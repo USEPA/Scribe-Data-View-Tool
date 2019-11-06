@@ -143,4 +143,5 @@ ENV/
 /.well-known
 .idea/
 /node_modules
+/frontend/node_modules
 migrations/
