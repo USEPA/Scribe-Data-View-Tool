@@ -28,7 +28,8 @@ The 5 standard actions of a ViewSet are list (GET) / create (POST) / show / upda
 ViewSets can also define additional API methods to be routed, using the @action decorator.
 """
 router = routers.DefaultRouter()
-router.register(r'sample_requests', sample_views.SampleViewSet)
+router.register(r'project_tables', sample_views.ProjectTablesViewSet, basename='project_tables')
+router.register(r'sample_requests', sample_views.SampleViewSet, basename='sample_requests')
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -38,7 +39,8 @@ urlpatterns = [
     url(r'^api/v1/', include(router.urls)),
 
     # Declare custom api urls
-    url(r'^api/v1/project_tables/(?P<project_id>.+)', sample_views.ScribeProjectTables.as_view()),
+    url(r'^api/v1/project_tables/(?P<project_id_p>.+)', sample_views.ProjectTablesViewSet.as_view({'get': 'list'})),
+    url(r'^api/v1/project_tables$', sample_views.ProjectTablesViewSet.as_view({'get': 'list'})),
 
     url(r'^api/v1/submit_sample_request', sample_views.SampleViewSet.submit_sample_request, name='sample_requests'),
 
