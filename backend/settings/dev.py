@@ -62,9 +62,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'urls'
 
-# TODO: Remove to separate the backend from the frontend (i.e. Host the entire React app completely separately, and
+# Point to Create React App's build/dist directory, so html templates are served from there.
+# TODO: If Remove to separate the backend from the frontend (i.e. Host the entire React app completely separately, and
 #  have API calls made to a separate Django server, on a different sub-domain via CORS.)
-#  Or change to point to Create React App's build/dist directory
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -90,15 +90,26 @@ WSGI_APPLICATION = 'settings.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'sql_server.pyodbc',
-        'HOST': os.environ.get('DB_HOST', ''),
+        'HOST': os.environ.get('SCRIBE_DB_HOST', ''),
         'NAME': 'Scribe',
-        'USER': os.environ.get('DB_USER', ''),
-        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
+        'USER': os.environ.get('SCRIBE_DB_USER', ''),
+        'PASSWORD': os.environ.get('SCRIBE_DB_PASSWORD', ''),
         'PORT': '1433',
         'OPTIONS': {
             'driver': "ODBC Driver 17 for SQL Server"
         }
-    }
+    },
+    'sadie_db': {
+        'ENGINE': 'sql_server.pyodbc',
+        'HOST': os.environ.get('SADIE_DB_HOST', ''),
+        'NAME': 'Sadie',
+        'USER': os.environ.get('SADIE_DB_USER', ''),
+        'PASSWORD': os.environ.get('SADIE_DB_PASSWORD', ''),
+        'PORT': '1433',
+        'OPTIONS': {
+            'driver': "ODBC Driver 17 for SQL Server"
+        }
+    },
 }
 
 CORS_ORIGIN_WHITELIST = [os.environ.get('CORS_ORIGIN_WHITELIST', '')]
