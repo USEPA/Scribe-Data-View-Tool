@@ -11,13 +11,8 @@ from .models import SampleModel
 from .serializers import SampleSerializer
 
 
-def index(request):
-    return HttpResponse("Hello, world.")
-
 # Note: Using ViewSets instead of APIViews in order to have them as registered routers
 # ViewSet -> list, APIView -> get
-
-
 class ProjectTablesViewSet(ViewSet):
 
     @staticmethod

@@ -32,6 +32,7 @@ APPEND_SLASH = False
 # Application definition
 
 INSTALLED_APPS = [
+    'automagic_rest',
     'sampleapp',
     'rest_framework',
     'rest_framework.authtoken',
