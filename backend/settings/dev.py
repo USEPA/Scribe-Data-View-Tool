@@ -33,7 +33,7 @@ APPEND_SLASH = False
 
 INSTALLED_APPS = [
     'automagic_rest',
-    'sampleapp',
+    'sadie',
     'rest_framework',
     'rest_framework.authtoken',
     'django.contrib.admin',

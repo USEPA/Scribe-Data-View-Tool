@@ -21,7 +21,7 @@ from django.views.generic import TemplateView
 from django.core.management import call_command
 from rest_framework import routers
 
-from sampleapp import views as sample_views
+from sadie import views as sample_views
 
 
 def build_data_models():
