@@ -16,7 +16,7 @@ Note: From project root folder, do the following project setup commands.
 3. Apply new migrations based on the changes detected in the app data models 
     > python manage.py makemigrations
 
-4. Synchronize the Sadie database with the latest set of models/migrations. 
+4. Synchronize the default Sadie database with the latest set of models/migrations. 
    Run manage.py to set the project settings, so the Django project’s setting files point 
    to the project's environment (.env) variables:
     > python manage.py migrate --database sadie_db

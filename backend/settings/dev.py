@@ -32,16 +32,16 @@ APPEND_SLASH = False
 # Application definition
 
 INSTALLED_APPS = [
-    'automagic_rest',
-    'sadie',
-    'rest_framework',
-    'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles'
+    'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'automagic_rest',
+    'sadie',
 ]
 
 
@@ -91,17 +91,6 @@ WSGI_APPLICATION = 'settings.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'sql_server.pyodbc',
-        'HOST': os.environ.get('SCRIBE_DB_HOST', ''),
-        'NAME': 'Scribe',
-        'USER': os.environ.get('SCRIBE_DB_USER', ''),
-        'PASSWORD': os.environ.get('SCRIBE_DB_PASSWORD', ''),
-        'PORT': '1433',
-        'OPTIONS': {
-            'driver': "ODBC Driver 17 for SQL Server"
-        }
-    },
-    'sadie_db': {
-        'ENGINE': 'sql_server.pyodbc',
         'HOST': os.environ.get('SADIE_DB_HOST', ''),
         'NAME': 'Sadie',
         'USER': os.environ.get('SADIE_DB_USER', ''),
@@ -111,9 +100,20 @@ DATABASES = {
             'driver': "ODBC Driver 17 for SQL Server"
         }
     },
+    'scribe_db': {
+        'ENGINE': 'sql_server.pyodbc',
+        'HOST': os.environ.get('SCRIBE_DB_HOST', ''),
+        'NAME': 'Scribe',
+        'USER': os.environ.get('SCRIBE_DB_USER', ''),
+        'PASSWORD': os.environ.get('SCRIBE_DB_PASSWORD', ''),
+        'PORT': '1433',
+        'OPTIONS': {
+            'driver': "ODBC Driver 17 for SQL Server"
+        }
+    },
 }
 
-CORS_ORIGIN_WHITELIST = [os.environ.get('CORS_ORIGIN_WHITELIST', '')]
+RUN_AUTOMAGIC_REST = [os.environ.get('RUN_AUTOMAGIC_REST', '')]
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

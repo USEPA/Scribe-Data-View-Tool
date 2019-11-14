@@ -18,15 +18,9 @@ from django.urls import include
 from django.conf.urls import url
 from django.views.decorators.cache import never_cache
 from django.views.generic import TemplateView
-from django.core.management import call_command
 from rest_framework import routers
 
 from sadie import views as sample_views
-
-
-def build_data_models():
-    """Runs the django-admin command that builds the Sadie PID data models"""
-    call_command('build_data_models', path='sadie_models')
 
 
 """Django REST Framework notes:
@@ -56,4 +50,3 @@ urlpatterns = [
 
 ]
 
-build_data_models()
