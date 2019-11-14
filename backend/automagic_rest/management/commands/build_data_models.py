@@ -65,7 +65,7 @@ class Command(BaseCommand):
     down by schema / product.
     """
 
-    # ./manage.py build_data_models --database=default --owner=sa --path=models_path
+    # ./manage.py build_data_models --database=scribe_db --owner=sa --path=models_path
     def add_arguments(self, parser):
         parser.add_argument(
             "--database",
@@ -233,6 +233,10 @@ class Command(BaseCommand):
             output = render_to_string(f"automagic_rest/models.html", context)
             f.write(output)
 
+        with open(f"{root_path}/serializers.py", "w") as f:
+            output = render_to_string(f"automagic_rest/serializers.html", context)
+            f.write(output)
+
     def handle(self, *args, **options):
         verbose = options.get("verbose")
         max_digits_default = self.get_max_digits_default()
@@ -327,8 +331,11 @@ class Command(BaseCommand):
                 )
                 primary_key_has_been_set = True
 
+            column_name_normalized = sub("[^A-Za-z0-9]+", "", column_name)
+            if column_name_normalized.isdigit() or type(column_name_normalized) == int:
+                column_name_normalized = '_' + str(column_name_normalized) + '_'
             context["tables"][row.table_name].append(
-                f"""{column_name} = models.{field_map}"""
+                f"""{column_name_normalized} = models.{field_map}"""
             )
 
         # Pop off the final false row, and write the URLs file.

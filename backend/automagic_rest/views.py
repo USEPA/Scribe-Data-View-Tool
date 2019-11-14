@@ -33,16 +33,7 @@ class GenericViewSet(ReadOnlyModelViewSet):
     A generic viewset which imports the necessary model, serializer, and permission
     for the endpoint.
     """
-    index_sql = """
-        SELECT DISTINCT a.attname AS index_column
-        FROM pg_namespace n
-        JOIN pg_class c ON n.oid = c.relnamespace
-        JOIN pg_index i ON c.oid = i.indrelid
-        JOIN pg_attribute a ON a.attnum = i.indkey[0]
-            AND a.attrelid = c.oid
-        WHERE n.nspname = %(schema_name)s
-            AND c.relname = %(table_name)s
-    """
+    index_sql = """SELECT * FROM {}"""
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -58,11 +49,11 @@ class GenericViewSet(ReadOnlyModelViewSet):
 
         # Grab the estimated count from the query plan; if its a large table,
         # use the count estimate for Pagination instead of an exact count.
-        table_estimate_count = estimate_count(
-            self.db_name, f"SELECT * FROM {self.schema_name}.{self.table_name}"
-        )
-        if table_estimate_count > self.get_estimate_count_limit():
-            self.pagination_class = CountEstimatePagination
+        # table_estimate_count = estimate_count(
+        #     self.db_name, f"SELECT * FROM {self.schema_name}.{self.table_name}"
+        # )
+        # if table_estimate_count > self.get_estimate_count_limit():
+        #     self.pagination_class = CountEstimatePagination
 
         # Only override permissions if provided.
         if api_permission:
@@ -177,10 +168,8 @@ class GenericViewSet(ReadOnlyModelViewSet):
         """
 
         cursor = connections[self.db_name].cursor()
-
-        cursor.execute(
-            self.index_sql, {"schema_name": self.schema_name, "table_name": self.table_name}
-        )
+        query_str = self.index_sql.format('['+self.schema_name+'].['+self.table_name+']')
+        cursor.execute(query_str)
 
         rows = cursor.fetchall()
 

@@ -38,6 +38,7 @@ urlpatterns = [
     # Declare router-viewsets api calls
     # http://localhost:8080/api/<router-viewsets>
     url(r'^api/v1/', include(router.urls)),
+    url(r'^api/v2/', include('sadie_models.urls')),
 
     # Declare custom api urls
     url(r'^api/v1/project_tables/(?P<project_id_p>.+)', sample_views.ProjectTablesViewSet.as_view({'get': 'list'})),

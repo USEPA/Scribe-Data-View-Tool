@@ -1,7 +1,9 @@
+{% load template_filters %}
+
 from django.db import models
 {% for table_key, table_value in tables.items %}
 
-class {{ schema_name }}_{{ table_key }}_model(models.Model):
+class {{ schema_name }}_{{ table_key|replace_invalid_model_chars }}_model(models.Model):
 {% for column in table_value %}    {{ column|safe }}
 {% endfor %}
     class Meta:
