@@ -19,7 +19,7 @@ Note: From project root folder, do the following project setup commands.
 4. Synchronize the default Sadie database with the latest set of models/migrations. 
    Run manage.py to set the project settings, so the Django project’s setting files point 
    to the project's environment (.env) variables:
-    > python manage.py migrate --database sadie_db
+    > python manage.py migrate --database default
 
 ### Run The Local Development Servers
 These commands start/run the project's local development web servers. From two separate command-line prompts, run these two commands (one to invoke the JS dependencies, and the other to run the local web server).
