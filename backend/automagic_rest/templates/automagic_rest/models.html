@@ -8,5 +8,5 @@ class {{ schema_name }}_{{ table_key|replace_invalid_model_chars }}_model(models
 {% endfor %}
     class Meta:
         managed = False
-        db_table = '{{ schema_name }}\".\"{{ table_key }}'
+        db_table = '{{ table_key }}'
 {% endfor %}

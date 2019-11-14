@@ -26,12 +26,19 @@ SQL_SERVER_COLUMN_FIELD_MAP = {
     "real": "FloatField({}blank=True, null=True{})",
     "date": "DateField({}blank=True, null=True{})",
     "datetime": "DateTimeField({}blank=True, null=True{})",
+    "datetime2": "DateTimeField({}blank=True, null=True{})",
     "time with time zone": "TimeField({}blank=True, null=True{})",
     "time without time zone": "TimeField({}blank=True, null=True{})",
     "character": "TextField({}blank=True, null=True{})",
     "nvarchar": "TextField({}blank=True, null=True{})",
+    "varchar": "TextField({}blank=True, null=True{})",
+    "geometry": "TextField({}blank=True, null=True{})",
     "ntext": "TextField({}blank=True, null=True{})",
+    "char": "TextField({}blank=True, null=True{})",
+    "xml": "TextField({}blank=True, null=True{})",
     "uuid": "UUIDField({}blank=True, null=True{})",
+    "uniqueidentifier": "UUIDField({}blank=True, null=True{})",
+    "varbinary": "BinaryField({}blank=True, null=True{})"
 }
 
 # Created a reserved words list that can not be used for Django field
@@ -151,7 +158,7 @@ class Command(BaseCommand):
         """
         PG schemata should only contain alphanumerics and underscore.
         """
-        return sub("[^0-9a-zA-Z]+", "_", identifier)
+        return sub("[^0-9a-zA-Z_]+", "_", identifier)
 
     def metadata_sql(self, allowed_schemata_sql, table_name_pattern):
         """
@@ -205,7 +212,7 @@ class Command(BaseCommand):
         allowed_schemata_sql = self.get_allowed_schemata_sql(allowed_schemata)
         if not allowed_schemata_sql:
             allowed_schemata_sql = 'dbo'
-        table_pattern = 'PID_'
+        table_pattern = '%'
 
         sql = self.metadata_sql(allowed_schemata_sql, table_pattern)
         cursor.execute(sql)
@@ -331,7 +338,7 @@ class Command(BaseCommand):
                 )
                 primary_key_has_been_set = True
 
-            column_name_normalized = sub("[^A-Za-z0-9]+", "", column_name)
+            column_name_normalized = sub("[^A-Za-z0-9_]+", "", column_name)
             if column_name_normalized.isdigit() or type(column_name_normalized) == int:
                 column_name_normalized = '_' + str(column_name_normalized) + '_'
             context["tables"][row.table_name].append(
