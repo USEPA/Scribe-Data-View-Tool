@@ -18,9 +18,9 @@ class SadieAppConfig(AppConfig):
 
         # call startup code here
         """Runs the django-admin command that builds the Sadie PID data models"""
-        if settings.RUN_AUTOMAGIC_REST:
-            from django.core.management import call_command
-            call_command('build_data_models', database='scribe_db', path='sadie_models')
+        # if settings.RUN_AUTOMAGIC_REST:
+        #     from django.core.management import call_command
+        #     call_command('build_data_models', database='scribe_db', path='sadie_models')
 
         """Adds missing project user groups to the Groups auth model and adds superusers to the new groups"""
         projects_sql = "SELECT TABLE_NAME, COLUMN_NAME, DATA_TYPE " \

@@ -35,15 +35,18 @@ router.register(r'sample_requests', sample_views.SampleViewSet, basename='sample
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
-    # Declare router-viewsets api calls
-    # http://localhost:8080/api/<router-viewsets>
-    url(r'^api/v1/', include(router.urls)),
+    # Declare automagic_rest api calls
+    # http://localhost:8080/api/v2/<PID_#>
     url(r'^api/v2/', include('sadie_models.urls')),
 
-    # Declare custom api urls
+    # Declare router-viewsets api calls
+    # http://localhost:8080/api/v1/<router-viewsets>
+    url(r'^api/v1/', include(router.urls)),
+    # Parameterized api urls
     url(r'^api/v1/project_tables/(?P<project_id_p>.+)', sample_views.ProjectTablesViewSet.as_view({'get': 'list'})),
     url(r'^api/v1/project_tables$', sample_views.ProjectTablesViewSet.as_view({'get': 'list'})),
 
+    # sample CRUD url
     url(r'^api/v1/submit_sample_request', sample_views.SampleViewSet.submit_sample_request, name='sample_requests'),
 
     # catch all other urls

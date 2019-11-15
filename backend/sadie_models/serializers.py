@@ -1,4 +1,5 @@
 
+
 from .models.dbo import (
     dbo_PID_1636_COC_model,
     dbo_PID_1636_EDDAirSampling_model,
@@ -247,11 +248,11 @@ from .models.dbo import (
     dbo_PID_1923_sysTaskGroups_model,
     dbo_PID_1923_sysTaskLst_model,
     dbo_PID_1923_sysTasks_model,
-    dbo_PID_1968_1605022 FINAL EXCEL 09 Jun 16 0923_model,
-    dbo_PID_1968_1605051 FINAL EXCEL 16 Jun 16 1613_model,
-    dbo_PID_1968_1606047 FINAL EXCEL 08 Jul 16 0748_model,
-    dbo_PID_1968_1607057 FINAL EXCEL 12 Aug 16 1005_model,
-    dbo_PID_1968_1608030 FINAL EXCEL 31 Aug 16 1619_model,
+    dbo_PID_1968_1605022_FINAL_EXCEL_09_Jun_16_0923_model,
+    dbo_PID_1968_1605051_FINAL_EXCEL_16_Jun_16_1613_model,
+    dbo_PID_1968_1606047_FINAL_EXCEL_08_Jul_16_0748_model,
+    dbo_PID_1968_1607057_FINAL_EXCEL_12_Aug_16_1005_model,
+    dbo_PID_1968_1608030_FINAL_EXCEL_31_Aug_16_1619_model,
     dbo_PID_1968_COC_model,
     dbo_PID_1968_EDDAirSampling_model,
     dbo_PID_1968_EDDBiotaSampling_model,
@@ -2215,11 +2216,11 @@ from .models.dbo import (
     dbo_PID_2509__Airsample_model,
     dbo_PID_2509__SoilLocation_model,
     dbo_PID_2509__Soilsample_model,
-    dbo_PID_2509_300-3485-1_Scribe_Ws Valiated_model,
-    dbo_PID_2509_300-3499-1_Scribe_Ws Validated_model,
-    dbo_PID_2509_300-3519-1_Scribe_Ws_Rev(1) Validated_model,
-    dbo_PID_2509_300-3545-1_Scribe_Ws_Rev(1) Validated_model,
-    dbo_PID_2509_300-3565-1_Scribe_Ws_Rev(1) Validated_model,
+    dbo_PID_2509_300_3485_1_Scribe_Ws_Valiated_model,
+    dbo_PID_2509_300_3499_1_Scribe_Ws_Validated_model,
+    dbo_PID_2509_300_3519_1_Scribe_Ws_Rev1_Validated_model,
+    dbo_PID_2509_300_3545_1_Scribe_Ws_Rev1_Validated_model,
+    dbo_PID_2509_300_3565_1_Scribe_Ws_Rev1_Validated_model,
     dbo_PID_2509_COC_model,
     dbo_PID_2509_EDDAirSampling_model,
     dbo_PID_2509_EDDBiotaSampling_model,
@@ -2690,7 +2691,7 @@ from .models.dbo import (
     dbo_PID_2596_sysTaskGroups_model,
     dbo_PID_2596_sysTaskLst_model,
     dbo_PID_2596_sysTasks_model,
-    dbo_PID_2610_160-11937-1_Std_StLouis_model,
+    dbo_PID_2610_160_11937_1_Std_StLouis_model,
     dbo_PID_2610_COC_model,
     dbo_PID_2610_EDDAirSampling_model,
     dbo_PID_2610_EDDBiotaSampling_model,
@@ -2741,7 +2742,7 @@ from .models.dbo import (
     dbo_PID_2610_sysTaskGroups_model,
     dbo_PID_2610_sysTaskLst_model,
     dbo_PID_2610_sysTasks_model,
-    dbo_PID_2614_160-11937-1_Std_StLouis_model,
+    dbo_PID_2614_160_11937_1_Std_StLouis_model,
     dbo_PID_2614_COC_model,
     dbo_PID_2614_EDDAirSampling_model,
     dbo_PID_2614_EDDBiotaSampling_model,
@@ -5983,7 +5984,7 @@ from .models.dbo import (
     dbo_PID_3550_sysTaskGroups_model,
     dbo_PID_3550_sysTaskLst_model,
     dbo_PID_3550_sysTasks_model,
-    dbo_PID_3551_0116 - 1329 , 0115 - 542_model,
+    dbo_PID_3551_0116___1329___0115___542_model,
     dbo_PID_3551_COC_model,
     dbo_PID_3551_EDDAirSampling_model,
     dbo_PID_3551_EDDBiotaSampling_model,
@@ -10114,33 +10115,33 @@ class dbo_PID_1923_sysTasks_serializer():
         fields = "__all__"
 
 
-class dbo_PID_1968_1605022 FINAL EXCEL 09 Jun 16 0923_serializer():
+class dbo_PID_1968_1605022_FINAL_EXCEL_09_Jun_16_0923_serializer():
     class Meta:
-        model = dbo_PID_1968_1605022 FINAL EXCEL 09 Jun 16 0923_model
+        model = dbo_PID_1968_1605022_FINAL_EXCEL_09_Jun_16_0923_model
         fields = "__all__"
 
 
-class dbo_PID_1968_1605051 FINAL EXCEL 16 Jun 16 1613_serializer():
+class dbo_PID_1968_1605051_FINAL_EXCEL_16_Jun_16_1613_serializer():
     class Meta:
-        model = dbo_PID_1968_1605051 FINAL EXCEL 16 Jun 16 1613_model
+        model = dbo_PID_1968_1605051_FINAL_EXCEL_16_Jun_16_1613_model
         fields = "__all__"
 
 
-class dbo_PID_1968_1606047 FINAL EXCEL 08 Jul 16 0748_serializer():
+class dbo_PID_1968_1606047_FINAL_EXCEL_08_Jul_16_0748_serializer():
     class Meta:
-        model = dbo_PID_1968_1606047 FINAL EXCEL 08 Jul 16 0748_model
+        model = dbo_PID_1968_1606047_FINAL_EXCEL_08_Jul_16_0748_model
         fields = "__all__"
 
 
-class dbo_PID_1968_1607057 FINAL EXCEL 12 Aug 16 1005_serializer():
+class dbo_PID_1968_1607057_FINAL_EXCEL_12_Aug_16_1005_serializer():
     class Meta:
-        model = dbo_PID_1968_1607057 FINAL EXCEL 12 Aug 16 1005_model
+        model = dbo_PID_1968_1607057_FINAL_EXCEL_12_Aug_16_1005_model
         fields = "__all__"
 
 
-class dbo_PID_1968_1608030 FINAL EXCEL 31 Aug 16 1619_serializer():
+class dbo_PID_1968_1608030_FINAL_EXCEL_31_Aug_16_1619_serializer():
     class Meta:
-        model = dbo_PID_1968_1608030 FINAL EXCEL 31 Aug 16 1619_model
+        model = dbo_PID_1968_1608030_FINAL_EXCEL_31_Aug_16_1619_model
         fields = "__all__"
 
 
@@ -21922,33 +21923,33 @@ class dbo_PID_2509__Soilsample_serializer():
         fields = "__all__"
 
 
-class dbo_PID_2509_300-3485-1_Scribe_Ws Valiated_serializer():
+class dbo_PID_2509_300_3485_1_Scribe_Ws_Valiated_serializer():
     class Meta:
-        model = dbo_PID_2509_300-3485-1_Scribe_Ws Valiated_model
+        model = dbo_PID_2509_300_3485_1_Scribe_Ws_Valiated_model
         fields = "__all__"
 
 
-class dbo_PID_2509_300-3499-1_Scribe_Ws Validated_serializer():
+class dbo_PID_2509_300_3499_1_Scribe_Ws_Validated_serializer():
     class Meta:
-        model = dbo_PID_2509_300-3499-1_Scribe_Ws Validated_model
+        model = dbo_PID_2509_300_3499_1_Scribe_Ws_Validated_model
         fields = "__all__"
 
 
-class dbo_PID_2509_300-3519-1_Scribe_Ws_Rev(1) Validated_serializer():
+class dbo_PID_2509_300_3519_1_Scribe_Ws_Rev1_Validated_serializer():
     class Meta:
-        model = dbo_PID_2509_300-3519-1_Scribe_Ws_Rev(1) Validated_model
+        model = dbo_PID_2509_300_3519_1_Scribe_Ws_Rev1_Validated_model
         fields = "__all__"
 
 
-class dbo_PID_2509_300-3545-1_Scribe_Ws_Rev(1) Validated_serializer():
+class dbo_PID_2509_300_3545_1_Scribe_Ws_Rev1_Validated_serializer():
     class Meta:
-        model = dbo_PID_2509_300-3545-1_Scribe_Ws_Rev(1) Validated_model
+        model = dbo_PID_2509_300_3545_1_Scribe_Ws_Rev1_Validated_model
         fields = "__all__"
 
 
-class dbo_PID_2509_300-3565-1_Scribe_Ws_Rev(1) Validated_serializer():
+class dbo_PID_2509_300_3565_1_Scribe_Ws_Rev1_Validated_serializer():
     class Meta:
-        model = dbo_PID_2509_300-3565-1_Scribe_Ws_Rev(1) Validated_model
+        model = dbo_PID_2509_300_3565_1_Scribe_Ws_Rev1_Validated_model
         fields = "__all__"
 
 
@@ -24772,9 +24773,9 @@ class dbo_PID_2596_sysTasks_serializer():
         fields = "__all__"
 
 
-class dbo_PID_2610_160-11937-1_Std_StLouis_serializer():
+class dbo_PID_2610_160_11937_1_Std_StLouis_serializer():
     class Meta:
-        model = dbo_PID_2610_160-11937-1_Std_StLouis_model
+        model = dbo_PID_2610_160_11937_1_Std_StLouis_model
         fields = "__all__"
 
 
@@ -25078,9 +25079,9 @@ class dbo_PID_2610_sysTasks_serializer():
         fields = "__all__"
 
 
-class dbo_PID_2614_160-11937-1_Std_StLouis_serializer():
+class dbo_PID_2614_160_11937_1_Std_StLouis_serializer():
     class Meta:
-        model = dbo_PID_2614_160-11937-1_Std_StLouis_model
+        model = dbo_PID_2614_160_11937_1_Std_StLouis_model
         fields = "__all__"
 
 
@@ -44530,9 +44531,9 @@ class dbo_PID_3550_sysTasks_serializer():
         fields = "__all__"
 
 
-class dbo_PID_3551_0116 - 1329 , 0115 - 542_serializer():
+class dbo_PID_3551_0116___1329___0115___542_serializer():
     class Meta:
-        model = dbo_PID_3551_0116 - 1329 , 0115 - 542_model
+        model = dbo_PID_3551_0116___1329___0115___542_model
         fields = "__all__"
 
 

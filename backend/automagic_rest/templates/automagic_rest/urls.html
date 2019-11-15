@@ -1,12 +1,19 @@
-from django.urls import include, path
+{% load template_filters %}
+
+from django.urls import include
+from django.conf.urls import url
 
 from {{ router_path }} import {{ router }}
 from {{ view_path }} import {{ view }}
 
-router = {{ router }}()
-{% for route in routes %}
-router.register(r"{{ route }}", {{ view }}, base_name="{{ db_name }}.{{ root_python_path }}.{{ route }}"){% endfor %}
+urlpatterns = []
+{% for route_group_key, route_group_values in routes.items %}
+{{ route_group_key|replace_invalid_model_chars }}_router = {{ router }}()
 
-urlpatterns = [
-    path('', include(router.urls)),
+{% for route in route_group_values %}{{ route_group_key|replace_invalid_model_chars }}_router.register(r"{{ route }}", {{ view }}, base_name="{{ db_name }}.{{ root_python_path }}.{{ route }}")
+{% endfor %}
+urlpatterns += [
+    url('{{ route_group_key }}/', include({{ route_group_key|replace_invalid_model_chars }}_router.urls)),
 ]
+
+{% endfor %}

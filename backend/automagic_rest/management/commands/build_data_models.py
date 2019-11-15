@@ -3,7 +3,7 @@ from collections import namedtuple
 from glob import glob
 import keyword
 import os
-from re import sub
+from re import sub, search
 
 from django.core.management.base import BaseCommand
 from django.db import connections
@@ -168,10 +168,13 @@ class Command(BaseCommand):
         """
         return sub("[^0-9a-zA-Z_]+", "_", identifier)
 
-    def metadata_sql(self, allowed_schemata_sql, table_name_pattern):
+    def metadata_sql(self, allowed_schemata_sql):
         """
         Returns the SQL to pull the introspection metadata.
         """
+
+        table_name_pattern = self.get_table_grouping_pattern()
+
         return """
             SELECT s.schema_name, c.table_name, c.column_name, c.data_type, c.character_maximum_length,
             c.numeric_precision, c.numeric_scale
@@ -213,6 +216,12 @@ class Command(BaseCommand):
         """
         return options.get("owner")
 
+    def get_table_grouping_pattern(self):
+        """
+        Returns the naming pattern in which the tables will be queried on and grouped into DRF routers.
+        """
+        return "PID_"
+
     def get_endpoint_metadata(self, options, cursor):
         owner = self.get_owner(options)
 
@@ -220,9 +229,8 @@ class Command(BaseCommand):
         allowed_schemata_sql = self.get_allowed_schemata_sql(allowed_schemata)
         if not allowed_schemata_sql:
             allowed_schemata_sql = 'dbo'
-        table_pattern = 'PID_'
 
-        sql = self.metadata_sql(allowed_schemata_sql, table_pattern)
+        sql = self.metadata_sql(allowed_schemata_sql)
         cursor.execute(sql)
 
         rows = fetch_result_with_blank_row(cursor)
@@ -260,6 +268,7 @@ class Command(BaseCommand):
         root_python_path = self.get_root_python_path(options)
         root_path = root_python_path.replace(".", os.sep)
         os.makedirs(root_path + os.sep + "models", exist_ok=True)
+        table_grouping_pattern = self.get_table_grouping_pattern()
 
         if len(options.get("schema", "")) == 0:
             self.delete_generated_files(root_path)
@@ -284,7 +293,7 @@ class Command(BaseCommand):
             "view_path": ".".join(view_data),
             "router": router_data.pop(),
             "router_path": ".".join(router_data),
-            "routes": [],
+            "routes": {},
         }
         model_count = 0
 
@@ -307,7 +316,14 @@ class Command(BaseCommand):
                     print(f"{model_count}: {row.table_name}")
                 context["tables"][row.table_name] = []
                 primary_key_has_been_set = False
-                context["routes"].append(f"""{row.schema_name}.{row.table_name}""")
+                # define route group
+                if row.table_name:
+                    route_group_name_search = search('{}(.*)_'.format(table_grouping_pattern), row.table_name)
+                    if route_group_name_search:
+                        route_group_name = route_group_name_search[0][:-1]
+                        if route_group_name not in context["routes"]:
+                            context["routes"][route_group_name] = []
+                        context["routes"][route_group_name].append(f"""{row.schema_name}.{row.table_name}""")
 
             # If the column name is a Python reserved word, append an underscore
             # to follow the Python convention
@@ -346,6 +362,7 @@ class Command(BaseCommand):
                 )
                 primary_key_has_been_set = True
 
+            # normalize the column name to adhere to Python/Django variable naming rules
             column_name_normalized = sub("[^A-Za-z0-9_]+", "", column_name)
             if column_name_normalized.isdigit() or type(column_name_normalized) == int:
                 column_name_normalized = '_' + str(column_name_normalized) + '_'
@@ -354,7 +371,7 @@ class Command(BaseCommand):
             )
 
         # Pop off the final false row, and write the URLs file.
-        context["routes"].pop()
+        # context["routes"].pop()
         with open(f"{root_path}/urls.py", "w") as f:
             output = render_to_string(f"automagic_rest/urls.html", context)
             f.write(output)
