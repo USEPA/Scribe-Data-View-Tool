@@ -1,12 +1,12 @@
 {% load template_filters %}
 
 from .models.{{ schema_name }} import ({% for table_key, table_value in tables.items %}
-    {{ schema_name }}_{{ table_key|replace_invalid_model_chars }}_model,{% endfor %}
+    {{ table_key|replace_invalid_model_chars }}_model,{% endfor %}
 )
 {% for table_key, table_value in tables.items %}
 
 class {{ schema_name }}_{{ table_key|replace_invalid_model_chars }}_serializer({{ serializer }}):
     class Meta:
-        model = {{ schema_name }}_{{ table_key|replace_invalid_model_chars }}_model
+        model = {{ table_key|replace_invalid_model_chars }}_model
         fields = "__all__"
 {% endfor %}

@@ -19,10 +19,9 @@ def split_basename(basename):
     parts = basename.split(".")
     db_name = parts[0]
     python_path_name = parts[1]
-    schema_name = parts[2]
-    table_name = parts[3]
+    table_name = parts[2]
 
-    return db_name, python_path_name, schema_name, table_name
+    return db_name, python_path_name, table_name
 
 
 class GenericViewSet(ReadOnlyModelViewSet):
@@ -37,13 +36,12 @@ class GenericViewSet(ReadOnlyModelViewSet):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.db_name, self.python_path_name, self.schema_name, self.table_name = split_basename(
-            self.basename
-        )
+        self.db_name, self.python_path_name, self.table_name = split_basename(self.basename)
+        self.schema_name = "dbo"
 
         self.model = getattr(
             import_module(f"{self.python_path_name}.models.{self.schema_name}"),
-            f"{self.schema_name}_{self.table_name}_model",
+            f"{self.table_name}_model",
         )
         api_permission = self.get_permission()
 

@@ -323,7 +323,7 @@ class Command(BaseCommand):
                         route_group_name = route_group_name_search[0][:-1]
                         if route_group_name not in context["routes"]:
                             context["routes"][route_group_name] = []
-                        context["routes"][route_group_name].append(f"""{row.schema_name}.{row.table_name}""")
+                        context["routes"][route_group_name].append(f"""{row.table_name}""")
 
             # If the column name is a Python reserved word, append an underscore
             # to follow the Python convention
