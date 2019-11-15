@@ -18,27 +18,35 @@ from django.template.loader import render_to_string
 SQL_SERVER_COLUMN_FIELD_MAP = {
     "smallint": "IntegerField({}blank=True, null=True{})",
     "int": "IntegerField({}blank=True, null=True{})",
+    "tinyint": "IntegerField({}blank=True, null=True{})",
     "bigint": "BigIntegerField({}blank=True, null=True{})",
     "oid": "BigIntegerField({}blank=True, null=True{})",
     "bit": "BooleanField({}blank=True, null=True{})",
     "numeric": "DecimalField({}blank=True, null=True{})",
+    "decimal": "DecimalField({}blank=True, null=True{})",
+    "money": "DecimalField({}blank=True, null=True{})",
+    "smallmoney": "DecimalField({}blank=True, null=True{})",
     "float": "FloatField({}blank=True, null=True{})",
     "real": "FloatField({}blank=True, null=True{})",
     "date": "DateField({}blank=True, null=True{})",
     "datetime": "DateTimeField({}blank=True, null=True{})",
     "datetime2": "DateTimeField({}blank=True, null=True{})",
+    "smalldatetime": "DateTimeField({}blank=True, null=True{})",
     "time with time zone": "TimeField({}blank=True, null=True{})",
     "time without time zone": "TimeField({}blank=True, null=True{})",
     "character": "TextField({}blank=True, null=True{})",
+    "nchar": "TextField({}blank=True, null=True{})",
     "nvarchar": "TextField({}blank=True, null=True{})",
     "varchar": "TextField({}blank=True, null=True{})",
     "geometry": "TextField({}blank=True, null=True{})",
+    "text": "TextField({}blank=True, null=True{})",
     "ntext": "TextField({}blank=True, null=True{})",
     "char": "TextField({}blank=True, null=True{})",
     "xml": "TextField({}blank=True, null=True{})",
     "uuid": "UUIDField({}blank=True, null=True{})",
     "uniqueidentifier": "UUIDField({}blank=True, null=True{})",
-    "varbinary": "BinaryField({}blank=True, null=True{})"
+    "varbinary": "BinaryField({}blank=True, null=True{})",
+    "binary": "BinaryField({}blank=True, null=True{})"
 }
 
 # Created a reserved words list that can not be used for Django field
@@ -212,7 +220,7 @@ class Command(BaseCommand):
         allowed_schemata_sql = self.get_allowed_schemata_sql(allowed_schemata)
         if not allowed_schemata_sql:
             allowed_schemata_sql = 'dbo'
-        table_pattern = '%'
+        table_pattern = 'PID_'
 
         sql = self.metadata_sql(allowed_schemata_sql, table_pattern)
         cursor.execute(sql)
@@ -312,10 +320,10 @@ class Command(BaseCommand):
                 db_column = ", db_column='{}'".format(row.column_name)
             else:
                 column_name = row.column_name
-                db_column = ""
+                db_column = ", db_column='{}'".format(row.column_name)
 
             # For decimals, add the max_length and decimal places
-            if row.data_type == "numeric":
+            if row.data_type in ["numeric", "decimal", "money"]:
                 max_digits = row.numeric_precision
                 if max_digits is None:
                     max_digits = max_digits_default
