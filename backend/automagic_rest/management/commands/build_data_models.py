@@ -351,6 +351,8 @@ class Command(BaseCommand):
                 db_column += f", max_digits={max_digits}, decimal_places={decimal_places}"
 
             if primary_key_has_been_set:
+                if row.column_name.replace(" ", "") == "pk":
+                    column_name = "id"
                 field_map = SQL_SERVER_COLUMN_FIELD_MAP[row.data_type].format("", db_column)
             else:
                 # We'll make the first column the primary key, since once is required in the Django ORM
@@ -365,7 +367,7 @@ class Command(BaseCommand):
             # normalize the column name to adhere to Python/Django variable naming rules
             column_name_normalized = sub("[^A-Za-z0-9_]+", "", column_name)
             if column_name_normalized.isdigit() or type(column_name_normalized) == int:
-                column_name_normalized = '_' + str(column_name_normalized) + '_'
+                column_name_normalized = '_' + str(column_name_normalized)
             context["tables"][row.table_name].append(
                 f"""{column_name_normalized} = models.{field_map}"""
             )

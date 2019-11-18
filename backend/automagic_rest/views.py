@@ -1,6 +1,7 @@
 from importlib import import_module
 
 from django.db import connections
+from django.apps import apps
 
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.filters import OrderingFilter, SearchFilter
@@ -39,10 +40,7 @@ class GenericViewSet(ReadOnlyModelViewSet):
         self.db_name, self.python_path_name, self.table_name = split_basename(self.basename)
         self.schema_name = "dbo"
 
-        self.model = getattr(
-            import_module(f"{self.python_path_name}.models.{self.schema_name}"),
-            f"{self.table_name}_model",
-        )
+        self.model = apps.get_model(self.python_path_name, f"{self.table_name}_model")
         api_permission = self.get_permission()
 
         # Grab the estimated count from the query plan; if its a large table,
