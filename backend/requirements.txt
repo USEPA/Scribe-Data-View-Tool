@@ -2,5 +2,5 @@ Django>=2.0,<2.1.99
 django-pyodbc-azure>=2.0,<2.1.99
 djangorestframework>=3.9,<3.9.99
 djangorestframework-queryfields>=1.0.0
-psycopg2>=2.7 ,<3.0
 djangorestframework-filters==1.0.0.dev0
+psycopg2>=2.7 ,<3.0

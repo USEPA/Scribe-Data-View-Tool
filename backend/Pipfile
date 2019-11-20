@@ -6,11 +6,12 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
+Django = ">=2.0,<2.1.99"
 django-pyodbc-azure = ">=2.0,<2.1.99"
 djangorestframework = "<3.9.99,>=3.9"
 djangorestframework-queryfields = ">=1.0.0"
+djangorestframework-filters = "==1.0.0.dev0"
 psycopg2 = "<3.0,>=2.7"
-Django = ">=2.0,<2.1.99"
 
 [requires]
 python_version = "3.7"
