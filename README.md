@@ -13,10 +13,10 @@ Note: From project root folder, do the following project setup commands.
 
     > pipenv install --dev && pipenv shell
 
-3. Apply new migrations based on the changes detected in the app data models 
+3. Apply new app registry migrations based on the changes detected in the app data models 
     > python manage.py makemigrations
 
-4. Synchronize the default Sadie database with the latest set of models/migrations. 
+4. Synchronize the default Sadie database with the default django models/migrations. 
    Run manage.py to set the project settings, so the Django project’s setting files point 
    to the project's environment (.env) variables:
     > python manage.py migrate --database default
