@@ -16,9 +16,16 @@ class Command(BaseCommand):
     set model permissions to the group
     """
 
-    # ./manage.py build_data_models --database=scribe_db
+    # ./manage.py build_data_models --app=scribe_models --database=scribe_db
     @staticmethod
     def add_arguments(parser):
+        parser.add_argument(
+            "--app",
+            action="store",
+            dest="app",
+            default="scribe_models",
+            help='The app to use. Defaults to the "scribe_models" app.',
+        )
         parser.add_argument(
             "--database",
             action="store",
@@ -40,10 +47,13 @@ class Command(BaseCommand):
         logger.addHandler(logging.FileHandler('build_project_user_groups.log', 'a'))
         print = logger.info
 
+        app_name = options.get("app")
         db_name = self.get_db(options)
         db_conn = connections[db_name]
 
         superusers = User.objects.filter(is_superuser=True)
+        for superuser in superusers:
+            superuser.user_permissions.clear()
 
         # Get unique project IDs
         with db_conn.cursor() as cursor:
@@ -64,14 +74,13 @@ class Command(BaseCommand):
 
             # Set Scribe data model permissions for group
             group_model_permissions = []
-            for model in apps.get_app_config('sadie_models').get_models():
+            for model in apps.get_app_config(app_name).get_models():
                 model_name = model.__name__
                 if str(project_id) in model_name:
                     for permission in PERMISSIONS:
                         # Create or update new permission.
                         name = 'Can {} {}'.format(permission, model._meta.object_name)
-                        ct = ContentType.objects.filter(model=model.__name__).first()
-                        # ct = ContentType.objects.get_for_model(model)
+                        ct = ContentType.objects.get_for_model(model)
                         model_permission = Permission.objects.update_or_create(codename="Can view model", name=name,
                                                                                content_type=ct)[0]
                         group_model_permissions.append(model_permission)

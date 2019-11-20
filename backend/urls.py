@@ -37,7 +37,7 @@ urlpatterns = [
 
     # Declare automagic_rest api calls
     # http://localhost:8080/api/v2/<PID_#>
-    url(r'^api/v2/', include('sadie_models.urls')),
+    url(r'^api/v2/', include('scribe_models.urls')),
 
     # Declare router-viewsets api calls
     # http://localhost:8080/api/v1/<router-viewsets>

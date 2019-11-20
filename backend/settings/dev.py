@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'automagic_rest',
     'sadie',
-    'sadie_models',
+    'scribe_models',
 ]
 
 
