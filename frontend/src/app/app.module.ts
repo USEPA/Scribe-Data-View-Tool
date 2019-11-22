@@ -8,7 +8,7 @@ import {OauthcallbackComponent} from './oauthcallback/oauthcallback.component';
 import {LoginService} from './services/login.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
-import {MatCardModule} from '@angular/material';
+import {MatButtonModule, MatCardModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,8 @@ import {MatCardModule} from '@angular/material';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonModule
   ],
   providers: [LoginService],
   bootstrap: [AppComponent]
