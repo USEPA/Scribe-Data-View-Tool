@@ -2,12 +2,12 @@ import {Injectable, Injector} from '@angular/core';
 import {HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 
-import {LoginService} from "./login.service";
 
 import {tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {environment} from '../environments/environment';
 import {MatDialog} from '@angular/material';
+import {LoginService} from './services/login.service';
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {

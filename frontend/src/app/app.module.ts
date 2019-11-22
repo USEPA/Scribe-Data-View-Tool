@@ -8,7 +8,7 @@ import {OauthcallbackComponent} from './oauthcallback/oauthcallback.component';
 import {LoginService} from './services/login.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {MatButtonModule, MatCardModule} from '@angular/material';
+import {MatButtonModule, MatCardModule, MatDialogModule} from '@angular/material';
 import {HttpRequestInterceptor} from './http-request.interceptor';
 
 @NgModule({
@@ -23,7 +23,8 @@ import {HttpRequestInterceptor} from './http-request.interceptor';
     HttpClientModule,
     BrowserAnimationsModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [
     {
