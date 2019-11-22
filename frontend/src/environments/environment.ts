@@ -3,7 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  oauth_url: 'https://epa.maps.arcgis.com/sharing/rest/oauth2/authorize',
+  oauth_client_id: 'ZtlpDht9ywRCA4Iq',
+  oauth_response_type: 'token',
+  oauth_redirect_uri: 'http://localhost:4200/oauthcallback',
+  local_client_id: '3aORB9zjGjFBB23Qr05CVdAET83RsuQFOMJnsiYa',
+  local_service_endpoint: 'http://localhost:4200/api',
 };
 
 /*

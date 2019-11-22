@@ -52,9 +52,12 @@ urlpatterns = [
 
     # sample CRUD url
     url(r'^api/v1/submit_sample_request', sadie_views.SampleViewSet.submit_sample_request, name='sample_requests'),
-
+    url(r'^api/oauth2/', include('rest_framework_social_oauth2.urls')),
+    url('', include('social_django.urls', namespace='social_django')),
     # catch all other urls
-    url(r'.*', never_cache(TemplateView.as_view(template_name='index.html')), name='index'),
+    # url(r'.*', never_cache(TemplateView.as_view(template_name='index.html')), name='index'),
 
 ]
 
+LOGIN_REDIRECT_URL = '/admin/'
+LOGIN_URL = '/admin/'

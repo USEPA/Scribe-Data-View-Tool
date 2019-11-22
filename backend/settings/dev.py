@@ -32,8 +32,9 @@ APPEND_SLASH = False
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
+    'agol_oauth2',
+    'django.contrib.admin',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -43,11 +44,14 @@ INSTALLED_APPS = [
     'automagic_rest',
     'sadie',
     'scribe_models',
+    'oauth2_provider',
+    'social_django',
+    'rest_framework_social_oauth2'
 ]
-
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
+
         'rest_framework.authentication.BasicAuthentication',
     )
 }
@@ -85,7 +89,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'settings.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -96,7 +99,7 @@ DATABASES = {
         'NAME': 'Sadie',
         'USER': os.environ.get('SADIE_DB_USER', ''),
         'PASSWORD': os.environ.get('SADIE_DB_PASSWORD', ''),
-        'PORT': '1433',
+        'PORT': '1434',
         'OPTIONS': {
             'driver': "ODBC Driver 17 for SQL Server"
         }
@@ -107,7 +110,7 @@ DATABASES = {
         'NAME': 'Scribe',
         'USER': os.environ.get('SCRIBE_DB_USER', ''),
         'PASSWORD': os.environ.get('SCRIBE_DB_PASSWORD', ''),
-        'PORT': '1433',
+        'PORT': '1434',
         'OPTIONS': {
             'driver': "ODBC Driver 17 for SQL Server"
         }
@@ -134,7 +137,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -148,7 +150,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 # Static files path
@@ -158,6 +159,35 @@ STATIC_URL = '/static/'
 ANGULAR_APP_DIR = os.path.join(PROJECT_ROOT, 'frontend')
 STATIC_ROOT = os.path.join(ANGULAR_APP_DIR, 'src', 'static')
 
-
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_AGOL_KEY = os.environ.get('SOCIAL_AUTH_AGOL_KEY', '')
+SOCIAL_AUTH_AGOL_SECRET = os.environ.get('SOCIAL_AUTH_AGOL_SECRET', '')
+SOCIAL_AUTH_AGOL_REDIRECT_URI = os.environ.get('SOCIAL_AUTH_AGOL_REDIRECT_URI', '')
+SOCIAL_AUTH_AGOL_DOMAIN = 'epa.maps.arcgis.com'
+
+SOCIAL_AUTH_PIPELINE = [  # Note: Sequence of functions matters here.
+    'social_core.pipeline.social_auth.social_details',  # 0
+    'social_core.pipeline.social_auth.social_uid',  # 1
+    'social_core.pipeline.social_auth.auth_allowed',  # 2
+    'social_core.pipeline.social_auth.social_user',  # 3
+    'social_core.pipeline.user.get_username',  # 4
+    'agol_oauth2.pipeline.associate_by_username',
+    'social_core.pipeline.social_auth.associate_user',  # 6
+    'social_core.pipeline.social_auth.load_extra_data',  # 7
+    'social_core.pipeline.user.user_details',  # 8
+]
+
+AUTHENTICATION_BACKENDS = (
+    'agol_oauth2.backend.AGOLOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+MIGRATION_MODULES = {
+    'oauth2_provider': 'oauth2'
+}
+
+OAUTH2_PROVIDER_ACCESS_TOKEN_MODEL = 'oauth2_provider.AccessToken'
+OAUTH2_PROVIDER_APPLICATION_MODEL = 'oauth2_provider.Application'
+OAUTH2_PROVIDER_REFRESH_TOKEN_MODEL = 'oauth2_provider.RefreshToken'

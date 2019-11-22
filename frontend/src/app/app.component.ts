@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,7 @@ import { Http, Response } from '@angular/http';
 export class AppComponent {
   title = 'frontend';
   url = 'http://localhost:4200/api/v1/projects/';
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
     public getProjects() {
         this.http.get(this.url).toPromise().then((res) => {
             return res.json();
