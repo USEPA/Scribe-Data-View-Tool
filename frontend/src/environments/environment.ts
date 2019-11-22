@@ -9,7 +9,7 @@ export const environment = {
   oauth_response_type: 'token',
   oauth_redirect_uri: 'http://localhost:4200/oauthcallback',
   local_client_id: '3aORB9zjGjFBB23Qr05CVdAET83RsuQFOMJnsiYa',
-  local_service_endpoint: 'http://localhost:4200/api',
+  local_service_endpoint: 'http://localhost:8000/api',
 };
 
 /*
