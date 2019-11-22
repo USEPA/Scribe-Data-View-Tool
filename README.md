@@ -23,7 +23,7 @@ Note: From project root folder, do the following project setup commands.
 
 ### Run The Local Development Servers
 These commands start/run the project's local development web servers. From two separate command-line prompts, run these two commands (one to invoke the JS dependencies, and the other to run the local web server).
-> yarn start
+> npm run start
 
 > python manage.py runserver
 

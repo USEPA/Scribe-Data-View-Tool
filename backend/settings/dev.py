@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PROJECT_ROOT = os.path.dirname(BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
@@ -64,13 +64,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'urls'
 
-# Point to Create React App's build/dist directory, so html templates are served from there.
-# TODO: If Remove to separate the backend from the frontend (i.e. Host the entire React app completely separately, and
-#  have API calls made to a separate Django server, on a different sub-domain via CORS.)
+# TODO: Set template directory to Angular template to separate the backend from the frontend (i.e. Host
+#  the Angular app completely separately from Django templates.)
+#  Have API calls made to a separate Django server, on a different sub-domain with CORS.
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(PROJECT_ROOT, 'frontend', 'public')],
+        'DIRS': [os.path.join(PROJECT_ROOT, 'frontend', 'src')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -153,11 +153,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 # Static files path
 STATIC_URL = '/static/'
-# With this setting, when the project builds, the Django static files will be placed in the same location as
-# the React build files. This way, Django fully handles serving the static files.
-STATICFILES_DIRS = [
-    os.path.join(PROJECT_ROOT, 'frontend', 'build', 'static')
-]
+# With these settings, when the project builds, the Django static files will be placed in the same location as
+# the Angular build files. This way, Django fully handles serving the static files.
+ANGULAR_APP_DIR = os.path.join(PROJECT_ROOT, 'frontend')
+STATIC_ROOT = os.path.join(ANGULAR_APP_DIR, 'src', 'static')
+
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
