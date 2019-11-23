@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "50439b88e1045c1c409b956c36e58fc93230561852136700e22dfb7354d04762"
+            "sha256": "c2f028aee2e876790291216f2de2e5ade3361b42b949c014efe56df79b3b2ee9"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -23,6 +23,10 @@
             ],
             "index": "pypi",
             "version": "==2.1.14"
+        },
+        "django-agol-oauth2": {
+            "git": "https://github.com/Innovate-Inc/django-agol-oauth2.git",
+            "ref": "1b584ae059aee7787d18fbf4d87eb377b641970c"
         },
         "django-filter": {
             "hashes": [

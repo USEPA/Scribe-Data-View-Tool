@@ -243,7 +243,7 @@ class Command(BaseCommand):
         """
         files_to_delete = glob(f"{root_path}/models/*.py")
         for f in files_to_delete:
-            if not f.endswith("__.py"):
+            if not f.endswith("__.py") and "models.py" not in f:
                 os.remove(f)
 
     def write_schema_files(self, root_path, context):

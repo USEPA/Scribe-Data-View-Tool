@@ -1,7 +1,1 @@
-from django.apps import AppConfig
-
-
-class ScribeModelsAppConfig(AppConfig):
-    name = 'scribe_models'
-    verbose_name = "Scribe Models Application"
-
+default_app_config = 'scribe_models.apps.ScribeModelsAppConfig'

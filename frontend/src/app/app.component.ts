@@ -12,7 +12,7 @@ export class AppComponent {
   constructor(private http: HttpClient) {}
     public getProjects() {
         this.http.get(this.url).toPromise().then((res) => {
-            return res.json();
+            return res;
         });
     }
 }

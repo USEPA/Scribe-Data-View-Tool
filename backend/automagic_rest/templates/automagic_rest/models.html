@@ -8,5 +8,6 @@ class {{ table_key|replace_invalid_model_chars }}_model(models.Model):
 {% endfor %}
     class Meta:
         managed = False
+        app_label = '{{ root_python_path }}'
         db_table = '{{ table_key }}'
 {% endfor %}

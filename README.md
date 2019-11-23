@@ -11,12 +11,16 @@ Note: From project root folder, do the following project setup commands.
     
     > pip install pipenv
 
+    > pipenv install git+https://github.com/Innovate-Inc/django-agol-oauth2.git@master#egg=django-agol-oauth2
+
     > pipenv install --dev && pipenv shell
 
 3. Apply new app registry migrations based on the changes detected in the app data models 
     > python manage.py makemigrations
 
-4. Synchronize the default Sadie database with the default django models/migrations. 
+    > python manage.py makemigrations scribe_models
+
+4. Synchronize migrations just to the default Sadie database with the default django models/migrations. 
    Run manage.py to set the project settings, so the Django project’s setting files point 
    to the project's environment (.env) variables:
     > python manage.py migrate --database default

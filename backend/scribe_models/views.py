@@ -1,8 +1,7 @@
 from rest_framework import serializers
 from rest_framework import viewsets
-from rest_framework.response import Response
 
-from .models.scribe_models import Projects
+from .models.scribe_base_models import Projects
 
 
 class ProjectsSerializer(serializers.ModelSerializer):

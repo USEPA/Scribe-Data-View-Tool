@@ -12,6 +12,7 @@ djangorestframework = "<3.9.99,>=3.9"
 djangorestframework-queryfields = ">=1.0.0"
 djangorestframework-filters = "==1.0.0.dev0"
 psycopg2 = "<3.0,>=2.7"
+django-agol-oauth2 = {git = "https://github.com/Innovate-Inc/django-agol-oauth2.git",ref = "master"}
 
 [requires]
 python_version = "3.7"
