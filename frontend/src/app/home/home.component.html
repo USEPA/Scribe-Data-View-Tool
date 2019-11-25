@@ -8,14 +8,16 @@
         target="_blank"
       > USEPA's Environmental Response Team's Scribe database
       </a>.
-      <mat-form-field *ngIf="isLoaded">
+      <br><br>
+      <div *ngIf="isLoaded">
+        <mat-label>Select Project: </mat-label>
         <select matNativeControl [(ngModel)]="selectedProject" name="project">
           <option value="" selected></option>
           <option *ngFor="let project of userProjects" [value]="project.id">
             {{project.project_name}}
           </option>
         </select>
-      </mat-form-field>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>

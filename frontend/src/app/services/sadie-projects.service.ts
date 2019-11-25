@@ -1,6 +1,11 @@
-import {Injectable, Injector} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
+
+export interface Project {
+  projectid: number;
+  project_name: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +13,9 @@ import {Router} from '@angular/router';
 export class SadieProjectsService {
 
   constructor(private http: HttpClient, public router: Router) {}
+
   async getUserProjects() {
-    const res = await this.http.get('projects').toPromise();
-    return res;
+    return await this.http.get<Project[]>('projects').toPromise();
   }
 
 }
