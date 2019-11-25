@@ -10,6 +10,7 @@ export const environment = {
   oauth_redirect_uri: 'http://localhost:4200/oauthcallback',
   local_client_id: 'ttDS2qFfDXJSxCjETxKHcWeFCjmiycrGPUrKRr8T',
   local_service_endpoint: 'http://localhost:4200/api',
+  api_version_tag: 'v1'
 };
 
 /*

@@ -1,6 +1,6 @@
 import {Injectable, Injector} from '@angular/core';
-import {HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse} from "@angular/common/http";
-import {Observable} from "rxjs/Observable";
+import {HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
 
 
 import {tap} from 'rxjs/operators';
@@ -16,10 +16,15 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const loginService = this.injector.get(LoginService);
-    if (request.url.indexOf(environment.local_service_endpoint) === 0) {
-      const auth_header = loginService.access_token ? {Authorization: `Bearer ${loginService.access_token}`} : {};
+    const authHeader = loginService.access_token ? {Authorization: `Bearer ${loginService.access_token}`} : {};
+    if (request.url.includes('http') || request.url.includes(environment.local_service_endpoint)) {
       request = request.clone({
-        setHeaders: auth_header
+        setHeaders: authHeader
+      });
+    } else {
+      request = request.clone({
+        url: `${environment.local_service_endpoint}/${environment.api_version_tag}/${request.url}/`,
+        setHeaders: authHeader
       });
     }
 

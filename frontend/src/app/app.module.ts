@@ -1,4 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -13,14 +14,17 @@ import {
   MatButtonModule, MatDialogModule, MatIconModule
 } from '@angular/material';
 import {HttpRequestInterceptor} from './http-request.interceptor';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    OauthcallbackComponent
+    OauthcallbackComponent,
+    HomeComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

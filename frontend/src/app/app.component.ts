@@ -1,20 +1,22 @@
-import { Component } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  isLoaded: boolean;
   routes = [
-    { path: '/', name: 'Home' }
+    { path: '/', name: 'Home' },
+    { path: 'logout', name: 'Logout' },
   ];
-  url = 'http://localhost:4200/api/v1/projects/';
-  constructor(private http: HttpClient) {}
-    public getProjects() {
-        this.http.get(this.url).toPromise().then((res) => {
-            return res;
-        });
-    }
+
+  constructor() {
+    this.isLoaded = false;
+  }
+
+  ngOnInit() {
+    console.log('loading');
+  }
 }

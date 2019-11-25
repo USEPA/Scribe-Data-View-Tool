@@ -66,19 +66,17 @@ export class LoginService implements CanActivateChild, CanActivate {
     window.location.href = this.oauth_url + '?' + url_params.join('&');
   }
 
-  convertToken(access_token: string, expires_in: string, user_id: string = null) {
+  async convertToken(access_token: string, expires_in: string, user_id: string = null) {
     // return forkJoin(
     // this.setEsriToken(access_token, expires_in, user_id),
-    return this.http.post(`${environment.local_service_endpoint}/oauth2/convert-token`, '', {
+    const response = await this.http.post(`${environment.local_service_endpoint}/oauth2/convert-token`, '', {
       params: new HttpParams()
         .set('grant_type', 'convert_token')
         .set('client_id', this.local_client_id)
         .set('backend', 'agol')
         .set('token', access_token)
-    }).pipe(
-      map(response =>
-        this.setAccessToken(response['access_token'], response['expires_in']))
-    );
+    }).toPromise();
+    this.setAccessToken(response['access_token'], response['expires_in']);
     // );
   }
 
