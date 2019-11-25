@@ -1,6 +1,16 @@
 /*
- * Sticky Footer Styles
- */
+* Make the component injected by <router-outlet> full height:
+*/
+main {
+  display: flex;
+  flex-direction: column;
+  // Select all direct descendants only of the <main> element
+  // that are not <router-outlet> elements:
+  > *:not(router-outlet) {
+    flex: 1; // child will set to an equal size inside the container
+    display: block;
+  }
+}
 
 .all-wrap {
   min-height: 100vh; // same height as browser window height
@@ -12,27 +22,4 @@
   min-height: 100vh; // same height as browser window height
 }
 
-.content {
-  flex: 1; // child will set to an equal size inside the container
-}
 
-
-/*
- * Make the component injected by <router-outlet> full height:
- */
-
-main {
-
-  display: flex;
-  flex-direction: column;
-
-  // Select all direct descendants only of the <main> element
-  // that are not <router-outlet> elements:
-  > *:not(router-outlet) {
-
-    flex: 1; // child will set to an equal size inside the container
-    display: block;
-
-  }
-
-}

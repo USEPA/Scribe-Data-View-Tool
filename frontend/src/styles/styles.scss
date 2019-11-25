@@ -7,13 +7,14 @@ $config: mat-typography-config();
 
 html, body {
   height: 100%;
-  width: 100%;
+  margin: 0 !important;
 }
-// body { font-family: Roboto, "Helvetica Neue", sans-serif; }
 body {
+  display: flex;
+  flex-direction: column;
   font-family: mat-font-family($config);
+  // font-family: Roboto, "Helvetica Neue", sans-serif;
   font-weight: normal;
-  margin: 0;
 }
 
 // Custom theme configurations
@@ -46,20 +47,19 @@ $custom-colors: (
 }
 
 .content {
-  display: flex;
-  flex: 1;
-  align-items: center;
+  flex: 1 0 auto;
+  padding: 20px;
 }
 
 mat-sidenav { width: 30vw; }
 mat-list-item { cursor: pointer; }
 
 footer {
+  position: absolute;
+  bottom:0;
+  width:100%;
   background: map-get($custom-colors, toolbar-background);
   color: white;
-  width: 100%;
-  height: inherit;
-  margin-top: 25px;
   padding: 2vh 1.7vw;
   > * { padding: 0 0 0 2rem; }
 }
@@ -69,14 +69,11 @@ footer {
   margin-top: 100px;
 }
 
-.home-info {
-  padding: 2vh 1.7vw;
-}
 
 svg#clouds {
   position: fixed;
   bottom: -160px;
   left: -230px;
   z-index: -10;
-  width: 1920px;
+  width: 100%;
 }

@@ -10,6 +10,7 @@ import {SadieProjectsService} from '../services/sadie-projects.service';
 })
 export class HomeComponent implements OnInit {
   isLoaded: boolean;
+  selectedProject: string;
   userProjects: Promise<object>;
 
   constructor(public app: AppComponent,

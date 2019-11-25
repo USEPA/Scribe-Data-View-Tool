@@ -1,5 +1,4 @@
 import {BrowserModule} from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
 import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -10,11 +9,13 @@ import {LoginService} from './services/login.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {
-  MatToolbarModule, MatSidenavModule, MatListModule, MatCardModule,
+  MatToolbarModule, MatSidenavModule, MatListModule, MatCardModule, MatFormFieldModule, MatSelectModule,
   MatButtonModule, MatDialogModule, MatIconModule
 } from '@angular/material';
+import {FormsModule} from '@angular/forms';
 import {HttpRequestInterceptor} from './http-request.interceptor';
 import { HomeComponent } from './home/home.component';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +25,6 @@ import { HomeComponent } from './home/home.component';
     HomeComponent
   ],
   imports: [
-    CommonModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -35,7 +35,10 @@ import { HomeComponent } from './home/home.component';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    FormsModule
   ],
   providers: [
     {
