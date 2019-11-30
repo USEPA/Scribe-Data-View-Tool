@@ -7,13 +7,11 @@ $config: mat-typography-config();
 
 html, body {
   height: 100%;
-  margin: 0 !important;
 }
 body {
-  display: flex;
-  flex-direction: column;
-  font-family: mat-font-family($config);
+  margin: 0 !important;
   // font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: mat-font-family($config);
   font-weight: normal;
 }
 
@@ -33,7 +31,6 @@ $custom-colors: (
 .mat-toolbar {
   background: map-get($custom-colors, toolbar-background);
   color: white;
-  span { margin-right: 2rem; }
   mat-icon {
     cursor: pointer;
     font-size: 1.6em;
@@ -46,34 +43,35 @@ $custom-colors: (
   flex: 1 1 auto;
 }
 
-.content {
-  flex: 1 0 auto;
-  padding: 20px;
+.content-container {
+  height: 84vh;
 }
 
-mat-sidenav { width: 30vw; }
-mat-list-item { cursor: pointer; }
+.component-container  {
+  height: 84vh;
+  display: flex;
+}
+
+.center {
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
 
 footer {
   position: absolute;
-  bottom:0;
+  margin-bottom: 0;
+  height: 15px;
   width:100%;
   background: map-get($custom-colors, toolbar-background);
   color: white;
-  padding: 2vh 1.7vw;
-  > * { padding: 0 0 0 2rem; }
+  padding: 20px;
 }
 
 // Other custom classes
-.login-container {
-  margin-top: 100px;
-}
-
-
 svg#clouds {
   position: fixed;
-  bottom: -160px;
-  left: -230px;
+  bottom: -170px;
   z-index: -10;
   width: 100%;
 }

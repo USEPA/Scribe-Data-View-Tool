@@ -1,0 +1,22 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <img width="70" alt="EPA" src="assets/img/EPA_logo.png"/>
+    <span><h1>Sadie</h1></span>
+    <!-- This fills the remaining space of the current row -->
+    <div class="mat-toolbar-spacer"></div>
+    <button width="70" mat-button routerLink="/login" *ngIf="router.url !='/login' && !(loginService.valid_token)">
+      Login
+    </button>
+    <div *ngIf="(loginService.valid_token)">
+      <span>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </span>
+      <mat-menu #menu="matMenu">
+        <span mat-menu-item>User: {{ loginService.display_name }}</span>
+        <button mat-menu-item (click)="loginService.logout()">Logout</button>
+      </mat-menu>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

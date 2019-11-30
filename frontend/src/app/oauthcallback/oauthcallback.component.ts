@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {switchMap, tap} from 'rxjs/operators';
-import {LoginService} from '../services/login.service';
+import {LoginService} from '@services/login.service';
 
 @Component({
   selector: 'app-oauthcallback',
@@ -16,10 +16,11 @@ export class OauthcallbackComponent implements OnInit {
   ngOnInit() {
     const next = this.route.snapshot.queryParams.next ? this.route.snapshot.queryParams.next : '/';
     this.route.fragment.pipe(
-      switchMap(fragment => {
-        const oauth_params = fragment.match('(access_token=)(.*)(&expires_in=)(.*)(&username=)(.*)(&ssl=)');
-
-        return this.loginService.convertToken(oauth_params[2], oauth_params[4], oauth_params[6]);
+      switchMap(async fragment => {
+        const oauthParams = fragment.match('(access_token=)(.*)(&expires_in=)(.*)(&username=)(.*)(&ssl=)');
+        const tokenResponse = await this.loginService.convertToken(oauthParams[2], oauthParams[4], oauthParams[6]);
+        this.loginService.setAccessToken(tokenResponse.access_token, tokenResponse.expires_in);
+        await this.loginService.getUserProps();
       }),
       tap(() => this.router.navigate([next], ))
     ).subscribe();

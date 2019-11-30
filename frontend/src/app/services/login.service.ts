@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {Router, ActivatedRouteSnapshot, CanActivateChild, RouterStateSnapshot, CanActivate} from '@angular/router';
 import {environment} from '../../environments/environment';
 
@@ -11,16 +11,17 @@ export class LoginService implements CanActivateChild, CanActivate {
   access_token;
   token_expires: Date;
   username: string;
-  // display_name: string;
+  display_name: string;
   client_id: string;
   response_type: string;
   redirect_uri: string;
   local_client_id: string;
   oauth_url: string;
-  esri_token_object: any;
-  // groups: string[];
-  // permissions: string[];
-  // is_superuser: boolean;
+  // esri_token_object: any;
+  groups: string[];
+  permissions: string[];
+  is_superuser: boolean;
+  valid_token: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(private http: HttpClient, private router: Router) {
     this.client_id = environment.oauth_client_id;
@@ -33,9 +34,8 @@ export class LoginService implements CanActivateChild, CanActivate {
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     return new Promise(resolve => {
 
-      this.loadToken().pipe(
-        tap(() => resolve(true)),
-        catchError(() => this.router.navigate(['login'], {queryParams: {next: window.location.pathname}}))
+      this.loadToken().pipe(tap(() => resolve(true)),
+        catchError(() => this.router.navigate(['login']))
       ).subscribe();
 
     });
@@ -44,9 +44,7 @@ export class LoginService implements CanActivateChild, CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     return new Promise(resolve => {
 
-      this.loadToken().pipe(
-        tap(() => resolve(true)
-        ),
+      this.loadToken().pipe(tap(() => resolve(true)),
         catchError(() => this.router.navigate(['login']))
       ).subscribe();
 
@@ -61,34 +59,24 @@ export class LoginService implements CanActivateChild, CanActivate {
       expiration: 20160
     };
 
-    const url_params: string[] = Object.keys(params).map(key => key + '=' + params[key]);
+    const urlParams: string[] = Object.keys(params).map(key => key + '=' + params[key]);
 
-    window.location.href = this.oauth_url + '?' + url_params.join('&');
+    window.location.href = this.oauth_url + '?' + urlParams.join('&');
   }
 
-  async convertToken(access_token: string, expires_in: string, user_id: string = null) {
-    // return forkJoin(
-    // this.setEsriToken(access_token, expires_in, user_id),
-    const response = await this.http.post(`${environment.local_service_endpoint}/oauth2/convert-token`, '', {
+  async convertToken(accessToken: string, expiresIn: string, userId: string = null) {
+    let response: any = {
+      access_token: null,
+      expires_in: null
+    };
+    response = await this.http.post(`${environment.local_service_endpoint}/oauth2/convert-token`, '', {
       params: new HttpParams()
         .set('grant_type', 'convert_token')
         .set('client_id', this.local_client_id)
         .set('backend', 'agol')
-        .set('token', access_token)
+        .set('token', accessToken)
     }).toPromise();
-    this.setAccessToken(response['access_token'], response['expires_in']);
-    // );
-  }
-
-  login(username: string, password: string) {
-    const data = {
-      username: username,
-      password: password
-    };
-    return this.http.post(`/rest-auth/login/`, data)
-      .pipe(
-        map(response => this.setAccessToken(response['key'], 3600))
-      );
+    return response;
   }
 
 
@@ -116,18 +104,29 @@ export class LoginService implements CanActivateChild, CanActivate {
   //   });
   // }
 
-  setAccessToken(access_token: string, expires_in: number) {
-    localStorage.setItem('access_token', access_token);
-    this.access_token = access_token;
+  setAccessToken(accessToken: string, expiresIn: number) {
+    localStorage.setItem('access_token', accessToken);
+    this.access_token = accessToken;
     const now = new Date().getTime();
-    this.token_expires = new Date(now + (expires_in * 1000));
+    this.token_expires = new Date(now + (expiresIn * 1000));
     localStorage.setItem('token_expires', this.token_expires.toISOString());
+    this.valid_token.next(true);
+  }
+
+  async getUserProps() {
+    const response = await this.http.get<any>('current_user').toPromise();
+    if (response.name) {
+      this.display_name = response.name;
+      this.is_superuser = response.is_superuser;
+      localStorage.setItem('display_name', this.display_name);
+    }
   }
 
   loadToken() {
     return new Observable(obs => {
-      const expiration_date = String(localStorage.getItem('token_expires'));
-      this.token_expires = expiration_date !== 'null' ? new Date(expiration_date) : new Date();
+      const expirationDate = String(localStorage.getItem('token_expires'));
+      this.token_expires = expirationDate !== 'null' ? new Date(expirationDate) : new Date();
+      this.display_name = localStorage.getItem('display_name');
       this.access_token = localStorage.getItem('access_token');
       if (this.access_token) {
         obs.next();
@@ -168,7 +167,12 @@ export class LoginService implements CanActivateChild, CanActivate {
     delete this.token_expires;
     delete this.access_token;
     localStorage.clear();
+    this.valid_token.next(false);
   }
 
+  logout() {
+    this.clearToken();
+    this.router.navigate(['login']);
+  }
 
 }

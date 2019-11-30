@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c2f028aee2e876790291216f2de2e5ade3361b42b949c014efe56df79b3b2ee9"
+            "sha256": "a278e29c5d6568916bdba1d02438610ca24e1526366f4e567a015b8c91e7119f"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,17 +16,46 @@
         ]
     },
     "default": {
+        "certifi": {
+            "hashes": [
+                "sha256:017c25db2a153ce562900032d5bc68e9f191e44e9a0f762f373977de9df1fbb3",
+                "sha256:25b64c7da4cd7479594d035c08c2d809eb4aab3a26e5a990ea98cc450c320f1f"
+            ],
+            "version": "==2019.11.28"
+        },
+        "chardet": {
+            "hashes": [
+                "sha256:84ab92ed1c4d4f16916e05906b6b75a6c0fb5db821cc65e70cbd64a3e2a5eaae",
+                "sha256:fc323ffcaeaed0e0a02bf4d117757b98aed530d9ed4531e3e15460124c106691"
+            ],
+            "version": "==3.0.4"
+        },
+        "defusedxml": {
+            "hashes": [
+                "sha256:6687150770438374ab581bb7a1b327a847dd9c5749e396102de3fad4e8a3ef93",
+                "sha256:f684034d135af4c6cbb949b8a4d2ed61634515257a67299e5f940fbaa34377f5"
+            ],
+            "markers": "python_version >= '3.0'",
+            "version": "==0.6.0"
+        },
         "django": {
             "hashes": [
-                "sha256:660e7cc240231b2fe702fada5fe952d29720fd6153fa6b59ea5dbf3161ab5cdd",
-                "sha256:d9159141fc354c4c28cc2b2586d55ba6d5e1531f5470218bb56a75be03d67398"
+                "sha256:7c3543e4fb070d14e10926189a7fcf42ba919263b7473dceaefce34d54e8a119",
+                "sha256:a2814bffd1f007805b19194eb0b9a331933b82bd5da1c3ba3d7b7ba16e06dc4b"
             ],
             "index": "pypi",
-            "version": "==2.1.14"
+            "version": "==2.2"
         },
-        "django-agol-oauth2": {
+        "django-agol-oauth2==0-0-1": {
             "git": "https://github.com/Innovate-Inc/django-agol-oauth2.git",
             "ref": "1b584ae059aee7787d18fbf4d87eb377b641970c"
+        },
+        "django-braces": {
+            "hashes": [
+                "sha256:a457d74ea29478123c0c4652272681b3cea0bf1232187fd9f9b6f1d97d32a890",
+                "sha256:ba68e98b817c6f01d71d10849f359979617b3fe4cefb7f289adefddced092ddc"
+            ],
+            "version": "==1.13.0"
         },
         "django-filter": {
             "hashes": [
@@ -35,20 +64,34 @@
             ],
             "version": "==2.2.0"
         },
-        "django-pyodbc-azure": {
+        "django-mssql-backend": {
             "hashes": [
-                "sha256:1fa3b31f4432ef2c90c434b284ad093478f8221121dafef05fafbe2c4d872211"
+                "sha256:8f353297a2107df443ac94e187c6931eca3e16fcc9aefbcdd3483fe0ae30f7e9",
+                "sha256:ade12a62b90fb40b0edd553d8e495552ca732536edd5b638157b51cc42a04939"
             ],
             "index": "pypi",
-            "version": "==2.1.0.0"
+            "version": "==2.4.0"
+        },
+        "django-oauth-toolkit": {
+            "hashes": [
+                "sha256:ad1b76275950ebbff708222cec57bbdb879f89bac7df6b9dee0f4b9db485c264"
+            ],
+            "version": "==1.2.0"
+        },
+        "django-rest-framework-social-oauth2": {
+            "hashes": [
+                "sha256:c9a297b636ffd37957c6146280e99ead41e6aca37bcb995e3d52d65eefbca0b7"
+            ],
+            "index": "pypi",
+            "version": "==1.1.0"
         },
         "djangorestframework": {
             "hashes": [
-                "sha256:376f4b50340a46c15ae15ddd0c853085f4e66058f97e4dbe7d43ed62f5e60651",
-                "sha256:c12869cfd83c33d579b17b3cb28a2ae7322a53c3ce85580c2a2ebe4e3f56c4fb"
+                "sha256:5488aed8f8df5ec1d70f04b2114abc52ae6729748a176c453313834a9ee179c8",
+                "sha256:dc81cbf9775c6898a580f6f1f387c4777d12bd87abf0f5406018d32ccae71090"
             ],
             "index": "pypi",
-            "version": "==3.9.4"
+            "version": "==3.10.3"
         },
         "djangorestframework-filters": {
             "hashes": [
@@ -65,6 +108,20 @@
             ],
             "index": "pypi",
             "version": "==1.0.0"
+        },
+        "idna": {
+            "hashes": [
+                "sha256:c357b3f628cf53ae2c4c05627ecc484553142ca23264e593d327bcde5e9c3407",
+                "sha256:ea8b7f6188e6fa117537c3df7da9fc686d485087abf6ac197f9c46432f7e4a3c"
+            ],
+            "version": "==2.8"
+        },
+        "oauthlib": {
+            "hashes": [
+                "sha256:bee41cc35fcca6e988463cacc3bcb8a96224f470ca547e697b604cc697b2f889",
+                "sha256:df884cd6cbe20e32633f1db1072e9356f53638e4361bef4e8b03c9127c9328ea"
+            ],
+            "version": "==3.1.0"
         },
         "psycopg2": {
             "hashes": [
@@ -85,6 +142,13 @@
             "index": "pypi",
             "version": "==2.8.4"
         },
+        "pyjwt": {
+            "hashes": [
+                "sha256:5c6eca3c2940464d106b99ba83b00c6add741c9becaec087fb7ccdefea71350e",
+                "sha256:8d59a976fb773f3e6a39c85636357c4f0e242707394cadadd9814f5cbaa20e96"
+            ],
+            "version": "==1.7.1"
+        },
         "pyodbc": {
             "hashes": [
                 "sha256:1b87eddbd50a8ef2703ca98dae69e3c83b04aaa7be0f5ae2d8a16fc56f6fe33c",
@@ -104,12 +168,71 @@
             ],
             "version": "==4.0.27"
         },
+        "python3-openid": {
+            "hashes": [
+                "sha256:0086da6b6ef3161cfe50fb1ee5cceaf2cda1700019fda03c2c5c440ca6abe4fa",
+                "sha256:628d365d687e12da12d02c6691170f4451db28d6d68d050007e4a40065868502"
+            ],
+            "markers": "python_version >= '3.0'",
+            "version": "==3.1.0"
+        },
         "pytz": {
             "hashes": [
                 "sha256:1c557d7d0e871de1f5ccd5833f60fb2550652da6be2693c1e02300743d21500d",
                 "sha256:b02c06db6cf09c12dd25137e563b31700d3b80fcc4ad23abb7a315f2789819be"
             ],
             "version": "==2019.3"
+        },
+        "requests": {
+            "hashes": [
+                "sha256:11e007a8a2aa0323f5a921e9e6a2d7e4e67d9877e85773fba9ba6419025cbeb4",
+                "sha256:9cf5292fcd0f598c671cfc1e0d7d1a7f13bb8085e9a590f48c010551dc6c4b31"
+            ],
+            "version": "==2.22.0"
+        },
+        "requests-oauthlib": {
+            "hashes": [
+                "sha256:7f71572defaecd16372f9006f33c2ec8c077c3cfa6f5911a9a90202beb513f3d",
+                "sha256:b4261601a71fd721a8bd6d7aa1cc1d6a8a93b4a9f5e96626f8e4d91e8beeaa6a"
+            ],
+            "version": "==1.3.0"
+        },
+        "six": {
+            "hashes": [
+                "sha256:1f1b7d42e254082a9db6279deae68afb421ceba6158efa6131de7b3003ee93fd",
+                "sha256:30f610279e8b2578cab6db20741130331735c781b56053c59c4076da27f06b66"
+            ],
+            "version": "==1.13.0"
+        },
+        "social-auth-app-django": {
+            "hashes": [
+                "sha256:6d0dd18c2d9e71ca545097d57b44d26f59e624a12833078e8e52f91baf849778",
+                "sha256:9237e3d7b6f6f59494c3b02e0cce6efc69c9d33ad9d1a064e3b2318bcbe89ae3",
+                "sha256:f151396e5b16e2eee12cd2e211004257826ece24fc4ae97a147df386c1cd7082"
+            ],
+            "version": "==3.1.0"
+        },
+        "social-auth-core": {
+            "hashes": [
+                "sha256:47cd2458c8fefd02466b0c514643e02ad8b61d8b4b69f7573e80882e3a97b0f0",
+                "sha256:8320666548a532eb158968eda542bbe1863682357c432d8c4e28034a7f1e3b58",
+                "sha256:d81ed681e3c0722300b61a0792c5db5d21206793f95ca810f010c1cc931c8d89"
+            ],
+            "version": "==3.2.0"
+        },
+        "sqlparse": {
+            "hashes": [
+                "sha256:40afe6b8d4b1117e7dff5504d7a8ce07d9a1b15aeeade8a2d10f130a834f8177",
+                "sha256:7c3dca29c022744e95b547e867cee89f4fce4373f3549ccd8797d8eb52cdb873"
+            ],
+            "version": "==0.3.0"
+        },
+        "urllib3": {
+            "hashes": [
+                "sha256:a8a318824cc77d1fd4b2bec2ded92646630d7fe8619497b142c84a9e6f5a7293",
+                "sha256:f3c5fd51747d450d4dcf6f923c81f78f811aab8205fda64b0aba34a4e48b0745"
+            ],
+            "version": "==1.25.7"
         }
     },
     "develop": {}

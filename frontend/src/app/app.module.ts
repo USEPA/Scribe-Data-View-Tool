@@ -5,16 +5,17 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
 import {OauthcallbackComponent} from './oauthcallback/oauthcallback.component';
-import {LoginService} from './services/login.service';
+import {LoginService} from '@services/login.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {
-  MatToolbarModule, MatSidenavModule, MatListModule, MatCardModule, MatFormFieldModule, MatSelectModule,
+  MatToolbarModule, MatMenuModule, MatListModule, MatCardModule, MatFormFieldModule, MatSelectModule,
   MatButtonModule, MatDialogModule, MatIconModule
 } from '@angular/material';
 import {FormsModule} from '@angular/forms';
 import {HttpRequestInterceptor} from './http-request.interceptor';
 import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from '@components/header/header.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     LoginComponent,
     OauthcallbackComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -33,12 +35,12 @@ import { HomeComponent } from './home/home.component';
     MatButtonModule,
     MatDialogModule,
     MatToolbarModule,
-    MatSidenavModule,
     MatListModule,
     MatIconModule,
     MatFormFieldModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
+    MatMenuModule
   ],
   providers: [
     {

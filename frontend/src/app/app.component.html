@@ -1,38 +1,8 @@
-<div class="app-container">
-  <mat-toolbar>
-    <mat-toolbar-row>
-      <img width="40" alt="Sadie Logo" src="assets/img/lab-flask.png">
-      <span><h1>Sadie</h1></span>
-      <!-- This fills the remaining space of the current row -->
-      <div class="mat-toolbar-spacer"></div>
-      <span>
-      <mat-icon
-        (click)="sidenav.open()"
-      >menu
-      </mat-icon>
-    </span>
-    </mat-toolbar-row>
-  </mat-toolbar>
+<app-header></app-header>
 
-  <!--<mat-sidenav-container class="all-wrap">
-    <mat-sidenav #sidenav over>
-      <mat-list>
-        <mat-list-item
-          *ngFor="let route of routes"
-          [routerLink]="route.path"
-          (click)="sidenav.toggle()"
-        >
-          &emsp;{{route.name}}
-        </mat-list-item>
-      </mat-list>
-    </mat-sidenav>
-    <mat-sidenav-content class="page-wrap">
-    </mat-sidenav-content>
-  </mat-sidenav-container>-->
+<div class="content-container">
 
-  <main layout="row" layout-align="center center" class="content">
-    <router-outlet></router-outlet>
-  </main>
+  <router-outlet></router-outlet>
 
   <svg id="clouds"
        alt="Gray Clouds Background"
@@ -48,8 +18,10 @@
     />
   </svg>
 
-  <footer>
-    Footer
-  </footer>
-
 </div>
+
+<footer>
+  Footer
+</footer>
+
+

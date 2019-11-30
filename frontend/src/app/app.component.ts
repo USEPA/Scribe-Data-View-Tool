@@ -7,16 +7,11 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AppComponent implements OnInit {
   isLoaded: boolean;
-  routes = [
-    { path: '/', name: 'Home' },
-    { path: 'logout', name: 'Logout' },
-  ];
 
   constructor() {
     this.isLoaded = false;
   }
 
   ngOnInit() {
-    console.log('loading');
   }
 }

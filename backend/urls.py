@@ -44,16 +44,18 @@ urlpatterns = [
     # Parameterized api urls
     url(r'^api/v1/project_tables/(?P<project_id_p>.+)', sadie_views.ProjectTablesViewSet.as_view({'get': 'list'})),
     url(r'^api/v1/project_tables$', sadie_views.ProjectTablesViewSet.as_view({'get': 'list'})),
+    url(r'^api/v1/current_user/', sadie_views.current_user),
 
     # Declare automagic_rest api calls
     # http://localhost:8080/api/v1/<PID_#>
     url(r'^api/v1/', include('scribe_models.urls')),
-
-
     # sample CRUD url
     url(r'^api/v1/submit_sample_request', sadie_views.SampleViewSet.submit_sample_request, name='sample_requests'),
+
+    # social oauth api calls
     url(r'^api/oauth2/', include('rest_framework_social_oauth2.urls')),
-    url('', include('social_django.urls', namespace='social_django')),
+    # url('', include('social_django.urls', namespace='social_django')),
+
     # catch all other urls
     # url(r'.*', never_cache(TemplateView.as_view(template_name='index.html')), name='index'),
 

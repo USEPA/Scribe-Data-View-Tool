@@ -6,13 +6,14 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-Django = ">=2.0,<2.1.99"
-django-pyodbc-azure = ">=2.0,<2.1.99"
-djangorestframework = "<3.9.99,>=3.9"
+Django = "==2.2.0"
+django-mssql-backend = "==2.4.0"
+djangorestframework = ">=3.10.3,<=3.10.99"
 djangorestframework-queryfields = ">=1.0.0"
 djangorestframework-filters = "==1.0.0.dev0"
 psycopg2 = "<3.0,>=2.7"
-django-agol-oauth2 = {git = "https://github.com/Innovate-Inc/django-agol-oauth2.git",ref = "master"}
+"django-agol-oauth2==0-0-1" = {git = "https://github.com/Innovate-Inc/django-agol-oauth2.git",ref = "master"}
+django-rest-framework-social-oauth2 = "==1.1.0"
 
 [requires]
 python_version = "3.7"
