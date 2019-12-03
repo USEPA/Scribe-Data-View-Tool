@@ -42,6 +42,7 @@ urlpatterns = [
     # http://localhost:8080/api/v1/<router-viewsets>
     url(r'^api/v1/', include(router.urls)),
     # Parameterized api urls
+    url(r'^api/v1/projects/(?P<project_id_p>.+)/samples/', scribe_model_views.get_project_samples),
     url(r'^api/v1/project_tables/(?P<project_id_p>.+)', sadie_views.ProjectTablesViewSet.as_view({'get': 'list'})),
     url(r'^api/v1/project_tables$', sadie_views.ProjectTablesViewSet.as_view({'get': 'list'})),
     url(r'^api/v1/current_user/', sadie_views.current_user),

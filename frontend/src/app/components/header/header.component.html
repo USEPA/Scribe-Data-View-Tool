@@ -7,7 +7,7 @@
     <button width="70" mat-button routerLink="/login" *ngIf="router.url !='/login' && !(loginService.valid_token)">
       Login
     </button>
-    <div *ngIf="(loginService.valid_token)">
+    <div *ngIf="(loginService.access_token)">
       <span>
         <button mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>menu</mat-icon>

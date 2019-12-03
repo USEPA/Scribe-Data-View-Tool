@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AppComponent} from '../app.component';
 import {LoginService} from '../services/login.service';
-import {Project, SadieProjectsService} from '../services/sadie-projects.service';
+import {Project, ProjectSample, SadieProjectsService} from '../services/sadie-projects.service';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
   isLoaded: boolean;
   selectedProject: string;
   userProjects: Project[];
+  projectSamples: ProjectSample[];
 
   constructor(public app: AppComponent,
               public loginService: LoginService,
@@ -29,6 +30,10 @@ export class HomeComponent implements OnInit {
       }
 
     }
+  }
+
+  async projectChanged(selectedProjectId) {
+    this.projectSamples = await this.sadieProjectsService.getProjectSamples(selectedProjectId);
   }
 
 }
