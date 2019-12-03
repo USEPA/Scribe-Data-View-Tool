@@ -16,7 +16,10 @@ export class AgGridComponent implements OnChanges {
 
   constructor() {
     this.showGrid = true;
-    this.defaultColDef = { resizable: true };
+    this.defaultColDef = {
+      autoHeight: true,
+      resizable: true
+    };
   }
 
   onGridReady(params) {
@@ -26,6 +29,12 @@ export class AgGridComponent implements OnChanges {
 
   onModelUpdated(params) {
     params.api.sizeColumnsToFit();
+    // params.api.autoSizeColumns();
+    const allColumnIds = [];
+    this.gridColumnApi.getAllColumns().forEach((column) => {
+      allColumnIds.push(column.colId);
+    });
+    this.gridColumnApi.autoSizeColumns(allColumnIds);
   }
 
   ngOnChanges(changes: SimpleChanges) {

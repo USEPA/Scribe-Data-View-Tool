@@ -85,3 +85,12 @@ svg#clouds {
   z-index: -10;
   width: 100%;
 }
+
+// custom AG Grid styles
+.ag-theme-balham .ag-cell {
+  font-size: 10px !important;
+}
+
+.ag-theme-balham .cell-wrap {
+  white-space: normal !important;
+}
