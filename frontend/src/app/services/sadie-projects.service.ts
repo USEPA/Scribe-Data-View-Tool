@@ -24,6 +24,11 @@ export interface ProjectSample {
   longitude: number;
 }
 
+export interface ColumnsRows {
+  columnDefs: any[];
+  rowData: any[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -36,7 +41,7 @@ export class SadieProjectsService {
   }
 
   async getProjectSamples(projectId: string) {
-    return await this.http.get<ProjectSample[]>(`projects/PID_${projectId}/samples`).toPromise();
+    return await this.http.get<ColumnsRows>(`projects/PID_${projectId}/samples`).toPromise();
   }
 
 }

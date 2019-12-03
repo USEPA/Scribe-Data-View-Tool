@@ -2,8 +2,9 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './login/login.component';
-import {LoginService} from './services/login.service';
+import {LoginService} from '@services/login.service';
 import {OauthcallbackComponent} from './oauthcallback/oauthcallback.component';
+import {AgGridModule} from 'ag-grid-angular/main';
 
 
 const routes: Routes = [
@@ -23,7 +24,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes),
+    AgGridModule.withComponents([])
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

@@ -9,31 +9,41 @@ import {Project, ProjectSample, SadieProjectsService} from '../services/sadie-pr
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  isLoaded: boolean;
+  projectsLoaded: boolean;
+  samplesLoaded: boolean;
   selectedProject: string;
   userProjects: Project[];
-  projectSamples: ProjectSample[];
+  projectSamplesColDefs: any[];
+  projectSamplesRowData: ProjectSample[];
 
   constructor(public app: AppComponent,
               public loginService: LoginService,
               public sadieProjectsService: SadieProjectsService) {
-    this.isLoaded = false;
+    this.projectsLoaded = false;
+    this.samplesLoaded = false;
   }
 
   async ngOnInit() {
     if (this.loginService.access_token) {
       try {
         this.userProjects = await this.sadieProjectsService.getUserProjects();
-        this.isLoaded = true;
+        this.projectsLoaded = true;
       } catch (err) {
-        this.isLoaded = false;
+        this.projectsLoaded = false;
       }
 
     }
   }
 
   async projectChanged(selectedProjectId) {
-    this.projectSamples = await this.sadieProjectsService.getProjectSamples(selectedProjectId);
+    try {
+      const results = await this.sadieProjectsService.getProjectSamples(selectedProjectId);
+      this.projectSamplesColDefs = results.columnDefs;
+      this.projectSamplesRowData = results.rowData;
+      this.samplesLoaded = true;
+    } catch (err) {
+      this.samplesLoaded = false;
+    }
   }
 
 }

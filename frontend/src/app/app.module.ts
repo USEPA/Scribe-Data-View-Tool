@@ -16,6 +16,8 @@ import {FormsModule} from '@angular/forms';
 import {HttpRequestInterceptor} from './http-request.interceptor';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from '@components/header/header.component';
+import { AgGridComponent } from '@components/ag-grid/ag-grid.component';
+import {AgGridModule} from 'ag-grid-angular';
 
 
 @NgModule({
@@ -24,7 +26,8 @@ import { HeaderComponent } from '@components/header/header.component';
     LoginComponent,
     OauthcallbackComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    AgGridComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { HeaderComponent } from '@components/header/header.component';
     MatFormFieldModule,
     MatSelectModule,
     FormsModule,
-    MatMenuModule
+    MatMenuModule,
+    AgGridModule
   ],
   providers: [
     {

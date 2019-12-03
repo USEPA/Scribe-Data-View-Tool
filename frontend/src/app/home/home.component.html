@@ -1,22 +1,25 @@
 <div class="component-container">
-  <mat-card style="width: 100%">
-    <mat-card-content>
-      Welcome to Sadie: An application to organize and view the
-      <a
-        href="https://response.epa.gov/site/site_profile.aspx?site_id=ScribeGIS"
-        target="_blank"
-      > USEPA's Environmental Response Team's Scribe database
-      </a>.
-      <br><br>
-      <div *ngIf="isLoaded">
-        <mat-label>Select Project: </mat-label>
-        <select matNativeControl [(ngModel)]="selectedProject" (ngModelChange)="projectChanged($event)" name="selectProject">
-          <option value="" selected></option>
-          <option *ngFor="let project of userProjects" [value]="project.projectid">
-            {{project.project_name}}
-          </option>
-        </select>
-      </div>
-    </mat-card-content>
-  </mat-card>
+  <div>
+    Welcome to Sadie: An application to organize and view the
+    <a
+      href="https://response.epa.gov/site/site_profile.aspx?site_id=ScribeGIS"
+      target="_blank"
+    > USEPA's Environmental Response Team's Scribe database
+    </a>.
+  </div>
+  <div *ngIf="projectsLoaded">
+    <mat-label>Select Project: </mat-label>
+    <select matNativeControl [(ngModel)]="selectedProject" (ngModelChange)="projectChanged($event)" name="selectProject">
+      <option value="" selected></option>
+      <option *ngFor="let project of userProjects" [value]="project.projectid">
+        {{project.project_name}}
+      </option>
+    </select>
+  </div>
+  <div>
+    <app-ag-grid *ngIf="samplesLoaded"
+      [columnDefs]="projectSamplesColDefs" [rowData]="projectSamplesRowData"
+    ></app-ag-grid>
+  </div>
 </div>
+

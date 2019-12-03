@@ -1,0 +1,17 @@
+<ag-grid-angular
+  style="width: 100%; height: 400px"
+  class="ag-theme-balham"
+  [columnDefs]="columnDefs"
+  [rowData]="rowData"
+  [enableFilter]="true"
+  [floatingFilter]="true"
+  [enableSorting]="true"
+  [enableColResize]="true"
+  [pagination]="true"
+  [paginationAutoPageSize]="true"
+  [alwaysShowVerticalScroll]="false"
+  [rowSelection]="'single'"
+  (gridReady)="onGridReady($event)"
+  (modelUpdated)="onModelUpdated($event)"
+>
+</ag-grid-angular>
