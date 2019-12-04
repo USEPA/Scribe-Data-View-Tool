@@ -1,4 +1,4 @@
-<div class="component-container">
+<div class="component-container-col">
   <div>
     Welcome to Sadie: An application to organize and view the
     <a
@@ -16,10 +16,13 @@
       </option>
     </select>
   </div>
-  <div>
-    <app-ag-grid *ngIf="samplesLoaded"
-      [columnDefs]="projectSamplesColDefs" [rowData]="projectSamplesRowData"
+  <div class="component-container-flex">
+    <app-ag-grid
+      *ngIf="samplesLoaded"
+      [columnDefs]="projectSamplesColDefs"
+      [rowData]="projectSamplesRowData"
     ></app-ag-grid>
+    <app-map-view *ngIf="samplesLoaded"></app-map-view>
   </div>
 </div>
 

@@ -4,6 +4,8 @@
 // AG Grid style imports
 @import "~ag-grid-community/src/styles/ag-grid.scss";
 @import "~ag-grid-community/src/styles/ag-theme-balham/sass/ag-theme-balham.scss";
+// Esri JS API css
+@import url('https://js.arcgis.com/4.12/esri/css/main.css');
 
 @include mat-core();
 
@@ -51,14 +53,18 @@ $custom-colors: (
   height: 100%;
 }
 
-.component-container  {
+.component-container-flex  {
+  display: flex;
+}
+
+.component-container-col  {
   display: flex;
   flex-direction: column;
   height: 100%;
   background-color: white;
 }
 
-.component-container > * {
+.component-container-col > * {
   margin: 10px;
 }
 
@@ -78,13 +84,15 @@ footer {
   padding: 20px;
 }
 
-// Other custom classes
-svg#clouds {
-  position: fixed;
-  bottom: -170px;
-  z-index: -10;
-  width: 100%;
+// map styles
+.map-container {
+  width: 600px;
+  height: 500px;
+  box-shadow: 0 8px 6px -6px black;
+  margin-left: 10px;
 }
+
+// Other custom styles
 
 // custom AG Grid styles
 .ag-theme-balham .ag-cell {
@@ -93,4 +101,17 @@ svg#clouds {
 
 .ag-theme-balham .cell-wrap {
   white-space: normal !important;
+}
+
+.loading-spinner {
+  position: absolute;
+  top: 50%;
+  left: 75%;
+}
+
+svg#clouds {
+  position: fixed;
+  bottom: -170px;
+  z-index: -10;
+  width: 100%;
 }

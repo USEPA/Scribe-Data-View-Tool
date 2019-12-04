@@ -10,7 +10,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {
   MatToolbarModule, MatMenuModule, MatListModule, MatCardModule, MatFormFieldModule, MatSelectModule,
-  MatButtonModule, MatDialogModule, MatIconModule
+  MatButtonModule, MatDialogModule, MatIconModule, MatProgressSpinnerModule
 } from '@angular/material';
 import {FormsModule} from '@angular/forms';
 import {HttpRequestInterceptor} from './http-request.interceptor';
@@ -18,6 +18,7 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from '@components/header/header.component';
 import { AgGridComponent } from '@components/ag-grid/ag-grid.component';
 import {AgGridModule} from 'ag-grid-angular';
+import { MapViewComponent } from './components/map-view/map-view.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {AgGridModule} from 'ag-grid-angular';
     OauthcallbackComponent,
     HomeComponent,
     HeaderComponent,
-    AgGridComponent
+    AgGridComponent,
+    MapViewComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,8 @@ import {AgGridModule} from 'ag-grid-angular';
     MatSelectModule,
     FormsModule,
     MatMenuModule,
-    AgGridModule
+    AgGridModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {

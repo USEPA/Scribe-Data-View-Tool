@@ -25,16 +25,23 @@ export class AgGridComponent implements OnChanges {
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
+    const allColumnIds = [];
+    this.gridColumnApi.getAllColumns().forEach((column) => {
+      allColumnIds.push(column.colId);
+    });
+    this.gridColumnApi.autoSizeColumns(allColumnIds);
   }
 
   onModelUpdated(params) {
     params.api.sizeColumnsToFit();
     // params.api.autoSizeColumns();
     const allColumnIds = [];
-    this.gridColumnApi.getAllColumns().forEach((column) => {
-      allColumnIds.push(column.colId);
-    });
-    this.gridColumnApi.autoSizeColumns(allColumnIds);
+    if (this.gridColumnApi) {
+      this.gridColumnApi.getAllColumns().forEach((column) => {
+        allColumnIds.push(column.colId);
+      });
+      this.gridColumnApi.autoSizeColumns(allColumnIds);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {

@@ -4,13 +4,13 @@
     <span><h1>Sadie</h1></span>
     <!-- This fills the remaining space of the current row -->
     <div class="mat-toolbar-spacer"></div>
-    <button width="70" mat-button routerLink="/login" *ngIf="router.url !='/login' && !(loginService.valid_token)">
+    <button width="100" mat-button routerLink="/login" *ngIf="router.url !='/login' && !(loginService.valid_token)">
       Login
     </button>
     <div *ngIf="(loginService.access_token)">
       <span>
         <button mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon>menu</mat-icon>
+          <mat-icon style="font-size: xx-large">menu</mat-icon>
         </button>
       </span>
       <mat-menu #menu="matMenu">
