@@ -22,7 +22,10 @@
       [columnDefs]="projectSamplesColDefs"
       [rowData]="projectSamplesRowData"
     ></app-ag-grid>
-    <app-map-view *ngIf="samplesLoaded"></app-map-view>
+    <app-map-view
+      *ngIf="samplesLoaded"
+      [pointData]="projectSamplesRowData"
+    ></app-map-view>
   </div>
 </div>
 

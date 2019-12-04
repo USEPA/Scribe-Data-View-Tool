@@ -9,19 +9,19 @@ export interface Project {
 }
 
 export interface ProjectSample {
-  samp_no: string;
-  sampleDate: Date;
-  sampleType: string;
-  site_no: string;
-  site_name: string;
-  area: string;
-  site_state: string;
-  epaRegionNumber: number;
-  contractor: string;
-  location: string;
-  locationDescription: string;
-  latitude: number;
-  longitude: number;
+  Area: string;
+  Contractor: string;
+  EPA_Region: string;
+  Lat: number;
+  Location: string;
+  Location_Desc: string;
+  Long: number;
+  Sample_Date: string;
+  Sample_Number: string;
+  Sample_Type: string;
+  Site_Name: string;
+  Site_Number: string;
+  State: string;
 }
 
 export interface ColumnsRows {
