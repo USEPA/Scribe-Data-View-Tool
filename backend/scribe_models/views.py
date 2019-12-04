@@ -33,9 +33,9 @@ def get_project_samples(request, project_id_p=0):
     try:
         project_samples_sql = f"""
         SELECT samp.samp_no as Sample_Number, samp.sampleDate as Sample_Date, samp.matrix as Sample_Type, 
-        s.site_no as Site_Number, s.site_name as Site_Name, s.area as Area, s.site_state as State, 
-        s.epaRegionNumber as EPA_Region, s.contractor as Contractor, loc.location as Location, 
-        loc.locationDescription as Location_Desc, loc.latitude as Lat, loc.longitude as Long
+        loc.location as Location, loc.locationDescription as Location_Desc, loc.latitude as Lat, loc.longitude as Long, 
+        s.epaRegionNumber as EPA_Region, s.site_no as Site_Number, s.site_name as Site_Name, 
+        s.area as Area, s.site_state as State, s.contractor as Contractor 
         FROM {project_id_p}_Samples samp
         INNER JOIN {project_id_p}_Site s ON samp.Site_No = s.Site_No
         INNER JOIN {project_id_p}_Location loc ON samp.Location = loc.Location
