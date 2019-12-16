@@ -15,19 +15,22 @@
         {{project.project_name}}
       </option>
     </select>
+    <span *ngIf="(projectSamplesRowData.length > mapNumOfFeatures)" class="mat-warn">
+      &nbsp;&emsp; {{'Number of records without geospatial points:' + (projectSamplesRowData.length - mapNumOfFeatures)}}
+    </span>
   </div>
   <div class="component-container-flex">
     <app-ag-grid
       *ngIf="samplesLoaded"
       [columnDefs]="projectSamplesColDefs"
       [rowData]="projectSamplesRowData"
-      [ngStyle]="{'width': projectSamplesRowData.length > 0 && mapHasFeatures ? '900px' : '100%'}"
+      [ngStyle]="{'width': (projectSamplesRowData.length > 0 && mapNumOfFeatures > 0) ? '900px' : '100%'}"
     ></app-ag-grid>
     <app-map-view
       *ngIf="samplesLoaded"
       [pointData]="projectSamplesRowData"
-      (mapFeaturesLoadedEvent)="setMapFeaturesLoadedEvent($event)"
-      [ngStyle]="{'display': mapHasFeatures ? 'block' : 'none'}"
+      (mapFeaturesLoadedEvent)="setMapNumOfFeatures($event)"
+      [ngStyle]="{'display': (mapNumOfFeatures >= 1) ? 'block' : 'none'}"
     ></app-map-view>
   </div>
 </div>

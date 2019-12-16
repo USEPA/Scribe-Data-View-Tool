@@ -24,7 +24,7 @@ import { loadModules } from 'esri-loader';
   styleUrls: ['./map-view.component.css']
 })
 export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
-  @Output() mapFeaturesLoadedEvent = new EventEmitter<boolean>();
+  @Output() mapFeaturesLoadedEvent = new EventEmitter<number>();
 
   // The <div> where we will place the map
   @ViewChild('mapViewDiv', { static: true }) private mapViewEl: ElementRef;
@@ -159,11 +159,8 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       });*/
       this._view.graphics.addMany(pointGraphicsArray);
       this._view.goTo(pointGraphicsArray);
-      this.mapFeaturesLoadedEvent.emit(true);
-    } else {
-      this.mapFeaturesLoadedEvent.emit(false);
     }
-
+    this.mapFeaturesLoadedEvent.emit(pointGraphicsArray.length);
   }
 
 }
