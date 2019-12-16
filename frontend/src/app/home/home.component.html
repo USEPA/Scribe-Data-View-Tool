@@ -6,32 +6,42 @@
       target="_blank"
     > USEPA's Environmental Response Team's Scribe database
     </a>.
+    <div *ngIf="projectsLoaded" style="margin-top: 10px;">
+      <mat-label>Select Project: </mat-label>
+      <select matNativeControl name="selectProject"
+              [(ngModel)]="selectedProject" (ngModelChange)="getProjectData($event)">
+        <option value="" selected></option>
+        <option *ngFor="let project of userProjects" [value]="project.projectid">
+          {{project.project_name}}
+        </option>
+      </select>
+    </div>
   </div>
-  <div *ngIf="projectsLoaded">
-    <mat-label>Select Project: </mat-label>
-    <select matNativeControl [(ngModel)]="selectedProject" (ngModelChange)="projectChanged($event)" name="selectProject">
-      <option value="" selected></option>
-      <option *ngFor="let project of userProjects" [value]="project.projectid">
-        {{project.project_name}}
-      </option>
-    </select>
-    <span *ngIf="(projectSamplesRowData.length > mapNumOfFeatures)" class="mat-warn">
-      &nbsp;&emsp; {{'Number of records without geospatial points:' + (projectSamplesRowData.length - mapNumOfFeatures)}}
-    </span>
-  </div>
-  <div class="component-container-flex">
-    <app-ag-grid
-      *ngIf="samplesLoaded"
-      [columnDefs]="projectSamplesColDefs"
-      [rowData]="projectSamplesRowData"
-      [ngStyle]="{'width': (projectSamplesRowData.length > 0 && mapNumOfFeatures > 0) ? '900px' : '100%'}"
-    ></app-ag-grid>
-    <app-map-view
-      *ngIf="samplesLoaded"
-      [pointData]="projectSamplesRowData"
-      (mapFeaturesLoadedEvent)="setMapNumOfFeatures($event)"
-      [ngStyle]="{'display': (mapNumOfFeatures >= 1) ? 'block' : 'none'}"
-    ></app-map-view>
-  </div>
+  <mat-tab-group (selectedIndexChange)="onTabChange($event)" animationDuration="10ms">
+    <mat-tab label="{{tabs[0]}}">
+      <div>
+        <span *ngIf="(mapNumOfFeatures > 1) && (projectSamplesRowData.length != mapNumOfFeatures)" class="mat-warn">
+          &nbsp;&emsp; {{'Number of records without geospatial points:' + (projectSamplesRowData.length - mapNumOfFeatures)}}
+        </span>
+        <div class="component-container-flex">
+          <app-ag-grid
+            *ngIf="samplesLoaded"
+            [columnDefs]="projectSamplesColDefs"
+            [rowData]="projectSamplesRowData"
+            [ngStyle]="{'width': (mapNumOfFeatures >= 1) ? '900px' : '100%'}"
+          ></app-ag-grid>
+          <app-map-view
+            *ngIf="samplesLoaded"
+            [pointData]="projectSamplesRowData"
+            (mapFeaturesLoadedEvent)="setMapNumOfFeatures($event)"
+            [ngStyle]="{'display': (mapNumOfFeatures >= 1) ? 'block' : 'none'}"
+          ></app-map-view>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="{{tabs[1]}}">
+      {{'Selected Project Id: ' + selectedProject}}
+    </mat-tab>
+  </mat-tab-group>
 </div>
 

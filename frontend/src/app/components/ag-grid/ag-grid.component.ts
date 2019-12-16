@@ -22,6 +22,16 @@ export class AgGridComponent implements OnChanges {
     };
   }
 
+  resizeColumns() {
+    const allColumnIds = [];
+    if (this.gridColumnApi) {
+      this.gridColumnApi.getAllColumns().forEach((column) => {
+        allColumnIds.push(column.colId);
+      });
+      this.gridColumnApi.autoSizeColumns(allColumnIds);
+    }
+  }
+
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -33,15 +43,11 @@ export class AgGridComponent implements OnChanges {
   }
 
   onModelUpdated(params) {
-    params.api.sizeColumnsToFit();
+    // params.api.sizeColumnsToFit();
     // params.api.autoSizeColumns();
-    const allColumnIds = [];
-    if (this.gridColumnApi) {
-      this.gridColumnApi.getAllColumns().forEach((column) => {
-        allColumnIds.push(column.colId);
-      });
-      this.gridColumnApi.autoSizeColumns(allColumnIds);
-    }
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+    this.resizeColumns();
   }
 
   ngOnChanges(changes: SimpleChanges) {

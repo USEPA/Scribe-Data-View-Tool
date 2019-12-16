@@ -10,9 +10,11 @@ import {Project, ProjectSample, SadieProjectsService} from '../services/sadie-pr
 })
 export class HomeComponent implements OnInit {
   projectsLoaded: boolean;
-  samplesLoaded: boolean;
+  samplesLoaded = false;
   mapNumOfFeatures = 1;
   selectedProject: string;
+  tabs: any = {0: 'Field Sample Points', 1: 'Analyte Results'};
+  selectedTab = 0;
   userProjects: Project[];
   projectSamplesColDefs: any[];
   projectSamplesRowData: ProjectSample[] = [];
@@ -21,7 +23,6 @@ export class HomeComponent implements OnInit {
               public loginService: LoginService,
               public sadieProjectsService: SadieProjectsService) {
     this.projectsLoaded = false;
-    this.samplesLoaded = false;
   }
 
   async ngOnInit() {
@@ -36,7 +37,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  async projectChanged(selectedProjectId) {
+  async getProjectData(selectedProjectId) {
     try {
       const results = await this.sadieProjectsService.getProjectSamples(selectedProjectId);
       this.projectSamplesColDefs = results.columnDefs;
@@ -51,4 +52,12 @@ export class HomeComponent implements OnInit {
     this.mapNumOfFeatures = val;
   }
 
+  async onTabChange(tabId) {
+    this.selectedTab = tabId;
+    if (this.tabs[this.selectedTab] === 'Field Sample Points') {
+      const results = await this.sadieProjectsService.getProjectSamples(this.selectedProject);
+      this.projectSamplesColDefs = results.columnDefs;
+      this.projectSamplesRowData = results.rowData;
+    }
+  }
 }
