@@ -68,11 +68,13 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     const self = this;
     try {
       // Load the modules for the ArcGIS API for JavaScript
-      const [EsriMap, EsriMapView, GraphicsLayer, Graphic] = await loadModules([
+      const [EsriMap, EsriMapView, GraphicsLayer, Graphic, BasemapGallery, Expand] = await loadModules([
         'esri/Map',
         'esri/views/MapView',
         'esri/layers/GraphicsLayer',
         'esri/Graphic',
+        'esri/widgets/BasemapGallery',
+        'esri/widgets/Expand'
       ]);
 
       // Initialize the other Esri Modules for this class
@@ -93,8 +95,19 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
         zoom: this._zoom,
         map: mapInstance
       };
-
+      // create map view
       this._view = new EsriMapView(mapViewProperties);
+      // add ootb map widgets to view
+      const basemapGalleryWidget = new BasemapGallery({
+        view: this._view
+      });
+      const baseMapExpand = new Expand({
+       expandIconClass: 'esri-icon-basemap',
+       view: this._view,
+       content: basemapGalleryWidget
+      });
+      this._view.ui.add(baseMapExpand, 'top-right');
+
       await this._view.when();
       return this._view;
 
@@ -143,7 +156,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
         const markerSymbol = {
           type: 'simple-marker',
           color: [0, 128, 0],
-          width: 3
+          width: 2
         };
         pointGraphic = this._graphic({
           // @ts-ignore
