@@ -13,6 +13,8 @@ $config: mat-typography-config();
 
 html, body {
   height: 100%;
+  width: 100vw;
+  max-width: 1550px;
 }
 body {
   margin: 0 !important;
@@ -65,7 +67,7 @@ $custom-colors: (
 }
 
 .component-container-col > * {
-  margin: 10px;
+  margin: 15px;
 }
 
 .center {
@@ -86,8 +88,8 @@ footer {
 
 // map styles
 .map-container {
-  width: 600px;
   height: 500px;
+  width: 600px;
   box-shadow: 0 8px 6px -6px black;
   margin-left: 10px;
 }
@@ -111,7 +113,6 @@ footer {
 
 svg#clouds {
   position: fixed;
-  bottom: -170px;
   z-index: -10;
-  width: 100%;
+  width: 90%;
 }

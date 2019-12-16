@@ -21,10 +21,13 @@
       *ngIf="samplesLoaded"
       [columnDefs]="projectSamplesColDefs"
       [rowData]="projectSamplesRowData"
+      [ngStyle]="{'width': projectSamplesRowData.length > 0 && mapHasFeatures ? '900px' : '100%'}"
     ></app-ag-grid>
     <app-map-view
       *ngIf="samplesLoaded"
       [pointData]="projectSamplesRowData"
+      (mapFeaturesLoadedEvent)="setMapFeaturesLoadedEvent($event)"
+      [ngStyle]="{'display': mapHasFeatures ? 'block' : 'none'}"
     ></app-map-view>
   </div>
 </div>

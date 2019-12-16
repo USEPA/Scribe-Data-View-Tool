@@ -24,7 +24,7 @@ import { loadModules } from 'esri-loader';
   styleUrls: ['./map-view.component.css']
 })
 export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
-  @Output() mapLoadedEvent = new EventEmitter<boolean>();
+  @Output() mapFeaturesLoadedEvent = new EventEmitter<boolean>();
 
   // The <div> where we will place the map
   @ViewChild('mapViewDiv', { static: true }) private mapViewEl: ElementRef;
@@ -33,9 +33,11 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   private _center: Array<number> = [0.1278, 51.5074];
   private _baseMap = 'streets';
   private _loaded = false;
+  private _map: __esri.Map = null;
   private _view: __esri.MapView = null;
   private _extent;
   private _graphic;
+  private _graphicsLayer;
   // mapService: MapService;
 
   @Input()
@@ -66,19 +68,22 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     const self = this;
     try {
       // Load the modules for the ArcGIS API for JavaScript
-      const [EsriMap, EsriMapView, Graphic] = await loadModules([
+      const [EsriMap, EsriMapView, GraphicsLayer, Graphic] = await loadModules([
         'esri/Map',
         'esri/views/MapView',
-        'esri/Graphic'
+        'esri/layers/GraphicsLayer',
+        'esri/Graphic',
       ]);
 
       // Initialize the other Esri Modules for this class
       self._graphic = Graphic;
+      self._graphicsLayer = GraphicsLayer;
 
       // Configure the BaseMap
       const mapProperties: __esri.MapProperties = {
         basemap: this._baseMap
       };
+      self._map = new EsriMap(mapProperties);
 
       // Initialize the MapView
       const mapInstance: __esri.Map = new EsriMap(mapProperties);
@@ -103,7 +108,6 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     this.initializeMap().then(mapView => {
       // The map has been initialized
       this._loaded = this._view.ready;
-      this.mapLoadedEvent.emit(true);
       // add initial geometries to the map view
       this.addPoints(this.pointData);
     });
@@ -127,6 +131,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   addPoints(pointData: any[]) {
     // Creates a graphic from existing lat/long pairs and then adds it to the map
     let pointGraphic = null;
+    const pointGraphicsArray = [];
     pointData.forEach( (pt: ProjectSample) => {
       if (pt.Lat && pt.Long) {
         const point = {
@@ -134,21 +139,31 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
           longitude: pt.Long,
           latitude: pt.Lat
         };
+        // point symbology
         const markerSymbol = {
           type: 'simple-marker',
-          color: [0, 128, 0]
+          color: [0, 128, 0],
+          width: 3
         };
         pointGraphic = this._graphic({
           // @ts-ignore
           geometry: point,
           symbol: markerSymbol
         });
-        this._view.graphics.add(pointGraphic);
+        pointGraphicsArray.push(pointGraphic);
       }
     });
-    if (pointGraphic) {
-      this._view.goTo(pointGraphic);
+    if (pointGraphicsArray.length > 0) {
+      /*const graphicsLayer = new this._graphicsLayer({
+        graphics: pointGraphicsArray
+      });*/
+      this._view.graphics.addMany(pointGraphicsArray);
+      this._view.goTo(pointGraphicsArray);
+      this.mapFeaturesLoadedEvent.emit(true);
+    } else {
+      this.mapFeaturesLoadedEvent.emit(false);
     }
+
   }
 
 }

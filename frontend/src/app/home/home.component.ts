@@ -11,6 +11,7 @@ import {Project, ProjectSample, SadieProjectsService} from '../services/sadie-pr
 export class HomeComponent implements OnInit {
   projectsLoaded: boolean;
   samplesLoaded: boolean;
+  mapHasFeatures: boolean;
   selectedProject: string;
   userProjects: Project[];
   projectSamplesColDefs: any[];
@@ -21,6 +22,7 @@ export class HomeComponent implements OnInit {
               public sadieProjectsService: SadieProjectsService) {
     this.projectsLoaded = false;
     this.samplesLoaded = false;
+    this.mapHasFeatures = true;
   }
 
   async ngOnInit() {
@@ -44,6 +46,10 @@ export class HomeComponent implements OnInit {
     } catch (err) {
       this.samplesLoaded = false;
     }
+  }
+
+  setMapFeaturesLoadedEvent(val) {
+    this.mapHasFeatures = val;
   }
 
 }
