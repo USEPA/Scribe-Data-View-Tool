@@ -1,11 +1,11 @@
-# Sadie
+# Scribe-Data-View-Tool
 
 ### Web App Setup
 Note: From project root folder, do the following project setup commands.
 1. Install project JavaScript package dependencies:
     > cd frontend
     
-    > yarn install
+    > npm install
 2. Install project Python dependencies: These commands will create a Python virtual environment instance for the project, and install the project's Python dependencies from the project Pipfile to this new virtual environment instance.
     > cd backend
     
@@ -20,7 +20,7 @@ Note: From project root folder, do the following project setup commands.
 
     > python manage.py makemigrations scribe_models
 
-4. Synchronize migrations just to the default Sadie database with the default django models/migrations. 
+4. Synchronize migrations just to the default Scribe-Data-View-Tool database with the default django models/migrations. 
    Run manage.py to set the project settings, so the Django project’s setting files point 
    to the project's environment (.env) variables:
     > python manage.py migrate --database default

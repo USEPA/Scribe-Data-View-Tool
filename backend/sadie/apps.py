@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class SadieAppConfig(AppConfig):
     name = 'sadie'
-    verbose_name = 'Sadie Application'
+    verbose_name = 'Scribe Data View Tool Application'
