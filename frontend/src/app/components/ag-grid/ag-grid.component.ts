@@ -70,7 +70,7 @@ export class AgGridComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.isLoading.currentValue) {
+    if (changes.isLoading && changes.isLoading.currentValue) {
       this.showLoading();
     } else {
       this.hideLoading();

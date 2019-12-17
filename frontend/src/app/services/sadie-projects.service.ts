@@ -79,12 +79,16 @@ export interface ProjectSample {
   Area: string;
   Contractor: string;
   EPA_Region: string;
-  Lat: number;
   Location: string;
   Location_Desc: string;
+  Lat: number;
   Long: number;
+  Sample_Depth: number;
+  Sample_Depth_To: number;
+  Sample_Depth_Units: string;
   Sample_Date: string;
   Sample_Number: string;
+  Substance_Type: string;
   Sample_Type: string;
   Site_Name: string;
   Site_Number: string;

@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   userProjects: Project[];
   projectsLoaded: boolean;
   selectedProject: string;
-  tabs: any = {0: 'Field Sample Points', 1: 'Analyte Results'};
+  tabs: any = {0: 'Sample Points', 1: 'Analyte Results'};
   selectedTab = 0;
   isLoadingData = false;
   // sample point props
@@ -48,60 +48,63 @@ export class HomeComponent implements OnInit {
   }
 
   async getProjectData(selectedProjectId) {
-    this.isLoadingData = true;
-    if (this.tabs[this.selectedTab] === 'Field Sample Points') {
-      try {
-        // get project sample data
-        const results = await this.sadieProjectsService.getProjectSamples(selectedProjectId);
-        this.projectSamplesColDefs = results.columnDefs;
-        this.projectSamplesRowData = results.rowData;
-        this.samplesLoaded = true;
-      } catch (err) {
-        this.samplesLoaded = false;
+    try {
+      this.isLoadingData = true;
+      // get project sample data
+      const sampleResults = await this.sadieProjectsService.getProjectSamples(selectedProjectId);
+      this.projectSamplesColDefs = sampleResults.columnDefs;
+      this.projectSamplesRowData = sampleResults.rowData;
+      // get project lab data
+      const labResults = await this.sadieProjectsService.getProjectLabResults(selectedProjectId);
+      if (labResults.length > 0) {
+        // combine samples with lab results
+        this.projectLabResultsColDefs = [...this.projectSamplesColDefs, ...this.setAgGridColumnProps(labResults)];
+        this.projectLabResultsRowData = this.mergeSamplesAndLabResults(labResults);
       }
+      this.isLoadingData = false;
+    } catch (err) {
+      this.isLoadingData = false;
     }
-    if (this.tabs[this.selectedTab] === 'Analyte Results') {
-      try {
-        // get project lab data
-        const results = await this.sadieProjectsService.getProjectLabResults(selectedProjectId);
-        if (results.length > 0) {
-          this.projectLabResultsColDefs = this.setAgGridColumnProps(results);
-          this.projectLabResultsRowData = results;
-          this.labResultLoaded = true;
-        }
-      } catch (err) {
-        this.labResultLoaded = false;
-      }
-    }
-    this.isLoadingData = false;
   }
 
   async onTabChange(tabId) {
     this.isLoadingData = true;
     this.selectedTab = tabId;
-    if (this.selectedProject && this.tabs[this.selectedTab] === 'Field Sample Points') {
+    if (this.selectedProject && this.tabs[this.selectedTab] === 'Sample Points') {
       try {
         const results = await this.sadieProjectsService.getProjectSamples(this.selectedProject);
         this.projectSamplesColDefs = results.columnDefs;
         this.projectSamplesRowData = results.rowData;
-        this.samplesLoaded = true;
       } catch (err) {
-        this.samplesLoaded = false;
+        this.isLoadingData = false;
       }
     }
     if (this.selectedProject && this.tabs[this.selectedTab] === 'Analyte Results') {
       try {
-        const results = await this.sadieProjectsService.getProjectLabResults(this.selectedProject);
-        if (results.length > 0) {
-          this.projectLabResultsColDefs = this.setAgGridColumnProps(results);
-          this.projectLabResultsRowData = results;
-          this.labResultLoaded = true;
+        const labResults = await this.sadieProjectsService.getProjectLabResults(this.selectedProject);
+        if (labResults.length > 0) {
+          // this.projectLabResultsColDefs = this.setAgGridColumnProps(labResults);
+          // this.projectLabResultsRowData = labResults;
+        // combine samples with lab results
+        this.projectLabResultsColDefs = [...this.projectSamplesColDefs, ...this.setAgGridColumnProps(labResults)];
+        this.projectLabResultsRowData = this.mergeSamplesAndLabResults(labResults);
         }
       } catch (err) {
-        this.labResultLoaded = false;
+        this.isLoadingData = false;
       }
     }
     this.isLoadingData = false;
+  }
+
+  mergeSamplesAndLabResults(labResults) {
+    const rowDataMerged = [];
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.projectSamplesRowData.length; i++) {
+      rowDataMerged.push({...this.projectSamplesRowData[i], ...(labResults.find((itmInner) =>
+         itmInner.Samp_No === this.projectSamplesRowData[i].Sample_Number))}
+      );
+    }
+    return rowDataMerged;
   }
 
   setAgGridColumnProps(results) {
