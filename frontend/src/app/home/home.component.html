@@ -20,27 +20,35 @@
   <mat-tab-group (selectedIndexChange)="onTabChange($event)" animationDuration="10ms">
     <mat-tab label="{{tabs[0]}}">
       <div>
-        <span *ngIf="(mapNumOfFeatures > 1) && (projectSamplesRowData.length != mapNumOfFeatures)" class="mat-warn">
-          &nbsp;&emsp; {{'Number of records without geospatial points:' + (projectSamplesRowData.length - mapNumOfFeatures)}}
+        <span [hidden]="(numOfGeoSamplePoints <= 1)"
+              class="mat-warn">
+          &nbsp;&emsp; {{'Number of records without geospatial points:' + (projectSamplesRowData.length - numOfGeoSamplePoints)}}
         </span>
         <div class="component-container-flex">
           <app-ag-grid
-            *ngIf="samplesLoaded"
+            [hidden]="!selectedProject"
+            [isLoading]="isLoadingData"
             [columnDefs]="projectSamplesColDefs"
             [rowData]="projectSamplesRowData"
-            [ngStyle]="{'width': (mapNumOfFeatures >= 1) ? '900px' : '100%'}"
+            [style.width]="(numOfGeoSamplePoints >= 1) ? '900px' : '100%'"
           ></app-ag-grid>
           <app-map-view
-            *ngIf="samplesLoaded"
+            [hidden]="!selectedProject"
             [pointData]="projectSamplesRowData"
-            (mapFeaturesLoadedEvent)="setMapNumOfFeatures($event)"
-            [ngStyle]="{'display': (mapNumOfFeatures >= 1) ? 'block' : 'none'}"
+            (mapFeaturesLoadedEvent)="setNumOfGeoFeatures($event)"
+            [style.display]="(numOfGeoSamplePoints >= 1) ? 'block' : 'none'"
           ></app-map-view>
         </div>
       </div>
     </mat-tab>
     <mat-tab label="{{tabs[1]}}">
-      {{'Selected Project Id: ' + selectedProject}}
+      <app-ag-grid
+        [hidden]="!selectedProject"
+        [isLoading]="isLoadingData"
+        [columnDefs]="projectLabResultsColDefs"
+        [rowData]="projectLabResultsRowData"
+        [ngStyle]="{'width': '100%'}"
+      ></app-ag-grid>
     </mat-tab>
   </mat-tab-group>
 </div>

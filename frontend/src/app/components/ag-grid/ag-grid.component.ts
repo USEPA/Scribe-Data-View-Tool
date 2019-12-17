@@ -10,7 +10,9 @@ export class AgGridComponent implements OnChanges {
   private gridApi;
   private gridColumnApi;
   private defaultColDef;
+  private overlayLoadingTemplate;
 
+  @Input() isLoading: boolean;
   @Input() columnDefs: any[];
   @Input() rowData: any[];
 
@@ -20,6 +22,19 @@ export class AgGridComponent implements OnChanges {
       autoHeight: true,
       resizable: true
     };
+    this.overlayLoadingTemplate = '<span class="ag-overlay-loading-center">Please wait while loading data</span>';
+  }
+
+  showLoading() {
+    if (this.gridApi) {
+      this.gridApi.showLoadingOverlay();
+    }
+  }
+
+  hideLoading() {
+    if (this.gridApi) {
+      this.gridApi.hideOverlay();
+    }
   }
 
   resizeColumns() {
@@ -42,6 +57,10 @@ export class AgGridComponent implements OnChanges {
     this.gridColumnApi.autoSizeColumns(allColumnIds);
   }
 
+  onRowDataChanged(params) {
+    this.hideLoading();
+  }
+
   onModelUpdated(params) {
     // params.api.sizeColumnsToFit();
     // params.api.autoSizeColumns();
@@ -51,6 +70,11 @@ export class AgGridComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    if (changes.isLoading.currentValue) {
+      this.showLoading();
+    } else {
+      this.hideLoading();
+    }
   }
 
 }

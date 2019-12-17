@@ -4,15 +4,14 @@
   [columnDefs]="columnDefs"
   [defaultColDef]="defaultColDef"
   [rowData]="rowData"
-  [enableFilter]="true"
   [floatingFilter]="true"
-  [enableSorting]="true"
-  [enableColResize]="true"
   [pagination]="true"
   [paginationAutoPageSize]="true"
   [alwaysShowVerticalScroll]="false"
   [rowSelection]="'single'"
+  [overlayLoadingTemplate]="overlayLoadingTemplate"
   (gridReady)="onGridReady($event)"
+  (rowDataChanged)="onRowDataChanged($event)"
   (modelUpdated)="onModelUpdated($event)"
 >
 </ag-grid-angular>

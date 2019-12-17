@@ -31,4 +31,4 @@ These commands start/run the project's local development web servers. From two s
 
 > python manage.py runserver
 
-When the above steps are completed, the website application will be served from [`localhost:3000`](http://localhost:4200/) 
+When the above steps are completed, the website application will be served from [`localhost:4200`](http://localhost:4200/) 
