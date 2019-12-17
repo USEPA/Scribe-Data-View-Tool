@@ -60,7 +60,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
 
 
   constructor(/*public loginService: LoginService*/) {
-    // ToDo: Add in map service if and when Geoplatform map services need to be pulled into Sadie
+    // ToDo: Add in map service if and when Geoplatform map services need to be pulled into the application
     // this.mapService = new MapService(loginService.access_token);
   }
 

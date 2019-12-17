@@ -46,6 +46,10 @@
             "index": "pypi",
             "version": "==2.2.8"
         },
+        "django-agol-oauth2": {
+            "git": "https://github.com/Innovate-Inc/django-agol-oauth2.git",
+            "ref": "1b584ae059aee7787d18fbf4d87eb377b641970c"
+        },
         "django-agol-oauth2==0-0-1": {
             "git": "https://github.com/Innovate-Inc/django-agol-oauth2.git",
             "ref": "1b584ae059aee7787d18fbf4d87eb377b641970c"
