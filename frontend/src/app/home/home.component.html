@@ -20,6 +20,29 @@
   <mat-tab-group (selectedIndexChange)="onTabChange($event)" animationDuration="10ms">
     <mat-tab label="{{tabs[0]}}">
       <div>
+        <span [hidden]="(numOfGeoSamplePoints <= 1)" class="mat-warn">
+          &nbsp;&emsp; {{'Number of records without geospatial points:' +
+          (projectLabResultsRowData.length - numOfGeoSamplePoints)}}
+        </span>
+        <div class="component-container-flex">
+          <app-ag-grid
+            [hidden]="!selectedProject"
+            [isLoading]="isLoadingData"
+            [columnDefs]="projectLabResultsColDefs"
+            [rowData]="projectLabResultsRowData"
+            [style.width]="(numOfGeoSamplePoints >= 1) ? '900px' : '100%'"
+          ></app-ag-grid>
+          <app-map-view
+            *ngIf="selectedProject"
+            [pointData]="projectLabResultsRowData"
+            (mapFeaturesLoadedEvent)="setNumOfGeoFeatures($event)"
+            [style.display]="(numOfGeoSamplePoints >= 1) ? 'block' : 'none'"
+          ></app-map-view>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="{{tabs[1]}}">
+      <div>
         <span [hidden]="(numOfGeoSamplePoints <= 1)"
               class="mat-warn">
           &nbsp;&emsp; {{'Number of records without geospatial points:' + (projectSamplesRowData.length - numOfGeoSamplePoints)}}
@@ -40,15 +63,6 @@
           ></app-map-view>
         </div>
       </div>
-    </mat-tab>
-    <mat-tab label="{{tabs[1]}}">
-      <app-ag-grid
-        [hidden]="!selectedProject"
-        [isLoading]="isLoadingData"
-        [columnDefs]="projectLabResultsColDefs"
-        [rowData]="projectLabResultsRowData"
-        [ngStyle]="{'width': '100%'}"
-      ></app-ag-grid>
     </mat-tab>
   </mat-tab-group>
 </div>

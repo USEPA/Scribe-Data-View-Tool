@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   userProjects: Project[];
   projectsLoaded: boolean;
   selectedProject: string;
-  tabs: any = {0: 'Sample Points', 1: 'Analyte Results'};
+  tabs: any = {0: 'Lab Analyte Results', 1: 'Sample Point Locations'};
   selectedTab = 0;
   isLoadingData = false;
   // sample point props
@@ -70,16 +70,7 @@ export class HomeComponent implements OnInit {
   async onTabChange(tabId) {
     this.isLoadingData = true;
     this.selectedTab = tabId;
-    if (this.selectedProject && this.tabs[this.selectedTab] === 'Sample Points') {
-      try {
-        const results = await this.sadieProjectsService.getProjectSamples(this.selectedProject);
-        this.projectSamplesColDefs = results.columnDefs;
-        this.projectSamplesRowData = results.rowData;
-      } catch (err) {
-        this.isLoadingData = false;
-      }
-    }
-    if (this.selectedProject && this.tabs[this.selectedTab] === 'Analyte Results') {
+    if (this.selectedProject && this.tabs[this.selectedTab] === 'Lab Analyte Results') {
       try {
         const labResults = await this.sadieProjectsService.getProjectLabResults(this.selectedProject);
         if (labResults.length > 0) {
@@ -89,6 +80,15 @@ export class HomeComponent implements OnInit {
         this.projectLabResultsColDefs = [...this.projectSamplesColDefs, ...this.setAgGridColumnProps(labResults)];
         this.projectLabResultsRowData = this.mergeSamplesAndLabResults(labResults);
         }
+      } catch (err) {
+        this.isLoadingData = false;
+      }
+    }
+    if (this.selectedProject && this.tabs[this.selectedTab] === 'Sample Point Locations') {
+      try {
+        const results = await this.sadieProjectsService.getProjectSamples(this.selectedProject);
+        this.projectSamplesColDefs = results.columnDefs;
+        this.projectSamplesRowData = results.rowData;
       } catch (err) {
         this.isLoadingData = false;
       }

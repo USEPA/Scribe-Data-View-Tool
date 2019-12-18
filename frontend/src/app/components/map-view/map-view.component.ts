@@ -103,8 +103,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       const sceneViewProperties: __esri.MapViewProperties = {
         container: this.mapViewEl.nativeElement,
         map: mapInstance,
-        center: this._center,
-        zoom: this._zoom
+        center: this._center
       };
       // create map scene view
       this._view = new SceneView(sceneViewProperties);
@@ -130,12 +129,12 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit() {
     // Initialize MapView and return an instance of MapView
     this.initializeMap().then(mapView => {
+      // add initial geometries to the scene view
+      // const pointGraphicsArray = this.addPoints(this.pointData);
+      // this.add3dPoints(this.pointData);
+      // this._view.goTo(pointGraphicsArray, {animate: false});
       // The map has been initialized
       this._loaded = this._view.ready;
-      // add initial geometries to the scene view
-      const pointGraphicsArray = this.addPoints(this.pointData);
-      this.add3dPoints(this.pointData);
-      this._view.goTo(pointGraphicsArray, {animate: false});
     });
   }
 
