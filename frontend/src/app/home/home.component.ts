@@ -58,7 +58,8 @@ export class HomeComponent implements OnInit {
       const labResults = await this.sadieProjectsService.getProjectLabResults(selectedProjectId);
       if (labResults.length > 0) {
         // combine samples with lab results
-        this.projectLabResultsColDefs = [...this.projectSamplesColDefs, ...this.setAgGridColumnProps(labResults)];
+        const samplePointCols = this.projectSamplesColDefs.slice(0, 3);
+        this.projectLabResultsColDefs = [...samplePointCols, ...this.setAgGridColumnProps(labResults)];
         this.projectLabResultsRowData = this.mergeSamplesAndLabResults(labResults);
       }
       this.isLoadingData = false;
@@ -76,9 +77,10 @@ export class HomeComponent implements OnInit {
         if (labResults.length > 0) {
           // this.projectLabResultsColDefs = this.setAgGridColumnProps(labResults);
           // this.projectLabResultsRowData = labResults;
-        // combine samples with lab results
-        this.projectLabResultsColDefs = [...this.projectSamplesColDefs, ...this.setAgGridColumnProps(labResults)];
-        this.projectLabResultsRowData = this.mergeSamplesAndLabResults(labResults);
+          // combine samples with lab results
+          const samplePointCols = this.projectSamplesColDefs.slice(0, 3);
+          this.projectLabResultsColDefs = [...samplePointCols, ...this.setAgGridColumnProps(labResults)];
+          this.projectLabResultsRowData = this.mergeSamplesAndLabResults(labResults);
         }
       } catch (err) {
         this.isLoadingData = false;

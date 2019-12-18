@@ -20,7 +20,8 @@
   <mat-tab-group (selectedIndexChange)="onTabChange($event)" animationDuration="10ms">
     <mat-tab label="{{tabs[0]}}">
       <div>
-        <span [hidden]="(numOfGeoSamplePoints <= 1)" class="mat-warn">
+        <span [hidden]="!(numOfGeoSamplePoints >= 1 && projectLabResultsRowData.length > numOfGeoSamplePoints)"
+              class="mat-warn">
           &nbsp;&emsp; {{'Number of records without geospatial points:' +
           (projectLabResultsRowData.length - numOfGeoSamplePoints)}}
         </span>
@@ -43,7 +44,7 @@
     </mat-tab>
     <mat-tab label="{{tabs[1]}}">
       <div>
-        <span [hidden]="(numOfGeoSamplePoints <= 1)"
+        <span [hidden]="!(numOfGeoSamplePoints >= 1 && projectLabResultsRowData.length > numOfGeoSamplePoints)"
               class="mat-warn">
           &nbsp;&emsp; {{'Number of records without geospatial points:' + (projectSamplesRowData.length - numOfGeoSamplePoints)}}
         </span>
