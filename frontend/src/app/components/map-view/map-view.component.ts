@@ -38,6 +38,8 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   private _extent;
   private _graphic;
   private _graphicsLayer;
+  private _point;
+  private _mesh;
   // mapService: MapService;
 
   @Input()
@@ -56,7 +58,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   @Input() baseMapId: ReplaySubject<string>;
-  @Input() pointData: ProjectSample[];
+  @Input() meshPointData: ProjectSample[];
 
 
   constructor(/*public loginService: LoginService*/) {
@@ -68,35 +70,48 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     const self = this;
     try {
       // Load the modules for the ArcGIS API for JavaScript
-      const [EsriMap, EsriMapView, GraphicsLayer, Graphic, BasemapGallery, Expand] = await loadModules([
+      const [EsriMap, SceneView, GraphicsLayer, Graphic, Point, Mesh, BasemapGallery, Expand] = await loadModules([
         'esri/Map',
-        'esri/views/MapView',
+        'esri/views/SceneView',
         'esri/layers/GraphicsLayer',
         'esri/Graphic',
+        'esri/geometry/Point',
+        'esri/geometry/Mesh',
         'esri/widgets/BasemapGallery',
         'esri/widgets/Expand'
       ]);
 
-      // Initialize the other Esri Modules for this class
-      self._graphic = Graphic;
+      // Initialize the graphics and geometry Esri Modules properties for this class
       self._graphicsLayer = GraphicsLayer;
+      self._graphic = Graphic;
+      self._point = Point;
+      self._mesh = Mesh;
 
       // Configure the BaseMap
       const mapProperties: __esri.MapProperties = {
-        basemap: this._baseMap
+        basemap: this._baseMap,
+        ground: {
+          navigationConstraint: {
+            type: 'none'
+          }
+        }
       };
       self._map = new EsriMap(mapProperties);
 
       // Initialize the MapView
       const mapInstance: __esri.Map = new EsriMap(mapProperties);
-      const mapViewProperties: __esri.MapViewProperties = {
+      const sceneViewProperties: __esri.MapViewProperties = {
         container: this.mapViewEl.nativeElement,
+        map: mapInstance,
         center: this._center,
-        zoom: this._zoom,
-        map: mapInstance
+        zoom: this._zoom
       };
-      // create map view
-      this._view = new EsriMapView(mapViewProperties);
+      // create map scene view
+      this._view = new SceneView({
+        container: this.mapViewEl.nativeElement,
+        map: mapInstance,
+        viewingMode: 'local',
+      });
       // add ootb map widgets to view
       const basemapGalleryWidget = new BasemapGallery({
         view: this._view
@@ -121,8 +136,8 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     this.initializeMap().then(mapView => {
       // The map has been initialized
       this._loaded = this._view.ready;
-      // add initial geometries to the map view
-      this.addPoints(this.pointData);
+      // add initial geometries to the scene view
+      this.add3dMeshPoints(this.meshPointData);
     });
   }
 
@@ -130,7 +145,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     if (this._view) {
       // reload map view graphics
       this._view.graphics = null;
-      this.addPoints(changes.pointData.currentValue);
+      this.add3dMeshPoints(changes.meshPointData.currentValue);
     }
   }
 
@@ -139,6 +154,69 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       // destroy the map view
       this._view.container = null;
     }
+  }
+
+  add3dMeshPoints(meshPointData: any[]) {
+    // Creates a graphic from existing lat/long pairs and then adds it to the map
+    const pointGraphicsArray = [];
+    meshPointData.forEach( (pt: ProjectSample) => {
+      let pointGraphic = null;
+      let pointGeometry = null;
+      let meshPointGraphic = null;
+      if (pt.Lat && pt.Long) {
+        // point graphic
+        const pointProps = {
+          type: 'point',
+          longitude: pt.Long,
+          latitude: pt.Lat
+        };
+        pointGeometry = this._point(pointProps);
+        const markerSymbol = {
+          type: 'simple-marker',
+          color: [0, 128, 0],
+          width: 2
+        };
+        pointGraphic = this._graphic({
+          // @ts-ignore
+          geometry: pointProps,
+          symbol: markerSymbol
+        });
+        if (pointGeometry && (pt.Sample_Depth || pt.Sample_Depth_To)) {
+          // Mesh point geometry
+          const meshGeometry = this._mesh.createCylinder(pointGeometry, {
+            size: {
+              width: 2,
+              height: pt.Sample_Depth,
+              depth: pt.Sample_Depth
+            },
+            material: {
+              color: 'green'
+            }
+          });
+          // Create a graphic and add it to the view
+          meshPointGraphic = this._graphic({
+            geometry: meshGeometry,
+            symbol: {
+              type: 'mesh-3d',
+              symbolLayers: [ { type: 'fill' } ]
+            }
+          });
+        }
+        pointGraphicsArray.push(meshPointGraphic);
+      }
+    });
+    if (pointGraphicsArray.length > 0) {
+      /*const graphicsLayer = new this._graphicsLayer({
+        graphics: pointGraphicsArray,
+        elevationInfo: {
+          mode: 'relative-to-ground'
+        }
+      });
+      this._map.add(graphicsLayer);*/
+      this._view.graphics.addMany(pointGraphicsArray);
+      this._view.goTo(pointGraphicsArray, {animate: false});
+    }
+    this.mapFeaturesLoadedEvent.emit(pointGraphicsArray.length);
   }
 
   addPoints(pointData: any[]) {
