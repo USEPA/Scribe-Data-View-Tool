@@ -34,7 +34,7 @@
           ></app-ag-grid>
           <app-map-view
             *ngIf="selectedProject"
-            [meshPointData]="projectSamplesRowData"
+            [pointData]="projectSamplesRowData"
             (mapFeaturesLoadedEvent)="setNumOfGeoFeatures($event)"
             [style.display]="(numOfGeoSamplePoints >= 1) ? 'block' : 'none'"
           ></app-map-view>

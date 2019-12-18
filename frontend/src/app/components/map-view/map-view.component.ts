@@ -58,7 +58,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   @Input() baseMapId: ReplaySubject<string>;
-  @Input() meshPointData: ProjectSample[];
+  @Input() pointData: ProjectSample[];
 
 
   constructor(/*public loginService: LoginService*/) {
@@ -107,11 +107,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
         zoom: this._zoom
       };
       // create map scene view
-      this._view = new SceneView({
-        container: this.mapViewEl.nativeElement,
-        map: mapInstance,
-        viewingMode: 'local',
-      });
+      this._view = new SceneView(sceneViewProperties);
       // add ootb map widgets to view
       const basemapGalleryWidget = new BasemapGallery({
         view: this._view
@@ -137,7 +133,9 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       // The map has been initialized
       this._loaded = this._view.ready;
       // add initial geometries to the scene view
-      this.add3dMeshPoints(this.meshPointData);
+      const pointGraphicsArray = this.addPoints(this.pointData);
+      this.add3dPoints(this.pointData);
+      this._view.goTo(pointGraphicsArray, {animate: false});
     });
   }
 
@@ -145,7 +143,9 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     if (this._view) {
       // reload map view graphics
       this._view.graphics = null;
-      this.add3dMeshPoints(changes.meshPointData.currentValue);
+      const pointGraphicsArray = this.addPoints(changes.pointData.currentValue);
+      this.add3dPoints(changes.pointData.currentValue);
+      this._view.goTo(pointGraphicsArray, {animate: false});
     }
   }
 
@@ -154,69 +154,6 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       // destroy the map view
       this._view.container = null;
     }
-  }
-
-  add3dMeshPoints(meshPointData: any[]) {
-    // Creates a graphic from existing lat/long pairs and then adds it to the map
-    const pointGraphicsArray = [];
-    meshPointData.forEach( (pt: ProjectSample) => {
-      let pointGraphic = null;
-      let pointGeometry = null;
-      let meshPointGraphic = null;
-      if (pt.Lat && pt.Long) {
-        // point graphic
-        const pointProps = {
-          type: 'point',
-          longitude: pt.Long,
-          latitude: pt.Lat
-        };
-        pointGeometry = this._point(pointProps);
-        const markerSymbol = {
-          type: 'simple-marker',
-          color: [0, 128, 0],
-          width: 2
-        };
-        pointGraphic = this._graphic({
-          // @ts-ignore
-          geometry: pointProps,
-          symbol: markerSymbol
-        });
-        if (pointGeometry && (pt.Sample_Depth || pt.Sample_Depth_To)) {
-          // Mesh point geometry
-          const meshGeometry = this._mesh.createCylinder(pointGeometry, {
-            size: {
-              width: 2,
-              height: pt.Sample_Depth,
-              depth: pt.Sample_Depth
-            },
-            material: {
-              color: 'green'
-            }
-          });
-          // Create a graphic and add it to the view
-          meshPointGraphic = this._graphic({
-            geometry: meshGeometry,
-            symbol: {
-              type: 'mesh-3d',
-              symbolLayers: [ { type: 'fill' } ]
-            }
-          });
-        }
-        pointGraphicsArray.push(meshPointGraphic);
-      }
-    });
-    if (pointGraphicsArray.length > 0) {
-      /*const graphicsLayer = new this._graphicsLayer({
-        graphics: pointGraphicsArray,
-        elevationInfo: {
-          mode: 'relative-to-ground'
-        }
-      });
-      this._map.add(graphicsLayer);*/
-      this._view.graphics.addMany(pointGraphicsArray);
-      this._view.goTo(pointGraphicsArray, {animate: false});
-    }
-    this.mapFeaturesLoadedEvent.emit(pointGraphicsArray.length);
   }
 
   addPoints(pointData: any[]) {
@@ -233,11 +170,10 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
         // point symbology
         const markerSymbol = {
           type: 'simple-marker',
-          color: [0, 128, 0],
-          width: 2
+          color: 'green',
+          size: 5,
         };
         pointGraphic = this._graphic({
-          // @ts-ignore
           geometry: point,
           symbol: markerSymbol
         });
@@ -245,13 +181,61 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       }
     });
     if (pointGraphicsArray.length > 0) {
-      /*const graphicsLayer = new this._graphicsLayer({
-        graphics: pointGraphicsArray
-      });*/
       this._view.graphics.addMany(pointGraphicsArray);
-      this._view.goTo(pointGraphicsArray);
     }
     this.mapFeaturesLoadedEvent.emit(pointGraphicsArray.length);
+    return pointGraphicsArray;
+  }
+
+  add3dPoints(pointData: any[]) {
+    // Creates a graphic from existing lat/long pairs and then adds it to the map
+    const pointGraphicsArray = [];
+    pointData.forEach( (pt: ProjectSample) => {
+      let pointProps = null;
+      let pointGeometry = null;
+      let meshPointGraphic = null;
+      if (pt.Lat && pt.Long && pt.Sample_Depth_To) {
+        // add point graphic
+        pointProps = {
+          type: 'point',
+          longitude: pt.Long,
+          latitude: pt.Lat,
+          z: (pt.Sample_Depth_To * -1)
+        };
+        // add 3d point with depth z coordinate
+        pointGeometry = this._point(pointProps);
+        const meshGeometry = this._mesh.createCylinder(pointGeometry, {
+          size: {
+            width: 5,
+            height: pt.Sample_Depth_To,
+            depth: pt.Sample_Depth_To
+          },
+          material: {
+            color: 'green'
+          },
+          edges: { type: 'solid', color: [50, 50, 50, 0.5], size: 1 }
+        });
+        // Create a graphic and add it to the view
+        meshPointGraphic = this._graphic({
+          geometry: meshGeometry,
+          symbol: {
+            type: 'mesh-3d',
+            symbolLayers: [ { type: 'fill' } ]
+          }
+        });
+        pointGraphicsArray.push(meshPointGraphic);
+      }
+    });
+    if (pointGraphicsArray.length > 0) {
+      /*const graphicsLayer = new this._graphicsLayer({
+        graphics: pointGraphicsArray,
+        elevationInfo: {
+          mode: 'relative-to-ground'
+        }
+      });
+      this._map.add(graphicsLayer);*/
+      this._view.graphics.addMany(pointGraphicsArray);
+    }
   }
 
 }
