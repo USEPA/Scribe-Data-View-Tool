@@ -5,6 +5,7 @@ import {LoginComponent} from './login/login.component';
 import {LoginService} from '@services/login.service';
 import {OauthcallbackComponent} from './oauthcallback/oauthcallback.component';
 import {AgGridModule} from 'ag-grid-angular/main';
+import { AgGridSelectFilterComponent } from '@components/ag-grid/ag-grid-select-filter.component';
 
 
 const routes: Routes = [
@@ -26,7 +27,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([AgGridSelectFilterComponent])
   ],
   exports: [RouterModule]
 })

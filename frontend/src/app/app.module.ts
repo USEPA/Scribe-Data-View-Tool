@@ -18,6 +18,7 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from '@components/header/header.component';
 import { AgGridComponent } from '@components/ag-grid/ag-grid.component';
 import {AgGridModule} from 'ag-grid-angular';
+import { AgGridSelectFilterComponent } from '@components/ag-grid/ag-grid-select-filter.component';
 import { MapViewComponent } from './components/map-view/map-view.component';
 
 
@@ -29,6 +30,7 @@ import { MapViewComponent } from './components/map-view/map-view.component';
     HomeComponent,
     HeaderComponent,
     AgGridComponent,
+    AgGridSelectFilterComponent,
     MapViewComponent
   ],
   imports: [

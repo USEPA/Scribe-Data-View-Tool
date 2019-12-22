@@ -130,9 +130,9 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     // Initialize MapView and return an instance of MapView
     this.initializeMap().then(mapView => {
       // add initial geometries to the scene view
-      // const pointGraphicsArray = this.addPoints(this.pointData);
-      // this.add3dPoints(this.pointData);
-      // this._view.goTo(pointGraphicsArray, {animate: false});
+      const pointGraphicsArray = this.addPoints(this.pointData);
+      this.add3dPoints(this.pointData);
+      this._view.goTo(pointGraphicsArray, {animate: false});
       // The map has been initialized
       this._loaded = this._view.ready;
     });

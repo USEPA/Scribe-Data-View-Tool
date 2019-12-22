@@ -1,0 +1,9 @@
+<div class="ag-filter">
+  <select matNativeControl name="selectFilter"
+          [(ngModel)]="selectedFilterVal" (ngModelChange)="onChange($event)">
+    <option value="" selected>Select All</option>
+    <option *ngFor="let selectFilter of selectFilterValues" [value]="selectFilter">
+      {{selectFilter}}
+    </option>
+  </select>
+</div>
