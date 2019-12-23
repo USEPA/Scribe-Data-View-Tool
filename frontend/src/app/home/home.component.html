@@ -44,10 +44,12 @@
             [customFilterProps]="agGridCustomFilters"
             [exportingCSV]="exportLabResultsCSV.asObservable()"
             [style.width]="(geoPointsArray.length > 0) ? '900px' : '100%'"
+            (rowSelectedEvent)="agGridRowSelected($event)"
           ></app-ag-grid>
           <app-map-view
             *ngIf="geoPointsArray.length > 0"
             [pointData]="geoPointsArray"
+            [selectedGeoPoint]="selectedGeoPoint"
             (mapFeaturesLoadedEvent)="mapGeoFeaturesLoaded($event)"
           ></app-map-view>
         </div>
@@ -68,10 +70,12 @@
           [customFilterProps]="agGridCustomFilters"
           [exportingCSV]="exportSamplePointLocationCSV.asObservable()"
           [style.width]="(geoPointsArray.length > 0) ? '900px' : '100%'"
+          (rowSelectedEvent)="agGridRowSelected($event)"
         ></app-ag-grid>
         <app-map-view
           *ngIf="geoPointsArray.length > 0"
           [pointData]="geoPointsArray"
+          [selectedGeoPoint]="selectedGeoPoint"
           (mapFeaturesLoadedEvent)="mapGeoFeaturesLoaded($event)"
         ></app-map-view>
       </div>

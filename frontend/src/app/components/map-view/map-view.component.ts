@@ -35,12 +35,14 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   private _loaded = false;
   private _map: __esri.Map = null;
   private _view: __esri.MapView = null;
-  private _extent;
   private _graphic;
   private _graphicsLayer;
+  private _zoomToPointGraphic;
   private _point;
   private _mesh;
+  // private _extent;
   // mapService: MapService;
+  private _selectedGeoPoint: ProjectSample;
 
   @Input()
   set center(center: Array<number>) {
@@ -56,10 +58,20 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   get baseMap(): string {
     return this._baseMap;
   }
+  @Input()
+  set selectedGeoPoint(selectedGeoPoint: ProjectSample) {
+    if (selectedGeoPoint) {
+      this._selectedGeoPoint = selectedGeoPoint;
+      // zoom to and highlight selected point
+      this.zoomToPoint(selectedGeoPoint);
+    }
+  }
+  get selectedGeoPoint(): ProjectSample {
+    return this._selectedGeoPoint;
+  }
 
   @Input() baseMapId: ReplaySubject<string>;
   @Input() pointData: ProjectSample[];
-
 
   constructor(/*public loginService: LoginService*/) {
     // ToDo: Add in map service if and when Geoplatform map services need to be pulled into the application
@@ -127,6 +139,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit() {
+    this._zoomToPointGraphic = null;
     // Initialize MapView and return an instance of MapView
     this.initializeMap().then(mapView => {
       // add initial geometries to the scene view
@@ -139,7 +152,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this._view) {
+    if (this._view && changes.pointData) {
       // reload map view graphics
       this._view.graphics = null;
       const pointGraphicsArray = this.addPoints(changes.pointData.currentValue);
@@ -237,4 +250,30 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  zoomToPoint(pointData: ProjectSample) {
+    this._view.graphics.remove(this._zoomToPointGraphic);
+    if (pointData && pointData.Lat && pointData.Long) {
+      const point = {
+        type: 'point',
+        longitude: pointData.Long,
+        latitude: pointData.Lat
+      };
+      // highlight symbology
+      const highlightSymbol = {
+        type: 'simple-marker',
+        size: 6,
+        outline: {
+          color: [21, 244, 238],
+          width: 4
+        }
+      };
+      this._zoomToPointGraphic = this._graphic({
+        geometry: point,
+        symbol: highlightSymbol
+      });
+      this._view.graphics.add(this._zoomToPointGraphic);
+      this._view.zoom = 18;
+      this._view.goTo(this._zoomToPointGraphic, {animate: true});
+    }
+  }
 }

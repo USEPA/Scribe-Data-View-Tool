@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, OnDestroy, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, Input, OnInit, OnDestroy, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
 import { AgGridSelectFilterComponent } from '@components/ag-grid/ag-grid-select-filter.component';
 import {ColDef} from 'ag-grid';
 import { Observable, Subscription } from 'rxjs';
@@ -9,6 +9,7 @@ import { Observable, Subscription } from 'rxjs';
   styleUrls: ['./ag-grid.component.css']
 })
 export class AgGridComponent implements OnInit, OnDestroy, OnChanges {
+  @Output() rowSelectedEvent = new EventEmitter<number>();
   public showGrid: boolean;
   private gridApi;
   private gridColumnApi;
@@ -75,7 +76,9 @@ export class AgGridComponent implements OnInit, OnDestroy, OnChanges {
     this.gridColumnApi.autoSizeColumns(allColumnIds);
   }
 
-  onRowDataChanged(params) {
+  onSelectionChanged(params) {
+    const selectedRows = this.gridApi.getSelectedRows();
+    this.rowSelectedEvent.emit(selectedRows[0]);
   }
 
   onModelUpdated(params) {

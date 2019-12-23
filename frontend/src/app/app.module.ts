@@ -10,7 +10,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {
   MatToolbarModule, MatMenuModule, MatListModule, MatCardModule, MatFormFieldModule, MatSelectModule,
-  MatButtonModule, MatDialogModule, MatIconModule, MatProgressSpinnerModule, MatTabsModule
+  MatButtonModule, MatDialogModule, MatIconModule, MatProgressSpinnerModule, MatTabsModule, MatSnackBarModule
 } from '@angular/material';
 import {FormsModule} from '@angular/forms';
 import {HttpRequestInterceptor} from './http-request.interceptor';
@@ -50,7 +50,8 @@ import { MapViewComponent } from './components/map-view/map-view.component';
     MatMenuModule,
     AgGridModule,
     MatProgressSpinnerModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSnackBarModule,
   ],
   providers: [
     {

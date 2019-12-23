@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AppComponent} from '../app.component';
 import {LoginService} from '../services/login.service';
 import {Project, ProjectSample, ProjectLabResult, SadieProjectsService} from '../services/sadie-projects.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -22,8 +23,9 @@ export class HomeComponent implements OnInit {
   // lab result props
   projectLabResultsColDefs: any[] = [];
   projectLabResultsRowData: ProjectLabResult[] = [];
-  // geo point props
+  // map / geo point props
   geoPointsArray = [];
+  selectedGeoPoint: ProjectSample = null;
   // ag grid properties
   agGridCustomFilters = null;
   exportLabResultsCSV: Subject<string> = new Subject<string>();
@@ -31,7 +33,8 @@ export class HomeComponent implements OnInit {
 
   constructor(public app: AppComponent,
               public loginService: LoginService,
-              public sadieProjectsService: SadieProjectsService) {
+              public sadieProjectsService: SadieProjectsService,
+              public snackBar: MatSnackBar) {
     this.projectsLoaded = false;
   }
 
@@ -43,6 +46,14 @@ export class HomeComponent implements OnInit {
       } catch (err) {
         this.projectsLoaded = false;
       }
+    }
+  }
+
+  agGridRowSelected(val) {
+    if (val.Lat && val.Long) {
+      this.selectedGeoPoint = val;
+    } else {
+      this.snackBar.open('Selection has no geospatial point', null, {duration: 1000});
     }
   }
 
