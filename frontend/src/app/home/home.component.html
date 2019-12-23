@@ -28,7 +28,13 @@
     </div>
   </div>
   <mat-tab-group (selectedIndexChange)="onTabChange($event)" animationDuration="10ms">
-    <mat-tab label="{{tabs[0]}}">
+    <mat-tab>
+        <ng-template mat-tab-label>
+          {{tabs[0]}}&nbsp;&nbsp;
+          <button *ngIf="selectedTab === 0 && projectLabResultsRowData.length > 0" (click)="onExportCSVBtnClick()">
+            Export CSV
+          </button>
+        </ng-template>
         <div class="component-container-flex">
           <app-ag-grid
             [hidden]="!selectedProject"
@@ -36,6 +42,7 @@
             [columnDefs]="projectLabResultsColDefs"
             [rowData]="projectLabResultsRowData"
             [customFilterProps]="agGridCustomFilters"
+            [exportingCSV]="exportLabResultsCSV.asObservable()"
             [style.width]="(geoPointsArray.length > 0) ? '900px' : '100%'"
           ></app-ag-grid>
           <app-map-view
@@ -45,7 +52,13 @@
           ></app-map-view>
         </div>
     </mat-tab>
-    <mat-tab label="{{tabs[1]}}">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        {{tabs[1]}}&nbsp;&nbsp;
+        <button *ngIf="selectedTab === 1 && projectSamplesRowData.length > 0" (click)="onExportCSVBtnClick()">
+          Export CSV
+        </button>
+      </ng-template>
       <div class="component-container-flex">
         <app-ag-grid
           [hidden]="!selectedProject"
@@ -53,6 +66,7 @@
           [columnDefs]="projectSamplesColDefs"
           [rowData]="projectSamplesRowData"
           [customFilterProps]="agGridCustomFilters"
+          [exportingCSV]="exportSamplePointLocationCSV.asObservable()"
           [style.width]="(geoPointsArray.length > 0) ? '900px' : '100%'"
         ></app-ag-grid>
         <app-map-view

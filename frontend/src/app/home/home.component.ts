@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AppComponent} from '../app.component';
 import {LoginService} from '../services/login.service';
 import {Project, ProjectSample, ProjectLabResult, SadieProjectsService} from '../services/sadie-projects.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -23,8 +24,10 @@ export class HomeComponent implements OnInit {
   projectLabResultsRowData: ProjectLabResult[] = [];
   // geo point props
   geoPointsArray = [];
-  // ag grid custom filter properties
+  // ag grid properties
   agGridCustomFilters = null;
+  exportLabResultsCSV: Subject<string> = new Subject<string>();
+  exportSamplePointLocationCSV: Subject<string> = new Subject<string>();
 
   constructor(public app: AppComponent,
               public loginService: LoginService,
@@ -151,4 +154,14 @@ export class HomeComponent implements OnInit {
     return columnDefs;
   }
 
+  onExportCSVBtnClick() {
+    // set ag grid title
+    const title = 'PID_' + this.selectedProject + '_' + this.tabs[this.selectedTab];
+    if (this.selectedTab === 0) {
+      this.exportLabResultsCSV.next(title);
+    }
+    if (this.selectedTab === 1) {
+      this.exportSamplePointLocationCSV.next(title);
+    }
+  }
 }

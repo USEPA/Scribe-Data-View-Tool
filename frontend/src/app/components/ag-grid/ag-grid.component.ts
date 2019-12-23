@@ -1,24 +1,27 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, Input, OnInit, OnDestroy, OnChanges, SimpleChanges} from '@angular/core';
 import { AgGridSelectFilterComponent } from '@components/ag-grid/ag-grid-select-filter.component';
 import {ColDef} from 'ag-grid';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-ag-grid',
   templateUrl: './ag-grid.component.html',
   styleUrls: ['./ag-grid.component.css']
 })
-export class AgGridComponent implements OnChanges {
+export class AgGridComponent implements OnInit, OnDestroy, OnChanges {
   public showGrid: boolean;
   private gridApi;
   private gridColumnApi;
   private defaultColDef;
   private overlayLoadingTemplate;
   private customComponents: object;
+  private exportingCSVSubscription: Subscription;
 
   @Input() isLoading: boolean;
   @Input() columnDefs: any[];
   @Input() rowData: any[];
   @Input() customFilterProps: object;
+  @Input() exportingCSV: Observable<string>;
 
   constructor() {
     this.showGrid = true;
@@ -28,6 +31,16 @@ export class AgGridComponent implements OnChanges {
     };
     this.overlayLoadingTemplate = '<span class="ag-overlay-loading-center">Please wait while loading data</span>';
     this.customComponents = { selectFilter: AgGridSelectFilterComponent };
+  }
+
+  ngOnInit() {
+    if (this.exportingCSV) {
+      this.exportingCSVSubscription = this.exportingCSV.subscribe((title) => this.exportCSV(title));
+    }
+  }
+
+  ngOnDestroy() {
+    this.exportingCSVSubscription.unsubscribe();
   }
 
   showLoading() {
@@ -63,7 +76,6 @@ export class AgGridComponent implements OnChanges {
   }
 
   onRowDataChanged(params) {
-    this.hideLoading();
   }
 
   onModelUpdated(params) {
@@ -75,14 +87,16 @@ export class AgGridComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.isLoading && changes.isLoading.currentValue) {
-      this.showLoading();
-    } else {
-      // Set custom filter properties for column definitions after Ag Grid has loaded
-      if (this.customFilterProps) {
-        this.setColDefFilterProps();
+    if (changes.isLoading) {
+      if (changes.isLoading.currentValue) {
+        this.showLoading();
+      } else {
+        // Set custom filter properties for column definitions after Ag Grid has loaded
+        if (this.customFilterProps) {
+          this.setColDefFilterProps();
+        }
+        this.hideLoading();
       }
-      this.hideLoading();
     }
   }
 
@@ -97,4 +111,12 @@ export class AgGridComponent implements OnChanges {
     });
   }
 
+  exportCSV(title) {
+    const params = {
+      columnGroups: true,
+      allColumns: true,
+      fileName: title,
+    };
+    this.gridApi.exportDataAsCsv(params);
+  }
 }

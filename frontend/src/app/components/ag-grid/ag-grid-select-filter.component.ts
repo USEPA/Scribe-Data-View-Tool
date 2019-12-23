@@ -34,7 +34,12 @@ export class AgGridSelectFilterComponent implements IFilterAngularComp {
     return this.selectedFilterVal.toLowerCase()
       .split(' ')
       .every((filterWord) => {
-        return this.valueGetter(params.node).toString().toLowerCase().indexOf(filterWord) >= 0;
+        const filterVal = this.valueGetter(params.node);
+        if (filterVal) {
+          return this.valueGetter(params.node).toString().toLowerCase().indexOf(filterWord) >= 0;
+        } else {
+          return false;
+        }
       });
   }
 
