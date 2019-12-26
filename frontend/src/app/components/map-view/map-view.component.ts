@@ -11,8 +11,7 @@ import {
   ViewChild
 } from '@angular/core';
 import {ReplaySubject} from 'rxjs';
-import {ProjectSample} from '@services/sadie-projects.service'; // Esri TypeScript Types
-import { loadModules } from 'esri-loader';
+import {loadModules} from 'esri-loader';
 
 // import {MapService} from '@services/map.service';
 // import {LoginService} from '@services/login.service';
@@ -27,7 +26,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   @Output() mapFeaturesLoadedEvent = new EventEmitter<number>();
 
   // The <div> where we will place the map
-  @ViewChild('mapViewDiv', { static: true }) private mapViewEl: ElementRef;
+  @ViewChild('mapViewDiv', {static: true}) private mapViewEl: ElementRef;
 
   private _zoom = 10;
   private _center: Array<number> = [0.1278, 51.5074];
@@ -42,36 +41,41 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   private _mesh;
   // private _extent;
   // mapService: MapService;
-  private _selectedGeoPoint: ProjectSample;
+  private _selectedGeoPoint: any;
 
   @Input()
   set center(center: Array<number>) {
     this._center = center;
   }
+
   get center(): Array<number> {
     return this._center;
   }
+
   @Input()
   set baseMap(baseMap: string) {
     this._baseMap = baseMap;
   }
+
   get baseMap(): string {
     return this._baseMap;
   }
+
   @Input()
-  set selectedGeoPoint(selectedGeoPoint: ProjectSample) {
+  set selectedGeoPoint(selectedGeoPoint: any) {
     if (selectedGeoPoint) {
       this._selectedGeoPoint = selectedGeoPoint;
       // zoom to and highlight selected point
       this.zoomToPoint(selectedGeoPoint);
     }
   }
-  get selectedGeoPoint(): ProjectSample {
+
+  get selectedGeoPoint(): any {
     return this._selectedGeoPoint;
   }
 
   @Input() baseMapId: ReplaySubject<string>;
-  @Input() pointData: ProjectSample[];
+  @Input() pointData: any[];
 
   constructor(/*public loginService: LoginService*/) {
     // ToDo: Add in map service if and when Geoplatform map services need to be pulled into the application
@@ -115,7 +119,15 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       const sceneViewProperties: __esri.MapViewProperties = {
         container: this.mapViewEl.nativeElement,
         map: mapInstance,
-        center: this._center
+        center: this._center,
+        popup: {
+          dockEnabled: false,
+          dockOptions: {
+            position: 'bottom-center',
+            // Ignore the default sizes that trigger responsive docking
+            breakpoint: false
+          }
+        },
       };
       // create map scene view
       this._view = new SceneView(sceneViewProperties);
@@ -124,9 +136,9 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
         view: this._view
       });
       const baseMapExpand = new Expand({
-       expandIconClass: 'esri-icon-basemap',
-       view: this._view,
-       content: basemapGalleryWidget
+        expandIconClass: 'esri-icon-basemap',
+        view: this._view,
+        content: basemapGalleryWidget
       });
       this._view.ui.add(baseMapExpand, 'top-right');
 
@@ -172,7 +184,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     // Creates a graphic from existing lat/long pairs and then adds it to the map
     let pointGraphic = null;
     const pointGraphicsArray = [];
-    pointData.forEach( (pt: ProjectSample) => {
+    pointData.forEach((pt: any) => {
       if (pt.Lat && pt.Long) {
         const point = {
           type: 'point',
@@ -187,7 +199,9 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
         };
         pointGraphic = this._graphic({
           geometry: point,
-          symbol: markerSymbol
+          symbol: markerSymbol,
+          attributes: pt,
+          popupTemplate: this.getGraphicsPopupTemplate(pointData)
         });
         pointGraphicsArray.push(pointGraphic);
       }
@@ -202,7 +216,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   add3dPoints(pointData: any[]) {
     // Creates a graphic from existing lat/long pairs and then adds it to the map
     const pointGraphicsArray = [];
-    pointData.forEach( (pt: ProjectSample) => {
+    pointData.forEach((pt: any) => {
       let pointProps = null;
       let pointGeometry = null;
       let meshPointGraphic = null;
@@ -225,14 +239,14 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
           material: {
             color: 'green'
           },
-          edges: { type: 'solid', color: [50, 50, 50, 0.5], size: 1 }
+          edges: {type: 'solid', color: [50, 50, 50, 0.5], size: 1}
         });
         // Create a graphic and add it to the view
         meshPointGraphic = this._graphic({
           geometry: meshGeometry,
           symbol: {
             type: 'mesh-3d',
-            symbolLayers: [ { type: 'fill' } ]
+            symbolLayers: [{type: 'fill'}]
           }
         });
         pointGraphicsArray.push(meshPointGraphic);
@@ -250,7 +264,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  zoomToPoint(pointData: ProjectSample) {
+  zoomToPoint(pointData: any) {
     this._view.graphics.remove(this._zoomToPointGraphic);
     if (pointData && pointData.Lat && pointData.Long) {
       const point = {
@@ -276,4 +290,28 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       this._view.goTo(this._zoomToPointGraphic, {animate: true});
     }
   }
+
+  getGraphicsPopupTemplate(records: any[]) {
+    let popupTemplate;
+    let title: string;
+    const fieldInfos = [];
+    Object.keys(records[0]).forEach((key) => {
+      if (!title) {
+        title = `${key}: ${records[0][key]}`;
+        return;
+      }
+      fieldInfos.push({fieldName: key});
+    });
+    popupTemplate = {
+      title,
+      content: [
+        {
+          type: 'fields',
+          fieldInfos
+        }
+      ]
+    };
+    return popupTemplate;
+  }
+
 }

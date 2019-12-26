@@ -67,8 +67,6 @@ export class HomeComponent implements OnInit {
       const sampleResults = await this.sadieProjectsService.getProjectSamples(selectedProjectId);
       this.projectSamplesColDefs = sampleResults.columnDefs;
       this.projectSamplesRowData = sampleResults.rowData;
-      // get map component geo points
-      this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
       // get project lab data
       const labResults = await this.sadieProjectsService.getProjectLabResults(selectedProjectId);
       if (labResults.length > 0) {
@@ -76,6 +74,11 @@ export class HomeComponent implements OnInit {
         const samplePointCols = this.projectSamplesColDefs.slice(0, 3);
         this.projectLabResultsColDefs = [...samplePointCols, ...this.setAgGridColumnProps(labResults)];
         this.projectLabResultsRowData = this.mergeSamplesAndLabResults(labResults);
+        // set map component's geo points array and popup template object
+        this.geoPointsArray = this.getLatLongRecords(this.projectLabResultsRowData);
+      } else {
+        // set map component's geo points array and popup template object
+        this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
       }
       // set ag grid component custom filter properties
       this.setAgGridFilters();
@@ -96,6 +99,8 @@ export class HomeComponent implements OnInit {
           const samplePointCols = this.projectSamplesColDefs.slice(0, 3);
           this.projectLabResultsColDefs = [...samplePointCols, ...this.setAgGridColumnProps(labResults)];
           this.projectLabResultsRowData = this.mergeSamplesAndLabResults(labResults);
+          // set map component's geo points array and popup template object
+          this.geoPointsArray = this.getLatLongRecords(this.projectLabResultsRowData);
         }
       } catch (err) {
         this.isLoadingData = false;
@@ -106,6 +111,8 @@ export class HomeComponent implements OnInit {
         const results = await this.sadieProjectsService.getProjectSamples(this.selectedProject);
         this.projectSamplesColDefs = results.columnDefs;
         this.projectSamplesRowData = results.rowData;
+        // set map component's geo points array and popup template object
+        this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
       } catch (err) {
         this.isLoadingData = false;
       }
@@ -113,7 +120,7 @@ export class HomeComponent implements OnInit {
     this.isLoadingData = false;
   }
 
-  getLatLongRecords(records: ProjectSample[]) {
+  getLatLongRecords(records: any) {
     const latLongRecords = [];
     records.forEach( (record: ProjectSample) => {
       if (record.Lat && record.Long) {
