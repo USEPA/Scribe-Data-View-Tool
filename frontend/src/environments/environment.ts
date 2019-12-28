@@ -14,6 +14,14 @@ export const environment = {
   default_baseloadedMap: '972c131daf9d4e83b30a98630c8f8b2b',
 };
 
+export const globals = {
+  samplePointSymbolColors: {
+      air: ['#00b7ff', '#0062a8', '#00497c'],
+      water: ['#6040ff', '#4c33cc', '#392699'],
+      soil: ['#b59273', '#ffb339', '#6b2600']
+  }
+};
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

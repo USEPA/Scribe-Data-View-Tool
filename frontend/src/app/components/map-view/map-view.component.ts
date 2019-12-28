@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import {ReplaySubject} from 'rxjs';
 import {loadModules} from 'esri-loader';
+import {globals} from '@environments/environment';
 
 // import {MapService} from '@services/map.service';
 // import {LoginService} from '@services/login.service';
@@ -35,7 +36,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   private _map: __esri.Map = null;
   private _view: __esri.MapView = null;
   private _graphic;
-  private _graphicsLayer;
+  private _featureLayer;
   private _zoomToPointGraphic;
   private _point;
   private _mesh;
@@ -86,10 +87,10 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     const self = this;
     try {
       // Load the modules for the ArcGIS API for JavaScript
-      const [EsriMap, SceneView, GraphicsLayer, Graphic, Point, Mesh, BasemapGallery, Expand] = await loadModules([
+      const [EsriMap, SceneView, FeatureLayer, Graphic, Point, Mesh, BasemapGallery, Expand] = await loadModules([
         'esri/Map',
         'esri/views/SceneView',
-        'esri/layers/GraphicsLayer',
+        'esri/layers/FeatureLayer',
         'esri/Graphic',
         'esri/geometry/Point',
         'esri/geometry/Mesh',
@@ -98,7 +99,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       ]);
 
       // Initialize the graphics and geometry Esri Modules properties for this class
-      self._graphicsLayer = GraphicsLayer;
+      self._featureLayer = FeatureLayer;
       self._graphic = Graphic;
       self._point = Point;
       self._mesh = Mesh;
@@ -165,8 +166,9 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges) {
     if (this._view && changes.pointData) {
-      // reload map view graphics
+      // ***IMPORTANT: Clear Map Graphics and Layers***
       this._view.graphics = null;
+      this._view.map.layers = null;
       const pointGraphicsArray = this.addPoints(changes.pointData.currentValue);
       this.add3dPoints(changes.pointData.currentValue);
       this._view.goTo(pointGraphicsArray, {animate: false});
@@ -180,8 +182,10 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+   /*
+    Creates client-side graphics and a feature layer from existing lat/long pairs and then adds it to the map
+   */
   addPoints(pointData: any[]) {
-    // Creates a graphic from existing lat/long pairs and then adds it to the map
     let pointGraphic = null;
     const pointGraphicsArray = [];
     pointData.forEach((pt: any) => {
@@ -191,26 +195,110 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
           longitude: pt.Long,
           latitude: pt.Lat
         };
-        // point symbology
-        const markerSymbol = {
+        let symbolColor = null;
+        if (pt.hasOwnProperty('Sample_Type') && pt.hasOwnProperty('MDL')) {
+          symbolColor = this.getSamplePointColorByMDL(pt);
+        }
+        const graphicSymbol = {
           type: 'simple-marker',
-          color: 'green',
-          size: 5,
+          color: symbolColor,
+          opacity: symbolColor ? 1 : 0,
+          size: 7,
         };
         pointGraphic = this._graphic({
           geometry: point,
-          symbol: markerSymbol,
+          symbol: graphicSymbol,
           attributes: pt,
-          popupTemplate: this.getGraphicsPopupTemplate(pointData)
+          // popupTemplate:
         });
         pointGraphicsArray.push(pointGraphic);
       }
     });
     if (pointGraphicsArray.length > 0) {
       this._view.graphics.addMany(pointGraphicsArray);
+      // Create the feature layer from client-side graphics and add to map
+      const layer = this.createFeatureLayerFromGraphics(pointGraphicsArray);
+      layer.then((lyr) => {
+        this._view.map.add(lyr);
+      });
     }
     this.mapFeaturesLoadedEvent.emit(pointGraphicsArray.length);
     return pointGraphicsArray;
+  }
+
+  async createFeatureLayerFromGraphics(pointGraphicsArray: any) {
+    const lyr = new this._featureLayer({
+      geometryType: 'point',
+      source: pointGraphicsArray,
+      objectIdField: 'ObjectID',
+      fields: this.setFeatureLayerFields(this.pointData),
+      popupTemplate: this.setLayerPopupTemplate(this.pointData),
+      renderer: {  // overrides the layer's default renderer
+          type: 'simple',
+          symbol: {
+            type: 'simple-marker',
+            opacity: 0,
+            outline: {
+              width: 0.5,
+              color: 'gray'
+            }
+          },
+        },
+      spatialReference: {
+        wkid: 4326
+      }
+    });
+    await lyr;
+    return lyr;
+  }
+
+  setLayerPopupTemplate(records: any[]) {
+    let popupTemplate;
+    let title: string;
+    const fieldInfos = [];
+    Object.keys(records[0]).forEach((key) => {
+      if (!title) {
+        title = `${key}: ${records[0][key]}`;
+        return;
+      }
+      fieldInfos.push({fieldName: key});
+    });
+    popupTemplate = {
+      title,
+      content: [
+        {
+          type: 'fields',
+          fieldInfos
+        }
+      ]
+    };
+    return popupTemplate;
+  }
+
+  setFeatureLayerFields(records: any[]) {
+    const fieldsArray = [];
+    fieldsArray.push({
+      name: 'ObjectID',
+      alias: 'ObjectID',
+      type: 'oid'
+    });
+    Object.keys(records[0]).forEach((key) => {
+      let fieldType;
+      const jsType = typeof(records[0][key]);
+      switch (jsType) {
+        case 'string':
+          fieldType = 'string';
+          break;
+        case 'number':
+          fieldType = 'double';
+          break;
+        case 'object':
+          fieldType = 'double';
+          break;
+      }
+      fieldsArray.push({name: key, alias: key, type: fieldType});
+    });
+    return fieldsArray;
   }
 
   add3dPoints(pointData: any[]) {
@@ -230,16 +318,19 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
         };
         // add 3d point with depth z coordinate
         pointGeometry = this._point(pointProps);
+        let symbolColor = '';
+        if (pt.hasOwnProperty('Sample_Type') && pt.hasOwnProperty('MDL')) {
+          symbolColor = this.getSamplePointColorByMDL(pt);
+        }
         const meshGeometry = this._mesh.createCylinder(pointGeometry, {
           size: {
-            width: 5,
+            width: 1,
             height: pt.Sample_Depth_To,
             depth: pt.Sample_Depth_To
           },
           material: {
-            color: 'green'
-          },
-          edges: {type: 'solid', color: [50, 50, 50, 0.5], size: 1}
+            color: symbolColor
+          }
         });
         // Create a graphic and add it to the view
         meshPointGraphic = this._graphic({
@@ -275,10 +366,10 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       // highlight symbology
       const highlightSymbol = {
         type: 'simple-marker',
-        size: 6,
+        size: 8,
         outline: {
           color: [21, 244, 238],
-          width: 4
+          width: 6
         }
       };
       this._zoomToPointGraphic = this._graphic({
@@ -291,27 +382,19 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  getGraphicsPopupTemplate(records: any[]) {
-    let popupTemplate;
-    let title: string;
-    const fieldInfos = [];
-    Object.keys(records[0]).forEach((key) => {
-      if (!title) {
-        title = `${key}: ${records[0][key]}`;
-        return;
-      }
-      fieldInfos.push({fieldName: key});
-    });
-    popupTemplate = {
-      title,
-      content: [
-        {
-          type: 'fields',
-          fieldInfos
-        }
-      ]
-    };
-    return popupTemplate;
+  getSamplePointColorByMDL(graphicProps: any) {
+    const symbolColors = globals.samplePointSymbolColors;
+    let symbolColor = null;
+    // set symbol color based on the sample point type and MDL value
+    const samplePointType = graphicProps.Sample_Type.toLowerCase();
+    if (!graphicProps.MDL || graphicProps.MDL === 0) {
+      symbolColor = symbolColors[samplePointType][0];
+    } else if (graphicProps.MDL > 0 && graphicProps.MDL <= 10) {
+      symbolColor = symbolColors[samplePointType][1];
+    } else if (graphicProps.MDL > 10 && graphicProps.MDL <= 100) {
+      symbolColor = symbolColors[samplePointType][2];
+    }
+    return symbolColor;
   }
 
 }

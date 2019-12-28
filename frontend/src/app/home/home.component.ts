@@ -74,10 +74,11 @@ export class HomeComponent implements OnInit {
         const samplePointCols = this.projectSamplesColDefs.slice(0, 3);
         this.projectLabResultsColDefs = [...samplePointCols, ...this.setAgGridColumnProps(labResults)];
         this.projectLabResultsRowData = this.mergeSamplesAndLabResults(labResults);
-        // set map component's geo points array and popup template object
+      }
+      // set map component's geo points array and popup template object
+      if (this.selectedProject && this.tabs[this.selectedTab] === 'Lab Analyte Results') {
         this.geoPointsArray = this.getLatLongRecords(this.projectLabResultsRowData);
       } else {
-        // set map component's geo points array and popup template object
         this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
       }
       // set ag grid component custom filter properties
