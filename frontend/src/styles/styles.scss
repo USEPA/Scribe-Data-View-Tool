@@ -21,6 +21,12 @@ body {
   font-weight: normal;
 }
 
+app-root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 // Custom theme configurations
 $primary: mat-palette($mat-blue, 500);
 $accent:  mat-palette($mat-blue, 500, A200, A400);
@@ -59,6 +65,7 @@ $custom-colors: (
 
 .component-container-flex  {
   display: flex;
+  height: 100%;
 }
 
 .component-container-col  {
@@ -90,10 +97,9 @@ footer {
 
 // map styles
 .map-container {
-  height: 500px;
-  width: 600px;
+  height: 100%;
+  width: 100%;
   box-shadow: 0 8px 6px -6px black;
-  margin-left: 10px;
 }
 
 // Other custom styles
@@ -117,4 +123,8 @@ svg#clouds {
   position: fixed;
   z-index: -10;
   width: 90%;
+}
+
+.mat-tab-body-wrapper {
+  flex: 1;
 }

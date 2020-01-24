@@ -12,7 +12,9 @@ import {
 } from '@angular/core';
 import {ReplaySubject} from 'rxjs';
 import {loadModules} from 'esri-loader';
-import {globals} from '@environments/environment';
+import {globals, environment} from '@environments/environment';
+
+
 
 // import {MapService} from '@services/map.service';
 // import {LoginService} from '@services/login.service';
@@ -324,9 +326,9 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
         }
         const meshGeometry = this._mesh.createCylinder(pointGeometry, {
           size: {
-            width: 1,
-            height: pt.Sample_Depth_To,
-            depth: pt.Sample_Depth_To
+            width: 2,
+            depth: 2,
+            height: (pt.Sample_Depth_To - pt.Sample_Depth),
           },
           material: {
             color: symbolColor
@@ -387,11 +389,11 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     let symbolColor = null;
     // set symbol color based on the sample point type and MDL value
     const samplePointType = graphicProps.Sample_Type.toLowerCase();
-    if (!graphicProps.MDL || graphicProps.MDL === 0) {
+    if (graphicProps.Result <= graphicProps.MDL) {
       symbolColor = symbolColors[samplePointType][0];
-    } else if (graphicProps.MDL > 0 && graphicProps.MDL <= 10) {
-      symbolColor = symbolColors[samplePointType][1];
-    } else if (graphicProps.MDL > 10 && graphicProps.MDL <= 100) {
+    // } else if (graphicProps.MDL > 0 && graphicProps.MDL <= 10) {
+      // symbolColor = symbolColors[samplePointType][1];
+    } else if (graphicProps.Result > graphicProps.MDL) {
       symbolColor = symbolColors[samplePointType][2];
     }
     return symbolColor;

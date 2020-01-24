@@ -108,7 +108,7 @@ DATABASES = {
         'NAME': 'Sadie',
         'USER': os.environ.get('SADIE_DB_USER', ''),
         'PASSWORD': os.environ.get('SADIE_DB_PASSWORD', ''),
-        'PORT': '1433',
+        'PORT': os.environ.get('SADIE_DB_PORT', '1433'),
         'OPTIONS': {
             'driver': "ODBC Driver 17 for SQL Server"
         }
@@ -119,7 +119,7 @@ DATABASES = {
         'NAME': 'Scribe',
         'USER': os.environ.get('SCRIBE_DB_USER', ''),
         'PASSWORD': os.environ.get('SCRIBE_DB_PASSWORD', ''),
-        'PORT': '1433',
+        'PORT': os.environ.get('SCRIBE_DB_PORT', '1433'),
         'OPTIONS': {
             'driver': "ODBC Driver 17 for SQL Server"
         }
