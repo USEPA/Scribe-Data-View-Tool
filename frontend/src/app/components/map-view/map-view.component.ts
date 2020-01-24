@@ -316,7 +316,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
           type: 'point',
           longitude: pt.Long,
           latitude: pt.Lat,
-          z: (pt.Sample_Depth_To * -1)
+          z: (pt.Sample_Depth_To * -1 * 10)
         };
         // add 3d point with depth z coordinate
         pointGeometry = this._point(pointProps);
@@ -326,9 +326,9 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
         }
         const meshGeometry = this._mesh.createCylinder(pointGeometry, {
           size: {
-            width: 2,
-            depth: 2,
-            height: (pt.Sample_Depth_To - pt.Sample_Depth),
+            width: 5,
+            depth: 5,
+            height: (pt.Sample_Depth_To - pt.Sample_Depth) * 10,
           },
           material: {
             color: symbolColor
