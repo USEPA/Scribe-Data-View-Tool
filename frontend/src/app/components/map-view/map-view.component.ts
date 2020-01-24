@@ -32,7 +32,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('mapViewDiv', {static: true}) private mapViewEl: ElementRef;
 
   private _zoom = 10;
-  private _center: Array<number> = [0.1278, 51.5074];
+  private _center: Array<number> = [-122.449445, 37.762852]; //-122.449445, 37.762852
   private _baseMap = 'streets';
   private _loaded = false;
   private _map: __esri.Map = null;
