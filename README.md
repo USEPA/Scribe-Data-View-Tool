@@ -30,19 +30,19 @@ Note: From project root folder, do the following application setup commands.
     Or install the project's Python dev dependencies directly from the project's existing Pipfile.
     > pipenv install --dev
 
-3. Apply new app registry data model migrations based on the changes detected in the app data models 
+3. IMPORTANT: Finally, need to rollback versions of the installed Python package dependencies which have breakings bugs in their most recent releases.
+- Presently, the only Python library dependency which latest release has a breaking bug is the pyodbc dependency (version 4.0.28).
+- To fix this, rollback the pyodbc dependency back to version `4.0.27`.
+
+### Apply Django Data Model Migrations to Database
+1. Apply new app registry data model migrations based on the changes detected in the app data models 
     > python manage.py makemigrations
 
     > python manage.py makemigrations scribe_models
 
-4. Synchronize migrations just to the default Scribe-Data-View-Tool database with the default django models/migrations. 
+2. Synchronize migrations just to the default Scribe-Data-View-Tool database with the default django models/migrations. 
    Run manage.py to set the project settings, and have the project’s setting files point to the project's environment (.env) variables:
     > python manage.py migrate --database default
-
-5. IMPORTANT: Finally, need to rollback versions of the installed Python package dependencies which have breakings bugs in their most recent releases.
-- Presently, the only Python library dependency which latest release has a breaking bug is the pyodbc dependency (version 4.0.28).
-- To fix this, rollback the pyodbc dependency back to version `4.0.27`.
-
 
 ### Run The Local Development Servers
 These commands start/run the project's local development web servers. From two separate command-line prompts, run these two commands (one to invoke the JS dependencies, and the other to run the local web server).
