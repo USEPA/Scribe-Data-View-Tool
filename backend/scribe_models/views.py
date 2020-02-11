@@ -1,5 +1,6 @@
 from django.db import connections
 from django.http import HttpResponseServerError
+from django.core.cache import cache
 
 from rest_framework import serializers
 from rest_framework import viewsets
@@ -31,6 +32,10 @@ def get_project_samples(request, project_id_p=0):
     :return: list of project samples
     """
     try:
+        response_data = cache.get(f'project_samples{project_id_p}')
+        if response_data is not None:
+            return Response(response_data)
+
         project_samples_sql = f"""
         SELECT samp.samp_no as Sample_Number, samp.sampleDate as Sample_Date, samp.matrix as Sample_Type, 
         loc.location as Location, loc.locationDescription as Location_Desc, 
@@ -56,6 +61,7 @@ def get_project_samples(request, project_id_p=0):
                 for idx, col in enumerate(cols):
                     row_values[col[0]] = row[idx]
                 row_data.append(row_values)
+            cache.set(f'project_samples{project_id_p}')
             return Response({'columnDefs': column_defs, 'rowData': row_data})
     except Exception as e:
         return Response({'columnDefs': [], 'rowData': []})

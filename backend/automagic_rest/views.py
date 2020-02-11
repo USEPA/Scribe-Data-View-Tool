@@ -2,7 +2,9 @@ from importlib import import_module
 
 from django.db import connections
 from django.apps import apps
+from django.core.cache import cache
 
+from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework_filters.backends import (
@@ -175,3 +177,13 @@ class GenericViewSet(ReadOnlyModelViewSet):
             index_columns.append(row[0])
 
         return index_columns
+
+    def list(self, request, *args, **kwargs):
+        uri = request.build_absolute_uri()
+        response_data = cache.get(f'{uri}')
+        if response_data is not None:
+            return Response(response_data)
+
+        response = super().list(request, *args, **kwargs)
+        cache.set(f'{uri}', response.data)
+        return response
