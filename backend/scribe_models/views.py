@@ -61,8 +61,9 @@ def get_project_samples(request, project_id_p=0):
                 for idx, col in enumerate(cols):
                     row_values[col[0]] = row[idx]
                 row_data.append(row_values)
-            cache.set(f'project_samples{project_id_p}')
-            return Response({'columnDefs': column_defs, 'rowData': row_data})
+            data = {'columnDefs': column_defs, 'rowData': row_data}
+            cache.set(f'project_samples{project_id_p}', data)
+            return Response(data)
     except Exception as e:
         return Response({'columnDefs': [], 'rowData': []})
 
