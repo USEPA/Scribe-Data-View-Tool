@@ -76,11 +76,13 @@ export class HomeComponent implements OnInit {
         this.projectLabResultsRowData = this.mergeSamplesAndLabResults(labResults);
       }
       // set map component's geo points array and popup template object
-      if (this.selectedProject && this.tabs[this.selectedTab] === 'Lab Analyte Results') {
-        this.geoPointsArray = this.getLatLongRecords(this.projectLabResultsRowData);
-      } else {
-        this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
-      }
+      // if (this.selectedProject && this.tabs[this.selectedTab] === 'Lab Analyte Results') {
+      //   this.geoPointsArray = this.getLatLongRecords(this.projectLabResultsRowData);
+      // } else {
+      //   this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
+      // }
+      // only pass in points for now
+      this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
       // set ag grid component custom filter properties
       this.setAgGridFilters();
       this.isLoadingData = false;
@@ -134,11 +136,16 @@ export class HomeComponent implements OnInit {
   mergeSamplesAndLabResults(labResults) {
     const rowDataMerged = [];
     // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < this.projectSamplesRowData.length; i++) {
-      rowDataMerged.push({...this.projectSamplesRowData[i], ...(labResults.find((itmInner) =>
-         itmInner.Samp_No === this.projectSamplesRowData[i].Sample_Number))}
+    labResults.forEach(result => {
+      rowDataMerged.push({...result, ...(this.projectSamplesRowData.find((point) =>
+         point.Sample_Number === result.Samp_No))}
       );
-    }
+    });
+    // for (let i = 0; i < this.projectSamplesRowData.length; i++) {
+    //   rowDataMerged.push({...this.projectSamplesRowData[i], ...(labResults.find((itmInner) =>
+    //      itmInner.Samp_No === this.projectSamplesRowData[i].Sample_Number))}
+    //   );
+    // }
     return rowDataMerged;
   }
 
