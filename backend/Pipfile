@@ -6,9 +6,9 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-Django = "<2.3.0,>=2.2.9"
+Django = "==2.2.10"
 django-mssql-backend = "==2.4.0"
-djangorestframework = ">=3.10.3,<=3.10.99"
+djangorestframework = "<=3.10.99,>=3.10.3"
 djangorestframework-queryfields = ">=1.0.0"
 djangorestframework-filters = "==1.0.0.dev0"
 psycopg2 = ">=2.7,<3.0"
