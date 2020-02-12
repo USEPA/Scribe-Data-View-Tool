@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AppComponent} from '../app.component';
 import {LoginService} from '../services/login.service';
 import {Project, ProjectSample, ProjectLabResult, SadieProjectsService} from '../services/sadie-projects.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Subject } from 'rxjs';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Subject} from 'rxjs';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-home',
@@ -65,7 +66,7 @@ export class HomeComponent implements OnInit {
       this.isLoadingData = true;
       // get project sample data
       const sampleResults = await this.sadieProjectsService.getProjectSamples(selectedProjectId);
-      this.projectSamplesColDefs = sampleResults.columnDefs;
+      this.projectSamplesColDefs = this.setAgGridColumnProps(sampleResults.rowData);
       this.projectSamplesRowData = sampleResults.rowData;
       // get project lab data
       const labResults = await this.sadieProjectsService.getProjectLabResults(selectedProjectId);
@@ -84,7 +85,7 @@ export class HomeComponent implements OnInit {
       // only pass in points for now
       this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
       // set ag grid component custom filter properties
-      this.setAgGridFilters();
+      this.setAgGridCustomFilters();
       this.isLoadingData = false;
     } catch (err) {
       this.isLoadingData = false;
@@ -103,7 +104,7 @@ export class HomeComponent implements OnInit {
           this.projectLabResultsColDefs = [...samplePointCols, ...this.setAgGridColumnProps(labResults)];
           this.projectLabResultsRowData = this.mergeSamplesAndLabResults(labResults);
           // set map component's geo points array and popup template object
-          this.geoPointsArray = this.getLatLongRecords(this.projectLabResultsRowData);
+          this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
         }
       } catch (err) {
         this.isLoadingData = false;
@@ -112,7 +113,7 @@ export class HomeComponent implements OnInit {
     if (this.selectedProject && this.tabs[this.selectedTab] === 'Sample Point Locations') {
       try {
         const results = await this.sadieProjectsService.getProjectSamples(this.selectedProject);
-        this.projectSamplesColDefs = results.columnDefs;
+        this.projectSamplesColDefs = this.setAgGridColumnProps(results.rowData);
         this.projectSamplesRowData = results.rowData;
         // set map component's geo points array and popup template object
         this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
@@ -125,7 +126,7 @@ export class HomeComponent implements OnInit {
 
   getLatLongRecords(records: any) {
     const latLongRecords = [];
-    records.forEach( (record: ProjectSample) => {
+    records.forEach((record: ProjectSample) => {
       if (record.Lat && record.Long) {
         latLongRecords.push(record);
       }
@@ -135,21 +136,23 @@ export class HomeComponent implements OnInit {
 
   mergeSamplesAndLabResults(labResults) {
     const rowDataMerged = [];
-    // tslint:disable-next-line:prefer-for-of
     labResults.forEach(result => {
       rowDataMerged.push({...result, ...(this.projectSamplesRowData.find((point) =>
          point.Sample_Number === result.Samp_No))}
       );
     });
+    // tslint:disable-next-line:prefer-for-of
     // for (let i = 0; i < this.projectSamplesRowData.length; i++) {
-    //   rowDataMerged.push({...this.projectSamplesRowData[i], ...(labResults.find((itmInner) =>
-    //      itmInner.Samp_No === this.projectSamplesRowData[i].Sample_Number))}
+    //   rowDataMerged.push({
+    //       ...this.projectSamplesRowData[i], ...(labResults.find((itmInner) =>
+    //       itmInner.Samp_No === this.projectSamplesRowData[i].Sample_Number))
+    //     }
     //   );
     // }
     return rowDataMerged;
   }
 
-  setAgGridFilters() {
+  setAgGridCustomFilters() {
     this.agGridCustomFilters = {
       Sample_Type: {
         filterName: 'selectFilter',
@@ -166,7 +169,7 @@ export class HomeComponent implements OnInit {
     const result = [];
     for (const item of arr) {
       if (item[key] && !result.includes(item[key])) {
-          result.push(item[key]);
+        result.push(item[key]);
       }
     }
     return result;
@@ -175,7 +178,30 @@ export class HomeComponent implements OnInit {
   setAgGridColumnProps(results) {
     const columnDefs = [];
     Object.keys(results[0]).forEach((key) => {
-      columnDefs.push({headerName: key, field: key, sortable: true, filter: true});
+      if (key.includes('Date_') || key.includes('_Date')) {
+        columnDefs.push({headerName: key, field: key, sortable: true,
+          filter: 'agDateColumnFilter',
+          filterParams: {
+            comparator(filterLocalDateAtMidnight, cellValue) {
+              const cellDate = new Date(cellValue);
+              if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
+                return 0;
+              }
+              if (cellDate < filterLocalDateAtMidnight) {
+                return -1;
+              }
+              if (cellDate > filterLocalDateAtMidnight) {
+                return 1;
+              }
+            }
+          }
+        });
+      } else if (!isNaN(results[0][key])) {
+        columnDefs.push({headerName: key, field: key, sortable: true, filter: 'agNumberColumnFilter'});
+      } else {
+        // defaults with default filter
+        columnDefs.push({headerName: key, field: key, sortable: true, filter: true});
+      }
     });
     return columnDefs;
   }
