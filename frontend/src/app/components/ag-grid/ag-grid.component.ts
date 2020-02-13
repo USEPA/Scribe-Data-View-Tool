@@ -28,10 +28,6 @@ export class AgGridComponent implements OnInit, OnDestroy {
     if (this._isLoading) {
       this.showLoading();
     } else {
-      // Set custom filter properties for column definitions after Ag Grid has loaded
-      if (this.customFilterProps) {
-        this.setColDefFilterProps();
-      }
       this.hideLoading();
     }
   }
@@ -67,6 +63,11 @@ export class AgGridComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    // Set custom filter properties for column definitions after Ag Grid has loaded
+    if (this.customFilterProps) {
+      this.setColDefFilterProps();
+    }
+    // Subscribe to observable events
     if (this.updatingColDefs) {
       this.updatingColDefsSubscription = this.updatingColDefs.subscribe((values) => {
         this.columnDefs = values;
