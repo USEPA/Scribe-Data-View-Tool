@@ -55,6 +55,7 @@
           ></app-ag-grid>
           <app-map-view
             *ngIf="geoPointsArray.length > 0"
+            [hidden]="isLoadingData"
             [pointData]="geoPointsArray"
             [selectedGeoPoint]="selectedGeoPoint"
             (mapFeaturesLoadedEvent)="mapGeoFeaturesLoaded($event)"
@@ -88,6 +89,7 @@
         ></app-ag-grid>
         <app-map-view
           *ngIf="geoPointsArray.length > 0"
+          [hidden]="isLoadingData"
           [pointData]="geoPointsArray"
           [selectedGeoPoint]="selectedGeoPoint"
           (mapFeaturesLoadedEvent)="mapGeoFeaturesLoaded($event)"

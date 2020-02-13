@@ -56,9 +56,10 @@ export class HomeComponent implements OnInit {
   agGridFiltersChanged(filteredRowData) {
     // update the map points
     // TODO: remove this bottleneck conditional once it's determined how we'll pass in geo-points from filtered lab results
-    if (filteredRowData.length >= 1 && filteredRowData.length < 1000) {
+    if (filteredRowData && (filteredRowData.length >= 1 && filteredRowData.length < 1000)) {
       this.geoPointsArray = this.getLatLongRecords(filteredRowData);
-    } else {
+    } else if (!filteredRowData) {
+      // if no filter applied, reset the map points
       this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
     }
   }
@@ -196,14 +197,15 @@ export class HomeComponent implements OnInit {
           filter: 'agDateColumnFilter',
           filterParams: {
             comparator(filterLocalDateAtMidnight, cellValue) {
-              const cellDate = new Date(cellValue);
+              const cellDateTime = new Date(cellValue);
+              const cellDate = new Date(cellDateTime.getFullYear(), cellDateTime.getMonth(), cellDateTime.getDate());
               if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
                 return 0;
               }
-              if (cellDate < filterLocalDateAtMidnight) {
+              if (cellDate.getTime() < filterLocalDateAtMidnight.getTime()) {
                 return -1;
               }
-              if (cellDate > filterLocalDateAtMidnight) {
+              if (cellDate.getTime() > filterLocalDateAtMidnight.getTime()) {
                 return 1;
               }
             }

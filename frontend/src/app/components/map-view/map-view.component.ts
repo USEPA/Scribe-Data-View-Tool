@@ -68,7 +68,11 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     if (selectedGeoPoint) {
       this._selectedGeoPoint = selectedGeoPoint;
       // zoom to and highlight selected point
-      this.zoomToPoint(selectedGeoPoint);
+      try {
+        this.zoomToPoint(selectedGeoPoint);
+      } catch (error) {
+        return;
+      }
     }
   }
 

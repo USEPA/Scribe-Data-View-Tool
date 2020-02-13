@@ -121,19 +121,19 @@ export class AgGridComponent implements OnInit, OnDestroy {
   }
 
   onFiltersChanged(params) {
-    const currentFilter = params.api.getFilterModel();
-    const currentFilterProps = currentFilter[Object.keys(currentFilter)[0]];
-    // check that text type filters have at least a length of 3 characters
-    if (currentFilterProps && (currentFilterProps.filterType !== 'text' ||
-      (currentFilterProps.filterType === 'text' && currentFilterProps.filter.length >= 3))) {
+    const lastFilter = params.api.getFilterModel();
+    const lastFilterProps = lastFilter[Object.keys(lastFilter)[Object.keys(lastFilter).length - 1]];
+    // check if last filter type is text, then have at least a length of 3 characters before returning filtered results
+    if (lastFilterProps && (lastFilterProps.filterType !== 'text' ||
+      (lastFilterProps.filterType === 'text' && lastFilterProps.filter.length >= 3))) {
       // return filtered rows
       const filteredRows = [];
       this.gridApi.forEachNodeAfterFilter((node, index) => {
         filteredRows.push(node.data);
       });
-      if (filteredRows.length > 0) {
-        this.filtersChangedEvent.emit(filteredRows);
-      }
+      this.filtersChangedEvent.emit(filteredRows);
+    } else if (!lastFilter || Object.keys(lastFilter).length === 0) {
+      this.filtersChangedEvent.emit(undefined);
     }
   }
 
