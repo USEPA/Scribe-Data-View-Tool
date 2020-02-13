@@ -50,6 +50,7 @@
             [updatingColDefs]="updateColDefs.asObservable()"
             [exportingCSV]="exportLabResultsCSV.asObservable()"
             [style.width]="(geoPointsArray.length > 0) ? '900px' : '100%'"
+            (filtersChangedEvent)="agGridFiltersChanged($event)"
             (rowSelectedEvent)="agGridRowSelected($event)"
           ></app-ag-grid>
           <app-map-view
@@ -82,6 +83,7 @@
           [updatingColDefs]="updateColDefs.asObservable()"
           [exportingCSV]="exportSamplePointLocationCSV.asObservable()"
           [style.width]="(geoPointsArray.length > 0) ? '900px' : '100%'"
+          (filtersChangedEvent)="agGridFiltersChanged($event)"
           (rowSelectedEvent)="agGridRowSelected($event)"
         ></app-ag-grid>
         <app-map-view

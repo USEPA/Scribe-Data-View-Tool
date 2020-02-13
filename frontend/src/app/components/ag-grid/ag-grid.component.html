@@ -9,6 +9,7 @@
   [paginationAutoPageSize]="true"
   [alwaysShowVerticalScroll]="false"
   [rowSelection]="'single'"
+  (filterChanged)="onFiltersChanged($event)"
   (selectionChanged)="onSelectionChanged($event)"
   [overlayLoadingTemplate]="overlayLoadingTemplate"
   (gridReady)="onGridReady($event)"
