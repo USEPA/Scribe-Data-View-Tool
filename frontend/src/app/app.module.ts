@@ -10,9 +10,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {
   MatToolbarModule, MatMenuModule, MatListModule, MatCardModule, MatFormFieldModule, MatSelectModule,
-  MatButtonModule, MatDialogModule, MatIconModule, MatProgressSpinnerModule, MatTabsModule, MatSnackBarModule
+  MatButtonModule, MatDialogModule, MatIconModule, MatProgressSpinnerModule, MatTabsModule, MatSnackBarModule,
+  MatChipsModule
 } from '@angular/material';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpRequestInterceptor} from './http-request.interceptor';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from '@components/header/header.component';
@@ -20,6 +21,8 @@ import { AgGridComponent } from '@components/ag-grid/ag-grid.component';
 import {AgGridModule} from 'ag-grid-angular';
 import { AgGridSelectFilterComponent } from '@components/ag-grid/ag-grid-select-filter.component';
 import { MapViewComponent } from './components/map-view/map-view.component';
+import { VisibleColumnsDialogComponent } from './components/visible-columns-dialog/visible-columns-dialog.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 @NgModule({
@@ -31,13 +34,16 @@ import { MapViewComponent } from './components/map-view/map-view.component';
     HeaderComponent,
     AgGridComponent,
     AgGridSelectFilterComponent,
-    MapViewComponent
+    MapViewComponent,
+    VisibleColumnsDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatCardModule,
     MatButtonModule,
     MatDialogModule,
@@ -46,12 +52,13 @@ import { MapViewComponent } from './components/map-view/map-view.component';
     MatIconModule,
     MatFormFieldModule,
     MatSelectModule,
-    FormsModule,
     MatMenuModule,
-    AgGridModule,
     MatProgressSpinnerModule,
     MatTabsModule,
     MatSnackBarModule,
+    MatChipsModule,
+    AgGridModule,
+    MatCheckboxModule,
   ],
   providers: [
     {
@@ -60,6 +67,9 @@ import { MapViewComponent } from './components/map-view/map-view.component';
       multi: true
     },
     LoginService],
+  entryComponents: [
+    VisibleColumnsDialogComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -2,8 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {AppComponent} from '../app.component';
 import {LoginService} from '../services/login.service';
 import {Project, ProjectSample, ProjectLabResult, SadieProjectsService} from '../services/sadie-projects.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {Subject} from 'rxjs';
+import {VisibleColumnsDialogComponent} from '../components/visible-columns-dialog/visible-columns-dialog.component';
 import * as moment from 'moment';
 
 @Component({
@@ -29,12 +30,14 @@ export class HomeComponent implements OnInit {
   selectedGeoPoint: ProjectSample = null;
   // ag grid properties
   agGridCustomFilters = null;
+  updateColDefs: Subject<any> = new Subject<any>();
   exportLabResultsCSV: Subject<string> = new Subject<string>();
   exportSamplePointLocationCSV: Subject<string> = new Subject<string>();
 
   constructor(public app: AppComponent,
               public loginService: LoginService,
               public sadieProjectsService: SadieProjectsService,
+              public dialog: MatDialog,
               public snackBar: MatSnackBar) {
     this.projectsLoaded = false;
   }
@@ -194,16 +197,38 @@ export class HomeComponent implements OnInit {
                 return 1;
               }
             }
-          }
+          },
+          hide: false
         });
       } else if (!isNaN(results[0][key])) {
-        columnDefs.push({headerName: key, field: key, sortable: true, filter: 'agNumberColumnFilter'});
+        columnDefs.push({headerName: key, field: key, sortable: true, filter: 'agNumberColumnFilter', hide: false});
       } else {
         // defaults with default filter
-        columnDefs.push({headerName: key, field: key, sortable: true, filter: true});
+        columnDefs.push({headerName: key, field: key, sortable: true, filter: true, hide: false});
       }
     });
     return columnDefs;
+  }
+
+  openVisibleColumnsDialog() {
+    let currentColumns = [];
+    if (this.tabs[this.selectedTab] === 'Lab Analyte Results') {
+      currentColumns = this.projectLabResultsColDefs;
+    }
+    if (this.tabs[this.selectedTab] === 'Sample Point Locations') {
+      currentColumns = this.projectSamplesColDefs;
+    }
+    const dialogRef = this.dialog.open(VisibleColumnsDialogComponent, {
+      width: '400px',
+      data: {
+        columns: currentColumns
+      }
+    });
+    dialogRef.afterClosed().subscribe(results => {
+      if (results && results.done) {
+        this.updateColDefs.next(results.columns);
+      }
+    });
   }
 
   onExportCSVBtnClick() {

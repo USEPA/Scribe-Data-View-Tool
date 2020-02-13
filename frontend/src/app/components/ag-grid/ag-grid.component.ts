@@ -8,7 +8,7 @@ import { Observable, Subscription } from 'rxjs';
   templateUrl: './ag-grid.component.html',
   styleUrls: ['./ag-grid.component.css']
 })
-export class AgGridComponent implements OnInit, OnDestroy, OnChanges {
+export class AgGridComponent implements OnInit, OnDestroy {
   @Output() rowSelectedEvent = new EventEmitter<number>();
   public showGrid: boolean;
   private gridApi;
@@ -16,12 +16,39 @@ export class AgGridComponent implements OnInit, OnDestroy, OnChanges {
   private defaultColDef;
   private overlayLoadingTemplate;
   private customComponents: object;
+  private updatingColDefsSubscription: Subscription;
   private exportingCSVSubscription: Subscription;
+  private _isLoading: boolean;
+  private _columnDefs: any;
 
-  @Input() isLoading: boolean;
-  @Input() columnDefs: any[];
+  // Inputs
+  @Input() set isLoading(value: boolean) {
+    this._isLoading = value;
+    if (this._isLoading) {
+      this.showLoading();
+    } else {
+      // Set custom filter properties for column definitions after Ag Grid has loaded
+      if (this.customFilterProps) {
+        this.setColDefFilterProps();
+      }
+      this.hideLoading();
+    }
+  }
+  get isLoading(): boolean {
+    return this._isLoading;
+  }
+  @Input('columnDefs')
+  set columnDefs(value: any) {
+    if (value.length > 0) {
+      this._columnDefs = value;
+    }
+  }
+  get columnDefs(): any {
+    return this._columnDefs;
+  }
   @Input() rowData: any[];
   @Input() customFilterProps: object;
+  @Input() updatingColDefs: Observable<any>;
   @Input() exportingCSV: Observable<string>;
 
   constructor() {
@@ -35,12 +62,22 @@ export class AgGridComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnInit() {
+    if (this.updatingColDefs) {
+      this.updatingColDefsSubscription = this.updatingColDefs.subscribe((values) => {
+        this.columnDefs = values;
+        // set column visibility
+        this.columnDefs.forEach((column) => {
+          this.gridColumnApi.setColumnVisible(column.field, !column.hide);
+        });
+      });
+    }
     if (this.exportingCSV) {
       this.exportingCSVSubscription = this.exportingCSV.subscribe((title) => this.exportCSV(title));
     }
   }
 
   ngOnDestroy() {
+    this.updatingColDefsSubscription.unsubscribe();
     this.exportingCSVSubscription.unsubscribe();
   }
 
@@ -58,7 +95,7 @@ export class AgGridComponent implements OnInit, OnDestroy, OnChanges {
 
   resizeColumns() {
     const allColumnIds = [];
-    if (this.gridColumnApi) {
+    if (this.gridColumnApi && this.gridColumnApi.getAllColumns()) {
       this.gridColumnApi.getAllColumns().forEach((column) => {
         allColumnIds.push(column.colId);
       });
@@ -70,10 +107,12 @@ export class AgGridComponent implements OnInit, OnDestroy, OnChanges {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     const allColumnIds = [];
-    this.gridColumnApi.getAllColumns().forEach((column) => {
-      allColumnIds.push(column.colId);
-    });
-    this.gridColumnApi.autoSizeColumns(allColumnIds);
+    if (this.gridColumnApi && this.gridColumnApi.getAllColumns()) {
+      this.gridColumnApi.getAllColumns().forEach((column) => {
+        allColumnIds.push(column.colId);
+      });
+      this.gridColumnApi.autoSizeColumns(allColumnIds);
+    }
   }
 
   onSelectionChanged(params) {
@@ -89,7 +128,7 @@ export class AgGridComponent implements OnInit, OnDestroy, OnChanges {
     this.resizeColumns();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  /*ngOnChanges(changes: SimpleChanges) {
     if (changes.isLoading) {
       if (changes.isLoading.currentValue) {
         this.showLoading();
@@ -101,7 +140,7 @@ export class AgGridComponent implements OnInit, OnDestroy, OnChanges {
         this.hideLoading();
       }
     }
-  }
+  }*/
 
   setColDefFilterProps() {
     this.columnDefs.forEach((item: ColDef) => {

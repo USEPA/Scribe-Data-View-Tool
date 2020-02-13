@@ -31,17 +31,23 @@
     <mat-tab>
         <ng-template mat-tab-label>
           {{tabs[0]}}&nbsp;&nbsp;
+          <button *ngIf="selectedTab === 0 && projectLabResultsRowData.length > 0" (click)="openVisibleColumnsDialog()">
+            Visible Columns
+          </button>&nbsp;&nbsp;
           <button *ngIf="selectedTab === 0 && projectLabResultsRowData.length > 0" (click)="onExportCSVBtnClick()">
             Export CSV
           </button>
         </ng-template>
         <div class="component-container-flex">
+          <mat-spinner *ngIf="isLoadingData" style="wdith: 100%; top: 50%; left: 50%;"></mat-spinner>
           <app-ag-grid
+            *ngIf="!isLoadingData"
             [hidden]="!selectedProject"
             [isLoading]="isLoadingData"
             [columnDefs]="projectLabResultsColDefs"
             [rowData]="projectLabResultsRowData"
             [customFilterProps]="agGridCustomFilters"
+            [updatingColDefs]="updateColDefs.asObservable()"
             [exportingCSV]="exportLabResultsCSV.asObservable()"
             [style.width]="(geoPointsArray.length > 0) ? '900px' : '100%'"
             (rowSelectedEvent)="agGridRowSelected($event)"
@@ -57,17 +63,23 @@
     <mat-tab>
       <ng-template mat-tab-label>
         {{tabs[1]}}&nbsp;&nbsp;
+        <button *ngIf="selectedTab === 1 && projectSamplesRowData.length > 0" (click)="openVisibleColumnsDialog()">
+          Visible Columns
+        </button>&nbsp;&nbsp;
         <button *ngIf="selectedTab === 1 && projectSamplesRowData.length > 0" (click)="onExportCSVBtnClick()">
           Export CSV
         </button>
       </ng-template>
       <div class="component-container-flex">
+        <mat-spinner *ngIf="isLoadingData" style="wdith: 100%; top: 50%; left: 50%;"></mat-spinner>
         <app-ag-grid
+          *ngIf="!isLoadingData"
           [hidden]="!selectedProject"
           [isLoading]="isLoadingData"
           [columnDefs]="projectSamplesColDefs"
           [rowData]="projectSamplesRowData"
           [customFilterProps]="agGridCustomFilters"
+          [updatingColDefs]="updateColDefs.asObservable()"
           [exportingCSV]="exportSamplePointLocationCSV.asObservable()"
           [style.width]="(geoPointsArray.length > 0) ? '900px' : '100%'"
           (rowSelectedEvent)="agGridRowSelected($event)"
