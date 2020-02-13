@@ -40,7 +40,11 @@ $custom-colors: (
   toolbar-background: mat-color($mat-blue, 700),
 );
 
-// Custom and extended classes
+// Material Angular extended classes
+mat-tab-group, .mat-tab-body-wrapper {
+  flex: 1;
+  height: 100%;
+}
 .mat-warn {
   color: mat-color($warn);
 }
@@ -59,6 +63,7 @@ $custom-colors: (
   flex: 1 1 auto;
 }
 
+// Custom classes
 .content-container {
   height: 100%;
 }
@@ -125,6 +130,3 @@ svg#clouds {
   width: 90%;
 }
 
-.mat-tab-body-wrapper {
-  flex: 1;
-}
