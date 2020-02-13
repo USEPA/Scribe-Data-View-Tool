@@ -53,6 +53,16 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  agGridFiltersChanged(filteredRowData) {
+    // update the map points
+    // TODO: remove this bottleneck conditional once it's determined how we'll pass in geo-points from filtered lab results
+    if (filteredRowData.length >= 1 && filteredRowData.length < 1000) {
+      this.geoPointsArray = this.getLatLongRecords(filteredRowData);
+    } else {
+      this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
+    }
+  }
+
   agGridRowSelected(val) {
     if (val.Lat && val.Long) {
       this.selectedGeoPoint = val;

@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, OnDestroy, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
-import { AgGridSelectFilterComponent } from '@components/ag-grid/ag-grid-select-filter.component';
+import {AgGridSelectFilterComponent} from '@components/ag-grid/ag-grid-select-filter.component';
 import {ColDef} from 'ag-grid';
-import { Observable, Subscription } from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-ag-grid',
@@ -9,6 +9,7 @@ import { Observable, Subscription } from 'rxjs';
   styleUrls: ['./ag-grid.component.css']
 })
 export class AgGridComponent implements OnInit, OnDestroy {
+  @Output() filtersChangedEvent = new EventEmitter<any[]>();
   @Output() rowSelectedEvent = new EventEmitter<number>();
   public showGrid: boolean;
   private gridApi;
@@ -34,18 +35,22 @@ export class AgGridComponent implements OnInit, OnDestroy {
       this.hideLoading();
     }
   }
+
   get isLoading(): boolean {
     return this._isLoading;
   }
+
   @Input('columnDefs')
   set columnDefs(value: any) {
     if (value.length > 0) {
       this._columnDefs = value;
     }
   }
+
   get columnDefs(): any {
     return this._columnDefs;
   }
+
   @Input() rowData: any[];
   @Input() customFilterProps: object;
   @Input() updatingColDefs: Observable<any>;
@@ -58,7 +63,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
       resizable: true
     };
     this.overlayLoadingTemplate = '<span class="ag-overlay-loading-center">Please wait while loading data</span>';
-    this.customComponents = { selectFilter: AgGridSelectFilterComponent };
+    this.customComponents = {selectFilter: AgGridSelectFilterComponent};
   }
 
   ngOnInit() {
@@ -112,6 +117,23 @@ export class AgGridComponent implements OnInit, OnDestroy {
         allColumnIds.push(column.colId);
       });
       this.gridColumnApi.autoSizeColumns(allColumnIds);
+    }
+  }
+
+  onFiltersChanged(params) {
+    const currentFilter = params.api.getFilterModel();
+    const currentFilterProps = currentFilter[Object.keys(currentFilter)[0]];
+    // check that text type filters have at least a length of 3 characters
+    if (currentFilterProps && (currentFilterProps.filterType !== 'text' ||
+      (currentFilterProps.filterType === 'text' && currentFilterProps.filter.length >= 3))) {
+      // return filtered rows
+      const filteredRows = [];
+      this.gridApi.forEachNodeAfterFilter((node, index) => {
+        filteredRows.push(node.data);
+      });
+      if (filteredRows.length > 0) {
+        this.filtersChangedEvent.emit(filteredRows);
+      }
     }
   }
 

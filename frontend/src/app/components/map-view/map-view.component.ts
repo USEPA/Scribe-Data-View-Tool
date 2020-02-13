@@ -15,7 +15,6 @@ import {loadModules} from 'esri-loader';
 import {globals, environment} from '@environments/environment';
 
 
-
 // import {MapService} from '@services/map.service';
 // import {LoginService} from '@services/login.service';
 
@@ -168,12 +167,15 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges) {
     if (this._view && changes.pointData) {
-      // ***IMPORTANT: Clear Map Graphics and Layers***
-      this._view.graphics = null;
-      this._view.map.layers = null;
-      const pointGraphicsArray = this.addPoints(changes.pointData.currentValue);
-      this.add3dPoints(changes.pointData.currentValue);
-      this._view.goTo(pointGraphicsArray, {animate: false});
+      const newPointData = changes.pointData.currentValue;
+      if (newPointData.length !== changes.pointData.previousValue.length) {
+        // ***IMPORTANT: Clear Map Graphics and Layers***
+        this._view.graphics = null;
+        this._view.map.layers = null;
+        const pointGraphicsArray = this.addPoints(changes.pointData.currentValue);
+        this.add3dPoints(changes.pointData.currentValue);
+        this._view.goTo(pointGraphicsArray, {animate: false});
+      }
     }
   }
 
@@ -184,9 +186,9 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-   /*
-    Creates client-side graphics and a feature layer from existing lat/long pairs and then adds it to the map
-   */
+  /*
+   Creates client-side graphics and a feature layer from existing lat/long pairs and then adds it to the map
+  */
   addPoints(pointData: any[]) {
     let pointGraphic = null;
     const pointGraphicsArray = [];
@@ -236,16 +238,16 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       fields: this.setFeatureLayerFields(this.pointData),
       popupTemplate: this.setLayerPopupTemplate(this.pointData),
       renderer: {  // overrides the layer's default renderer
-          type: 'simple',
-          symbol: {
-            type: 'simple-marker',
-            opacity: 0,
-            outline: {
-              width: 0.5,
-              color: 'gray'
-            }
-          },
+        type: 'simple',
+        symbol: {
+          type: 'simple-marker',
+          opacity: 0,
+          outline: {
+            width: 0.5,
+            color: 'gray'
+          }
         },
+      },
       spatialReference: {
         wkid: 4326
       }
@@ -286,7 +288,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     });
     Object.keys(records[0]).forEach((key) => {
       let fieldType;
-      const jsType = typeof(records[0][key]);
+      const jsType = typeof (records[0][key]);
       switch (jsType) {
         case 'string':
           fieldType = 'string';
@@ -391,7 +393,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     const samplePointType = graphicProps.Sample_Type.toLowerCase();
     if (graphicProps.Result <= graphicProps.MDL) {
       symbolColor = symbolColors[samplePointType][0];
-    // } else if (graphicProps.MDL > 0 && graphicProps.MDL <= 10) {
+      // } else if (graphicProps.MDL > 0 && graphicProps.MDL <= 10) {
       // symbolColor = symbolColors[samplePointType][1];
     } else if (graphicProps.Result > graphicProps.MDL) {
       symbolColor = symbolColors[samplePointType][2];
