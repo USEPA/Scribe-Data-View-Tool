@@ -49,16 +49,6 @@ export class AgGridComponent implements OnInit, OnDestroy {
     return this._columnDefs;
   }
 
-  @Input('activeFilters')
-  set activeFilters(filters: ActiveFilter[]) {
-    if (filters.length > 0) {
-      this._activeFilters = filters;
-    }
-  }
-  get activeFilters(): ActiveFilter[] {
-    return this._activeFilters;
-  }
-
   @Input() rowData: any[];
   @Input() customFilterProps: object;
   @Input() updatingColDefs: Observable<any>;
@@ -102,6 +92,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.updatingColDefsSubscription.unsubscribe();
+    this.updatingFiltersSubscription.unsubscribe();
     this.exportingCSVSubscription.unsubscribe();
   }
 
