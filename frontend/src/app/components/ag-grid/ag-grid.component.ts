@@ -2,6 +2,7 @@ import {Component, Input, OnInit, OnDestroy, OnChanges, SimpleChanges, Output, E
 import {AgGridSelectFilterComponent} from '@components/ag-grid/ag-grid-select-filter.component';
 import {ColDef} from 'ag-grid';
 import {Observable, Subscription} from 'rxjs';
+import {Filters, ActiveFilter} from '../../filters';
 
 @Component({
   selector: 'app-ag-grid',
@@ -9,7 +10,7 @@ import {Observable, Subscription} from 'rxjs';
   styleUrls: ['./ag-grid.component.css']
 })
 export class AgGridComponent implements OnInit, OnDestroy {
-  @Output() filtersChangedEvent = new EventEmitter<any[]>();
+  @Output() filtersChangedEvent = new EventEmitter<{activeFilters: any[], filteredRowData: any[]}>();
   @Output() rowSelectedEvent = new EventEmitter<number>();
   public showGrid: boolean;
   private gridApi;
@@ -17,10 +18,12 @@ export class AgGridComponent implements OnInit, OnDestroy {
   private defaultColDef;
   private overlayLoadingTemplate;
   private customComponents: object;
-  private updatingColDefsSubscription: Subscription;
-  private exportingCSVSubscription: Subscription;
   private _isLoading: boolean;
   private _columnDefs: any;
+  private _activeFilters: ActiveFilter[];
+  private updatingColDefsSubscription: Subscription;
+  private updatingFiltersSubscription: Subscription;
+  private exportingCSVSubscription: Subscription;
 
   // Inputs
   @Input() set isLoading(value: boolean) {
@@ -42,7 +45,6 @@ export class AgGridComponent implements OnInit, OnDestroy {
       this._columnDefs = value;
     }
   }
-
   get columnDefs(): any {
     return this._columnDefs;
   }
@@ -50,6 +52,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
   @Input() rowData: any[];
   @Input() customFilterProps: object;
   @Input() updatingColDefs: Observable<any>;
+  @Input() updatingFilters: Observable<any>;
   @Input() exportingCSV: Observable<string>;
 
   constructor() {
@@ -68,6 +71,11 @@ export class AgGridComponent implements OnInit, OnDestroy {
       this.setColDefFilterProps();
     }
     // Subscribe to observable events
+    if (this.updatingFilters) {
+      this.updatingFiltersSubscription = this.updatingFilters.subscribe((filters) => {
+        this.updateActiveFilters(filters);
+      });
+    }
     if (this.updatingColDefs) {
       this.updatingColDefsSubscription = this.updatingColDefs.subscribe((values) => {
         this.columnDefs = values;
@@ -84,6 +92,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.updatingColDefsSubscription.unsubscribe();
+    this.updatingFiltersSubscription.unsubscribe();
     this.exportingCSVSubscription.unsubscribe();
   }
 
@@ -122,19 +131,58 @@ export class AgGridComponent implements OnInit, OnDestroy {
   }
 
   onFiltersChanged(params) {
-    const lastFilter = params.api.getFilterModel();
-    const lastFilterProps = lastFilter[Object.keys(lastFilter)[Object.keys(lastFilter).length - 1]];
+    const activeFilters = params.api.getFilterModel();
+    // get active filters and their values
+    const activeFilterValues = [];
+    for (const key of Object.keys(activeFilters)) {
+      if (activeFilters[key].filterType === 'date') {
+        if (activeFilters[key].condition1) {
+          activeFilterValues.push({name: key,
+            value: `${activeFilters[key].condition1.dateFrom}...`});
+        } else {
+          activeFilterValues.push({name: key, value: activeFilters[key].dateFrom});
+        }
+      } else if (activeFilters[key].value) {
+        activeFilterValues.push({name: key, value: activeFilters[key].value});
+      } else if (activeFilters[key].filter) {
+        activeFilterValues.push({name: key, value: activeFilters[key].filter});
+      }
+    }
+    // get the filtered rows
+    const lastFilterProps = activeFilters[Object.keys(activeFilters)[Object.keys(activeFilters).length - 1]];
     // check if last filter type is text, then have at least a length of 3 characters before returning filtered results
     if (lastFilterProps && (lastFilterProps.filterType !== 'text' ||
       (lastFilterProps.filterType === 'text' && lastFilterProps.filter.length >= 3))) {
-      // return filtered rows
       const filteredRows = [];
       this.gridApi.forEachNodeAfterFilter((node, index) => {
         filteredRows.push(node.data);
       });
-      this.filtersChangedEvent.emit(filteredRows);
-    } else if (!lastFilter || Object.keys(lastFilter).length === 0) {
-      this.filtersChangedEvent.emit(undefined);
+      this.filtersChangedEvent.emit({activeFilters: activeFilterValues, filteredRowData: filteredRows});
+    } else if (!activeFilters || Object.keys(activeFilters).length === 0) {
+      this.filtersChangedEvent.emit({activeFilters: activeFilterValues, filteredRowData: undefined});
+    }
+  }
+
+  updateActiveFilters(filters) {
+    try {
+      const activeFilters = this.gridApi.getFilterModel();
+      if (Object.keys(activeFilters).length > 0) {
+        if (filters === undefined || filters.length === 0) {
+          // clear all filters
+          this.gridApi.setFilterModel(null);
+        } else {
+          // remove the deselected filters from the current filter model and reset the model
+          const currentFilterNames = filters.map(f => f.name);
+          for (const filterName of Object.keys(activeFilters)) {
+            if (!currentFilterNames.includes(filterName)) {
+              delete activeFilters[filterName];
+            }
+          }
+          this.gridApi.setFilterModel(activeFilters);
+        }
+      }
+    } catch (err) {
+      return;
     }
   }
 
@@ -150,20 +198,6 @@ export class AgGridComponent implements OnInit, OnDestroy {
     this.gridColumnApi = params.columnApi;
     this.resizeColumns();
   }
-
-  /*ngOnChanges(changes: SimpleChanges) {
-    if (changes.isLoading) {
-      if (changes.isLoading.currentValue) {
-        this.showLoading();
-      } else {
-        // Set custom filter properties for column definitions after Ag Grid has loaded
-        if (this.customFilterProps) {
-          this.setColDefFilterProps();
-        }
-        this.hideLoading();
-      }
-    }
-  }*/
 
   setColDefFilterProps() {
     this.columnDefs.forEach((item: ColDef) => {

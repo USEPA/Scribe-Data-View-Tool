@@ -11,7 +11,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {
   MatToolbarModule, MatMenuModule, MatListModule, MatCardModule, MatFormFieldModule, MatSelectModule,
   MatButtonModule, MatDialogModule, MatIconModule, MatProgressSpinnerModule, MatTabsModule, MatSnackBarModule,
-  MatChipsModule
+  MatChipsModule, MatCheckboxModule, MatSidenavModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpRequestInterceptor} from './http-request.interceptor';
@@ -22,7 +22,6 @@ import {AgGridModule} from 'ag-grid-angular';
 import { AgGridSelectFilterComponent } from '@components/ag-grid/ag-grid-select-filter.component';
 import { MapViewComponent } from './components/map-view/map-view.component';
 import { VisibleColumnsDialogComponent } from './components/visible-columns-dialog/visible-columns-dialog.component';
-import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 @NgModule({
@@ -37,29 +36,30 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     MapViewComponent,
     VisibleColumnsDialogComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatToolbarModule,
-    MatListModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatMenuModule,
-    MatProgressSpinnerModule,
-    MatTabsModule,
-    MatSnackBarModule,
-    MatChipsModule,
-    AgGridModule,
-    MatCheckboxModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatToolbarModule,
+        MatListModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatMenuModule,
+        MatProgressSpinnerModule,
+        MatTabsModule,
+        MatSnackBarModule,
+        MatCheckboxModule,
+        MatSidenavModule,
+        MatChipsModule,
+        AgGridModule,
+    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
