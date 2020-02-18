@@ -9,7 +9,7 @@ import {Observable, Subscription} from 'rxjs';
   styleUrls: ['./ag-grid.component.css']
 })
 export class AgGridComponent implements OnInit, OnDestroy {
-  @Output() filtersChangedEvent = new EventEmitter<any[]>();
+  @Output() filtersChangedEvent = new EventEmitter<{activeFilters: any[], filteredRowData: any[]}>();
   @Output() rowSelectedEvent = new EventEmitter<number>();
   public showGrid: boolean;
   private gridApi;
@@ -122,19 +122,33 @@ export class AgGridComponent implements OnInit, OnDestroy {
   }
 
   onFiltersChanged(params) {
-    const lastFilter = params.api.getFilterModel();
-    const lastFilterProps = lastFilter[Object.keys(lastFilter)[Object.keys(lastFilter).length - 1]];
+    const activeFilters = params.api.getFilterModel();
+    // get active filters and their values
+    const activeFilterValues = [];
+    for (const key of Object.keys(activeFilters)) {
+      if (activeFilters[key].filterType === 'date') {
+        if (activeFilters[key].condition1) {
+          activeFilterValues.push({name: key,
+            value: `${activeFilters[key].condition1.dateFrom}...`});
+        } else {
+          activeFilterValues.push({name: key, value: activeFilters[key].dateFrom});
+        }
+      } else {
+        activeFilterValues.push({name: key, value: activeFilters[key].value});
+      }
+    }
+    // get the filtered rows
+    const lastFilterProps = activeFilters[Object.keys(activeFilters)[Object.keys(activeFilters).length - 1]];
     // check if last filter type is text, then have at least a length of 3 characters before returning filtered results
     if (lastFilterProps && (lastFilterProps.filterType !== 'text' ||
       (lastFilterProps.filterType === 'text' && lastFilterProps.filter.length >= 3))) {
-      // return filtered rows
       const filteredRows = [];
       this.gridApi.forEachNodeAfterFilter((node, index) => {
         filteredRows.push(node.data);
       });
-      this.filtersChangedEvent.emit(filteredRows);
-    } else if (!lastFilter || Object.keys(lastFilter).length === 0) {
-      this.filtersChangedEvent.emit(undefined);
+      this.filtersChangedEvent.emit({activeFilters: activeFilterValues, filteredRowData: filteredRows});
+    } else if (!activeFilters || Object.keys(activeFilters).length === 0) {
+      this.filtersChangedEvent.emit({activeFilters: activeFilterValues, filteredRowData: undefined});
     }
   }
 

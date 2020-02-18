@@ -2,10 +2,21 @@ import {Component, OnInit} from '@angular/core';
 import {AppComponent} from '../app.component';
 import {LoginService} from '../services/login.service';
 import {Project, ProjectSample, ProjectLabResult, SadieProjectsService} from '../services/sadie-projects.service';
-import {MatDialog, MatSnackBar} from '@angular/material';
+import {MatDialog, MatSnackBar, MatChipInputEvent} from '@angular/material';
 import {Subject} from 'rxjs';
 import {VisibleColumnsDialogComponent} from '../components/visible-columns-dialog/visible-columns-dialog.component';
 import * as moment from 'moment';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+
+interface Filters {
+  activeFilters: ActiveFilter[];
+  filteredRowData: any[];
+}
+
+interface ActiveFilter {
+  name: string;
+  value: string;
+}
 
 @Component({
   selector: 'app-home',
@@ -33,6 +44,8 @@ export class HomeComponent implements OnInit {
   updateColDefs: Subject<any> = new Subject<any>();
   exportLabResultsCSV: Subject<string> = new Subject<string>();
   exportSamplePointLocationCSV: Subject<string> = new Subject<string>();
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  agGridActiveFilters: ActiveFilter[] = [];
 
   constructor(public app: AppComponent,
               public loginService: LoginService,
@@ -53,14 +66,24 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  agGridFiltersChanged(filteredRowData) {
-    // update the map points
+  agGridFiltersChanged(filters: Filters) {
+    // update the active filters
+    this.agGridActiveFilters = filters.activeFilters;
+    // update the filtered map points
     // TODO: remove this bottleneck conditional once it's determined how we'll pass in geo-points from filtered lab results
-    if (filteredRowData && (filteredRowData.length >= 1 && filteredRowData.length < 1000)) {
-      this.geoPointsArray = this.getLatLongRecords(filteredRowData);
-    } else if (!filteredRowData) {
+    if (filters.filteredRowData && (filters.filteredRowData.length >= 1 && filters.filteredRowData.length < 1000)) {
+      this.geoPointsArray = this.getLatLongRecords(filters.filteredRowData);
+    } else if (!filters.filteredRowData) {
       // if no filter applied, reset the map points
       this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
+    }
+  }
+
+  removeFilter(filter: ActiveFilter): void {
+    const index = this.agGridActiveFilters.indexOf(filter);
+    if (index >= 0) {
+      this.agGridActiveFilters.splice(index, 1);
+      // clear filter from Ag Grid
     }
   }
 
