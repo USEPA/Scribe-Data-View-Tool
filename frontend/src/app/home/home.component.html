@@ -102,6 +102,7 @@
           [rowData]="projectSamplesRowData"
           [customFilterProps]="agGridCustomFilters"
           [updatingColDefs]="updateColDefs.asObservable()"
+          [updatingFilters]="updateFilters.asObservable()"
           [exportingCSV]="exportSamplePointLocationCSV.asObservable()"
           [style.width]="(geoPointsArray.length > 0) ? '900px' : '100%'"
           (filtersChangedEvent)="agGridFiltersChanged($event)"
