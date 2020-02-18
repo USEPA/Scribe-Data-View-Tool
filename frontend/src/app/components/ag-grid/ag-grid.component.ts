@@ -2,6 +2,7 @@ import {Component, Input, OnInit, OnDestroy, OnChanges, SimpleChanges, Output, E
 import {AgGridSelectFilterComponent} from '@components/ag-grid/ag-grid-select-filter.component';
 import {ColDef} from 'ag-grid';
 import {Observable, Subscription} from 'rxjs';
+import {Filters, ActiveFilter} from '../../filters';
 
 @Component({
   selector: 'app-ag-grid',
@@ -17,10 +18,12 @@ export class AgGridComponent implements OnInit, OnDestroy {
   private defaultColDef;
   private overlayLoadingTemplate;
   private customComponents: object;
-  private updatingColDefsSubscription: Subscription;
-  private exportingCSVSubscription: Subscription;
   private _isLoading: boolean;
   private _columnDefs: any;
+  private _activeFilters: ActiveFilter[];
+  private updatingColDefsSubscription: Subscription;
+  private updatingFiltersSubscription: Subscription;
+  private exportingCSVSubscription: Subscription;
 
   // Inputs
   @Input() set isLoading(value: boolean) {
@@ -42,14 +45,24 @@ export class AgGridComponent implements OnInit, OnDestroy {
       this._columnDefs = value;
     }
   }
-
   get columnDefs(): any {
     return this._columnDefs;
+  }
+
+  @Input('activeFilters')
+  set activeFilters(filters: ActiveFilter[]) {
+    if (filters.length > 0) {
+      this._activeFilters = filters;
+    }
+  }
+  get activeFilters(): ActiveFilter[] {
+    return this._activeFilters;
   }
 
   @Input() rowData: any[];
   @Input() customFilterProps: object;
   @Input() updatingColDefs: Observable<any>;
+  @Input() updatingFilters: Observable<any>;
   @Input() exportingCSV: Observable<string>;
 
   constructor() {
@@ -68,6 +81,11 @@ export class AgGridComponent implements OnInit, OnDestroy {
       this.setColDefFilterProps();
     }
     // Subscribe to observable events
+    if (this.updatingFilters) {
+      this.updatingFiltersSubscription = this.updatingFilters.subscribe((filters) => {
+        this.updateActiveFilters(filters);
+      });
+    }
     if (this.updatingColDefs) {
       this.updatingColDefsSubscription = this.updatingColDefs.subscribe((values) => {
         this.columnDefs = values;
@@ -133,8 +151,10 @@ export class AgGridComponent implements OnInit, OnDestroy {
         } else {
           activeFilterValues.push({name: key, value: activeFilters[key].dateFrom});
         }
-      } else {
+      } else if (activeFilters[key].value) {
         activeFilterValues.push({name: key, value: activeFilters[key].value});
+      } else if (activeFilters[key].filter) {
+        activeFilterValues.push({name: key, value: activeFilters[key].filter});
       }
     }
     // get the filtered rows
@@ -152,6 +172,29 @@ export class AgGridComponent implements OnInit, OnDestroy {
     }
   }
 
+  updateActiveFilters(filters) {
+    try {
+      const activeFilters = this.gridApi.getFilterModel();
+      if (Object.keys(activeFilters).length > 0) {
+        if (filters === undefined || filters.length === 0) {
+          // clear all filters
+          this.gridApi.setFilterModel(null);
+        } else {
+          // remove the deselected filters from the current filter model and reset the model
+          const currentFilterNames = filters.map(f => f.name);
+          for (const filterName of Object.keys(activeFilters)) {
+            if (!currentFilterNames.includes(filterName)) {
+              delete activeFilters[filterName];
+            }
+          }
+          this.gridApi.setFilterModel(activeFilters);
+        }
+      }
+    } catch (err) {
+      return;
+    }
+  }
+
   onSelectionChanged(params) {
     const selectedRows = this.gridApi.getSelectedRows();
     this.rowSelectedEvent.emit(selectedRows[0]);
@@ -164,20 +207,6 @@ export class AgGridComponent implements OnInit, OnDestroy {
     this.gridColumnApi = params.columnApi;
     this.resizeColumns();
   }
-
-  /*ngOnChanges(changes: SimpleChanges) {
-    if (changes.isLoading) {
-      if (changes.isLoading.currentValue) {
-        this.showLoading();
-      } else {
-        // Set custom filter properties for column definitions after Ag Grid has loaded
-        if (this.customFilterProps) {
-          this.setColDefFilterProps();
-        }
-        this.hideLoading();
-      }
-    }
-  }*/
 
   setColDefFilterProps() {
     this.columnDefs.forEach((item: ColDef) => {

@@ -1,5 +1,5 @@
 <mat-drawer-container>
-  <mat-drawer #filterNav mode="side" opened="false" position="end">
+  <mat-drawer #filterNav mode="side" [opened]="filterNavOpened" position="end">
     <mat-form-field style="padding-top: 10px;">
       <mat-chip-list #chipList aria-label="Fruit selection">
         <mat-chip *ngFor="let filter of agGridActiveFilters" selectable removable (removed)="removeFilter(filter)">
@@ -21,7 +21,7 @@
         </a>.
       </span>
       <button *ngIf="agGridActiveFilters.length > 0" type="button" mat-raised-button color="primary"
-              (click)="filterNav.toggle()">
+              (click)="filterNavOpened = !filterNavOpened">
         {{ filterNav.opened ? 'Hide Filters' : 'Show Filters' }}
       </button>
     </span>
@@ -67,6 +67,7 @@
           [rowData]="projectLabResultsRowData"
           [customFilterProps]="agGridCustomFilters"
           [updatingColDefs]="updateColDefs.asObservable()"
+          [updatingFilters]="updateFilters.asObservable()"
           [exportingCSV]="exportLabResultsCSV.asObservable()"
           [style.width]="(geoPointsArray.length > 0) ? '900px' : '100%'"
           (filtersChangedEvent)="agGridFiltersChanged($event)"

@@ -7,16 +7,8 @@ import {Subject} from 'rxjs';
 import {VisibleColumnsDialogComponent} from '../components/visible-columns-dialog/visible-columns-dialog.component';
 import * as moment from 'moment';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {Filters, ActiveFilter} from '../filters';
 
-interface Filters {
-  activeFilters: ActiveFilter[];
-  filteredRowData: any[];
-}
-
-interface ActiveFilter {
-  name: string;
-  value: string;
-}
 
 @Component({
   selector: 'app-home',
@@ -42,8 +34,10 @@ export class HomeComponent implements OnInit {
   // ag grid properties
   agGridCustomFilters = null;
   updateColDefs: Subject<any> = new Subject<any>();
+  updateFilters: Subject<any> = new Subject<any>();
   exportLabResultsCSV: Subject<string> = new Subject<string>();
   exportSamplePointLocationCSV: Subject<string> = new Subject<string>();
+  filterNavOpened = false;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   agGridActiveFilters: ActiveFilter[] = [];
 
@@ -83,7 +77,11 @@ export class HomeComponent implements OnInit {
     const index = this.agGridActiveFilters.indexOf(filter);
     if (index >= 0) {
       this.agGridActiveFilters.splice(index, 1);
-      // clear filter from Ag Grid
+      if (this.agGridActiveFilters.length === 0 && this.filterNavOpened) {
+        this.filterNavOpened = false;
+      }
+      // update filters in Ag Grid
+      this.updateFilters.next(this.agGridActiveFilters);
     }
   }
 
