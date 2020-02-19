@@ -64,9 +64,19 @@ export class HomeComponent implements OnInit {
     // update the active filters
     this.agGridActiveFilters = filters.activeFilters;
     // update the filtered map points
-    // TODO: remove this bottleneck conditional once it's determined how we'll pass in geo-points from filtered lab results
-    if (filters.filteredRowData && (filters.filteredRowData.length >= 1 && filters.filteredRowData.length < 1000)) {
-      this.geoPointsArray = this.getLatLongRecords(filters.filteredRowData);
+    if (filters.filteredRowData && filters.filteredRowData.length > 0) {
+      // IMPORTANT: pass in the sample point records that weren't filtered out to the map
+      // TODO: Add a summary calculation of the lab results to pass in along with these sample point records in order to
+      //  determine how the sample points need to be symbolized
+      const filteredSamplePoints = [];
+      this.projectSamplesRowData.forEach((samplePoint) => {
+         filters.filteredRowData.forEach((result) => {
+            if (result.Samp_No === samplePoint.Sample_Number && !filteredSamplePoints.includes(samplePoint)) {
+              filteredSamplePoints.push(samplePoint);
+            }
+         });
+      });
+      this.geoPointsArray = this.getLatLongRecords(filteredSamplePoints);
     } else if (!filters.filteredRowData) {
       // if no filter applied, reset the map points
       this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
