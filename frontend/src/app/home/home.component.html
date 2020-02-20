@@ -61,7 +61,7 @@
         <mat-spinner *ngIf="isLoadingData"></mat-spinner>
         <app-ag-grid
           *ngIf="!isLoadingData"
-          [hidden]="!selectedProject"
+          [hidden]="!selectedProject && selectedProjects.length == 0"
           [isLoading]="isLoadingData"
           [columnDefs]="projectLabResultsColDefs"
           [rowData]="projectLabResultsRowData"
@@ -96,7 +96,7 @@
         <mat-spinner *ngIf="isLoadingData"></mat-spinner>
         <app-ag-grid
           *ngIf="!isLoadingData"
-          [hidden]="!selectedProject"
+          [hidden]="!selectedProject && selectedProjects.length == 0"
           [isLoading]="isLoadingData"
           [columnDefs]="projectSamplesColDefs"
           [rowData]="projectSamplesRowData"
