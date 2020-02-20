@@ -1,7 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {AppComponent} from '../app.component';
 import {LoginService} from '../services/login.service';
-import {Project, ProjectSample, ProjectLabResult, SadieProjectsService} from '../services/sadie-projects.service';
+import {
+  Project,
+  ProjectSample,
+  ProjectLabResult,
+  SadieProjectsService,
+  ColumnsRows
+} from '../services/sadie-projects.service';
 import {MatDialog, MatSnackBar, MatChipInputEvent} from '@angular/material';
 import {ActivatedRoute} from '@angular/router';
 import {Subject, Subscription} from 'rxjs';
@@ -174,15 +180,20 @@ export class HomeComponent implements OnInit {
   }
 
   async getCombinedProjectData(projectIds) {
-    const combinedSamplePointRowData: any[] = [];
-    const combinedLabResultRowData: any[] = [];
+    let combinedSamplePointRowData = [];
+    let combinedLabResultRowData = [];
     this.isLoadingData = true;
-    for (const projectId of projectIds) {
-      const samplePointResults = await this.sadieProjectsService.getProjectSamples(projectId);
-      combinedSamplePointRowData.concat(samplePointResults.rowData);
-      const labResults = await this.sadieProjectsService.getProjectLabResults(projectId);
-      combinedLabResultRowData.concat(labResults);
-    }
+    // combine all project sample point and lab results data
+    const projectsSamplePoints = await Promise.all(projectIds.map(async (projectId) => {
+      const colsRows = await this.sadieProjectsService.getProjectSamples(projectId);
+      return colsRows.rowData;
+    }));
+    // combine lab results
+    const projectsLabResults = await Promise.all(projectIds.map(async (projectId) =>
+      await this.sadieProjectsService.getProjectLabResults(projectId)
+    ));
+    combinedSamplePointRowData = [].concat(...projectsSamplePoints);
+    combinedLabResultRowData = [].concat(...projectsLabResults);
     this.projectSamplesColDefs = this.setAgGridColumnProps(combinedSamplePointRowData);
     this.projectSamplesRowData = combinedSamplePointRowData;
     this.mergeSamplesAndLabResults(this.projectSamplesRowData, combinedLabResultRowData);
