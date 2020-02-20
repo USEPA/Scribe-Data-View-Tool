@@ -3,7 +3,8 @@ import {AppComponent} from '../app.component';
 import {LoginService} from '../services/login.service';
 import {Project, ProjectSample, ProjectLabResult, SadieProjectsService} from '../services/sadie-projects.service';
 import {MatDialog, MatSnackBar, MatChipInputEvent} from '@angular/material';
-import {Subject} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
+import {Subject, Subscription} from 'rxjs';
 import {VisibleColumnsDialogComponent} from '../components/visible-columns-dialog/visible-columns-dialog.component';
 import * as moment from 'moment';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
@@ -18,14 +19,17 @@ import {Filters, ActiveFilter} from '../filters';
 export class HomeComponent implements OnInit {
   userProjects: Project[];
   projectsLoaded: boolean;
+  urlParamsSubscription: Subscription;
   selectedProject: string;
+  selectedProjects: string[];
+  queryFilterParams: {};
   tabs: any = {0: 'Lab Analyte Results', 1: 'Sample Point Locations'};
   selectedTab = 0;
   isLoadingData = false;
   // sample point props
   projectSamplesColDefs: any[] = [];
   projectSamplesRowData: ProjectSample[] = [];
-  // lab result props
+  // lab results props
   projectLabResultsColDefs: any[] = [];
   projectLabResultsRowData: ProjectLabResult[] = [];
   // map / geo point props
@@ -42,6 +46,7 @@ export class HomeComponent implements OnInit {
   agGridActiveFilters: ActiveFilter[] = [];
 
   constructor(public app: AppComponent,
+              public route: ActivatedRoute,
               public loginService: LoginService,
               public sadieProjectsService: SadieProjectsService,
               public dialog: MatDialog,
@@ -50,14 +55,49 @@ export class HomeComponent implements OnInit {
   }
 
   async ngOnInit() {
+    // Subscribing to query string parameters
+    this.urlParamsSubscription = this.route.queryParams.subscribe(queryParams => {
+      if (queryParams.projects) {
+        this.selectedProjects = queryParams.projects.split(',').map(item => item.trim());
+        this.queryFilterParams = this.definePresetAgGridFilterValues(queryParams);
+      }
+    });
     if (this.loginService.access_token) {
       try {
         this.userProjects = await this.sadieProjectsService.getUserProjects();
         this.projectsLoaded = true;
+        const projectIds = this.userProjects.map(p => p.projectid.toString());
+        // If project IDs passed from query parameters exist, combine their results
+        if (this.selectedProjects.every((val) => projectIds.indexOf(val) >= 0)) {
+          this.getCombinedProjectData(this.selectedProjects);
+        }
       } catch (err) {
-        this.projectsLoaded = false;
+        return;
       }
     }
+  }
+
+  definePresetAgGridFilterValues(queryParams) {
+    const relationalOperators = ['gt', 'lt', 'gte', 'lte'];
+    const queryFilterParams = {};
+    const queryParamsClone = Object.assign({}, queryParams);
+    delete queryParamsClone.projects;
+    for (const paramKey of Object.keys(queryParamsClone)) {
+      const operandMatch = relationalOperators.find((operand) => {
+        if (paramKey.includes(operand)) {
+          return operand;
+        }
+      });
+      if (operandMatch) {
+        queryFilterParams[paramKey.replace(`_${operandMatch}`, '').toLowerCase()] = {
+          relational_operator: operandMatch,
+          value: queryParamsClone[paramKey]
+        };
+      } else {
+        queryFilterParams[paramKey.toLowerCase()] = {relational_operator: '=', value: queryParamsClone[paramKey]};
+      }
+    }
+    return queryFilterParams;
   }
 
   agGridFiltersChanged(filters: Filters) {
@@ -70,11 +110,11 @@ export class HomeComponent implements OnInit {
       //  determine how the sample points need to be symbolized
       const filteredSamplePoints = [];
       this.projectSamplesRowData.forEach((samplePoint) => {
-         filters.filteredRowData.forEach((result) => {
-            if (result.Samp_No === samplePoint.Sample_Number && !filteredSamplePoints.includes(samplePoint)) {
-              filteredSamplePoints.push(samplePoint);
-            }
-         });
+        filters.filteredRowData.forEach((result) => {
+          if (result.Samp_No === samplePoint.Sample_Number && !filteredSamplePoints.includes(samplePoint)) {
+            filteredSamplePoints.push(samplePoint);
+          }
+        });
       });
       this.geoPointsArray = this.getLatLongRecords(filteredSamplePoints);
     } else if (!filters.filteredRowData) {
@@ -108,6 +148,8 @@ export class HomeComponent implements OnInit {
 
   async getProjectData(selectedProjectId) {
     try {
+      // remove current URL parameters
+      window.history.replaceState({}, document.title, '/');
       this.isLoadingData = true;
       // get project sample data
       const sampleResults = await this.sadieProjectsService.getProjectSamples(selectedProjectId);
@@ -119,15 +161,9 @@ export class HomeComponent implements OnInit {
         // combine samples with lab results
         const samplePointCols = this.projectSamplesColDefs.slice(0, 3);
         this.projectLabResultsColDefs = [...samplePointCols, ...this.setAgGridColumnProps(labResults)];
-        this.projectLabResultsRowData = this.mergeSamplesAndLabResults(labResults);
+        this.projectLabResultsRowData = this.mergeSamplesAndLabResults(this.projectSamplesRowData, labResults);
       }
-      // set map component's geo points array and popup template object
-      // if (this.selectedProject && this.tabs[this.selectedTab] === 'Lab Analyte Results') {
-      //   this.geoPointsArray = this.getLatLongRecords(this.projectLabResultsRowData);
-      // } else {
-      //   this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
-      // }
-      // only pass in points for now
+      // only pass in sample points for now
       this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
       // set ag grid component custom filter properties
       this.setAgGridCustomFilters();
@@ -135,6 +171,32 @@ export class HomeComponent implements OnInit {
     } catch (err) {
       this.isLoadingData = false;
     }
+  }
+
+  async getCombinedProjectData(projectIds) {
+    const combinedSamplePointRowData: any[] = [];
+    const combinedLabResultRowData: any[] = [];
+    this.isLoadingData = true;
+    for (const projectId of projectIds) {
+      const samplePointResults = await this.sadieProjectsService.getProjectSamples(projectId);
+      combinedSamplePointRowData.concat(samplePointResults.rowData);
+      const labResults = await this.sadieProjectsService.getProjectLabResults(projectId);
+      combinedLabResultRowData.concat(labResults);
+    }
+    this.projectSamplesColDefs = this.setAgGridColumnProps(combinedSamplePointRowData);
+    this.projectSamplesRowData = combinedSamplePointRowData;
+    this.mergeSamplesAndLabResults(this.projectSamplesRowData, combinedLabResultRowData);
+    if (combinedLabResultRowData.length > 0) {
+      // combine samples with lab results
+      const samplePointCols = this.projectSamplesColDefs.slice(0, 3);
+      this.projectLabResultsColDefs = [...samplePointCols, ...this.setAgGridColumnProps(combinedLabResultRowData)];
+      this.projectLabResultsRowData = this.mergeSamplesAndLabResults(this.projectSamplesRowData, combinedLabResultRowData);
+    }
+    // only pass in sample points for now
+    this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
+    // set ag grid component custom filter properties
+    this.setAgGridCustomFilters();
+    this.isLoadingData = false;
   }
 
   async onTabChange(tabId) {
@@ -147,7 +209,7 @@ export class HomeComponent implements OnInit {
           // combine samples with lab results
           const samplePointCols = this.projectSamplesColDefs.slice(0, 3);
           this.projectLabResultsColDefs = [...samplePointCols, ...this.setAgGridColumnProps(labResults)];
-          this.projectLabResultsRowData = this.mergeSamplesAndLabResults(labResults);
+          this.projectLabResultsRowData = this.mergeSamplesAndLabResults(this.projectSamplesRowData, labResults);
           // set map component's geo points array and popup template object
           this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
         }
@@ -179,21 +241,15 @@ export class HomeComponent implements OnInit {
     return latLongRecords;
   }
 
-  mergeSamplesAndLabResults(labResults) {
+  mergeSamplesAndLabResults(samplePoints, labResults) {
     const rowDataMerged = [];
     labResults.forEach(result => {
-      rowDataMerged.push({...result, ...(this.projectSamplesRowData.find((point) =>
-         point.Sample_Number === result.Samp_No))}
+      rowDataMerged.push({
+          ...result, ...(samplePoints.find((point) =>
+          point.Sample_Number === result.Samp_No))
+        }
       );
     });
-    // tslint:disable-next-line:prefer-for-of
-    // for (let i = 0; i < this.projectSamplesRowData.length; i++) {
-    //   rowDataMerged.push({
-    //       ...this.projectSamplesRowData[i], ...(labResults.find((itmInner) =>
-    //       itmInner.Samp_No === this.projectSamplesRowData[i].Sample_Number))
-    //     }
-    //   );
-    // }
     return rowDataMerged;
   }
 
@@ -224,7 +280,8 @@ export class HomeComponent implements OnInit {
     const columnDefs = [];
     Object.keys(results[0]).forEach((key) => {
       if (key.includes('Date_') || key.includes('_Date')) {
-        columnDefs.push({headerName: key, field: key, sortable: true,
+        columnDefs.push({
+          headerName: key, field: key, sortable: true,
           filter: 'agDateColumnFilter',
           filterParams: {
             comparator(filterLocalDateAtMidnight, cellValue) {
