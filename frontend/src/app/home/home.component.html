@@ -61,15 +61,17 @@
         <mat-spinner *ngIf="isLoadingData"></mat-spinner>
         <app-ag-grid
           *ngIf="!isLoadingData"
-          [hidden]="!selectedProject && selectedProjects.length == 0"
+          [hidden]="!selectedProject && !selectedProjects"
           [isLoading]="isLoadingData"
           [columnDefs]="projectLabResultsColDefs"
           [rowData]="projectLabResultsRowData"
           [customFilterProps]="agGridCustomFilters"
           [updatingColDefs]="updateColDefs.asObservable()"
+          [settingFilters]="presetFilters.asObservable()"
           [updatingFilters]="updateFilters.asObservable()"
           [exportingCSV]="exportLabResultsCSV.asObservable()"
           [style.width]="(geoPointsArray.length > 0) ? '900px' : '100%'"
+          (gridReadyEvent)="setAgGridPresetFilters($event)"
           (filtersChangedEvent)="agGridFiltersChanged($event)"
           (rowSelectedEvent)="agGridRowSelected($event)"
         ></app-ag-grid>
@@ -96,15 +98,17 @@
         <mat-spinner *ngIf="isLoadingData"></mat-spinner>
         <app-ag-grid
           *ngIf="!isLoadingData"
-          [hidden]="!selectedProject && selectedProjects.length == 0"
+          [hidden]="!selectedProject && !selectedProjects"
           [isLoading]="isLoadingData"
           [columnDefs]="projectSamplesColDefs"
           [rowData]="projectSamplesRowData"
           [customFilterProps]="agGridCustomFilters"
           [updatingColDefs]="updateColDefs.asObservable()"
+          [settingFilters]="presetFilters.asObservable()"
           [updatingFilters]="updateFilters.asObservable()"
           [exportingCSV]="exportSamplePointLocationCSV.asObservable()"
           [style.width]="(geoPointsArray.length > 0) ? '900px' : '100%'"
+          (gridReadyEvent)="setAgGridPresetFilters($event)"
           (filtersChangedEvent)="agGridFiltersChanged($event)"
           (rowSelectedEvent)="agGridRowSelected($event)"
         ></app-ag-grid>

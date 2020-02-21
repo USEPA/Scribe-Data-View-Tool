@@ -10,6 +10,7 @@ import {Filters, ActiveFilter} from '../../filters';
   styleUrls: ['./ag-grid.component.css']
 })
 export class AgGridComponent implements OnInit, OnDestroy {
+  @Output() gridReadyEvent = new EventEmitter<any>();
   @Output() filtersChangedEvent = new EventEmitter<{activeFilters: any[], filteredRowData: any[]}>();
   @Output() rowSelectedEvent = new EventEmitter<number>();
   public showGrid: boolean;
@@ -22,6 +23,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
   private _columnDefs: any;
   private _activeFilters: ActiveFilter[];
   private updatingColDefsSubscription: Subscription;
+  private settingFiltersSubscription: Subscription;
   private updatingFiltersSubscription: Subscription;
   private exportingCSVSubscription: Subscription;
 
@@ -52,6 +54,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
   @Input() rowData: any[];
   @Input() customFilterProps: object;
   @Input() updatingColDefs: Observable<any>;
+  @Input() settingFilters: Observable<any>;
   @Input() updatingFilters: Observable<any>;
   @Input() exportingCSV: Observable<string>;
 
@@ -66,11 +69,16 @@ export class AgGridComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // Set custom filter properties for column definitions after Ag Grid has loaded
+    // Set custom filter properties for column definitions
     if (this.customFilterProps) {
       this.setColDefFilterProps();
     }
     // Subscribe to observable events
+    if (this.settingFilters) {
+      this.settingFiltersSubscription = this.settingFilters.subscribe((presetFilters) => {
+        this.setFilters(presetFilters);
+      });
+    }
     if (this.updatingFilters) {
       this.updatingFiltersSubscription = this.updatingFilters.subscribe((filters) => {
         this.updateActiveFilters(filters);
@@ -128,6 +136,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
       });
       this.gridColumnApi.autoSizeColumns(allColumnIds);
     }
+    this.gridReadyEvent.emit(this.columnDefs);
   }
 
   onFiltersChanged(params) {
@@ -160,6 +169,28 @@ export class AgGridComponent implements OnInit, OnDestroy {
       this.filtersChangedEvent.emit({activeFilters: activeFilterValues, filteredRowData: filteredRows});
     } else if (!activeFilters || Object.keys(activeFilters).length === 0) {
       this.filtersChangedEvent.emit({activeFilters: activeFilterValues, filteredRowData: undefined});
+    }
+  }
+
+  setFilters(presetFilters) {
+    // Set preset filters for the filter model after ag grid has loaded
+    try {
+      if (this.gridApi) {
+        for (const filterName of Object.keys(presetFilters)) {
+          const filterComponent = this.gridApi.getFilterInstance(filterName);
+          if (filterComponent) {
+            filterComponent.setModel({
+              type: presetFilters[filterName].type,
+              value: presetFilters[filterName].value ? presetFilters[filterName].value : '',
+              filter: presetFilters[filterName].filter ? presetFilters[filterName].filter : null
+            });
+          }
+        }
+        const presetFilterModel = this.gridApi.getFilterModel();
+        this.gridApi.setFilterModel(presetFilterModel);
+      }
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -196,7 +227,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
     // params.api.autoSizeColumns();
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
-    this.resizeColumns();
+    // this.resizeColumns();
   }
 
   setColDefFilterProps() {

@@ -42,8 +42,10 @@ export class HomeComponent implements OnInit {
   geoPointsArray = [];
   selectedGeoPoint: ProjectSample = null;
   // ag grid properties
+  agGridRelationalOperators = {_lt: 'lessThan', _lte: 'lessThanOrEqual', _gt: 'greaterThan', _gte: 'greaterThanOrEqual'};
   agGridCustomFilters = null;
   updateColDefs: Subject<any> = new Subject<any>();
+  presetFilters: Subject<any> = new Subject<any>();
   updateFilters: Subject<any> = new Subject<any>();
   exportLabResultsCSV: Subject<string> = new Subject<string>();
   exportSamplePointLocationCSV: Subject<string> = new Subject<string>();
@@ -74,7 +76,7 @@ export class HomeComponent implements OnInit {
         this.projectsLoaded = true;
         const projectIds = this.userProjects.map(p => p.projectid.toString());
         // If project IDs passed from query parameters exist, combine their results
-        if (this.selectedProjects.every((val) => projectIds.indexOf(val) >= 0)) {
+        if (this.selectedProjects && this.selectedProjects.every((val) => projectIds.indexOf(val) >= 0)) {
           this.getCombinedProjectData(this.selectedProjects);
         }
       } catch (err) {
@@ -84,23 +86,22 @@ export class HomeComponent implements OnInit {
   }
 
   definePresetAgGridFilterValues(queryParams) {
-    const relationalOperators = ['gt', 'lt', 'gte', 'lte'];
     const queryFilterParams = {};
     const queryParamsClone = Object.assign({}, queryParams);
     delete queryParamsClone.projects;
     for (const paramKey of Object.keys(queryParamsClone)) {
-      const operandMatch = relationalOperators.find((operand) => {
-        if (paramKey.includes(operand)) {
-          return operand;
+      const operandMatch = Object.keys(this.agGridRelationalOperators).find((operandKey) => {
+        if (paramKey.endsWith(operandKey)) {
+          return this.agGridRelationalOperators[operandKey];
         }
       });
       if (operandMatch) {
-        queryFilterParams[paramKey.replace(`_${operandMatch}`, '').toLowerCase()] = {
-          relational_operator: operandMatch,
+        queryFilterParams[paramKey.replace(operandMatch, '').toLowerCase()] = {
+          relationalOperator: this.agGridRelationalOperators[operandMatch],
           value: queryParamsClone[paramKey]
         };
       } else {
-        queryFilterParams[paramKey.toLowerCase()] = {relational_operator: '=', value: queryParamsClone[paramKey]};
+        queryFilterParams[paramKey.toLowerCase()] = {relationalOperator: 'equals', value: queryParamsClone[paramKey]};
       }
     }
     return queryFilterParams;
@@ -154,6 +155,10 @@ export class HomeComponent implements OnInit {
 
   async getProjectData(selectedProjectId) {
     try {
+      // clear active filters
+      this.agGridActiveFilters = [];
+      this.updateFilters.next([]);
+      this.presetFilters.next([]);
       // remove current URL parameters
       window.history.replaceState({}, document.title, '/');
       this.isLoadingData = true;
@@ -180,6 +185,10 @@ export class HomeComponent implements OnInit {
   }
 
   async getCombinedProjectData(projectIds) {
+    // clear active filters
+    this.agGridActiveFilters = [];
+    this.updateFilters.next([]);
+    this.presetFilters.next([]);
     let combinedSamplePointRowData = [];
     let combinedLabResultRowData = [];
     this.isLoadingData = true;
@@ -292,6 +301,7 @@ export class HomeComponent implements OnInit {
     Object.keys(results[0]).forEach((key) => {
       if (key.includes('Date_') || key.includes('_Date')) {
         columnDefs.push({
+          colId: key,
           headerName: key, field: key, sortable: true,
           filter: 'agDateColumnFilter',
           filterParams: {
@@ -312,13 +322,40 @@ export class HomeComponent implements OnInit {
           hide: false
         });
       } else if (!isNaN(results[0][key])) {
-        columnDefs.push({headerName: key, field: key, sortable: true, filter: 'agNumberColumnFilter', hide: false});
+        columnDefs.push({colId: key, headerName: key, field: key, sortable: true, filter: 'agNumberColumnFilter', hide: false});
       } else {
         // defaults with default filter
-        columnDefs.push({headerName: key, field: key, sortable: true, filter: true, hide: false});
+        columnDefs.push({colId: key, headerName: key, field: key, sortable: true, filter: true, hide: false});
       }
     });
     return columnDefs;
+  }
+
+  setAgGridPresetFilters(columnDefs) {
+    const hardcodedFilters = {};
+    if (this.queryFilterParams) {
+      for (const paramKey of Object.keys(this.queryFilterParams)) {
+        columnDefs.forEach((columnDef) => {
+          if (columnDef.field.toLowerCase() === paramKey.toLowerCase()) {
+            // determine the filter's field type
+            if (columnDef.filter === 'agDateColumnFilter') {
+              hardcodedFilters[columnDef.field] = {
+                type: this.queryFilterParams[paramKey].relationalOperator, dateFrom: this.queryFilterParams[paramKey].value
+              };
+            } else if (columnDef.filter === 'agNumberColumnFilter') {
+              hardcodedFilters[columnDef.field] = {
+                type: this.queryFilterParams[paramKey].relationalOperator, filter: this.queryFilterParams[paramKey].value
+              };
+            } else {
+              hardcodedFilters[columnDef.field] = {
+                type: this.queryFilterParams[paramKey].relationalOperator, value: this.queryFilterParams[paramKey].value
+              };
+            }
+          }
+        });
+      }
+      this.presetFilters.next(hardcodedFilters);
+    }
   }
 
   openVisibleColumnsDialog() {
