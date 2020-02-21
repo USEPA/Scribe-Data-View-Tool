@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
   urlParamsSubscription: Subscription;
   selectedProject: string;
   selectedProjects: string[];
-  queryFilterParams: {};
+  queryFilterParams: any;
   tabs: any = {0: 'Lab Analyte Results', 1: 'Sample Point Locations'};
   selectedTab = 0;
   isLoadingData = false;
@@ -66,8 +66,8 @@ export class HomeComponent implements OnInit {
     // Subscribing to query string parameters
     this.urlParamsSubscription = this.route.queryParams.subscribe(queryParams => {
       if (queryParams.projects) {
-        this.selectedProjects = queryParams.projects.split(',').map(item => item.trim());
-        this.queryFilterParams = this.definePresetAgGridFilterValues(queryParams);
+        this.queryFilterParams = queryParams;
+        this.selectedProjects = this.queryFilterParams.projects.split(',').map(item => item.trim());
       }
     });
     if (this.loginService.access_token) {
@@ -83,28 +83,6 @@ export class HomeComponent implements OnInit {
         return;
       }
     }
-  }
-
-  definePresetAgGridFilterValues(queryParams) {
-    const queryFilterParams = {};
-    const queryParamsClone = Object.assign({}, queryParams);
-    delete queryParamsClone.projects;
-    for (const paramKey of Object.keys(queryParamsClone)) {
-      const operandMatch = Object.keys(this.agGridRelationalOperators).find((operandKey) => {
-        if (paramKey.endsWith(operandKey)) {
-          return this.agGridRelationalOperators[operandKey];
-        }
-      });
-      if (operandMatch) {
-        queryFilterParams[paramKey.replace(operandMatch, '').toLowerCase()] = {
-          relationalOperator: this.agGridRelationalOperators[operandMatch],
-          value: queryParamsClone[paramKey]
-        };
-      } else {
-        queryFilterParams[paramKey.toLowerCase()] = {relationalOperator: 'equals', value: queryParamsClone[paramKey]};
-      }
-    }
-    return queryFilterParams;
   }
 
   agGridFiltersChanged(filters: Filters) {
@@ -155,12 +133,10 @@ export class HomeComponent implements OnInit {
 
   async getProjectData(selectedProjectId) {
     try {
-      // clear active filters
-      this.agGridActiveFilters = [];
-      this.updateFilters.next([]);
-      this.presetFilters.next([]);
       // remove current URL parameters
       window.history.replaceState({}, document.title, '/');
+      // clear active filters
+      this.agGridActiveFilters = [];
       this.isLoadingData = true;
       // get project sample data
       const sampleResults = await this.sadieProjectsService.getProjectSamples(selectedProjectId);
@@ -187,8 +163,6 @@ export class HomeComponent implements OnInit {
   async getCombinedProjectData(projectIds) {
     // clear active filters
     this.agGridActiveFilters = [];
-    this.updateFilters.next([]);
-    this.presetFilters.next([]);
     let combinedSamplePointRowData = [];
     let combinedLabResultRowData = [];
     this.isLoadingData = true;
@@ -334,28 +308,52 @@ export class HomeComponent implements OnInit {
   setAgGridPresetFilters(columnDefs) {
     const hardcodedFilters = {};
     if (this.queryFilterParams) {
-      for (const paramKey of Object.keys(this.queryFilterParams)) {
+      const queryFilterDefinitions = this.definePresetAgGridFilterValues(this.queryFilterParams);
+      for (const paramKey of Object.keys(queryFilterDefinitions)) {
         columnDefs.forEach((columnDef) => {
           if (columnDef.field.toLowerCase() === paramKey.toLowerCase()) {
             // determine the filter's field type
             if (columnDef.filter === 'agDateColumnFilter') {
               hardcodedFilters[columnDef.field] = {
-                type: this.queryFilterParams[paramKey].relationalOperator, dateFrom: this.queryFilterParams[paramKey].value
+                type: queryFilterDefinitions[paramKey].relationalOperator, dateFrom: queryFilterDefinitions[paramKey].value
               };
             } else if (columnDef.filter === 'agNumberColumnFilter') {
               hardcodedFilters[columnDef.field] = {
-                type: this.queryFilterParams[paramKey].relationalOperator, filter: this.queryFilterParams[paramKey].value
+                type: queryFilterDefinitions[paramKey].relationalOperator, filter: queryFilterDefinitions[paramKey].value
               };
             } else {
               hardcodedFilters[columnDef.field] = {
-                type: this.queryFilterParams[paramKey].relationalOperator, value: this.queryFilterParams[paramKey].value
+                type: queryFilterDefinitions[paramKey].relationalOperator, value: queryFilterDefinitions[paramKey].value
               };
             }
           }
         });
       }
       this.presetFilters.next(hardcodedFilters);
+      this.queryFilterParams = undefined;
     }
+  }
+
+  definePresetAgGridFilterValues(queryParams) {
+    const queryFilterParams = {};
+    const queryParamsClone = Object.assign({}, queryParams);
+    delete queryParamsClone.projects;
+    for (const paramKey of Object.keys(queryParamsClone)) {
+      const operandMatch = Object.keys(this.agGridRelationalOperators).find((operandKey) => {
+        if (paramKey.endsWith(operandKey)) {
+          return this.agGridRelationalOperators[operandKey];
+        }
+      });
+      if (operandMatch) {
+        queryFilterParams[paramKey.replace(operandMatch, '').toLowerCase()] = {
+          relationalOperator: this.agGridRelationalOperators[operandMatch],
+          value: queryParamsClone[paramKey]
+        };
+      } else {
+        queryFilterParams[paramKey.toLowerCase()] = {relationalOperator: 'equals', value: queryParamsClone[paramKey]};
+      }
+    }
+    return queryFilterParams;
   }
 
   openVisibleColumnsDialog() {

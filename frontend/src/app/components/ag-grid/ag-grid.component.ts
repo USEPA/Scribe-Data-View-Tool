@@ -135,8 +135,8 @@ export class AgGridComponent implements OnInit, OnDestroy {
         allColumnIds.push(column.colId);
       });
       this.gridColumnApi.autoSizeColumns(allColumnIds);
+      this.gridReadyEvent.emit(this.columnDefs);
     }
-    this.gridReadyEvent.emit(this.columnDefs);
   }
 
   onFiltersChanged(params) {
