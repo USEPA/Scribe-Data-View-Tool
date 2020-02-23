@@ -112,7 +112,7 @@ export class SadieProjectsService {
   }
 
   async getProjectLabResults(projectId: string) {
-    return await this.http.get<ProjectLabResult[]>(`PID_${projectId}/PID_${projectId}_LabResults/`).toPromise();
+    return await this.http.get<ProjectLabResult[]>(`PID_${projectId}/PID_${projectId}_LabResults`).toPromise();
   }
 
 }

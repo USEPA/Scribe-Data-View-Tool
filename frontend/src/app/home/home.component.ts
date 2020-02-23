@@ -9,12 +9,14 @@ import {
   ColumnsRows
 } from '../services/sadie-projects.service';
 import {MatDialog, MatSnackBar, MatChipInputEvent} from '@angular/material';
-import {ActivatedRoute} from '@angular/router';
-import {Subject, Subscription} from 'rxjs';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Subject, Subscription, Observable} from 'rxjs';
 import {VisibleColumnsDialogComponent} from '../components/visible-columns-dialog/visible-columns-dialog.component';
 import * as moment from 'moment';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {Filters, ActiveFilter} from '../filters';
+import {FormControl} from "@angular/forms";
+import {query} from "@angular/animations";
 
 
 @Component({
@@ -27,7 +29,7 @@ export class HomeComponent implements OnInit {
   projectsLoaded: boolean;
   urlParamsSubscription: Subscription;
   selectedProject: string;
-  selectedProjects: string[];
+  selectedProjects: string[] = [];
   queryFilterParams: any;
   tabs: any = {0: 'Lab Analyte Results', 1: 'Sample Point Locations'};
   selectedTab = 0;
@@ -42,7 +44,12 @@ export class HomeComponent implements OnInit {
   geoPointsArray = [];
   selectedGeoPoint: ProjectSample = null;
   // ag grid properties
-  agGridRelationalOperators = {_lt: 'lessThan', _lte: 'lessThanOrEqual', _gt: 'greaterThan', _gte: 'greaterThanOrEqual'};
+  agGridRelationalOperators = {
+    _lt: 'lessThan',
+    _lte: 'lessThanOrEqual',
+    _gt: 'greaterThan',
+    _gte: 'greaterThanOrEqual'
+  };
   agGridCustomFilters = null;
   updateColDefs: Subject<any> = new Subject<any>();
   presetFilters: Subject<any> = new Subject<any>();
@@ -52,42 +59,59 @@ export class HomeComponent implements OnInit {
   filterNavOpened = false;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   agGridActiveFilters: ActiveFilter[] = [];
+  projects = new FormControl();
 
   constructor(public app: AppComponent,
               public route: ActivatedRoute,
               public loginService: LoginService,
               public sadieProjectsService: SadieProjectsService,
               public dialog: MatDialog,
-              public snackBar: MatSnackBar) {
+              public snackBar: MatSnackBar,
+              public router: Router) {
     this.projectsLoaded = false;
   }
 
   async ngOnInit() {
+    //
+    this.userProjects = await this.sadieProjectsService.getUserProjects();
+
     // Subscribing to query string parameters
     this.urlParamsSubscription = this.route.queryParams.subscribe(queryParams => {
       if (queryParams.projects) {
         this.queryFilterParams = queryParams;
-        this.selectedProjects = this.queryFilterParams.projects.split(',').map(item => item.trim());
-      }
-    });
-    if (this.loginService.access_token) {
-      try {
-        this.userProjects = await this.sadieProjectsService.getUserProjects();
-        this.projectsLoaded = true;
-        const projectIds = this.userProjects.map(p => p.projectid.toString());
-        // If project IDs passed from query parameters exist, combine their results
-        if (this.selectedProjects && this.selectedProjects.every((val) => projectIds.indexOf(val) >= 0)) {
+        let newSelectedProjects = this.queryFilterParams.projects.split(',').map(item => item.trim());
+        let notLoadedProjects = newSelectedProjects.filter(project_id => !this.selectedProjects.includes(project_id));
+        let removedProjects =  this.selectedProjects.filter(project_id => !newSelectedProjects.includes(project_id));
+        if (notLoadedProjects.length > 0 || removedProjects.length > 0) {
+          this.selectedProjects = newSelectedProjects; // todo: in the future only load projects that have not been loaded already
           this.getCombinedProjectData(this.selectedProjects);
+          this.projects.setValue(this.selectedProjects.map(id => parseInt(id)));
         }
-      } catch (err) {
-        return;
       }
-    }
+
+      let filters = [];
+      for (let key of Object.keys(queryParams).filter(k => k !== 'projects')) {
+        filters.push({name: key, value: queryParams[key]});
+      }
+      this.applyFilter(filters);
+    });
+    // if (this.loginService.access_token) {
+    // try {
+    //   this.projectsLoaded = true;
+    //   const projectIds = this.userProjects.map(p => p.projectid.toString());
+    //   // If project IDs passed from query parameters exist, combine their results
+    //   if (this.selectedProjects && this.selectedProjects.every((val) => projectIds.indexOf(val) >= 0)) {
+    //
+    //   }
+    // } catch (err) {
+    //   return;
+    // }
+    // }
   }
 
   agGridFiltersChanged(filters: Filters) {
     // update the active filters
-    this.agGridActiveFilters = filters.activeFilters;
+    filters.activeFilters.forEach(filter => this.setQueryParam(filter.name, filter.value));
     // update the filtered map points
     if (filters.filteredRowData && filters.filteredRowData.length > 0) {
       // IMPORTANT: pass in the sample point records that weren't filtered out to the map
@@ -108,13 +132,15 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  applyFilter(activeFilters) {
+    this.agGridActiveFilters = activeFilters;
+  }
+
   removeFilter(filter: ActiveFilter): void {
     const index = this.agGridActiveFilters.indexOf(filter);
     if (index >= 0) {
       this.agGridActiveFilters.splice(index, 1);
-      if (this.agGridActiveFilters.length === 0 && this.filterNavOpened) {
-        this.filterNavOpened = false;
-      }
+      this.clearQueryParam(filter.name);
       // update filters in Ag Grid
       this.updateFilters.next(this.agGridActiveFilters);
     }
@@ -136,7 +162,7 @@ export class HomeComponent implements OnInit {
       // remove current URL parameters
       window.history.replaceState({}, document.title, '/');
       // clear active filters
-      this.agGridActiveFilters = [];
+      this.agGridActiveFilters = []; // todo: move this so they are reset but they need to be applied from query params if loading
       this.isLoadingData = true;
       // get project sample data
       const sampleResults = await this.sadieProjectsService.getProjectSamples(selectedProjectId);
@@ -162,7 +188,7 @@ export class HomeComponent implements OnInit {
 
   async getCombinedProjectData(projectIds) {
     // clear active filters
-    this.agGridActiveFilters = [];
+    this.agGridActiveFilters = [] // todo: this isn't resetting... which is fine I suppose;
     let combinedSamplePointRowData = [];
     let combinedLabResultRowData = [];
     this.isLoadingData = true;
@@ -296,7 +322,14 @@ export class HomeComponent implements OnInit {
           hide: false
         });
       } else if (!isNaN(results[0][key])) {
-        columnDefs.push({colId: key, headerName: key, field: key, sortable: true, filter: 'agNumberColumnFilter', hide: false});
+        columnDefs.push({
+          colId: key,
+          headerName: key,
+          field: key,
+          sortable: true,
+          filter: 'agNumberColumnFilter',
+          hide: false
+        });
       } else {
         // defaults with default filter
         columnDefs.push({colId: key, headerName: key, field: key, sortable: true, filter: true, hide: false});
@@ -315,11 +348,13 @@ export class HomeComponent implements OnInit {
             // determine the filter's field type
             if (columnDef.filter === 'agDateColumnFilter') {
               hardcodedFilters[columnDef.field] = {
-                type: queryFilterDefinitions[paramKey].relationalOperator, dateFrom: queryFilterDefinitions[paramKey].value
+                type: queryFilterDefinitions[paramKey].relationalOperator,
+                dateFrom: queryFilterDefinitions[paramKey].value
               };
             } else if (columnDef.filter === 'agNumberColumnFilter') {
               hardcodedFilters[columnDef.field] = {
-                type: queryFilterDefinitions[paramKey].relationalOperator, filter: queryFilterDefinitions[paramKey].value
+                type: queryFilterDefinitions[paramKey].relationalOperator,
+                filter: queryFilterDefinitions[paramKey].value
               };
             } else {
               hardcodedFilters[columnDef.field] = {
@@ -386,5 +421,19 @@ export class HomeComponent implements OnInit {
     if (this.selectedTab === 1) {
       this.exportSamplePointLocationCSV.next(title);
     }
+  }
+
+  setQueryParam(field: string, value: any) {
+    const queryParams = {};
+    queryParams[field] = value;
+    this.router.navigate([], {queryParams: queryParams, queryParamsHandling: "merge"});
+  }
+
+  clearQueryParam(field) {
+    let queryParams = {};
+    Object.keys(this.route.snapshot.queryParams).filter(k => k !== field).forEach(key => {
+      queryParams[key] = this.route.snapshot.queryParams[key];
+    });
+    this.router.navigate([], {queryParams: queryParams});
   }
 }
