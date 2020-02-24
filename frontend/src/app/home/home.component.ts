@@ -194,6 +194,32 @@ export class HomeComponent implements OnInit {
     this.isLoadingData = false;
   }
 
+  async getCombinedProjectData(projectIds) {
+    const combinedSamplePointRowData: any[] = [];
+    const combinedLabResultRowData: any[] = [];
+    this.isLoadingData = true;
+    for (const projectId of projectIds) {
+      const samplePointResults = await this.sadieProjectsService.getProjectSamples(projectId);
+      combinedSamplePointRowData.concat(samplePointResults.rowData);
+      const labResults = await this.sadieProjectsService.getProjectLabResults(projectId);
+      combinedLabResultRowData.concat(labResults);
+    }
+    this.projectSamplesColDefs = this.setAgGridColumnProps(combinedSamplePointRowData);
+    this.projectSamplesRowData = combinedSamplePointRowData;
+    this.mergeSamplesAndLabResults(this.projectSamplesRowData, combinedLabResultRowData);
+    if (combinedLabResultRowData.length > 0) {
+      // combine samples with lab results
+      const samplePointCols = this.projectSamplesColDefs.slice(0, 3);
+      this.projectLabResultsColDefs = [...samplePointCols, ...this.setAgGridColumnProps(combinedLabResultRowData)];
+      this.projectLabResultsRowData = this.mergeSamplesAndLabResults(this.projectSamplesRowData, combinedLabResultRowData);
+    }
+    // only pass in sample points for now
+    this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
+    // set ag grid component custom filter properties
+    this.setAgGridCustomFilters();
+    this.isLoadingData = false;
+  }
+
   async onTabChange(tabId) {
     this.isLoadingData = true;
     this.selectedTab = tabId;
