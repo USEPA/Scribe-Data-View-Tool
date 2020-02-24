@@ -15,8 +15,8 @@ import {VisibleColumnsDialogComponent} from '../components/visible-columns-dialo
 import * as moment from 'moment';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {Filters, ActiveFilter} from '../filters';
-import {FormControl} from "@angular/forms";
-import {query} from "@angular/animations";
+import {FormControl} from '@angular/forms';
+import {query} from '@angular/animations';
 
 
 @Component({
@@ -79,18 +79,22 @@ export class HomeComponent implements OnInit {
     this.urlParamsSubscription = this.route.queryParams.subscribe(queryParams => {
       if (queryParams.projects) {
         this.queryFilterParams = queryParams;
-        let newSelectedProjects = this.queryFilterParams.projects.split(',').map(item => item.trim());
-        let notLoadedProjects = newSelectedProjects.filter(project_id => !this.selectedProjects.includes(project_id));
-        let removedProjects =  this.selectedProjects.filter(project_id => !newSelectedProjects.includes(project_id));
+        const newSelectedProjects = this.queryFilterParams.projects.split(',').map(item => item.trim());
+        const notLoadedProjects = newSelectedProjects.filter(projectId => !this.selectedProjects.includes(projectId));
+        const removedProjects =  this.selectedProjects.filter(projectId => !newSelectedProjects.includes(projectId));
         if (notLoadedProjects.length > 0 || removedProjects.length > 0) {
+          // clear active filters
+          this.agGridActiveFilters = [];
+          this.updateFilters.next([]);
           this.selectedProjects = newSelectedProjects; // todo: in the future only load projects that have not been loaded already
           this.getCombinedProjectData(this.selectedProjects);
+          // tslint:disable-next-line:radix
           this.projects.setValue(this.selectedProjects.map(id => parseInt(id)));
         }
       }
 
-      let filters = [];
-      for (let key of Object.keys(queryParams).filter(k => k !== 'projects')) {
+      const filters = [];
+      for (const key of Object.keys(queryParams).filter(k => k !== 'projects')) {
         filters.push({name: key, value: queryParams[key]});
       }
       this.applyFilter(filters);
@@ -157,65 +161,36 @@ export class HomeComponent implements OnInit {
   mapGeoFeaturesLoaded(val) {
   }
 
-  async getProjectData(selectedProjectId) {
-    try {
-      // remove current URL parameters
-      window.history.replaceState({}, document.title, '/');
-      // clear active filters
-      this.agGridActiveFilters = []; // todo: move this so they are reset but they need to be applied from query params if loading
-      this.isLoadingData = true;
-      // get project sample data
-      const sampleResults = await this.sadieProjectsService.getProjectSamples(selectedProjectId);
-      this.projectSamplesColDefs = this.setAgGridColumnProps(sampleResults.rowData);
-      this.projectSamplesRowData = sampleResults.rowData;
-      // get project lab data
-      const labResults = await this.sadieProjectsService.getProjectLabResults(selectedProjectId);
-      if (labResults.length > 0) {
-        // combine samples with lab results
-        const samplePointCols = this.projectSamplesColDefs.slice(0, 3);
-        this.projectLabResultsColDefs = [...samplePointCols, ...this.setAgGridColumnProps(labResults)];
-        this.projectLabResultsRowData = this.mergeSamplesAndLabResults(this.projectSamplesRowData, labResults);
-      }
-      // only pass in sample points for now
-      this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
-      // set ag grid component custom filter properties
-      this.setAgGridCustomFilters();
-      this.isLoadingData = false;
-    } catch (err) {
-      this.isLoadingData = false;
-    }
-  }
-
   async getCombinedProjectData(projectIds) {
-    // clear active filters
-    this.agGridActiveFilters = [] // todo: this isn't resetting... which is fine I suppose;
     let combinedSamplePointRowData = [];
     let combinedLabResultRowData = [];
     this.isLoadingData = true;
     // combine all project sample point and lab results data
     const projectsSamplePoints = await Promise.all(projectIds.map(async (projectId) => {
-      const colsRows = await this.sadieProjectsService.getProjectSamples(projectId);
-      return colsRows.rowData;
+      const rows = await this.sadieProjectsService.getProjectSamples(projectId);
+      return rows;
     }));
     // combine lab results
-    const projectsLabResults = await Promise.all(projectIds.map(async (projectId) =>
-      await this.sadieProjectsService.getProjectLabResults(projectId)
-    ));
+    const projectsLabResults = await Promise.all(projectIds.map(async (projectId) => {
+      const rows = await this.sadieProjectsService.getProjectLabResults(projectId);
+      return rows;
+    }));
     combinedSamplePointRowData = [].concat(...projectsSamplePoints);
     combinedLabResultRowData = [].concat(...projectsLabResults);
-    this.projectSamplesColDefs = this.setAgGridColumnProps(combinedSamplePointRowData);
-    this.projectSamplesRowData = combinedSamplePointRowData;
-    this.mergeSamplesAndLabResults(this.projectSamplesRowData, combinedLabResultRowData);
-    if (combinedLabResultRowData.length > 0) {
+    if (combinedSamplePointRowData.length > 0) {
+      this.projectSamplesColDefs = this.setAgGridColumnProps(combinedSamplePointRowData);
+      this.projectSamplesRowData = combinedSamplePointRowData;
       // combine samples with lab results
       const samplePointCols = this.projectSamplesColDefs.slice(0, 3);
       this.projectLabResultsColDefs = [...samplePointCols, ...this.setAgGridColumnProps(combinedLabResultRowData)];
       this.projectLabResultsRowData = this.mergeSamplesAndLabResults(this.projectSamplesRowData, combinedLabResultRowData);
+      // set ag grid component custom filter properties
+      this.setAgGridCustomFilters();
+      if (this.projectLabResultsRowData.length > 0) {
+        // only pass in sample points for now
+        this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
+      }
     }
-    // only pass in sample points for now
-    this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
-    // set ag grid component custom filter properties
-    this.setAgGridCustomFilters();
     this.isLoadingData = false;
   }
 
@@ -239,9 +214,9 @@ export class HomeComponent implements OnInit {
     }
     if (this.selectedProject && this.tabs[this.selectedTab] === 'Sample Point Locations') {
       try {
-        const results = await this.sadieProjectsService.getProjectSamples(this.selectedProject);
-        this.projectSamplesColDefs = this.setAgGridColumnProps(results.rowData);
-        this.projectSamplesRowData = results.rowData;
+        const rows = await this.sadieProjectsService.getProjectSamples(this.selectedProject);
+        this.projectSamplesColDefs = this.setAgGridColumnProps(rows);
+        this.projectSamplesRowData = rows;
         // set map component's geo points array and popup template object
         this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
       } catch (err) {
@@ -298,44 +273,48 @@ export class HomeComponent implements OnInit {
 
   setAgGridColumnProps(results) {
     const columnDefs = [];
-    Object.keys(results[0]).forEach((key) => {
-      if (key.includes('Date_') || key.includes('_Date')) {
-        columnDefs.push({
-          colId: key,
-          headerName: key, field: key, sortable: true,
-          filter: 'agDateColumnFilter',
-          filterParams: {
-            comparator(filterLocalDateAtMidnight, cellValue) {
-              const cellDateTime = new Date(cellValue);
-              const cellDate = new Date(cellDateTime.getFullYear(), cellDateTime.getMonth(), cellDateTime.getDate());
-              if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
-                return 0;
+    try {
+      Object.keys(results[0]).forEach((key) => {
+        if (key.includes('Date_') || key.includes('_Date')) {
+          columnDefs.push({
+            colId: key,
+            headerName: key, field: key, sortable: true,
+            filter: 'agDateColumnFilter',
+            filterParams: {
+              comparator(filterLocalDateAtMidnight, cellValue) {
+                const cellDateTime = new Date(cellValue);
+                const cellDate = new Date(cellDateTime.getFullYear(), cellDateTime.getMonth(), cellDateTime.getDate());
+                if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
+                  return 0;
+                }
+                if (cellDate.getTime() < filterLocalDateAtMidnight.getTime()) {
+                  return -1;
+                }
+                if (cellDate.getTime() > filterLocalDateAtMidnight.getTime()) {
+                  return 1;
+                }
               }
-              if (cellDate.getTime() < filterLocalDateAtMidnight.getTime()) {
-                return -1;
-              }
-              if (cellDate.getTime() > filterLocalDateAtMidnight.getTime()) {
-                return 1;
-              }
-            }
-          },
-          hide: false
-        });
-      } else if (!isNaN(results[0][key])) {
-        columnDefs.push({
-          colId: key,
-          headerName: key,
-          field: key,
-          sortable: true,
-          filter: 'agNumberColumnFilter',
-          hide: false
-        });
-      } else {
-        // defaults with default filter
-        columnDefs.push({colId: key, headerName: key, field: key, sortable: true, filter: true, hide: false});
-      }
-    });
-    return columnDefs;
+            },
+            hide: false
+          });
+        } else if (!isNaN(results[0][key])) {
+          columnDefs.push({
+            colId: key,
+            headerName: key,
+            field: key,
+            sortable: true,
+            filter: 'agNumberColumnFilter',
+            hide: false
+          });
+        } else {
+          // defaults with default filter
+          columnDefs.push({colId: key, headerName: key, field: key, sortable: true, filter: true, hide: false});
+        }
+      });
+      return columnDefs;
+    } catch (err) {
+      return columnDefs;
+    }
   }
 
   setAgGridPresetFilters(columnDefs) {
@@ -426,14 +405,14 @@ export class HomeComponent implements OnInit {
   setQueryParam(field: string, value: any) {
     const queryParams = {};
     queryParams[field] = value;
-    this.router.navigate([], {queryParams: queryParams, queryParamsHandling: "merge"});
+    this.router.navigate([], {queryParams, queryParamsHandling: 'merge'});
   }
 
   clearQueryParam(field) {
-    let queryParams = {};
+    const queryParams = {};
     Object.keys(this.route.snapshot.queryParams).filter(k => k !== field).forEach(key => {
       queryParams[key] = this.route.snapshot.queryParams[key];
     });
-    this.router.navigate([], {queryParams: queryParams});
+    this.router.navigate([], {queryParams});
   }
 }

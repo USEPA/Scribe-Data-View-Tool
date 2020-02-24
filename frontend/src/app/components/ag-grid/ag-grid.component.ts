@@ -69,10 +69,6 @@ export class AgGridComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // Set custom filter properties for column definitions
-    if (this.customFilterProps) {
-      this.setColDefFilterProps();
-    }
     // Subscribe to observable events
     if (this.settingFilters) {
       this.settingFiltersSubscription = this.settingFilters.subscribe((presetFilters) => {
@@ -95,6 +91,10 @@ export class AgGridComponent implements OnInit, OnDestroy {
     }
     if (this.exportingCSV) {
       this.exportingCSVSubscription = this.exportingCSV.subscribe((title) => this.exportCSV(title));
+    }
+    // Set custom filter properties for column definitions
+    if (this.columnDefs && this.customFilterProps) {
+      this.setColDefFilterProps();
     }
   }
 
