@@ -129,14 +129,18 @@ export class AgGridComponent implements OnInit, OnDestroy {
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
-    const allColumnIds = [];
     if (this.gridColumnApi && this.gridColumnApi.getAllColumns()) {
-      this.gridColumnApi.getAllColumns().forEach((column) => {
-        allColumnIds.push(column.colId);
-      });
-      this.gridColumnApi.autoSizeColumns(allColumnIds);
+      // this.resizeColumns();
+      this.gridColumnApi.autoSizeAllColumns();
       this.gridReadyEvent.emit(this.columnDefs);
     }
+  }
+
+  onModelUpdated(params) {
+    // params.api.sizeColumnsToFit();
+    // params.api.autoSizeColumns();
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
   }
 
   onFiltersChanged(params) {
@@ -220,14 +224,6 @@ export class AgGridComponent implements OnInit, OnDestroy {
   onSelectionChanged(params) {
     const selectedRows = this.gridApi.getSelectedRows();
     this.rowSelectedEvent.emit(selectedRows[0]);
-  }
-
-  onModelUpdated(params) {
-    // params.api.sizeColumnsToFit();
-    // params.api.autoSizeColumns();
-    this.gridApi = params.api;
-    this.gridColumnApi = params.columnApi;
-    // this.resizeColumns();
   }
 
   setColDefFilterProps() {

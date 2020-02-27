@@ -73,6 +73,7 @@ export interface ProjectLabResult {
   'Test_Type': string;
   'Total_Or_Disolved': string;
   'Validation_Level': string;
+  'Region_Tag_Prefix': string;
 }
 
 export interface ProjectSample {
@@ -81,18 +82,20 @@ export interface ProjectSample {
   EPA_Region: string;
   Location: string;
   Location_Desc: string;
-  Lat: number;
-  Long: number;
+  Latitude: number;
+  Longitude: number;
   Sample_Depth: number;
   Sample_Depth_To: number;
   Sample_Depth_Units: string;
   Sample_Date: string;
-  Sample_Number: string;
+  Samp_No: string;
   Substance_Type: string;
   Sample_Type: string;
   Site_Name: string;
   Site_Number: string;
   State: string;
+  LabResultsAvailable: boolean;
+  Numeric_Tags: any;
 }
 
 

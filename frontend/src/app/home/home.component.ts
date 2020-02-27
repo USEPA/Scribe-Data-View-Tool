@@ -10,13 +10,14 @@ import {
 } from '../services/sadie-projects.service';
 import {MatDialog, MatSnackBar, MatChipInputEvent} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Subject, Subscription, Observable} from 'rxjs';
-import {VisibleColumnsDialogComponent} from '../components/visible-columns-dialog/visible-columns-dialog.component';
-import * as moment from 'moment';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {Filters, ActiveFilter} from '../filters';
 import {FormControl} from '@angular/forms';
+import {Subject, Subscription, Observable} from 'rxjs';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {query} from '@angular/animations';
+import * as moment from 'moment';
+import {VisibleColumnsDialogComponent} from '../components/visible-columns-dialog/visible-columns-dialog.component';
+import {Filters, ActiveFilter} from '../filters';
+import {CONFIG_SETTINGS} from '../config_settings';
 
 
 @Component({
@@ -124,7 +125,7 @@ export class HomeComponent implements OnInit {
       const filteredSamplePoints = [];
       this.projectSamplesRowData.forEach((samplePoint) => {
         filters.filteredRowData.forEach((result) => {
-          if (result.Samp_No === samplePoint.Sample_Number && !filteredSamplePoints.includes(samplePoint)) {
+          if (result.Samp_No === samplePoint.Samp_No && !filteredSamplePoints.includes(samplePoint)) {
             filteredSamplePoints.push(samplePoint);
           }
         });
@@ -151,7 +152,7 @@ export class HomeComponent implements OnInit {
   }
 
   agGridRowSelected(val) {
-    if (val.Lat && val.Long) {
+    if (val.Latitude && val.Longitude) {
       this.selectedGeoPoint = val;
     } else {
       this.snackBar.open('Selection has no geospatial point', null, {duration: 1000});
@@ -181,7 +182,12 @@ export class HomeComponent implements OnInit {
       this.projectSamplesColDefs = this.setAgGridColumnProps(combinedSamplePointRowData);
       this.projectSamplesRowData = combinedSamplePointRowData;
       // combine samples with lab results
-      const samplePointCols = this.projectSamplesColDefs.slice(0, 3);
+      const samplePointCols = this.projectSamplesColDefs.filter( (value, index, array) => {
+        if (['Sample Number', 'Sample Date', 'Sample Type'].includes(array[index].headerName)) {
+          return array[index].headerName;
+        }
+      });
+      // const samplePointCols = this.projectSamplesColDefs.slice(0, 3);
       this.projectLabResultsColDefs = [...samplePointCols, ...this.setAgGridColumnProps(combinedLabResultRowData)];
       this.projectLabResultsRowData = this.mergeSamplesAndLabResults(this.projectSamplesRowData, combinedLabResultRowData);
       // set ag grid component custom filter properties
@@ -229,8 +235,9 @@ export class HomeComponent implements OnInit {
   getLatLongRecords(records: any) {
     const latLongRecords = [];
     records.forEach((record: ProjectSample) => {
-      if (record.Lat && record.Long) {
-        latLongRecords.push(record);
+      const sampleRecord = record;
+      if (sampleRecord.Latitude && sampleRecord.Longitude) {
+        latLongRecords.push(sampleRecord);
       }
     });
     return latLongRecords;
@@ -241,7 +248,7 @@ export class HomeComponent implements OnInit {
     labResults.forEach(result => {
       rowDataMerged.push({
           ...result, ...(samplePoints.find((point) =>
-          point.Sample_Number === result.Samp_No))
+          point.Samp_No === result.Samp_No))
         }
       );
     });
@@ -250,9 +257,10 @@ export class HomeComponent implements OnInit {
 
   setAgGridCustomFilters() {
     this.agGridCustomFilters = {
-      Sample_Type: {
+      // Sample Type is Matrix alias
+      Matrix: {
         filterName: 'selectFilter',
-        filterValues: this.getDistinctValuesByKey(this.projectSamplesRowData, 'Sample_Type')
+        filterValues: this.getDistinctValuesByKey(this.projectSamplesRowData, 'Matrix')
       },
       Analyte: {
         filterName: 'selectFilter',
@@ -275,10 +283,14 @@ export class HomeComponent implements OnInit {
     const columnDefs = [];
     try {
       Object.keys(results[0]).forEach((key) => {
-        if (key.includes('Date_') || key.includes('_Date')) {
+        const headerName = CONFIG_SETTINGS.defaultTableSettings.hasOwnProperty(key) ? CONFIG_SETTINGS.defaultTableSettings[key].alias : key;
+        const hide = CONFIG_SETTINGS.defaultTableSettings.hasOwnProperty(key) ? CONFIG_SETTINGS.defaultTableSettings[key].hide : false;
+        if (key.includes('Date') || key.includes('Date_') || key.includes('_Date')) {
           columnDefs.push({
             colId: key,
-            headerName: key, field: key, sortable: true,
+            headerName,
+            field: key,
+            sortable: true,
             filter: 'agDateColumnFilter',
             filterParams: {
               comparator(filterLocalDateAtMidnight, cellValue) {
@@ -295,20 +307,20 @@ export class HomeComponent implements OnInit {
                 }
               }
             },
-            hide: false
+            hide
           });
         } else if (!isNaN(results[0][key])) {
           columnDefs.push({
             colId: key,
-            headerName: key,
+            headerName,
             field: key,
             sortable: true,
             filter: 'agNumberColumnFilter',
-            hide: false
+            hide
           });
         } else {
           // defaults with default filter
-          columnDefs.push({colId: key, headerName: key, field: key, sortable: true, filter: true, hide: false});
+          columnDefs.push({colId: key, headerName, field: key, sortable: true, filter: true, hide});
         }
       });
       return columnDefs;

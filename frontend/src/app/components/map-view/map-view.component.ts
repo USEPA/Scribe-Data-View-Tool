@@ -13,8 +13,6 @@ import {
 import {ReplaySubject} from 'rxjs';
 import {loadModules} from 'esri-loader';
 import {globals, environment} from '@environments/environment';
-
-
 // import {MapService} from '@services/map.service';
 // import {LoginService} from '@services/login.service';
 
@@ -31,7 +29,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('mapViewDiv', {static: true}) private mapViewEl: ElementRef;
 
   private _zoom = 10;
-  private _center: Array<number> = [-122.449445, 37.762852]; //-122.449445, 37.762852
+  private _center: Array<number> = [-122.449445, 37.762852]; // -122.449445, 37.762852
   private _baseMap = 'streets';
   private _loaded = false;
   private _map: __esri.Map = null;
@@ -197,16 +195,20 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     let pointGraphic = null;
     const pointGraphicsArray = [];
     pointData.forEach((pt: any) => {
-      if (pt.Lat && pt.Long) {
+      if (pt.Latitude && pt.Longitude) {
         const point = {
           type: 'point',
-          longitude: pt.Long,
-          latitude: pt.Lat
+          longitude: pt.Longitude,
+          latitude: pt.Latitude
         };
         let symbolColor = null;
-        if (pt.hasOwnProperty('Sample_Type') && pt.hasOwnProperty('MDL')) {
+        if (pt.hasOwnProperty('Matrix') && pt.hasOwnProperty('MDL')) {
           symbolColor = this.getSamplePointColorByMDL(pt);
         }
+        // Remove fields that have invalid field types for Esri map data
+        delete pt.LabResultsAvailable;
+        delete pt.Numeric_Tags;
+        delete pt.Region_Tag_Prefix;
         const graphicSymbol = {
           type: 'simple-marker',
           color: symbolColor,
@@ -265,8 +267,8 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     let title: string;
     const fieldInfos = [];
     Object.keys(records[0]).forEach((key) => {
-      if (!title) {
-        title = `${key}: ${records[0][key]}`;
+      if (!title && key === 'Samp_No') {
+        title = `Sample Number: ${records[0][key]}`;
         return;
       }
       fieldInfos.push({fieldName: key});
@@ -316,18 +318,18 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       let pointProps = null;
       let pointGeometry = null;
       let meshPointGraphic = null;
-      if (pt.Lat && pt.Long && pt.Sample_Depth_To) {
+      if (pt.Latitude && pt.Longitude && pt.Sample_Depth_To) {
         // add point graphic
         pointProps = {
           type: 'point',
-          longitude: pt.Long,
-          latitude: pt.Lat,
+          longitude: pt.Longitude,
+          latitude: pt.Latitude,
           z: (pt.Sample_Depth_To * -1 * 10)
         };
         // add 3d point with depth z coordinate
         pointGeometry = this._point(pointProps);
         let symbolColor = '';
-        if (pt.hasOwnProperty('Sample_Type') && pt.hasOwnProperty('MDL')) {
+        if (pt.hasOwnProperty('Matrix') && pt.hasOwnProperty('MDL')) {
           symbolColor = this.getSamplePointColorByMDL(pt);
         }
         const meshGeometry = this._mesh.createCylinder(pointGeometry, {
@@ -365,11 +367,11 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
 
   zoomToPoint(pointData: any) {
     this._view.graphics.remove(this._zoomToPointGraphic);
-    if (pointData && pointData.Lat && pointData.Long) {
+    if (pointData && pointData.Latitude && pointData.Longitude) {
       const point = {
         type: 'point',
-        longitude: pointData.Long,
-        latitude: pointData.Lat
+        longitude: pointData.Longitude,
+        latitude: pointData.Latitude
       };
       // highlight symbology
       const highlightSymbol = {
