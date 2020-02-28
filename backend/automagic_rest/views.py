@@ -30,13 +30,10 @@ def split_basename(basename):
 
 class GenericViewSet(ModelViewSet):
     """
-    """
-
-    """
-    A generic viewset which imports the necessary model, serializer, and permission
-    for the endpoint.
+    A generic viewset which imports the necessary model, serializer, and permission for the endpoint.
     """
     index_sql = """SELECT * FROM {}"""
+    lookup_field = 'Location'
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -189,6 +186,6 @@ class GenericViewSet(ModelViewSet):
         cache.set(f'{uri}', response.data)
         return response
 
-    def update(self, request, pk=None):
-        print(request)
-        print(pk)
+    # def update(self, request, pk=None):
+    #     print(request)
+    #     print(pk)

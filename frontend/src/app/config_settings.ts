@@ -64,4 +64,10 @@ export const CONFIG_SETTINGS = {
     Total_Or_Dissolved: {alias: 'Total or Dissolved', hide: true},
     Validation_Level: {alias: 'Validation Level', hide: true},
   },
+  locationFieldNames : [
+    'LocationID', 'Site_No', 'Location', 'PropertyID', 'LocationDescription', 'LocationZone', 'Latitude', 'Longitude',
+    'Altitude', 'GPS_PDOP', 'GPS_CorrectionType', 'GPS_Date', 'GPS_Time', 'GPS_Collected_By', 'GPS_Comment', 'GPS_Phase',
+    'Northing', 'Easting', 'Datum', 'GeoMethod', 'GeoScale', 'Surf_Elev', 'Surf_Units', 'ElevMethod', 'ElevDatum',
+    'Coord_Sys_Desc', 'LocationComment', 'Location_Image_Path', 'Date_Input', 'Date_Edit'
+  ]
 };

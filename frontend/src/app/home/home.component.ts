@@ -398,26 +398,37 @@ export class HomeComponent implements OnInit {
   }
 
   openUpdateRowDialog(updateAction) {
-    let items;
+    const items = [];
     if (updateAction === 'addPoint') {
-      items = this.selectedPoint;
+      items.push(this.selectedPoint);
     }
     const dialogRef = this.dialog.open(UpdateRowDialogComponent, {
       width: '700px',
       data: {
         action: updateAction,
-        items: [items]
+        items
       }
     });
 
     dialogRef.afterClosed().subscribe(async results => {
       if (results && results.done) {
         if (updateAction === 'addPoint') {
-          results.data.Site_No = this.selectedPoint.Site_No;
-          results.data.Location = this.selectedPoint.Location;
-          const projectIds = this.userProjects.map(p => p.projectid.toString());
+          const addedPoint = {
+            Latitude: undefined, Longitude: undefined, Altitude: 0, LocationComment: undefined
+          };
+          const selectedItem  = items[0];
+          CONFIG_SETTINGS.locationFieldNames.forEach((fieldName) => {
+            if (selectedItem.hasOwnProperty(fieldName)) {
+              addedPoint[fieldName] = selectedItem[fieldName];
+            }
+          });
+          addedPoint.Latitude = results.data.latitude;
+          addedPoint.Longitude = results.data.longitude;
+          addedPoint.Altitude = 0;
+          addedPoint.LocationComment = results.data.locationComment;
           const result = await this.sadieProjectsService.updateSampleLocation(
-            this.selectedProjects[0].toString(), results.data.Location, results.data);
+            this.selectedProjects[0].toString(), `${items[0].Location}` , addedPoint
+          );
         }
       }
     });
