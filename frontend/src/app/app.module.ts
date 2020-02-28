@@ -9,19 +9,20 @@ import {LoginService} from '@services/login.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {
-  MatToolbarModule, MatMenuModule, MatListModule, MatCardModule, MatFormFieldModule, MatSelectModule,
+  MatToolbarModule, MatMenuModule, MatListModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule,
   MatButtonModule, MatDialogModule, MatIconModule, MatProgressSpinnerModule, MatTabsModule, MatSnackBarModule,
   MatChipsModule, MatCheckboxModule, MatSidenavModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpRequestInterceptor} from './http-request.interceptor';
-import { HomeComponent } from './home/home.component';
-import { HeaderComponent } from '@components/header/header.component';
-import { AgGridComponent } from '@components/ag-grid/ag-grid.component';
+import {HomeComponent} from './home/home.component';
+import {HeaderComponent} from '@components/header/header.component';
+import {AgGridComponent} from '@components/ag-grid/ag-grid.component';
 import {AgGridModule} from 'ag-grid-angular';
-import { AgGridSelectFilterComponent } from '@components/ag-grid/ag-grid-select-filter.component';
-import { MapViewComponent } from './components/map-view/map-view.component';
-import { VisibleColumnsDialogComponent } from './components/visible-columns-dialog/visible-columns-dialog.component';
+import {AgGridSelectFilterComponent} from '@components/ag-grid/ag-grid-select-filter.component';
+import {MapViewComponent} from './components/map-view/map-view.component';
+import {VisibleColumnsDialogComponent} from './components/visible-columns-dialog/visible-columns-dialog.component';
+import {UpdateRowDialogComponent} from './components/update-row-dialog/update-row-dialog.component';
 
 
 @NgModule({
@@ -34,32 +35,34 @@ import { VisibleColumnsDialogComponent } from './components/visible-columns-dial
     AgGridComponent,
     AgGridSelectFilterComponent,
     MapViewComponent,
-    VisibleColumnsDialogComponent
+    VisibleColumnsDialogComponent,
+    UpdateRowDialogComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatCardModule,
-        MatButtonModule,
-        MatDialogModule,
-        MatToolbarModule,
-        MatListModule,
-        MatIconModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatMenuModule,
-        MatProgressSpinnerModule,
-        MatTabsModule,
-        MatSnackBarModule,
-        MatCheckboxModule,
-        MatSidenavModule,
-        MatChipsModule,
-        AgGridModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatToolbarModule,
+    MatListModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatMenuModule,
+    MatProgressSpinnerModule,
+    MatTabsModule,
+    MatSnackBarModule,
+    MatCheckboxModule,
+    MatSidenavModule,
+    MatChipsModule,
+    AgGridModule,
+  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -68,7 +71,8 @@ import { VisibleColumnsDialogComponent } from './components/visible-columns-dial
     },
     LoginService],
   entryComponents: [
-    VisibleColumnsDialogComponent
+    VisibleColumnsDialogComponent,
+    UpdateRowDialogComponent
   ],
   bootstrap: [AppComponent]
 })

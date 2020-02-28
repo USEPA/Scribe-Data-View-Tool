@@ -46,13 +46,22 @@
 <mat-tab-group (selectedIndexChange)="onTabChange($event)" animationDuration="10ms">
   <mat-tab>
     <ng-template mat-tab-label>
-      {{tabs[0]}}&nbsp;&nbsp;
-      <button *ngIf="selectedTab === 0 && projectLabResultsRowData.length > 0" (click)="openVisibleColumnsDialog()">
-        Visible Columns
-      </button>&nbsp;&nbsp;
-      <button *ngIf="selectedTab === 0 && projectLabResultsRowData.length > 0" (click)="onExportCSVBtnClick()">
-        Export CSV
-      </button>
+      {{tabs[0]}}
+      <span *ngIf="selectedTab === 0 && !isLoadingData">
+        <button mat-raised-button color="primary" style="transform: scale(0.8); padding: 0 5px;"
+                (click)="openVisibleColumnsDialog()">
+          Visible Columns
+        </button>
+        <button mat-raised-button color="primary" style="transform: scale(0.8); padding: 0 5px;"
+                (click)="onExportCSVBtnClick()">
+          Export CSV
+        </button>
+        <button mat-raised-button color="warn" *ngIf="selectedPoint && (!selectedPoint.Latitude || !selectedPoint.Longitude)"
+                style="transform: scale(0.8); padding: 0 5px;"
+                (click)="openUpdateRowDialog('addPoint')">
+          Add Point
+        </button>
+      </span>
     </ng-template>
     <div class="component-container-flex">
       <mat-spinner *ngIf="isLoadingData"></mat-spinner>
@@ -67,7 +76,7 @@
         [settingFilters]="presetFilters.asObservable()"
         [updatingFilters]="updateFilters.asObservable()"
         [exportingCSV]="exportLabResultsCSV.asObservable()"
-        [style.width]="(geoPointsArray.length > 0) ? '900px' : '100%'"
+        [style.width]="(geoPointsArray.length > 0) ? '1000px' : '100%'"
         (gridReadyEvent)="setAgGridPresetFilters($event)"
         (filtersChangedEvent)="agGridFiltersChanged($event)"
         (rowSelectedEvent)="agGridRowSelected($event)"
@@ -76,7 +85,7 @@
         *ngIf="geoPointsArray.length > 0"
         [hidden]="isLoadingData"
         [pointData]="geoPointsArray"
-        [selectedGeoPoint]="selectedGeoPoint"
+        [selectedGeoPoint]="selectedPoint"
         (mapFeaturesLoadedEvent)="mapGeoFeaturesLoaded($event)"
       ></app-map-view>
     </div>
@@ -104,7 +113,7 @@
         [settingFilters]="presetFilters.asObservable()"
         [updatingFilters]="updateFilters.asObservable()"
         [exportingCSV]="exportSamplePointLocationCSV.asObservable()"
-        [style.width]="(geoPointsArray.length > 0) ? '900px' : '100%'"
+        [style.width]="(geoPointsArray.length > 0) ? '1000px' : '100%'"
         (gridReadyEvent)="setAgGridPresetFilters($event)"
         (filtersChangedEvent)="agGridFiltersChanged($event)"
         (rowSelectedEvent)="agGridRowSelected($event)"
@@ -113,7 +122,7 @@
         *ngIf="geoPointsArray.length > 0"
         [hidden]="isLoadingData"
         [pointData]="geoPointsArray"
-        [selectedGeoPoint]="selectedGeoPoint"
+        [selectedGeoPoint]="selectedPoint"
         (mapFeaturesLoadedEvent)="mapGeoFeaturesLoaded($event)"
       ></app-map-view>
     </div>

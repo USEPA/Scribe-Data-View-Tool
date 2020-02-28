@@ -16,6 +16,7 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {query} from '@angular/animations';
 import * as moment from 'moment';
 import {VisibleColumnsDialogComponent} from '../components/visible-columns-dialog/visible-columns-dialog.component';
+import {UpdateRowDialogComponent} from '@components/update-row-dialog/update-row-dialog.component';
 import {Filters, ActiveFilter} from '../filters';
 import {CONFIG_SETTINGS} from '../config_settings';
 
@@ -43,7 +44,7 @@ export class HomeComponent implements OnInit {
   projectLabResultsRowData: ProjectLabResult[] = [];
   // map / geo point props
   geoPointsArray = [];
-  selectedGeoPoint: ProjectSample = null;
+  selectedPoint: ProjectSample = null;
   // ag grid properties
   agGridRelationalOperators = {
     _lt: 'lessThan',
@@ -153,8 +154,9 @@ export class HomeComponent implements OnInit {
 
   agGridRowSelected(val) {
     if (val.Latitude && val.Longitude) {
-      this.selectedGeoPoint = val;
+      this.selectedPoint = val;
     } else {
+      this.selectedPoint = val;
       this.snackBar.open('Selection has no geospatial point', null, {duration: 1000});
     }
   }
@@ -183,11 +185,10 @@ export class HomeComponent implements OnInit {
       this.projectSamplesRowData = combinedSamplePointRowData;
       // combine samples with lab results
       const samplePointCols = this.projectSamplesColDefs.filter( (value, index, array) => {
-        if (['Sample Number', 'Sample Date', 'Sample Type'].includes(array[index].headerName)) {
+        if (['Sample Number', 'Sample Date', 'Sample Type', 'Latitude', 'Longitude'].includes(array[index].headerName)) {
           return array[index].headerName;
         }
       });
-      // const samplePointCols = this.projectSamplesColDefs.slice(0, 3);
       this.projectLabResultsColDefs = [...samplePointCols, ...this.setAgGridColumnProps(combinedLabResultRowData)];
       this.projectLabResultsRowData = this.mergeSamplesAndLabResults(this.projectSamplesRowData, combinedLabResultRowData);
       // set ag grid component custom filter properties
@@ -201,35 +202,14 @@ export class HomeComponent implements OnInit {
   }
 
   async onTabChange(tabId) {
-    this.isLoadingData = true;
     this.selectedTab = tabId;
-    if (this.selectedProject && this.tabs[this.selectedTab] === 'Lab Analyte Results') {
+    if (this.selectedProjects) {
       try {
-        const labResults = await this.sadieProjectsService.getProjectLabResults(this.selectedProject);
-        if (labResults.length > 0) {
-          // combine samples with lab results
-          const samplePointCols = this.projectSamplesColDefs.slice(0, 3);
-          this.projectLabResultsColDefs = [...samplePointCols, ...this.setAgGridColumnProps(labResults)];
-          this.projectLabResultsRowData = this.mergeSamplesAndLabResults(this.projectSamplesRowData, labResults);
-          // set map component's geo points array and popup template object
-          this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
-        }
+        this.getCombinedProjectData(this.selectedProjects);
       } catch (err) {
         this.isLoadingData = false;
       }
     }
-    if (this.selectedProject && this.tabs[this.selectedTab] === 'Sample Point Locations') {
-      try {
-        const rows = await this.sadieProjectsService.getProjectSamples(this.selectedProject);
-        this.projectSamplesColDefs = this.setAgGridColumnProps(rows);
-        this.projectSamplesRowData = rows;
-        // set map component's geo points array and popup template object
-        this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
-      } catch (err) {
-        this.isLoadingData = false;
-      }
-    }
-    this.isLoadingData = false;
   }
 
   getLatLongRecords(records: any) {
@@ -282,9 +262,11 @@ export class HomeComponent implements OnInit {
   setAgGridColumnProps(results) {
     const columnDefs = [];
     try {
-      Object.keys(results[0]).forEach((key) => {
-        const headerName = CONFIG_SETTINGS.defaultTableSettings.hasOwnProperty(key) ? CONFIG_SETTINGS.defaultTableSettings[key].alias : key;
-        const hide = CONFIG_SETTINGS.defaultTableSettings.hasOwnProperty(key) ? CONFIG_SETTINGS.defaultTableSettings[key].hide : false;
+      Object.keys(results[0]).forEach((key, index) => {
+        const headerName = CONFIG_SETTINGS.defaultColumnSettings.hasOwnProperty(key)
+          ? CONFIG_SETTINGS.defaultColumnSettings[key].alias : key;
+        const hide = CONFIG_SETTINGS.defaultColumnSettings.hasOwnProperty(key)
+          ? CONFIG_SETTINGS.defaultColumnSettings[key].hide : false;
         if (key.includes('Date') || key.includes('Date_') || key.includes('_Date')) {
           columnDefs.push({
             colId: key,
@@ -382,6 +364,7 @@ export class HomeComponent implements OnInit {
     return queryFilterParams;
   }
 
+  // Tab Button Actions
   openVisibleColumnsDialog() {
     let currentColumns = [];
     if (this.tabs[this.selectedTab] === 'Lab Analyte Results') {
@@ -412,6 +395,32 @@ export class HomeComponent implements OnInit {
     if (this.selectedTab === 1) {
       this.exportSamplePointLocationCSV.next(title);
     }
+  }
+
+  openUpdateRowDialog(updateAction) {
+    let items;
+    if (updateAction === 'addPoint') {
+      items = this.selectedPoint;
+    }
+    const dialogRef = this.dialog.open(UpdateRowDialogComponent, {
+      width: '700px',
+      data: {
+        action: updateAction,
+        items: [items]
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(async results => {
+      if (results && results.done) {
+        if (updateAction === 'addPoint') {
+          results.data.Site_No = this.selectedPoint.Site_No;
+          results.data.Location = this.selectedPoint.Location;
+          const projectIds = this.userProjects.map(p => p.projectid.toString());
+          const result = await this.sadieProjectsService.updateSampleLocation(
+            this.selectedProjects[0].toString(), results.data.Location, results.data);
+        }
+      }
+    });
   }
 
   setQueryParam(field: string, value: any) {

@@ -5,12 +5,13 @@ from django.apps import apps
 from django.core.cache import cache
 
 from rest_framework.response import Response
-from rest_framework.viewsets import ReadOnlyModelViewSet
+from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework_filters.backends import (
     ComplexFilterBackend,
     RestFrameworkFilterBackend,
 )
+from .permissions import IsAuthUser
 
 from .pagination import estimate_count, CountEstimatePagination
 
@@ -27,7 +28,7 @@ def split_basename(basename):
     return db_name, python_path_name, table_name
 
 
-class GenericViewSet(ReadOnlyModelViewSet):
+class GenericViewSet(ModelViewSet):
     """
     """
 
@@ -149,7 +150,7 @@ class GenericViewSet(ReadOnlyModelViewSet):
         If overridden, this method must provide a valid Django REST Framework
         permission class to use in the view.
         """
-        return None
+        return IsAuthUser
 
     def get_estimate_count_limit(self):
         """
@@ -187,3 +188,7 @@ class GenericViewSet(ReadOnlyModelViewSet):
         response = super().list(request, *args, **kwargs)
         cache.set(f'{uri}', response.data)
         return response
+
+    def update(self, request, pk=None):
+        print(request)
+        print(pk)

@@ -77,10 +77,11 @@ export interface ProjectLabResult {
 }
 
 export interface ProjectSample {
+  Site_No: string;
+  Location: string;
   Area: string;
   Contractor: string;
   EPA_Region: string;
-  Location: string;
   Location_Desc: string;
   Latitude: number;
   Longitude: number;
@@ -92,10 +93,10 @@ export interface ProjectSample {
   Substance_Type: string;
   Sample_Type: string;
   Site_Name: string;
-  Site_Number: string;
   State: string;
   LabResultsAvailable: boolean;
   Numeric_Tags: any;
+  LocationComment: string;
 }
 
 
@@ -129,4 +130,12 @@ export class SadieProjectsService {
       });
   }
 
+  async updateSampleLocation(projectId: string, locationId: string, item: any) {
+    return await this.http.put<any>(`PID_${projectId}/PID_${projectId}_Location/${locationId}`, item).toPromise()
+      .then((results) => {
+        return results;
+      }).catch((error) => {
+        console.log(error);
+      });
+  }
 }
