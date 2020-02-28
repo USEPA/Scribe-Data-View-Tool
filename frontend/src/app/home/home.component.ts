@@ -403,7 +403,7 @@ export class HomeComponent implements OnInit {
       items.push(this.selectedPoint);
     }
     const dialogRef = this.dialog.open(UpdateRowDialogComponent, {
-      width: '700px',
+      width: '500px',
       data: {
         action: updateAction,
         items

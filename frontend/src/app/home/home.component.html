@@ -92,13 +92,17 @@
   </mat-tab>
   <mat-tab>
     <ng-template mat-tab-label>
-      {{tabs[1]}}&nbsp;&nbsp;
-      <button *ngIf="selectedTab === 1 && projectSamplesRowData.length > 0" (click)="openVisibleColumnsDialog()">
-        Visible Columns
-      </button>&nbsp;&nbsp;
-      <button *ngIf="selectedTab === 1 && projectSamplesRowData.length > 0" (click)="onExportCSVBtnClick()">
-        Export CSV
-      </button>
+      {{tabs[1]}}
+      <span *ngIf="selectedTab === 1 && !isLoadingData">
+        <button mat-raised-button color="primary" style="transform: scale(0.8); padding: 0 5px;"
+                (click)="openVisibleColumnsDialog()">
+          Visible Columns
+        </button>
+        <button mat-raised-button color="primary" style="transform: scale(0.8); padding: 0 5px;"
+                (click)="onExportCSVBtnClick()">
+          Export CSV
+        </button>
+      </span>
     </ng-template>
     <div class="component-container-flex">
       <mat-spinner *ngIf="isLoadingData"></mat-spinner>
