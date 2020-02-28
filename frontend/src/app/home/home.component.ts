@@ -88,6 +88,7 @@ export class HomeComponent implements OnInit {
           // clear active filters
           this.agGridActiveFilters = [];
           this.updateFilters.next([]);
+          this.selectedPoint = null;
           this.selectedProjects = newSelectedProjects; // todo: in the future only load projects that have not been loaded already
           this.getCombinedProjectData(this.selectedProjects);
           // tslint:disable-next-line:radix
