@@ -33,14 +33,13 @@
     </mat-form-field>
   </div>
   <br>
-  <div *ngIf="projectSamplesRowData.length > 0 && !isLoadingData">
-      <span [hidden]="geoPointsArray.length > 0" class="mat-warn">
-        {{'No geospatial points'}}
-      </span>
-    <span [hidden]="!(geoPointsArray.length > 0 && projectSamplesRowData.length > geoPointsArray.length)"
-          class="mat-warn">
-        {{'Number of records without geospatial points: ' + (projectSamplesRowData.length - geoPointsArray.length)}}
-      </span>
+  <div *ngIf="projectSamplesRowData.length > 0 && !isLoadingData" style="margin-left: 15px;">
+    <span [hidden]="geoPointsArray.length > 0" class="mat-warn">
+      {{'No geospatial points'}}
+    </span>
+    <span [hidden]="!noGeoPointsCount" class="mat-warn">
+      {{'Number of Samples without map points: ' + (noGeoPointsCount)}}
+    </span>
   </div>
 </div>
 <mat-tab-group (selectedIndexChange)="onTabChange($event)" animationDuration="10ms">

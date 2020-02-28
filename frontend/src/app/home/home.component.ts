@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
   projectLabResultsRowData: ProjectLabResult[] = [];
   // map / geo point props
   geoPointsArray = [];
+  noGeoPointsCount: number;
   selectedPoint: ProjectSample = null;
   // ag grid properties
   agGridRelationalOperators = {
@@ -117,6 +118,7 @@ export class HomeComponent implements OnInit {
   }
 
   agGridFiltersChanged(filters: Filters) {
+    this.selectedPoint = null;
     // update the active filters
     filters.activeFilters.forEach(filter => this.setQueryParam(filter.name, filter.value));
     // update the filtered map points
@@ -133,9 +135,11 @@ export class HomeComponent implements OnInit {
         });
       });
       this.geoPointsArray = this.getLatLongRecords(filteredSamplePoints);
+      this.noGeoPointsCount = (filteredSamplePoints.length - this.geoPointsArray.length);
     } else if (!filters.filteredRowData) {
       // if no filter applied, reset the map points
       this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
+      this.noGeoPointsCount = (this.projectSamplesRowData.length - this.geoPointsArray.length);
     }
   }
 
