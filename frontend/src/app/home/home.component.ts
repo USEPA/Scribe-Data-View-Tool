@@ -43,7 +43,8 @@ export class HomeComponent implements OnInit {
   projectLabResultsRowData: ProjectLabResult[] = [];
   // map / geo point props
   geoPointsArray = [];
-  selectedGeoPoint: ProjectSample = null;
+  selectedPoint: ProjectSample = null;
+  missingGeoPointsCount = 0;
   // ag grid properties
   agGridRelationalOperators = {
     _lt: 'lessThan',
@@ -131,9 +132,15 @@ export class HomeComponent implements OnInit {
         });
       });
       this.geoPointsArray = this.getLatLongRecords(filteredSamplePoints);
+      this.missingGeoPointsCount = this.projectSamplesRowData.length - this.geoPointsArray.length;
+    } else if (filters.filteredRowData && filters.filteredRowData.length === 0) {
+      // if 0 filtered results, clear map points
+      this.geoPointsArray = [];
+      this.missingGeoPointsCount = this.projectSamplesRowData.length;
     } else if (!filters.filteredRowData) {
       // if no filter applied, reset the map points
       this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
+      this.missingGeoPointsCount = this.projectSamplesRowData.length - this.geoPointsArray.length;
     }
   }
 
@@ -153,7 +160,7 @@ export class HomeComponent implements OnInit {
 
   agGridRowSelected(val) {
     if (val.Latitude && val.Longitude) {
-      this.selectedGeoPoint = val;
+      this.selectedPoint = val;
     } else {
       this.snackBar.open('Selection has no geospatial point', null, {duration: 1000});
     }
@@ -183,7 +190,7 @@ export class HomeComponent implements OnInit {
       this.projectSamplesRowData = combinedSamplePointRowData;
       // combine samples with lab results
       const samplePointCols = this.projectSamplesColDefs.filter( (value, index, array) => {
-        if (['Sample Number', 'Sample Date', 'Sample Type'].includes(array[index].headerName)) {
+        if (['Sample Number', 'Sample Date', 'Sample Type', 'Latitude', 'Longitude'].includes(array[index].headerName)) {
           return array[index].headerName;
         }
       });
@@ -195,41 +202,21 @@ export class HomeComponent implements OnInit {
       if (this.projectLabResultsRowData.length > 0) {
         // only pass in sample points for now
         this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
+        this.missingGeoPointsCount = this.projectSamplesRowData.length - this.geoPointsArray.length;
       }
     }
     this.isLoadingData = false;
   }
 
   async onTabChange(tabId) {
-    this.isLoadingData = true;
     this.selectedTab = tabId;
-    if (this.selectedProject && this.tabs[this.selectedTab] === 'Lab Analyte Results') {
+    if (this.selectedProjects) {
       try {
-        const labResults = await this.sadieProjectsService.getProjectLabResults(this.selectedProject);
-        if (labResults.length > 0) {
-          // combine samples with lab results
-          const samplePointCols = this.projectSamplesColDefs.slice(0, 3);
-          this.projectLabResultsColDefs = [...samplePointCols, ...this.setAgGridColumnProps(labResults)];
-          this.projectLabResultsRowData = this.mergeSamplesAndLabResults(this.projectSamplesRowData, labResults);
-          // set map component's geo points array and popup template object
-          this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
-        }
+        this.getCombinedProjectData(this.selectedProjects);
       } catch (err) {
         this.isLoadingData = false;
       }
     }
-    if (this.selectedProject && this.tabs[this.selectedTab] === 'Sample Point Locations') {
-      try {
-        const rows = await this.sadieProjectsService.getProjectSamples(this.selectedProject);
-        this.projectSamplesColDefs = this.setAgGridColumnProps(rows);
-        this.projectSamplesRowData = rows;
-        // set map component's geo points array and popup template object
-        this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
-      } catch (err) {
-        this.isLoadingData = false;
-      }
-    }
-    this.isLoadingData = false;
   }
 
   getLatLongRecords(records: any) {
@@ -283,8 +270,10 @@ export class HomeComponent implements OnInit {
     const columnDefs = [];
     try {
       Object.keys(results[0]).forEach((key) => {
-        const headerName = CONFIG_SETTINGS.defaultTableSettings.hasOwnProperty(key) ? CONFIG_SETTINGS.defaultTableSettings[key].alias : key;
-        const hide = CONFIG_SETTINGS.defaultTableSettings.hasOwnProperty(key) ? CONFIG_SETTINGS.defaultTableSettings[key].hide : false;
+        const headerName = CONFIG_SETTINGS.defaultColumnSettings.hasOwnProperty(key)
+          ? CONFIG_SETTINGS.defaultColumnSettings[key].alias : key;
+        const hide = CONFIG_SETTINGS.defaultColumnSettings.hasOwnProperty(key)
+          ? CONFIG_SETTINGS.defaultColumnSettings[key].hide : false;
         if (key.includes('Date') || key.includes('Date_') || key.includes('_Date')) {
           columnDefs.push({
             colId: key,
