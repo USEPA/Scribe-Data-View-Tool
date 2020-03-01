@@ -12,11 +12,9 @@ mat-drawer {
 }
 
 mat-spinner {
+  position: absolute;
   width: 100%;
   top: 50%;
   left: 50%;
 }
 
-.mat-form-field {
-  margin-bottom: -30px;
-}

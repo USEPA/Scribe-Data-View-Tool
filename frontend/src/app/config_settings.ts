@@ -1,7 +1,7 @@
 
 // Global configurations
 export const CONFIG_SETTINGS = {
-  defaultTableSettings: {
+  defaultColumnSettings: {
     Samp_No: {alias: 'Sample Number', hide: false},
     SampleDate: {alias: 'Sample Date', hide: false},
     Matrix: {alias: 'Sample Type', hide: false},

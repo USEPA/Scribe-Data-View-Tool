@@ -1,15 +1,15 @@
 <div style="margin: 10px 10px 0 10px;">
-    <span class="component-container-row" style="justify-content: space-between">
-      <span>Welcome to Scribe Data Explorer: An application to organize and view the
-        <a href="https://response.epa.gov/site/site_profile.aspx?site_id=ScribeGIS" target="_blank">
-          USEPA's Environmental Response Team's Scribe database
-        </a>.
-      </span>
+  <span class="component-container-row" style="justify-content: space-between">
+    <span>Welcome to Scribe Data Explorer: An application to organize and view the
+      <a href="https://response.epa.gov/site/site_profile.aspx?site_id=ScribeGIS" target="_blank">
+        USEPA's Environmental Response Team's Scribe database
+      </a>.
     </span>
+  </span>
   <div style="display: flex; justify-content: space-between; margin: 15px 15px 0 15px;">
     <div>
       <mat-form-field style="width: 600px; margin-right: 15px;">
-        <mat-label>Select Project:</mat-label>
+        <mat-label>Select Project(s):</mat-label>
         <mat-select [formControl]="projects" multiple>
           <mat-option *ngFor="let project of userProjects" [value]="project.projectid">
             {{project.project_name}}
@@ -19,46 +19,47 @@
       <button mat-raised-button color="primary" (click)="setQueryParam('projects', projects.value.join(','))">Go
       </button>
     </div>
-    <mat-form-field style="width: 50%" *ngIf="agGridActiveFilters.length > 0">
-      <mat-chip-list #chipList aria-label="Fruit selection">
+    <mat-form-field *ngIf="agGridActiveFilters.length > 0" style="width: 50%">
+      <mat-chip-list #chipList>
         <mat-chip *ngFor="let filter of agGridActiveFilters" selectable removable (removed)="removeFilter(filter)">
           {{filter.name}} : {{filter.value}}
           <mat-icon matChipRemove>cancel</mat-icon>
         </mat-chip>
-        <input placeholder=" Active Filters:"
-               [matChipInputFor]="chipList"
-               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-               matChipInputAddOnBlur>
+        <input matChipInputAddOnBlur placeholder=" Active Filters:"
+               [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        >
       </mat-chip-list>
     </mat-form-field>
   </div>
-  <br>
-  <div *ngIf="projectSamplesRowData.length > 0 && !isLoadingData">
-      <span [hidden]="geoPointsArray.length > 0" class="mat-warn">
-        {{'No geospatial points'}}
-      </span>
-    <span [hidden]="!(geoPointsArray.length > 0 && projectSamplesRowData.length > geoPointsArray.length)"
-          class="mat-warn">
-        {{'Number of records without geospatial points: ' + (projectSamplesRowData.length - geoPointsArray.length)}}
-      </span>
-  </div>
+  <span [hidden]="isLoadingData" style="margin-left: 15px;">
+    <span *ngIf="geoPointsArray.length === 0" class="mat-warn">
+      No map points
+    </span>
+    <span *ngIf="geoPointsArray.length > 0 && missingGeoPointsCount > 0" class="mat-warn">
+      Number of records without coordinates: {{missingGeoPointsCount}}
+    </span>
+  </span>
 </div>
+<mat-spinner *ngIf="isLoadingData"></mat-spinner>
+<!-- Tabs -->
 <mat-tab-group (selectedIndexChange)="onTabChange($event)" animationDuration="10ms">
   <mat-tab>
     <ng-template mat-tab-label>
-      {{tabs[0]}}&nbsp;&nbsp;
-      <button *ngIf="selectedTab === 0 && projectLabResultsRowData.length > 0" (click)="openVisibleColumnsDialog()">
-        Visible Columns
-      </button>&nbsp;&nbsp;
-      <button *ngIf="selectedTab === 0 && projectLabResultsRowData.length > 0" (click)="onExportCSVBtnClick()">
-        Export CSV
-      </button>
+      {{tabs[0]}}
+      <span *ngIf="!isLoadingData && selectedTab === 0">
+        <button mat-raised-button color="primary" style="transform: scale(0.8); padding: 0 5px;"
+                (click)="openVisibleColumnsDialog()">
+          Visible Columns
+        </button>
+        <button mat-raised-button color="primary" style="transform: scale(0.8); padding: 0 5px;"
+                (click)="onExportCSVBtnClick()">
+          Export CSV
+        </button>
+      </span>
     </ng-template>
     <div class="component-container-flex">
-      <mat-spinner *ngIf="isLoadingData"></mat-spinner>
       <app-ag-grid
         *ngIf="!isLoadingData"
-        [hidden]="!selectedProject && !selectedProjects"
         [isLoading]="isLoadingData"
         [columnDefs]="projectLabResultsColDefs"
         [rowData]="projectLabResultsRowData"
@@ -67,7 +68,7 @@
         [settingFilters]="presetFilters.asObservable()"
         [updatingFilters]="updateFilters.asObservable()"
         [exportingCSV]="exportLabResultsCSV.asObservable()"
-        [style.width]="(geoPointsArray.length > 0) ? '900px' : '100%'"
+        [style.width]="(geoPointsArray.length > 0) ? '1000px' : '100%'"
         (gridReadyEvent)="setAgGridPresetFilters($event)"
         (filtersChangedEvent)="agGridFiltersChanged($event)"
         (rowSelectedEvent)="agGridRowSelected($event)"
@@ -76,26 +77,26 @@
         *ngIf="geoPointsArray.length > 0"
         [hidden]="isLoadingData"
         [pointData]="geoPointsArray"
-        [selectedGeoPoint]="selectedGeoPoint"
+        [selectedGeoPoint]="selectedPoint"
         (mapFeaturesLoadedEvent)="mapGeoFeaturesLoaded($event)"
       ></app-map-view>
     </div>
   </mat-tab>
   <mat-tab>
     <ng-template mat-tab-label>
-      {{tabs[1]}}&nbsp;&nbsp;
-      <button *ngIf="selectedTab === 1 && projectSamplesRowData.length > 0" (click)="openVisibleColumnsDialog()">
-        Visible Columns
-      </button>&nbsp;&nbsp;
-      <button *ngIf="selectedTab === 1 && projectSamplesRowData.length > 0" (click)="onExportCSVBtnClick()">
-        Export CSV
-      </button>
+      {{tabs[1]}}
+      <span *ngIf="!isLoadingData&& selectedTab === 1">
+        <button mat-raised-button color="primary" style="transform: scale(0.8); padding: 0 5px;" (click)="openVisibleColumnsDialog()">
+          Visible Columns
+        </button>
+        <button mat-raised-button color="primary" style="transform: scale(0.8); padding: 0 5px;" (click)="onExportCSVBtnClick()">
+          Export CSV
+        </button>
+      </span>
     </ng-template>
     <div class="component-container-flex">
-      <mat-spinner *ngIf="isLoadingData"></mat-spinner>
       <app-ag-grid
         *ngIf="!isLoadingData"
-        [hidden]="!selectedProject && !selectedProjects"
         [isLoading]="isLoadingData"
         [columnDefs]="projectSamplesColDefs"
         [rowData]="projectSamplesRowData"
@@ -104,7 +105,7 @@
         [settingFilters]="presetFilters.asObservable()"
         [updatingFilters]="updateFilters.asObservable()"
         [exportingCSV]="exportSamplePointLocationCSV.asObservable()"
-        [style.width]="(geoPointsArray.length > 0) ? '900px' : '100%'"
+        [style.width]="(geoPointsArray.length > 0) ? '1000px' : '100%'"
         (gridReadyEvent)="setAgGridPresetFilters($event)"
         (filtersChangedEvent)="agGridFiltersChanged($event)"
         (rowSelectedEvent)="agGridRowSelected($event)"
@@ -113,7 +114,7 @@
         *ngIf="geoPointsArray.length > 0"
         [hidden]="isLoadingData"
         [pointData]="geoPointsArray"
-        [selectedGeoPoint]="selectedGeoPoint"
+        [selectedGeoPoint]="selectedPoint"
         (mapFeaturesLoadedEvent)="mapGeoFeaturesLoaded($event)"
       ></app-map-view>
     </div>
