@@ -119,7 +119,7 @@ export class HomeComponent implements OnInit {
     // update the active filters
     filters.activeFilters.forEach(filter => this.setQueryParam(filter.name, filter.value));
     // update the filtered map points
-    if (filters.filteredRowData && filters.filteredRowData.length > 0) {
+    if (filters.activeFilters.length > 0 && filters.filteredRowData.length > 0) {
       // IMPORTANT: pass in the sample point records that weren't filtered out to the map
       // TODO: Add a summary calculation of the lab results to pass in along with these sample point records in order to
       //  determine how the sample points need to be symbolized
@@ -132,15 +132,14 @@ export class HomeComponent implements OnInit {
         });
       });
       this.geoPointsArray = this.getLatLongRecords(filteredSamplePoints);
-      this.missingGeoPointsCount = this.projectSamplesRowData.length - this.geoPointsArray.length;
-    } else if (filters.filteredRowData && filters.filteredRowData.length === 0) {
+      this.missingGeoPointsCount = this.geoPointsArray.length === 0 ? 0 : filteredSamplePoints.length - this.geoPointsArray.length;
+    } else if (filters.activeFilters.length > 0 && filters.filteredRowData.length === 0) {
       // if 0 filtered results, clear map points
       this.geoPointsArray = [];
       this.missingGeoPointsCount = this.projectSamplesRowData.length;
-    } else if (!filters.filteredRowData) {
-      // if no filter applied, reset the map points
-      this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
-      this.missingGeoPointsCount = this.projectSamplesRowData.length - this.geoPointsArray.length;
+    } else {
+      // if no filters applied, refresh project data
+      this.getCombinedProjectData(this.selectedProjects);
     }
   }
 
@@ -188,22 +187,22 @@ export class HomeComponent implements OnInit {
     if (combinedSamplePointRowData.length > 0) {
       this.projectSamplesColDefs = this.setAgGridColumnProps(combinedSamplePointRowData);
       this.projectSamplesRowData = combinedSamplePointRowData;
-      // combine samples with lab results
-      const samplePointCols = this.projectSamplesColDefs.filter( (value, index, array) => {
-        if (['Sample Number', 'Sample Date', 'Sample Type', 'Latitude', 'Longitude'].includes(array[index].headerName)) {
-          return array[index].headerName;
-        }
-      });
-      // const samplePointCols = this.projectSamplesColDefs.slice(0, 3);
-      this.projectLabResultsColDefs = [...samplePointCols, ...this.setAgGridColumnProps(combinedLabResultRowData)];
-      this.projectLabResultsRowData = this.mergeSamplesAndLabResults(this.projectSamplesRowData, combinedLabResultRowData);
+      // only pass in sample points for now
+      this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
+      this.missingGeoPointsCount = this.projectSamplesRowData.length - this.geoPointsArray.length;
+      if (this.selectedTab === 0) {
+        // combine samples with lab results
+        const samplePointCols = this.projectSamplesColDefs.filter( (value, index, array) => {
+          if (['Sample Number', 'Sample Date', 'Sample Type', 'Latitude', 'Longitude'].includes(array[index].headerName)) {
+            return array[index].headerName;
+          }
+        });
+        this.projectLabResultsColDefs = [...samplePointCols, ...this.setAgGridColumnProps(combinedLabResultRowData)];
+        this.projectLabResultsRowData = this.mergeSamplesAndLabResults(this.projectSamplesRowData, combinedLabResultRowData);
+        this.missingGeoPointsCount = this.getMissingGeoPoints(this.projectSamplesRowData, combinedLabResultRowData)
+      }
       // set ag grid component custom filter properties
       this.setAgGridCustomFilters();
-      if (this.projectLabResultsRowData.length > 0) {
-        // only pass in sample points for now
-        this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
-        this.missingGeoPointsCount = this.projectSamplesRowData.length - this.geoPointsArray.length;
-      }
     }
     this.isLoadingData = false;
   }
@@ -212,6 +211,10 @@ export class HomeComponent implements OnInit {
     this.selectedTab = tabId;
     if (this.selectedProjects) {
       try {
+        // clear filters and get tab data
+        this.clearQueryParams();
+        this.agGridActiveFilters = [];
+        this.updateFilters.next([]);
         this.getCombinedProjectData(this.selectedProjects);
       } catch (err) {
         this.isLoadingData = false;
@@ -236,10 +239,26 @@ export class HomeComponent implements OnInit {
       rowDataMerged.push({
           ...result, ...(samplePoints.find((point) =>
           point.Samp_No === result.Samp_No))
-        }
-      );
+        });
     });
     return rowDataMerged;
+  }
+
+  getMissingGeoPoints(samplePoints, labResults) {
+    let missingGeoPointsCount = 0;
+    labResults.forEach(result => {
+      const found = samplePoints.find((point) => {
+        if (point.Samp_No === result.Samp_No) {
+          return point;
+        }
+      });
+      if (found) {
+        if (!found.Latitude || !found.Longitude) {
+          missingGeoPointsCount = missingGeoPointsCount + 1;
+        }
+      }
+    });
+    return missingGeoPointsCount;
   }
 
   setAgGridCustomFilters() {
@@ -412,6 +431,14 @@ export class HomeComponent implements OnInit {
   clearQueryParam(field) {
     const queryParams = {};
     Object.keys(this.route.snapshot.queryParams).filter(k => k !== field).forEach(key => {
+      queryParams[key] = this.route.snapshot.queryParams[key];
+    });
+    this.router.navigate([], {queryParams});
+  }
+
+  clearQueryParams() {
+    const queryParams = {};
+    Object.keys(this.route.snapshot.queryParams).filter(k => k === 'projects').forEach(key => {
       queryParams[key] = this.route.snapshot.queryParams[key];
     });
     this.router.navigate([], {queryParams});

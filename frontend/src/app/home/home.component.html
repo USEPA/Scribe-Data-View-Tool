@@ -31,14 +31,14 @@
       </mat-chip-list>
     </mat-form-field>
   </div>
-  <div [hidden]="isLoadingData" style="margin-left: 15px;">
-    <span [hidden]="missingGeoPointsCount != projectSamplesRowData.length" class="mat-warn">
+  <span [hidden]="isLoadingData" style="margin-left: 15px;">
+    <span *ngIf="geoPointsArray.length === 0" class="mat-warn">
       No map points
     </span>
-    <span [hidden]="missingGeoPointsCount === 0 || (missingGeoPointsCount === projectSamplesRowData.length)" class="mat-warn">
-      {{'Number of records without map points: ' + missingGeoPointsCount}}
+    <span *ngIf="geoPointsArray.length > 0 && missingGeoPointsCount > 0" class="mat-warn">
+      Number of records without coordinates: {{missingGeoPointsCount}}
     </span>
-  </div>
+  </span>
 </div>
 <mat-spinner *ngIf="isLoadingData"></mat-spinner>
 <!-- Tabs -->
