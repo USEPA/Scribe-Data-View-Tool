@@ -18,6 +18,7 @@ from django.urls import include
 from django.conf.urls import url
 from django.views.decorators.cache import never_cache
 from django.views.generic import TemplateView
+from django.conf import settings
 from rest_framework import routers
 
 from sadie import views as sadie_views
@@ -36,25 +37,25 @@ router.register(r'project_tables', sadie_views.ProjectTablesViewSet, basename='s
 
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^{}api/admin/'.format(settings.URL_PREFIX), admin.site.urls),
 
     # Declare registered router-viewsets api calls
     # http://localhost:8080/api/v1/<router-viewsets>
-    url(r'^api/v1/', include(router.urls)),
+    url(r'^{}api/v1/'.format(settings.URL_PREFIX), include(router.urls)),
     # Parameterized api urls
-    url(r'^api/v1/projects/(?P<project_id_p>.+)/samples/', scribe_model_views.get_project_samples),
-    url(r'^api/v1/project_tables/(?P<project_id_p>.+)', sadie_views.ProjectTablesViewSet.as_view({'get': 'list'})),
-    url(r'^api/v1/project_tables$', sadie_views.ProjectTablesViewSet.as_view({'get': 'list'})),
-    url(r'^api/v1/current_user/', sadie_views.current_user),
+    url(r'^{}api/v1/projects/(?P<project_id_p>.+)/samples/'.format(settings.URL_PREFIX), scribe_model_views.get_project_samples),
+    url(r'^{}api/v1/project_tables/(?P<project_id_p>.+)'.format(settings.URL_PREFIX), sadie_views.ProjectTablesViewSet.as_view({'get': 'list'})),
+    url(r'^{}api/v1/project_tables$'.format(settings.URL_PREFIX), sadie_views.ProjectTablesViewSet.as_view({'get': 'list'})),
+    url(r'^{}api/v1/current_user/'.format(settings.URL_PREFIX), sadie_views.current_user),
 
     # Declare automagic_rest api calls
     # http://localhost:8080/api/v1/<PID_#>
-    url(r'^api/v1/', include('scribe_models.urls')),
+    url(r'^{}api/v1/'.format(settings.URL_PREFIX), include('scribe_models.urls')),
     # sample CRUD url
-    url(r'^api/v1/submit_sample_request', sadie_views.SampleViewSet.submit_sample_request, name='sample_requests'),
+    url(r'^{}api/v1/submit_sample_request'.format(settings.URL_PREFIX), sadie_views.SampleViewSet.submit_sample_request, name='sample_requests'),
 
     # social oauth api calls
-    url(r'^api/oauth2/', include('rest_framework_social_oauth2.urls')),
+    url(r'^{}api/oauth2/'.format(settings.URL_PREFIX), include('rest_framework_social_oauth2.urls')),
     # url('', include('social_django.urls', namespace='social_django')),
 
     # catch all other urls

@@ -162,7 +162,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 # Static files path
-STATIC_URL = '/static/'
+STATIC_URL = '/sadiev2/static/'
 # With these settings, when the project builds, the Django static files will be placed in the same location as
 # the Angular build files. This way, Django fully handles serving the static files.
 ANGULAR_APP_DIR = os.path.join(PROJECT_ROOT, 'frontend')
@@ -207,3 +207,5 @@ CACHES = {
         'LOCATION': 'unique-snowflake',
     }
 }
+
+URL_PREFIX = os.environ.get('URL_PREFIX', '')
