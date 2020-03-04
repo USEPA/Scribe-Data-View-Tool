@@ -16,9 +16,9 @@ export class AgGridComponent implements OnInit, OnDestroy {
   public showGrid: boolean;
   private gridApi;
   private gridColumnApi;
-  private defaultColDef;
-  private overlayLoadingTemplate;
-  private customComponents: object;
+  public defaultColDef;
+  public overlayLoadingTemplate;
+  public customComponents: object;
   private _isLoading: boolean;
   private _columnDefs: any;
   private _activeFilters: ActiveFilter[];

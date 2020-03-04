@@ -31,7 +31,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   private _zoom = 10;
   private _center: Array<number> = [-122.449445, 37.762852]; // -122.449445, 37.762852
   private _baseMap = 'streets';
-  private _loaded = false;
+  public _loaded = false;
   private _map: __esri.Map = null;
   private _view: __esri.MapView = null;
   private _graphic;
