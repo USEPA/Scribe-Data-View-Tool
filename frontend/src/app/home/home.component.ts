@@ -1,13 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AppComponent} from '../app.component';
 import {LoginService} from '../services/login.service';
-import {
-  Project,
-  ProjectSample,
-  ProjectLabResult,
-  SadieProjectsService,
-  ColumnsRows
-} from '../services/sadie-projects.service';
+import {SadieProjectsService} from '@services/sadie-projects.service';
+import {Project, ProjectSample, ProjectLabResult, ColumnDefs} from '../projectDataTypes';
 import {MatDialog, MatSnackBar, MatChipInputEvent} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
@@ -36,10 +31,10 @@ export class HomeComponent implements OnInit {
   selectedTab = 0;
   isLoadingData = false;
   // sample point props
-  projectSamplesColDefs: any[] = [];
+  projectSamplesColDefs: ColumnDefs[] = [];
   projectSamplesRowData: ProjectSample[] = [];
   // lab results props
-  projectLabResultsColDefs: any[] = [];
+  projectLabResultsColDefs: ColumnDefs[] = [];
   projectLabResultsRowData: ProjectLabResult[] = [];
   // map / geo point props
   geoPointsArray = [];
@@ -191,15 +186,16 @@ export class HomeComponent implements OnInit {
       this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
       this.missingGeoPointsCount = this.projectSamplesRowData.length - this.geoPointsArray.length;
       if (this.selectedTab === 0) {
+        const addedSamplePointColIDs = ['Samp_No', 'SampleDate', 'Matrix', 'Latitude', 'Longitude'];
         // combine samples with lab results
         const samplePointCols = this.projectSamplesColDefs.filter( (value, index, array) => {
-          if (['Sample Number', 'Sample Date', 'Sample Type', 'Latitude', 'Longitude'].includes(array[index].headerName)) {
-            return array[index].headerName;
+          if (addedSamplePointColIDs.includes(array[index].colId)) {
+            return array[index].colId;
           }
         });
-        this.projectLabResultsColDefs = [...samplePointCols, ...this.setAgGridColumnProps(combinedLabResultRowData)];
+        this.projectLabResultsColDefs = [...samplePointCols, ...this.setAgGridColumnProps(combinedLabResultRowData, addedSamplePointColIDs)];
         this.projectLabResultsRowData = this.mergeSamplesAndLabResults(this.projectSamplesRowData, combinedLabResultRowData);
-        this.missingGeoPointsCount = this.getMissingGeoPoints(this.projectSamplesRowData, combinedLabResultRowData)
+        this.missingGeoPointsCount = this.getMissingGeoPoints(this.projectSamplesRowData, combinedLabResultRowData);
       }
       // set ag grid component custom filter properties
       this.setAgGridCustomFilters();
@@ -285,50 +281,52 @@ export class HomeComponent implements OnInit {
     return result;
   }
 
-  setAgGridColumnProps(results) {
+  setAgGridColumnProps(results, addedColIDs = []) {
     const columnDefs = [];
     try {
       Object.keys(results[0]).forEach((key) => {
-        const headerName = CONFIG_SETTINGS.defaultColumnSettings.hasOwnProperty(key)
-          ? CONFIG_SETTINGS.defaultColumnSettings[key].alias : key;
-        const hide = CONFIG_SETTINGS.defaultColumnSettings.hasOwnProperty(key)
-          ? CONFIG_SETTINGS.defaultColumnSettings[key].hide : false;
-        if (key.includes('Date') || key.includes('Date_') || key.includes('_Date')) {
-          columnDefs.push({
-            colId: key,
-            headerName,
-            field: key,
-            sortable: true,
-            filter: 'agDateColumnFilter',
-            filterParams: {
-              comparator(filterLocalDateAtMidnight, cellValue) {
-                const cellDateTime = new Date(cellValue);
-                const cellDate = new Date(cellDateTime.getFullYear(), cellDateTime.getMonth(), cellDateTime.getDate());
-                if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
-                  return 0;
+        if (!addedColIDs.includes(key)) {
+          const headerName = CONFIG_SETTINGS.defaultColumnSettings.hasOwnProperty(key)
+            ? CONFIG_SETTINGS.defaultColumnSettings[key].alias : key;
+          const hide = CONFIG_SETTINGS.defaultColumnSettings.hasOwnProperty(key)
+            ? CONFIG_SETTINGS.defaultColumnSettings[key].hide : false;
+          if (key.includes('Date') || key.includes('Date_') || key.includes('_Date')) {
+            columnDefs.push({
+              colId: key,
+              headerName,
+              field: key,
+              sortable: true,
+              filter: 'agDateColumnFilter',
+              filterParams: {
+                comparator(filterLocalDateAtMidnight, cellValue) {
+                  const cellDateTime = new Date(cellValue);
+                  const cellDate = new Date(cellDateTime.getFullYear(), cellDateTime.getMonth(), cellDateTime.getDate());
+                  if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
+                    return 0;
+                  }
+                  if (cellDate.getTime() < filterLocalDateAtMidnight.getTime()) {
+                    return -1;
+                  }
+                  if (cellDate.getTime() > filterLocalDateAtMidnight.getTime()) {
+                    return 1;
+                  }
                 }
-                if (cellDate.getTime() < filterLocalDateAtMidnight.getTime()) {
-                  return -1;
-                }
-                if (cellDate.getTime() > filterLocalDateAtMidnight.getTime()) {
-                  return 1;
-                }
-              }
-            },
-            hide
-          });
-        } else if (!isNaN(results[0][key])) {
-          columnDefs.push({
-            colId: key,
-            headerName,
-            field: key,
-            sortable: true,
-            filter: 'agNumberColumnFilter',
-            hide
-          });
-        } else {
-          // defaults with default filter
-          columnDefs.push({colId: key, headerName, field: key, sortable: true, filter: true, hide});
+              },
+              hide
+            });
+          } else if (!isNaN(results[0][key])) {
+            columnDefs.push({
+              colId: key,
+              headerName,
+              field: key,
+              sortable: true,
+              filter: 'agNumberColumnFilter',
+              hide
+            });
+          } else {
+            // defaults with default filter
+            columnDefs.push({colId: key, headerName, field: key, sortable: true, filter: true, hide});
+          }
         }
       });
       return columnDefs;

@@ -3,6 +3,7 @@ import {AgGridSelectFilterComponent} from '@components/ag-grid/ag-grid-select-fi
 import {Observable, Subscription} from 'rxjs';
 import {Filters, ActiveFilter} from '../../filters';
 import { ColDef } from 'ag-grid-community';
+import {CONFIG_SETTINGS} from '../../config_settings';
 
 @Component({
   selector: 'app-ag-grid',
@@ -148,17 +149,19 @@ export class AgGridComponent implements OnInit, OnDestroy {
     // get active filters and their values
     const activeFilterValues = [];
     for (const key of Object.keys(activeFilters)) {
+      const activeFilterName = CONFIG_SETTINGS.defaultColumnSettings.hasOwnProperty(key)
+        ? CONFIG_SETTINGS.defaultColumnSettings[key].alias : key;
       if (activeFilters[key].filterType === 'date') {
         if (activeFilters[key].condition1) {
-          activeFilterValues.push({name: key,
+          activeFilterValues.push({name: activeFilterName,
             value: `${activeFilters[key].condition1.dateFrom}...`});
         } else {
-          activeFilterValues.push({name: key, value: activeFilters[key].dateFrom});
+          activeFilterValues.push({name: activeFilterName, value: activeFilters[key].dateFrom});
         }
       } else if (activeFilters[key].value) {
-        activeFilterValues.push({name: key, value: activeFilters[key].value});
+        activeFilterValues.push({name: activeFilterName, value: activeFilters[key].value});
       } else if (activeFilters[key].filter) {
-        activeFilterValues.push({name: key, value: activeFilters[key].filter});
+        activeFilterValues.push({name: activeFilterName, value: activeFilters[key].filter});
       }
     }
     // get the filtered rows

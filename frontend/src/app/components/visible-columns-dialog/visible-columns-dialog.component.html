@@ -3,9 +3,9 @@
     <span>Select which columns you want to see: </span>
   </h1>
   <div mat-dialog-content>
-      <div *ngFor="let column of data.columns; let i = index">
+      <div *ngFor="let column of visibleColumns; let i = index">
         <mat-checkbox [value]="column" [checked]="!column.hide" (change)="column.hide = !column.hide">
-          {{column.field}}
+          {{column.headerName}}
         </mat-checkbox>
       </div>
   </div>
