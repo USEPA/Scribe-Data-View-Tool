@@ -78,7 +78,7 @@ export class HomeComponent implements OnInit {
         this.queryFilterParams = queryParams;
         const newSelectedProjects = this.queryFilterParams.projects.split(',').map(item => item.trim());
         const notLoadedProjects = newSelectedProjects.filter(projectId => !this.selectedProjects.includes(projectId));
-        const removedProjects =  this.selectedProjects.filter(projectId => !newSelectedProjects.includes(projectId));
+        const removedProjects = this.selectedProjects.filter(projectId => !newSelectedProjects.includes(projectId));
         if (notLoadedProjects.length > 0 || removedProjects.length > 0) {
           // clear active filters
           this.agGridActiveFilters = [];
@@ -112,9 +112,15 @@ export class HomeComponent implements OnInit {
 
   agGridFiltersChanged(filters: Filters) {
     // update the active filters
-    filters.activeFilters.forEach(filter => this.setQueryParam(filter.name, filter.value));
+    if (filters.activeFilters.length > 0) {
+      filters.activeFilters.forEach((filter) => {
+        this.setQueryParam(filter.name, filter.value);
+      });
+    } else { // if no filters applied, clear project(s) query params / active filters
+      this.clearQueryParams();
+    }
     // update the filtered map points
-    if (filters.activeFilters.length > 0 && filters.filteredRowData.length > 0) {
+    if (filters.filteredRowData.length > 0) {
       // IMPORTANT: pass in the sample point records that weren't filtered out to the map
       // TODO: Add a summary calculation of the lab results to pass in along with these sample point records in order to
       //  determine how the sample points need to be symbolized
@@ -127,13 +133,17 @@ export class HomeComponent implements OnInit {
         });
       });
       this.geoPointsArray = this.getLatLongRecords(filteredSamplePoints);
-      this.missingGeoPointsCount = this.geoPointsArray.length === 0 ? 0 : filteredSamplePoints.length - this.geoPointsArray.length;
-    } else if (filters.activeFilters.length > 0 && filters.filteredRowData.length === 0) {
+
+      // refresh missing map points number
+      const totalMapPoints = this.getLatLongRecords(filters.filteredRowData);
+      this.missingGeoPointsCount = filters.filteredRowData.length - totalMapPoints.length;
+      // this.missingGeoPointsCount = this.geoPointsArray.length === 0 ? 0 : filteredSamplePoints.length - this.geoPointsArray.length;
+    } else if (filters.filteredRowData.length === 0) {
       // if 0 filtered results, clear map points
       this.geoPointsArray = [];
       this.missingGeoPointsCount = this.projectSamplesRowData.length;
     } else {
-      // if no filters applied, refresh project data
+      // refresh data
       this.getCombinedProjectData(this.selectedProjects);
     }
   }
@@ -188,7 +198,7 @@ export class HomeComponent implements OnInit {
       if (this.selectedTab === 0) {
         const addedSamplePointColIDs = ['Samp_No', 'SampleDate', 'Matrix', 'Latitude', 'Longitude'];
         // combine samples with lab results
-        const samplePointCols = this.projectSamplesColDefs.filter( (value, index, array) => {
+        const samplePointCols = this.projectSamplesColDefs.filter((value, index, array) => {
           if (addedSamplePointColIDs.includes(array[index].colId)) {
             return array[index].colId;
           }
@@ -233,9 +243,9 @@ export class HomeComponent implements OnInit {
     const rowDataMerged = [];
     labResults.forEach(result => {
       rowDataMerged.push({
-          ...result, ...(samplePoints.find((point) =>
+        ...result, ...(samplePoints.find((point) =>
           point.Samp_No === result.Samp_No))
-        });
+      });
     });
     return rowDataMerged;
   }
@@ -336,32 +346,33 @@ export class HomeComponent implements OnInit {
   }
 
   setAgGridPresetFilters(columnDefs) {
-    const hardcodedFilters = {};
+    const hardcodedPresetFilters = {};
     if (this.queryFilterParams) {
-      const queryFilterDefinitions = this.definePresetAgGridFilterValues(this.queryFilterParams);
-      for (const paramKey of Object.keys(queryFilterDefinitions)) {
+      const agGridFilterDefinitions = this.definePresetAgGridFilterValues(this.queryFilterParams);
+      for (const paramKey of Object.keys(agGridFilterDefinitions)) {
         columnDefs.forEach((columnDef) => {
-          if (columnDef.field.toLowerCase() === paramKey.toLowerCase()) {
-            // determine the filter's field type
+          if (columnDef.field === paramKey) {
+            // determine the Ag Grid field's filter type
             if (columnDef.filter === 'agDateColumnFilter') {
-              hardcodedFilters[columnDef.field] = {
-                type: queryFilterDefinitions[paramKey].relationalOperator,
-                dateFrom: queryFilterDefinitions[paramKey].value
+              hardcodedPresetFilters[columnDef.field] = {
+                type: agGridFilterDefinitions[paramKey].relationalOperator,
+                dateFrom: agGridFilterDefinitions[paramKey].value
               };
             } else if (columnDef.filter === 'agNumberColumnFilter') {
-              hardcodedFilters[columnDef.field] = {
-                type: queryFilterDefinitions[paramKey].relationalOperator,
-                filter: queryFilterDefinitions[paramKey].value
+              hardcodedPresetFilters[columnDef.field] = {
+                type: agGridFilterDefinitions[paramKey].relationalOperator,
+                filter: agGridFilterDefinitions[paramKey].value
               };
             } else {
-              hardcodedFilters[columnDef.field] = {
-                type: queryFilterDefinitions[paramKey].relationalOperator, value: queryFilterDefinitions[paramKey].value
+              hardcodedPresetFilters[columnDef.field] = {
+                type: agGridFilterDefinitions[paramKey].relationalOperator,
+                value: agGridFilterDefinitions[paramKey].value
               };
             }
           }
         });
       }
-      this.presetFilters.next(hardcodedFilters);
+      this.presetFilters.next(hardcodedPresetFilters);
       this.queryFilterParams = undefined;
     }
   }
@@ -371,18 +382,30 @@ export class HomeComponent implements OnInit {
     const queryParamsClone = Object.assign({}, queryParams);
     delete queryParamsClone.projects;
     for (const paramKey of Object.keys(queryParamsClone)) {
+      // lookup corresponding Ag Grid filter operand
       const operandMatch = Object.keys(this.agGridRelationalOperators).find((operandKey) => {
         if (paramKey.endsWith(operandKey)) {
           return this.agGridRelationalOperators[operandKey];
         }
       });
-      if (operandMatch) {
-        queryFilterParams[paramKey.replace(operandMatch, '').toLowerCase()] = {
-          relationalOperator: this.agGridRelationalOperators[operandMatch],
-          value: queryParamsClone[paramKey]
-        };
-      } else {
-        queryFilterParams[paramKey.toLowerCase()] = {relationalOperator: 'equals', value: queryParamsClone[paramKey]};
+      // lookup column definition's field name from the query parameter's alias name
+      const paramFieldName = paramKey.replace(operandMatch, '');
+      const columnField = Object.keys(CONFIG_SETTINGS.defaultColumnSettings).find((key) => {
+        // handle case sensitivity here
+        if (CONFIG_SETTINGS.defaultColumnSettings[key].alias.toLowerCase() === paramFieldName.toLowerCase()) {
+          return key;
+        }
+      });
+      if (columnField) {
+        if (operandMatch) {
+          queryFilterParams[columnField] = {
+            relationalOperator: this.agGridRelationalOperators[operandMatch],
+            value: queryParamsClone[paramKey]
+          };
+        } else {
+          // default to equals operand
+          queryFilterParams[columnField] = {relationalOperator: 'equals', value: queryParamsClone[paramKey]};
+        }
       }
     }
     return queryFilterParams;

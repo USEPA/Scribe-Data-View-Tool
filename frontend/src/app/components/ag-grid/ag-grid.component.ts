@@ -73,7 +73,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
     // Subscribe to observable events
     if (this.settingFilters) {
       this.settingFiltersSubscription = this.settingFilters.subscribe((presetFilters) => {
-        this.setFilters(presetFilters);
+        this.setPresetFilters(presetFilters);
       });
     }
     if (this.updatingFilters) {
@@ -158,10 +158,10 @@ export class AgGridComponent implements OnInit, OnDestroy {
         } else {
           activeFilterValues.push({name: activeFilterName, value: activeFilters[key].dateFrom});
         }
-      } else if (activeFilters[key].value) {
-        activeFilterValues.push({name: activeFilterName, value: activeFilters[key].value});
       } else if (activeFilters[key].filter) {
         activeFilterValues.push({name: activeFilterName, value: activeFilters[key].filter});
+      } else if (activeFilters[key].value) {
+        activeFilterValues.push({name: activeFilterName, value: activeFilters[key].value});
       }
     }
     // get the filtered rows
@@ -179,7 +179,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
     }
   }
 
-  setFilters(presetFilters) {
+  setPresetFilters(presetFilters) {
     // Set preset filters for the filter model after ag grid has loaded
     try {
       if (this.gridApi) {
