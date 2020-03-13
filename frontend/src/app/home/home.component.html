@@ -21,9 +21,8 @@
     </div>
     <mat-form-field *ngIf="agGridActiveFilters.length > 0" style="width: 50%">
       <mat-chip-list #chipList>
-        <mat-chip *ngFor="let filter of agGridActiveFilters" selectable removable (removed)="removeFilter(filter)">
-          {{filter.name}} : {{filter.value}}
-          <mat-icon matChipRemove>cancel</mat-icon>
+        <mat-chip *ngFor="let filter of agGridActiveFilters" selectable removable (removed)="removeActiveFilter(filter)">
+          {{filter.alias}} {{filter.operand}} {{filter.value}} <mat-icon matChipRemove>cancel</mat-icon>
         </mat-chip>
         <input matChipInputAddOnBlur placeholder=" Active Filters:"
                [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"

@@ -3,7 +3,7 @@ import {AgGridSelectFilterComponent} from '@components/ag-grid/ag-grid-select-fi
 import {Observable, Subscription} from 'rxjs';
 import {Filters, ActiveFilter} from '../../filters';
 import { ColDef } from 'ag-grid-community';
-import {CONFIG_SETTINGS} from '../../config_settings';
+
 
 @Component({
   selector: 'app-ag-grid',
@@ -149,19 +149,32 @@ export class AgGridComponent implements OnInit, OnDestroy {
     // get active filters and their values
     const activeFilterValues = [];
     for (const key of Object.keys(activeFilters)) {
-      const activeFilterName = CONFIG_SETTINGS.defaultColumnSettings.hasOwnProperty(key)
-        ? CONFIG_SETTINGS.defaultColumnSettings[key].alias : key;
       if (activeFilters[key].filterType === 'date') {
         if (activeFilters[key].condition1) {
-          activeFilterValues.push({name: activeFilterName,
-            value: `${activeFilters[key].condition1.dateFrom}...`});
+          activeFilterValues.push({
+            field: key,
+            operand: 'equals',
+            value: `${activeFilters[key].condition1.dateFrom}...`
+          });
         } else {
-          activeFilterValues.push({name: activeFilterName, value: activeFilters[key].dateFrom});
+          activeFilterValues.push({
+            field: key,
+            operand: 'equals',
+            value: activeFilters[key].dateFrom
+          });
         }
       } else if (activeFilters[key].filter) {
-        activeFilterValues.push({name: activeFilterName, value: activeFilters[key].filter});
+        activeFilterValues.push({
+          field: key,
+          operand: activeFilters[key].type ? activeFilters[key].type : 'equals',
+          value: activeFilters[key].filter
+        });
       } else if (activeFilters[key].value) {
-        activeFilterValues.push({name: activeFilterName, value: activeFilters[key].value});
+        activeFilterValues.push({
+          field: key,
+          operand: 'equals',
+          value: activeFilters[key].value
+        });
       }
     }
     // get the filtered rows
@@ -189,6 +202,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
             filterComponent.setModel({
               type: presetFilters[filterName].type,
               value: presetFilters[filterName].value ? presetFilters[filterName].value : '',
+              dateFrom: presetFilters[filterName].dateFrom ? presetFilters[filterName].dateFrom : '',
               filter: presetFilters[filterName].filter ? presetFilters[filterName].filter : null
             });
           }
@@ -203,24 +217,26 @@ export class AgGridComponent implements OnInit, OnDestroy {
 
   updateActiveFilters(filters) {
     try {
-      const activeFilters = this.gridApi.getFilterModel();
-      if (Object.keys(activeFilters).length > 0) {
-        if (filters === undefined || filters.length === 0) {
-          // clear all filters
-          this.gridApi.setFilterModel(null);
-        } else {
+      if (filters.length > 0) {
+        const activeFilters = this.gridApi.getFilterModel();
+        if (Object.keys(activeFilters).length > 0) {
           // remove the deselected filters from the current filter model and reset the model
-          const currentFilterNames = filters.map(f => f.name);
-          for (const filterName of Object.keys(activeFilters)) {
-            if (!currentFilterNames.includes(filterName)) {
-              delete activeFilters[filterName];
+          const currentFilterNames = filters.map((f: ActiveFilter) => {
+            return f.field;
+          });
+          for (const key of Object.keys(activeFilters)) {
+            if (!currentFilterNames.includes(key)) {
+              delete activeFilters[key];
             }
           }
           this.gridApi.setFilterModel(activeFilters);
         }
+      } else {
+        // clear all filters
+        this.gridApi.setFilterModel(null);
       }
     } catch (err) {
-      return;
+      console.log(err);
     }
   }
 

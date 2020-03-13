@@ -4,7 +4,7 @@ import {LoginService} from '../services/login.service';
 import {SadieProjectsService} from '@services/sadie-projects.service';
 import {Project, ProjectSample, ProjectLabResult, ColumnDefs} from '../projectDataTypes';
 import {MatDialog, MatSnackBar, MatChipInputEvent} from '@angular/material';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
 import {Subject, Subscription, Observable} from 'rxjs';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
@@ -47,6 +47,20 @@ export class HomeComponent implements OnInit {
     _gt: 'greaterThan',
     _gte: 'greaterThanOrEqual'
   };
+  displayFilterOperators = {
+    equals: '=',
+    lessThan: '<',
+    lessThanOrEqual: '<=',
+    greaterThan: '>',
+    greaterThanOrEqual: '>='
+  };
+  queryParamOperators = {
+    equals: '',
+    lessThan: '_lt',
+    lessThanOrEqual: '_lte',
+    greaterThan: '_gt',
+    greaterThanOrEqual: '_gte',
+  };
   agGridCustomFilters = null;
   updateColDefs: Subject<any> = new Subject<any>();
   presetFilters: Subject<any> = new Subject<any>();
@@ -82,7 +96,6 @@ export class HomeComponent implements OnInit {
         if (notLoadedProjects.length > 0 || removedProjects.length > 0) {
           // clear active filters
           this.agGridActiveFilters = [];
-          this.updateFilters.next([]);
           this.selectedProjects = newSelectedProjects; // todo: in the future only load projects that have not been loaded already
           this.getCombinedProjectData(this.selectedProjects);
           // tslint:disable-next-line:radix
@@ -90,36 +103,69 @@ export class HomeComponent implements OnInit {
         }
       }
 
-      const filters = [];
+      /*const filters = [];
       for (const key of Object.keys(queryParams).filter(k => k !== 'projects')) {
         filters.push({name: key, value: queryParams[key]});
-      }
-      this.applyFilter(filters);
+      }*/
+
     });
-    // if (this.loginService.access_token) {
-    // try {
-    //   this.projectsLoaded = true;
-    //   const projectIds = this.userProjects.map(p => p.projectid.toString());
-    //   // If project IDs passed from query parameters exist, combine their results
-    //   if (this.selectedProjects && this.selectedProjects.every((val) => projectIds.indexOf(val) >= 0)) {
-    //
-    //   }
-    // } catch (err) {
-    //   return;
-    // }
-    // }
   }
 
   agGridFiltersChanged(filters: Filters) {
-    // update the active filters
-    if (filters.activeFilters.length > 0) {
-      filters.activeFilters.forEach((filter) => {
-        this.setQueryParam(filter.name, filter.value);
-      });
-    } else { // if no filters applied, clear project(s) query params / active filters
+    // 1) Update the query params / active filters
+    if (filters.activeFilters.length === 0) {
+      // if no filters applied, clear query params / active filters
       this.clearQueryParams();
+      this.agGridActiveFilters = [];
+    } else {
+      const newAgGridFilters = [...filters.activeFilters.map(item => item.field)];
+      const currentAgGridFilters = [...this.agGridActiveFilters.map(item => item.field)];
+      const removedAgGridFilters = currentAgGridFilters.filter(x => !newAgGridFilters.includes(x));
+      if (removedAgGridFilters.length > 0) {
+        this.agGridActiveFilters.forEach((activeFilter, index) => {
+          if (removedAgGridFilters.includes(activeFilter.field)) {
+            this.agGridActiveFilters.splice(index, 1);
+            this.clearQueryParam(activeFilter);
+          }
+        });
+      } else { // loop through new Ag Grid filters to check for added or updated filters
+        filters.activeFilters.forEach((agGridFilter) => {
+          // check for added filter
+          if (currentAgGridFilters.indexOf(agGridFilter.field) === -1) {
+            const queryParamAlias = CONFIG_SETTINGS.defaultColumnSettings.hasOwnProperty(agGridFilter.field)
+                ? CONFIG_SETTINGS.defaultColumnSettings[agGridFilter.field].alias : agGridFilter.field;
+            const queryParamOperator = this.queryParamOperators[agGridFilter.operand];
+            this.agGridActiveFilters.push({
+              field: agGridFilter.field,
+              queryParam: `${queryParamAlias}${queryParamOperator}`,
+              alias: queryParamAlias,
+              operand: this.displayFilterOperators[agGridFilter.operand],
+              value: agGridFilter.value,
+            });
+            this.addQueryParam(this.agGridActiveFilters[this.agGridActiveFilters.length - 1]);
+          } else {
+            // check for updated filter value and/or operand
+            this.agGridActiveFilters.forEach((activeFilter) => {
+              if (activeFilter.field === agGridFilter.field) {
+                if ((activeFilter.value.toString() !== agGridFilter.value.toString())) {
+                  activeFilter.value = agGridFilter.value;
+                  this.updateQueryParam(activeFilter);
+                }
+                const activeOperand = activeFilter.operand;
+                const newOperand = agGridFilter.operand;
+                if (activeOperand && newOperand && (this.displayFilterOperators[newOperand] !== activeOperand)) {
+                  this.clearQueryParam(activeFilter);
+                  activeFilter.operand = this.displayFilterOperators[agGridFilter.operand];
+                  activeFilter.queryParam = activeFilter.alias + this.queryParamOperators[newOperand];
+                  this.updateQueryParam(activeFilter);
+                }
+              }
+            });
+          }
+        });
+      }
     }
-    // update the filtered map points
+    // 2) Update the filtered map points
     if (filters.filteredRowData.length > 0) {
       // IMPORTANT: pass in the sample point records that weren't filtered out to the map
       // TODO: Add a summary calculation of the lab results to pass in along with these sample point records in order to
@@ -148,15 +194,11 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  applyFilter(activeFilters) {
-    this.agGridActiveFilters = activeFilters;
-  }
-
-  removeFilter(filter: ActiveFilter): void {
+  removeActiveFilter(filter: ActiveFilter): void {
     const index = this.agGridActiveFilters.indexOf(filter);
     if (index >= 0) {
       this.agGridActiveFilters.splice(index, 1);
-      this.clearQueryParam(filter.name);
+      this.clearQueryParam(filter);
       // update filters in Ag Grid
       this.updateFilters.next(this.agGridActiveFilters);
     }
@@ -346,25 +388,33 @@ export class HomeComponent implements OnInit {
   }
 
   setAgGridPresetFilters(columnDefs) {
-    const hardcodedPresetFilters = {};
+    const agGridPresetFilters = {};
     if (this.queryFilterParams) {
       const agGridFilterDefinitions = this.definePresetAgGridFilterValues(this.queryFilterParams);
       for (const paramKey of Object.keys(agGridFilterDefinitions)) {
+        // add active filter for chips
+        this.agGridActiveFilters.push({
+          field: paramKey,
+          queryParam: agGridFilterDefinitions[paramKey].queryParam,
+          alias: CONFIG_SETTINGS.defaultColumnSettings[paramKey].alias,
+          operand: this.displayFilterOperators[agGridFilterDefinitions[paramKey].relationalOperator],
+          value: agGridFilterDefinitions[paramKey].value,
+        });
         columnDefs.forEach((columnDef) => {
           if (columnDef.field === paramKey) {
             // determine the Ag Grid field's filter type
             if (columnDef.filter === 'agDateColumnFilter') {
-              hardcodedPresetFilters[columnDef.field] = {
+              agGridPresetFilters[columnDef.field] = {
                 type: agGridFilterDefinitions[paramKey].relationalOperator,
                 dateFrom: agGridFilterDefinitions[paramKey].value
               };
             } else if (columnDef.filter === 'agNumberColumnFilter') {
-              hardcodedPresetFilters[columnDef.field] = {
+              agGridPresetFilters[columnDef.field] = {
                 type: agGridFilterDefinitions[paramKey].relationalOperator,
                 filter: agGridFilterDefinitions[paramKey].value
               };
             } else {
-              hardcodedPresetFilters[columnDef.field] = {
+              agGridPresetFilters[columnDef.field] = {
                 type: agGridFilterDefinitions[paramKey].relationalOperator,
                 value: agGridFilterDefinitions[paramKey].value
               };
@@ -372,7 +422,7 @@ export class HomeComponent implements OnInit {
           }
         });
       }
-      this.presetFilters.next(hardcodedPresetFilters);
+      this.presetFilters.next(agGridPresetFilters);
       this.queryFilterParams = undefined;
     }
   }
@@ -389,22 +439,23 @@ export class HomeComponent implements OnInit {
         }
       });
       // lookup column definition's field name from the query parameter's alias name
-      const paramFieldName = paramKey.replace(operandMatch, '');
+      const paramFieldName = paramKey.replace(operandMatch, '').trim().toLowerCase();
       const columnField = Object.keys(CONFIG_SETTINGS.defaultColumnSettings).find((key) => {
         // handle case sensitivity here
-        if (CONFIG_SETTINGS.defaultColumnSettings[key].alias.toLowerCase() === paramFieldName.toLowerCase()) {
+        if (CONFIG_SETTINGS.defaultColumnSettings[key].alias.trim().toLowerCase() === paramFieldName) {
           return key;
         }
       });
       if (columnField) {
         if (operandMatch) {
           queryFilterParams[columnField] = {
+            queryParam: paramKey.trim(),
             relationalOperator: this.agGridRelationalOperators[operandMatch],
             value: queryParamsClone[paramKey]
           };
         } else {
           // default to equals operand
-          queryFilterParams[columnField] = {relationalOperator: 'equals', value: queryParamsClone[paramKey]};
+          queryFilterParams[columnField] = {queryParam: paramKey.trim(), relationalOperator: 'equals', value: queryParamsClone[paramKey]};
         }
       }
     }
@@ -443,18 +494,33 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  /*
+  * Route Query Parameter methods
+  */
   setQueryParam(field: string, value: any) {
     const queryParams = {};
     queryParams[field] = value;
     this.router.navigate([], {queryParams, queryParamsHandling: 'merge'});
   }
 
-  clearQueryParam(field) {
+  addQueryParam(addedFilter: ActiveFilter) {
     const queryParams = {};
-    Object.keys(this.route.snapshot.queryParams).filter(k => k !== field).forEach(key => {
-      queryParams[key] = this.route.snapshot.queryParams[key];
+    queryParams[addedFilter.queryParam] = addedFilter.value;
+    this.router.navigate([], {queryParams, queryParamsHandling: 'merge'});
+  }
+
+  updateQueryParam(updatedFilter: ActiveFilter) {
+    const queryParams: Params = {};
+    queryParams[updatedFilter.queryParam] = updatedFilter.value;
+    this.router.navigate([], {queryParams, queryParamsHandling: 'merge'});
+  }
+
+  clearQueryParam(removedFilter: ActiveFilter) {
+    const clearedQueryParams = {};
+    Object.keys(this.route.snapshot.queryParams).filter(k => k !== removedFilter.queryParam).forEach((key) => {
+      clearedQueryParams[key] = this.route.snapshot.queryParams[key];
     });
-    this.router.navigate([], {queryParams});
+    this.router.navigate([], {queryParams: clearedQueryParams});
   }
 
   clearQueryParams() {

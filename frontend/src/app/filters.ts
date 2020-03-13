@@ -4,6 +4,9 @@ export interface Filters {
 }
 
 export interface ActiveFilter {
-  name: string;
+  field: string;
+  queryParam: string;
+  alias: string;
+  operand: string;
   value: string;
 }
