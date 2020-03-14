@@ -14,7 +14,7 @@ export class OauthcallbackComponent implements OnInit {
   }
 
   ngOnInit() {
-    const next = this.route.snapshot.queryParams.next ? this.route.snapshot.queryParams.next : '/';
+    const next = this.route.snapshot.queryParams.next ? this.route.snapshot.queryParams.next : '';
     this.route.fragment.pipe(
       switchMap(async fragment => {
         const oauthParams = fragment.match('(access_token=)(.*)(&expires_in=)(.*)(&username=)(.*)(&ssl=)');
