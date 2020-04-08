@@ -38,8 +38,10 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   private _featureLayer;
   private _zoomToPointGraphic;
   private _point;
+  private _viewPoint;
   private _mesh;
-  // private _extent;
+  private _homeBtn;
+  private _initExtent;
   // mapService: MapService;
   private _selectedGeoPoint: any;
 
@@ -90,13 +92,15 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     const self = this;
     try {
       // Load the modules for the ArcGIS API for JavaScript
-      const [EsriMap, SceneView, FeatureLayer, Graphic, Point, Mesh, BasemapGallery, Expand] = await loadModules([
+      const [EsriMap, SceneView, FeatureLayer, Graphic, Point, Viewpoint, Mesh, Home, BasemapGallery, Expand] = await loadModules([
         'esri/Map',
         'esri/views/SceneView',
         'esri/layers/FeatureLayer',
         'esri/Graphic',
         'esri/geometry/Point',
+        'esri/Viewpoint',
         'esri/geometry/Mesh',
+        'esri/widgets/Home',
         'esri/widgets/BasemapGallery',
         'esri/widgets/Expand'
       ]);
@@ -105,7 +109,9 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       self._featureLayer = FeatureLayer;
       self._graphic = Graphic;
       self._point = Point;
+      self._viewPoint = Viewpoint;
       self._mesh = Mesh;
+      self._homeBtn = Home;
 
       // Configure the BaseMap
       const mapProperties: __esri.MapProperties = {
@@ -136,6 +142,10 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       // create map scene view
       this._view = new SceneView(sceneViewProperties);
       // add ootb map widgets to view
+      this._homeBtn = new Home({
+        view: this._view
+      });
+      this._view.ui.add(this._homeBtn, 'top-right');
       const basemapGalleryWidget = new BasemapGallery({
         view: this._view
       });
@@ -230,6 +240,10 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       const layer = this.createFeatureLayerFromGraphics(pointGraphicsArray);
       layer.then((lyr) => {
         this._view.map.add(lyr);
+        lyr.when((lyrLoaded) => {
+          // get and set the map extent from the feature layer extent
+          this.setHomeExtentFromFl(lyrLoaded);
+        });
       });
     }
     this.mapFeaturesLoadedEvent.emit(pointGraphicsArray.length);
@@ -260,6 +274,18 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     });
     await lyr;
     return lyr;
+  }
+
+  // sets home button extent
+  setHomeExtentFromFl(featureLayer) {
+    this._view.extent = featureLayer.fullExtent;
+    const newViewPoint = new this._viewPoint({
+      targetGeometry: this._view.extent,
+      scale: this._view.scale
+    });
+    if (this._homeBtn) {
+      this._homeBtn.viewpoint = newViewPoint;
+    }
   }
 
   setLayerPopupTemplate(records: any[]) {
