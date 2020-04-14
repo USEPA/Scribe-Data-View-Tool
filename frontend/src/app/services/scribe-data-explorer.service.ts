@@ -1,13 +1,17 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {ColumnsRows, Project, ProjectLabResult} from '../projectDataTypes';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {ColumnsRows, Project, ProjectLabResult} from '../projectInterfaceTypes';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class SadieProjectsService {
+export class ScribeDataExplorerService {
+  public mapSymbolFieldsSource: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public mapSymbolFieldsChangedEvent: Observable<any> = this.mapSymbolFieldsSource.asObservable();
+  public mapSymbolFieldAliases = ['Matrix', 'Analyte', 'MDL'];
 
   constructor(private http: HttpClient, public router: Router) {
   }

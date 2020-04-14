@@ -64,4 +64,25 @@ export const CONFIG_SETTINGS = {
     Total_Or_Dissolved: {alias: 'Total or Dissolved', hide: true},
     Validation_Level: {alias: 'Validation Level', hide: true},
   },
+  // query params and ag grid filter operand properties
+  queryParamOperators: {
+    equals: '',
+    lessThan: '_lt',
+    lessThanOrEqual: '_lte',
+    greaterThan: '_gt',
+    greaterThanOrEqual: '_gte',
+  },
+  agGridRelationalOperators: {
+    _lt: 'lessThan',
+    _lte: 'lessThanOrEqual',
+    _gt: 'greaterThan',
+    _gte: 'greaterThanOrEqual'
+  },
+  displayFilterOperators: {
+    equals: '=',
+    lessThan: '<',
+    lessThanOrEqual: '<=',
+    greaterThan: '>',
+    greaterThanOrEqual: '>='
+  },
 };

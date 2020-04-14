@@ -7,6 +7,7 @@
     </span>
   </span>
   <div style="display: flex; justify-content: space-between; margin: 15px 15px 0 15px;">
+    <!-- Projects Selection -->
     <div>
       <mat-form-field style="width: 600px; margin-right: 15px;">
         <mat-label>Select Project(s):</mat-label>
@@ -16,9 +17,11 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <button mat-raised-button color="primary" (click)="setQueryParam('projects', projects.value.join(','))">Go
+      <button mat-raised-button color="primary" (click)="setQueryParam('projects', projects.value.join(','))">
+        Go
       </button>
     </div>
+    <!-- Selected Filters -->
     <mat-form-field *ngIf="agGridActiveFilters.length > 0" style="width: 50%">
       <mat-chip-list #chipList>
         <mat-chip *ngFor="let filter of agGridActiveFilters" selectable removable (removed)="removeActiveFilter(filter)">
@@ -30,13 +33,28 @@
       </mat-chip-list>
     </mat-form-field>
   </div>
-  <span [hidden]="isLoadingData" style="margin-left: 15px;">
-    <span *ngIf="geoPointsArray.length === 0" class="mat-warn">
-      No map points
+  <span *ngIf="!isLoadingData" class="component-container-row" style="margin-left: 15px;">
+    <!-- Missing map points -->
+    <span class="component-container-col">
+      <span *ngIf="geoPointsArray.length === 0" class="mat-warn">
+        No map points
+      </span>
+      <span *ngIf="geoPointsArray.length > 0 && missingGeoPointsCount > 0" class="mat-warn">
+        Number of records without coordinates: {{missingGeoPointsCount}}
+      </span>
     </span>
-    <span *ngIf="geoPointsArray.length > 0 && missingGeoPointsCount > 0" class="mat-warn">
-      Number of records without coordinates: {{missingGeoPointsCount}}
-    </span>
+    <!-- Map Symbology -->
+    <div *ngIf="geoPointsArray.length > 0" class="component-container-col">
+      <span class="mat-warn">To enable symbolization of MDLs, filter on an Analyte and then enter a MDL threshold: </span>
+      <div *ngIf="mapSymbolFields.length > 0" style="padding-top: 5px;">
+        <mat-form-field>
+          <input matInput type="number" placeholder="MDL Threshold" aria-label="MDL Threshold"
+                 autocomplete="off" min="0"/>
+          <mat-hint style="color: orange;"></mat-hint>
+        </mat-form-field>&nbsp;
+        <button mat-raised-button color="primary">Symbolize</button>
+      </div>
+    </div>
   </span>
 </div>
 <mat-spinner *ngIf="isLoadingData"></mat-spinner>

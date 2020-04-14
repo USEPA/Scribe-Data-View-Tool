@@ -9,7 +9,7 @@ import {LoginService} from '@services/login.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {
-  MatToolbarModule, MatMenuModule, MatListModule, MatCardModule, MatFormFieldModule, MatSelectModule,
+  MatInputModule, MatToolbarModule, MatMenuModule, MatListModule, MatCardModule, MatFormFieldModule, MatSelectModule,
   MatButtonModule, MatDialogModule, MatIconModule, MatProgressSpinnerModule, MatTabsModule, MatSnackBarModule,
   MatChipsModule, MatCheckboxModule, MatSidenavModule
 } from '@angular/material';
@@ -43,6 +43,7 @@ import { VisibleColumnsDialogComponent } from './components/visible-columns-dial
         BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
+        MatInputModule,
         MatCardModule,
         MatButtonModule,
         MatDialogModule,

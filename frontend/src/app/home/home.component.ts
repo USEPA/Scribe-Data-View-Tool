@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AppComponent} from '../app.component';
 import {LoginService} from '../services/login.service';
-import {SadieProjectsService} from '@services/sadie-projects.service';
-import {Project, ProjectSample, ProjectLabResult, ColumnDefs} from '../projectDataTypes';
+import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
+import {Project, ProjectSample, ProjectLabResult, ColumnDefs} from '../projectInterfaceTypes';
 import {MatDialog, MatSnackBar, MatChipInputEvent} from '@angular/material';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
@@ -11,7 +11,7 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {query} from '@angular/animations';
 import * as moment from 'moment';
 import {VisibleColumnsDialogComponent} from '../components/visible-columns-dialog/visible-columns-dialog.component';
-import {Filters, ActiveFilter} from '../filters';
+import {FiltersInterfaceTypes, ActiveFilter} from '../filtersInterfaceTypes';
 import {CONFIG_SETTINGS} from '../config_settings';
 
 
@@ -21,15 +21,15 @@ import {CONFIG_SETTINGS} from '../config_settings';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  userProjects: Project[];
-  projectsLoaded: boolean;
-  urlParamsSubscription: Subscription;
-  selectedProject: string;
-  selectedProjects: string[] = [];
-  queryFilterParams: any;
   tabs: any = {0: 'Lab Analyte Results', 1: 'Sample Point Locations'};
   selectedTab = 0;
   isLoadingData = false;
+  // project props
+  projects = new FormControl();
+  userProjects: Project[];
+  projectsLoaded: boolean;
+  selectedProject: string;
+  selectedProjects: string[] = [];
   // sample point props
   projectSamplesColDefs: ColumnDefs[] = [];
   projectSamplesRowData: ProjectSample[] = [];
@@ -40,42 +40,25 @@ export class HomeComponent implements OnInit {
   geoPointsArray = [];
   selectedPoint: ProjectSample = null;
   missingGeoPointsCount = 0;
-  // ag grid properties
-  agGridRelationalOperators = {
-    _lt: 'lessThan',
-    _lte: 'lessThanOrEqual',
-    _gt: 'greaterThan',
-    _gte: 'greaterThanOrEqual'
-  };
-  displayFilterOperators = {
-    equals: '=',
-    lessThan: '<',
-    lessThanOrEqual: '<=',
-    greaterThan: '>',
-    greaterThanOrEqual: '>='
-  };
-  queryParamOperators = {
-    equals: '',
-    lessThan: '_lt',
-    lessThanOrEqual: '_lte',
-    greaterThan: '_gt',
-    greaterThanOrEqual: '_gte',
-  };
+  mapSymbolFields = [];
+  // filter props
+  queryFilterParams: any;
+  urlParamsSubscription: Subscription;
   agGridCustomFilters = null;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  agGridActiveFilters: ActiveFilter[] = [];
+  filterNavOpened = false;
+  // AgGrid events
   updateColDefs: Subject<any> = new Subject<any>();
   presetFilters: Subject<any> = new Subject<any>();
   updateFilters: Subject<any> = new Subject<any>();
   exportLabResultsCSV: Subject<string> = new Subject<string>();
   exportSamplePointLocationCSV: Subject<string> = new Subject<string>();
-  filterNavOpened = false;
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  agGridActiveFilters: ActiveFilter[] = [];
-  projects = new FormControl();
 
   constructor(public app: AppComponent,
               public route: ActivatedRoute,
               public loginService: LoginService,
-              public sadieProjectsService: SadieProjectsService,
+              public scribeDataExplorerService: ScribeDataExplorerService,
               public dialog: MatDialog,
               public snackBar: MatSnackBar,
               public router: Router) {
@@ -84,7 +67,7 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit() {
     //
-    this.userProjects = await this.sadieProjectsService.getUserProjects();
+    this.userProjects = await this.scribeDataExplorerService.getUserProjects();
 
     // Subscribing to query string parameters
     this.urlParamsSubscription = this.route.queryParams.subscribe(queryParams => {
@@ -102,6 +85,10 @@ export class HomeComponent implements OnInit {
           this.projects.setValue(this.selectedProjects.map(id => parseInt(id)));
         }
       }
+      // subscribe to map symbol fields changed event
+      /*this.scribeDataExplorerService.mapSymbolFieldsChangedEvent.subscribe((mapSymbolFields) => {
+        console.log(mapSymbolFields);
+      });*/
 
       /*const filters = [];
       for (const key of Object.keys(queryParams).filter(k => k !== 'projects')) {
@@ -111,12 +98,13 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  agGridFiltersChanged(filters: Filters) {
+  agGridFiltersChanged(filters: FiltersInterfaceTypes) {
     // 1) Update the query params / active filters
     if (filters.activeFilters.length === 0) {
       // if no filters applied, clear query params / active filters
       this.clearQueryParams();
       this.agGridActiveFilters = [];
+      this.mapSymbolFields = [];
     } else {
       const newAgGridFilters = [...filters.activeFilters.map(item => item.field)];
       const currentAgGridFilters = [...this.agGridActiveFilters.map(item => item.field)];
@@ -128,23 +116,24 @@ export class HomeComponent implements OnInit {
             this.clearQueryParam(activeFilter);
           }
         });
-      } else { // loop through new Ag Grid filters to check for added or updated filters
+      } else {
+        // loop through new Ag Grid filters to check for added or updated filters
+        this.mapSymbolFields = [];
         filters.activeFilters.forEach((agGridFilter) => {
           // check for added filter
           if (currentAgGridFilters.indexOf(agGridFilter.field) === -1) {
             const queryParamAlias = CONFIG_SETTINGS.defaultColumnSettings.hasOwnProperty(agGridFilter.field)
                 ? CONFIG_SETTINGS.defaultColumnSettings[agGridFilter.field].alias : agGridFilter.field;
-            const queryParamOperator = this.queryParamOperators[agGridFilter.operand];
+            const queryParamOperator = CONFIG_SETTINGS.queryParamOperators[agGridFilter.operand];
             this.agGridActiveFilters.push({
               field: agGridFilter.field,
               queryParam: `${queryParamAlias}${queryParamOperator}`,
               alias: queryParamAlias,
-              operand: this.displayFilterOperators[agGridFilter.operand],
+              operand: CONFIG_SETTINGS.displayFilterOperators[agGridFilter.operand],
               value: agGridFilter.value,
             });
             this.addQueryParam(this.agGridActiveFilters[this.agGridActiveFilters.length - 1]);
-          } else {
-            // check for updated filter value and/or operand
+          } else { // check for updated filter value and/or operand
             this.agGridActiveFilters.forEach((activeFilter) => {
               if (activeFilter.field === agGridFilter.field) {
                 if ((activeFilter.value.toString() !== agGridFilter.value.toString())) {
@@ -153,14 +142,18 @@ export class HomeComponent implements OnInit {
                 }
                 const activeOperand = activeFilter.operand;
                 const newOperand = agGridFilter.operand;
-                if (activeOperand && newOperand && (this.displayFilterOperators[newOperand] !== activeOperand)) {
+                if (activeOperand && newOperand && (CONFIG_SETTINGS.displayFilterOperators[newOperand] !== activeOperand)) {
                   this.clearQueryParam(activeFilter);
-                  activeFilter.operand = this.displayFilterOperators[agGridFilter.operand];
-                  activeFilter.queryParam = activeFilter.alias + this.queryParamOperators[newOperand];
+                  activeFilter.operand = CONFIG_SETTINGS.displayFilterOperators[agGridFilter.operand];
+                  activeFilter.queryParam = activeFilter.alias + CONFIG_SETTINGS.queryParamOperators[newOperand];
                   this.updateQueryParam(activeFilter);
                 }
               }
             });
+          }
+          // check for any map symbology selections
+          if (this.scribeDataExplorerService.mapSymbolFieldAliases.includes(agGridFilter.field)) {
+            this.mapSymbolFields.push(agGridFilter);
           }
         });
       }
@@ -221,12 +214,12 @@ export class HomeComponent implements OnInit {
     this.isLoadingData = true;
     // combine all project sample point and lab results data
     const projectsSamplePoints = await Promise.all(projectIds.map(async (projectId) => {
-      const rows = await this.sadieProjectsService.getProjectSamples(projectId);
+      const rows = await this.scribeDataExplorerService.getProjectSamples(projectId);
       return rows;
     }));
     // combine lab results
     const projectsLabResults = await Promise.all(projectIds.map(async (projectId) => {
-      const rows = await this.sadieProjectsService.getProjectLabResults(projectId);
+      const rows = await this.scribeDataExplorerService.getProjectLabResults(projectId);
       return rows;
     }));
     combinedSamplePointRowData = [].concat(...projectsSamplePoints);
@@ -249,8 +242,8 @@ export class HomeComponent implements OnInit {
         this.projectLabResultsRowData = this.mergeSamplesAndLabResults(this.projectSamplesRowData, combinedLabResultRowData);
         this.missingGeoPointsCount = this.getMissingGeoPoints(this.projectSamplesRowData, combinedLabResultRowData);
       }
-      // set ag grid component custom filter properties
-      this.setAgGridCustomFilters();
+      // set ag-grid select filter properties
+      this.setAgGridSelectFilters();
     }
     this.isLoadingData = false;
   }
@@ -309,7 +302,7 @@ export class HomeComponent implements OnInit {
     return missingGeoPointsCount;
   }
 
-  setAgGridCustomFilters() {
+  setAgGridSelectFilters() {
     this.agGridCustomFilters = {
       // Sample Type is Matrix alias
       Matrix: {
@@ -397,7 +390,7 @@ export class HomeComponent implements OnInit {
           field: paramKey,
           queryParam: agGridFilterDefinitions[paramKey].queryParam,
           alias: CONFIG_SETTINGS.defaultColumnSettings[paramKey].alias,
-          operand: this.displayFilterOperators[agGridFilterDefinitions[paramKey].relationalOperator],
+          operand: CONFIG_SETTINGS.displayFilterOperators[agGridFilterDefinitions[paramKey].relationalOperator],
           value: agGridFilterDefinitions[paramKey].value,
         });
         columnDefs.forEach((columnDef) => {
@@ -433,9 +426,9 @@ export class HomeComponent implements OnInit {
     delete queryParamsClone.projects;
     for (const paramKey of Object.keys(queryParamsClone)) {
       // lookup corresponding Ag Grid filter operand
-      const operandMatch = Object.keys(this.agGridRelationalOperators).find((operandKey) => {
+      const operandMatch = Object.keys(CONFIG_SETTINGS.agGridRelationalOperators).find((operandKey) => {
         if (paramKey.endsWith(operandKey)) {
-          return this.agGridRelationalOperators[operandKey];
+          return CONFIG_SETTINGS.agGridRelationalOperators[operandKey];
         }
       });
       // lookup column definition's field name from the query parameter's alias name
@@ -450,7 +443,7 @@ export class HomeComponent implements OnInit {
         if (operandMatch) {
           queryFilterParams[columnField] = {
             queryParam: paramKey.trim(),
-            relationalOperator: this.agGridRelationalOperators[operandMatch],
+            relationalOperator: CONFIG_SETTINGS.agGridRelationalOperators[operandMatch],
             value: queryParamsClone[paramKey]
           };
         } else {
