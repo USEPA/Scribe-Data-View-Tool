@@ -9,11 +9,3 @@ export const environment = {
   api_version_tag: 'v1',
   default_baseloadedMap: '972c131daf9d4e83b30a98630c8f8b2b',
 };
-
-export const globals = {
-  samplePointSymbolColors: {
-      air: ['#00b7ff', '#0062a8', '#00497c'],
-      water: ['#6040ff', '#4c33cc', '#392699'],
-      soil: ['#b59273', '#ffb339', '#6b2600']
-  }
-};

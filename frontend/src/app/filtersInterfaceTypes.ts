@@ -1,4 +1,4 @@
-export interface Filters {
+export interface FiltersInterfaceTypes {
   activeFilters: ActiveFilter[];
   filteredRowData: any[];
 }

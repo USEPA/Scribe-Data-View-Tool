@@ -103,4 +103,17 @@ export interface ProjectSample {
   State: string;
   LabResultsAvailable: boolean;
   Numeric_Tags: any;
+  MDL: number;
+}
+
+export interface MapSymbolizationProps {
+  min: number;
+  max: number;
+  threshold: number;
+}
+
+export interface MapSymbol {
+  value: number;
+  color: string;
+  label: string;
 }

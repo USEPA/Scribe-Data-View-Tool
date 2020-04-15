@@ -64,4 +64,31 @@ export const CONFIG_SETTINGS = {
     Total_Or_Dissolved: {alias: 'Total or Dissolved', hide: true},
     Validation_Level: {alias: 'Validation Level', hide: true},
   },
+  // query params and ag grid filter operand properties
+  queryParamOperators: {
+    equals: '',
+    lessThan: '_lt',
+    lessThanOrEqual: '_lte',
+    greaterThan: '_gt',
+    greaterThanOrEqual: '_gte',
+  },
+  agGridRelationalOperators: {
+    _lt: 'lessThan',
+    _lte: 'lessThanOrEqual',
+    _gt: 'greaterThan',
+    _gte: 'greaterThanOrEqual'
+  },
+  displayFilterOperators: {
+    equals: '=',
+    lessThan: '<',
+    lessThanOrEqual: '<=',
+    greaterThan: '>',
+    greaterThanOrEqual: '>='
+  },
+  mapPointSymbolBreaks: 6,
+  mapPointSymbolColors: {
+    air: ['#00b7ff', '#0062a8', '#00497c'],
+    water: ['#6040ff', '#4c33cc', '#392699'],
+    soil: ['#B49664', '#A97850', '#9F5A3C', '#943C28', '#8A1E14', '#800000']
+  }
 };

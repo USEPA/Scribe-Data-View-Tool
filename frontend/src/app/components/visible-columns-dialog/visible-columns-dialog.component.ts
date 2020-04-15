@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormControl, Validators} from '@angular/forms';
-import {ColumnDefs} from '../../projectDataTypes';
+import {ColumnDefs} from '../../projectInterfaceTypes';
 
 @Component({
   selector: 'app-visible-columns-dialog',

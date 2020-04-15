@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, OnDestroy, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
 import {AgGridSelectFilterComponent} from '@components/ag-grid/ag-grid-select-filter.component';
 import {Observable, Subscription} from 'rxjs';
-import {Filters, ActiveFilter} from '../../filters';
+import {FiltersInterfaceTypes, ActiveFilter} from '../../filtersInterfaceTypes';
 import { ColDef } from 'ag-grid-community';
 
 

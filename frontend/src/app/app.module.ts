@@ -9,9 +9,9 @@ import {LoginService} from '@services/login.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {
-  MatToolbarModule, MatMenuModule, MatListModule, MatCardModule, MatFormFieldModule, MatSelectModule,
+  MatInputModule, MatToolbarModule, MatMenuModule, MatListModule, MatCardModule, MatFormFieldModule, MatSelectModule,
   MatButtonModule, MatDialogModule, MatIconModule, MatProgressSpinnerModule, MatTabsModule, MatSnackBarModule,
-  MatChipsModule, MatCheckboxModule, MatSidenavModule
+  MatChipsModule, MatCheckboxModule, MatSidenavModule, MatGridListModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpRequestInterceptor} from './http-request.interceptor';
@@ -36,30 +36,32 @@ import { VisibleColumnsDialogComponent } from './components/visible-columns-dial
     MapViewComponent,
     VisibleColumnsDialogComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatCardModule,
-        MatButtonModule,
-        MatDialogModule,
-        MatToolbarModule,
-        MatListModule,
-        MatIconModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatMenuModule,
-        MatProgressSpinnerModule,
-        MatTabsModule,
-        MatSnackBarModule,
-        MatCheckboxModule,
-        MatSidenavModule,
-        MatChipsModule,
-        AgGridModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatCardModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatToolbarModule,
+    MatListModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatMenuModule,
+    MatProgressSpinnerModule,
+    MatTabsModule,
+    MatSnackBarModule,
+    MatCheckboxModule,
+    MatSidenavModule,
+    MatChipsModule,
+    AgGridModule,
+    MatGridListModule,
+  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
