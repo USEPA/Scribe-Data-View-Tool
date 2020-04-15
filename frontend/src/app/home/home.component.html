@@ -58,7 +58,7 @@
           Symbolize
         </button>
       </div>
-      <mat-grid-list *ngIf="mapSymbolDefinitions.length > 0" [cols]="mapPointSymbolBreaks" rowHeight="4:1" style="width: 75vh;">
+      <mat-grid-list *ngIf="mapSymbolDefinitions.length > 0" [cols]="mapPointSymbolBreaks" rowHeight="4:1" style="width: 60vh;">
         <mat-grid-tile *ngFor="let mapSymbol of mapSymbolDefinitions; let mapSymbolIndex = index"
                        [colspan]="1" [rowspan]="1"
                        [style.background]="mapSymbol.color" style="color: white;">

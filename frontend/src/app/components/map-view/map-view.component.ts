@@ -473,7 +473,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
   calculateThresholdSymbologyDefinitions(mapSymbolizationProps) {
     const symbologyDefinitions = [];
     // get the low and high intensity symbology stop intervals based on the min, max, and threshold values
-    const cardinality: number = this.mapPointSymbolBreaks / 2;
+    let cardinality: number = this.mapPointSymbolBreaks / 2;
     const lowIntensityStep = (mapSymbolizationProps.threshold - mapSymbolizationProps.min) / (cardinality - 1);
     for (let i = 0; i < cardinality; i++) {
       let symbolDefinition;
@@ -481,17 +481,12 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
       symbolDefinition = {value: lowIntensityVal, color: this.mapPointSymbolColors.soil[i], label: `<=${lowIntensityVal}`};
       symbologyDefinitions.push(symbolDefinition);
     }
+    cardinality = cardinality  + 1;
     const highIntensityStep = (mapSymbolizationProps.max - mapSymbolizationProps.threshold) / (cardinality - 1);
-    for (let i = 0; i < cardinality; i++) {
+    for (let i = 1; i < cardinality; i++) {
       let symbolDefinition;
-      let highIntensityVal;
-      if (i === 0) {
-        highIntensityVal = +(mapSymbolizationProps.threshold).toFixed(2);
-        symbolDefinition = {value: highIntensityVal, color: this.mapPointSymbolColors.soil[cardinality + i], label: `>${highIntensityVal}`};
-      } else {
-        highIntensityVal = +(mapSymbolizationProps.threshold + (highIntensityStep * i)).toFixed(2);
-        symbolDefinition = {value: highIntensityVal, color: this.mapPointSymbolColors.soil[cardinality + i], label: `<=${highIntensityVal}`};
-      }
+      const highIntensityVal = +(mapSymbolizationProps.threshold + (highIntensityStep * i)).toFixed(2);
+      symbolDefinition = {value: highIntensityVal, color: this.mapPointSymbolColors.soil[i + 2], label: `<=${highIntensityVal}`};
       symbologyDefinitions.push(symbolDefinition);
     }
     return symbologyDefinitions;
