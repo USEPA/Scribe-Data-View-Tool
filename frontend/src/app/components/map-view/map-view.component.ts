@@ -8,7 +8,8 @@ import {
   OnChanges,
   Output,
   SimpleChanges,
-  ViewChild
+  ViewChild,
+  AfterViewInit
 } from '@angular/core';
 import {ReplaySubject} from 'rxjs';
 import {loadModules} from 'esri-loader';
@@ -24,7 +25,7 @@ import {MapSymbolizationProps} from '../../projectInterfaceTypes';
   templateUrl: './map-view.component.html',
   styleUrls: ['./map-view.component.css']
 })
-export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
+export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   @Output() mapFeaturesLoadedEvent = new EventEmitter<number>();
 
   // The <div> where we will place the map
@@ -88,40 +89,6 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   @Input() pointData: any[];
 
   constructor(public scribeDataExplorerService: ScribeDataExplorerService) {
-    // subscribe to MDL value entered event
-    this.scribeDataExplorerService.mdlValueChangedEvent.subscribe((symbolizationProps: MapSymbolizationProps) => {
-      if (this._view) {
-        // symbolize feature layer based on latest MDL min, max, and threshold values
-        const symbologyDefinitions = this.calculateThresholdSymbologyDefinitions(symbolizationProps);
-        const lyrRenderer = {
-          type: 'simple',
-          symbol: {
-            type: 'simple-marker',
-            size: 7,
-          },
-          visualVariables: [{
-            type: 'color',
-            field: 'MDL',
-            stops: symbologyDefinitions
-          }]
-        };
-        this._view.map.layers.forEach((lyr: any) => {
-          lyr.renderer = lyrRenderer;
-        });
-        this.scribeDataExplorerService.mapPointsSymbolizationSource.next(symbologyDefinitions);
-        // ToDo: symbolize graphics based on latest renderer symbology
-        /*const newGraphics = [];
-        this._view.graphics.forEach((graphic: any) => {
-          const newGraphic = graphic.clone();
-          if (graphic.attributes.hasOwnProperty('Matrix') && graphic.attributes.hasOwnProperty('MDL')) {
-            newGraphic.symbol.color = this.getSamplePointColorByMDL(graphic.attributes, symbolizationProps.threshold);
-          }
-          newGraphics.push(newGraphic);
-        });
-        this._view.graphics.removeAll();
-        this._view.graphics.addMany(newGraphics);*/
-      }
-    });
     // ToDo: Add in map service if and when Geoplatform map services need to be pulled into the application
     // this.mapService = new MapService(loginService.access_token);
   }
@@ -212,6 +179,43 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       this._view.goTo(pointGraphicsArray, {animate: false});
       // The map has been initialized
       this._loaded = this._view.ready;
+    });
+  }
+
+  ngAfterViewInit(): void {
+    // subscribe to MDL value entered event
+    this.scribeDataExplorerService.mdlValueChangedEvent.subscribe((symbolizationProps: MapSymbolizationProps) => {
+      if (this._view) {
+        // symbolize feature layer based on latest MDL min, max, and threshold values
+        const symbologyDefinitions = this.calculateThresholdSymbologyDefinitions(symbolizationProps);
+        const lyrRenderer = {
+          type: 'simple',
+          symbol: {
+            type: 'simple-marker',
+            size: 7,
+          },
+          visualVariables: [{
+            type: 'color',
+            field: 'MDL',
+            stops: symbologyDefinitions
+          }]
+        };
+        this._view.map.layers.forEach((lyr: any) => {
+          lyr.renderer = lyrRenderer;
+        });
+        this.scribeDataExplorerService.mapPointsSymbolizationSource.next(symbologyDefinitions);
+        // ToDo: symbolize graphics based on latest renderer symbology
+        /*const newGraphics = [];
+        this._view.graphics.forEach((graphic: any) => {
+          const newGraphic = graphic.clone();
+          if (graphic.attributes.hasOwnProperty('Matrix') && graphic.attributes.hasOwnProperty('MDL')) {
+            newGraphic.symbol.color = this.getSamplePointColorByMDL(graphic.attributes, symbolizationProps.threshold);
+          }
+          newGraphics.push(newGraphic);
+        });
+        this._view.graphics.removeAll();
+        this._view.graphics.addMany(newGraphics);*/
+      }
     });
   }
 
@@ -473,17 +477,21 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     const lowIntensityStep = (mapSymbolizationProps.threshold - mapSymbolizationProps.min) / (cardinality - 1);
     for (let i = 0; i < cardinality; i++) {
       let symbolDefinition;
-      const lowIntensityVal = mapSymbolizationProps.min + (lowIntensityStep * i);
-      const value = Math.round( (lowIntensityVal) * 10 ) / 10;
-      symbolDefinition = {value, color: this.mapPointSymbolColors.soil[i], label: `<=${value}`};
+      const lowIntensityVal = +(mapSymbolizationProps.min + (lowIntensityStep * i)).toFixed(2);
+      symbolDefinition = {value: lowIntensityVal, color: this.mapPointSymbolColors.soil[i], label: `<=${lowIntensityVal}`};
       symbologyDefinitions.push(symbolDefinition);
     }
     const highIntensityStep = (mapSymbolizationProps.max - mapSymbolizationProps.threshold) / (cardinality - 1);
     for (let i = 0; i < cardinality; i++) {
       let symbolDefinition;
-      const highIntensityVal = mapSymbolizationProps.threshold + (highIntensityStep * i);
-      const value = Math.round( (highIntensityVal) * 10 ) / 10;
-      symbolDefinition = {value, color: this.mapPointSymbolColors.soil[cardinality + i], label: `<=${value}`};
+      let highIntensityVal;
+      if (i === 0) {
+        highIntensityVal = +(mapSymbolizationProps.threshold).toFixed(2);
+        symbolDefinition = {value: highIntensityVal, color: this.mapPointSymbolColors.soil[cardinality + i], label: `>${highIntensityVal}`};
+      } else {
+        highIntensityVal = +(mapSymbolizationProps.threshold + (highIntensityStep * i)).toFixed(2);
+        symbolDefinition = {value: highIntensityVal, color: this.mapPointSymbolColors.soil[cardinality + i], label: `<=${highIntensityVal}`};
+      }
       symbologyDefinitions.push(symbolDefinition);
     }
     return symbologyDefinitions;

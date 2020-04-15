@@ -46,19 +46,19 @@
       </span>
     </span>
     <!-- Map Symbology -->
-    <div *ngIf="geoPointsArray.length > 0" class="component-container-col">
+    <div [hidden]="geoPointsArray.length === 0" class="component-container-col">
       <span class="mat-warn">To symbologize samples by MDL, filter to an Analyte and provide the MDL value: </span>
-      <div *ngIf="mapSymbolFields.length > 0" style="padding-top: 5px;">
+      <div *ngIf="mdlMin && mdlMax" style="padding-top: 5px;">
         <mat-form-field style="min-width: 300px;">
           <input [formControl]="mdlThreshold" matInput type="number" autocomplete="off"
                  [placeholder]="'MDL Threshold between '+ mdlMin + ' and ' + mdlMax" [min]="mdlMin" [max]="mdlMax"/>
           <mat-error [hidden]="mdlThreshold.valid">Value must be between {{mdlMin}} and {{mdlMax}}</mat-error>
         </mat-form-field>&nbsp;
-        <button mat-raised-button color="primary" (click)="$event.preventDefault(); symbolizeMapPointsEvent();">
+        <button mat-raised-button color="primary" (click)="symbolizeMapPointsEvent();">
           Symbolize
         </button>
       </div>
-      <mat-grid-list [cols]="mapPointSymbolBreaks" rowHeight="4:1" style="width: 100vh;">
+      <mat-grid-list *ngIf="mapSymbolDefinitions.length > 0" [cols]="mapPointSymbolBreaks" rowHeight="4:1" style="width: 75vh;">
         <mat-grid-tile *ngFor="let mapSymbol of mapSymbolDefinitions; let mapSymbolIndex = index"
                        [colspan]="1" [rowspan]="1"
                        [style.background]="mapSymbol.color" style="color: white;">

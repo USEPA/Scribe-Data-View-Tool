@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {AppComponent} from '../app.component';
 import {LoginService} from '../services/login.service';
 import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
@@ -20,6 +20,7 @@ import * as moment from 'moment';
 import {VisibleColumnsDialogComponent} from '../components/visible-columns-dialog/visible-columns-dialog.component';
 import {FiltersInterfaceTypes, ActiveFilter} from '../filtersInterfaceTypes';
 import {CONFIG_SETTINGS} from '../config_settings';
+import {isNumber} from "util";
 
 
 @Component({
@@ -27,7 +28,7 @@ import {CONFIG_SETTINGS} from '../config_settings';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   tabs: any = {0: 'Lab Analyte Results', 1: 'Sample Point Locations'};
   selectedTab = 0;
   isLoadingData = false;
@@ -49,10 +50,10 @@ export class HomeComponent implements OnInit {
   missingGeoPointsCount = 0;
   mapSymbolFields = [];
   mapPointSymbolBreaks: number = CONFIG_SETTINGS.mapPointSymbolBreaks;
-  mapSymbolDefinitions: MapSymbol[];
+  mapSymbolDefinitions: MapSymbol[] = [];
   mdlThreshold = new FormControl();
-  mdlMin = 0;
-  mdlMax = 1000;
+  mdlMin = null;
+  mdlMax = null;
   // filter props
   queryFilterParams: any;
   urlParamsSubscription: Subscription;
@@ -98,11 +99,6 @@ export class HomeComponent implements OnInit {
         }
       }
 
-      // subscribe to MDL value entered event
-      this.scribeDataExplorerService.mapPointsSymbolizationChangedEvent.subscribe((symbologyDefinitions) => {
-        this.mapSymbolDefinitions = symbologyDefinitions;
-      });
-
       /*const filters = [];
       for (const key of Object.keys(queryParams).filter(k => k !== 'projects')) {
         filters.push({name: key, value: queryParams[key]});
@@ -111,13 +107,20 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit() {
+    // subscribe to MDL value entered event
+    this.scribeDataExplorerService.mapPointsSymbolizationChangedEvent.subscribe((symbologyDefinitions) => {
+      if (symbologyDefinitions && this.mapSymbolDefinitions !== symbologyDefinitions) {
+        this.mapSymbolDefinitions = symbologyDefinitions;
+      }
+    });
+  }
+
   agGridFiltersChanged(filters: FiltersInterfaceTypes) {
     // 1) Update the query params / active filters
     if (filters.activeFilters.length === 0) {
-      // if no filters applied, clear query params / active filters
-      this.clearQueryParams();
-      this.agGridActiveFilters = [];
-      this.mapSymbolFields = [];
+      // if no filters applied, clear query params / active filters / map properties
+      this.initProps();
     } else {
       const newAgGridFilters = [...filters.activeFilters.map(item => item.field)];
       const currentAgGridFilters = [...this.agGridActiveFilters.map(item => item.field)];
@@ -204,6 +207,14 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  initProps(): void {
+    this.clearQueryParams();
+    this.agGridActiveFilters = [];
+    this.mapSymbolFields = [];
+    this.mapSymbolDefinitions = [];
+    this.mdlThreshold.setValue(null);
+  }
+
   removeActiveFilter(filter: ActiveFilter): void {
     const index = this.agGridActiveFilters.indexOf(filter);
     if (index >= 0) {
@@ -216,8 +227,10 @@ export class HomeComponent implements OnInit {
 
   setMDLRange(pointsData) {
     // set min and max MDL values
-    this.mdlMin = Math.min.apply(Math, pointsData.map((pt) => pt.MDL));
-    this.mdlMax = Math.max.apply(Math, pointsData.map((pt) => pt.MDL));
+    const min = Math.min.apply(Math, pointsData.map((pt) => pt.MDL));
+    isFinite(min) ? this.mdlMin = min : this.mdlMin = null;
+    const max = Math.max.apply(Math, pointsData.map((pt) => pt.MDL));
+    isFinite(max) ? this.mdlMax = max : this.mdlMax = null;
     this.mdlThreshold.setValidators([Validators.min(this.mdlMin), Validators.max(this.mdlMax)]);
   }
 
