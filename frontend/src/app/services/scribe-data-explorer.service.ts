@@ -9,8 +9,10 @@ import {ColumnsRows, Project, ProjectLabResult} from '../projectInterfaceTypes';
   providedIn: 'root'
 })
 export class ScribeDataExplorerService {
-  public mapSymbolFieldsSource: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  public mapSymbolFieldsChangedEvent: Observable<any> = this.mapSymbolFieldsSource.asObservable();
+  public mdlValueSource: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public mdlValueChangedEvent: Observable<any> = this.mdlValueSource.asObservable();
+  public mapPointsSymbolizationSource: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public mapPointsSymbolizationChangedEvent: Observable<any> = this.mapPointsSymbolizationSource.asObservable();
   public mapSymbolFieldAliases = ['Matrix', 'Analyte', 'MDL'];
 
   constructor(private http: HttpClient, public router: Router) {

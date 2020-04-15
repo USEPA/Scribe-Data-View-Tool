@@ -2,10 +2,17 @@ import {Component, OnInit} from '@angular/core';
 import {AppComponent} from '../app.component';
 import {LoginService} from '../services/login.service';
 import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
-import {Project, ProjectSample, ProjectLabResult, ColumnDefs} from '../projectInterfaceTypes';
+import {
+  Project,
+  ProjectSample,
+  ProjectLabResult,
+  ColumnDefs,
+  MapSymbolizationProps,
+  MapSymbol
+} from '../projectInterfaceTypes';
 import {MatDialog, MatSnackBar, MatChipInputEvent} from '@angular/material';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {FormControl} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
 import {Subject, Subscription, Observable} from 'rxjs';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {query} from '@angular/animations';
@@ -41,6 +48,11 @@ export class HomeComponent implements OnInit {
   selectedPoint: ProjectSample = null;
   missingGeoPointsCount = 0;
   mapSymbolFields = [];
+  mapPointSymbolBreaks: number = CONFIG_SETTINGS.mapPointSymbolBreaks;
+  mapSymbolDefinitions: MapSymbol[];
+  mdlThreshold = new FormControl();
+  mdlMin = 0;
+  mdlMax = 1000;
   // filter props
   queryFilterParams: any;
   urlParamsSubscription: Subscription;
@@ -85,10 +97,11 @@ export class HomeComponent implements OnInit {
           this.projects.setValue(this.selectedProjects.map(id => parseInt(id)));
         }
       }
-      // subscribe to map symbol fields changed event
-      /*this.scribeDataExplorerService.mapSymbolFieldsChangedEvent.subscribe((mapSymbolFields) => {
-        console.log(mapSymbolFields);
-      });*/
+
+      // subscribe to MDL value entered event
+      this.scribeDataExplorerService.mapPointsSymbolizationChangedEvent.subscribe((symbologyDefinitions) => {
+        this.mapSymbolDefinitions = symbologyDefinitions;
+      });
 
       /*const filters = [];
       for (const key of Object.keys(queryParams).filter(k => k !== 'projects')) {
@@ -160,18 +173,22 @@ export class HomeComponent implements OnInit {
     }
     // 2) Update the filtered map points
     if (filters.filteredRowData.length > 0) {
-      // IMPORTANT: pass in the sample point records that weren't filtered out to the map
+      // IMPORTANT: pass in the resulting singular sample point records to the map
       // TODO: Add a summary calculation of the lab results to pass in along with these sample point records in order to
       //  determine how the sample points need to be symbolized
       const filteredSamplePoints = [];
       this.projectSamplesRowData.forEach((samplePoint) => {
-        filters.filteredRowData.forEach((result) => {
-          if (result.Samp_No === samplePoint.Samp_No && !filteredSamplePoints.includes(samplePoint)) {
+        filters.filteredRowData.forEach((labResult) => {
+          if (labResult.Samp_No === samplePoint.Samp_No && !filteredSamplePoints.includes(samplePoint)) {
+            // add MDL value to sample point attributes
+            labResult.MDL ? samplePoint.MDL = labResult.MDL : samplePoint.MDL = 0;
             filteredSamplePoints.push(samplePoint);
           }
         });
       });
       this.geoPointsArray = this.getLatLongRecords(filteredSamplePoints);
+      // set MDL min and max range
+      this.setMDLRange(this.geoPointsArray);
 
       // refresh missing map points number
       const totalMapPoints = this.getLatLongRecords(filters.filteredRowData);
@@ -194,6 +211,20 @@ export class HomeComponent implements OnInit {
       this.clearQueryParam(filter);
       // update filters in Ag Grid
       this.updateFilters.next(this.agGridActiveFilters);
+    }
+  }
+
+  setMDLRange(pointsData) {
+    // set min and max MDL values
+    this.mdlMin = Math.min.apply(Math, pointsData.map((pt) => pt.MDL));
+    this.mdlMax = Math.max.apply(Math, pointsData.map((pt) => pt.MDL));
+    this.mdlThreshold.setValidators([Validators.min(this.mdlMin), Validators.max(this.mdlMax)]);
+  }
+
+  symbolizeMapPointsEvent() {
+    if (this.mdlThreshold.valid) {
+      const mapSymbolizationProps: MapSymbolizationProps = {threshold: this.mdlThreshold.value, min: this.mdlMin, max: this.mdlMax};
+      this.scribeDataExplorerService.mdlValueSource.next(mapSymbolizationProps);
     }
   }
 

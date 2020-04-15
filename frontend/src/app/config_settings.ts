@@ -85,4 +85,10 @@ export const CONFIG_SETTINGS = {
     greaterThan: '>',
     greaterThanOrEqual: '>='
   },
+  mapPointSymbolBreaks: 6,
+  mapPointSymbolColors: {
+    air: ['#00b7ff', '#0062a8', '#00497c'],
+    water: ['#6040ff', '#4c33cc', '#392699'],
+    soil: ['#B49664', '#A97850', '#9F5A3C', '#943C28', '#8A1E14', '#800000']
+  }
 };

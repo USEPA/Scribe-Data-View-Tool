@@ -12,7 +12,9 @@ import {
 } from '@angular/core';
 import {ReplaySubject} from 'rxjs';
 import {loadModules} from 'esri-loader';
-import {globals, environment} from '@environments/environment';
+import {CONFIG_SETTINGS} from '../../config_settings';
+import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
+import {MapSymbolizationProps} from '../../projectInterfaceTypes';
 // import {MapService} from '@services/map.service';
 // import {LoginService} from '@services/login.service';
 
@@ -44,6 +46,8 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   private _initExtent;
   // mapService: MapService;
   private _selectedGeoPoint: any;
+  private mapPointSymbolBreaks: number = CONFIG_SETTINGS.mapPointSymbolBreaks;
+  private mapPointSymbolColors = CONFIG_SETTINGS.mapPointSymbolColors;
 
   @Input()
   set center(center: Array<number>) {
@@ -83,7 +87,41 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   @Input() baseMapId: ReplaySubject<string>;
   @Input() pointData: any[];
 
-  constructor(/*public loginService: LoginService*/) {
+  constructor(public scribeDataExplorerService: ScribeDataExplorerService) {
+    // subscribe to MDL value entered event
+    this.scribeDataExplorerService.mdlValueChangedEvent.subscribe((symbolizationProps: MapSymbolizationProps) => {
+      if (this._view) {
+        // symbolize feature layer based on latest MDL min, max, and threshold values
+        const symbologyDefinitions = this.calculateThresholdSymbologyDefinitions(symbolizationProps);
+        const lyrRenderer = {
+          type: 'simple',
+          symbol: {
+            type: 'simple-marker',
+            size: 7,
+          },
+          visualVariables: [{
+            type: 'color',
+            field: 'MDL',
+            stops: symbologyDefinitions
+          }]
+        };
+        this._view.map.layers.forEach((lyr: any) => {
+          lyr.renderer = lyrRenderer;
+        });
+        this.scribeDataExplorerService.mapPointsSymbolizationSource.next(symbologyDefinitions);
+        // ToDo: symbolize graphics based on latest renderer symbology
+        /*const newGraphics = [];
+        this._view.graphics.forEach((graphic: any) => {
+          const newGraphic = graphic.clone();
+          if (graphic.attributes.hasOwnProperty('Matrix') && graphic.attributes.hasOwnProperty('MDL')) {
+            newGraphic.symbol.color = this.getSamplePointColorByMDL(graphic.attributes, symbolizationProps.threshold);
+          }
+          newGraphics.push(newGraphic);
+        });
+        this._view.graphics.removeAll();
+        this._view.graphics.addMany(newGraphics);*/
+      }
+    });
     // ToDo: Add in map service if and when Geoplatform map services need to be pulled into the application
     // this.mapService = new MapService(loginService.access_token);
   }
@@ -211,10 +249,10 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
           longitude: pt.Longitude,
           latitude: pt.Latitude
         };
-        let symbolColor = null;
-        if (pt.hasOwnProperty('Matrix') && pt.hasOwnProperty('MDL')) {
+        const symbolColor = null;
+        /*if (pt.hasOwnProperty('Matrix') && pt.hasOwnProperty('MDL')) {
           symbolColor = this.getSamplePointColorByMDL(pt);
-        }
+        }*/
         // Remove fields that have invalid field types for Esri map data
         delete pt.LabResultsAvailable;
         delete pt.Numeric_Tags;
@@ -354,10 +392,10 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
         };
         // add 3d point with depth z coordinate
         pointGeometry = this._point(pointProps);
-        let symbolColor = '';
-        if (pt.hasOwnProperty('Matrix') && pt.hasOwnProperty('MDL')) {
+        const symbolColor = null;
+        /*if (pt.hasOwnProperty('Matrix') && pt.hasOwnProperty('MDL')) {
           symbolColor = this.getSamplePointColorByMDL(pt);
-        }
+        }*/
         const meshGeometry = this._mesh.createCylinder(pointGeometry, {
           size: {
             width: 5,
@@ -418,19 +456,36 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  getSamplePointColorByMDL(graphicProps: any) {
-    const symbolColors = globals.samplePointSymbolColors;
+  getSamplePointColorByMDL(graphicProps: any, mdlValue: number = null) {
     let symbolColor = null;
     // set symbol color based on the sample point type and MDL value
-    const samplePointType = graphicProps.Sample_Type.toLowerCase();
-    if (graphicProps.Result <= graphicProps.MDL) {
-      symbolColor = symbolColors[samplePointType][0];
-      // } else if (graphicProps.MDL > 0 && graphicProps.MDL <= 10) {
-      // symbolColor = symbolColors[samplePointType][1];
-    } else if (graphicProps.Result > graphicProps.MDL) {
-      symbolColor = symbolColors[samplePointType][2];
+    const samplePointType = graphicProps.Matrix.toLowerCase();
+    if (graphicProps.MDL > 0 && graphicProps.MDL <= 10) {
+      symbolColor = this.mapPointSymbolColors[samplePointType][1];
     }
     return symbolColor;
   }
 
+  calculateThresholdSymbologyDefinitions(mapSymbolizationProps) {
+    const symbologyDefinitions = [];
+    // get the low and high intensity symbology stop intervals based on the min, max, and threshold values
+    const cardinality: number = this.mapPointSymbolBreaks / 2;
+    const lowIntensityStep = (mapSymbolizationProps.threshold - mapSymbolizationProps.min) / (cardinality - 1);
+    for (let i = 0; i < cardinality; i++) {
+      let symbolDefinition;
+      const lowIntensityVal = mapSymbolizationProps.min + (lowIntensityStep * i);
+      const value = Math.round( (lowIntensityVal) * 10 ) / 10;
+      symbolDefinition = {value, color: this.mapPointSymbolColors.soil[i], label: `<=${value}`};
+      symbologyDefinitions.push(symbolDefinition);
+    }
+    const highIntensityStep = (mapSymbolizationProps.max - mapSymbolizationProps.threshold) / (cardinality - 1);
+    for (let i = 0; i < cardinality; i++) {
+      let symbolDefinition;
+      const highIntensityVal = mapSymbolizationProps.threshold + (highIntensityStep * i);
+      const value = Math.round( (highIntensityVal) * 10 ) / 10;
+      symbolDefinition = {value, color: this.mapPointSymbolColors.soil[cardinality + i], label: `<=${value}`};
+      symbologyDefinitions.push(symbolDefinition);
+    }
+    return symbologyDefinitions;
+  }
 }

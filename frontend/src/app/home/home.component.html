@@ -24,8 +24,10 @@
     <!-- Selected Filters -->
     <mat-form-field *ngIf="agGridActiveFilters.length > 0" style="width: 50%">
       <mat-chip-list #chipList>
-        <mat-chip *ngFor="let filter of agGridActiveFilters" selectable removable (removed)="removeActiveFilter(filter)">
-          {{filter.alias}} {{filter.operand}} {{filter.value}} <mat-icon matChipRemove>cancel</mat-icon>
+        <mat-chip *ngFor="let filter of agGridActiveFilters" selectable removable
+                  (removed)="removeActiveFilter(filter)">
+          {{filter.alias}} {{filter.operand}} {{filter.value}}
+          <mat-icon matChipRemove>cancel</mat-icon>
         </mat-chip>
         <input matChipInputAddOnBlur placeholder=" Active Filters:"
                [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -45,15 +47,24 @@
     </span>
     <!-- Map Symbology -->
     <div *ngIf="geoPointsArray.length > 0" class="component-container-col">
-      <span class="mat-warn">To enable symbolization of MDLs, filter on an Analyte and then enter a MDL threshold: </span>
+      <span class="mat-warn">To symbologize samples by MDL, filter to an Analyte and provide the MDL value: </span>
       <div *ngIf="mapSymbolFields.length > 0" style="padding-top: 5px;">
-        <mat-form-field>
-          <input matInput type="number" placeholder="MDL Threshold" aria-label="MDL Threshold"
-                 autocomplete="off" min="0"/>
-          <mat-hint style="color: orange;"></mat-hint>
+        <mat-form-field style="min-width: 300px;">
+          <input [formControl]="mdlThreshold" matInput type="number" autocomplete="off"
+                 [placeholder]="'MDL Threshold between '+ mdlMin + ' and ' + mdlMax" [min]="mdlMin" [max]="mdlMax"/>
+          <mat-error [hidden]="mdlThreshold.valid">Value must be between {{mdlMin}} and {{mdlMax}}</mat-error>
         </mat-form-field>&nbsp;
-        <button mat-raised-button color="primary">Symbolize</button>
+        <button mat-raised-button color="primary" (click)="$event.preventDefault(); symbolizeMapPointsEvent();">
+          Symbolize
+        </button>
       </div>
+      <mat-grid-list [cols]="mapPointSymbolBreaks" rowHeight="4:1" style="width: 100vh;">
+        <mat-grid-tile *ngFor="let mapSymbol of mapSymbolDefinitions; let mapSymbolIndex = index"
+                       [colspan]="1" [rowspan]="1"
+                       [style.background]="mapSymbol.color" style="color: white;">
+          {{mapSymbol.label}}
+        </mat-grid-tile>
+      </mat-grid-list>
     </div>
   </span>
 </div>
@@ -103,10 +114,12 @@
     <ng-template mat-tab-label>
       {{tabs[1]}}
       <span *ngIf="!isLoadingData&& selectedTab === 1">
-        <button mat-raised-button color="primary" style="transform: scale(0.8); padding: 0 5px;" (click)="openVisibleColumnsDialog()">
+        <button mat-raised-button color="primary" style="transform: scale(0.8); padding: 0 5px;"
+                (click)="openVisibleColumnsDialog()">
           Visible Columns
         </button>
-        <button mat-raised-button color="primary" style="transform: scale(0.8); padding: 0 5px;" (click)="onExportCSVBtnClick()">
+        <button mat-raised-button color="primary" style="transform: scale(0.8); padding: 0 5px;"
+                (click)="onExportCSVBtnClick()">
           Export CSV
         </button>
       </span>
