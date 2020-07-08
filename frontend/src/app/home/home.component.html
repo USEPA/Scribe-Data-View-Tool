@@ -6,7 +6,7 @@
       </a>.
     </span>
   </span>
-  <div style="display: flex; justify-content: space-between; margin: 15px 15px 0 15px;">
+  <div style="display: flex; justify-content: space-between; margin: 15px;">
     <!-- Projects Selection -->
     <div>
       <mat-form-field style="width: 600px; margin-right: 15px;">
@@ -35,7 +35,7 @@
       </mat-chip-list>
     </mat-form-field>
   </div>
-  <span *ngIf="!isLoadingData" class="component-container-row" style="margin-left: 15px;">
+  <span *ngIf="!isLoadingData" class="component-container-row">
     <!-- Missing map points -->
     <span class="component-container-col">
       <span *ngIf="geoPointsArray.length === 0" class="mat-warn">
@@ -47,21 +47,23 @@
     </span>
     <!-- Map Symbology -->
     <div [hidden]="geoPointsArray.length === 0" class="component-container-col">
-      <span class="mat-warn">To symbologize samples by MDL, filter to an Analyte and provide the MDL value: </span>
+      <span class="mat-warn">To symbologize samples by MDL, filter to an Analyte and provide the MDL value within the range: </span>
       <div *ngIf="mdlMin && mdlMax" style="padding-top: 5px;">
         <mat-form-field style="min-width: 300px;">
           <input [formControl]="mdlThreshold" matInput type="number" autocomplete="off"
                  [placeholder]="'MDL Threshold between '+ mdlMin + ' and ' + mdlMax" [min]="mdlMin" [max]="mdlMax"/>
           <mat-error [hidden]="mdlThreshold.valid">Value must be between {{mdlMin}} and {{mdlMax}}</mat-error>
         </mat-form-field>&nbsp;
-        <button mat-raised-button color="primary" (click)="symbolizeMapPointsEvent();">
+        <button mat-raised-button color="primary"
+                [disabled]="!mdlThreshold.value || !(mdlThreshold.value >= mdlMin && mdlThreshold.value <= mdlMax)"
+                (click)="symbolizeMapPointsEvent();">
           Symbolize
         </button>
       </div>
-      <mat-grid-list *ngIf="mapSymbolDefinitions.length > 0" [cols]="mapPointSymbolBreaks" rowHeight="4:1" style="width: 60vh;">
+      <mat-grid-list *ngIf="mapSymbolDefinitions.length > 0" [cols]="mapPointSymbolBreaks" (window:resize)="onResize($event)"
+                     rowHeight="fit" style="height: 30px;">
         <mat-grid-tile *ngFor="let mapSymbol of mapSymbolDefinitions; let mapSymbolIndex = index"
-                       [colspan]="1" [rowspan]="1"
-                       [style.background]="mapSymbol.color" style="color: white;">
+                       [colspan]="colsSpan" [rowspan]="1" [style.background]="mapSymbol.color" class="color-ramp-tile">
           {{mapSymbol.label}}
         </mat-grid-tile>
       </mat-grid-list>

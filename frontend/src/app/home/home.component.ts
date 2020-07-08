@@ -54,6 +54,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   mdlThreshold = new FormControl();
   mdlMin = null;
   mdlMax = null;
+  colsSpan = 1;
   // filter props
   queryFilterParams: any;
   urlParamsSubscription: Subscription;
@@ -67,6 +68,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   updateFilters: Subject<any> = new Subject<any>();
   exportLabResultsCSV: Subject<string> = new Subject<string>();
   exportSamplePointLocationCSV: Subject<string> = new Subject<string>();
+
 
   constructor(public app: AppComponent,
               public route: ActivatedRoute,
@@ -104,6 +106,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         filters.push({name: key, value: queryParams[key]});
       }*/
 
+      this.colsSpan = (window.innerWidth > 1050) ? 1 : 2;
     });
   }
 
@@ -566,5 +569,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
       queryParams[key] = this.route.snapshot.queryParams[key];
     });
     this.router.navigate([], {queryParams});
+  }
+
+  onResize(event) {
+    this.colsSpan = (event.target.innerWidth > 1050) ? 1 : 2;
   }
 }
