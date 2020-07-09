@@ -187,22 +187,29 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
     this.scribeDataExplorerService.mdlValueChangedEvent.subscribe((symbolizationProps: MapSymbolizationProps) => {
       if (this._view) {
         // symbolize feature layer based on latest MDL min, max, and threshold values
-        const symbologyDefinitions = this.calculateThresholdSymbologyDefinitions(symbolizationProps);
-        const lyrRenderer = {
-          type: 'simple',
-          symbol: {
-            type: 'simple-marker',
-            size: 7,
-          },
-          visualVariables: [{
-            type: 'color',
-            field: 'MDL',
-            stops: symbologyDefinitions
-          }]
-        };
-        this._view.map.layers.forEach((lyr: any) => {
-          lyr.renderer = lyrRenderer;
-        });
+        let symbologyDefinitions = [];
+        if (symbolizationProps) {
+          symbologyDefinitions = this.calculateThresholdSymbologyDefinitions(symbolizationProps);
+          const lyrRenderer = {
+            type: 'simple',
+            symbol: {
+              type: 'simple-marker',
+              size: 7,
+            },
+            visualVariables: [{
+              type: 'color',
+              field: 'MDL',
+              stops: symbologyDefinitions
+            }]
+          };
+          this._view.map.layers.forEach((lyr: any) => {
+            lyr.renderer = lyrRenderer;
+          });
+        } else {
+          this._view.map.layers.forEach((lyr: any) => {
+            lyr.renderer = null;
+          });
+        }
         this.scribeDataExplorerService.mapPointsSymbolizationSource.next(symbologyDefinitions);
         // ToDo: symbolize graphics based on latest renderer symbology
         /*const newGraphics = [];

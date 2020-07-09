@@ -48,6 +48,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   geoPointsArray = [];
   selectedPoint: ProjectSample = null;
   missingGeoPointsCount = 0;
+  // Map MDL symbolization props
+  isReadyToSymbolizeMapPoints = false;
   mapSymbolFields = [];
   mapPointSymbolBreaks: number = CONFIG_SETTINGS.mapPointSymbolBreaks;
   mapSymbolDefinitions: MapSymbol[] = [];
@@ -55,20 +57,28 @@ export class HomeComponent implements OnInit, AfterViewInit {
   mdlMin = null;
   mdlMax = null;
   colsSpan = 1;
-  // filter props
+  // url query param filtering props
   queryFilterParams: any;
   urlParamsSubscription: Subscription;
-  agGridCustomFilters = null;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  agGridActiveFilters: ActiveFilter[] = [];
-  filterNavOpened = false;
-  // AgGrid events
+  // AgGrid filter and events props
+  agGridCustomFilters = null;
+  private _agGridActiveFilters: ActiveFilter[] = [];
+  agGridActiveFiltersSubject: Subject<ActiveFilter[]> = new Subject<ActiveFilter[]>();
+  agGridActiveFiltersEvt: Observable<ActiveFilter[]> = this.agGridActiveFiltersSubject.asObservable();
   updateColDefs: Subject<any> = new Subject<any>();
   presetFilters: Subject<any> = new Subject<any>();
   updateFilters: Subject<any> = new Subject<any>();
   exportLabResultsCSV: Subject<string> = new Subject<string>();
   exportSamplePointLocationCSV: Subject<string> = new Subject<string>();
 
+  get agGridActiveFilters() {
+    return this._agGridActiveFilters;
+  }
+  set agGridActiveFilters(value: ActiveFilter[]) {
+    this._agGridActiveFilters = value;
+    this.agGridActiveFiltersSubject.next(value);
+  }
 
   constructor(public app: AppComponent,
               public route: ActivatedRoute,
@@ -111,6 +121,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    // subscribe to changes to active Ag Grid filter
+    this.agGridActiveFiltersEvt.subscribe((agGridActiveFilters) => {
+      this.checkReadyToSymbolizeMapPoints();
+    });
     // subscribe to MDL value entered event
     this.scribeDataExplorerService.mapPointsSymbolizationChangedEvent.subscribe((symbologyDefinitions) => {
       if (symbologyDefinitions && this.mapSymbolDefinitions !== symbologyDefinitions) {
@@ -132,6 +146,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.agGridActiveFilters.forEach((activeFilter, index) => {
           if (removedAgGridFilters.includes(activeFilter.field)) {
             this.agGridActiveFilters.splice(index, 1);
+            this.agGridActiveFilters = this.agGridActiveFilters.slice();
             this.clearQueryParam(activeFilter);
           }
         });
@@ -144,13 +159,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
             const queryParamAlias = CONFIG_SETTINGS.defaultColumnSettings.hasOwnProperty(agGridFilter.field)
                 ? CONFIG_SETTINGS.defaultColumnSettings[agGridFilter.field].alias : agGridFilter.field;
             const queryParamOperator = CONFIG_SETTINGS.queryParamOperators[agGridFilter.operand];
-            this.agGridActiveFilters.push({
+            const newActiveFilter = {
               field: agGridFilter.field,
               queryParam: `${queryParamAlias}${queryParamOperator}`,
               alias: queryParamAlias,
               operand: CONFIG_SETTINGS.displayFilterOperators[agGridFilter.operand],
               value: agGridFilter.value,
-            });
+            };
+            this.agGridActiveFilters = [...this.agGridActiveFilters, newActiveFilter];
             this.addQueryParam(this.agGridActiveFilters[this.agGridActiveFilters.length - 1]);
           } else { // check for updated filter value and/or operand
             this.agGridActiveFilters.forEach((activeFilter) => {
@@ -222,9 +238,20 @@ export class HomeComponent implements OnInit, AfterViewInit {
     const index = this.agGridActiveFilters.indexOf(filter);
     if (index >= 0) {
       this.agGridActiveFilters.splice(index, 1);
+      this.agGridActiveFilters = this.agGridActiveFilters.slice();
       this.clearQueryParam(filter);
       // update filters in Ag Grid
       this.updateFilters.next(this.agGridActiveFilters);
+    }
+  }
+
+  checkReadyToSymbolizeMapPoints() {
+    if (this.agGridActiveFilters.filter(f => f.field === 'Analyte').length > 0) {
+      this.isReadyToSymbolizeMapPoints = true;
+    } else {
+      this.isReadyToSymbolizeMapPoints = false;
+      // clear map symbolization
+      this.scribeDataExplorerService.mdlValueSource.next(undefined);
     }
   }
 
@@ -433,13 +460,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
       const agGridFilterDefinitions = this.definePresetAgGridFilterValues(this.queryFilterParams);
       for (const paramKey of Object.keys(agGridFilterDefinitions)) {
         // add active filter for chips
-        this.agGridActiveFilters.push({
+        const newActiveFilter = {
           field: paramKey,
           queryParam: agGridFilterDefinitions[paramKey].queryParam,
           alias: CONFIG_SETTINGS.defaultColumnSettings[paramKey].alias,
           operand: CONFIG_SETTINGS.displayFilterOperators[agGridFilterDefinitions[paramKey].relationalOperator],
           value: agGridFilterDefinitions[paramKey].value,
-        });
+        };
+        this.agGridActiveFilters = [...this.agGridActiveFilters, newActiveFilter];
         columnDefs.forEach((columnDef) => {
           if (columnDef.field === paramKey) {
             // determine the Ag Grid field's filter type

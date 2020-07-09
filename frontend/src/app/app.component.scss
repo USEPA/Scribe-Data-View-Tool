@@ -29,4 +29,6 @@ main {
   min-height: 100vh; // same height as browser window height
 }
 
-
+::ng-deep .mat-select-value-text {
+  white-space: normal !important;
+}
