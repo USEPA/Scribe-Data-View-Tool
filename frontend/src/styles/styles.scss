@@ -106,6 +106,10 @@ footer {
   box-shadow: 0 8px 6px -6px black;
 }
 
+.esri-view-height-less-than-medium .esri-popup__main-container {
+  max-height: 250px !important;
+}
+
 // custom AG Grid styles
 .ag-theme-balham .ag-cell {
   font-size: 10px !important;
@@ -121,4 +125,3 @@ footer {
   top: 40%;
   left: 75%;
 }
-

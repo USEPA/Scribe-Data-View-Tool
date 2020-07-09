@@ -1,8 +1,10 @@
 import {Component, Input, OnInit, OnDestroy, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
 import {AgGridSelectFilterComponent} from '@components/ag-grid/ag-grid-select-filter.component';
 import {Observable, Subscription} from 'rxjs';
-import {FiltersInterfaceTypes, ActiveFilter} from '../../filtersInterfaceTypes';
 import { ColDef } from 'ag-grid-community';
+
+import {ActiveFilter} from '../../filtersInterfaceTypes';
+import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
 
 
 @Component({
@@ -59,7 +61,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
   @Input() updatingFilters: Observable<any>;
   @Input() exportingCSV: Observable<string>;
 
-  constructor() {
+  constructor(public scribeDataExplorerService: ScribeDataExplorerService) {
     this.showGrid = true;
     this.defaultColDef = {
       autoHeight: true,
@@ -71,6 +73,8 @@ export class AgGridComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Subscribe to observable events
+
+    // subscribe to table filtering and column events
     if (this.settingFilters) {
       this.settingFiltersSubscription = this.settingFilters.subscribe((presetFilters) => {
         this.setPresetFilters(presetFilters);
@@ -93,6 +97,24 @@ export class AgGridComponent implements OnInit, OnDestroy {
     if (this.exportingCSV) {
       this.exportingCSVSubscription = this.exportingCSV.subscribe((title) => this.exportCSV(title));
     }
+    // subscribe to map component events
+    // on map point selected / clicked, select corresponding table rows
+    this.scribeDataExplorerService.mapPointSelectedChangedEvent.subscribe((pointAttributes) => {
+      if (this.gridApi && pointAttributes) {
+        this.gridApi.deselectAll();
+        let isFirstSamplePoint;
+        this.gridApi.forEachNode( (node) => {
+          if (node.data.Samp_No === pointAttributes.Samp_No) {
+            node.setSelected( true );
+            if (!isFirstSamplePoint) {
+              this.gridApi.ensureIndexVisible(node.rowIndex, 'top');
+              isFirstSamplePoint = true;
+            }
+          }
+        });
+      }
+    });
+
     // Set custom filter properties for column definitions
     if (this.columnDefs && this.customFilterProps) {
       this.setColDefFilterProps();

@@ -16,6 +16,7 @@ import {loadModules} from 'esri-loader';
 import {CONFIG_SETTINGS} from '../../config_settings';
 import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
 import {MapSymbolizationProps} from '../../projectInterfaceTypes';
+import FeatureLayerType = __esri.FeatureLayer;
 // import {MapService} from '@services/map.service';
 // import {LoginService} from '@services/login.service';
 
@@ -47,6 +48,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
   private _initExtent;
   // mapService: MapService;
   private _selectedGeoPoint: any;
+  private mapPointsFeatureLayer: FeatureLayerType;
   private mapPointSymbolBreaks: number = CONFIG_SETTINGS.mapPointSymbolBreaks;
   private mapPointSymbolColors = CONFIG_SETTINGS.mapPointSymbolColors;
 
@@ -179,6 +181,20 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
       this._view.goTo(pointGraphicsArray, {animate: false});
       // The map has been initialized
       this._loaded = this._view.ready;
+      // subscribe to map view events
+      this._view.on('click', (event) => {
+        this._view.hitTest(event).then((response) => {
+          this._view.popup.open({
+            location: event.mapPoint,
+          });
+          // Only return features for the feature layer
+          const selectedFeature = response.results.filter((result) => {
+           return result.graphic.layer === this.mapPointsFeatureLayer;
+          })[0].graphic;
+          // on map point selected / clicked, select corresponding table rows
+          this.scribeDataExplorerService.mapPointSelectedSource.next(selectedFeature.attributes);
+        });
+      });
     });
   }
 
@@ -250,7 +266,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
   /*
    Creates client-side graphics and a feature layer from existing lat/long pairs and then adds it to the map
   */
-  addPoints(pointData: any[]) {
+  async addPoints(pointData: any[]) {
     let pointGraphic = null;
     const pointGraphicsArray = [];
     pointData.forEach((pt: any) => {
@@ -286,25 +302,24 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
     if (pointGraphicsArray.length > 0) {
       this._view.graphics.addMany(pointGraphicsArray);
       // Create the feature layer from client-side graphics and add to map
-      const layer = this.createFeatureLayerFromGraphics(pointGraphicsArray);
-      layer.then((lyr) => {
-        this._view.map.add(lyr);
-        lyr.when((lyrLoaded) => {
-          // get and set the map extent from the feature layer extent
-          this.setHomeExtentFromFl(lyrLoaded);
-        });
+      this.mapPointsFeatureLayer = await this.createFeatureLayerFromGraphics(pointGraphicsArray);
+      this._view.map.add(this.mapPointsFeatureLayer);
+      this.mapPointsFeatureLayer.when((lyrLoaded) => {
+        // get and set the map extent from the feature layer extent
+        this.setHomeExtentFromFl(lyrLoaded);
       });
     }
     this.mapFeaturesLoadedEvent.emit(pointGraphicsArray.length);
     return pointGraphicsArray;
   }
 
-  async createFeatureLayerFromGraphics(pointGraphicsArray: any) {
+  createFeatureLayerFromGraphics(pointGraphicsArray: any): Promise<FeatureLayerType> {
     const lyr = new this._featureLayer({
       geometryType: 'point',
       source: pointGraphicsArray,
       objectIdField: 'ObjectID',
       fields: this.setFeatureLayerFields(this.pointData),
+      outFields: ['*'],
       popupTemplate: this.setLayerPopupTemplate(this.pointData),
       renderer: {  // overrides the layer's default renderer
         type: 'simple',
@@ -321,7 +336,6 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
         wkid: 4326
       }
     });
-    await lyr;
     return lyr;
   }
 
@@ -339,23 +353,24 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
 
   setLayerPopupTemplate(records: any[]) {
     let popupTemplate;
-    let title: string;
     const fieldInfos = [];
     Object.keys(records[0]).forEach((key) => {
-      if (!title && key === 'Samp_No') {
-        title = `Sample Number: ${records[0][key]}`;
+      if (key === 'Samp_No') {
+        fieldInfos.unshift({fieldName: key});
         return;
       }
       fieldInfos.push({fieldName: key});
     });
     popupTemplate = {
-      title,
+      title: 'Sample Point',
       content: [
         {
           type: 'fields',
           fieldInfos
         }
-      ]
+      ],
+      alignment: 'bottom-center',
+      autoOpenEnabled: false
     };
     return popupTemplate;
   }
