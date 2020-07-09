@@ -17,6 +17,9 @@ import {CONFIG_SETTINGS} from '../../config_settings';
 import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
 import {MapSymbolizationProps} from '../../projectInterfaceTypes';
 import FeatureLayerType = __esri.FeatureLayer;
+import FeatureLayerViewType = __esri.FeatureLayerView;
+import GraphicsLayerType = __esri.GraphicsLayer;
+import SketchViewModelType = __esri.SketchViewModel;
 // import {MapService} from '@services/map.service';
 // import {LoginService} from '@services/login.service';
 
@@ -39,19 +42,24 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
   private _map: __esri.Map = null;
   private _view: __esri.MapView = null;
   private _graphic;
+  private _graphicsLayer;
   private _featureLayer;
   private _zoomToPointGraphic;
   private _point;
   private _viewPoint;
   private _mesh;
   private _homeBtn;
+  private _sketchViewModel;
   private _initExtent;
   // mapService: MapService;
-  private _selectedGeoPoint: any;
-  private mapPointsFeatureLayer: FeatureLayerType;
   private mapPointSymbolBreaks: number = CONFIG_SETTINGS.mapPointSymbolBreaks;
   private mapPointSymbolColors = CONFIG_SETTINGS.mapPointSymbolColors;
+  mapPointsFeatureLayer: FeatureLayerType;
+  mapPointsFeatureLayerHighlight;
+  polygonSelectionGraphicsLayer: GraphicsLayerType;
+  pointSelectionSketchViewModel: SketchViewModelType;
 
+  private _selectedGeoPoint: any;
   @Input()
   set center(center: Array<number>) {
     this._center = center;
@@ -99,26 +107,31 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
     const self = this;
     try {
       // Load the modules for the ArcGIS API for JavaScript
-      const [EsriMap, SceneView, FeatureLayer, Graphic, Point, Viewpoint, Mesh, Home, BasemapGallery, Expand] = await loadModules([
+      const [EsriMap, SceneView, FeatureLayer, Graphic, GraphicsLayer, Point, Viewpoint, Mesh, Home,
+        BasemapGallery, Expand, SketchViewModel] = await loadModules([
         'esri/Map',
         'esri/views/SceneView',
         'esri/layers/FeatureLayer',
         'esri/Graphic',
+        'esri/layers/GraphicsLayer',
         'esri/geometry/Point',
         'esri/Viewpoint',
         'esri/geometry/Mesh',
         'esri/widgets/Home',
         'esri/widgets/BasemapGallery',
-        'esri/widgets/Expand'
+        'esri/widgets/Expand',
+        'esri/widgets/Sketch/SketchViewModel',
       ]);
 
       // Initialize the graphics and geometry Esri Modules properties for this class
       self._featureLayer = FeatureLayer;
       self._graphic = Graphic;
+      self._graphicsLayer = GraphicsLayer;
       self._point = Point;
       self._viewPoint = Viewpoint;
       self._mesh = Mesh;
       self._homeBtn = Home;
+      self._sketchViewModel = SketchViewModel;
 
       // Configure the BaseMap
       const mapProperties: __esri.MapProperties = {
@@ -181,6 +194,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
       this._view.goTo(pointGraphicsArray, {animate: false});
       // The map has been initialized
       this._loaded = this._view.ready;
+
       // subscribe to map view events
       this._view.on('click', (event) => {
         this._view.hitTest(event).then((response) => {
@@ -195,6 +209,9 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
           this.scribeDataExplorerService.mapPointSelectedSource.next(selectedFeature.attributes);
         });
       });
+      // create a new sketchviewmodel and set its properties
+      // set up the click event for the select by polygon button
+      this.setupPointSelectionSketchViewModel();
     });
   }
 
@@ -513,4 +530,87 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
     }
     return symbologyDefinitions;
   }
+
+  setupPointSelectionSketchViewModel() {
+    // define polygon graphics layer used to draw a sketch view model and to query features / map points that intersect it
+    this.polygonSelectionGraphicsLayer = new this._graphicsLayer();
+    this._map.add(this.polygonSelectionGraphicsLayer);
+    // create a new sketch view model set with the polygon graphics layer
+    this.pointSelectionSketchViewModel = new this._sketchViewModel({
+      view: this._view,
+      layer: this.polygonSelectionGraphicsLayer,
+      pointSymbol: {
+        type: 'simple-marker',
+        color: [255, 255, 255, 0],
+        size: '2px',
+        outline: {
+          color: [21, 244, 238],
+          width: 6
+        }
+      }
+    });
+
+    // add the select by polygon button to the view and create event listener
+    this._view.ui.add('select-by-polygon', 'top-left');
+    const selectButton = document.getElementById('select-by-polygon');
+    selectButton.addEventListener('click', (event) => {
+      this._view.popup.close();
+      // enable drawing the polygon
+      if (this.pointSelectionSketchViewModel.state !== 'active') {
+        this.pointSelectionSketchViewModel.create('polygon');
+      } else {
+        this.pointSelectionSketchViewModel.cancel();
+      }
+    });
+
+    this.pointSelectionSketchViewModel.on('create', (event) => {
+      if (event.state === 'complete') {
+        this.polygonSelectionGraphicsLayer.remove(event.graphic);
+        this.selectPointFeatures(event.graphic.geometry);
+      }
+    });
+  }
+
+  selectPointFeatures(geometry) {
+    if (this.mapPointsFeatureLayer) {
+      // create a query and set its geometry parameter to the polygon that was drawn on the view
+      const query = {
+        geometry,
+        outFields: ['*']
+      };
+      // query mapPointsFeatureLayer. Geometry set for the query, so only intersecting geometries are returned
+      this.mapPointsFeatureLayer.queryFeatures(query).then((results) => {
+          const graphics = results.features;
+          if (graphics.length > 0) {
+            // zoom to the extent of the polygon with factor 2
+            this._view.goTo(geometry.extent.expand(2)).catch((error) => {
+              if (error.name !== 'AbortError') {
+                console.error('Error selecting map points: ' + error);
+              }
+            });
+            // remove existing highlighted map point
+            if (this._zoomToPointGraphic) {
+              this._view.graphics.remove(this._zoomToPointGraphic);
+            }
+            // highlight the selected features
+            this._view.whenLayerView(this.mapPointsFeatureLayer).then((layerView: FeatureLayerViewType) => {
+              if (this.mapPointsFeatureLayerHighlight) {
+                this.mapPointsFeatureLayerHighlight.remove();
+              }
+              this.mapPointsFeatureLayerHighlight = layerView.highlight(graphics);
+            });
+            // get the attributes of map points
+            const pointsAttributeData = [];
+            graphics.map((feature, i) => {
+              pointsAttributeData.push(feature.attributes);
+            });
+            // on map points selected, filter them in corresponding table rows
+            this.scribeDataExplorerService.mapPointsSelectedSource.next(pointsAttributeData);
+          }
+        }).catch((error) => {
+          console.error('Error selecting map points: ' + error);
+        });
+    }
+  }
+
 }

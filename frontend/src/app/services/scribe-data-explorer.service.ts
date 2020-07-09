@@ -11,6 +11,8 @@ import {ColumnsRows, Project, ProjectLabResult, ProjectSample} from '../projectI
 export class ScribeDataExplorerService {
   public mapPointSelectedSource: BehaviorSubject<ProjectSample> = new BehaviorSubject<ProjectSample>(null);
   public mapPointSelectedChangedEvent: Observable<ProjectSample> = this.mapPointSelectedSource.asObservable();
+  public mapPointsSelectedSource: BehaviorSubject<ProjectSample[]> = new BehaviorSubject<ProjectSample[]>(null);
+  public mapPointsSelectedChangedEvent: Observable<ProjectSample[]> = this.mapPointsSelectedSource.asObservable();
   public mdlValueSource: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   public mdlValueChangedEvent: Observable<any> = this.mdlValueSource.asObservable();
   public mapPointsSymbolizationSource: BehaviorSubject<any> = new BehaviorSubject<any>(null);

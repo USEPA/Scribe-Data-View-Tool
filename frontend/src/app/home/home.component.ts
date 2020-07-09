@@ -42,6 +42,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   projectSamplesColDefs: ColumnDefs[] = [];
   projectSamplesRowData: ProjectSample[] = [];
   // lab results props
+  combinedLabResultRowData = [];
   projectLabResultsColDefs: ColumnDefs[] = [];
   projectLabResultsRowData: ProjectLabResult[] = [];
   // map / geo point props
@@ -110,7 +111,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
           this.projects.setValue(this.selectedProjects.map(id => parseInt(id)));
         }
       }
-
       /*const filters = [];
       for (const key of Object.keys(queryParams).filter(k => k !== 'projects')) {
         filters.push({name: key, value: queryParams[key]});
@@ -129,6 +129,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.scribeDataExplorerService.mapPointsSymbolizationChangedEvent.subscribe((symbologyDefinitions) => {
       if (symbologyDefinitions && this.mapSymbolDefinitions !== symbologyDefinitions) {
         this.mapSymbolDefinitions = symbologyDefinitions;
+      }
+    });
+    // subscribe to selected map points event, and set table rows to the new subset of selected sample points
+    this.scribeDataExplorerService.mapPointsSelectedChangedEvent.subscribe((selectedSamplePointsRowData) => {
+      if (selectedSamplePointsRowData) {
+        this.projectLabResultsRowData = this.mergeSelectedSamplesAndLabResults(selectedSamplePointsRowData, this.combinedLabResultRowData);
       }
     });
   }
@@ -284,7 +290,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   async getCombinedProjectData(projectIds) {
     let combinedSamplePointRowData = [];
-    let combinedLabResultRowData = [];
     this.isLoadingData = true;
     // combine all project sample point and lab results data
     const projectsSamplePoints = await Promise.all(projectIds.map(async (projectId) => {
@@ -297,7 +302,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       return rows;
     }));
     combinedSamplePointRowData = [].concat(...projectsSamplePoints);
-    combinedLabResultRowData = [].concat(...projectsLabResults);
+    this.combinedLabResultRowData = [].concat(...projectsLabResults);
     if (combinedSamplePointRowData.length > 0) {
       this.projectSamplesColDefs = this.setAgGridColumnProps(combinedSamplePointRowData);
       this.projectSamplesRowData = combinedSamplePointRowData;
@@ -312,9 +317,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
             return array[index].colId;
           }
         });
-        this.projectLabResultsColDefs = [...samplePointCols, ...this.setAgGridColumnProps(combinedLabResultRowData, addedSamplePointColIDs)];
-        this.projectLabResultsRowData = this.mergeSamplesAndLabResults(this.projectSamplesRowData, combinedLabResultRowData);
-        this.missingGeoPointsCount = this.getMissingGeoPoints(this.projectSamplesRowData, combinedLabResultRowData);
+        this.projectLabResultsColDefs = [...samplePointCols,
+          ...this.setAgGridColumnProps(this.combinedLabResultRowData, addedSamplePointColIDs)];
+        this.projectLabResultsRowData = this.mergeAllSamplesAndLabResults(this.projectSamplesRowData, this.combinedLabResultRowData);
+        this.missingGeoPointsCount = this.getMissingGeoPoints(this.projectSamplesRowData, this.combinedLabResultRowData);
       }
       // set ag-grid select filter properties
       this.setAgGridSelectFilters();
@@ -348,7 +354,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     return latLongRecords;
   }
 
-  mergeSamplesAndLabResults(samplePoints, labResults) {
+  mergeAllSamplesAndLabResults(samplePoints, labResults) {
     const rowDataMerged = [];
     labResults.forEach(result => {
       rowDataMerged.push({
@@ -357,6 +363,21 @@ export class HomeComponent implements OnInit, AfterViewInit {
       });
     });
     return rowDataMerged;
+  }
+
+  mergeSelectedSamplesAndLabResults(selectedSamplePoints, labResults) {
+      const rowDataMerged = [];
+      labResults.forEach(result => {
+        const found = selectedSamplePoints.find((point) => {
+          if (point.Samp_No === result.Samp_No) {
+            return point;
+          }
+        });
+        if (found) {
+          rowDataMerged.push({...result, ...found});
+        }
+      });
+      return rowDataMerged;
   }
 
   getMissingGeoPoints(samplePoints, labResults) {
