@@ -297,9 +297,14 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
           id: portalItemId
         }
       } as __esri.LayerFromPortalItemParams).then( (portalLyr) => {
-        this._map.add(portalLyr);
-        portalLyr.load();
-        console.log(portalLyr);
+        portalLyr.load().then((loadedPortalLyr) => {
+          const portalLyrSubLayers = loadedPortalLyr.createServiceSublayers();
+          // delete the scribe data sublayer
+          portalLyrSubLayers.items.splice(0, 1);
+          loadedPortalLyr.sublayers = portalLyrSubLayers;
+          this._map.add(loadedPortalLyr);
+          console.log(this._map);
+        });
       }).catch((error) => {
         console.log(error);
       });
