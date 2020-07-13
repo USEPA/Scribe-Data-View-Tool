@@ -147,10 +147,9 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
       self._map = new EsriMap(mapProperties);
 
       // Initialize the MapView
-      const mapInstance: __esri.Map = new EsriMap(mapProperties);
       const sceneViewProperties: __esri.MapViewProperties = {
         container: this.mapViewEl.nativeElement,
-        map: mapInstance,
+        map: self._map,
         center: this._center,
         popup: {
           dockEnabled: false,
