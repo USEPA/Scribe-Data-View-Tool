@@ -20,8 +20,8 @@ import FeatureLayerType = __esri.FeatureLayer;
 import FeatureLayerViewType = __esri.FeatureLayerView;
 import GraphicsLayerType = __esri.GraphicsLayer;
 import SketchViewModelType = __esri.SketchViewModel;
+import {LoginService} from '@services/login.service';
 // import {MapService} from '@services/map.service';
-// import {LoginService} from '@services/login.service';
 
 
 @Component({
@@ -44,6 +44,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
   private _graphic;
   private _graphicsLayer;
   private _featureLayer;
+  private _layer;
   private _zoomToPointGraphic;
   private _point;
   private _viewPoint;
@@ -95,11 +96,10 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
     return this._selectedGeoPoint;
   }
 
-  @Input() baseMapId: ReplaySubject<string>;
+  @Input() portalLayerIds: string[];
   @Input() pointData: any[];
 
-  constructor(public scribeDataExplorerService: ScribeDataExplorerService) {
-    // ToDo: Add in map service if and when Geoplatform map services need to be pulled into the application
+  constructor(public loginService: LoginService, public scribeDataExplorerService: ScribeDataExplorerService) {
     // this.mapService = new MapService(loginService.access_token);
   }
 
@@ -107,11 +107,12 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
     const self = this;
     try {
       // Load the modules for the ArcGIS API for JavaScript
-      const [EsriMap, SceneView, FeatureLayer, Graphic, GraphicsLayer, Point, Viewpoint, Mesh, Home,
+      const [EsriMap, SceneView, FeatureLayer, Layer, Graphic, GraphicsLayer, Point, Viewpoint, Mesh, Home,
         BasemapGallery, Expand, SketchViewModel] = await loadModules([
         'esri/Map',
         'esri/views/SceneView',
         'esri/layers/FeatureLayer',
+        'esri/layers/Layer',
         'esri/Graphic',
         'esri/layers/GraphicsLayer',
         'esri/geometry/Point',
@@ -123,8 +124,9 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
         'esri/widgets/Sketch/SketchViewModel',
       ]);
 
-      // Initialize the graphics and geometry Esri Modules properties for this class
+      // Initialize the Esri Modules properties for this map component class
       self._featureLayer = FeatureLayer;
+      self._layer = Layer;
       self._graphic = Graphic;
       self._graphicsLayer = GraphicsLayer;
       self._point = Point;
@@ -189,11 +191,17 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
     // Initialize MapView and return an instance of MapView
     this.initializeMap().then(mapView => {
       // add initial geometries to the scene view
-      const pointGraphicsArray = this.addPoints(this.pointData);
-      this.add3dPoints(this.pointData);
-      this._view.goTo(pointGraphicsArray, {animate: false});
+      if (this.pointData) {
+        const pointGraphicsArray = this.addPoints(this.pointData);
+        this.add3dPoints(this.pointData);
+        this._view.goTo(pointGraphicsArray, {animate: false});
+      }
       // The map has been initialized
       this._loaded = this._view.ready;
+      // load any portal layers from input prop
+      if (this.portalLayerIds) {
+        this.loadPortalLayers(this.portalLayerIds);
+      }
 
       // subscribe to map view events
       this._view.on('click', (event) => {
@@ -266,9 +274,11 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
         // ***IMPORTANT: Clear Map Graphics and Layers***
         this._view.graphics = null;
         this._view.map.layers = null;
-        const pointGraphicsArray = this.addPoints(changes.pointData.currentValue);
-        this.add3dPoints(changes.pointData.currentValue);
-        this._view.goTo(pointGraphicsArray, {animate: false});
+        if (changes.pointData.currentValue) {
+          const pointGraphicsArray = this.addPoints(changes.pointData.currentValue);
+          this.add3dPoints(changes.pointData.currentValue);
+          this._view.goTo(pointGraphicsArray, {animate: false});
+        }
       }
     }
   }
@@ -278,6 +288,23 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
       // destroy the map view
       this._view.container = null;
     }
+  }
+
+  async loadPortalLayers(portalLyrItemIds) {
+    const portalLayers: __esri.Layer[]  = await Promise.all(portalLyrItemIds.map(async (portalItemId) => {
+      return this._layer.fromPortalItem({
+        portalItem: {
+          id: portalItemId
+        }
+      } as __esri.LayerFromPortalItemParams).then( (portalLyr) => {
+        this._map.add(portalLyr);
+        portalLyr.load();
+        console.log(portalLyr);
+      }).catch((error) => {
+        console.log(error);
+      });
+    }));
+    // console.log(this._map.allLayers);
   }
 
   /*

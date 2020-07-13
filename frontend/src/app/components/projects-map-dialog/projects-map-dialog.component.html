@@ -1,0 +1,15 @@
+<div>
+  <h1 mat-dialog-title>
+    <span>Select which project(s) you want to see: </span>
+  </h1>
+  <div mat-dialog-content>
+    <app-map-view
+      [portalLayerIds]="['add9432d507146e7abf3351efa097b99']"
+      (mapFeaturesLoadedEvent)="mapGeoFeaturesLoaded($event)"
+    ></app-map-view>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="accent" (click)="dismiss()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="confirm()">Go</button>
+  </div>
+</div>

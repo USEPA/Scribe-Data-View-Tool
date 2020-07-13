@@ -22,6 +22,7 @@ import {AgGridModule} from 'ag-grid-angular';
 import { AgGridSelectFilterComponent } from '@components/ag-grid/ag-grid-select-filter.component';
 import { MapViewComponent } from './components/map-view/map-view.component';
 import { VisibleColumnsDialogComponent } from './components/visible-columns-dialog/visible-columns-dialog.component';
+import { ProjectsMapDialogComponent } from './components/projects-map-dialog/projects-map-dialog.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { VisibleColumnsDialogComponent } from './components/visible-columns-dial
     AgGridComponent,
     AgGridSelectFilterComponent,
     MapViewComponent,
-    VisibleColumnsDialogComponent
+    VisibleColumnsDialogComponent,
+    ProjectsMapDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +72,8 @@ import { VisibleColumnsDialogComponent } from './components/visible-columns-dial
     },
     LoginService],
   entryComponents: [
-    VisibleColumnsDialogComponent
+    VisibleColumnsDialogComponent,
+    ProjectsMapDialogComponent
   ],
   bootstrap: [AppComponent]
 })

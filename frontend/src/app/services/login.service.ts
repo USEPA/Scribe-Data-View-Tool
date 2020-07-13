@@ -3,6 +3,8 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Router, ActivatedRouteSnapshot, CanActivateChild, RouterStateSnapshot, CanActivate} from '@angular/router';
+import {loadModules} from 'esri-loader';
+
 import {environment} from '../../environments/environment';
 
 
@@ -17,7 +19,7 @@ export class LoginService implements CanActivateChild, CanActivate {
   redirect_uri: string;
   local_client_id: string;
   oauth_url: string;
-  // esri_token_object: any;
+  esri_token_object: any;
   groups: string[];
   permissions: string[];
   is_superuser: boolean;
@@ -80,29 +82,25 @@ export class LoginService implements CanActivateChild, CanActivate {
   }
 
 
-  // setEsriToken(access_token: string, expires_in: string, user_id: string) {
-  //   return new Observable(obs => {
-  //     loadModules(['esri/identity/IdentityManager', 'esri/identity/OAuthInfo'])
-  //       .then(([IdentityManager, OAuthInfo]) => {
-  //         const info = new OAuthInfo({
-  //           appId: environment.oauth_client_id,
-  //           portalUrl: 'https://epa.maps.arcgis.com'
-  //         });
-  //         IdentityManager.registerOAuthInfos([info]);
-  //         this.esri_token_object = {
-  //           expires: expires_in,
-  //           server: `https://epa.maps.arcgis.com/sharing`,
-  //           ssl: true,
-  //           token: access_token,
-  //           userId: user_id
-  //         };
-  //         IdentityManager.registerToken(this.esri_token_object);
-  //         localStorage.setItem('esri_oauth_token', JSON.stringify(this.esri_token_object));
-  //         obs.next();
-  //         obs.complete();
-  //       });
-  //   });
-  // }
+  async setEsriToken(access_token: string, expires_in: string, user_id: string) {
+    loadModules(['esri/identity/IdentityManager', 'esri/identity/OAuthInfo'])
+      .then(([IdentityManager, OAuthInfo]) => {
+        const info = new OAuthInfo({
+          appId: environment.oauth_client_id,
+          portalUrl: 'https://epa.maps.arcgis.com'
+        });
+        IdentityManager.registerOAuthInfos([info]);
+        this.esri_token_object = {
+          expires: expires_in,
+          server: `https://epa.maps.arcgis.com/sharing`,
+          ssl: true,
+          token: access_token,
+          userId: user_id
+        };
+        IdentityManager.registerToken(this.esri_token_object);
+        localStorage.setItem('esri_oauth_token', JSON.stringify(this.esri_token_object));
+      });
+  }
 
   setAccessToken(accessToken: string, expiresIn: number) {
     localStorage.setItem('access_token', accessToken);
@@ -129,26 +127,31 @@ export class LoginService implements CanActivateChild, CanActivate {
       this.display_name = localStorage.getItem('display_name');
       this.access_token = localStorage.getItem('access_token');
       if (this.access_token) {
-        obs.next();
-        obs.complete();
+        this.loadEsriToken()
+          .then(() => {
+            obs.next();
+            obs.complete();
+          }).catch(() => {
+          obs.error();
+        });
       } else {
         obs.error();
       }
     });
   }
 
-  // loadEsriToken() {
-  //   this.esri_token_object = JSON.parse(localStorage.getItem('esri_oauth_token'));
-  //   return loadModules(['esri/identity/IdentityManager', 'esri/identity/OAuthInfo'])
-  //     .then(([IdentityManager, OAuthInfo]) => {
-  //       const info = new OAuthInfo({
-  //         appId: environment.oauth_client_id,
-  //         portalUrl: 'https://epa.maps.arcgis.com'
-  //       });
-  //       IdentityManager.registerOAuthInfos([info]);
-  //       IdentityManager.registerToken(this.esri_token_object);
-  //     });
-  // }
+  loadEsriToken() {
+    return loadModules(['esri/identity/IdentityManager', 'esri/identity/OAuthInfo'])
+      .then(([IdentityManager, OAuthInfo]) => {
+        const info = new OAuthInfo({
+          appId: environment.oauth_client_id,
+          portalUrl: 'https://epa.maps.arcgis.com'
+        });
+        this.esri_token_object = JSON.parse(localStorage.getItem('esri_oauth_token'));
+        IdentityManager.registerOAuthInfos([info]);
+        IdentityManager.registerToken(this.esri_token_object);
+      });
+  }
 
   isTokenValid() {
     const now = new Date();

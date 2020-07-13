@@ -102,6 +102,7 @@ footer {
 // map styles
 .map-container {
   height: 100%;
+  min-height: 400px;
   width: 100%;
   box-shadow: 0 8px 6px -6px black;
 }
@@ -122,6 +123,6 @@ footer {
 // Other custom styles
 .loading-spinner {
   position: absolute;
-  top: 40%;
-  left: 75%;
+  top: 45%;
+  left: 50%;
 }

@@ -19,6 +19,7 @@ export class OauthcallbackComponent implements OnInit {
       switchMap(async fragment => {
         const oauthParams = fragment.match('(access_token=)(.*)(&expires_in=)(.*)(&username=)(.*)(&ssl=)');
         const tokenResponse = await this.loginService.convertToken(oauthParams[2], oauthParams[4], oauthParams[6]);
+        await this.loginService.setEsriToken(oauthParams[2], oauthParams[4], oauthParams[6]);
         this.loginService.setAccessToken(tokenResponse.access_token, tokenResponse.expires_in);
         await this.loginService.getUserProps();
       }),
