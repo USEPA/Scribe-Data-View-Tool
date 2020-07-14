@@ -2,13 +2,15 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {ColumnsRows, Project, ProjectLabResult, ProjectSample} from '../projectInterfaceTypes';
+import {ColumnsRows, Project, ProjectCentroid, ProjectLabResult, ProjectSample} from '../projectInterfaceTypes';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScribeDataExplorerService {
+  public projectCentroidsSelectedSource: BehaviorSubject<ProjectCentroid[]> = new BehaviorSubject<ProjectCentroid[]>(null);
+  public projectCentroidsSelectedEvent: Observable<ProjectCentroid[]> = this.projectCentroidsSelectedSource.asObservable();
   public mapPointSelectedSource: BehaviorSubject<ProjectSample> = new BehaviorSubject<ProjectSample>(null);
   public mapPointSelectedChangedEvent: Observable<ProjectSample> = this.mapPointSelectedSource.asObservable();
   public mapPointsSelectedSource: BehaviorSubject<ProjectSample[]> = new BehaviorSubject<ProjectSample[]>(null);

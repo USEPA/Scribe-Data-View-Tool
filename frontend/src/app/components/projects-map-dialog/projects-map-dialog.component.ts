@@ -1,6 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+
 import {VisibleColumnsDialogComponent} from '@components/visible-columns-dialog/visible-columns-dialog.component';
+import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
+import {ProjectCentroid} from '../../projectInterfaceTypes';
 
 
 @Component({
@@ -9,11 +12,23 @@ import {VisibleColumnsDialogComponent} from '@components/visible-columns-dialog/
   styleUrls: ['./projects-map-dialog.component.css']
 })
 export class ProjectsMapDialogComponent implements OnInit {
+  selectedProjectCentroids: ProjectCentroid[];
+  selectedProjectNames = '';
 
   constructor(public dialogRef: MatDialogRef<VisibleColumnsDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) { }
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public scribeDataExplorerService: ScribeDataExplorerService) { }
 
   ngOnInit() {
+    // subscribe to selected project centroid points
+    this.scribeDataExplorerService.projectCentroidsSelectedEvent.subscribe((projectCentroids) => {
+      if (projectCentroids) {
+        this.selectedProjectNames = projectCentroids.map((projectCentroid) => {
+          return projectCentroid.PROJECT_NAME;
+        }).join(',');
+        this.selectedProjectCentroids = projectCentroids;
+      }
+    });
   }
 
   mapGeoFeaturesLoaded(val) {
@@ -21,7 +36,7 @@ export class ProjectsMapDialogComponent implements OnInit {
   }
 
   confirm() {
-    this.dialogRef.close({done: true, columns: this.data.columns});
+    this.dialogRef.close({done: true, data: this.selectedProjectCentroids});
   }
 
   dismiss() {

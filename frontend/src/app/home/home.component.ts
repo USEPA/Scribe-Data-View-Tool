@@ -14,11 +14,12 @@ import {
   ProjectLabResult,
   ColumnDefs,
   MapSymbolizationProps,
-  MapSymbol
+  MapSymbol,
+  ProjectCentroid
 } from '../projectInterfaceTypes';
 import {LoginService} from '@services/login.service';
 import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
-import {VisibleColumnsDialogComponent} from '../components/visible-columns-dialog/visible-columns-dialog.component';
+import {VisibleColumnsDialogComponent} from '@components/visible-columns-dialog/visible-columns-dialog.component';
 import {ProjectsMapDialogComponent} from '@components/projects-map-dialog/projects-map-dialog.component';
 import {FiltersInterfaceTypes, ActiveFilter} from '../filtersInterfaceTypes';
 import {CONFIG_SETTINGS} from '../config_settings';
@@ -146,7 +147,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
     });
     dialogRef.afterClosed().subscribe(results => {
       if (results && results.done) {
-        console.log(results);
+        this.clearProjects();
+        const projectCentroids: ProjectCentroid[] = results.data;
+        const newSelectedProjectIDs = projectCentroids.map((projectCentroid) => {
+          return projectCentroid.PROJECTID;
+        }).join(',');
+        this.setQueryParam('projects', newSelectedProjectIDs);
       }
     });
   }
@@ -336,9 +342,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
       }
       // set ag-grid select filter properties
       this.setAgGridSelectFilters();
+      this.showTable = true;
+    } else {
+      this.showTable = false;
     }
     this.isLoadingData = false;
-    this.showTable = true;
   }
 
   setProjects(event) {
@@ -358,13 +366,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  clearProjects(event) {
+  clearProjects(event = null) {
+    if (event) {
       event.stopPropagation();
-      this.initProps();
-      // disable the table and map components
-      this.showTable = false;
-      this.geoPointsArray = [];
-      this.projects.setValue(null);
+    }
+    this.initProps();
+    // disable the table and map components
+    this.showTable = false;
+    this.geoPointsArray = [];
+    this.projects.setValue(null);
   }
 
   async onTabChange(tabId) {

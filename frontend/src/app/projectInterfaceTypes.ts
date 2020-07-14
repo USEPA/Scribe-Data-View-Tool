@@ -20,6 +20,22 @@ export interface ColumnDefs {
   hide: boolean;
 }
 
+export interface ProjectCentroid {
+  OBJECTID: number;
+  CLIENT_COMPUTERNAME: string;
+  CLIENT_USERNAME: string;
+  CURRENT_VERSION: number;
+  EMAIL: string;
+  FULL_NAME: string;
+  LAST_UPDATE: number;
+  ORGANIZATION: string;
+  PHONE_NUMBER: string;
+  PROJECTID: number;
+  PROJECT_NAME: string;
+  PUBLISHER_ROLE: string;
+  UPDATE_TO_VERSION: number;
+}
+
 export interface ProjectLabResult {
   'LabResultsID': number;
   'Site_No': string;

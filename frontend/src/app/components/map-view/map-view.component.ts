@@ -40,7 +40,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
   private _baseMap = 'streets';
   public _loaded = false;
   private _map: __esri.Map = null;
-  private _view: __esri.MapView = null;
+  private _view: __esri.SceneView = null;
   private _graphic;
   private _graphicsLayer;
   private _featureLayer;
@@ -146,7 +146,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
       };
       self._map = new EsriMap(mapProperties);
 
-      // Initialize the MapView
+      // Initialize the SceneView
       const sceneViewProperties: __esri.MapViewProperties = {
         container: this.mapViewEl.nativeElement,
         map: self._map,
@@ -208,12 +208,18 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
           this._view.popup.open({
             location: event.mapPoint,
           });
-          // Only return features for the feature layer
-          const selectedFeature = response.results.filter((result) => {
-           return result.graphic.layer === this.mapPointsFeatureLayer;
-          })[0].graphic;
-          // on map point selected / clicked, select corresponding table rows
-          this.scribeDataExplorerService.mapPointSelectedSource.next(selectedFeature.attributes);
+          let selectedGraphic = response.results[0].graphic;
+          if ('PROJECTID' in selectedGraphic.attributes) {
+            // on project centroid point selected / clicked, go to that project
+            this.scribeDataExplorerService.projectCentroidsSelectedSource.next([selectedGraphic.attributes]);
+          } else {
+            // Only return selected map point graphic from the click event results
+            selectedGraphic = response.results.filter((result) => {
+             return result.graphic.layer === this.mapPointsFeatureLayer;
+            })[0].graphic;
+            // on map point selected / clicked, select corresponding table rows
+            this.scribeDataExplorerService.mapPointSelectedSource.next(selectedGraphic.attributes);
+          }
         });
       });
       // create a new sketchviewmodel and set its properties
@@ -292,17 +298,20 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
   async loadPortalLayers(portalLyrItemIds) {
     const portalLayers: __esri.Layer[]  = await Promise.all(portalLyrItemIds.map(async (portalItemId) => {
       return this._layer.fromPortalItem({
-        portalItem: {
-          id: portalItemId
-        }
-      } as __esri.LayerFromPortalItemParams).then( (portalLyr) => {
+          portalItem: {
+            id: portalItemId
+          }
+        } as __esri.LayerFromPortalItemParams).then( (portalLyr) => {
         portalLyr.load().then((loadedPortalLyr) => {
-          const portalLyrSubLayers = loadedPortalLyr.createServiceSublayers();
-          // delete the scribe data sublayer
-          portalLyrSubLayers.items.splice(0, 1);
-          loadedPortalLyr.sublayers = portalLyrSubLayers;
-          this._map.add(loadedPortalLyr);
-          console.log(this._map);
+          // const portalLyrSubLayers = loadedPortalLyr.createServiceSublayers();
+          const scribeProjectsSubLyr = portalLyr.sublayers.find((sublayer) => {
+            return sublayer.title === 'Scribe Projects';
+          });
+          const scribeProjectsFeatureLyr = scribeProjectsSubLyr.createFeatureLayer().then((featureLayer) => {
+            featureLayer.outFields = ['*'];
+            return featureLayer.load();
+          });
+          this._view.map.add(scribeProjectsFeatureLyr);
         });
       }).catch((error) => {
         console.log(error);
