@@ -18,8 +18,6 @@ import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service'
 import {MapSymbolizationProps} from '../../projectInterfaceTypes';
 import FeatureLayerType = __esri.FeatureLayer;
 import FeatureLayerViewType = __esri.FeatureLayerView;
-import GraphicsLayerType = __esri.GraphicsLayer;
-import SketchViewModelType = __esri.SketchViewModel;
 import {LoginService} from '@services/login.service';
 // import {MapService} from '@services/map.service';
 
@@ -30,6 +28,7 @@ import {LoginService} from '@services/login.service';
   styleUrls: ['./map-view.component.css']
 })
 export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
+  @Input() mapDivId = 'mapViewDiv';
   @Output() mapFeaturesLoadedEvent = new EventEmitter<number>();
 
   // The <div> where we will place the map
@@ -39,8 +38,8 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
   private _center: Array<number> = [-122.449445, 37.762852]; // -122.449445, 37.762852
   private _baseMap = 'streets';
   public _loaded = false;
-  private _map: __esri.Map = null;
-  private _view: __esri.SceneView = null;
+  private _map: __esri.Map;
+  private _view: __esri.SceneView;
   private _graphic;
   private _graphicsLayer;
   private _featureLayer;
@@ -55,10 +54,11 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
   // mapService: MapService;
   private mapPointSymbolBreaks: number = CONFIG_SETTINGS.mapPointSymbolBreaks;
   private mapPointSymbolColors = CONFIG_SETTINGS.mapPointSymbolColors;
-  mapPointsFeatureLayer: FeatureLayerType;
+  mapPointsFeatureLayer: __esri.FeatureLayer;
+  scribeProjectsFeatureLyr: __esri.FeatureLayer;
   mapPointsFeatureLayerHighlight;
-  polygonSelectionGraphicsLayer: GraphicsLayerType;
-  pointSelectionSketchViewModel: SketchViewModelType;
+  polygonSelectionGraphicsLayer: __esri.GraphicsLayer;
+  pointSelectionSketchViewModel: __esri.SketchViewModel;
 
   private _selectedGeoPoint: any;
   @Input()
@@ -137,7 +137,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
 
       // Configure the BaseMap
       const mapProperties: __esri.MapProperties = {
-        basemap: this._baseMap,
+        basemap: self._baseMap,
         ground: {
           navigationConstraint: {
             type: 'none'
@@ -145,12 +145,13 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
         }
       };
       self._map = new EsriMap(mapProperties);
+      this.mapViewEl.nativeElement.id = this.mapDivId;
 
       // Initialize the SceneView
       const sceneViewProperties: __esri.MapViewProperties = {
         container: this.mapViewEl.nativeElement,
         map: self._map,
-        center: this._center,
+        center: self._center,
         popup: {
           dockEnabled: false,
           dockOptions: {
@@ -161,24 +162,28 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
         },
       };
       // create map scene view
-      this._view = new SceneView(sceneViewProperties);
+      self._view = new SceneView(sceneViewProperties);
       // add ootb map widgets to view
-      this._homeBtn = new Home({
-        view: this._view
+      self._homeBtn = new Home({
+        view: self._view
       });
-      this._view.ui.add(this._homeBtn, 'top-right');
+      self._view.ui.add(self._homeBtn, 'top-right');
       const basemapGalleryWidget = new BasemapGallery({
-        view: this._view
+        view: self._view
       });
       const baseMapExpand = new Expand({
         expandIconClass: 'esri-icon-basemap',
-        view: this._view,
+        view: self._view,
         content: basemapGalleryWidget
       });
-      this._view.ui.add(baseMapExpand, 'top-right');
+      self._view.ui.add(baseMapExpand, 'top-right');
 
-      await this._view.when();
-      return this._view;
+      return self._view.when((loadedView) => {
+        // resolve();
+        return loadedView;
+      }, error => {
+        console.log(error);
+      });
 
     } catch (error) {
       console.log('EsriLoader: ', error);
@@ -208,17 +213,19 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
           this._view.popup.open({
             location: event.mapPoint,
           });
-          let selectedGraphic = response.results[0].graphic;
-          if ('PROJECTID' in selectedGraphic.attributes) {
-            // on project centroid point selected / clicked, go to that project
-            this.scribeDataExplorerService.projectCentroidsSelectedSource.next([selectedGraphic.attributes]);
-          } else {
-            // Only return selected map point graphic from the click event results
-            selectedGraphic = response.results.filter((result) => {
-             return result.graphic.layer === this.mapPointsFeatureLayer;
-            })[0].graphic;
-            // on map point selected / clicked, select corresponding table rows
-            this.scribeDataExplorerService.mapPointSelectedSource.next(selectedGraphic.attributes);
+          if (response.results.length > 0) {
+            let selectedGraphic = response.results[0].graphic;
+            if ('PROJECTID' in selectedGraphic.attributes) {
+              // on project centroid point selected / clicked, go to that project
+              this.scribeDataExplorerService.projectCentroidsSelectedSource.next([selectedGraphic.attributes]);
+            } else {
+              // Only return selected map point graphic from the click event results
+              selectedGraphic = response.results.filter((result) => {
+               return result.graphic.layer === this.mapPointsFeatureLayer;
+              })[0].graphic;
+              // on map point selected / clicked, select corresponding table rows
+              this.scribeDataExplorerService.mapPointSelectedSource.next(selectedGraphic.attributes);
+            }
           }
         });
       });
@@ -307,11 +314,15 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
           const scribeProjectsSubLyr = portalLyr.sublayers.find((sublayer) => {
             return sublayer.title === 'Scribe Projects';
           });
-          const scribeProjectsFeatureLyr = scribeProjectsSubLyr.createFeatureLayer().then((featureLayer) => {
-            featureLayer.outFields = ['*'];
-            return featureLayer.load();
-          });
-          this._view.map.add(scribeProjectsFeatureLyr);
+          if (scribeProjectsSubLyr) {
+            scribeProjectsSubLyr.createFeatureLayer().then((featureLayer) => {
+              featureLayer.outFields = ['*'];
+              featureLayer.load().then((loadedFeatureLyr) => {
+                this.scribeProjectsFeatureLyr = loadedFeatureLyr;
+                this._view.map.add(this.scribeProjectsFeatureLyr);
+              });
+            });
+          }
         });
       }).catch((error) => {
         console.log(error);
@@ -347,7 +358,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
           opacity: symbolColor ? 1 : 0,
           size: 7,
         };
-        pointGraphic = this._graphic({
+        pointGraphic = new this._graphic({
           geometry: point,
           symbol: graphicSymbol,
           attributes: pt,
@@ -490,7 +501,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
           }
         });
         // Create a graphic and add it to the view
-        meshPointGraphic = this._graphic({
+        meshPointGraphic = new this._graphic({
           geometry: meshGeometry,
           symbol: {
             type: 'mesh-3d',
@@ -529,7 +540,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
           width: 6
         }
       };
-      this._zoomToPointGraphic = this._graphic({
+      this._zoomToPointGraphic = new this._graphic({
         geometry: point,
         symbol: highlightSymbol
       });
@@ -612,14 +623,20 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
   }
 
   selectPointFeatures(geometry) {
+    // create a query and set its geometry parameter to the polygon that was drawn on the view
+    const query = {
+      geometry,
+      outFields: ['*']
+    };
+    let queryFeatureLayer = null;
     if (this.mapPointsFeatureLayer) {
-      // create a query and set its geometry parameter to the polygon that was drawn on the view
-      const query = {
-        geometry,
-        outFields: ['*']
-      };
+      queryFeatureLayer = this.mapPointsFeatureLayer;
+    } else if (this.scribeProjectsFeatureLyr) {
+      queryFeatureLayer = this.scribeProjectsFeatureLyr;
+    }
+    if (queryFeatureLayer) {
       // query mapPointsFeatureLayer. Geometry set for the query, so only intersecting geometries are returned
-      this.mapPointsFeatureLayer.queryFeatures(query).then((results) => {
+      queryFeatureLayer.queryFeatures(query).then((results) => {
           const graphics = results.features;
           if (graphics.length > 0) {
             // zoom to the extent of the polygon with factor 2
@@ -633,7 +650,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
               this._view.graphics.remove(this._zoomToPointGraphic);
             }
             // highlight the selected features
-            this._view.whenLayerView(this.mapPointsFeatureLayer).then((layerView: FeatureLayerViewType) => {
+            this._view.whenLayerView(queryFeatureLayer).then((layerView: FeatureLayerViewType) => {
               if (this.mapPointsFeatureLayerHighlight) {
                 this.mapPointsFeatureLayerHighlight.remove();
               }
@@ -644,8 +661,13 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
             graphics.map((feature, i) => {
               pointsAttributeData.push(feature.attributes);
             });
-            // on map points selected, filter them in corresponding table rows
-            this.scribeDataExplorerService.mapPointsSelectedSource.next(pointsAttributeData);
+            if (this.mapPointsFeatureLayer) {
+              // on map points selected, filter them in corresponding table rows
+              this.scribeDataExplorerService.mapPointsSelectedSource.next(pointsAttributeData);
+            } else if (this.scribeProjectsFeatureLyr) {
+              // on project centroid points selected, go to that project
+              this.scribeDataExplorerService.projectCentroidsSelectedSource.next(pointsAttributeData);
+            }
           }
         }).catch((error) => {
           console.error('Error selecting map points: ' + error);

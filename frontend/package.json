@@ -24,7 +24,7 @@
     "@angular/router": "~8.2.14",
     "ag-grid-angular": "^22.1.1",
     "ag-grid-community": "^22.1.1",
-    "esri-loader": "^2.10.0",
+    "esri-loader": "^2.15.0",
     "moment": "^2.24.0",
     "rxjs": "^6.5.4",
     "tslib": "^1.10.0",

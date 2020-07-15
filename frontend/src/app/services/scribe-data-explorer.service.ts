@@ -29,21 +29,21 @@ export class ScribeDataExplorerService {
   }
 
   async getProjectSamples(projectId: string) {
-    return await this.http.get<ColumnsRows>(`projects/PID_${projectId}/samples`).toPromise()
-      .then((colsRows) => {
-        return colsRows.rowData;
-      }).catch((error) => {
-        return [];
+    const results: ColumnsRows = await this.http.get<ColumnsRows>(`projects/PID_${projectId}/samples`).toPromise()
+      .catch((error) => {
+        console.log(error.message);
+        return {} as ColumnsRows;
       });
+    return results.rowData;
   }
 
   async getProjectLabResults(projectId: string) {
-    return await this.http.get<ProjectLabResult[]>(`PID_${projectId}/PID_${projectId}_LabResults`).toPromise()
-      .then((results) => {
-        return results;
-      }).catch((error) => {
+    const results = await this.http.get<ProjectLabResult[]>(`PID_${projectId}/PID_${projectId}_LabResults`).toPromise()
+      .catch((error) => {
+        console.log(error.message);
         return [];
       });
+    return results;
   }
 
 }

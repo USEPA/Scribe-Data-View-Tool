@@ -147,12 +147,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
     });
     dialogRef.afterClosed().subscribe(results => {
       if (results && results.done) {
-        this.clearProjects();
         const projectCentroids: ProjectCentroid[] = results.data;
         const newSelectedProjectIDs = projectCentroids.map((projectCentroid) => {
           return projectCentroid.PROJECTID;
-        }).join(',');
-        this.setQueryParam('projects', newSelectedProjectIDs);
+        });
+        const currentSelectedProjects = this.projects.value as Array<number>;
+        if (!currentSelectedProjects || (currentSelectedProjects.sort().join(',') !== newSelectedProjectIDs.sort().join(','))) {
+          this.clearProjects();
+          this.setQueryParam('projects', newSelectedProjectIDs.join(','));
+        }
       }
     });
   }
@@ -351,17 +354,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   setProjects(event) {
     event.stopPropagation();
-    const newSelectedProjects = this.projects.value.join(',');
-    const currentSelectedProjects = this.route.snapshot.queryParams.projects;
-    if (!currentSelectedProjects) {
-      this.setQueryParam('projects', newSelectedProjects);
-    } else {
-      if (newSelectedProjects !== currentSelectedProjects) {
-        const queryParams = {};
-        Object.keys(this.route.snapshot.queryParams).filter(k => k === 'projects').forEach(key => {
-          queryParams[key] = newSelectedProjects;
-        });
-        this.router.navigate([], {queryParams});
+    if (this.projects.value) {
+      const newSelectedProjects = this.projects.value.join(',');
+      const currentSelectedProjects = this.route.snapshot.queryParams.projects;
+      if (!currentSelectedProjects) {
+        this.setQueryParam('projects', newSelectedProjects);
+      } else {
+        if (newSelectedProjects !== currentSelectedProjects) {
+          const queryParams = {};
+          Object.keys(this.route.snapshot.queryParams).filter(k => k === 'projects').forEach(key => {
+            queryParams[key] = newSelectedProjects;
+          });
+          this.router.navigate([], {queryParams});
+        }
       }
     }
   }

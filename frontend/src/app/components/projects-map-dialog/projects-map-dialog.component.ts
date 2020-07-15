@@ -25,7 +25,7 @@ export class ProjectsMapDialogComponent implements OnInit {
       if (projectCentroids) {
         this.selectedProjectNames = projectCentroids.map((projectCentroid) => {
           return projectCentroid.PROJECT_NAME;
-        }).join(',');
+        }).join(', ');
         this.selectedProjectCentroids = projectCentroids;
       }
     });

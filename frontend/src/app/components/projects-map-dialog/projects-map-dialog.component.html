@@ -6,6 +6,7 @@
   </h1>
   <div mat-dialog-content>
     <app-map-view
+      [mapDivId]="'projectCentroidsMap'"
       [portalLayerIds]="['add9432d507146e7abf3351efa097b99']"
       (mapFeaturesLoadedEvent)="mapGeoFeaturesLoaded($event)"
     ></app-map-view>
