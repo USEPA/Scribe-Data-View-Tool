@@ -123,6 +123,7 @@ export interface ProjectSample {
 }
 
 export interface MapSymbolizationProps {
+  sampleType: string;
   min: number;
   max: number;
   threshold: number;

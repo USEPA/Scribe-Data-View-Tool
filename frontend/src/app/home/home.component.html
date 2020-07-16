@@ -57,11 +57,12 @@
       </span>
     </div>
     <!-- Map Symbology -->
-    <div *ngIf="geoPointsArray.length > 0 && isReadyToSymbolizeMapPoints" class="component-container-col">
+    <div *ngIf="selectedProjects.length > 0 && geoPointsArray.length > 0" class="component-container-col">
       <span class="mat-warn">
-        To symbologize map point samples by MDL, <br> filter to an Analyte and provide the MDL value within the range:
+        To symbologize map point samples by MDL, filter to an Analyte and optionally a Sample Type. <br>
+        Then provide the MDL value within the range:
       </span>
-      <div style="padding-top: 5px;">
+      <div *ngIf="isReadyToSymbolizeMapPoints" style="padding-top: 5px;">
         <mat-form-field style="min-width: 300px;">
           <input [formControl]="mdlThreshold" matInput type="number" autocomplete="off"
                  [placeholder]="'MDL Threshold between '+ mdlMin + ' and ' + mdlMax" [min]="mdlMin" [max]="mdlMax"/>

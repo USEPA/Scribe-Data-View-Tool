@@ -234,8 +234,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
           }
         });
       });
+
       this.geoPointsArray = this.getLatLongRecords(filteredSamplePoints);
       // set MDL min and max range
+      this.mdlThreshold.setValue(null);
       this.setMDLRange(this.geoPointsArray);
 
       // refresh missing map points number
@@ -272,7 +274,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   checkReadyToSymbolizeMapPoints() {
-    if (this.agGridActiveFilters.filter(f => f.field === 'Analyte').length > 0) {
+    const symbolizationFilters = ['Analyte'];
+    const symbolizationFiltersFound = this.agGridActiveFilters.filter(f => {
+      return symbolizationFilters.includes(f.alias);
+    });
+    if (symbolizationFiltersFound.length === 1) {
       this.isReadyToSymbolizeMapPoints = true;
     } else {
       this.isReadyToSymbolizeMapPoints = false;
@@ -291,8 +297,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   symbolizeMapPointsEvent() {
-    if (this.mdlThreshold.valid) {
-      const mapSymbolizationProps: MapSymbolizationProps = {threshold: this.mdlThreshold.value, min: this.mdlMin, max: this.mdlMax};
+    if (this.mdlThreshold.value && this.mdlThreshold.valid) {
+      const sampleTypeFilter = this.agGridActiveFilters.filter(f => {
+        return f.alias === 'Sample Type';
+      })[0];
+      const mapSymbolizationProps: MapSymbolizationProps = {
+        sampleType: sampleTypeFilter ? sampleTypeFilter.value.toLowerCase() : 'default',
+        threshold: this.mdlThreshold.value, min: this.mdlMin, max: this.mdlMax
+      };
       this.scribeDataExplorerService.mdlValueSource.next(mapSymbolizationProps);
     }
   }

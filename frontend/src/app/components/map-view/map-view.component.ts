@@ -256,11 +256,21 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
             }]
           };
           this._view.map.layers.forEach((lyr: any) => {
+            lyr.outFields = ['*']; // REQUIRED for querying the layer attributes
             lyr.renderer = lyrRenderer;
           });
         } else {
+          // reset renderer
+          const lyrRenderer = {
+            type: 'simple',
+            symbol: {
+              type: 'simple-marker',
+              size: 7,
+            }
+          };
           this._view.map.layers.forEach((lyr: any) => {
-            lyr.renderer = null;
+            lyr.outFields = ['*']; // REQUIRED for querying the layer attributes
+            lyr.renderer = lyrRenderer;
           });
         }
         this.scribeDataExplorerService.mapPointsSymbolizationSource.next(symbologyDefinitions);
@@ -316,7 +326,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
           });
           if (scribeProjectsSubLyr) {
             scribeProjectsSubLyr.createFeatureLayer().then((featureLayer) => {
-              featureLayer.outFields = ['*'];
+              featureLayer.outFields = ['*']; // REQUIRED for querying the layer attributes
               featureLayer.load().then((loadedFeatureLyr) => {
                 this.scribeProjectsFeatureLyr = loadedFeatureLyr;
                 this._view.map.add(this.scribeProjectsFeatureLyr);
@@ -387,17 +397,14 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
       source: pointGraphicsArray,
       objectIdField: 'ObjectID',
       fields: this.setFeatureLayerFields(this.pointData),
-      outFields: ['*'],
+      outFields: ['*'], // REQUIRED for querying the layer attributes
       popupTemplate: this.setLayerPopupTemplate(this.pointData),
       renderer: {  // overrides the layer's default renderer
         type: 'simple',
         symbol: {
           type: 'simple-marker',
           opacity: 0,
-          outline: {
-            width: 0.5,
-            color: 'gray'
-          }
+          size: 7
         },
       },
       spatialReference: {
@@ -562,13 +569,14 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
 
   calculateThresholdSymbologyDefinitions(mapSymbolizationProps) {
     const symbologyDefinitions = [];
+    const sampleType = mapSymbolizationProps.sampleType;
     // get the low and high intensity symbology stop intervals based on the min, max, and threshold values
     let cardinality: number = this.mapPointSymbolBreaks / 2;
     const lowIntensityStep = (mapSymbolizationProps.threshold - mapSymbolizationProps.min) / (cardinality - 1);
     for (let i = 0; i < cardinality; i++) {
       let symbolDefinition;
       const lowIntensityVal = +(mapSymbolizationProps.min + (lowIntensityStep * i)).toFixed(2);
-      symbolDefinition = {value: lowIntensityVal, color: this.mapPointSymbolColors.soil[i], label: `<=${lowIntensityVal}`};
+      symbolDefinition = {value: lowIntensityVal, color: this.mapPointSymbolColors[sampleType][i], label: `<=${lowIntensityVal}`};
       symbologyDefinitions.push(symbolDefinition);
     }
     cardinality = cardinality  + 1;
@@ -576,7 +584,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
     for (let i = 1; i < cardinality; i++) {
       let symbolDefinition;
       const highIntensityVal = +(mapSymbolizationProps.threshold + (highIntensityStep * i)).toFixed(2);
-      symbolDefinition = {value: highIntensityVal, color: this.mapPointSymbolColors.soil[i + 2], label: `<=${highIntensityVal}`};
+      symbolDefinition = {value: highIntensityVal, color: this.mapPointSymbolColors[sampleType][i + 2], label: `<=${highIntensityVal}`};
       symbologyDefinitions.push(symbolDefinition);
     }
     return symbologyDefinitions;
@@ -626,7 +634,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
     // create a query and set its geometry parameter to the polygon that was drawn on the view
     const query = {
       geometry,
-      outFields: ['*']
+      outFields: ['*'] // REQUIRED for querying the layer attributes
     };
     let queryFeatureLayer = null;
     if (this.mapPointsFeatureLayer) {

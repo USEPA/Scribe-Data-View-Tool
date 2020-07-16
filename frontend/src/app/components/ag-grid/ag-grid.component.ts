@@ -102,14 +102,12 @@ export class AgGridComponent implements OnInit, OnDestroy {
     this.scribeDataExplorerService.mapPointSelectedChangedEvent.subscribe((pointAttributes) => {
       if (this.gridApi && pointAttributes) {
         this.gridApi.deselectAll();
-        let isFirstSamplePoint;
+        let rowIndex = 0;
         this.gridApi.forEachNode( (node) => {
           if (node.data.Samp_No === pointAttributes.Samp_No) {
-            node.setSelected( true );
-            if (!isFirstSamplePoint) {
-              this.gridApi.ensureIndexVisible(node.rowIndex, 'top');
-              isFirstSamplePoint = true;
-            }
+            node.setSelected( true);
+            rowIndex = node.rowIndex;
+            this.gridApi.ensureIndexVisible(rowIndex, 'middle');
           }
         });
       }

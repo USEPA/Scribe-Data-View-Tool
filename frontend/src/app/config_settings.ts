@@ -87,8 +87,10 @@ export const CONFIG_SETTINGS = {
   },
   mapPointSymbolBreaks: 6,
   mapPointSymbolColors: {
-    air: ['#00b7ff', '#0062a8', '#00497c'],
-    water: ['#6040ff', '#4c33cc', '#392699'],
-    soil: ['#fff7bc', '#fee391', '#ec7014', '#cc4c02', '#993404', '#662506']
+    default: ['#fff7bc', '#fee391', '#ec7014', '#cc4c02', '#993404', '#662506'],
+    water: ['#7fdfff', '#32cbff', '#4292c6', '#0077be', '#08519c', '#08306b'],
+    air: ['#7fdfff', '#32cbff', '#4292c6', '#0077be', '#08519c', '#08306b'],
+    soil: ['#fff7bc', '#fee391', '#ec7014', '#cc4c02', '#993404', '#662506'],
+    solid: ['#fff7bc', '#fee391', '#ec7014', '#cc4c02', '#993404', '#662506']
   }
 };
