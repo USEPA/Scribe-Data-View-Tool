@@ -89,7 +89,7 @@
   <mat-tab>
     <ng-template mat-tab-label>
       {{tabs[0]}}
-      <span *ngIf="!isLoadingData && selectedTab === 0">
+      <span *ngIf="showTable && selectedTab === 0">
         <button mat-raised-button color="primary" style="transform: scale(0.8); padding: 0 5px;"
                 (click)="openVisibleColumnsDialog()">
           Visible Columns
@@ -128,7 +128,7 @@
   <mat-tab>
     <ng-template mat-tab-label>
       {{tabs[1]}}
-      <span *ngIf="!isLoadingData&& selectedTab === 1">
+      <span *ngIf="showTable && selectedTab === 1">
         <button mat-raised-button color="primary" style="transform: scale(0.8); padding: 0 5px;"
                 (click)="openVisibleColumnsDialog()">
           Visible Columns

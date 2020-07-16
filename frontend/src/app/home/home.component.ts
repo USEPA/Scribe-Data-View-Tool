@@ -38,7 +38,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
   projects = new FormControl();
   userProjects: Project[];
   projectsLoaded: boolean;
-  selectedProject: string;
   selectedProjects: string[] = [];
   // sample point props
   projectSamplesColDefs: ColumnDefs[] = [];
@@ -478,12 +477,18 @@ export class HomeComponent implements OnInit, AfterViewInit {
   setAgGridColumnProps(results, addedColIDs = []) {
     const columnDefs = [];
     try {
-      Object.keys(results[0]).forEach((key) => {
+      const colNames = Object.keys(results[0]);
+      colNames.forEach((key) => {
         if (!addedColIDs.includes(key)) {
-          const headerName = CONFIG_SETTINGS.defaultColumnSettings.hasOwnProperty(key)
-            ? CONFIG_SETTINGS.defaultColumnSettings[key].alias : key;
-          const hide = CONFIG_SETTINGS.defaultColumnSettings.hasOwnProperty(key)
-            ? CONFIG_SETTINGS.defaultColumnSettings[key].hide : false;
+          let headerName;
+          let hide;
+          if (CONFIG_SETTINGS.defaultColumnSettings.hasOwnProperty(key)) {
+            headerName = CONFIG_SETTINGS.defaultColumnSettings[key].alias;
+            hide = CONFIG_SETTINGS.defaultColumnSettings[key].hide;
+          } else {
+            headerName = key.replace(/_/g, ' ');
+            hide = false;
+          }
           if (key.includes('Date') || key.includes('Date_') || key.includes('_Date')) {
             columnDefs.push({
               colId: key,
@@ -628,7 +633,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   onExportCSVBtnClick() {
     // set ag grid title
-    const title = 'PID_' + this.selectedProject + '_' + this.tabs[this.selectedTab];
+    const selectedTab = this.tabs[this.selectedTab].replace(/ /g, '_');
+    const title = 'Projects_' + this.selectedProjects.join('_') + '_' + selectedTab;
     if (this.selectedTab === 0) {
       this.exportLabResultsCSV.next(title);
     }
