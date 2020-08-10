@@ -99,14 +99,7 @@ footer {
   padding: 20px;
 }
 
-// map styles
-.map-container {
-  height: 100%;
-  min-height: 400px;
-  width: 100%;
-  box-shadow: 0 8px 6px -6px black;
-}
-
+// Esri map styles
 .esri-view-height-less-than-medium .esri-popup__main-container {
   max-height: 250px !important;
 }

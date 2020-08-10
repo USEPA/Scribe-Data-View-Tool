@@ -1,9 +1,13 @@
 <div>
-  <h1 mat-dialog-title>
-    <span>
-      Select which project(s) you want to see: <b>{{selectedProjectNames}}</b>
+  <div>
+    <span class="mat-h3">
+      Click a project in the map to load a single project or use the lasso tool <span class="esri-icon-polygon">.</span>
+      to select multiple projects. To use the lasso, click once to begin drawing and double-click to complete.
+      <br>
+      <span>Project(s) selected: <b>{{selectedProjectNames}}</b></span>
+      <br>
     </span>
-  </h1>
+  </div>
   <div mat-dialog-content>
     <app-map-view
       [mapDivId]="'projectCentroidsMap'"

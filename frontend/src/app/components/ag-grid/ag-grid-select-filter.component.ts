@@ -23,7 +23,9 @@ export class AgGridSelectFilterComponent implements IFilterAngularComp {
   agInit(params: ExtendedFilterParams): void {
     this.params = params;
     this.valueGetter = params.valueGetter;
-    this.selectFilterValues = params.values;
+    this.selectFilterValues = params.values.sort((a, b) => {
+      return a.localeCompare(b, 'en', {sensitivity: 'base'});
+    });
   }
 
   isFilterActive(): boolean {

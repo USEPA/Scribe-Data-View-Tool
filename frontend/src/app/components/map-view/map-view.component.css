@@ -1,3 +1,11 @@
 :host {
   width: 55%
 }
+
+.map-container {
+  height: 100%;
+  min-height: 400px;
+  width: 100%;
+  min-width: 500px;
+  box-shadow: 0 8px 6px -6px black;
+}

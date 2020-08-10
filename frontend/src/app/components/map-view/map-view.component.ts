@@ -34,10 +34,10 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
   // The <div> where we will place the map
   @ViewChild('mapViewDiv', {static: true}) private mapViewEl: ElementRef;
 
+  mapViewLoaded = false;
   private _zoom = 10;
   private _center: Array<number> = [-122.449445, 37.762852]; // -122.449445, 37.762852
   private _baseMap = 'streets';
-  public _loaded = false;
   private _map: __esri.Map;
   private _view: __esri.SceneView;
   private _graphic;
@@ -192,6 +192,8 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
 
   ngOnInit() {
     this._zoomToPointGraphic = null;
+    document.getElementById('select-by-polygon').style.visibility = 'hidden';
+
     // Initialize MapView and return an instance of MapView
     this.initializeMap().then(mapView => {
       // add initial geometries to the scene view
@@ -201,7 +203,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
         this._view.goTo(pointGraphicsArray, {animate: false});
       }
       // The map has been initialized
-      this._loaded = this._view.ready;
+      this.mapViewLoaded = this._view.ready;
       // load any portal layers from input prop
       if (this.portalLayerIds) {
         this.loadPortalLayers(this.portalLayerIds);
@@ -621,6 +623,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
         this.pointSelectionSketchViewModel.cancel();
       }
     });
+    selectButton.style.visibility = 'visible';
 
     this.pointSelectionSketchViewModel.on('create', (event) => {
       if (event.state === 'complete') {
