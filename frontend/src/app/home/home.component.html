@@ -8,7 +8,7 @@
       Select projects from the drop-down or use the "Select Projects on Map" button to get started.
     </span>
   </span>
-  <div class="component-container-row" style="margin-top: 15px;">
+  <div class="component-container-row" style="margin-top: 10px;">
     <!-- Projects Selection -->
     <div class="component-container-col">
       <span class="component-container-row">
@@ -85,11 +85,6 @@
       </mat-grid-list>
     </div>
   </span>
-  <div *ngIf="isMapPointsSelected" class="component-container-row" style="margin-top: 15px; margin-left: 750px;">
-    <button mat-raised-button color="primary" aria-label="Clear Map Selection" (click)="onClearMapSelection()">
-      Clear Map Selection
-    </button>
-  </div>
 </div>
 <mat-spinner *ngIf="isLoadingData"></mat-spinner>
 <!-- Tabs -->
@@ -105,6 +100,10 @@
         <button mat-raised-button color="primary" style="transform: scale(0.8); padding: 0 5px;"
                 (click)="onExportCSVBtnClick()">
           Export CSV
+        </button>
+        <button *ngIf="isMapPointsSelected" mat-raised-button color="primary" style="transform: scale(0.8); padding: 0 5px;"
+                (click)="onClearMapSelection()">
+          Clear Map Selection
         </button>
       </span>
     </ng-template>
@@ -144,6 +143,10 @@
         <button mat-raised-button color="primary" style="transform: scale(0.8); padding: 0 5px;"
                 (click)="onExportCSVBtnClick()">
           Export CSV
+        </button>
+        <button *ngIf="isMapPointsSelected" mat-raised-button color="primary" style="transform: scale(0.8); padding: 0 5px;"
+                (click)="onClearMapSelection()">
+          Clear Map Selection
         </button>
       </span>
     </ng-template>

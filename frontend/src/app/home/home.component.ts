@@ -336,6 +336,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   async getCombinedProjectData(projectIds) {
     let combinedSamplePointRowData = [];
     this.isLoadingData = true;
+    this.isMapPointsSelected = false;
     // combine all project sample point and lab results data
     const projectsSamplePoints = await Promise.all(projectIds.map(async (projectId) => {
       const rows = await this.scribeDataExplorerService.getProjectSamples(projectId);
@@ -413,6 +414,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         // clear filters and get tab data
         this.agGridActiveFilters = [];
         this.updateFilters.next([]);
+        this.scribeDataExplorerService.clearMapSelectionSource.next(true);
         this.getCombinedProjectData(this.selectedProjects);
       } catch (err) {
         this.isLoadingData = false;
