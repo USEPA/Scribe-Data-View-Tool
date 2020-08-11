@@ -238,6 +238,21 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
   }
 
   ngAfterViewInit(): void {
+    // subscribe to clear map selection event to clear highlight and reset row data
+    this.scribeDataExplorerService.clearMapSelectionEvent.subscribe((clear) => {
+      if (clear) {
+        if (this.mapPointsFeatureLayerHighlight) {
+          this.mapPointsFeatureLayerHighlight.remove();
+        }
+        if (this._view) {
+          if (this._zoomToPointGraphic) {
+            this._view.graphics.remove(this._zoomToPointGraphic);
+          }
+          this._view.popup.close();
+        }
+        this.scribeDataExplorerService.mapPointsSelectedSource.next(null);
+      }
+    });
     // subscribe to MDL value entered event
     this.scribeDataExplorerService.mdlValueChangedEvent.subscribe((symbolizationProps: MapSymbolizationProps) => {
       if (this._view) {

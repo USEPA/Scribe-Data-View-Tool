@@ -1,9 +1,11 @@
 <div style="margin: 10px 10px 0 10px;">
   <span class="component-container-row" style="justify-content: space-between">
-    <span>Welcome to Scribe Data Explorer: An application to organize and view the
+    <span>
+      Welcome to the Scribe Data Explorer! Search for and interact with projects from
       <a href="https://response.epa.gov/site/site_profile.aspx?site_id=ScribeGIS" target="_blank">
-        USEPA's Environmental Response Team's Scribe database
-      </a>.
+        USEPA ERT's Scribe database system
+      </a>.<br>
+      Select projects from the drop-down or use the "Select Projects on Map" button to get started.
     </span>
   </span>
   <div class="component-container-row" style="margin-top: 15px;">
@@ -17,18 +19,18 @@
               {{project.project_name}}
             </mat-option>
           </mat-select>
-          <button *ngIf="projects.value" mat-button matSuffix mat-mini-fab color="accent" style="transform: scale(.75);"
-                  aria-label="Clear" (click)="clearProjects($event)">
-          <mat-icon>close</mat-icon></button>
         </mat-form-field>&nbsp;
-        <button mat-raised-button color="primary" style="align-self: flex-end; margin-bottom: 20px;"
-                (click)="setProjects($event)">
-          Go
-        </button>&nbsp;
-        <button mat-raised-button color="primary" style="align-self: flex-end; margin-bottom: 20px;"
-                (click)="openProjectsMapDialog()">
-          Select Project(s) on Map
-        </button>
+        <span style="align-self: flex-end; margin-bottom: 20px;">
+          <button mat-raised-button color="primary" (click)="setProjects($event)">
+            Go
+          </button>&nbsp;
+          <button mat-raised-button color="primary" (click)="openProjectsMapDialog()">
+            Select Project(s) on Map
+          </button>&nbsp;
+          <button *ngIf="projects.value" mat-raised-button color="primary" (click)="clearProjects($event)">
+            Clear All
+          </button>
+        </span>
       </span>
     </div>
     <div class="component-container-col" style="margin-left: 15px;">
@@ -83,6 +85,11 @@
       </mat-grid-list>
     </div>
   </span>
+  <div *ngIf="isMapPointsSelected" class="component-container-row" style="margin-top: 15px; margin-left: 750px;">
+    <button mat-raised-button color="primary" aria-label="Clear Map Selection" (click)="onClearMapSelection()">
+      Clear Map Selection
+    </button>
+  </div>
 </div>
 <mat-spinner *ngIf="isLoadingData"></mat-spinner>
 <!-- Tabs -->

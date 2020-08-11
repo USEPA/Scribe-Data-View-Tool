@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   userProjects: Project[];
   projectsLoaded: boolean;
   selectedProjects: string[] = [];
+  isMapPointsSelected = false;
   // sample point props
   projectSamplesColDefs: ColumnDefs[] = [];
   projectSamplesRowData: ProjectSample[] = [];
@@ -131,10 +132,22 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.mapSymbolDefinitions = symbologyDefinitions;
       }
     });
-    // subscribe to selected map points event, and set table rows to the new subset of selected sample points
+
+    // subscribe to selected map points events, and filter table rows to the subset of selected sample points
     this.scribeDataExplorerService.mapPointsSelectedChangedEvent.subscribe((selectedSamplePointsRowData) => {
       if (selectedSamplePointsRowData) {
         this.projectLabResultsRowData = this.mergeSelectedSamplesAndLabResults(selectedSamplePointsRowData, this.combinedLabResultRowData);
+        this.isMapPointsSelected = true;
+      } else {
+        this.projectLabResultsRowData = this.mergeAllSamplesAndLabResults(this.projectSamplesRowData, this.combinedLabResultRowData);
+        this.isMapPointsSelected = false;
+      }
+    });
+    this.scribeDataExplorerService.mapPointSelectedChangedEvent.subscribe((pointAttributes) => {
+      if (pointAttributes) {
+        this.isMapPointsSelected = true;
+      } else {
+        this.isMapPointsSelected = false;
       }
     });
   }
@@ -653,6 +666,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     if (this.selectedTab === 1) {
       this.exportSamplePointLocationCSV.next(title);
     }
+  }
+
+  onClearMapSelection() {
+    this.scribeDataExplorerService.clearMapSelectionSource.next(true);
   }
 
   /*
