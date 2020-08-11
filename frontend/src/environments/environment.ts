@@ -4,6 +4,11 @@
 
 export const environment = {
   production: false,
+  agol_trusted_servers: ['http://127.0.0.1:8000'],
+  agol_proxy_rules: {
+    urlPrefix: 'services.arcgis.com/cJ9YHowT8TU7DUyn',
+    proxyUrl: 'http://127.0.0.1:8000/proxy/'
+  },
   oauth_url: 'https://epa.maps.arcgis.com/sharing/rest/oauth2/authorize',
   oauth_client_id: 'ZtlpDht9ywRCA4Iq',
   oauth_response_type: 'token',

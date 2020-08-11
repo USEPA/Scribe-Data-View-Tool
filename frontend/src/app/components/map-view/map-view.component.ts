@@ -13,12 +13,14 @@ import {
 } from '@angular/core';
 import {ReplaySubject} from 'rxjs';
 import {loadModules} from 'esri-loader';
+
+import {environment} from '@environments/environment';
 import {CONFIG_SETTINGS} from '../../config_settings';
-import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
 import {MapSymbolizationProps} from '../../projectInterfaceTypes';
 import FeatureLayerType = __esri.FeatureLayer;
 import FeatureLayerViewType = __esri.FeatureLayerView;
 import {LoginService} from '@services/login.service';
+import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
 // import {MapService} from '@services/map.service';
 
 
@@ -107,8 +109,10 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
     const self = this;
     try {
       // Load the modules for the ArcGIS API for JavaScript
-      const [EsriMap, SceneView, FeatureLayer, Layer, Graphic, GraphicsLayer, Point, Viewpoint, Mesh, Home,
+      const [esriConfig, urlUtils, EsriMap, SceneView, FeatureLayer, Layer, Graphic, GraphicsLayer, Point, Viewpoint, Mesh, Home,
         BasemapGallery, Expand, SketchViewModel] = await loadModules([
+        'esri/config',
+        'esri/core/urlUtils',
         'esri/Map',
         'esri/views/SceneView',
         'esri/layers/FeatureLayer',
@@ -123,6 +127,8 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
         'esri/widgets/Expand',
         'esri/widgets/Sketch/SketchViewModel',
       ]);
+      esriConfig.request.trustedServers.push(environment.agol_trusted_servers);
+      urlUtils.addProxyRule(environment.agol_proxy_rules);
 
       // Initialize the Esri Modules properties for this map component class
       self._featureLayer = FeatureLayer;

@@ -40,13 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'rest_framework.authtoken',
     'automagic_rest',
     'sadie',
     'scribe_models',
     'oauth2_provider',
     'social_django',
-    'rest_framework_social_oauth2'
 ]
 
 '''
@@ -173,7 +171,6 @@ LOGOUT_REDIRECT_URL = '/'
 
 SOCIAL_AUTH_AGOL_KEY = os.environ.get('SOCIAL_AUTH_AGOL_KEY', '')
 SOCIAL_AUTH_AGOL_SECRET = os.environ.get('SOCIAL_AUTH_AGOL_SECRET', '')
-SOCIAL_AUTH_AGOL_REDIRECT_URI = os.environ.get('SOCIAL_AUTH_AGOL_REDIRECT_URI', '')
 SOCIAL_AUTH_AGOL_DOMAIN = 'epa.maps.arcgis.com'
 
 SOCIAL_AUTH_PIPELINE = [  # Note: Sequence of functions matters here.

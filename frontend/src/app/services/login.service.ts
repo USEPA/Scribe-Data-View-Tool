@@ -82,7 +82,7 @@ export class LoginService implements CanActivateChild, CanActivate {
   }
 
 
-  async setEsriToken(access_token: string, expires_in: string, user_id: string) {
+  /*async setEsriToken(access_token: string, expires_in: string, user_id: string) {
     loadModules(['esri/identity/IdentityManager', 'esri/identity/OAuthInfo'])
       .then(([IdentityManager, OAuthInfo]) => {
         const info = new OAuthInfo({
@@ -100,7 +100,7 @@ export class LoginService implements CanActivateChild, CanActivate {
         IdentityManager.registerToken(this.esri_token_object);
         localStorage.setItem('esri_oauth_token', JSON.stringify(this.esri_token_object));
       });
-  }
+  }*/
 
   setAccessToken(accessToken: string, expiresIn: number) {
     localStorage.setItem('access_token', accessToken);
@@ -127,20 +127,15 @@ export class LoginService implements CanActivateChild, CanActivate {
       this.display_name = localStorage.getItem('display_name');
       this.access_token = localStorage.getItem('access_token');
       if (this.access_token) {
-        this.loadEsriToken()
-          .then(() => {
-            obs.next();
-            obs.complete();
-          }).catch(() => {
-          obs.error();
-        });
+        obs.next();
+        obs.complete();
       } else {
         obs.error();
       }
     });
   }
 
-  loadEsriToken() {
+  /*loadEsriToken() {
     return loadModules(['esri/identity/IdentityManager', 'esri/identity/OAuthInfo'])
       .then(([IdentityManager, OAuthInfo]) => {
         const info = new OAuthInfo({
@@ -151,7 +146,7 @@ export class LoginService implements CanActivateChild, CanActivate {
         IdentityManager.registerOAuthInfos([info]);
         IdentityManager.registerToken(this.esri_token_object);
       });
-  }
+  }*/
 
   isTokenValid() {
     const now = new Date();

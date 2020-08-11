@@ -19,21 +19,11 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    // let next: string;
-    // if (!isUndefined(this.state.params.next)) next = this.state.params.next;
-    // else next = 'root';
     this.loginService.sendToLogin(this.route.snapshot.queryParams.next);
   }
 
-  // can not use b/c it would break mapping
-  // loginWithCredentials() {
-  //   this.login_error = '';
-  //   this.loginService.login(this.username, this.password).pipe(
-  //     catchError(error => {
-  //       let error_object = JSON.parse(error.error);
-  //       this.login_error = error_object.non_field_errors[0];
-  //     }),
-  //     map(response => this.router.navigate(['dashboard']))
-  //   ).subscribe();
-  // }
+  login(loginType: string) {
+    const next = this.route.snapshot.queryParams.next ? this.route.snapshot.queryParams.next : '';
+    this.loginService.sendToLogin(loginType, window.location.origin + next);
+  }
 }
