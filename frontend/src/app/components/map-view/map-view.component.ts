@@ -127,10 +127,10 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
         'esri/widgets/Expand',
         'esri/widgets/Sketch/SketchViewModel',
       ]);
-      esriConfig.request.trustedServers.push('http://127.0.0.1:8000');
+      esriConfig.request.trustedServers.push('http://localhost:8000');
       urlUtils.addProxyRule({
         urlPrefix: 'services.arcgis.com/cJ9YHowT8TU7DUyn',
-        proxyUrl: 'http://127.0.0.1:8000/proxy/'
+        proxyUrl: 'http://localhost:8000/proxy/'
       });
 
       // Initialize the Esri Modules properties for this map component class

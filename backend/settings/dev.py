@@ -25,7 +25,7 @@ SECRET_KEY = 'sbrn8pas3(km3y8m4=ekh#zt+(&$+ja+5wi*ff57zbsqi-n88v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(',')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
 
 APPEND_SLASH = False
 
@@ -170,11 +170,11 @@ STATIC_ROOT = os.path.join(ANGULAR_APP_DIR, 'src', 'static')
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-SOCIAL_AUTH_ALLOWED_REDIRECT_HOSTS = ['localhost:4200']
+SOCIAL_AUTH_ALLOWED_REDIRECT_HOSTS = os.environ.get('SOCIAL_AUTH_ALLOWED_REDIRECT_HOSTS', '').split(',')
 
-SOCIAL_AUTH_AGOL_KEY = 'ZtlpDht9ywRCA4Iq'
-SOCIAL_AUTH_AGOL_SECRET = 'e038b0201ca24183959369d9fc2eca93'
-SOCIAL_AUTH_AGOL_REDIRECT_URI = 'http://localhost:8000/api/oauth2/complete/agol/'
+SOCIAL_AUTH_AGOL_KEY = os.environ.get('SOCIAL_AUTH_AGOL_KEY', '')
+SOCIAL_AUTH_AGOL_SECRET = os.environ.get('SOCIAL_AUTH_AGOL_SECRET', '')
+SOCIAL_AUTH_AGOL_REDIRECT_URI = os.environ.get('SOCIAL_AUTH_AGOL_REDIRECT_URI', '')
 SOCIAL_AUTH_AGOL_DOMAIN = 'epa.maps.arcgis.com'
 
 SOCIAL_AUTH_PIPELINE = [  # Note: Sequence of functions matters here.
