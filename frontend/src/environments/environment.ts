@@ -4,19 +4,17 @@
 
 export const environment = {
   production: false,
+  oauth_url: 'http://localhost:8000/api/oauth2',
+  oauth_client_id: 'ZtlpDht9ywRCA4Iq',
+  local_client_id: 'ttDS2qFfDXJSxCjETxKHcWeFCjmiycrGPUrKRr8T',
+  api_url: 'http://localhost:4200/api',
+  api_version_tag: 'v1',
+  default_baseloadedMap: '972c131daf9d4e83b30a98630c8f8b2b',
   agol_trusted_servers: ['http://127.0.0.1:8000'],
   agol_proxy_rules: {
     urlPrefix: 'services.arcgis.com/cJ9YHowT8TU7DUyn',
     proxyUrl: 'http://127.0.0.1:8000/proxy/'
   },
-  oauth_url: 'https://epa.maps.arcgis.com/sharing/rest/oauth2/authorize',
-  oauth_client_id: 'ZtlpDht9ywRCA4Iq',
-  oauth_response_type: 'token',
-  oauth_redirect_uri: 'http://localhost:4200/oauthcallback',
-  local_client_id: 'ttDS2qFfDXJSxCjETxKHcWeFCjmiycrGPUrKRr8T',
-  local_service_endpoint: 'http://localhost:4200/api',
-  api_version_tag: 'v1',
-  default_baseloadedMap: '972c131daf9d4e83b30a98630c8f8b2b',
 };
 
 /*
