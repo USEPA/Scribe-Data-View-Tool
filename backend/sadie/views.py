@@ -45,7 +45,10 @@ class EsriProxy(View):
             # data_dump = DataIntake.objects.get(pk=match.group(5)) # get obj to check permissions in teh future
 
             # put token in params and parse query params to new request
-            params = dict(token=token) if 'services.arcgis.com/cJ9YHowT8TU7DUyn' in url else dict()
+            if 'services.arcgis.com/cJ9YHowT8TU7DUyn' in url or 'utility.arcgis.com' in url:
+                params = dict(token=token)
+            else:
+                params = dict()
             for key, value in request.GET.items():
                 if '?' in key:
                     key = key.split('?')[1]
