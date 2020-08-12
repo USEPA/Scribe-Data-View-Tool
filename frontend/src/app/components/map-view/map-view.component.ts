@@ -98,7 +98,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
     return this._selectedGeoPoint;
   }
 
-  @Input() portalLayerIds: string[];
+  @Input() portalLayerServiceUrls: string[];
   @Input() pointData: any[];
 
   constructor(public loginService: LoginService, public scribeDataExplorerService: ScribeDataExplorerService) {
@@ -127,10 +127,10 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
         'esri/widgets/Expand',
         'esri/widgets/Sketch/SketchViewModel',
       ]);
-      esriConfig.request.trustedServers.push('http://localhost:8000');
+      esriConfig.request.trustedServers.push(environment.agol_trusted_server);
       urlUtils.addProxyRule({
-        urlPrefix: 'utility.arcgis.com',
-        proxyUrl: 'http://localhost:8000/proxy/'
+        urlPrefix: environment.agol_proxy_url_prefix,
+        proxyUrl: environment.agol_proxy_url
       });
 
       // Initialize the Esri Modules properties for this map component class
@@ -145,10 +145,8 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
       self._sketchViewModel = SketchViewModel;
 
       // Configure the BaseMap
-      const references = new this._featureLayer('https://utility.arcgis.com/usrsvcs/servers/add9432d507146e7abf3351efa097b99/rest/services/R9GIS/R9ScribeData/MapServer');
       const mapProperties: __esri.MapProperties = {
         basemap: self._baseMap,
-        layers: [references],
         ground: {
           navigationConstraint: {
             type: 'none'
@@ -216,9 +214,9 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
       // The map has been initialized
       this.mapViewLoaded = this._view.ready;
       // load any portal layers from input prop
-      /*if (this.portalLayerIds) {
-        this.loadPortalLayers(this.portalLayerIds);
-      }*/
+      if (this.portalLayerServiceUrls) {
+        this.loadPortalLayers(this.portalLayerServiceUrls);
+      }
 
       // subscribe to map view events
       this._view.on('click', (event) => {
@@ -228,7 +226,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
           });
           if (response.results.length > 0) {
             let selectedGraphic = response.results[0].graphic;
-            if ('PROJECTID' in selectedGraphic.attributes) {
+            if (selectedGraphic.attributes && 'PROJECTID' in selectedGraphic.attributes) {
               // on project centroid point selected / clicked, go to that project
               this.scribeDataExplorerService.projectCentroidsSelectedSource.next([selectedGraphic.attributes]);
             } else {
@@ -340,13 +338,11 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
     }
   }
 
-  async loadPortalLayers(portalLyrItemIds) {
-    const portalLayers: __esri.Layer[]  = await Promise.all(portalLyrItemIds.map(async (portalItemId) => {
-      return this._layer.fromPortalItem({
-          portalItem: {
-            id: portalItemId
-          }
-        } as __esri.LayerFromPortalItemParams).then( (portalLyr) => {
+  async loadPortalLayers(portalLyrServiceUrls) {
+    const portalLayers: __esri.Layer[]  = await Promise.all(portalLyrServiceUrls.map(async (portalItemId) => {
+      return this._layer.fromArcGISServerUrl({
+        url: 'https://utility.arcgis.com/usrsvcs/servers/add9432d507146e7abf3351efa097b99/rest/services/R9GIS/R9ScribeData/MapServer'
+      } as unknown as __esri.LayerFromArcGISServerUrlParams).then( (portalLyr) => {
         portalLyr.load().then((loadedPortalLyr) => {
           // const portalLyrSubLayers = loadedPortalLyr.createServiceSublayers();
           const scribeProjectsSubLyr = portalLyr.sublayers.find((sublayer) => {
