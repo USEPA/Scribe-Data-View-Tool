@@ -19,7 +19,7 @@ import {CONFIG_SETTINGS} from '../../config_settings';
 import {MapSymbolizationProps} from '../../projectInterfaceTypes';
 import FeatureLayerType = __esri.FeatureLayer;
 import FeatureLayerViewType = __esri.FeatureLayerView;
-import {LoginService} from '@services/login.service';
+import {LoginService} from '../../auth/login.service';
 import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
 // import {MapService} from '@services/map.service';
 

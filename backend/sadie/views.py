@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.db import connections
 from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import View
 from django.utils.decorators import method_decorator
 
@@ -81,6 +82,7 @@ class EsriProxy(View):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
+@ensure_csrf_cookie
 def current_user(request):
     current_user_response = {
         'name': '{} {}'.format(request.user.first_name, request.user.last_name) if request.user.first_name else request.user.username,

@@ -17,7 +17,7 @@ import {
   MapSymbol,
   ProjectCentroid
 } from '../projectInterfaceTypes';
-import {LoginService} from '@services/login.service';
+import {LoginService} from '../auth/login.service';
 import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
 import {VisibleColumnsDialogComponent} from '@components/visible-columns-dialog/visible-columns-dialog.component';
 import {ProjectsMapDialogComponent} from '@components/projects-map-dialog/projects-map-dialog.component';
