@@ -7,7 +7,7 @@ export const environment = {
   oauth_url: 'http://localhost:8000/api/oauth2',
   oauth_client_id: 'ZtlpDht9ywRCA4Iq',
   local_client_id: 'ttDS2qFfDXJSxCjETxKHcWeFCjmiycrGPUrKRr8T',
-  api_url: 'http://localhost:4200/api',
+  api_url: 'http://localhost:8000/api',
   api_version_tag: 'v1',
   default_baseloadedMap: '972c131daf9d4e83b30a98630c8f8b2b',
   agol_trusted_servers: ['http://127.0.0.1:8000'],

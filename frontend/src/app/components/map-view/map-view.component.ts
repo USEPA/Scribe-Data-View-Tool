@@ -129,7 +129,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
       ]);
       esriConfig.request.trustedServers.push('http://localhost:8000');
       urlUtils.addProxyRule({
-        urlPrefix: 'services.arcgis.com/cJ9YHowT8TU7DUyn',
+        urlPrefix: 'utility.arcgis.com',
         proxyUrl: 'http://localhost:8000/proxy/'
       });
 
@@ -145,8 +145,10 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
       self._sketchViewModel = SketchViewModel;
 
       // Configure the BaseMap
+      const references = new this._featureLayer('https://utility.arcgis.com/usrsvcs/servers/add9432d507146e7abf3351efa097b99/rest/services/R9GIS/R9ScribeData/MapServer');
       const mapProperties: __esri.MapProperties = {
         basemap: self._baseMap,
+        layers: [references],
         ground: {
           navigationConstraint: {
             type: 'none'
@@ -214,9 +216,9 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
       // The map has been initialized
       this.mapViewLoaded = this._view.ready;
       // load any portal layers from input prop
-      if (this.portalLayerIds) {
+      /*if (this.portalLayerIds) {
         this.loadPortalLayers(this.portalLayerIds);
-      }
+      }*/
 
       // subscribe to map view events
       this._view.on('click', (event) => {

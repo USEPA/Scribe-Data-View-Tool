@@ -1,5 +1,6 @@
 django>=2.2.0,<=2.2.99
 django-mssql-backend==2.4.0
+django-cors-headers
 djangorestframework>=3.10.3,<=3.10.99
 django-rest-auth>=0.9.5,<=0.9.99
 djangorestframework-queryfields>=1.0.0

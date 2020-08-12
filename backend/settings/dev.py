@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.auth.context_processors',
+    'corsheaders',
     'rest_framework',
     'automagic_rest',
     'sadie',
@@ -67,6 +68,7 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -193,6 +195,9 @@ AUTHENTICATION_BACKENDS = (
     'agol_oauth2.backend.AGOLOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
 
 MIGRATION_MODULES = {
     'oauth2_provider': 'oauth2'
