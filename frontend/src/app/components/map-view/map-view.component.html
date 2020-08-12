@@ -1,16 +1,11 @@
 <div *ngIf="!mapViewLoaded" class="loading-spinner">
-  <mat-spinner></mat-spinner>
+    <mat-spinner></mat-spinner>
 </div>
 <!-- The DIV that we inject the map into -->
 <div [hidden]="!mapViewLoaded" #mapViewDiv class="map-container">
-
+  <div id="select-by-polygon" class="esri-widget esri-widget--button esri-widget esri-interactive"
+       title="Select features by polygon" style="visibility: hidden;">
+    <span class="esri-icon-polygon"></span>
+  </div>
 </div>
 
-<div id="select-by-polygon" class="esri-widget esri-widget--button esri-widget esri-interactive"
-     title="Select features by polygon" style="visibility: hidden;">
-  <span class="esri-icon-polygon"></span>
-</div>
-<div id="containerDiv">
-  <span id="title" class="esri-widget">Construction Year</span>
-  <div id="slider"></div>
-</div>
