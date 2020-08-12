@@ -16,12 +16,10 @@ export interface User {
 @Injectable()
 export class LoginService implements CanActivateChild, CanActivate {
   currentUser: ReplaySubject<User> = new ReplaySubject<User>();
-  displayName: string;
+  currentUsername: {displayName: ''};
   oauthUrl: string;
   groups: string[];
   permissions: string[];
-  isSuperuser: boolean;
-
 
   constructor(private http: HttpClient, private router: Router) {
     this.oauthUrl = environment.oauth_url;
@@ -50,23 +48,21 @@ export class LoginService implements CanActivateChild, CanActivate {
   checkUser(): Observable<any> {
     return this.http.get(`${environment.api_url}/current_user/`).pipe(
       tap((config) => {
-        console.log(config);
         this.currentUser.next(config);
       })
     );
   }
 
-  async setUser() {
-    const response = await this.http.get<any>('current_user').toPromise();
-    if (response.name) {
-      this.displayName = response.name;
-      this.isSuperuser = response.is_superuser;
-      localStorage.setItem('display_name', this.displayName);
-    }
-  }
-
   logout() {
+    this.currentUser.next();
     return this.http.get(`${environment.api_url}/auth/logout/`, {responseType: 'text'});
   }
 
+  async storeUserName() {
+    const response = await this.http.get<any>('current_user').toPromise();
+    if (response.name) {
+      this.currentUsername.displayName = response.name;
+      localStorage.setItem('display_name', this.currentUsername.displayName);
+    }
+  }
 }

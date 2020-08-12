@@ -24,10 +24,16 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const headerName = 'X-CSRFToken';
     const token = this.tokenExtractor.getToken() as string;
-    if (request.url.indexOf(environment.api_url) === 0) {
+    if (!request.url.includes(environment.api_url)) {
       request = request.clone({
         headers: token ? request.headers.set(headerName, token) : request.headers,
-        url: request.url,
+        url: `${environment.api_url}/${environment.api_version_tag}/${request.url}/`,
+        withCredentials: true
+      });
+    } else {
+      request = request.clone({
+        headers: token ? request.headers.set(headerName, token) : request.headers,
+        url: `${request.url}`,
         withCredentials: true
       });
     }

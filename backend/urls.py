@@ -39,6 +39,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     # Authentication api calls
     url('^api/oauth2/', include('social_django.urls', namespace='social_django')),
+    url(r'^api/auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/current_user/', current_user),
     url(r'^proxy/', EsriProxy.as_view()),
     # url(r'^{}api/oauth2/'.format(settings.URL_PREFIX), include('rest_framework_social_oauth2.urls')),
