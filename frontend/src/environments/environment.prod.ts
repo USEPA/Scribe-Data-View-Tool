@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  oauth_url: 'https://r9.ercloud.org/api/oauth2',
+  oauth_url: 'https://r9.ercloud.org/scribeexplorer/api/oauth2',
   api_url: 'https://r9.ercloud.org/scribeexplorer/api',
   api_version_tag: 'v1',
   default_baseloadedMap: '972c131daf9d4e83b30a98630c8f8b2b',
