@@ -262,7 +262,9 @@ export class AgGridComponent implements OnInit, OnDestroy {
 
   onSelectionChanged(params) {
     const selectedRows = this.gridApi.getSelectedRows();
-    this.rowSelectedEvent.emit(selectedRows[0]);
+    if (selectedRows.constructor === Array && selectedRows.length >= 0) {
+      this.rowSelectedEvent.emit(selectedRows[0]);
+    }
   }
 
   setColDefFilterProps() {

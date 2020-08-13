@@ -55,7 +55,9 @@ export class LoginService implements CanActivateChild, CanActivate {
 
   logout() {
     this.currentUser.next();
-    return this.http.get(`${environment.api_url}/auth/logout/`, {responseType: 'text'});
+    return this.http.get(`${environment.api_url}/auth/logout/`).toPromise().catch((error) => {
+      throw error;
+    });
   }
 
   async storeUserName() {

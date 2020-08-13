@@ -268,6 +268,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   initProps(): void {
+    this.selectedProjects = [];
     this.clearQueryParams();
     this.agGridActiveFilters = [];
     this.mapSymbolFields = [];
@@ -325,8 +326,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   agGridRowSelected(val) {
     if (val.Latitude && val.Longitude) {
       this.selectedPoint = val;
+      this.isMapPointsSelected = true;
     } else {
       this.snackBar.open('Selection has no geospatial point', null, {duration: 1000});
+      this.isMapPointsSelected = false;
     }
   }
 
