@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 import {LoginService} from '../login.service';
+import {environment} from '@environments/environment';
 
 
 @Component({
@@ -19,6 +20,6 @@ export class LoginComponent implements OnInit {
 
   login() {
     const next = this.route.snapshot.queryParams.next ? this.route.snapshot.queryParams.next : '';
-    this.loginService.sendToLogin(window.location.href + next);
+    this.loginService.sendToLogin(environment.login_redirect + next);
   }
 }
