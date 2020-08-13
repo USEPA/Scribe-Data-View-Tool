@@ -13,12 +13,14 @@ import {
 } from '@angular/core';
 import {ReplaySubject} from 'rxjs';
 import {loadModules} from 'esri-loader';
+
+import {environment} from '@environments/environment';
 import {CONFIG_SETTINGS} from '../../config_settings';
-import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
 import {MapSymbolizationProps} from '../../projectInterfaceTypes';
 import FeatureLayerType = __esri.FeatureLayer;
 import FeatureLayerViewType = __esri.FeatureLayerView;
-import {LoginService} from '@services/login.service';
+import {LoginService} from '../../auth/login.service';
+import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
 // import {MapService} from '@services/map.service';
 
 
@@ -96,7 +98,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
     return this._selectedGeoPoint;
   }
 
-  @Input() portalLayerIds: string[];
+  @Input() portalLayerServiceUrls: string[];
   @Input() pointData: any[];
 
   constructor(public loginService: LoginService, public scribeDataExplorerService: ScribeDataExplorerService) {
@@ -107,8 +109,10 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
     const self = this;
     try {
       // Load the modules for the ArcGIS API for JavaScript
-      const [EsriMap, SceneView, FeatureLayer, Layer, Graphic, GraphicsLayer, Point, Viewpoint, Mesh, Home,
+      const [esriConfig, urlUtils, EsriMap, SceneView, FeatureLayer, Layer, Graphic, GraphicsLayer, Point, Viewpoint, Mesh, Home,
         BasemapGallery, Expand, SketchViewModel] = await loadModules([
+        'esri/config',
+        'esri/core/urlUtils',
         'esri/Map',
         'esri/views/SceneView',
         'esri/layers/FeatureLayer',
@@ -123,6 +127,11 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
         'esri/widgets/Expand',
         'esri/widgets/Sketch/SketchViewModel',
       ]);
+      esriConfig.request.trustedServers.push(environment.agol_trusted_server);
+      urlUtils.addProxyRule({
+        urlPrefix: environment.agol_proxy_url_prefix,
+        proxyUrl: environment.agol_proxy_url
+      });
 
       // Initialize the Esri Modules properties for this map component class
       self._featureLayer = FeatureLayer;
@@ -205,8 +214,8 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
       // The map has been initialized
       this.mapViewLoaded = this._view.ready;
       // load any portal layers from input prop
-      if (this.portalLayerIds) {
-        this.loadPortalLayers(this.portalLayerIds);
+      if (this.portalLayerServiceUrls) {
+        this.loadPortalLayers(this.portalLayerServiceUrls);
       }
 
       // subscribe to map view events
@@ -217,7 +226,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
           });
           if (response.results.length > 0) {
             let selectedGraphic = response.results[0].graphic;
-            if ('PROJECTID' in selectedGraphic.attributes) {
+            if (selectedGraphic.attributes && 'PROJECTID' in selectedGraphic.attributes) {
               // on project centroid point selected / clicked, go to that project
               this.scribeDataExplorerService.projectCentroidsSelectedSource.next([selectedGraphic.attributes]);
             } else {
@@ -329,13 +338,11 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
     }
   }
 
-  async loadPortalLayers(portalLyrItemIds) {
-    const portalLayers: __esri.Layer[]  = await Promise.all(portalLyrItemIds.map(async (portalItemId) => {
-      return this._layer.fromPortalItem({
-          portalItem: {
-            id: portalItemId
-          }
-        } as __esri.LayerFromPortalItemParams).then( (portalLyr) => {
+  async loadPortalLayers(portalLyrServiceUrls) {
+    const portalLayers: __esri.Layer[]  = await Promise.all(portalLyrServiceUrls.map(async (portalItemId) => {
+      return this._layer.fromArcGISServerUrl({
+        url: 'https://utility.arcgis.com/usrsvcs/servers/add9432d507146e7abf3351efa097b99/rest/services/R9GIS/R9ScribeData/MapServer'
+      } as unknown as __esri.LayerFromArcGISServerUrlParams).then( (portalLyr) => {
         portalLyr.load().then((loadedPortalLyr) => {
           // const portalLyrSubLayers = loadedPortalLyr.createServiceSublayers();
           const scribeProjectsSubLyr = portalLyr.sublayers.find((sublayer) => {

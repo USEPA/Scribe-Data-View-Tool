@@ -5,7 +5,7 @@ export const environment = {
   oauth_response_type: 'token',
   oauth_redirect_uri: 'https://r9.ercloud.org/scribeexplorer/oauthcallback',
   local_client_id: 'ttDS2qFfDXJSxCjETxKHcWeFCjmiycrGPUrKRr8T',
-  local_service_endpoint: 'https://r9.ercloud.org/scribeexplorer/api',
+  api_url: 'https://r9.ercloud.org/scribeexplorer/api',
   api_version_tag: 'v1',
   default_baseloadedMap: '972c131daf9d4e83b30a98630c8f8b2b',
 };

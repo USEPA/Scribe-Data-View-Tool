@@ -1,30 +1,40 @@
 import {Injectable, Injector} from '@angular/core';
-import {HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse} from '@angular/common/http';
-import {Observable} from 'rxjs';
-
-
-import {tap} from 'rxjs/operators';
+import {
+  HttpInterceptor,
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpErrorResponse,
+  HttpXsrfTokenExtractor
+} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {environment} from '../environments/environment';
 import {MatDialog} from '@angular/material';
-import {LoginService} from './services/login.service';
+import {Observable} from 'rxjs';
+import {tap} from 'rxjs/operators';
+
+import {environment} from '@environments/environment';
+
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
-  constructor(private injector: Injector, public router: Router, public dialog: MatDialog) {
+  constructor(private injector: Injector, public router: Router, public dialog: MatDialog,
+              private tokenExtractor: HttpXsrfTokenExtractor) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const loginService = this.injector.get(LoginService);
-    const authHeader = loginService.access_token ? {Authorization: `Bearer ${loginService.access_token}`} : {};
-    if (request.url.includes('http') || request.url.includes(environment.local_service_endpoint)) {
+    const headerName = 'X-CSRFToken';
+    const token = this.tokenExtractor.getToken() as string;
+    if (!request.url.includes(environment.api_url)) {
       request = request.clone({
-        setHeaders: authHeader
+        headers: token ? request.headers.set(headerName, token) : request.headers,
+        url: `${environment.api_url}/${environment.api_version_tag}/${request.url}/`,
+        withCredentials: true
       });
     } else {
       request = request.clone({
-        url: `${environment.local_service_endpoint}/${environment.api_version_tag}/${request.url}/`,
-        setHeaders: authHeader
+        headers: token ? request.headers.set(headerName, token) : request.headers,
+        url: `${request.url}`,
+        withCredentials: true
       });
     }
 
@@ -33,9 +43,10 @@ export class HttpRequestInterceptor implements HttpInterceptor {
         },
         err => {
           if (err instanceof HttpErrorResponse && err.status === 401) {
-            loginService.clearToken();
-            this.dialog.closeAll(); // to make sure they are not left open after navigation to login page.
-            this.router.navigate(['/login'], {queryParams: {next: window.location.pathname}});
+            this.dialog.closeAll();
+            if (!this.router.url.includes('/login')) {
+              this.router.navigate(['/login'], {queryParams: {next: this.router.url}});
+            }
           }
         }));
   }

@@ -19,6 +19,7 @@ class ProjectsSerializer(serializers.ModelSerializer):
 
 class ProjectsViewSet(viewsets.ModelViewSet):
     db_name = "scribe_db"
+    permission_classes = [IsAuthenticated]
     queryset = Projects.objects.using(db_name).order_by('project_name')
     serializer_class = ProjectsSerializer
 

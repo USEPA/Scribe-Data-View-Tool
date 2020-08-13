@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {LoginService} from '@services/login.service';
+import {tap} from 'rxjs/operators';
+
+import {LoginService} from '../../auth/login.service';
+
 
 @Component({
   selector: 'app-header',
@@ -9,9 +12,13 @@ import {LoginService} from '@services/login.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public loginService: LoginService, public router: Router) {}
+  constructor(public loginService: LoginService, private router: Router) {}
 
   ngOnInit() {
+  }
+
+  logout() {
+    this.loginService.logout().pipe(tap(() => this.router.navigate(['login']))).subscribe();
   }
 
 }
