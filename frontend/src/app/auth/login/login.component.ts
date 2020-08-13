@@ -19,6 +19,6 @@ export class LoginComponent implements OnInit {
 
   login() {
     const next = this.route.snapshot.queryParams.next ? this.route.snapshot.queryParams.next : '';
-    this.loginService.sendToLogin(window.location.origin + next);
+    this.loginService.sendToLogin(window.location.href + next);
   }
 }
