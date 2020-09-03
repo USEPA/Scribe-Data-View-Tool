@@ -110,7 +110,7 @@ export const CONFIG_SETTINGS = {
     Numeric_Tags: {alias: 'Numeric Tags', hide: true},
     CaseNumber: {alias: 'Case Number', hide: true},
     Next_CLP_Sample_No: {alias: 'Next CLP Sample No', hide: true},
-    Next_Tag: {alias: 'Next_Tag', hide: true},
+    Next_Tag: {alias: 'Next Tag', hide: true},
     Region_Tag_Prefix: {alias: 'Region Tag Prefix', hide: true},
     Response_Authority: {alias: 'Response Authority', hide: true},
     NPL_Status: {alias: 'NPL Status', hide: true},
