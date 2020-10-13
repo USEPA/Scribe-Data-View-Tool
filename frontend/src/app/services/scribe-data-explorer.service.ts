@@ -27,7 +27,20 @@ export class ScribeDataExplorerService {
   }
 
   async getUserProjects() {
-    return await this.http.get<Project[]>('projects').toPromise();
+    const results = await this.http.get<Project[]>('projects').toPromise()
+      .catch((error) => {
+        console.log(error.message);
+        return {} as ColumnsRows;
+      });
+    return results;
+  }
+
+  async publishToAGOL(data) {
+    const results = await this.http.post<any>('export_content_to_agol', data).toPromise()
+      .catch((error) => {
+        return error.message;
+      });
+    return results;
   }
 
   async getProjectSamples(projectId: string) {

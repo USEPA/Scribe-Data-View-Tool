@@ -2,7 +2,7 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {MatDialog, MatSnackBar, MatChipInputEvent} from '@angular/material';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormControl, Validators} from '@angular/forms';
-import {Subject, Subscription, Observable} from 'rxjs';
+import {Subject, Subscription, Observable, BehaviorSubject} from 'rxjs';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {query} from '@angular/animations';
 import * as moment from 'moment';
@@ -15,7 +15,7 @@ import {
   ColumnDefs,
   MapSymbolizationProps,
   MapSymbol,
-  ProjectCentroid
+  ProjectCentroid, ColumnsRows
 } from '../projectInterfaceTypes';
 import {LoginService} from '../auth/login.service';
 import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   isLoadingData = false;
   // project props
   projects = new FormControl();
-  userProjects: Project[];
+  userProjects: Project[] | ColumnsRows;
   projectsLoaded: boolean;
   selectedProjects: string[] = [];
   isMapPointsSelected = false;
@@ -72,8 +72,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   updateColDefs: Subject<any> = new Subject<any>();
   presetFilters: Subject<any> = new Subject<any>();
   updateFilters: Subject<any> = new Subject<any>();
-  exportLabResultsCSV: Subject<string> = new Subject<string>();
-  exportSamplePointLocationCSV: Subject<string> = new Subject<string>();
+  private publishLabResultsToAGOL = new BehaviorSubject <string>(null);
+  private publishSamplePointLocationsToAGOL = new BehaviorSubject <string>(null);
+  private exportLabResultsCSV: Subject<string> = new BehaviorSubject <string>(null);
+  private exportSamplePointLocationCSV: Subject<string> = new BehaviorSubject <string>(null);
   showTable = false;
 
   get agGridActiveFilters() {
@@ -659,6 +661,18 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.updateColDefs.next(results.columns);
       }
     });
+  }
+
+  onPublishAGOLBtnClick() {
+    // set ag grid title
+    const selectedTab = this.tabs[this.selectedTab].replace(/ /g, '_');
+    const title = 'Projects_' + this.selectedProjects.join('_') + '_' + selectedTab;
+    if (this.selectedTab === 0) {
+      this.publishLabResultsToAGOL.next(title);
+    }
+    if (this.selectedTab === 1) {
+      this.publishSamplePointLocationsToAGOL.next(title);
+    }
   }
 
   onExportCSVBtnClick() {

@@ -119,3 +119,18 @@ footer {
   top: 45%;
   left: 50%;
 }
+
+.snackbar-success {
+  max-width: 95% !important;
+  padding: 10px !important; // spacing between the text and boundary
+  background-color: green;
+  color: white;
+}
+
+.snackbar-error {
+  max-width: 95% !important;
+  padding: 10px !important; // spacing between the text and boundary
+  background-color: orangered;
+  color: white;
+}
+

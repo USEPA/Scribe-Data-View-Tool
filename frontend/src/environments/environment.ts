@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   oauth_url: 'http://localhost:8000/api/oauth2',
   oauth_client_id: 'ZtlpDht9ywRCA4Iq',
-  login_redirect: 'http://localhost:8000',
+  login_redirect: 'http://localhost:4200',
   local_client_id: 'ttDS2qFfDXJSxCjETxKHcWeFCjmiycrGPUrKRr8T',
   api_url: 'http://localhost:8000/api',
   api_version_tag: 'v1',

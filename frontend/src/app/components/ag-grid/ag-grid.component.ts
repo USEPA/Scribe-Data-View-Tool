@@ -1,9 +1,11 @@
 import {Component, Input, OnInit, OnDestroy, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
-import {AgGridSelectFilterComponent} from '@components/ag-grid/ag-grid-select-filter.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Observable, Subscription} from 'rxjs';
-import { ColDef } from 'ag-grid-community';
 
+import { ColDef } from 'ag-grid-community';
+import {AgGridSelectFilterComponent} from '@components/ag-grid/ag-grid-select-filter.component';
 import {ActiveFilter} from '../../filtersInterfaceTypes';
+
 import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
 
 
@@ -28,7 +30,6 @@ export class AgGridComponent implements OnInit, OnDestroy {
   private updatingColDefsSubscription: Subscription;
   private settingFiltersSubscription: Subscription;
   private updatingFiltersSubscription: Subscription;
-  private exportingCSVSubscription: Subscription;
 
   // Inputs
   @Input() set isLoading(value: boolean) {
@@ -59,9 +60,10 @@ export class AgGridComponent implements OnInit, OnDestroy {
   @Input() updatingColDefs: Observable<any>;
   @Input() settingFilters: Observable<any>;
   @Input() updatingFilters: Observable<any>;
+  @Input() publishingToAGOL: Observable<string>;
   @Input() exportingCSV: Observable<string>;
 
-  constructor(public scribeDataExplorerService: ScribeDataExplorerService) {
+  constructor(public scribeDataExplorerService: ScribeDataExplorerService, public snackBar: MatSnackBar) {
     this.showGrid = true;
     this.defaultColDef = {
       autoHeight: true,
@@ -94,9 +96,6 @@ export class AgGridComponent implements OnInit, OnDestroy {
         });
       });
     }
-    if (this.exportingCSV) {
-      this.exportingCSVSubscription = this.exportingCSV.subscribe((title) => this.exportCSV(title));
-    }
     // subscribe to map component events
     // on map point selected / clicked, select corresponding table rows
     this.scribeDataExplorerService.mapPointSelectedChangedEvent.subscribe((pointAttributes) => {
@@ -112,6 +111,17 @@ export class AgGridComponent implements OnInit, OnDestroy {
         });
       }
     });
+    // subscribe to data exporting events
+    this.publishingToAGOL.subscribe((title) => {
+      if (title) {
+        this.publishToAGOL(title);
+      }
+    });
+    this.exportingCSV.subscribe((title) => {
+      if (title) {
+        this.exportCSV(title);
+      }
+    });
 
     // Set custom filter properties for column definitions
     if (this.columnDefs && this.customFilterProps) {
@@ -122,7 +132,6 @@ export class AgGridComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.updatingColDefsSubscription.unsubscribe();
     this.updatingFiltersSubscription.unsubscribe();
-    this.exportingCSVSubscription.unsubscribe();
   }
 
   showLoading() {
@@ -276,6 +285,19 @@ export class AgGridComponent implements OnInit, OnDestroy {
         item.filterParams = {values: this.customFilterProps[item.field].filterValues};
       }
     });
+  }
+
+  async publishToAGOL(title) {
+    const rowData = [];
+    this.gridApi.forEachNodeAfterFilter((row) => {
+      rowData.push(row.data);
+    });
+    if (rowData.length > 0) {
+      const serviceUrl = await this.scribeDataExplorerService.publishToAGOL({title, rows: rowData});
+      this.snackBar.open(`AGOL Service: ${serviceUrl} published.`, null, {
+        duration: 5000, panelClass: ['snackbar-success']
+      });
+    }
   }
 
   exportCSV(title) {

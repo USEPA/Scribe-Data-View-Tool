@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
 import {HttpRequestInterceptor} from './http-request.interceptor';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
@@ -40,7 +40,11 @@ import { ProjectsMapDialogComponent } from '@components/projects-map-dialog/proj
     CustomMaterialModule,
     ReactiveFormsModule,
     AgGridModule,
-    AuthModule
+    AuthModule,
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'csrftoken',
+      headerName: 'X-CSRFToken'
+    }),
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

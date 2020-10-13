@@ -97,6 +97,10 @@
           Visible Columns
         </button>
         <button mat-raised-button color="primary" style="transform: scale(0.8); padding: 0 5px;"
+                (click)="onPublishAGOLBtnClick()">
+          Publish To AGOL
+        </button>
+        <button mat-raised-button color="primary" style="transform: scale(0.8); padding: 0 5px;"
                 (click)="onExportCSVBtnClick()">
           Export CSV
         </button>
@@ -116,6 +120,7 @@
         [updatingColDefs]="updateColDefs.asObservable()"
         [settingFilters]="presetFilters.asObservable()"
         [updatingFilters]="updateFilters.asObservable()"
+        [publishingToAGOL]="publishLabResultsToAGOL.asObservable()"
         [exportingCSV]="exportLabResultsCSV.asObservable()"
         [style.width]="(geoPointsArray.length > 0) ? '1200px' : '100%'"
         (gridReadyEvent)="setAgGridPresetFilters($event)"
@@ -140,6 +145,10 @@
           Visible Columns
         </button>
         <button mat-raised-button color="primary" style="transform: scale(0.8); padding: 0 5px;"
+                (click)="onPublishAGOLBtnClick()">
+          Publish To AGOL
+        </button>
+        <button mat-raised-button color="primary" style="transform: scale(0.8); padding: 0 5px;"
                 (click)="onExportCSVBtnClick()">
           Export CSV
         </button>
@@ -159,6 +168,7 @@
         [updatingColDefs]="updateColDefs.asObservable()"
         [settingFilters]="presetFilters.asObservable()"
         [updatingFilters]="updateFilters.asObservable()"
+        [publishingToAGOL]="publishSamplePointLocationsToAGOL.asObservable()"
         [exportingCSV]="exportSamplePointLocationCSV.asObservable()"
         [style.width]="(geoPointsArray.length > 0) ? '1000px' : '100%'"
         (gridReadyEvent)="setAgGridPresetFilters($event)"
