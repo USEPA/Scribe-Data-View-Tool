@@ -1,5 +1,4 @@
 import {Component, Input, OnInit, OnDestroy, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Observable, Subscription} from 'rxjs';
 import { ColDef } from 'ag-grid-community';
 
@@ -63,7 +62,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
   @Input() publishingToAGOL: Observable<string>;
   @Input() exportingCSV: Observable<string>;
 
-  constructor(public scribeDataExplorerService: ScribeDataExplorerService, public snackBar: MatSnackBar) {
+  constructor(public scribeDataExplorerService: ScribeDataExplorerService) {
     this.showGrid = true;
     this.defaultColDef = {
       autoHeight: true,
@@ -298,11 +297,8 @@ export class AgGridComponent implements OnInit, OnDestroy {
       rowData.push(row.data);
     });
     if (rowData.length > 0) {
-      const serviceUrl = await this.scribeDataExplorerService.publishToAGOL({title, rows: rowData});
+      await this.scribeDataExplorerService.publishToAGOL({title, rows: rowData});
       this.scribeDataExplorerService.isPublishingToAGOL.next(false);
-      this.snackBar.open(`AGOL Service: ${serviceUrl} published.`, null, {
-        duration: 5000, panelClass: ['snackbar-success']
-      });
     }
   }
 

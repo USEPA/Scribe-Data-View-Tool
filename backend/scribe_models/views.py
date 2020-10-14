@@ -72,6 +72,8 @@ def get_project_samples(request, project_id_p=0):
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def publish_to_agol(request):
+    geojson_item = None
+    agol_conn = None
     try:
         # open an AGOL connection
         social_auth = request.user.social_auth.get(provider='agol')
@@ -80,22 +82,30 @@ def publish_to_agol(request):
         # construct data as GeoJson: https://doc.arcgis.com/en/arcgis-online/reference/geojson.htm
         geojson_features = []
         for row in request.data['rows']:
-            point = geojson.Point((row['Longitude'], row['Latitude']))
-            geojson_features.append(geojson.Feature(geometry=point, properties=row))
-        feature_collection = geojson.FeatureCollection(geojson_features)
-        item_properties = {
-            'title': request.data['title'],
-            'description': 'Scribe Explorer generated feature layer',
-            'tags': 'GeoJson, Scribe Explorer',
-            'type': 'GeoJson',
-        }
-        geojson_tmp_file = write_temp_geojson_file(feature_collection)
-        geojson_item = agol_conn.content.add(item_properties=item_properties, data=geojson_tmp_file)
-        geojson_lyr = geojson_item.publish()
-        agol_conn.content.delete_items([geojson_item.itemid])
-        return Response(geojson_lyr.url)
+            try:
+                point = geojson.Point((row['Longitude'], row['Latitude']))
+                geojson_features.append(geojson.Feature(geometry=point, properties=row))
+            except Exception as ex:
+                geojson_features.append(geojson.Feature(geometry={"type": "Point", "coordinates": []}, properties=row))
+        if len(geojson_features) > 0:
+            feature_collection = geojson.FeatureCollection(geojson_features)
+            item_properties = {
+                'title': request.data['title'],
+                'description': 'Scribe Explorer generated feature layer',
+                'tags': 'GeoJson, Scribe Explorer',
+                'type': 'GeoJson',
+            }
+            geojson_tmp_file = write_temp_geojson_file(feature_collection)
+            geojson_item = agol_conn.content.add(item_properties=item_properties, data=geojson_tmp_file)
+            geojson_lyr = geojson_item.publish(overwrite=True)
+            agol_conn.content.delete_items([geojson_item.itemid])
+            return Response(geojson_lyr.url)
+        else:
+            return Response('')
     except Exception as ex:
         print(ex)
+        if agol_conn and geojson_item:
+            agol_conn.content.delete_items([geojson_item.itemid])
         return Response(status=500)
 
 

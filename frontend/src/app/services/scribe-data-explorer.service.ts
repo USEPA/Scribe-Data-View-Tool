@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {
   AGOLService,
@@ -33,21 +34,28 @@ export class ScribeDataExplorerService {
   public mapPointsSymbolizationChangedEvent: Observable<any> = this.mapPointsSymbolizationSource.asObservable();
   public mapSymbolFieldAliases = ['Matrix', 'Analyte', 'MDL'];
 
-  constructor(private http: HttpClient, public router: Router) {
+  constructor(private http: HttpClient, public router: Router, public snackBar: MatSnackBar) {
   }
 
   async getUserProjects() {
     const results = await this.http.get<Project[]>('projects').toPromise()
       .catch((error) => {
-        console.log(error.message);
         return {} as ColumnsRows;
       });
     return results;
   }
 
   async publishToAGOL(data) {
-    const results = await this.http.post<any>('export_content_to_agol', data).toPromise()
+    const results = await this.http.post<any>('publish_content_to_agol', data).toPromise()
+      .then((serviceUrl) => {
+        this.snackBar.open(`AGOL Service: ${serviceUrl} published.`, null, {
+          duration: 3000, panelClass: ['snackbar-success']
+        });
+      })
       .catch((error) => {
+        this.snackBar.open(`Error publishing GeoPlatform service.`, null, {
+          duration: 3000, panelClass: ['snackbar-error']
+        });
         return error.message;
       });
     return results;
@@ -56,7 +64,7 @@ export class ScribeDataExplorerService {
   async getPublishedAGOLServices() {
     const results = await this.http.get<any>('get_published_agol_services').toPromise()
       .catch((error) => {
-        return error.message;
+        return [];
       });
     return results;
   }

@@ -137,6 +137,9 @@ footer {
   background-color: green;
   color: white;
 }
+.snackbar-success > .mat-simple-snackbar {
+  justify-content: center;
+}
 
 .snackbar-error {
   max-width: 95% !important;
@@ -144,4 +147,6 @@ footer {
   background-color: orangered;
   color: white;
 }
-
+.snackbar-error > .mat-simple-snackbar {
+  justify-content: center;
+}
