@@ -22,7 +22,7 @@ from django.conf import settings
 from rest_framework import routers
 
 from backend.sadie.views import EsriProxy, ProjectTablesViewSet, current_user
-from backend.scribe_models.views import ProjectsViewSet, get_project_samples, publish_to_agol
+from backend.scribe_models.views import *
 
 
 """Django REST Framework notes:
@@ -48,6 +48,7 @@ urlpatterns = [
     # http://localhost:8080/api/v1/<router-viewsets>
     url(r'^{}api/v1/'.format(settings.URL_PREFIX), include(router.urls)),
     url(r'^{}api/v1/export_content_to_agol/'.format(settings.URL_PREFIX), publish_to_agol),
+    url(r'^{}api/v1/get_published_agol_services/'.format(settings.URL_PREFIX), get_published_agol_services),
     # Declare parameterized project api urls
     url(r'^{}api/v1/projects/(?P<project_id_p>.+)/samples/'.format(settings.URL_PREFIX), get_project_samples),
     url(r'^{}api/v1/project_tables/(?P<project_id_p>.+)'.format(settings.URL_PREFIX), ProjectTablesViewSet.as_view({'get': 'list'})),

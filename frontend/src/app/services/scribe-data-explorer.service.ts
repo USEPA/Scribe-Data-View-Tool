@@ -2,13 +2,23 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {ColumnsRows, Project, ProjectCentroid, ProjectLabResult, ProjectSample} from '../projectInterfaceTypes';
+import {
+  AGOLService,
+  ColumnsRows,
+  Project,
+  ProjectCentroid,
+  ProjectLabResult,
+  ProjectSample
+} from '../projectInterfaceTypes';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScribeDataExplorerService {
+  public userAGOLServices: BehaviorSubject<AGOLService[]> = new BehaviorSubject<AGOLService[]>(null);
+  public isPublishingToAGOL: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   public projectCentroidsSelectedSource: BehaviorSubject<ProjectCentroid[]> = new BehaviorSubject<ProjectCentroid[]>(null);
   public projectCentroidsSelectedEvent: Observable<ProjectCentroid[]> = this.projectCentroidsSelectedSource.asObservable();
   public mapPointSelectedSource: BehaviorSubject<ProjectSample> = new BehaviorSubject<ProjectSample>(null);
@@ -37,6 +47,14 @@ export class ScribeDataExplorerService {
 
   async publishToAGOL(data) {
     const results = await this.http.post<any>('export_content_to_agol', data).toPromise()
+      .catch((error) => {
+        return error.message;
+      });
+    return results;
+  }
+
+  async getPublishedAGOLServices() {
+    const results = await this.http.get<any>('get_published_agol_services').toPromise()
       .catch((error) => {
         return error.message;
       });

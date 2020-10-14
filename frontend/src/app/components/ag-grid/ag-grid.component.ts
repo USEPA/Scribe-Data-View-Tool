@@ -1,12 +1,12 @@
 import {Component, Input, OnInit, OnDestroy, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Observable, Subscription} from 'rxjs';
-
 import { ColDef } from 'ag-grid-community';
-import {AgGridSelectFilterComponent} from '@components/ag-grid/ag-grid-select-filter.component';
-import {ActiveFilter} from '../../filtersInterfaceTypes';
 
 import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
+import {AgGridSelectFilterComponent} from '@components/ag-grid/ag-grid-select-filter.component';
+import {ActiveFilter} from '../../filtersInterfaceTypes';
+import {AGOLService} from '../../projectInterfaceTypes';
 
 
 @Component({
@@ -114,7 +114,12 @@ export class AgGridComponent implements OnInit, OnDestroy {
     // subscribe to data exporting events
     this.publishingToAGOL.subscribe((title) => {
       if (title) {
-        this.publishToAGOL(title);
+        this.publishToAGOL(title).then(async () => {
+          // update user's published AGOL services list
+          await this.scribeDataExplorerService.getPublishedAGOLServices().then((items: AGOLService[]) => {
+            this.scribeDataExplorerService.userAGOLServices.next(items);
+          });
+        });
       }
     });
     this.exportingCSV.subscribe((title) => {
@@ -294,6 +299,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
     });
     if (rowData.length > 0) {
       const serviceUrl = await this.scribeDataExplorerService.publishToAGOL({title, rows: rowData});
+      this.scribeDataExplorerService.isPublishingToAGOL.next(false);
       this.snackBar.open(`AGOL Service: ${serviceUrl} published.`, null, {
         duration: 5000, panelClass: ['snackbar-success']
       });

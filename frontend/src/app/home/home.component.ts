@@ -15,7 +15,7 @@ import {
   ColumnDefs,
   MapSymbolizationProps,
   MapSymbol,
-  ProjectCentroid, ColumnsRows
+  ProjectCentroid, ColumnsRows, AGOLService
 } from '../projectInterfaceTypes';
 import {LoginService} from '../auth/login.service';
 import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
@@ -97,8 +97,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   async ngOnInit() {
-    //
+    // get user's projects and published AGOL services
     this.userProjects = await this.scribeDataExplorerService.getUserProjects();
+    await this.scribeDataExplorerService.getPublishedAGOLServices().then((items: AGOLService[]) => {
+      this.scribeDataExplorerService.userAGOLServices.next(items);
+    });
 
     // Subscribing to query string parameters
     this.urlParamsSubscription = this.route.queryParams.subscribe(queryParams => {
@@ -664,6 +667,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   onPublishAGOLBtnClick() {
+    this.scribeDataExplorerService.isPublishingToAGOL.next(true);
     // set ag grid title
     const selectedTab = this.tabs[this.selectedTab].replace(/ /g, '_');
     const title = 'Projects_' + this.selectedProjects.join('_') + '_' + selectedTab;

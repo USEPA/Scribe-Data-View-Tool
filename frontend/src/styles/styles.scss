@@ -114,7 +114,18 @@ footer {
 }
 
 // Other custom styles
-.loading-spinner {
+.btn-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -15px;
+  width: 100%;
+}
+.btn-spinner circle {
+  stroke: orange;
+}
+
+.map-loading-spinner {
   position: absolute;
   top: 45%;
   left: 50%;

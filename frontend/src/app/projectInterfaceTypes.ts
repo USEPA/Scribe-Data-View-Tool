@@ -5,6 +5,11 @@ export interface Project {
   project_name: string;
 }
 
+export interface AGOLService {
+  title: string;
+  url: string;
+}
+
 export interface ColumnsRows {
   columnDefs: any[];
   rowData: any[];

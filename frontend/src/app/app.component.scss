@@ -19,16 +19,19 @@ main {
   }
 }
 
-.all-wrap {
-  min-height: 100vh; // same height as browser window height
-}
-
 .page-wrap {
   display: flex;
   flex-direction: column;
   min-height: 100vh; // same height as browser window height
 }
 
+// Angular Material app style overrides
+
 ::ng-deep .mat-select-value-text {
   white-space: normal !important;
+}
+
+// Remove the active tab grayed out style
+::ng-deep .mat-tab-label.mat-tab-label-active {
+  opacity: 1 !important;
 }

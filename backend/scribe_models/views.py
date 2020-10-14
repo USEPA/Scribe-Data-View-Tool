@@ -91,7 +91,7 @@ def publish_to_agol(request):
         }
         geojson_tmp_file = write_temp_geojson_file(feature_collection)
         geojson_item = agol_conn.content.add(item_properties=item_properties, data=geojson_tmp_file)
-        geojson_lyr = geojson_item.publish(overwrite=True)
+        geojson_lyr = geojson_item.publish()
         agol_conn.content.delete_items([geojson_item.itemid])
         return Response(geojson_lyr.url)
     except Exception as ex:
@@ -104,3 +104,24 @@ def write_temp_geojson_file(feature_collection):
     with open(tmp_file[1], 'w') as outfile:
         geojson.dump(feature_collection, outfile)
     return tmp_file[1]
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_published_agol_services(request):
+    try:
+        # open an AGOL connection
+        social_auth = request.user.social_auth.get(provider='agol')
+        agol_token = social_auth.get_access_token(load_strategy())
+        agol_conn = GIS(token=agol_token)
+        # get user's published services
+        items = []
+        agol_items = agol_conn.content.search(
+            query="owner:{owner} tags:{tags}".format(owner=social_auth.uid, tags='Scribe Explorer'),
+            item_type="Feature *")
+        for item in agol_items:
+            items.append({'title': item.title, 'url': item.homepage})
+        return Response(items)
+    except Exception as ex:
+        print(ex)
+        return Response(status=500)
