@@ -1,5 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {MatDialog, MatSnackBar, MatChipInputEvent} from '@angular/material';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormControl, Validators} from '@angular/forms';
 import {Subject, Subscription, Observable, BehaviorSubject} from 'rxjs';
