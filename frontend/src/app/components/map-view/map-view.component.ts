@@ -12,7 +12,6 @@ import {
   AfterViewInit
 } from '@angular/core';
 import {ReplaySubject} from 'rxjs';
-import {loadModules} from 'esri-loader';
 
 import {environment} from '@environments/environment';
 import {CONFIG_SETTINGS} from '../../config_settings';
@@ -107,96 +106,96 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
 
   async initializeMap() {
     const self = this;
-    try {
-      // Load the modules for the ArcGIS API for JavaScript
-      const [esriConfig, urlUtils, EsriMap, SceneView, FeatureLayer, Layer, Graphic, GraphicsLayer, Point, Viewpoint, Mesh, Home,
-        BasemapGallery, Expand, SketchViewModel] = await loadModules([
-        'esri/config',
-        'esri/core/urlUtils',
-        'esri/Map',
-        'esri/views/SceneView',
-        'esri/layers/FeatureLayer',
-        'esri/layers/Layer',
-        'esri/Graphic',
-        'esri/layers/GraphicsLayer',
-        'esri/geometry/Point',
-        'esri/Viewpoint',
-        'esri/geometry/Mesh',
-        'esri/widgets/Home',
-        'esri/widgets/BasemapGallery',
-        'esri/widgets/Expand',
-        'esri/widgets/Sketch/SketchViewModel',
-      ]);
-      esriConfig.request.trustedServers.push(environment.agol_trusted_server);
-      urlUtils.addProxyRule({
-        urlPrefix: environment.agol_proxy_url_prefix,
-        proxyUrl: environment.agol_proxy_url
-      });
-
-      // Initialize the Esri Modules properties for this map component class
-      self._featureLayer = FeatureLayer;
-      self._layer = Layer;
-      self._graphic = Graphic;
-      self._graphicsLayer = GraphicsLayer;
-      self._point = Point;
-      self._viewPoint = Viewpoint;
-      self._mesh = Mesh;
-      self._homeBtn = Home;
-      self._sketchViewModel = SketchViewModel;
-
-      // Configure the BaseMap
-      const mapProperties: __esri.MapProperties = {
-        basemap: self._baseMap,
-        ground: {
-          navigationConstraint: {
-            type: 'none'
-          }
-        }
-      };
-      self._map = new EsriMap(mapProperties);
-      this.mapViewEl.nativeElement.id = this.mapDivId;
-
-      // Initialize the SceneView
-      const sceneViewProperties: __esri.MapViewProperties = {
-        container: this.mapViewEl.nativeElement,
-        map: self._map,
-        center: self._center,
-        popup: {
-          dockEnabled: false,
-          dockOptions: {
-            position: 'bottom-center',
-            // Ignore the default sizes that trigger responsive docking
-            breakpoint: false
-          }
-        },
-      };
-      // create map scene view
-      self._view = new SceneView(sceneViewProperties);
-      // add ootb map widgets to view
-      self._homeBtn = new Home({
-        view: self._view
-      });
-      self._view.ui.add(self._homeBtn, 'top-right');
-      const basemapGalleryWidget = new BasemapGallery({
-        view: self._view
-      });
-      const baseMapExpand = new Expand({
-        expandIconClass: 'esri-icon-basemap',
-        view: self._view,
-        content: basemapGalleryWidget
-      });
-      self._view.ui.add(baseMapExpand, 'top-right');
-
-      return self._view.when((loadedView) => {
-        // resolve();
-        return loadedView;
-      }, error => {
-        console.log(error);
-      });
-
-    } catch (error) {
-      console.log('EsriLoader: ', error);
-    }
+    // try {
+    //   // Load the modules for the ArcGIS API for JavaScript
+    //   const [esriConfig, urlUtils, EsriMap, SceneView, FeatureLayer, Layer, Graphic, GraphicsLayer, Point, Viewpoint, Mesh, Home,
+    //     BasemapGallery, Expand, SketchViewModel] = await loadModules([
+    //     'esri/config',
+    //     'esri/core/urlUtils',
+    //     'esri/Map',
+    //     'esri/views/SceneView',
+    //     'esri/layers/FeatureLayer',
+    //     'esri/layers/Layer',
+    //     'esri/Graphic',
+    //     'esri/layers/GraphicsLayer',
+    //     'esri/geometry/Point',
+    //     'esri/Viewpoint',
+    //     'esri/geometry/Mesh',
+    //     'esri/widgets/Home',
+    //     'esri/widgets/BasemapGallery',
+    //     'esri/widgets/Expand',
+    //     'esri/widgets/Sketch/SketchViewModel',
+    //   ]);
+    //   esriConfig.request.trustedServers.push(environment.agol_trusted_server);
+    //   urlUtils.addProxyRule({
+    //     urlPrefix: environment.agol_proxy_url_prefix,
+    //     proxyUrl: environment.agol_proxy_url
+    //   });
+    //
+    //   // Initialize the Esri Modules properties for this map component class
+    //   self._featureLayer = FeatureLayer;
+    //   self._layer = Layer;
+    //   self._graphic = Graphic;
+    //   self._graphicsLayer = GraphicsLayer;
+    //   self._point = Point;
+    //   self._viewPoint = Viewpoint;
+    //   self._mesh = Mesh;
+    //   self._homeBtn = Home;
+    //   self._sketchViewModel = SketchViewModel;
+    //
+    //   // Configure the BaseMap
+    //   const mapProperties: __esri.MapProperties = {
+    //     basemap: self._baseMap,
+    //     ground: {
+    //       navigationConstraint: {
+    //         type: 'none'
+    //       }
+    //     }
+    //   };
+    //   self._map = new EsriMap(mapProperties);
+    //   this.mapViewEl.nativeElement.id = this.mapDivId;
+    //
+    //   // Initialize the SceneView
+    //   const sceneViewProperties: __esri.MapViewProperties = {
+    //     container: this.mapViewEl.nativeElement,
+    //     map: self._map,
+    //     center: self._center,
+    //     popup: {
+    //       dockEnabled: false,
+    //       dockOptions: {
+    //         position: 'bottom-center',
+    //         // Ignore the default sizes that trigger responsive docking
+    //         breakpoint: false
+    //       }
+    //     },
+    //   };
+    //   // create map scene view
+    //   self._view = new SceneView(sceneViewProperties);
+    //   // add ootb map widgets to view
+    //   self._homeBtn = new Home({
+    //     view: self._view
+    //   });
+    //   self._view.ui.add(self._homeBtn, 'top-right');
+    //   const basemapGalleryWidget = new BasemapGallery({
+    //     view: self._view
+    //   });
+    //   const baseMapExpand = new Expand({
+    //     expandIconClass: 'esri-icon-basemap',
+    //     view: self._view,
+    //     content: basemapGalleryWidget
+    //   });
+    //   self._view.ui.add(baseMapExpand, 'top-right');
+    //
+    //   return self._view.when((loadedView) => {
+    //     // resolve();
+    //     return loadedView;
+    //   }, error => {
+    //     console.log(error);
+    //   });
+    //
+    // } catch (error) {
+    //   console.log('EsriLoader: ', error);
+    // }
   }
 
   ngOnInit() {

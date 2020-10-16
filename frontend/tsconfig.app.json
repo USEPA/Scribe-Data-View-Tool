@@ -16,6 +16,7 @@
     "src/polyfills.ts"
   ],
   "include": [
+    "node_modules/arcgis-js-api/index.d.ts",
     "src/**/*.ts"
   ],
   "exclude": [
