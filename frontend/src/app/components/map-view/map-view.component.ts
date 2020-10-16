@@ -326,6 +326,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
       } as unknown as __esri.LayerFromArcGISServerUrlParams).then((portalLyr) => {
         portalLyr.load().then((loadedPortalLyr) => {
           // const portalLyrSubLayers = loadedPortalLyr.createServiceSublayers();
+          // @ts-ignore
           const scribeProjectsSubLyr = portalLyr.sublayers.find((sublayer) => {
             return sublayer.title === 'Scribe Projects';
           });
