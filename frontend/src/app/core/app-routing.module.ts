@@ -3,8 +3,8 @@ import {Routes, RouterModule} from '@angular/router';
 import {HomeComponent} from '../home/home.component';
 import {LoginComponent} from '../auth/login/login.component';
 import {LoginService} from '../auth/login.service';
-import {AgGridModule} from 'ag-grid-angular/main';
 import { AgGridSelectFilterComponent } from '@components/ag-grid/ag-grid-select-filter.component';
+import {AgGridModule} from '@ag-grid-community/angular';
 
 const routes: Routes = [
   {

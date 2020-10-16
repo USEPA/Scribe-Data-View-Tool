@@ -16,10 +16,29 @@ import {ReplaySubject} from 'rxjs';
 import {environment} from '@environments/environment';
 import {CONFIG_SETTINGS} from '../../config_settings';
 import {MapSymbolizationProps} from '../../projectInterfaceTypes';
-import FeatureLayerType = __esri.FeatureLayer;
-import FeatureLayerViewType = __esri.FeatureLayerView;
+import FeatureLayer from 'esri/layers/FeatureLayer';
+import GraphicsLayer from 'esri/layers/GraphicsLayer';
+import SketchViewModel from 'esri/widgets/Sketch/SketchViewModel';
+import Map from 'esri/Map';
+import esriConfig from 'esri/config';
+import urlUtils from 'esri/core/urlUtils';
+import Layer from 'esri/layers/Layer';
+import Graphic from 'esri/Graphic';
+import ViewPoint from 'esri/Viewpoint';
+import Point from 'esri/geometry/Point';
+import Home from 'esri/widgets/Home';
+import Mesh from 'esri/geometry/Mesh';
+import SceneView from 'esri/views/SceneView';
+import BasemapGallery from 'esri/widgets/BasemapGallery';
+import Expand from 'esri/widgets/Expand';
+import SimpleRenderer from 'esri/renderers/SimpleRenderer';
+import SimpleMarkerSymbol from 'esri/symbols/SimpleMarkerSymbol';
+import MeshSymbol3D from 'esri/symbols/MeshSymbol3D';
+import MeshMaterial from 'esri/geometry/support/MeshMaterial';
+import Color from 'esri/Color';
 import {LoginService} from '../../auth/login.service';
 import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
+
 // import {MapService} from '@services/map.service';
 
 
@@ -41,27 +60,20 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
   private _baseMap = 'streets';
   private _map: __esri.Map;
   private _view: __esri.SceneView;
-  private _graphic;
-  private _graphicsLayer;
-  private _featureLayer;
-  private _layer;
-  private _zoomToPointGraphic;
-  private _point;
-  private _viewPoint;
-  private _mesh;
-  private _homeBtn;
-  private _sketchViewModel;
-  private _initExtent;
+  private _zoomToPointGraphic: __esri.Graphic;
+  private _homeBtn: __esri.Home;
+
   // mapService: MapService;
   private mapPointSymbolBreaks: number = CONFIG_SETTINGS.mapPointSymbolBreaks;
   private mapPointSymbolColors = CONFIG_SETTINGS.mapPointSymbolColors;
-  mapPointsFeatureLayer: __esri.FeatureLayer;
-  scribeProjectsFeatureLyr: __esri.FeatureLayer;
+  mapPointsFeatureLayer: FeatureLayer;
+  scribeProjectsFeatureLyr: FeatureLayer;
   mapPointsFeatureLayerHighlight;
-  polygonSelectionGraphicsLayer: __esri.GraphicsLayer;
-  pointSelectionSketchViewModel: __esri.SketchViewModel;
+  polygonSelectionGraphicsLayer: GraphicsLayer;
+  pointSelectionSketchViewModel: SketchViewModel;
 
   private _selectedGeoPoint: any;
+
   @Input()
   set center(center: Array<number>) {
     this._center = center;
@@ -104,95 +116,65 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
     // this.mapService = new MapService(loginService.access_token);
   }
 
-  async initializeMap() {
-    const self = this;
-    // try {
-    //   // Load the modules for the ArcGIS API for JavaScript
-    //   const [esriConfig, urlUtils, EsriMap, SceneView, FeatureLayer, Layer, Graphic, GraphicsLayer, Point, Viewpoint, Mesh, Home,
-    //     BasemapGallery, Expand, SketchViewModel] = await loadModules([
-    //     'esri/config',
-    //     'esri/core/urlUtils',
-    //     'esri/Map',
-    //     'esri/views/SceneView',
-    //     'esri/layers/FeatureLayer',
-    //     'esri/layers/Layer',
-    //     'esri/Graphic',
-    //     'esri/layers/GraphicsLayer',
-    //     'esri/geometry/Point',
-    //     'esri/Viewpoint',
-    //     'esri/geometry/Mesh',
-    //     'esri/widgets/Home',
-    //     'esri/widgets/BasemapGallery',
-    //     'esri/widgets/Expand',
-    //     'esri/widgets/Sketch/SketchViewModel',
-    //   ]);
-    //   esriConfig.request.trustedServers.push(environment.agol_trusted_server);
-    //   urlUtils.addProxyRule({
-    //     urlPrefix: environment.agol_proxy_url_prefix,
-    //     proxyUrl: environment.agol_proxy_url
-    //   });
-    //
-    //   // Initialize the Esri Modules properties for this map component class
-    //   self._featureLayer = FeatureLayer;
-    //   self._layer = Layer;
-    //   self._graphic = Graphic;
-    //   self._graphicsLayer = GraphicsLayer;
-    //   self._point = Point;
-    //   self._viewPoint = Viewpoint;
-    //   self._mesh = Mesh;
-    //   self._homeBtn = Home;
-    //   self._sketchViewModel = SketchViewModel;
-    //
-    //   // Configure the BaseMap
-    //   const mapProperties: __esri.MapProperties = {
-    //     basemap: self._baseMap,
-    //     ground: {
-    //       navigationConstraint: {
-    //         type: 'none'
-    //       }
-    //     }
-    //   };
-    //   self._map = new EsriMap(mapProperties);
-    //   this.mapViewEl.nativeElement.id = this.mapDivId;
-    //
-    //   // Initialize the SceneView
-    //   const sceneViewProperties: __esri.MapViewProperties = {
-    //     container: this.mapViewEl.nativeElement,
-    //     map: self._map,
-    //     center: self._center,
-    //     popup: {
-    //       dockEnabled: false,
-    //       dockOptions: {
-    //         position: 'bottom-center',
-    //         // Ignore the default sizes that trigger responsive docking
-    //         breakpoint: false
-    //       }
-    //     },
-    //   };
-    //   // create map scene view
-    //   self._view = new SceneView(sceneViewProperties);
-    //   // add ootb map widgets to view
-    //   self._homeBtn = new Home({
-    //     view: self._view
-    //   });
-    //   self._view.ui.add(self._homeBtn, 'top-right');
-    //   const basemapGalleryWidget = new BasemapGallery({
-    //     view: self._view
-    //   });
-    //   const baseMapExpand = new Expand({
-    //     expandIconClass: 'esri-icon-basemap',
-    //     view: self._view,
-    //     content: basemapGalleryWidget
-    //   });
-    //   self._view.ui.add(baseMapExpand, 'top-right');
-    //
-    //   return self._view.when((loadedView) => {
-    //     // resolve();
-    //     return loadedView;
-    //   }, error => {
-    //     console.log(error);
-    //   });
-    //
+  initializeMap() {
+    esriConfig.request.trustedServers.push(environment.agol_trusted_server);
+    esriConfig.request.proxyRules.push({
+      urlPrefix: environment.agol_proxy_url_prefix,
+      proxyUrl: environment.agol_proxy_url
+    });
+
+    // Initialize the Esri Modules properties for this map component class
+
+    // Configure the BaseMap
+    const mapProperties: __esri.MapProperties = {
+      basemap: this._baseMap,
+      ground: {
+        navigationConstraint: {
+          type: 'none'
+        }
+      }
+    };
+    this._map = new Map(mapProperties);
+    this.mapViewEl.nativeElement.id = this.mapDivId;
+
+    // Initialize the SceneView
+    const sceneViewProperties: __esri.SceneViewProperties = {
+      container: this.mapViewEl.nativeElement,
+      map: this._map,
+      center: this._center,
+      popup: {
+        dockEnabled: false,
+        dockOptions: {
+          position: 'bottom-center',
+          // Ignore the default sizes that trigger responsive docking
+          breakpoint: false
+        }
+      },
+    };
+    // create map scene view
+    this._view = new SceneView(sceneViewProperties);
+    // add ootb map widgets to view
+    this._homeBtn = new Home({
+      view: this._view
+    });
+    this._view.ui.add(this._homeBtn, 'top-right');
+    const basemapGalleryWidget = new BasemapGallery({
+      view: this._view
+    });
+    const baseMapExpand = new Expand({
+      expandIconClass: 'esri-icon-basemap',
+      view: this._view,
+      content: basemapGalleryWidget
+    });
+    this._view.ui.add(baseMapExpand, 'top-right');
+
+    return this._view.when((loadedView) => {
+      // resolve();
+      return loadedView;
+    }, error => {
+      console.log(error);
+    });
+
     // } catch (error) {
     //   console.log('EsriLoader: ', error);
     // }
@@ -231,7 +213,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
             } else {
               // Only return selected map point graphic from the click event results
               selectedGraphic = response.results.filter((result) => {
-               return result.graphic.layer === this.mapPointsFeatureLayer;
+                return result.graphic.layer === this.mapPointsFeatureLayer;
               })[0].graphic;
               // on map point selected / clicked, select corresponding table rows
               this.scribeDataExplorerService.mapPointSelectedSource.next(selectedGraphic.attributes);
@@ -338,10 +320,10 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
   }
 
   async loadPortalLayers(portalLyrServiceUrls) {
-    const portalLayers: __esri.Layer[]  = await Promise.all(portalLyrServiceUrls.map(async (portalItemId) => {
-      return this._layer.fromArcGISServerUrl({
+    const portalLayers: __esri.Layer[] = await Promise.all(portalLyrServiceUrls.map(async (portalItemId) => {
+      return Layer.fromArcGISServerUrl({
         url: 'https://utility.arcgis.com/usrsvcs/servers/add9432d507146e7abf3351efa097b99/rest/services/R9GIS/R9ScribeData/MapServer'
-      } as unknown as __esri.LayerFromArcGISServerUrlParams).then( (portalLyr) => {
+      } as unknown as __esri.LayerFromArcGISServerUrlParams).then((portalLyr) => {
         portalLyr.load().then((loadedPortalLyr) => {
           // const portalLyrSubLayers = loadedPortalLyr.createServiceSublayers();
           const scribeProjectsSubLyr = portalLyr.sublayers.find((sublayer) => {
@@ -372,11 +354,10 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
     const pointGraphicsArray = [];
     pointData.forEach((pt: any) => {
       if (pt.Latitude && pt.Longitude) {
-        const point = {
-          type: 'point',
+        const point = new Point({
           longitude: pt.Longitude,
           latitude: pt.Latitude
-        };
+        });
         const symbolColor = null;
         /*if (pt.hasOwnProperty('Matrix') && pt.hasOwnProperty('MDL')) {
           symbolColor = this.getSamplePointColorByMDL(pt);
@@ -391,7 +372,8 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
           opacity: symbolColor ? 1 : 0,
           size: 7,
         };
-        pointGraphic = new this._graphic({
+        // @ts-ignore
+        pointGraphic = new Graphic({
           geometry: point,
           symbol: graphicSymbol,
           attributes: pt,
@@ -414,33 +396,28 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
     return pointGraphicsArray;
   }
 
-  createFeatureLayerFromGraphics(pointGraphicsArray: any): Promise<FeatureLayerType> {
-    const lyr = new this._featureLayer({
+  createFeatureLayerFromGraphics(pointGraphicsArray: any): __esri.FeatureLayer {
+    const renderer = new SimpleRenderer({  // overrides the layer's default renderer
+      symbol: new SimpleMarkerSymbol({size: 7})
+    });
+    return new FeatureLayer({
       geometryType: 'point',
       source: pointGraphicsArray,
       objectIdField: 'ObjectID',
       fields: this.setFeatureLayerFields(this.pointData),
       outFields: ['*'], // REQUIRED for querying the layer attributes
       popupTemplate: this.setLayerPopupTemplate(this.pointData),
-      renderer: {  // overrides the layer's default renderer
-        type: 'simple',
-        symbol: {
-          type: 'simple-marker',
-          opacity: 0,
-          size: 7
-        },
-      },
+      renderer,
       spatialReference: {
         wkid: 4326
       }
     });
-    return lyr;
   }
 
   // sets home button extent
   setHomeExtentFromFl(featureLayer) {
     this._view.extent = featureLayer.fullExtent;
-    const newViewPoint = new this._viewPoint({
+    const newViewPoint = new ViewPoint({
       targetGeometry: this._view.extent,
       scale: this._view.scale
     });
@@ -515,34 +492,31 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
           z: (pt.Sample_Depth_To * -1 * 10)
         };
         // add 3d point with depth z coordinate
-        pointGeometry = this._point(pointProps);
-        const symbolColor = null;
+        pointGeometry = new Point(pointProps);
+        // const symbolColor = null;
         /*if (pt.hasOwnProperty('Matrix') && pt.hasOwnProperty('MDL')) {
           symbolColor = this.getSamplePointColorByMDL(pt);
         }*/
-        const meshGeometry = this._mesh.createCylinder(pointGeometry, {
+        const meshGeometry = Mesh.createCylinder(pointGeometry, {
           size: {
             width: 5,
             depth: 5,
             height: (pt.Sample_Depth_To - pt.Sample_Depth) * 10,
           },
-          material: {
-            color: symbolColor
-          }
+          material: new MeshMaterial()
         });
         // Create a graphic and add it to the view
-        meshPointGraphic = new this._graphic({
+        meshPointGraphic = new Graphic({
           geometry: meshGeometry,
-          symbol: {
-            type: 'mesh-3d',
+          symbol: new MeshSymbol3D({
             symbolLayers: [{type: 'fill'}]
-          }
+          })
         });
         pointGraphicsArray.push(meshPointGraphic);
       }
     });
     if (pointGraphicsArray.length > 0) {
-      /*const graphicsLayer = new this._graphicsLayer({
+      /*const graphicsLayer = new GraphicsLayer({
         graphics: pointGraphicsArray,
         elevationInfo: {
           mode: 'relative-to-ground'
@@ -556,21 +530,19 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
   zoomToPoint(pointData: any) {
     this._view.graphics.remove(this._zoomToPointGraphic);
     if (pointData && pointData.Latitude && pointData.Longitude) {
-      const point = {
-        type: 'point',
+      const point = new Point({
         longitude: pointData.Longitude,
         latitude: pointData.Latitude
-      };
+      });
       // highlight symbology
-      const highlightSymbol = {
-        type: 'simple-marker',
+      const highlightSymbol = new SimpleMarkerSymbol({
         size: 8,
         outline: {
           color: [21, 244, 238],
           width: 6
         }
-      };
-      this._zoomToPointGraphic = new this._graphic({
+      });
+      this._zoomToPointGraphic = new Graphic({
         geometry: point,
         symbol: highlightSymbol
       });
@@ -599,15 +571,23 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
     for (let i = 0; i < cardinality; i++) {
       let symbolDefinition;
       const lowIntensityVal = +(mapSymbolizationProps.min + (lowIntensityStep * i)).toFixed(2);
-      symbolDefinition = {value: lowIntensityVal, color: this.mapPointSymbolColors[sampleType][i], label: `<=${lowIntensityVal}`};
+      symbolDefinition = {
+        value: lowIntensityVal,
+        color: this.mapPointSymbolColors[sampleType][i],
+        label: `<=${lowIntensityVal}`
+      };
       symbologyDefinitions.push(symbolDefinition);
     }
-    cardinality = cardinality  + 1;
+    cardinality = cardinality + 1;
     const highIntensityStep = (mapSymbolizationProps.max - mapSymbolizationProps.threshold) / (cardinality - 1);
     for (let i = 1; i < cardinality; i++) {
       let symbolDefinition;
       const highIntensityVal = +(mapSymbolizationProps.threshold + (highIntensityStep * i)).toFixed(2);
-      symbolDefinition = {value: highIntensityVal, color: this.mapPointSymbolColors[sampleType][i + 2], label: `<=${highIntensityVal}`};
+      symbolDefinition = {
+        value: highIntensityVal,
+        color: this.mapPointSymbolColors[sampleType][i + 2],
+        label: `<=${highIntensityVal}`
+      };
       symbologyDefinitions.push(symbolDefinition);
     }
     return symbologyDefinitions;
@@ -615,10 +595,10 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
 
   setupPointSelectionSketchViewModel() {
     // define polygon graphics layer used to draw a sketch view model and to query features / map points that intersect it
-    this.polygonSelectionGraphicsLayer = new this._graphicsLayer();
+    this.polygonSelectionGraphicsLayer = new GraphicsLayer();
     this._map.add(this.polygonSelectionGraphicsLayer);
     // create a new sketch view model set with the polygon graphics layer
-    this.pointSelectionSketchViewModel = new this._sketchViewModel({
+    this.pointSelectionSketchViewModel = new SketchViewModel({
       view: this._view,
       layer: this.polygonSelectionGraphicsLayer,
       pointSymbol: {
@@ -669,41 +649,41 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
     if (queryFeatureLayer) {
       // query mapPointsFeatureLayer. Geometry set for the query, so only intersecting geometries are returned
       queryFeatureLayer.queryFeatures(query).then((results) => {
-          const graphics = results.features;
-          if (graphics.length > 0) {
-            // zoom to the extent of the polygon with factor 2
-            this._view.goTo(geometry.extent.expand(2)).catch((error) => {
-              if (error.name !== 'AbortError') {
-                console.error('Error selecting map points: ' + error);
-              }
-            });
-            // remove existing highlighted map point
-            if (this._zoomToPointGraphic) {
-              this._view.graphics.remove(this._zoomToPointGraphic);
+        const graphics = results.features;
+        if (graphics.length > 0) {
+          // zoom to the extent of the polygon with factor 2
+          this._view.goTo(geometry.extent.expand(2)).catch((error) => {
+            if (error.name !== 'AbortError') {
+              console.error('Error selecting map points: ' + error);
             }
-            // highlight the selected features
-            this._view.whenLayerView(queryFeatureLayer).then((layerView: FeatureLayerViewType) => {
-              if (this.mapPointsFeatureLayerHighlight) {
-                this.mapPointsFeatureLayerHighlight.remove();
-              }
-              this.mapPointsFeatureLayerHighlight = layerView.highlight(graphics);
-            });
-            // get the attributes of map points
-            const pointsAttributeData = [];
-            graphics.map((feature, i) => {
-              pointsAttributeData.push(feature.attributes);
-            });
-            if (this.mapPointsFeatureLayer) {
-              // on map points selected, filter them in corresponding table rows
-              this.scribeDataExplorerService.mapPointsSelectedSource.next(pointsAttributeData);
-            } else if (this.scribeProjectsFeatureLyr) {
-              // on project centroid points selected, go to that project
-              this.scribeDataExplorerService.projectCentroidsSelectedSource.next(pointsAttributeData);
-            }
+          });
+          // remove existing highlighted map point
+          if (this._zoomToPointGraphic) {
+            this._view.graphics.remove(this._zoomToPointGraphic);
           }
-        }).catch((error) => {
-          console.error('Error selecting map points: ' + error);
-        });
+          // highlight the selected features
+          this._view.whenLayerView(queryFeatureLayer).then((layerView: __esri.FeatureLayerView) => {
+            if (this.mapPointsFeatureLayerHighlight) {
+              this.mapPointsFeatureLayerHighlight.remove();
+            }
+            this.mapPointsFeatureLayerHighlight = layerView.highlight(graphics);
+          });
+          // get the attributes of map points
+          const pointsAttributeData = [];
+          graphics.map((feature, i) => {
+            pointsAttributeData.push(feature.attributes);
+          });
+          if (this.mapPointsFeatureLayer) {
+            // on map points selected, filter them in corresponding table rows
+            this.scribeDataExplorerService.mapPointsSelectedSource.next(pointsAttributeData);
+          } else if (this.scribeProjectsFeatureLyr) {
+            // on project centroid points selected, go to that project
+            this.scribeDataExplorerService.projectCentroidsSelectedSource.next(pointsAttributeData);
+          }
+        }
+      }).catch((error) => {
+        console.error('Error selecting map points: ' + error);
+      });
     }
   }
 

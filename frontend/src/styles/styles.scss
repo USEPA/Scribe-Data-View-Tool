@@ -2,8 +2,8 @@
 @import '~@angular/material/theming';
 @import url('//fonts.googleapis.com/icon?family=Material+Icons');
 // AG Grid style imports
-@import "~ag-grid-community/src/styles/ag-grid.scss";
-@import "~ag-grid-community/src/styles/ag-theme-balham/sass/ag-theme-balham.scss";
+@import "~@ag-grid-community/all-modules/dist/styles/ag-grid.min.css" ;
+@import "~@ag-grid-community/all-modules/dist/styles/ag-theme-balham/sass/legacy/ag-theme-balham-v22-compat.scss";
 // Esri JS API css
 //@import url('https://js.arcgis.com/4.12/esri/css/main.css');
 

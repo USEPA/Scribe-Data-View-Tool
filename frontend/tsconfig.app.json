@@ -2,9 +2,6 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": [
-      "arcgis-js-api"
-    ],
     "paths": {
       "@services/*": ["src/app/services/*"],
       "@components/*": ["src/app/components/*"],
@@ -16,7 +13,6 @@
     "src/polyfills.ts"
   ],
   "include": [
-    "node_modules/arcgis-js-api/index.d.ts",
     "src/**/*.ts"
   ],
   "exclude": [

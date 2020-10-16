@@ -3,8 +3,8 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
 import {Router, ActivatedRouteSnapshot, CanActivateChild, RouterStateSnapshot, CanActivate} from '@angular/router';
-
 import {environment} from '@environments/environment';
+
 
 export interface User {
   id: number;
