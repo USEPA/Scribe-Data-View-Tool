@@ -51,10 +51,10 @@ import { ProjectsMapDialogComponent } from '@components/projects-map-dialog/proj
     useClass: HttpRequestInterceptor,
     multi: true
   }],
-  entryComponents: [
-    VisibleColumnsDialogComponent,
-    ProjectsMapDialogComponent
-  ],
+  // entryComponents: [
+  //   VisibleColumnsDialogComponent,
+  //   ProjectsMapDialogComponent
+  // ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
