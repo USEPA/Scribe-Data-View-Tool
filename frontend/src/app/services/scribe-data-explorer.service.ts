@@ -100,7 +100,7 @@ export class ScribeDataExplorerService {
   }
 
   async generateGeoJson(data) {
-    const fileResult = await this.http.post<any>(`${this.scribeApiUrl}/generate_geojson_file/`, data).toPromise().then((file) => {
+    const fileResult = await this.http.post<any>(`${this.scribeApiUrl}/generate_geojson/`, data).toPromise().then((file) => {
       return file;
     }).catch((error) => {
       this.snackBar.open(`Error publishing GeoPlatform service: Error creating GeoJson file.`, null, {
@@ -124,8 +124,8 @@ export class ScribeDataExplorerService {
           });
           return false;
         } else {
-          if ('success' in response && response.success === false) {
-            this.snackBar.open(`Error publishing GeoPlatform service: ${response.error.message}`, null, {
+          if ('services' in response && response.services[0].success === false) {
+            this.snackBar.open(`Error publishing GeoPlatform service: ${response.services[0].error.message}`, null, {
               duration: 3000, panelClass: ['snackbar-error']
             });
             return false;
