@@ -47,8 +47,7 @@ urlpatterns = [
     # Declare registered router ViewSet api calls
     # http://localhost:8080/api/v1/<router-viewsets>
     url(r'^{}api/v1/'.format(settings.URL_PREFIX), include(router.urls)),
-    url(r'^{}api/v1/publish_content_to_agol/'.format(settings.URL_PREFIX), publish_to_agol),
-    url(r'^{}api/v1/get_published_agol_services/'.format(settings.URL_PREFIX), get_published_agol_services),
+    url(r'^{}api/v1/generate_geojson_file/'.format(settings.URL_PREFIX), generate_geojson),
     # Declare parameterized project api urls
     url(r'^{}api/v1/projects/(?P<project_id_p>.+)/samples/'.format(settings.URL_PREFIX), get_project_samples),
     url(r'^{}api/v1/project_tables/(?P<project_id_p>.+)'.format(settings.URL_PREFIX), ProjectTablesViewSet.as_view({'get': 'list'})),

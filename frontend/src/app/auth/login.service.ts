@@ -3,19 +3,21 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
 import {Router, ActivatedRouteSnapshot, CanActivateChild, RouterStateSnapshot, CanActivate} from '@angular/router';
-import {environment} from '@environments/environment';
 
+import {environment} from '@environments/environment';
 
 export interface User {
   id: number;
   name: string;
   permissions: string[];
   is_superuser: boolean;
+  'agol_username': string;
+  'agol_token'?: string;
 }
 
 @Injectable()
 export class LoginService implements CanActivateChild, CanActivate {
-  currentUser: ReplaySubject<User> = new ReplaySubject<User>();
+  currentUser: BehaviorSubject<User> = new BehaviorSubject<User>(null);
   currentUsername: {displayName: ''};
   oauthUrl: string;
   groups: string[];
@@ -54,7 +56,7 @@ export class LoginService implements CanActivateChild, CanActivate {
   }
 
   logout() {
-    this.currentUser.next();
+    this.currentUser.next(null);
     return this.http.get(`${environment.api_url}/auth/logout/`).toPromise().catch((error) => {
       throw error;
     });
