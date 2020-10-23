@@ -13,9 +13,6 @@ import {
 } from '@angular/core';
 import {ReplaySubject} from 'rxjs';
 
-import {environment} from '@environments/environment';
-import {CONFIG_SETTINGS} from '../../config_settings';
-import {MapSymbolizationProps} from '../../projectInterfaceTypes';
 import FeatureLayer from 'esri/layers/FeatureLayer';
 import GraphicsLayer from 'esri/layers/GraphicsLayer';
 import SketchViewModel from 'esri/widgets/Sketch/SketchViewModel';
@@ -36,9 +33,12 @@ import SimpleMarkerSymbol from 'esri/symbols/SimpleMarkerSymbol';
 import MeshSymbol3D from 'esri/symbols/MeshSymbol3D';
 import MeshMaterial from 'esri/geometry/support/MeshMaterial';
 import Color from 'esri/Color';
+
+import {environment} from '@environments/environment';
+import {CONFIG_SETTINGS} from '../../config_settings';
 import {LoginService} from '../../auth/login.service';
 import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
-
+import {MapSymbolizationProps} from '../../projectInterfaceTypes';
 // import {MapService} from '@services/map.service';
 
 

@@ -87,9 +87,14 @@ class EsriProxy(View):
 @permission_classes([IsAuthenticated])
 @ensure_csrf_cookie
 def current_user(request):
+    social_auth = request.user.social_auth.get(provider='agol')
+    agol_username = social_auth.uid
+    agol_token = social_auth.get_access_token(load_strategy())
     current_user_response = {
         'name': '{} {}'.format(request.user.first_name, request.user.last_name) if request.user.first_name else request.user.username,
-        'is_superuser': request.user.is_superuser
+        'is_superuser': request.user.is_superuser,
+        'agol_username': agol_username,
+        'agol_token': agol_token
     }
     return Response(current_user_response)
 
