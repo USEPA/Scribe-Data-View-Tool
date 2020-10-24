@@ -12,7 +12,7 @@ import {AuthModule} from './auth/auth.module';
 import {CustomMaterialModule} from './core/material.module';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from '@components/header/header.component';
-import {AgGridModule} from 'ag-grid-angular';
+import {AgGridModule} from '@ag-grid-community/angular';
 import { AgGridComponent } from '@components/ag-grid/ag-grid.component';
 import { AgGridSelectFilterComponent } from '@components/ag-grid/ag-grid-select-filter.component';
 import { MapViewComponent } from '@components/map-view/map-view.component';
@@ -51,10 +51,10 @@ import { ProjectsMapDialogComponent } from '@components/projects-map-dialog/proj
     useClass: HttpRequestInterceptor,
     multi: true
   }],
-  entryComponents: [
-    VisibleColumnsDialogComponent,
-    ProjectsMapDialogComponent
-  ],
+  // entryComponents: [
+  //   VisibleColumnsDialogComponent,
+  //   ProjectsMapDialogComponent
+  // ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

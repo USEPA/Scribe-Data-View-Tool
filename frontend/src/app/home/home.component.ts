@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {MatDialog, MatSnackBar, MatChipInputEvent} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormControl, Validators} from '@angular/forms';
 import {Subject, Subscription, Observable, BehaviorSubject} from 'rxjs';
@@ -23,10 +23,12 @@ import {VisibleColumnsDialogComponent} from '@components/visible-columns-dialog/
 import {ProjectsMapDialogComponent} from '@components/projects-map-dialog/projects-map-dialog.component';
 import {FiltersInterfaceTypes, ActiveFilter} from '../filtersInterfaceTypes';
 import {CONFIG_SETTINGS} from '../config_settings';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
   selector: 'app-home',
+  // templateUrl: './home.component.html',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -72,10 +74,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   updateColDefs: Subject<any> = new Subject<any>();
   presetFilters: Subject<any> = new Subject<any>();
   updateFilters: Subject<any> = new Subject<any>();
-  private publishLabResultsToAGOL = new BehaviorSubject <string>(null);
-  private publishSamplePointLocationsToAGOL = new BehaviorSubject <string>(null);
-  private exportLabResultsCSV: Subject<string> = new BehaviorSubject <string>(null);
-  private exportSamplePointLocationCSV: Subject<string> = new BehaviorSubject <string>(null);
+  publishLabResultsToAGOL = new BehaviorSubject <string>(null);
+  publishSamplePointLocationsToAGOL = new BehaviorSubject <string>(null);
+  exportLabResultsCSV: Subject<string> = new BehaviorSubject <string>(null);
+  exportSamplePointLocationCSV: Subject<string> = new BehaviorSubject <string>(null);
   showTable = false;
 
   get agGridActiveFilters() {

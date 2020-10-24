@@ -3,6 +3,9 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {BehaviorSubject, Observable} from 'rxjs';
+import esriConfig from 'esri/config';
+
+import {environment} from '@environments/environment';
 import {
   AGOLService,
   ColumnsRows,
@@ -11,6 +14,8 @@ import {
   ProjectLabResult,
   ProjectSample
 } from '../projectInterfaceTypes';
+import {LoginService} from '../auth/login.service';
+
 
 
 @Injectable({
@@ -34,43 +39,137 @@ export class ScribeDataExplorerService {
   public mapPointsSymbolizationChangedEvent: Observable<any> = this.mapPointsSymbolizationSource.asObservable();
   public mapSymbolFieldAliases = ['Matrix', 'Analyte', 'MDL'];
 
-  constructor(private http: HttpClient, public router: Router, public snackBar: MatSnackBar) {
+  scribeApiUrl = null;
+  agolUserContentUrl = null;
+
+  constructor(private http: HttpClient, public router: Router, public loginService: LoginService,
+              public snackBar: MatSnackBar) {
+    const username = this.loginService.currentUser.value.agol_username;
+    this.scribeApiUrl = `${environment.api_url}/${environment.api_version_tag}`;
+    this.agolUserContentUrl = `https://epa.maps.arcgis.com/sharing/rest/content/users/${username}`;
+
+    esriConfig.request.trustedServers.push(environment.agol_trusted_server);
+    esriConfig.request.proxyRules.push({
+      urlPrefix: environment.agol_proxy_url_prefix,
+      proxyUrl: environment.agol_proxy_url
+    });
   }
 
   async getUserProjects() {
-    const results = await this.http.get<Project[]>('projects').toPromise()
+    const results = await this.http.get<Project[]>(`${this.scribeApiUrl}/projects/`).toPromise()
       .catch((error) => {
         return {} as ColumnsRows;
       });
     return results;
   }
 
-  async publishToAGOL(data) {
-    const results = await this.http.post<any>('publish_content_to_agol', data).toPromise()
-      .then((serviceUrl) => {
-        this.snackBar.open(`AGOL Service: ${serviceUrl} published.`, null, {
-          duration: 3000, panelClass: ['snackbar-success']
+  async addItemToAGOL(data) {
+    let result = false;
+    const geoJson = await this.generateGeoJson(data);
+    if (geoJson) {
+      const url = `${this.agolUserContentUrl}/addItem`;
+      const formData = new FormData();
+      const geojsonFile = new Blob([geoJson], { type: 'application/geo+json' });
+      formData.append('type', 'GeoJson');
+      formData.append('title', data.title);
+      formData.append('file', geojsonFile, data.title);
+      formData.append('tags', 'Scribe Explorer');
+      // formData.append('multipart', 'true');
+      // formData.append('filename', data.title);
+      formData.append('token', this.loginService.currentUser.value.agol_token);
+      formData.append('f', 'json');
+      result = await this.http.post<any>(url, formData).toPromise().then((response) => {
+        if ('error' in response) {
+          this.snackBar.open(`Error publishing GeoPlatform service: ${response.error.message}`, null, {
+            duration: 3000, panelClass: ['snackbar-error']
+          });
+          return false;
+        } else {
+          // return added item id
+          return response.id;
+        }
+      }).catch((error) => {
+        this.snackBar.open(`Error publishing GeoPlatform service.`, null, {
+          duration: 3000, panelClass: ['snackbar-error']
         });
-      })
-      .catch((error) => {
+        return false;
+      });
+
+    }
+    return result;
+  }
+
+  async generateGeoJson(data) {
+    const fileResult = await this.http.post<any>(`${this.scribeApiUrl}/generate_geojson/`, data).toPromise().then((file) => {
+      return file;
+    }).catch((error) => {
+      this.snackBar.open(`Error publishing GeoPlatform service: Error creating GeoJson file.`, null, {
+        duration: 3000, panelClass: ['snackbar-error']
+      });
+      return false;
+    });
+    return fileResult;
+  }
+
+  async publishToAGOL(data) {
+    const itemId = await this.addItemToAGOL(data);
+    if (itemId) {
+      const publishParams = JSON.stringify({name: data.title, description: 'Scribe Explorer generated feature layer'});
+      const url = `${this.agolUserContentUrl}/publish?itemId=${itemId}&fileType=geojson&publishParameters=${publishParams}&token=${this.loginService.currentUser.value.agol_token}&f=json`;
+      const result = await this.http.post<any>(url, {}).toPromise().then((response) => {
+        // console.log(response);
+        if ('error' in response) {
+          this.snackBar.open(`Error publishing GeoPlatform service: ${response.error.message}`, null, {
+            duration: 3000, panelClass: ['snackbar-error']
+          });
+          return false;
+        } else {
+          if ('services' in response && response.services[0].success === false) {
+            this.snackBar.open(`Error publishing GeoPlatform service: ${response.services[0].error.message}`, null, {
+              duration: 3000, panelClass: ['snackbar-error']
+            });
+            return false;
+          }
+          this.snackBar.open(`AGOL Service published.`, null, {
+            duration: 3000, panelClass: ['snackbar-success']
+          });
+          return true;
+        }
+      }).catch((error) => {
         this.snackBar.open(`Error publishing GeoPlatform service.`, null, {
           duration: 3000, panelClass: ['snackbar-error']
         });
         return error.message;
       });
-    return results;
+      // delete added item
+      const deleteItemUrl = `${this.agolUserContentUrl}/deleteItems?items=${itemId}&token=${this.loginService.currentUser.value.agol_token}&f=json`;
+      const deleteResult = await this.http.post<any>(deleteItemUrl, {}).toPromise().then((response) => {
+        return response.results[0].success;
+      });
+
+      return result;
+    }
   }
 
   async getPublishedAGOLServices() {
-    const results = await this.http.get<any>('get_published_agol_services').toPromise()
+    const agolServices = [];
+    const url = `${this.agolUserContentUrl}?token=${this.loginService.currentUser.value.agol_token}&f=json`;
+    const results = await this.http.get<any>(url).toPromise()
       .catch((error) => {
-        return [];
+        return false;
       });
-    return results;
+    if (results) {
+      for (const item of results.items) {
+        if (item.tags.includes('Scribe Explorer')) {
+          agolServices.push({title: item.title, url: `${environment.geo_platform_url}/home/item.html?id=${item.id}`});
+        }
+      }
+    }
+    return agolServices;
   }
 
   async getProjectSamples(projectId: string) {
-    const results: ColumnsRows = await this.http.get<ColumnsRows>(`projects/PID_${projectId}/samples`).toPromise()
+    const results: ColumnsRows = await this.http.get<ColumnsRows>(`${this.scribeApiUrl}/projects/PID_${projectId}/samples/`).toPromise()
       .catch((error) => {
         console.log(error.message);
         return {} as ColumnsRows;
@@ -79,7 +178,7 @@ export class ScribeDataExplorerService {
   }
 
   async getProjectLabResults(projectId: string) {
-    const results = await this.http.get<ProjectLabResult[]>(`PID_${projectId}/PID_${projectId}_LabResults`).toPromise()
+    const results = await this.http.get<ProjectLabResult[]>(`${this.scribeApiUrl}/PID_${projectId}/PID_${projectId}_LabResults/`).toPromise()
       .catch((error) => {
         console.log(error.message);
         return [];

@@ -8,7 +8,7 @@ import {
   HttpXsrfTokenExtractor
 } from '@angular/common/http';
 import {Router} from '@angular/router';
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 
@@ -24,11 +24,10 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const headerName = 'X-CSRFToken';
     const token = this.tokenExtractor.getToken() as string;
-    if (!request.url.includes(environment.api_url)) {
+    if (request.url.includes(environment.geo_platform_url)) {
+      // don't include CSRF token
       request = request.clone({
-        headers: token ? request.headers.set(headerName, token) : request.headers,
-        url: `${environment.api_url}/${environment.api_version_tag}/${request.url}/`,
-        withCredentials: true
+        url: request.url
       });
     } else {
       request = request.clone({
