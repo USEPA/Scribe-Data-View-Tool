@@ -8,6 +8,7 @@ import esriConfig from 'esri/config';
 import {environment} from '@environments/environment';
 import {
   AGOLService,
+  AGOLContentInfo,
   ColumnsRows,
   Project,
   ProjectCentroid,
@@ -63,16 +64,17 @@ export class ScribeDataExplorerService {
     return results;
   }
 
-  async addItemToAGOL(data) {
+  async addItemToAGOL(agolContentInfo: AGOLContentInfo) {
     let result = false;
-    const geoJson = await this.generateGeoJson(data);
+    const geoJson = await this.generateGeoJson(agolContentInfo);
     if (geoJson) {
       const url = `${this.agolUserContentUrl}/addItem`;
       const formData = new FormData();
       const geojsonFile = new Blob([geoJson], { type: 'application/geo+json' });
       formData.append('type', 'GeoJson');
-      formData.append('title', data.title);
-      formData.append('file', geojsonFile, data.title);
+      formData.append('title', agolContentInfo.title);
+      formData.append('description', agolContentInfo.description);
+      formData.append('file', geojsonFile, agolContentInfo.title);
       formData.append('tags', 'Scribe Explorer');
       // formData.append('multipart', 'true');
       // formData.append('filename', data.title);
@@ -111,11 +113,15 @@ export class ScribeDataExplorerService {
     return fileResult;
   }
 
-  async publishToAGOL(data) {
-    const itemId = await this.addItemToAGOL(data);
+  async publishToAGOL(agolContentInfo: AGOLContentInfo) {
+    const itemId = await this.addItemToAGOL(agolContentInfo);
     if (itemId) {
-      const publishParams = JSON.stringify({name: data.title, description: 'Scribe Explorer generated feature layer'});
-      const url = `${this.agolUserContentUrl}/publish?itemId=${itemId}&fileType=geojson&publishParameters=${publishParams}&token=${this.loginService.currentUser.value.agol_token}&f=json`;
+      const publishParams = JSON.stringify({
+        name: agolContentInfo.title + '_' + String(itemId),
+        description: agolContentInfo.description
+      });
+      let url = `${this.agolUserContentUrl}/publish?itemId=${itemId}&fileType=geojson&publishParameters=${publishParams}`;
+      url = url + `&token=${this.loginService.currentUser.value.agol_token}&f=json`;
       const result = await this.http.post<any>(url, {}).toPromise().then((response) => {
         // console.log(response);
         if ('error' in response) {

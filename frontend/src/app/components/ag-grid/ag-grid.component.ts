@@ -59,7 +59,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
   @Input() updatingColDefs: Observable<any>;
   @Input() settingFilters: Observable<any>;
   @Input() updatingFilters: Observable<any>;
-  @Input() publishingToAGOL: Observable<string>;
+  @Input() publishingToAGOL: Observable<{title: string, description: string}>;
   @Input() exportingCSV: Observable<string>;
 
   constructor(public scribeDataExplorerService: ScribeDataExplorerService) {
@@ -111,9 +111,9 @@ export class AgGridComponent implements OnInit, OnDestroy {
       }
     });
     // subscribe to data exporting events
-    this.publishingToAGOL.subscribe((title) => {
-      if (title) {
-        this.publishToAGOL(title).then(async () => {
+    this.publishingToAGOL.subscribe((featureLayerInfo) => {
+      if (featureLayerInfo) {
+        this.publishToAGOL(featureLayerInfo).then(async () => {
           // update user's published AGOL services list
           await this.scribeDataExplorerService.getPublishedAGOLServices().then((items: AGOLService[]) => {
             this.scribeDataExplorerService.userAGOLServices.next(items);
@@ -291,13 +291,14 @@ export class AgGridComponent implements OnInit, OnDestroy {
     });
   }
 
-  async publishToAGOL(title) {
+  async publishToAGOL(featureLayerInfo) {
     const rowData = [];
     this.gridApi.forEachNodeAfterFilter((row) => {
       rowData.push(row.data);
     });
     if (rowData.length > 0) {
-      await this.scribeDataExplorerService.publishToAGOL({title, rows: rowData});
+      featureLayerInfo.rows = rowData;
+      await this.scribeDataExplorerService.publishToAGOL(featureLayerInfo);
       this.scribeDataExplorerService.isPublishingToAGOL.next(false);
     }
   }

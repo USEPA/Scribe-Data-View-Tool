@@ -10,6 +10,12 @@ export interface AGOLService {
   url: string;
 }
 
+export interface AGOLContentInfo {
+  title: string;
+  description: string;
+  rows: [];
+}
+
 export interface ColumnsRows {
   columnDefs: any[];
   rowData: any[];

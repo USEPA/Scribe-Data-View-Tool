@@ -35,7 +35,7 @@
         <div *ngIf="!(scribeDataExplorerService.userAGOLServices | async)" style="position: relative;">
             <mat-spinner diameter="40"></mat-spinner>
         </div>
-        <mat-form-field *ngIf="(scribeDataExplorerService.userAGOLServices | async)" style="width: 50%;">
+        <mat-form-field *ngIf="(scribeDataExplorerService.userAGOLServices | async)" style="width: 75%;">
           <mat-label>Open your GeoPlatform service:</mat-label>
           <mat-select [formControl]="projects">
             <mat-option *ngFor="let item of scribeDataExplorerService.userAGOLServices.value">
@@ -76,7 +76,7 @@
       TODO: Remove when data analysis and map symbology is handled by the AGOL / GeoPlatform integration)
     -->
     <!--
-    <div *ngIf="selectedProjects.length > 0 && geoPointsArray.length > 0" class="component-container-col">
+    <div *ngIf="selectedProjectIDs.length > 0 && geoPointsArray.length > 0" class="component-container-col">
       <span class="mat-warn">
         To symbologize map point samples by MDL, filter to an Analyte and optionally a Sample Type. <br>
         Then provide the MDL value within the range:
