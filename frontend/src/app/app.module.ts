@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
 import {HttpRequestInterceptor} from './http-request.interceptor';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
@@ -12,7 +12,7 @@ import {AuthModule} from './auth/auth.module';
 import {CustomMaterialModule} from './core/material.module';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from '@components/header/header.component';
-import {AgGridModule} from 'ag-grid-angular';
+import {AgGridModule} from '@ag-grid-community/angular';
 import { AgGridComponent } from '@components/ag-grid/ag-grid.component';
 import { AgGridSelectFilterComponent } from '@components/ag-grid/ag-grid-select-filter.component';
 import { MapViewComponent } from '@components/map-view/map-view.component';
@@ -40,17 +40,21 @@ import { ProjectsMapDialogComponent } from '@components/projects-map-dialog/proj
     CustomMaterialModule,
     ReactiveFormsModule,
     AgGridModule,
-    AuthModule
+    AuthModule,
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'csrftoken',
+      headerName: 'X-CSRFToken'
+    }),
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: HttpRequestInterceptor,
     multi: true
   }],
-  entryComponents: [
-    VisibleColumnsDialogComponent,
-    ProjectsMapDialogComponent
-  ],
+  // entryComponents: [
+  //   VisibleColumnsDialogComponent,
+  //   ProjectsMapDialogComponent
+  // ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

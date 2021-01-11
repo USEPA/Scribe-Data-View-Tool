@@ -5,6 +5,17 @@ export interface Project {
   project_name: string;
 }
 
+export interface AGOLService {
+  title: string;
+  url: string;
+}
+
+export interface AGOLContentInfo {
+  title: string;
+  description: string;
+  rows: [];
+}
+
 export interface ColumnsRows {
   columnDefs: any[];
   rowData: any[];

@@ -22,7 +22,7 @@ from django.conf import settings
 from rest_framework import routers
 
 from backend.sadie.views import EsriProxy, ProjectTablesViewSet, current_user
-from scribe_models import views as scribe_model_views
+from backend.scribe_models.views import *
 
 
 """Django REST Framework notes:
@@ -31,7 +31,7 @@ The 5 standard actions of a ViewSet are list (GET) / create (POST) / show / upda
 ViewSets can also define additional API methods to be routed, using the @action decorator.
 """
 router = routers.DefaultRouter()
-router.register(r'projects', scribe_model_views.ProjectsViewSet, basename='scribe_db.projects')
+router.register(r'projects', ProjectsViewSet, basename='scribe_db.projects')
 router.register(r'project_tables', ProjectTablesViewSet, basename='scribe_db.project_tables')
 
 
@@ -41,14 +41,15 @@ urlpatterns = [
     url('^api/oauth2/', include('social_django.urls', namespace='social_django')),
     url(r'^api/auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/current_user/', current_user),
-    url(r'^proxy/', EsriProxy.as_view()),
+    url(r'^api/proxy/', EsriProxy.as_view()),
     # url(r'^{}api/oauth2/'.format(settings.URL_PREFIX), include('rest_framework_social_oauth2.urls')),
 
     # Declare registered router ViewSet api calls
     # http://localhost:8080/api/v1/<router-viewsets>
     url(r'^{}api/v1/'.format(settings.URL_PREFIX), include(router.urls)),
+    url(r'^{}api/v1/generate_geojson/'.format(settings.URL_PREFIX), generate_geojson),
     # Declare parameterized project api urls
-    url(r'^{}api/v1/projects/(?P<project_id_p>.+)/samples/'.format(settings.URL_PREFIX), scribe_model_views.get_project_samples),
+    url(r'^{}api/v1/projects/(?P<project_id_p>.+)/samples/'.format(settings.URL_PREFIX), get_project_samples),
     url(r'^{}api/v1/project_tables/(?P<project_id_p>.+)'.format(settings.URL_PREFIX), ProjectTablesViewSet.as_view({'get': 'list'})),
     url(r'^{}api/v1/project_tables$'.format(settings.URL_PREFIX), ProjectTablesViewSet.as_view({'get': 'list'})),
 

@@ -1,6 +1,6 @@
 import {Component, ViewChild, ViewContainerRef} from '@angular/core';
-import {IDoesFilterPassParams, IFilterParams, RowNode} from 'ag-grid-community/main';
-import {IFilterAngularComp} from 'ag-grid-angular/main';
+import {IDoesFilterPassParams, IFilterParams, RowNode} from '@ag-grid-community/all-modules';
+import {IFilterAngularComp} from '@ag-grid-community/angular';
 
 interface ExtendedFilterParams extends IFilterParams {
   values: string[];

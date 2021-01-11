@@ -6,15 +6,15 @@ export const environment = {
   production: false,
   oauth_url: 'http://localhost:8000/api/oauth2',
   oauth_client_id: 'ZtlpDht9ywRCA4Iq',
+  login_redirect: 'http://localhost:4200',
   local_client_id: 'ttDS2qFfDXJSxCjETxKHcWeFCjmiycrGPUrKRr8T',
   api_url: 'http://localhost:8000/api',
   api_version_tag: 'v1',
   default_baseloadedMap: '972c131daf9d4e83b30a98630c8f8b2b',
-  agol_trusted_servers: ['http://127.0.0.1:8000'],
-  agol_proxy_rules: {
-    urlPrefix: 'services.arcgis.com/cJ9YHowT8TU7DUyn',
-    proxyUrl: 'http://127.0.0.1:8000/proxy/'
-  },
+  agol_trusted_server: 'http://localhost:8000',
+  agol_proxy_url_prefix: 'utility.arcgis.com',
+  agol_proxy_url: 'http://localhost:8000/api/proxy/',
+  geo_platform_url: 'https://epa.maps.arcgis.com'
 };
 
 /*

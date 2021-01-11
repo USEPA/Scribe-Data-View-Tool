@@ -1,8 +1,8 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {MatDialog, MatSnackBar, MatChipInputEvent} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormControl, Validators} from '@angular/forms';
-import {Subject, Subscription, Observable} from 'rxjs';
+import {Subject, Subscription, Observable, BehaviorSubject} from 'rxjs';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {query} from '@angular/animations';
 import * as moment from 'moment';
@@ -15,7 +15,7 @@ import {
   ColumnDefs,
   MapSymbolizationProps,
   MapSymbol,
-  ProjectCentroid
+  ProjectCentroid, ColumnsRows, AGOLService
 } from '../projectInterfaceTypes';
 import {LoginService} from '../auth/login.service';
 import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
@@ -23,10 +23,12 @@ import {VisibleColumnsDialogComponent} from '@components/visible-columns-dialog/
 import {ProjectsMapDialogComponent} from '@components/projects-map-dialog/projects-map-dialog.component';
 import {FiltersInterfaceTypes, ActiveFilter} from '../filtersInterfaceTypes';
 import {CONFIG_SETTINGS} from '../config_settings';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
   selector: 'app-home',
+  // templateUrl: './home.component.html',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -36,9 +38,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   isLoadingData = false;
   // project props
   projects = new FormControl();
-  userProjects: Project[];
+  userProjects: Project[] | any;
   projectsLoaded: boolean;
-  selectedProjects: string[] = [];
+  selectedProjectIDs: string[] = [];
   isMapPointsSelected = false;
   // sample point props
   projectSamplesColDefs: ColumnDefs[] = [];
@@ -72,8 +74,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   updateColDefs: Subject<any> = new Subject<any>();
   presetFilters: Subject<any> = new Subject<any>();
   updateFilters: Subject<any> = new Subject<any>();
-  exportLabResultsCSV: Subject<string> = new Subject<string>();
-  exportSamplePointLocationCSV: Subject<string> = new Subject<string>();
+  publishLabResultsToAGOL = new BehaviorSubject <{title: string, description: string}>(null);
+  publishSamplePointLocationsToAGOL = new BehaviorSubject <{title: string, description: string}>(null);
+  exportLabResultsCSV: Subject<string> = new BehaviorSubject <string>(null);
+  exportSamplePointLocationCSV: Subject<string> = new BehaviorSubject <string>(null);
   showTable = false;
 
   get agGridActiveFilters() {
@@ -95,22 +99,25 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   async ngOnInit() {
-    //
+    // get user's projects and published AGOL services
     this.userProjects = await this.scribeDataExplorerService.getUserProjects();
+    await this.scribeDataExplorerService.getPublishedAGOLServices().then((items: AGOLService[]) => {
+      this.scribeDataExplorerService.userAGOLServices.next(items);
+    });
 
     // Subscribing to query string parameters
     this.urlParamsSubscription = this.route.queryParams.subscribe(queryParams => {
       if (queryParams.projects) {
         this.queryFilterParams = queryParams;
-        const newSelectedProjects = this.queryFilterParams.projects.split(',').map(item => item.trim());
-        // const notLoadedProjects = newSelectedProjects.filter(projectId => !this.selectedProjects.includes(projectId));
-        // const removedProjects = this.selectedProjects.filter(projectId => !newSelectedProjects.includes(projectId));
+        const newselectedProjectIDs = this.queryFilterParams.projects.split(',').map(item => item.trim());
+        // const notLoadedProjects = newselectedProjectIDs.filter(projectId => !this.selectedProjectIDs.includes(projectId));
+        // const removedProjects = this.selectedProjectIDs.filter(projectId => !newselectedProjectIDs.includes(projectId));
         // clear active filters
         this.agGridActiveFilters = [];
-        this.selectedProjects = newSelectedProjects; // todo: in the future only load projects that have not been loaded already
-        this.getCombinedProjectData(this.selectedProjects);
+        this.selectedProjectIDs = newselectedProjectIDs; // todo: in the future only load projects that have not been loaded already
+        this.getCombinedProjectData(this.selectedProjectIDs);
         // tslint:disable-next-line:radix
-        this.projects.setValue(this.selectedProjects.map(id => parseInt(id)));
+        this.projects.setValue(this.selectedProjectIDs.map(id => parseInt(id)));
       }
       /*const filters = [];
       for (const key of Object.keys(queryParams).filter(k => k !== 'projects')) {
@@ -163,8 +170,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
         const newSelectedProjectIDs = projectCentroids.map((projectCentroid) => {
           return projectCentroid.PROJECTID;
         });
-        const currentSelectedProjects = this.projects.value as Array<number>;
-        if (!currentSelectedProjects || (currentSelectedProjects.sort().join(',') !== newSelectedProjectIDs.sort().join(','))) {
+        const currentselectedProjectIDs = this.projects.value as Array<number>;
+        if (!currentselectedProjectIDs || (currentselectedProjectIDs.sort().join(',') !== newSelectedProjectIDs.sort().join(','))) {
           this.clearProjects();
           this.setQueryParam('projects', newSelectedProjectIDs.join(','));
         }
@@ -263,11 +270,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.missingGeoPointsCount = this.projectSamplesRowData.length;
     } else {
       // refresh data
-      this.getCombinedProjectData(this.selectedProjects);
+      this.getCombinedProjectData(this.selectedProjectIDs);
     }
   }
 
   initProps(): void {
+    this.selectedProjectIDs = [];
     this.clearQueryParams();
     this.agGridActiveFilters = [];
     this.mapSymbolFields = [];
@@ -325,8 +333,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   agGridRowSelected(val) {
     if (val.Latitude && val.Longitude) {
       this.selectedPoint = val;
+      this.isMapPointsSelected = true;
     } else {
       this.snackBar.open('Selection has no geospatial point', null, {duration: 1000});
+      this.isMapPointsSelected = false;
     }
   }
 
@@ -380,15 +390,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
   setProjects(event) {
     event.stopPropagation();
     if (this.projects.value) {
-      const newSelectedProjects = this.projects.value.join(',');
-      const currentSelectedProjects = this.route.snapshot.queryParams.projects;
-      if (!currentSelectedProjects) {
-        this.setQueryParam('projects', newSelectedProjects);
+      const newselectedProjectIDs = this.projects.value.join(',');
+      const currentselectedProjectIDs = this.route.snapshot.queryParams.projects;
+      if (!currentselectedProjectIDs) {
+        this.setQueryParam('projects', newselectedProjectIDs);
       } else {
-        if (newSelectedProjects !== currentSelectedProjects) {
+        if (newselectedProjectIDs !== currentselectedProjectIDs) {
           const queryParams = {};
           Object.keys(this.route.snapshot.queryParams).filter(k => k === 'projects').forEach(key => {
-            queryParams[key] = newSelectedProjects;
+            queryParams[key] = newselectedProjectIDs;
           });
           this.router.navigate([], {queryParams});
         }
@@ -409,13 +419,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   async onTabChange(tabId) {
     this.selectedTab = tabId;
-    if (this.selectedProjects) {
+    if (this.selectedProjectIDs) {
       try {
         // clear filters and get tab data
         this.agGridActiveFilters = [];
         this.updateFilters.next([]);
         this.scribeDataExplorerService.clearMapSelectionSource.next(true);
-        this.getCombinedProjectData(this.selectedProjects);
+        this.getCombinedProjectData(this.selectedProjectIDs);
       } catch (err) {
         this.isLoadingData = false;
         this.showTable = false;
@@ -658,10 +668,34 @@ export class HomeComponent implements OnInit, AfterViewInit {
     });
   }
 
+  onPublishAGOLBtnClick() {
+    let selectedProjects: Project[];
+    this.scribeDataExplorerService.isPublishingToAGOL.next(true);
+    selectedProjects = this.userProjects.filter((project: Project) => {
+        return this.projects.value.includes(project.projectid);
+    });
+    // set feature layer title: "[Project name] ([Number]) Scribe Project Feature Layer"
+    const staticText = 'Scribe Project Feature Layer';
+    const selectedTab = this.tabs[this.selectedTab].replace(/ /g, '_');
+    const title = `${selectedProjects[0].project_name} (${selectedProjects[0].projectid}) ${staticText}`;
+    // set feature layer description: Project names and current filters list
+    const selectedProjectNames = selectedProjects.map(selectedProject => selectedProject.project_name).join(', ');
+    const activeFilterNames = this.agGridActiveFilters.map(activeFilter => {
+      return `${activeFilter.field} ${activeFilter.operand} ${activeFilter.value}`;
+    }).join(', ');
+    const description = `Projects: [${selectedProjectNames}], Filters: [${activeFilterNames}]`;
+    if (this.selectedTab === 0) {
+      this.publishLabResultsToAGOL.next({title, description});
+    }
+    if (this.selectedTab === 1) {
+      this.publishSamplePointLocationsToAGOL.next({title, description});
+    }
+  }
+
   onExportCSVBtnClick() {
     // set ag grid title
     const selectedTab = this.tabs[this.selectedTab].replace(/ /g, '_');
-    const title = 'Projects_' + this.selectedProjects.join('_') + '_' + selectedTab;
+    const title = 'Projects_' + this.selectedProjectIDs.join('_') + '_' + selectedTab;
     if (this.selectedTab === 0) {
       this.exportLabResultsCSV.next(title);
     }

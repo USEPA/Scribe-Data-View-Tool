@@ -1,10 +1,11 @@
 import {Component, Input, OnInit, OnDestroy, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
-import {AgGridSelectFilterComponent} from '@components/ag-grid/ag-grid-select-filter.component';
 import {Observable, Subscription} from 'rxjs';
-import { ColDef } from 'ag-grid-community';
+import {ClientSideRowModelModule, ColDef} from '@ag-grid-community/all-modules';
 
-import {ActiveFilter} from '../../filtersInterfaceTypes';
 import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
+import {AgGridSelectFilterComponent} from '@components/ag-grid/ag-grid-select-filter.component';
+import {ActiveFilter} from '../../filtersInterfaceTypes';
+import {AGOLService} from '../../projectInterfaceTypes';
 
 
 @Component({
@@ -28,8 +29,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
   private updatingColDefsSubscription: Subscription;
   private settingFiltersSubscription: Subscription;
   private updatingFiltersSubscription: Subscription;
-  private exportingCSVSubscription: Subscription;
-
+  public modules = [ClientSideRowModelModule];
   // Inputs
   @Input() set isLoading(value: boolean) {
     this._isLoading = value;
@@ -59,6 +59,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
   @Input() updatingColDefs: Observable<any>;
   @Input() settingFilters: Observable<any>;
   @Input() updatingFilters: Observable<any>;
+  @Input() publishingToAGOL: Observable<{title: string, description: string}>;
   @Input() exportingCSV: Observable<string>;
 
   constructor(public scribeDataExplorerService: ScribeDataExplorerService) {
@@ -94,9 +95,6 @@ export class AgGridComponent implements OnInit, OnDestroy {
         });
       });
     }
-    if (this.exportingCSV) {
-      this.exportingCSVSubscription = this.exportingCSV.subscribe((title) => this.exportCSV(title));
-    }
     // subscribe to map component events
     // on map point selected / clicked, select corresponding table rows
     this.scribeDataExplorerService.mapPointSelectedChangedEvent.subscribe((pointAttributes) => {
@@ -112,6 +110,22 @@ export class AgGridComponent implements OnInit, OnDestroy {
         });
       }
     });
+    // subscribe to data exporting events
+    this.publishingToAGOL.subscribe((featureLayerInfo) => {
+      if (featureLayerInfo) {
+        this.publishToAGOL(featureLayerInfo).then(async () => {
+          // update user's published AGOL services list
+          await this.scribeDataExplorerService.getPublishedAGOLServices().then((items: AGOLService[]) => {
+            this.scribeDataExplorerService.userAGOLServices.next(items);
+          });
+        });
+      }
+    });
+    this.exportingCSV.subscribe((title) => {
+      if (title) {
+        this.exportCSV(title);
+      }
+    });
 
     // Set custom filter properties for column definitions
     if (this.columnDefs && this.customFilterProps) {
@@ -122,7 +136,6 @@ export class AgGridComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.updatingColDefsSubscription.unsubscribe();
     this.updatingFiltersSubscription.unsubscribe();
-    this.exportingCSVSubscription.unsubscribe();
   }
 
   showLoading() {
@@ -262,7 +275,9 @@ export class AgGridComponent implements OnInit, OnDestroy {
 
   onSelectionChanged(params) {
     const selectedRows = this.gridApi.getSelectedRows();
-    this.rowSelectedEvent.emit(selectedRows[0]);
+    if (selectedRows.constructor === Array && selectedRows.length >= 0) {
+      this.rowSelectedEvent.emit(selectedRows[0]);
+    }
   }
 
   setColDefFilterProps() {
@@ -274,6 +289,18 @@ export class AgGridComponent implements OnInit, OnDestroy {
         item.filterParams = {values: this.customFilterProps[item.field].filterValues};
       }
     });
+  }
+
+  async publishToAGOL(featureLayerInfo) {
+    const rowData = [];
+    this.gridApi.forEachNodeAfterFilter((row) => {
+      rowData.push(row.data);
+    });
+    if (rowData.length > 0) {
+      featureLayerInfo.rows = rowData;
+      await this.scribeDataExplorerService.publishToAGOL(featureLayerInfo);
+      this.scribeDataExplorerService.isPublishingToAGOL.next(false);
+    }
   }
 
   exportCSV(title) {

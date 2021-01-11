@@ -12,15 +12,33 @@ import {
   AfterViewInit
 } from '@angular/core';
 import {ReplaySubject} from 'rxjs';
-import {loadModules} from 'esri-loader';
+
+import FeatureLayer from 'esri/layers/FeatureLayer';
+import GraphicsLayer from 'esri/layers/GraphicsLayer';
+import SketchViewModel from 'esri/widgets/Sketch/SketchViewModel';
+import Map from 'esri/Map';
+import esriConfig from 'esri/config';
+import urlUtils from 'esri/core/urlUtils';
+import Layer from 'esri/layers/Layer';
+import Graphic from 'esri/Graphic';
+import ViewPoint from 'esri/Viewpoint';
+import Point from 'esri/geometry/Point';
+import Home from 'esri/widgets/Home';
+import Mesh from 'esri/geometry/Mesh';
+import SceneView from 'esri/views/SceneView';
+import BasemapGallery from 'esri/widgets/BasemapGallery';
+import Expand from 'esri/widgets/Expand';
+import SimpleRenderer from 'esri/renderers/SimpleRenderer';
+import SimpleMarkerSymbol from 'esri/symbols/SimpleMarkerSymbol';
+import MeshSymbol3D from 'esri/symbols/MeshSymbol3D';
+import MeshMaterial from 'esri/geometry/support/MeshMaterial';
+import Color from 'esri/Color';
 
 import {environment} from '@environments/environment';
 import {CONFIG_SETTINGS} from '../../config_settings';
-import {MapSymbolizationProps} from '../../projectInterfaceTypes';
-import FeatureLayerType = __esri.FeatureLayer;
-import FeatureLayerViewType = __esri.FeatureLayerView;
 import {LoginService} from '../../auth/login.service';
 import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
+import {MapSymbolizationProps} from '../../projectInterfaceTypes';
 // import {MapService} from '@services/map.service';
 
 
@@ -42,33 +60,18 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
   private _baseMap = 'streets';
   private _map: __esri.Map;
   private _view: __esri.SceneView;
-  private _graphic;
-  private _graphicsLayer;
-  private _featureLayer;
-  private _layer;
-  private _zoomToPointGraphic;
-  private _point;
-  private _viewPoint;
-  private _mesh;
-  private _homeBtn;
-  private _sketchViewModel;
-  private _initExtent;
-  private _colorRendererCreator;
+  private _zoomToPointGraphic: __esri.Graphic;
+  private _homeBtn: __esri.Home;
 
-  private _ColorSlider;
   // mapService: MapService;
   private mapPointSymbolBreaks: number = CONFIG_SETTINGS.mapPointSymbolBreaks;
   private mapPointSymbolColors = CONFIG_SETTINGS.mapPointSymbolColors;
-  mapPointsFeatureLayer: __esri.FeatureLayer;
-  scribeProjectsFeatureLyr: __esri.FeatureLayer;
+  mapPointsFeatureLayer: FeatureLayer;
+  scribeProjectsFeatureLyr: FeatureLayer;
   mapPointsFeatureLayerHighlight;
-  polygonSelectionGraphicsLayer: __esri.GraphicsLayer;
-  pointSelectionSketchViewModel: __esri.SketchViewModel;
-  private symbol = {
-    type: 'simple-marker',
-    opacity: 0,
-    size: 7
-  };
+  polygonSelectionGraphicsLayer: GraphicsLayer;
+  pointSelectionSketchViewModel: SketchViewModel;
+
   private _selectedGeoPoint: any;
 
   @Input()
@@ -106,111 +109,75 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
     return this._selectedGeoPoint;
   }
 
-  @Input() portalLayerIds: string[];
+  @Input() portalLayerServiceUrls: string[];
   @Input() pointData: any[];
 
   constructor(public loginService: LoginService, public scribeDataExplorerService: ScribeDataExplorerService) {
     // this.mapService = new MapService(loginService.access_token);
   }
 
-  async initializeMap() {
-    const self = this;
-    try {
-      // Load the modules for the ArcGIS API for JavaScript
-      const [esriConfig, urlUtils, EsriMap, SceneView, FeatureLayer, Layer, Graphic, GraphicsLayer, Point, Viewpoint, Mesh, Home,
-        BasemapGallery, Expand, SketchViewModel, colorRendererCreator, ColorSlider] = await loadModules([
-        'esri/config',
-        'esri/core/urlUtils',
-        'esri/Map',
-        'esri/views/SceneView',
-        'esri/layers/FeatureLayer',
-        'esri/layers/Layer',
-        'esri/Graphic',
-        'esri/layers/GraphicsLayer',
-        'esri/geometry/Point',
-        'esri/Viewpoint',
-        'esri/geometry/Mesh',
-        'esri/widgets/Home',
-        'esri/widgets/BasemapGallery',
-        'esri/widgets/Expand',
-        'esri/widgets/Sketch/SketchViewModel',
-        'esri/smartMapping/renderers/color',
-        'esri/widgets/smartMapping/ColorSlider'
-      ]);
-      esriConfig.request.trustedServers.push('http://localhost:8000');
-      urlUtils.addProxyRule({
-        urlPrefix: 'utility.arcgis.com',
-        proxyUrl: 'http://localhost:8000/proxy/'
-      });
+  initializeMap() {
+    esriConfig.request.trustedServers.push(environment.agol_trusted_server);
+    esriConfig.request.proxyRules.push({
+      urlPrefix: environment.agol_proxy_url_prefix,
+      proxyUrl: environment.agol_proxy_url
+    });
 
-      // Initialize the Esri Modules properties for this map component class
-      self._featureLayer = FeatureLayer;
-      self._layer = Layer;
-      self._graphic = Graphic;
-      self._graphicsLayer = GraphicsLayer;
-      self._point = Point;
-      self._viewPoint = Viewpoint;
-      self._mesh = Mesh;
-      self._homeBtn = Home;
-      self._sketchViewModel = SketchViewModel;
-      self._colorRendererCreator = colorRendererCreator;
-      self._ColorSlider = ColorSlider;
+    // Initialize the Esri Modules properties for this map component class
 
-      // Configure the BaseMap
-      const references = new this._featureLayer('https://utility.arcgis.com/usrsvcs/servers/add9432d507146e7abf3351efa097b99/rest/services/R9GIS/R9ScribeData/MapServer');
-      const mapProperties: __esri.MapProperties = {
-        basemap: self._baseMap,
-        layers: [references],
-        ground: {
-          navigationConstraint: {
-            type: 'none'
-          }
+    // Configure the BaseMap
+    const mapProperties: __esri.MapProperties = {
+      basemap: this._baseMap,
+      ground: {
+        navigationConstraint: {
+          type: 'none'
         }
-      };
-      self._map = new EsriMap(mapProperties);
-      this.mapViewEl.nativeElement.id = this.mapDivId;
+      }
+    };
+    this._map = new Map(mapProperties);
+    this.mapViewEl.nativeElement.id = this.mapDivId;
 
-      // Initialize the SceneView
-      const sceneViewProperties: __esri.MapViewProperties = {
-        container: this.mapViewEl.nativeElement,
-        map: self._map,
-        center: self._center,
-        popup: {
-          dockEnabled: false,
-          dockOptions: {
-            position: 'bottom-center',
-            // Ignore the default sizes that trigger responsive docking
-            breakpoint: false
-          }
-        },
-      };
-      // create map scene view
-      self._view = new SceneView(sceneViewProperties);
-      // add ootb map widgets to view
-      self._homeBtn = new Home({
-        view: self._view
-      });
-      self._view.ui.add(self._homeBtn, 'top-right');
-      const basemapGalleryWidget = new BasemapGallery({
-        view: self._view
-      });
-      const baseMapExpand = new Expand({
-        expandIconClass: 'esri-icon-basemap',
-        view: self._view,
-        content: basemapGalleryWidget
-      });
-      self._view.ui.add(baseMapExpand, 'top-right');
+    // Initialize the SceneView
+    const sceneViewProperties: __esri.SceneViewProperties = {
+      container: this.mapViewEl.nativeElement,
+      map: this._map,
+      center: this._center,
+      popup: {
+        dockEnabled: false,
+        dockOptions: {
+          position: 'bottom-center',
+          // Ignore the default sizes that trigger responsive docking
+          breakpoint: false
+        }
+      },
+    };
+    // create map scene view
+    this._view = new SceneView(sceneViewProperties);
+    // add ootb map widgets to view
+    this._homeBtn = new Home({
+      view: this._view
+    });
+    this._view.ui.add(this._homeBtn, 'top-right');
+    const basemapGalleryWidget = new BasemapGallery({
+      view: this._view
+    });
+    const baseMapExpand = new Expand({
+      expandIconClass: 'esri-icon-basemap',
+      view: this._view,
+      content: basemapGalleryWidget
+    });
+    this._view.ui.add(baseMapExpand, 'top-right');
 
-      return self._view.when((loadedView) => {
-        // resolve();
-        return loadedView;
-      }, error => {
-        console.log(error);
-      });
+    return this._view.when((loadedView) => {
+      // resolve();
+      return loadedView;
+    }, error => {
+      console.log(error);
+    });
 
-    } catch (error) {
-      console.log('EsriLoader: ', error);
-    }
+    // } catch (error) {
+    //   console.log('EsriLoader: ', error);
+    // }
   }
 
   ngOnInit() {
@@ -228,9 +195,9 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
       // The map has been initialized
       this.mapViewLoaded = this._view.ready;
       // load any portal layers from input prop
-      /*if (this.portalLayerIds) {
-        this.loadPortalLayers(this.portalLayerIds);
-      }*/
+      if (this.portalLayerServiceUrls) {
+        this.loadPortalLayers(this.portalLayerServiceUrls);
+      }
 
       // subscribe to map view events
       this._view.on('click', (event) => {
@@ -240,7 +207,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
           });
           if (response.results.length > 0) {
             let selectedGraphic = response.results[0].graphic;
-            if ('PROJECTID' in selectedGraphic.attributes) {
+            if (selectedGraphic.attributes && 'PROJECTID' in selectedGraphic.attributes) {
               // on project centroid point selected / clicked, go to that project
               this.scribeDataExplorerService.projectCentroidsSelectedSource.next([selectedGraphic.attributes]);
             } else {
@@ -383,15 +350,14 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
     }
   }
 
-  async loadPortalLayers(portalLyrItemIds) {
-    const portalLayers: __esri.Layer[] = await Promise.all(portalLyrItemIds.map(async (portalItemId) => {
-      return this._layer.fromPortalItem({
-        portalItem: {
-          id: portalItemId
-        }
-      } as __esri.LayerFromPortalItemParams).then((portalLyr) => {
+  async loadPortalLayers(portalLyrServiceUrls) {
+    const portalLayers: __esri.Layer[] = await Promise.all(portalLyrServiceUrls.map(async (portalItemId) => {
+      return Layer.fromArcGISServerUrl({
+        url: 'https://utility.arcgis.com/usrsvcs/servers/add9432d507146e7abf3351efa097b99/rest/services/R9GIS/R9ScribeData/MapServer'
+          } as unknown as __esri.LayerFromArcGISServerUrlParams).then((portalLyr) => {
         portalLyr.load().then((loadedPortalLyr) => {
           // const portalLyrSubLayers = loadedPortalLyr.createServiceSublayers();
+          // @ts-ignore
           const scribeProjectsSubLyr = portalLyr.sublayers.find((sublayer) => {
             return sublayer.title === 'Scribe Projects';
           });
@@ -420,11 +386,10 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
     const pointGraphicsArray = [];
     pointData.forEach((pt: any) => {
       if (pt.Latitude && pt.Longitude) {
-        const point = {
-          type: 'point',
+        const point = new Point({
           longitude: pt.Longitude,
           latitude: pt.Latitude
-        };
+        });
         const symbolColor = null;
         /*if (pt.hasOwnProperty('Matrix') && pt.hasOwnProperty('MDL')) {
           symbolColor = this.getSamplePointColorByMDL(pt);
@@ -439,7 +404,8 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
           opacity: symbolColor ? 1 : 0,
           size: 7,
         };
-        pointGraphic = new this._graphic({
+        // @ts-ignore
+        pointGraphic = new Graphic({
           geometry: point,
           symbol: graphicSymbol,
           attributes: pt,
@@ -463,30 +429,29 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
   }
 
   createFeatureLayerFromGraphics(pointGraphicsArray: any, geometryType = 'point', elevationInfo = null,
-                                 symbol = this.symbol): Promise<FeatureLayerType> {
-    const lyr = new this._featureLayer({
+                                 symbol = this.symbol): __esri.FeatureLayer {
+    const renderer = new SimpleRenderer({  // overrides the layer's default renderer
+      symbol: new SimpleMarkerSymbol({size: 7})
+    });
+    return new FeatureLayer({
       geometryType,
       source: pointGraphicsArray,
       objectIdField: 'ObjectID',
       fields: this.setFeatureLayerFields(this.pointData),
       outFields: ['*'], // REQUIRED for querying the layer attributes
       popupTemplate: this.setLayerPopupTemplate(this.pointData),
-      renderer: {  // overrides the layer's default renderer
-        type: 'simple',
-        symbol
-      },
+      renderer,
       spatialReference: {
         wkid: 4326
       },
       elevationInfo
     });
-    return lyr;
   }
 
   // sets home button extent
   setHomeExtentFromFl(featureLayer) {
     this._view.extent = featureLayer.fullExtent;
-    const newViewPoint = new this._viewPoint({
+    const newViewPoint = new ViewPoint({
       targetGeometry: this._view.extent,
       scale: this._view.scale
     });
@@ -563,35 +528,35 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
           z: (pt.Samp_Depth_To * -1 * 10)
         };
         // add 3d point with depth z coordinate
-        pointGeometry = new this._point(pointProps);
-        const symbolColor = null;
+        pointGeometry = new Point(pointProps);
+        // const symbolColor = null;
         /*if (pt.hasOwnProperty('Matrix') && pt.hasOwnProperty('MDL')) {
           symbolColor = this.getSamplePointColorByMDL(pt);
         }*/
-        const meshGeometry = this._mesh.createCylinder(pointGeometry, {
+        const meshGeometry = Mesh.createCylinder(pointGeometry, {
           size: {
             width: 10,
             depth: 10,
             height: (pt.Samp_Depth_To - pt.Samp_Depth) * 10,
           },
-          material: {
-            color: symbolColor
-          }
+          material: new MeshMaterial()
         });
         // Create a graphic and add it to the view
         delete pt.LabResultsAvailable;
         delete pt.Numeric_Tags;
         delete pt.Region_Tag_Prefix;
-        meshPointGraphic = new this._graphic({
+        meshPointGraphic = new Graphic({
           geometry: meshGeometry,
-          symbol,
+          symbol: new MeshSymbol3D({
+            symbolLayers: [{type: 'fill'}]
+          }),
           attributes: pt
         });
         pointGraphicsArray.push(meshPointGraphic);
       }
     });
     if (pointGraphicsArray.length > 0) {
-      // const graphicsLayer = new this._graphicsLayer({
+      // const graphicsLayer = new GraphicsLayer({
       //   graphics: pointGraphicsArray,
       //   elevationInfo: {
       //     mode: 'relative-to-ground'
@@ -616,21 +581,19 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
   zoomToPoint(pointData: any) {
     this._view.graphics.remove(this._zoomToPointGraphic);
     if (pointData && pointData.Latitude && pointData.Longitude) {
-      const point = {
-        type: 'point',
+      const point = new Point({
         longitude: pointData.Longitude,
         latitude: pointData.Latitude
-      };
+      });
       // highlight symbology
-      const highlightSymbol = {
-        type: 'simple-marker',
+      const highlightSymbol = new SimpleMarkerSymbol({
         size: 8,
         outline: {
           color: [21, 244, 238],
           width: 6
         }
-      };
-      this._zoomToPointGraphic = new this._graphic({
+      });
+      this._zoomToPointGraphic = new Graphic({
         geometry: point,
         symbol: highlightSymbol
       });
@@ -683,10 +646,10 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
 
   setupPointSelectionSketchViewModel() {
     // define polygon graphics layer used to draw a sketch view model and to query features / map points that intersect it
-    this.polygonSelectionGraphicsLayer = new this._graphicsLayer();
+    this.polygonSelectionGraphicsLayer = new GraphicsLayer();
     this._map.add(this.polygonSelectionGraphicsLayer);
     // create a new sketch view model set with the polygon graphics layer
-    this.pointSelectionSketchViewModel = new this._sketchViewModel({
+    this.pointSelectionSketchViewModel = new SketchViewModel({
       view: this._view,
       layer: this.polygonSelectionGraphicsLayer,
       pointSymbol: {
@@ -750,7 +713,7 @@ export class MapViewComponent implements OnInit, AfterViewInit, OnChanges, OnDes
             this._view.graphics.remove(this._zoomToPointGraphic);
           }
           // highlight the selected features
-          this._view.whenLayerView(queryFeatureLayer).then((layerView: FeatureLayerViewType) => {
+          this._view.whenLayerView(queryFeatureLayer).then((layerView: __esri.FeatureLayerView) => {
             if (this.mapPointsFeatureLayerHighlight) {
               this.mapPointsFeatureLayerHighlight.remove();
             }

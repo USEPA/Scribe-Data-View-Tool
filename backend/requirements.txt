@@ -1,5 +1,5 @@
 django>=2.2.0,<=2.2.99
-django-mssql-backend==2.4.0
+django-mssql-backend==2.7.0
 django-cors-headers
 djangorestframework>=3.10.3,<=3.10.99
 django-rest-auth>=0.9.5,<=0.9.99
@@ -10,3 +10,6 @@ git+https://github.com/Innovate-Inc/django-agol-oauth2.git@master#egg=django-ago
 django-rest-framework-social-oauth2==1.1.0
 python-dotenv
 wfastcgi==3.0.0
+pywinpty==0.5.1
+geojson
+arcgis==1.8.1

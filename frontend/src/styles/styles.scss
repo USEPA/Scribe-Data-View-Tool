@@ -2,8 +2,8 @@
 @import '~@angular/material/theming';
 @import url('//fonts.googleapis.com/icon?family=Material+Icons');
 // AG Grid style imports
-@import "~ag-grid-community/src/styles/ag-grid.scss";
-@import "~ag-grid-community/src/styles/ag-theme-balham/sass/ag-theme-balham.scss";
+@import "~@ag-grid-community/all-modules/dist/styles/ag-grid.min.css" ;
+@import "~@ag-grid-community/all-modules/dist/styles/ag-theme-balham/sass/legacy/ag-theme-balham-v22-compat.scss";
 // Esri JS API css
 //@import url('https://js.arcgis.com/4.12/esri/css/main.css');
 
@@ -114,8 +114,39 @@ footer {
 }
 
 // Other custom styles
-.loading-spinner {
+.btn-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -15px;
+  width: 100%;
+}
+.btn-spinner circle {
+  stroke: orange;
+}
+
+.map-loading-spinner {
   position: absolute;
   top: 45%;
   left: 50%;
+}
+
+.snackbar-success {
+  max-width: 95% !important;
+  padding: 10px !important; // spacing between the text and boundary
+  background-color: green;
+  color: white;
+}
+.snackbar-success > .mat-simple-snackbar {
+  justify-content: center;
+}
+
+.snackbar-error {
+  max-width: 95% !important;
+  padding: 10px !important; // spacing between the text and boundary
+  background-color: orangered;
+  color: white;
+}
+.snackbar-error > .mat-simple-snackbar {
+  justify-content: center;
 }

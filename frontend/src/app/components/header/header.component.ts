@@ -18,7 +18,12 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.loginService.logout().pipe(tap(() => this.router.navigate(['login']))).subscribe();
+    this.loginService.logout().then((result) => {
+      this.router.navigate(['login']);
+    }).catch((error) => {
+      // console.log(error);
+      this.router.navigate(['login']);
+    });
   }
 
 }
