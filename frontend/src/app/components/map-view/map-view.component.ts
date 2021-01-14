@@ -343,7 +343,6 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   //   //       });
   //   //     }
   //   //     // this.scribeDataExplorerService.mapPointsSymbolizationSource.next(symbologyDefinitions);
-  //   //     // ToDo: symbolize graphics based on latest renderer symbology
   //   //     /*const newGraphics = [];
   //   //     this._view.graphics.forEach((graphic: any) => {
   //   //       const newGraphic = graphic.clone();

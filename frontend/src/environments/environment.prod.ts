@@ -7,6 +7,6 @@ export const environment = {
   agol_trusted_server: 'https://r9.ercloud.org',
   agol_proxy_url_prefix: 'utility.arcgis.com',
   agol_proxy_url: 'https://r9.ercloud.org/scribeexplorer/api/proxy/',
-  login_redirect: 'https://r9.ercloud.org/scribeexplorer/'
-
+  login_redirect: 'https://r9.ercloud.org/scribeexplorer/',
+  geo_platform_url: 'https://epa.maps.arcgis.com'
 };
