@@ -118,43 +118,49 @@
         <button mat-raised-button color="primary" style="transform: scale(0.8); margin-left: -20px;"
                 (click)="onPublishAGOLBtnClick()" [disabled]="(scribeDataExplorerService.isPublishingToAGOL | async)">
           Publish To GeoPlatform
-          <mat-spinner *ngIf="(scribeDataExplorerService.isPublishingToAGOL | async)" class="btn-spinner" diameter="30"></mat-spinner>
+          <mat-spinner *ngIf="(scribeDataExplorerService.isPublishingToAGOL | async)" class="btn-spinner"
+                       diameter="30"></mat-spinner>
         </button>
         <button mat-raised-button color="primary" style="transform: scale(0.8); margin-left: -20px;"
                 (click)="onExportCSVBtnClick()">
           Export CSV
         </button>
-        <button *ngIf="isMapPointsSelected" mat-raised-button color="primary" style="transform: scale(0.8); margin-left: -20px;"
+        <button *ngIf="isMapPointsSelected" mat-raised-button color="primary"
+                style="transform: scale(0.8); margin-left: -20px;"
                 (click)="onClearMapSelection()">
           Clear Map Selection
         </button>
       </span>
     </ng-template>
-    <div class="component-container-flex">
-      <app-ag-grid
-        *ngIf="showTable && !isLoadingData"
-        [isLoading]="isLoadingData"
-        [columnDefs]="projectLabResultsColDefs"
-        [rowData]="projectLabResultsRowData"
-        [customFilterProps]="agGridCustomFilters"
-        [updatingColDefs]="updateColDefs.asObservable()"
-        [settingFilters]="presetFilters.asObservable()"
-        [updatingFilters]="updateFilters.asObservable()"
-        [publishingToAGOL]="publishLabResultsToAGOL.asObservable()"
-        [exportingCSV]="exportLabResultsCSV.asObservable()"
-        [style.width]="(geoPointsArray.length > 0) ? '1200px' : '100%'"
-        (gridReadyEvent)="setAgGridPresetFilters($event)"
-        (filtersChangedEvent)="agGridFiltersChanged($event)"
-        (rowSelectedEvent)="agGridRowSelected($event)"
-      ></app-ag-grid>
-      <app-map-view
-        *ngIf="geoPointsArray.length > 0"
-        [hidden]="isLoadingData"
-        [pointData]="geoPointsArray"
-        [selectedGeoPoint]="selectedPoint"
-        (mapFeaturesLoadedEvent)="mapGeoFeaturesLoaded($event)"
-      ></app-map-view>
-    </div>
+    <ng-template matTabContent>
+      <div class="component-container-flex">
+        <app-ag-grid
+          *ngIf="showTable && !isLoadingData"
+          [isLoading]="isLoadingData"
+          [columnDefs]="projectLabResultsColDefs"
+          [rowData]="projectLabResultsRowData"
+          [selectedFeatures]="selectedPoints"
+          [customFilterProps]="agGridCustomFilters"
+          [updatingColDefs]="updateColDefs.asObservable()"
+          [settingFilters]="presetFilters.asObservable()"
+          [updatingFilters]="updateFilters.asObservable()"
+          [publishingToAGOL]="publishLabResultsToAGOL.asObservable()"
+          [exportingCSV]="exportLabResultsCSV.asObservable()"
+          [style.width]="(geoPointsArray.length > 0) ? '1200px' : '100%'"
+          (gridReadyEvent)="setAgGridPresetFilters($event)"
+          (filtersChangedEvent)="agGridFiltersChanged($event)"
+          (selectedFeaturesChange)="agGridRowSelected($event)"
+        ></app-ag-grid>
+        <app-map-view
+          *ngIf="geoPointsArray.length > 0"
+          [hidden]="isLoadingData"
+          [pointData]="geoPointsArray"
+          [(selectedFeatures)]="selectedPoints"
+          (mapFeaturesLoadedEvent)="mapGeoFeaturesLoaded($event)"
+          [analyte]="selectedAnalyte | async"
+        ></app-map-view>
+      </div>
+    </ng-template>
   </mat-tab>
   <mat-tab>
     <ng-template mat-tab-label>
@@ -167,24 +173,27 @@
         <button mat-raised-button color="primary" style="transform: scale(0.8); margin-left: -20px;"
                 (click)="onPublishAGOLBtnClick()" [disabled]="(scribeDataExplorerService.isPublishingToAGOL | async)">
           Publish To GeoPlatform
-          <mat-spinner *ngIf="(scribeDataExplorerService.isPublishingToAGOL | async)" class="btn-spinner" diameter="30"></mat-spinner>
+          <mat-spinner *ngIf="(scribeDataExplorerService.isPublishingToAGOL | async)" class="btn-spinner"
+                       diameter="30"></mat-spinner>
         </button>
         <button mat-raised-button color="primary" style="transform: scale(0.8); margin-left: -20px;"
                 (click)="onExportCSVBtnClick()">
           Export CSV
         </button>
-        <button *ngIf="isMapPointsSelected" mat-raised-button color="primary" style="transform: scale(0.8); margin-left: -20px;"
+        <button *ngIf="isMapPointsSelected" mat-raised-button color="primary"
+                style="transform: scale(0.8); margin-left: -20px;"
                 (click)="onClearMapSelection()">
           Clear Map Selection
         </button>
       </span>
     </ng-template>
-    <div class="component-container-flex">
+    <ng-template matTabContent class="component-container-flex">
       <app-ag-grid
         *ngIf="showTable && !isLoadingData"
         [isLoading]="isLoadingData"
         [columnDefs]="projectSamplesColDefs"
         [rowData]="projectSamplesRowData"
+        [selectedFeatures]="selectedPoints"
         [customFilterProps]="agGridCustomFilters"
         [updatingColDefs]="updateColDefs.asObservable()"
         [settingFilters]="presetFilters.asObservable()"
@@ -200,9 +209,10 @@
         *ngIf="geoPointsArray.length > 0"
         [hidden]="isLoadingData"
         [pointData]="geoPointsArray"
-        [selectedGeoPoint]="selectedPoint"
+        [(selectedFeatures)]="selectedPoints"
         (mapFeaturesLoadedEvent)="mapGeoFeaturesLoaded($event)"
+        [analyte]="selectedAnalyte | async"
       ></app-map-view>
-    </div>
+    </ng-template>
   </mat-tab>
 </mat-tab-group>

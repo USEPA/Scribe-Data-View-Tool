@@ -16,22 +16,6 @@
             "customWebpackConfig": {
               "path": "./esri.conf.js"
             },
-            "allowedCommonJsDependencies": [
-              "esri/layers/FeatureLayer",
-              "esri/layers/GraphicsLayer",
-              "esri/widgets/Sketch/SketchViewModel",
-              "esri/Map",
-              "esri/layers/Layer",
-              "esri/Graphic",
-              "esri/Viewpoint",
-              "esri/geometry/Point",
-              "esri/widgets/Home",
-              "esri/geometry/Mesh",
-              "esri/views/SceneView",
-              "esri/widgets/Expand",
-              "esri/widgets/BasemapGallery",
-              "esri/renderers/SimpleRenderer"
-            ],
             "outputPath": "dist/frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -42,7 +26,12 @@
               "src/favicon.ico",
               "src/assets",
               "src/static",
-              "src/web.config"
+              "src/web.config",
+              {
+                "glob": "**/*",
+                "input": "node_modules/@arcgis/core/assets",
+                "output": "/assets/"
+              }
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",

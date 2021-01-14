@@ -131,6 +131,7 @@ export interface ProjectSample {
   LabResultsAvailable: boolean;
   Numeric_Tags: any;
   MDL: number;
+  Result: number;
 }
 
 export interface MapSymbolizationProps {

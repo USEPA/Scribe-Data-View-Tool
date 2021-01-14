@@ -20,7 +20,6 @@
       "dom"
     ],
     "types": [
-      "arcgis-js-api",
       "moment"
     ]
   },

@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {BehaviorSubject, Observable} from 'rxjs';
-import esriConfig from 'esri/config';
+import esriConfig from '@arcgis/core/config';
 
 import {environment} from '@environments/environment';
 import {

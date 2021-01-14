@@ -79,7 +79,7 @@ export const CONFIG_SETTINGS = {
     SampleType: {alias: 'Sample Collection Type', hide: true},
     Activity: {alias: 'Activity', hide: true},
     Samp_Depth: {alias: 'Sample Depth', hide: false},
-    Samp_Depth_To: {alias: 'Sample Depth To', hide: true},
+    Samp_Depth_To: {alias: 'Sample Depth To', hide: false},
     Samp_Depth_Units: {alias: 'Sample Depth Units', hide: false},
     Volume: {alias: 'Volume', hide: true},
     Volume_Units: {alias: 'Volume Units', hide: true},

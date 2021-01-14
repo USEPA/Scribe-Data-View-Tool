@@ -43,4 +43,7 @@ export class ProjectsMapDialogComponent implements OnInit {
     this.dialogRef.close({done: false});
   }
 
+  selectProject(attributes) {
+    this.scribeDataExplorerService.projectCentroidsSelectedSource.next(attributes);
+  }
 }
