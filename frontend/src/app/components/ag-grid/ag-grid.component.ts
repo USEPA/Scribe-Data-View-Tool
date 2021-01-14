@@ -13,10 +13,10 @@ import {AGOLService} from '../../projectInterfaceTypes';
   templateUrl: './ag-grid.component.html',
   styleUrls: ['./ag-grid.component.css']
 })
-export class AgGridComponent implements OnInit, OnDestroy {
+export class AgGridComponent implements OnInit, OnDestroy, OnChanges {
   @Output() gridReadyEvent = new EventEmitter<any>();
-  @Output() filtersChangedEvent = new EventEmitter<{activeFilters: any[], filteredRowData: any[]}>();
-  @Output() rowSelectedEvent = new EventEmitter<number>();
+  @Output() filtersChangedEvent = new EventEmitter<{ activeFilters: any[], filteredRowData: any[] }>();
+  @Output() rowSelectedEvent = new EventEmitter<any[]>();
   public showGrid: boolean;
   private gridApi;
   private gridColumnApi;
@@ -30,6 +30,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
   private settingFiltersSubscription: Subscription;
   private updatingFiltersSubscription: Subscription;
   public modules = [ClientSideRowModelModule];
+
   // Inputs
   @Input() set isLoading(value: boolean) {
     this._isLoading = value;
@@ -50,6 +51,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
       this._columnDefs = value;
     }
   }
+
   get columnDefs(): any {
     return this._columnDefs;
   }
@@ -59,8 +61,10 @@ export class AgGridComponent implements OnInit, OnDestroy {
   @Input() updatingColDefs: Observable<any>;
   @Input() settingFilters: Observable<any>;
   @Input() updatingFilters: Observable<any>;
-  @Input() publishingToAGOL: Observable<{title: string, description: string}>;
+  @Input() publishingToAGOL: Observable<{ title: string, description: string }>;
   @Input() exportingCSV: Observable<string>;
+  @Input() selectedFeatures: string[];
+  @Output() selectedFeaturesChange: EventEmitter<string[]> = new EventEmitter<string[]>();
 
   constructor(public scribeDataExplorerService: ScribeDataExplorerService) {
     this.showGrid = true;
@@ -96,20 +100,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
       });
     }
     // subscribe to map component events
-    // on map point selected / clicked, select corresponding table rows
-    this.scribeDataExplorerService.mapPointSelectedChangedEvent.subscribe((pointAttributes) => {
-      if (this.gridApi && pointAttributes) {
-        this.gridApi.deselectAll();
-        let rowIndex = 0;
-        this.gridApi.forEachNode( (node) => {
-          if (node.data.Samp_No === pointAttributes.Samp_No) {
-            node.setSelected( true);
-            rowIndex = node.rowIndex;
-            this.gridApi.ensureIndexVisible(rowIndex, 'middle');
-          }
-        });
-      }
-    });
+
     // subscribe to data exporting events
     this.publishingToAGOL.subscribe((featureLayerInfo) => {
       if (featureLayerInfo) {
@@ -136,6 +127,27 @@ export class AgGridComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.updatingColDefsSubscription.unsubscribe();
     this.updatingFiltersSubscription.unsubscribe();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.selectedFeatures !== undefined && changes.selectedFeatures.currentValue) {
+      if (changes.selectedFeatures.previousValue === undefined ||
+          !changes.selectedFeatures.currentValue.every(x => changes.selectedFeatures.previousValue.includes(x))) {
+        // on map point selected / clicked, select corresponding table rows
+        if (this.gridApi) {
+          this.gridApi.deselectAll();
+          let rowIndex = 0;
+          this.gridApi.forEachNode((node) => {
+            const found = changes.selectedFeatures.currentValue.find(x => x === node.data.Samp_No);
+            if (found) {
+              node.setSelected(true, false, true);
+              rowIndex = node.rowIndex;
+              this.gridApi.ensureIndexVisible(rowIndex, 'middle');
+            }
+          });
+        }
+      }
+    }
   }
 
   showLoading() {
@@ -276,7 +288,8 @@ export class AgGridComponent implements OnInit, OnDestroy {
   onSelectionChanged(params) {
     const selectedRows = this.gridApi.getSelectedRows();
     if (selectedRows.constructor === Array && selectedRows.length >= 0) {
-      this.rowSelectedEvent.emit(selectedRows[0]);
+      this.selectedFeatures = [...new Set(selectedRows.map(x => x.Samp_No))];
+      this.selectedFeaturesChange.emit(this.selectedFeatures);
     }
   }
 
