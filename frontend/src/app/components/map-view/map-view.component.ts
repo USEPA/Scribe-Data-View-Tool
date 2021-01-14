@@ -46,6 +46,7 @@ import MapProperties = __esri.MapProperties;
 import LayerFromArcGISServerUrlParams = __esri.LayerFromArcGISServerUrlParams;
 import Handle = __esri.Handle;
 import {isEqual} from 'lodash';
+import SimpleMarkerSymbolProperties = __esri.SimpleMarkerSymbolProperties;
 
 // import {MapService} from '@services/map.service';
 
@@ -444,12 +445,10 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
         delete pt.LabResultsAvailable;
         delete pt.Numeric_Tags;
         delete pt.Region_Tag_Prefix;
-        const graphicSymbol = {
-          type: 'simple-marker',
+        const graphicSymbol = new SimpleMarkerSymbol({
           color: symbolColor,
-          opacity: symbolColor ? 1 : 0,
           size: 7,
-        };
+        });
         // @ts-ignore
         pointGraphic = new Graphic({
           geometry: point,
@@ -590,11 +589,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
         delete pt.Region_Tag_Prefix;
         meshPointGraphic = new Graphic({
           geometry: meshGeometry,
-          symbol: new MeshSymbol3D({
-            symbolLayers: [{
-              type: 'fill'
-            }]
-          }),
+          symbol: new MeshSymbol3D(),
           attributes: pt
         });
         pointGraphicsArray.push(meshPointGraphic);
