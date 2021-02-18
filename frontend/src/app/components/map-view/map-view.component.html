@@ -2,10 +2,11 @@
   <mat-spinner></mat-spinner>
 </div>
 <!-- The DIV that we inject the map into -->
-<div [style.display]="{'hidden': !mapViewLoaded}" #mapViewDiv class="map-container">
+<div [style.display]="{'none': !mapViewLoaded}" #mapViewDiv class="map-container">
   <div id="select-by-polygon" class="esri-widget esri-widget--button esri-widget esri-interactive"
        title="Select features by polygon" style="visibility: hidden;">
     <span class="esri-icon-polygon"></span>
   </div>
 </div>
+
 

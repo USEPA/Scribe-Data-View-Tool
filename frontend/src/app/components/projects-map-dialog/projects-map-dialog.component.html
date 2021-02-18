@@ -13,6 +13,7 @@
       [portalLayerServiceUrls]="[
         'https://utility.arcgis.com/usrsvcs/servers/add9432d507146e7abf3351efa097b99/rest/services/R9GIS/R9ScribeData/MapServer'
       ]"
+      [center]="[-117.628, 37.287]"
       (mapFeaturesLoadedEvent)="mapGeoFeaturesLoaded($event)"
       (selectedFeaturesChange)="selectProject($event)"
     ></app-map-view>
