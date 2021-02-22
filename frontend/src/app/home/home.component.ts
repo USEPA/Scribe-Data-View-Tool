@@ -175,8 +175,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
         });
         const currentselectedProjectIDs = this.projects.value as Array<number>;
         if (!currentselectedProjectIDs || (currentselectedProjectIDs.sort().join(',') !== newSelectedProjectIDs.sort().join(','))) {
-          this.clearProjects();
-          this.setQueryParam('projects', newSelectedProjectIDs.join(','));
+          // this.clearProjects();
+          // this.setQueryParam('projects', newSelectedProjectIDs.join(','));
+          this.projects.setValue(newSelectedProjectIDs);
+          this.setProjects();
         }
       }
     });
@@ -367,8 +369,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.isLoadingData = false;
   }
 
-  setProjects(event) {
-    event.stopPropagation();
+  setProjects(event?) {
+    if (event) {
+      event.stopPropagation();
+    }
+
+    this.clearQueryParams();
+
     if (this.projects.value) {
       const newselectedProjectIDs = this.projects.value.join(',');
       this.setQueryParam('projects', newselectedProjectIDs);
@@ -725,7 +732,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   clearQueryParams() {
     const queryParams = {};
-    Object.keys(this.route.snapshot.queryParams).filter(k => k === 'projects').forEach(key => {
+    Object.keys(this.route.snapshot.queryParams).forEach(key => {
       queryParams[key] = null;
     });
     this.router.navigate([], {queryParams});

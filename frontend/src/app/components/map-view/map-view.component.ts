@@ -230,7 +230,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit() {
     this._zoomToPointGraphic = null;
-    document.getElementById('select-by-polygon').style.visibility = 'hidden';
+    // document.getElementById('select-by-polygon').style.visibility = 'hidden';
 
     // Initialize MapView and return an instance of MapView
     this.initializeMap().then(mapView => {
@@ -256,12 +256,15 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
           //   location: event.mapPoint,
           // });
           if (response.results.length > 0) {
-            this.selectedFeaturesChange.emit([response.results[0].graphic.attributes.Samp_No]);
-            // if (selectedGraphic.attributes && 'PROJECTID' in selectedGraphic.attributes) {
+            // this.selectedFeaturesChange.emit([response.results[0].graphic.attributes.Samp_No]);
+            if (response.results[0].graphic.attributes &&
+              response.results[0].graphic.attributes.hasOwnProperty('PROJECTID')) {
             //   // on project centroid point selected / clicked, go to that project
             //
-            //   this.scribeDataExplorerService.projectCentroidsSelectedSource.next([selectedGraphic.attributes]);
-            // } else {
+             this.selectedFeaturesChange.emit([response.results[0].graphic.attributes]);
+            } else {
+              this.selectedFeaturesChange.emit([response.results[0].graphic.attributes.Samp_No]);
+            }
             //   // Only return selected map point graphic from the click event results
             //   // selectedGraphic = response.results.filter((result) => {
             //   //   return result.graphic.layer === this.mapPointsFeatureLayer;
@@ -770,18 +773,18 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     this.pointSelectionSketchViewModel.on('create', (event) => {
       if (event.state === 'complete') {
         this.polygonSelectionGraphicsLayer.remove(event.graphic);
-        this.selectPointFeatures(event.graphic.geometry);
+        this.selectPointFeatures(event.graphic.geometry, this.mapPointsFeatureLayer);
       }
     });
   }
 
-  selectPointFeatures(geometry) {
+  selectPointFeatures(geometry, queryFeatureLayer) {
     // create a query and set its geometry parameter to the polygon that was drawn on the view
     const query = {
       geometry,
       outFields: ['*'] // REQUIRED for querying the layer attributes
     };
-    const queryFeatureLayer = this.layer3d;
+    // const queryFeatureLayer = this.layer3d;
     // if (this.mapPointsFeatureLayer) {
     //   queryFeatureLayer = this.mapPointsFeatureLayer;
     // } else if (this.scribeProjectsFeatureLyr) {
