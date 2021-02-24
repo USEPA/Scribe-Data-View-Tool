@@ -132,8 +132,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    // TODO: Remove when data analysis and map symbology is handled by the AGOL / GeoPlatform integration)
     // subscribe to changes to active Ag Grid filter
-    this.agGridActiveFiltersEvt.subscribe((agGridActiveFilters) => {
+    /*this.agGridActiveFiltersEvt.subscribe((agGridActiveFilters) => {
       this.checkReadyToSymbolizeMapPoints();
     });
     // subscribe to MDL value entered event
@@ -141,7 +142,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       if (symbologyDefinitions && this.mapSymbolDefinitions !== symbologyDefinitions) {
         this.mapSymbolDefinitions = symbologyDefinitions;
       }
-    });
+    });*/
 
     // subscribe to selected map points events, and filter table rows to the subset of selected sample points
     this.scribeDataExplorerService.mapPointsSelectedChangedEvent.subscribe((selectedSamplePointsRowData) => {
@@ -261,7 +262,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
       });
 
       this.geoPointsArray = this.getLatLongRecords(filteredSamplePoints);
-      // set MDL min and max range
 
       // refresh missing map points number
       const totalMapPoints = this.getLatLongRecords(filters.filteredRowData);
@@ -408,6 +408,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   async onTabChange(tabId) {
     this.selectedTab = tabId;
+    this.isLoadingData = true;
     if (this.selectedProjectIDs) {
       try {
         // clear filters and get tab data

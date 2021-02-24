@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, OnDestroy, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
-import {ClientSideRowModelModule, ColDef} from '@ag-grid-community/all-modules';
+import {ColDef, ClientSideRowModelModule, CsvExportModule} from '@ag-grid-community/all-modules';
 
 import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
 import {AgGridSelectFilterComponent} from '@components/ag-grid/ag-grid-select-filter.component';
@@ -29,7 +29,7 @@ export class AgGridComponent implements OnInit, OnDestroy, OnChanges {
   private updatingColDefsSubscription: Subscription;
   private settingFiltersSubscription: Subscription;
   private updatingFiltersSubscription: Subscription;
-  public modules = [ClientSideRowModelModule];
+  public modules = [ClientSideRowModelModule, CsvExportModule];
 
   // Inputs
   @Input() set isLoading(value: boolean) {
@@ -127,6 +127,7 @@ export class AgGridComponent implements OnInit, OnDestroy, OnChanges {
   ngOnDestroy() {
     this.updatingColDefsSubscription.unsubscribe();
     this.updatingFiltersSubscription.unsubscribe();
+    this.gridApi.destroy();
   }
 
   ngOnChanges(changes: SimpleChanges) {
