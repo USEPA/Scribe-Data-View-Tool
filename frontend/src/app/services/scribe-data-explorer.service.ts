@@ -18,7 +18,6 @@ import {
 import {LoginService} from '../auth/login.service';
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -64,13 +63,13 @@ export class ScribeDataExplorerService {
     return results;
   }
 
-  async addItemToAGOL(agolContentInfo: AGOLContentInfo) {
+  async addItemToAGOL(agolContentInfo: AGOLContentInfo): Promise<string | boolean> {
     let result = false;
-    const geoJson = await this.generateGeoJson(agolContentInfo);
+    const geoJson = this.generateGeoJson(agolContentInfo.rows);
     if (geoJson) {
       const url = `${this.agolUserContentUrl}/addItem`;
       const formData = new FormData();
-      const geojsonFile = new Blob([geoJson], { type: 'application/geo+json' });
+      const geojsonFile = new Blob([JSON.stringify(geoJson)], {type: 'application/geo+json'});
       formData.append('type', 'GeoJson');
       formData.append('title', agolContentInfo.title);
       formData.append('description', agolContentInfo.description);
@@ -101,28 +100,55 @@ export class ScribeDataExplorerService {
     return result;
   }
 
-  async generateGeoJson(data) {
-    const fileResult = await this.http.post<any>(`${this.scribeApiUrl}/generate_geojson/`, data).toPromise().then((file) => {
-      return file;
-    }).catch((error) => {
-      this.snackBar.open(`Error publishing GeoPlatform service: Error creating GeoJson file.`, null, {
-        duration: 3000, panelClass: ['snackbar-error']
-      });
-      return false;
+  generateGeoJson(data) {
+    const pointGraphicsArray = [];
+    data.forEach((pt: any) => {
+      if (pt.Latitude && pt.Longitude) {
+        // Remove fields that have invalid field types for Esri map data
+        delete pt.LabResultsAvailable;
+        delete pt.Numeric_Tags;
+        delete pt.Region_Tag_Prefix;
+        pointGraphicsArray.push({
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [pt.Longitude, pt.Latitude]
+          },
+          properties: pt
+        });
+      }
     });
-    return fileResult;
+    return {type: 'FeatureCollection', features: pointGraphicsArray};
   }
+
+  // async generateGeoJson(data) {
+  //   const fileResult = await this.http.post<any>(`${this.scribeApiUrl}/generate_geojson/`, data).toPromise().then((file) => {
+  //     return file;
+  //   }).catch((error) => {
+  //     this.snackBar.open(`Error publishing GeoPlatform service: Error creating GeoJson file.`, null, {
+  //       duration: 3000, panelClass: ['snackbar-error']
+  //     });
+  //     return false;
+  //   });
+  //   return fileResult;
+  // }
 
   async publishToAGOL(agolContentInfo: AGOLContentInfo) {
     const itemId = await this.addItemToAGOL(agolContentInfo);
     if (itemId) {
-      const publishParams = JSON.stringify({
-        name: agolContentInfo.title + '_' + String(itemId),
-        description: agolContentInfo.description
-      });
-      let url = `${this.agolUserContentUrl}/publish?itemId=${itemId}&fileType=geojson&publishParameters=${publishParams}`;
-      url = url + `&token=${this.loginService.currentUser.value.agol_token}&f=json`;
-      const result = await this.http.post<any>(url, {}).toPromise().then((response) => {
+      // const publishParams = JSON.stringify();
+      const url = `${this.agolUserContentUrl}/publish`;
+      // url = url + `&token=${this.loginService.currentUser.value.agol_token}&f=json`;
+      const formData = new FormData();
+      formData.append('itemId', itemId as string);
+      formData.append('fileType', 'geojson');
+      formData.append('f', 'json');
+      formData.append('token', this.loginService.currentUser.value.agol_token);
+      formData.append('publishParameters', JSON.stringify({
+          name: 'results',
+          description: agolContentInfo.description
+        }));
+      const result = await this.http.post<any>(url, formData).toPromise().then((response) => {
         // console.log(response);
         if ('error' in response) {
           this.snackBar.open(`Error publishing GeoPlatform service: ${response.error.message}`, null, {
