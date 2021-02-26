@@ -145,7 +145,7 @@ export class ScribeDataExplorerService {
       formData.append('f', 'json');
       formData.append('token', this.loginService.currentUser.value.agol_token);
       formData.append('publishParameters', JSON.stringify({
-          name: 'results',
+          name: itemId,
           description: agolContentInfo.description
         }));
       const result = await this.http.post<any>(url, formData).toPromise().then((response) => {
