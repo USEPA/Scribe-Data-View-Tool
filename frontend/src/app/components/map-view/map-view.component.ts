@@ -238,8 +238,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       if (this.pointData) {
         this._map.layers.removeAll();
         const pointGraphicsArray = this.addPoints(this.pointData);
-        this.layer3d = this.add3dPoints(this.pointData);
-        this.setRenderer(this.layer3d);
+        this.add3dPoints(this.pointData);
         this._view.goTo(pointGraphicsArray, {animate: false});
       }
       // The map has been initialized
@@ -389,10 +388,9 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
         if (changes.pointData && changes.pointData.currentValue) {
           this._map.layers.removeAll();
           const pointGraphicsArray = this.addPoints(changes.pointData.currentValue);
-          this.layer3d = this.add3dPoints(changes.pointData.currentValue);
+          this.add3dPoints(changes.pointData.currentValue);
           this._view.goTo(pointGraphicsArray, {animate: false});
         }
-        this.setRenderer(this.layer3d);
       }
       // if (changes.analyte && changes.analyte.currentValue !== changes.analyte.previousValue) {
       //   this.setRenderer(this.layer3d);
@@ -626,6 +624,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       // });
       // this._view.map.add(graphicsLayer);
       // this._view.graphics.addMany(pointGraphicsArray);
+      // this._view.goTo(pointGraphicsArray);
 
       const newLayer = this.createFeatureLayerFromGraphics(
         pointGraphicsArray,
@@ -635,8 +634,8 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
         }
       );
       this._view.map.add(newLayer);
-      // this._view.goTo(pointGraphicsArray);
-      return newLayer;
+      this.layer3d = newLayer;
+      this.setRenderer(this.layer3d);
     }
   }
 

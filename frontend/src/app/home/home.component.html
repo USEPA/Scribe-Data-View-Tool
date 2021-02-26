@@ -125,10 +125,10 @@
                 (click)="onExportCSVBtnClick()">
           Export CSV
         </button>
-        <button *ngIf="isMapPointsSelected" mat-raised-button color="primary"
-                style="transform: scale(0.8); margin-left: -20px;"
-                (click)="onClearMapSelection()">
-          Clear Map Selection
+        <button *ngIf="selectedPoints.length > 0" mat-raised-button color="primary"
+                style="transform: scale(0.8); margin-left: -15px;"
+                (click)="onClearSelection()">
+          Clear Selection
         </button>
       </span>
     </ng-template>
@@ -180,10 +180,10 @@
                 (click)="onExportCSVBtnClick()">
           Export CSV
         </button>
-        <button *ngIf="isMapPointsSelected" mat-raised-button color="primary"
-                style="transform: scale(0.8); margin-left: -20px;"
-                (click)="onClearMapSelection()">
-          Clear Map Selection
+        <button *ngIf="selectedPoints.length > 0" mat-raised-button color="primary"
+                style="transform: scale(0.8); margin-left: -15px;"
+                (click)="onClearSelection()">
+          Clear Selection
         </button>
       </span>
     </ng-template>
