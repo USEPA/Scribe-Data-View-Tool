@@ -772,7 +772,11 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     this.pointSelectionSketchViewModel.on('create', (event) => {
       if (event.state === 'complete') {
         this.polygonSelectionGraphicsLayer.remove(event.graphic);
-        this.selectPointFeatures(event.graphic.geometry, this.mapPointsFeatureLayer);
+        if (this.mapPointsFeatureLayer) {
+          this.selectPointFeatures(event.graphic.geometry, this.mapPointsFeatureLayer);
+        } else if (this.scribeProjectsFeatureLyr) {
+          this.selectPointFeatures(event.graphic.geometry, this.scribeProjectsFeatureLyr);
+        }
       }
     });
   }
@@ -783,12 +787,6 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       geometry,
       outFields: ['*'] // REQUIRED for querying the layer attributes
     };
-    // const queryFeatureLayer = this.layer3d;
-    // if (this.mapPointsFeatureLayer) {
-    //   queryFeatureLayer = this.mapPointsFeatureLayer;
-    // } else if (this.scribeProjectsFeatureLyr) {
-    //   queryFeatureLayer = this.scribeProjectsFeatureLyr;
-    // }
     if (queryFeatureLayer) {
       // query mapPointsFeatureLayer. Geometry set for the query, so only intersecting geometries are returned
       queryFeatureLayer.queryFeatures(query).then((results) => {
@@ -807,15 +805,14 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
             }
             this.mapPointsFeatureLayerHighlight = layerView.highlight(graphics);
           });
+          // on Scribe Projects layer selection, emit selected project attributes
+          if (this.scribeProjectsFeatureLyr) {
+            const attributeData = graphics.map(feature => feature.attributes);
+            this.selectedFeaturesChange.emit(attributeData);
+            return;
+          }
           // get the attributes of map points
           this.selectedFeaturesChange.emit([...new Set(graphics.map((feature, i) => feature.attributes.Samp_No))]);
-          // if (this.mapPointsFeatureLayer) {
-          //   // on map points selected, filter them in corresponding table rows
-          //   this.scribeDataExplorerService.mapPointsSelectedSource.next(pointsAttributeData);
-          // } else if (this.scribeProjectsFeatureLyr) {
-          //   // on project centroid points selected, go to that project
-          //   this.scribeDataExplorerService.projectCentroidsSelectedSource.next(pointsAttributeData);
-          // }
         }
       }).catch((error) => {
         console.error('Error selecting map points: ' + error);

@@ -354,6 +354,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.showTable = true;
     } else {
       this.showTable = false;
+      this.geoPointsArray = [];
+      this.snackBar.open('Selected project(s) have no Scribe data.', null, {duration: 3000});
     }
     this.isLoadingData = false;
   }

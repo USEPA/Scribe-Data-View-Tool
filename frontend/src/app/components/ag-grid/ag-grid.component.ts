@@ -16,7 +16,6 @@ import {AGOLService} from '../../projectInterfaceTypes';
 export class AgGridComponent implements OnInit, OnDestroy {
   @Output() gridReadyEvent = new EventEmitter<any>();
   @Output() filtersChangedEvent = new EventEmitter<{ activeFilters: any[], filteredRowData: any[] }>();
-  @Output() rowSelectedEvent = new EventEmitter<any[]>();
   public showGrid: boolean;
   private gridApi;
   private gridColumnApi;

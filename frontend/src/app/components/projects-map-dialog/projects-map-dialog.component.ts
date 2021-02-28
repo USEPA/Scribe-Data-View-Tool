@@ -36,14 +36,9 @@ export class ProjectsMapDialogComponent implements OnInit {
   }
 
   selectProject(selectedProjects) {
-       // subscribe to selected project centroid points
-    // this.scribeDataExplorerService.projectCentroidsSelectedEvent.subscribe((projectCentroids) => {
-    //   if (projectCentroids) {
-        this.selectedProjectNames = selectedProjects.map((projectCentroid) => {
-          return projectCentroid.PROJECT_NAME;
-        }).join(', ');
-        this.selectedProjectCentroids = selectedProjects;
-      // }
-    // });
+    this.selectedProjectNames = selectedProjects.map((projectCentroid) => {
+      return projectCentroid.PROJECT_NAME;
+    }).join(', ');
+    this.selectedProjectCentroids = selectedProjects;
   }
 }
