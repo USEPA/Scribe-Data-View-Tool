@@ -25,9 +25,9 @@ PROJECT_ROOT = os.path.dirname(BASE_DIR)
 SECRET_KEY = 'sbrn8pas3(km3y8m4=ekh#zt+(&$+ja+5wi*ff57zbsqi-n88v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(',')
 
 APPEND_SLASH = False
 
@@ -41,14 +41,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.auth.context_processors',
-    'corsheaders',
     'rest_framework',
+    'rest_framework.authtoken',
     'automagic_rest',
     'sadie',
     'scribe_models',
     'oauth2_provider',
     'social_django',
+    'rest_framework_social_oauth2'
 ]
 
 '''
@@ -60,7 +60,6 @@ REST_FRAMEWORK = {
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        # 'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.DjangoModelPermissions',),
@@ -70,7 +69,6 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -111,6 +109,7 @@ DATABASES = {
         'NAME': 'Sadie',
         'USER': os.environ.get('SADIE_DB_USER', ''),
         'PASSWORD': os.environ.get('SADIE_DB_PASSWORD', ''),
+        'PORT': os.environ.get('SADIE_DB_PORT', '1433'),
         'OPTIONS': {
             'driver': "ODBC Driver 13 for SQL Server"
         }
@@ -121,6 +120,7 @@ DATABASES = {
         'NAME': 'Scribe',
         'USER': os.environ.get('SCRIBE_DB_USER', ''),
         'PASSWORD': os.environ.get('SCRIBE_DB_PASSWORD', ''),
+        'PORT': os.environ.get('SCRIBE_DB_PORT', '1433'),
         'OPTIONS': {
             'driver': "ODBC Driver 13 for SQL Server"
         }
@@ -160,10 +160,14 @@ USE_L10N = True
 
 USE_TZ = True
 
+# moved up so we can use in static url
+URL_PREFIX = os.environ.get('URL_PREFIX', '')
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 # Static files path
-STATIC_URL = '/sadiev2/static/'
+STATIC_URL = f'/{URL_PREFIX}static/'
 # With these settings, when the project builds, the Django static files will be placed in the same location as
 # the Angular build files. This way, Django fully handles serving the static files.
 ANGULAR_APP_DIR = os.path.join(PROJECT_ROOT, 'frontend')
@@ -172,11 +176,11 @@ STATIC_ROOT = os.path.join(ANGULAR_APP_DIR, 'src', 'static')
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-SOCIAL_AUTH_ALLOWED_REDIRECT_HOSTS = os.environ.get('SOCIAL_AUTH_ALLOWED_REDIRECT_HOSTS', '').split(',')
-
 SOCIAL_AUTH_AGOL_KEY = os.environ.get('SOCIAL_AUTH_AGOL_KEY', '')
 SOCIAL_AUTH_AGOL_SECRET = os.environ.get('SOCIAL_AUTH_AGOL_SECRET', '')
 SOCIAL_AUTH_AGOL_DOMAIN = 'epa.maps.arcgis.com'
+
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
 SOCIAL_AUTH_PIPELINE = [  # Note: Sequence of functions matters here.
     'social_core.pipeline.social_auth.social_details',  # 0
@@ -195,9 +199,6 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
-
 MIGRATION_MODULES = {
     'oauth2_provider': 'oauth2'
 }
@@ -206,11 +207,5 @@ OAUTH2_PROVIDER_ACCESS_TOKEN_MODEL = 'oauth2_provider.AccessToken'
 OAUTH2_PROVIDER_APPLICATION_MODEL = 'oauth2_provider.Application'
 OAUTH2_PROVIDER_REFRESH_TOKEN_MODEL = 'oauth2_provider.RefreshToken'
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'unique-snowflake',
-    }
-}
+USE_X_FORWARDED_HOST = True
 
-URL_PREFIX = os.environ.get('URL_PREFIX', '')
