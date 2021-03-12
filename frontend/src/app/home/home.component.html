@@ -204,7 +204,7 @@
           [style.width]="(geoPointsArray.length > 0) ? '1000px' : '100%'"
           (gridReadyEvent)="setAgGridPresetFilters($event)"
           (filtersChangedEvent)="agGridFiltersChanged($event)"
-          (rowSelectedEvent)="agGridRowSelected($event)"
+          (selectedFeaturesChange)="agGridRowSelected($event)"
         ></app-ag-grid>
         <app-map-view
           *ngIf="geoPointsArray.length > 0"
