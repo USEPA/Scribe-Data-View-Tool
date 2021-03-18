@@ -7296,9 +7296,75 @@ PID_3553_router.register(r"PID_3553_EDDSoilSampling", GenericViewSet, base_name=
 PID_3553_router.register(r"PID_3553_EDDWaterSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_EDDWaterSampling")
 PID_3553_router.register(r"PID_3553_EDDWipeSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_EDDWipeSampling")
 PID_3553_router.register(r"PID_3553_Events", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_Events")
+PID_3553_router.register(r"PID_3553_Instruments", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_Instruments")
+PID_3553_router.register(r"PID_3553_LabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_LabAnalyses")
+PID_3553_router.register(r"PID_3553_LabResults", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_LabResults")
+PID_3553_router.register(r"PID_3553_Location", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_Location")
+PID_3553_router.register(r"PID_3553_Monitoring", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_Monitoring")
+PID_3553_router.register(r"PID_3553_PropertyInfo", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_PropertyInfo")
+PID_3553_router.register(r"PID_3553_PropertyOccupant", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_PropertyOccupant")
+PID_3553_router.register(r"PID_3553_refAnalytes", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_refAnalytes")
+PID_3553_router.register(r"PID_3553_refLabLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_refLabLst")
+PID_3553_router.register(r"PID_3553_refMatrixLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_refMatrixLst")
+PID_3553_router.register(r"PID_3553_refNames", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_refNames")
+PID_3553_router.register(r"PID_3553_refPickLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_refPickLst")
+PID_3553_router.register(r"PID_3553_refSGenus", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_refSGenus")
+PID_3553_router.register(r"PID_3553_Samples", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_Samples")
+PID_3553_router.register(r"PID_3553_SamplesAir", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_SamplesAir")
+PID_3553_router.register(r"PID_3553_SamplesBiota", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_SamplesBiota")
+PID_3553_router.register(r"PID_3553_SamplesMeasurements", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_SamplesMeasurements")
+PID_3553_router.register(r"PID_3553_SamplesSoil", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_SamplesSoil")
+PID_3553_router.register(r"PID_3553_SamplesSoilGas", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_SamplesSoilGas")
+PID_3553_router.register(r"PID_3553_SamplesTags", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_SamplesTags")
+PID_3553_router.register(r"PID_3553_SamplesWater", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_SamplesWater")
+PID_3553_router.register(r"PID_3553_SamplesWipe", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_SamplesWipe")
+PID_3553_router.register(r"PID_3553_Site", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_Site")
+PID_3553_router.register(r"PID_3553_sysDataColumn", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_sysDataColumn")
+PID_3553_router.register(r"PID_3553_sysDataColumnLayout", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_sysDataColumnLayout")
+PID_3553_router.register(r"PID_3553_sysDataLabel", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_sysDataLabel")
+PID_3553_router.register(r"PID_3553_sysDataLabelLines", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_sysDataLabelLines")
+PID_3553_router.register(r"PID_3553_sysDataLabelLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_sysDataLabelLst")
+PID_3553_router.register(r"PID_3553_sysDataMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_sysDataMap")
+PID_3553_router.register(r"PID_3553_sysDataMapCol", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_sysDataMapCol")
+PID_3553_router.register(r"PID_3553_sysDataRpt", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_sysDataRpt")
+PID_3553_router.register(r"PID_3553_sysDataViews", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_sysDataViews")
+PID_3553_router.register(r"PID_3553_sysKMLMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_sysKMLMap")
+PID_3553_router.register(r"PID_3553_sysKMLMapClass", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_sysKMLMapClass")
+PID_3553_router.register(r"PID_3553_sysLookupLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_sysLookupLst")
+PID_3553_router.register(r"PID_3553_sysTableLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_sysTableLst")
+PID_3553_router.register(r"PID_3553_sysTaskGroups", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_sysTaskGroups")
+PID_3553_router.register(r"PID_3553_sysTaskLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_sysTaskLst")
+PID_3553_router.register(r"PID_3553_sysTasks", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_sysTasks")
 
 urlpatterns += [
     url('PID_3553/', include(PID_3553_router.urls)),
+]
+
+
+PID_3553_Field_router = DefaultRouter()
+
+PID_3553_Field_router.register(r"PID_3553_Field_XRF", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_Field_XRF")
+
+urlpatterns += [
+    url('PID_3553_Field/', include(PID_3553_Field_router.urls)),
+]
+
+
+PID_3553_GIS_router = DefaultRouter()
+
+PID_3553_GIS_router.register(r"PID_3553_GIS_Location", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_GIS_Location")
+
+urlpatterns += [
+    url('PID_3553_GIS/', include(PID_3553_GIS_router.urls)),
+]
+
+
+PID_3553_lu_router = DefaultRouter()
+
+PID_3553_lu_router.register(r"PID_3553_lu_Method", GenericViewSet, base_name="scribe_db.scribe_models.PID_3553_lu_Method")
+
+urlpatterns += [
+    url('PID_3553_lu/', include(PID_3553_lu_router.urls)),
 ]
 
 
@@ -11358,12 +11424,12 @@ urlpatterns += [
 ]
 
 
-PID_4046__router = DefaultRouter()
+PID_4046_router = DefaultRouter()
 
-PID_4046__router.register(r"PID_4046___Location", GenericViewSet, base_name="scribe_db.scribe_models.PID_4046___Location")
+PID_4046_router.register(r"PID_4046___Location", GenericViewSet, base_name="scribe_db.scribe_models.PID_4046___Location")
 
 urlpatterns += [
-    url('PID_4046__/', include(PID_4046__router.urls)),
+    url('PID_4046__/', include(PID_4046_router.urls)),
 ]
 
 
@@ -11502,7 +11568,6 @@ PID_4048_router.register(r"PID_4048_sysTableLst", GenericViewSet, base_name="scr
 PID_4048_router.register(r"PID_4048_sysTaskGroups", GenericViewSet, base_name="scribe_db.scribe_models.PID_4048_sysTaskGroups")
 PID_4048_router.register(r"PID_4048_sysTaskLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4048_sysTaskLst")
 PID_4048_router.register(r"PID_4048_sysTasks", GenericViewSet, base_name="scribe_db.scribe_models.PID_4048_sysTasks")
-PID_4048_router.register(r"PID_4048_updatedstuff", GenericViewSet, base_name="scribe_db.scribe_models.PID_4048_updatedstuff")
 
 urlpatterns += [
     url('PID_4048/', include(PID_4048_router.urls)),
@@ -11581,30 +11646,12 @@ urlpatterns += [
 ]
 
 
-PID_4048_FactoryStreet_Cadmium_Chromium_Mercury_router = DefaultRouter()
-
-PID_4048_FactoryStreet_Cadmium_Chromium_Mercury_router.register(r"PID_4048_FactoryStreet_Cadmium,_Chromium_Mercury_InSoil", GenericViewSet, base_name="scribe_db.scribe_models.PID_4048_FactoryStreet_Cadmium,_Chromium_Mercury_InSoil")
-
-urlpatterns += [
-    url('PID_4048_FactoryStreet_Cadmium,_Chromium_Mercury/', include(PID_4048_FactoryStreet_Cadmium_Chromium_Mercury_router.urls)),
-]
-
-
 PID_4048_R9_router = DefaultRouter()
 
 PID_4048_R9_router.register(r"PID_4048_R9_refUnitConversion", GenericViewSet, base_name="scribe_db.scribe_models.PID_4048_R9_refUnitConversion")
 
 urlpatterns += [
     url('PID_4048_R9/', include(PID_4048_R9_router.urls)),
-]
-
-
-PID_4049_edf_T10000005772_router = DefaultRouter()
-
-PID_4049_edf_T10000005772_router.register(r"PID_4049__edf_T10000005772_20210216", GenericViewSet, base_name="scribe_db.scribe_models.PID_4049__edf_T10000005772_20210216")
-
-urlpatterns += [
-    url('PID_4049__edf_T10000005772/', include(PID_4049_edf_T10000005772_router.urls)),
 ]
 
 
@@ -11744,844 +11791,5 @@ PID_4061_router.register(r"PID_4061_sysTasks", GenericViewSet, base_name="scribe
 
 urlpatterns += [
     url('PID_4061/', include(PID_4061_router.urls)),
-]
-
-
-PID_4072_router = DefaultRouter()
-
-PID_4072_router.register(r"PID_4072_ActionLevels", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_ActionLevels")
-PID_4072_router.register(r"PID_4072_COC", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_COC")
-PID_4072_router.register(r"PID_4072_EDDAirSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_EDDAirSampling")
-PID_4072_router.register(r"PID_4072_EDDBiotaSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_EDDBiotaSampling")
-PID_4072_router.register(r"PID_4072_EDDLabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_EDDLabAnalyses")
-PID_4072_router.register(r"PID_4072_EDDMonitoringData", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_EDDMonitoringData")
-PID_4072_router.register(r"PID_4072_EDDProperty", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_EDDProperty")
-PID_4072_router.register(r"PID_4072_EDDSoilGasSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_EDDSoilGasSampling")
-PID_4072_router.register(r"PID_4072_EDDSoilSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_EDDSoilSampling")
-PID_4072_router.register(r"PID_4072_EDDWaterSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_EDDWaterSampling")
-PID_4072_router.register(r"PID_4072_EDDWipeSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_EDDWipeSampling")
-PID_4072_router.register(r"PID_4072_Events", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_Events")
-PID_4072_router.register(r"PID_4072_Instruments", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_Instruments")
-PID_4072_router.register(r"PID_4072_LabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_LabAnalyses")
-PID_4072_router.register(r"PID_4072_LabResults", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_LabResults")
-PID_4072_router.register(r"PID_4072_Location", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_Location")
-PID_4072_router.register(r"PID_4072_Monitoring", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_Monitoring")
-PID_4072_router.register(r"PID_4072_PropertyOccupant", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_PropertyOccupant")
-PID_4072_router.register(r"PID_4072_refAnalytes", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_refAnalytes")
-PID_4072_router.register(r"PID_4072_refLabLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_refLabLst")
-PID_4072_router.register(r"PID_4072_refMatrixLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_refMatrixLst")
-PID_4072_router.register(r"PID_4072_refNames", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_refNames")
-PID_4072_router.register(r"PID_4072_refPickLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_refPickLst")
-PID_4072_router.register(r"PID_4072_refSGenus", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_refSGenus")
-PID_4072_router.register(r"PID_4072_Samples", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_Samples")
-PID_4072_router.register(r"PID_4072_SamplesAir", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_SamplesAir")
-PID_4072_router.register(r"PID_4072_SamplesBiota", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_SamplesBiota")
-PID_4072_router.register(r"PID_4072_SamplesMeasurements", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_SamplesMeasurements")
-PID_4072_router.register(r"PID_4072_SamplesSoil", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_SamplesSoil")
-PID_4072_router.register(r"PID_4072_SamplesSoilGas", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_SamplesSoilGas")
-PID_4072_router.register(r"PID_4072_SamplesTags", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_SamplesTags")
-PID_4072_router.register(r"PID_4072_SamplesWater", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_SamplesWater")
-PID_4072_router.register(r"PID_4072_SamplesWipe", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_SamplesWipe")
-PID_4072_router.register(r"PID_4072_Site", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_Site")
-PID_4072_router.register(r"PID_4072_sysDataColumn", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_sysDataColumn")
-PID_4072_router.register(r"PID_4072_sysDataColumnLayout", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_sysDataColumnLayout")
-PID_4072_router.register(r"PID_4072_sysDataLabel", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_sysDataLabel")
-PID_4072_router.register(r"PID_4072_sysDataLabelLines", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_sysDataLabelLines")
-PID_4072_router.register(r"PID_4072_sysDataLabelLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_sysDataLabelLst")
-PID_4072_router.register(r"PID_4072_sysDataMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_sysDataMap")
-PID_4072_router.register(r"PID_4072_sysDataMapCol", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_sysDataMapCol")
-PID_4072_router.register(r"PID_4072_sysDataRpt", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_sysDataRpt")
-PID_4072_router.register(r"PID_4072_sysDataViews", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_sysDataViews")
-PID_4072_router.register(r"PID_4072_sysKMLMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_sysKMLMap")
-PID_4072_router.register(r"PID_4072_sysKMLMapClass", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_sysKMLMapClass")
-PID_4072_router.register(r"PID_4072_sysLookupLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_sysLookupLst")
-PID_4072_router.register(r"PID_4072_sysTableLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_sysTableLst")
-PID_4072_router.register(r"PID_4072_sysTaskGroups", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_sysTaskGroups")
-PID_4072_router.register(r"PID_4072_sysTaskLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_sysTaskLst")
-PID_4072_router.register(r"PID_4072_sysTasks", GenericViewSet, base_name="scribe_db.scribe_models.PID_4072_sysTasks")
-
-urlpatterns += [
-    url('PID_4072/', include(PID_4072_router.urls)),
-]
-
-
-PID_4085_router = DefaultRouter()
-
-PID_4085_router.register(r"PID_4085_320-57931-1 Validated tbj1 kal2", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_320-57931-1 Validated tbj1 kal2")
-PID_4085_router.register(r"PID_4085_320-59178-1 Validated tbj1 kal2", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_320-59178-1 Validated tbj1 kal2")
-PID_4085_router.register(r"PID_4085_440-250206-1 Validated", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_440-250206-1 Validated")
-PID_4085_router.register(r"PID_4085_ActionLevels", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_ActionLevels")
-PID_4085_router.register(r"PID_4085_Air Monitoring", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_Air Monitoring")
-PID_4085_router.register(r"PID_4085_COC", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_COC")
-PID_4085_router.register(r"PID_4085_EDDAirSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_EDDAirSampling")
-PID_4085_router.register(r"PID_4085_EDDBiotaSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_EDDBiotaSampling")
-PID_4085_router.register(r"PID_4085_EDDLabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_EDDLabAnalyses")
-PID_4085_router.register(r"PID_4085_EDDMonitoringData", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_EDDMonitoringData")
-PID_4085_router.register(r"PID_4085_EDDProperty", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_EDDProperty")
-PID_4085_router.register(r"PID_4085_EDDSoilGasSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_EDDSoilGasSampling")
-PID_4085_router.register(r"PID_4085_EDDSoilSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_EDDSoilSampling")
-PID_4085_router.register(r"PID_4085_EDDWaterSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_EDDWaterSampling")
-PID_4085_router.register(r"PID_4085_EDDWipeSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_EDDWipeSampling")
-PID_4085_router.register(r"PID_4085_Events", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_Events")
-PID_4085_router.register(r"PID_4085_Instruments", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_Instruments")
-PID_4085_router.register(r"PID_4085_LabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_LabAnalyses")
-PID_4085_router.register(r"PID_4085_LabResults", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_LabResults")
-PID_4085_router.register(r"PID_4085_Location", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_Location")
-PID_4085_router.register(r"PID_4085_Monitoring", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_Monitoring")
-PID_4085_router.register(r"PID_4085_PropertyInfo", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_PropertyInfo")
-PID_4085_router.register(r"PID_4085_PropertyOccupant", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_PropertyOccupant")
-PID_4085_router.register(r"PID_4085_refAnalytes", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_refAnalytes")
-PID_4085_router.register(r"PID_4085_refLabLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_refLabLst")
-PID_4085_router.register(r"PID_4085_refMatrixLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_refMatrixLst")
-PID_4085_router.register(r"PID_4085_refNames", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_refNames")
-PID_4085_router.register(r"PID_4085_refPickLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_refPickLst")
-PID_4085_router.register(r"PID_4085_refSGenus", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_refSGenus")
-PID_4085_router.register(r"PID_4085_Samples", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_Samples")
-PID_4085_router.register(r"PID_4085_SamplesAir", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_SamplesAir")
-PID_4085_router.register(r"PID_4085_SamplesBiota", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_SamplesBiota")
-PID_4085_router.register(r"PID_4085_SamplesMeasurements", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_SamplesMeasurements")
-PID_4085_router.register(r"PID_4085_SamplesSoil", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_SamplesSoil")
-PID_4085_router.register(r"PID_4085_SamplesSoilGas", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_SamplesSoilGas")
-PID_4085_router.register(r"PID_4085_SamplesTags", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_SamplesTags")
-PID_4085_router.register(r"PID_4085_SamplesWater", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_SamplesWater")
-PID_4085_router.register(r"PID_4085_SamplesWipe", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_SamplesWipe")
-PID_4085_router.register(r"PID_4085_Site", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_Site")
-PID_4085_router.register(r"PID_4085_sysDataColumn", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_sysDataColumn")
-PID_4085_router.register(r"PID_4085_sysDataColumnLayout", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_sysDataColumnLayout")
-PID_4085_router.register(r"PID_4085_sysDataLabel", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_sysDataLabel")
-PID_4085_router.register(r"PID_4085_sysDataLabelLines", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_sysDataLabelLines")
-PID_4085_router.register(r"PID_4085_sysDataLabelLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_sysDataLabelLst")
-PID_4085_router.register(r"PID_4085_sysDataMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_sysDataMap")
-PID_4085_router.register(r"PID_4085_sysDataMapCol", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_sysDataMapCol")
-PID_4085_router.register(r"PID_4085_sysDataRpt", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_sysDataRpt")
-PID_4085_router.register(r"PID_4085_sysDataViews", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_sysDataViews")
-PID_4085_router.register(r"PID_4085_sysKMLMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_sysKMLMap")
-PID_4085_router.register(r"PID_4085_sysKMLMapClass", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_sysKMLMapClass")
-PID_4085_router.register(r"PID_4085_sysLookupLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_sysLookupLst")
-PID_4085_router.register(r"PID_4085_sysTableLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_sysTableLst")
-PID_4085_router.register(r"PID_4085_sysTaskGroups", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_sysTaskGroups")
-PID_4085_router.register(r"PID_4085_sysTaskLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_sysTaskLst")
-PID_4085_router.register(r"PID_4085_sysTasks", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_sysTasks")
-
-urlpatterns += [
-    url('PID_4085/', include(PID_4085_router.urls)),
-]
-
-
-PID_4085_550_136699_1_22APR20_router = DefaultRouter()
-
-PID_4085_550_136699_1_22APR20_router.register(r"PID_4085_550-136699-1_22 APR 20_Validated", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_550-136699-1_22 APR 20_Validated")
-
-urlpatterns += [
-    url('PID_4085_550-136699-1_22 APR 20/', include(PID_4085_550_136699_1_22APR20_router.urls)),
-]
-
-
-PID_4085_550_136700_1_22APR20_router = DefaultRouter()
-
-PID_4085_550_136700_1_22APR20_router.register(r"PID_4085_550-136700-1_22 APR 20_Validated", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_550-136700-1_22 APR 20_Validated")
-
-urlpatterns += [
-    url('PID_4085_550-136700-1_22 APR 20/', include(PID_4085_550_136700_1_22APR20_router.urls)),
-]
-
-
-PID_4085_550_136790_1_22APR20_router = DefaultRouter()
-
-PID_4085_550_136790_1_22APR20_router.register(r"PID_4085_550-136790-1_22 APR 20_Validated", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_550-136790-1_22 APR 20_Validated")
-
-urlpatterns += [
-    url('PID_4085_550-136790-1_22 APR 20/', include(PID_4085_550_136790_1_22APR20_router.urls)),
-]
-
-
-PID_4085_550_136820_1_22APR20_router = DefaultRouter()
-
-PID_4085_550_136820_1_22APR20_router.register(r"PID_4085_550-136820-1_22 APR 20_Validated", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_550-136820-1_22 APR 20_Validated")
-
-urlpatterns += [
-    url('PID_4085_550-136820-1_22 APR 20/', include(PID_4085_550_136820_1_22APR20_router.urls)),
-]
-
-
-PID_4085_550_136831_1_22APR20_router = DefaultRouter()
-
-PID_4085_550_136831_1_22APR20_router.register(r"PID_4085_550-136831-1_22 APR 20_Validated", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_550-136831-1_22 APR 20_Validated")
-
-urlpatterns += [
-    url('PID_4085_550-136831-1_22 APR 20/', include(PID_4085_550_136831_1_22APR20_router.urls)),
-]
-
-
-PID_4085_550_136874_1_22APR20_router = DefaultRouter()
-
-PID_4085_550_136874_1_22APR20_router.register(r"PID_4085_550-136874-1_22 APR 20_Validated", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_550-136874-1_22 APR 20_Validated")
-
-urlpatterns += [
-    url('PID_4085_550-136874-1_22 APR 20/', include(PID_4085_550_136874_1_22APR20_router.urls)),
-]
-
-
-PID_4085_550_136943_1_22APR20_router = DefaultRouter()
-
-PID_4085_550_136943_1_22APR20_router.register(r"PID_4085_550-136943-1_22 APR 20_Validated", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_550-136943-1_22 APR 20_Validated")
-
-urlpatterns += [
-    url('PID_4085_550-136943-1_22 APR 20/', include(PID_4085_550_136943_1_22APR20_router.urls)),
-]
-
-
-PID_4085_550_137564_1_22APR20_router = DefaultRouter()
-
-PID_4085_550_137564_1_22APR20_router.register(r"PID_4085_550-137564-1_22 APR 20_Validated", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_550-137564-1_22 APR 20_Validated")
-
-urlpatterns += [
-    url('PID_4085_550-137564-1_22 APR 20/', include(PID_4085_550_137564_1_22APR20_router.urls)),
-]
-
-
-PID_4085_FactoryStreet_Cadmium_Chromium_Mercury_router = DefaultRouter()
-
-PID_4085_FactoryStreet_Cadmium_Chromium_Mercury_router.register(r"PID_4085_FactoryStreet_Cadmium_Chromium_Mercury_InSoil", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_FactoryStreet_Cadmium_Chromium_Mercury_InSoil")
-
-urlpatterns += [
-    url('PID_4085_FactoryStreet_Cadmium_Chromium_Mercury/', include(PID_4085_FactoryStreet_Cadmium_Chromium_Mercury_router.urls)),
-]
-
-
-PID_4085_R9_router = DefaultRouter()
-
-PID_4085_R9_router.register(r"PID_4085_R9_refUnitConversion", GenericViewSet, base_name="scribe_db.scribe_models.PID_4085_R9_refUnitConversion")
-
-urlpatterns += [
-    url('PID_4085_R9/', include(PID_4085_R9_router.urls)),
-]
-
-
-PID_4087_router = DefaultRouter()
-
-PID_4087_router.register(r"PID_4087_ActionLevels", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_ActionLevels")
-PID_4087_router.register(r"PID_4087_COC", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_COC")
-PID_4087_router.register(r"PID_4087_EDDAirSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_EDDAirSampling")
-PID_4087_router.register(r"PID_4087_EDDBiotaSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_EDDBiotaSampling")
-PID_4087_router.register(r"PID_4087_EDDLabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_EDDLabAnalyses")
-PID_4087_router.register(r"PID_4087_EDDMonitoringData", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_EDDMonitoringData")
-PID_4087_router.register(r"PID_4087_EDDProperty", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_EDDProperty")
-PID_4087_router.register(r"PID_4087_EDDSoilGasSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_EDDSoilGasSampling")
-PID_4087_router.register(r"PID_4087_EDDSoilSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_EDDSoilSampling")
-PID_4087_router.register(r"PID_4087_EDDWaterSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_EDDWaterSampling")
-PID_4087_router.register(r"PID_4087_EDDWipeSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_EDDWipeSampling")
-PID_4087_router.register(r"PID_4087_Events", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_Events")
-PID_4087_router.register(r"PID_4087_Instruments", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_Instruments")
-PID_4087_router.register(r"PID_4087_LabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_LabAnalyses")
-PID_4087_router.register(r"PID_4087_LabResults", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_LabResults")
-PID_4087_router.register(r"PID_4087_Location", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_Location")
-PID_4087_router.register(r"PID_4087_Monitoring", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_Monitoring")
-PID_4087_router.register(r"PID_4087_PropertyInfo", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_PropertyInfo")
-PID_4087_router.register(r"PID_4087_PropertyOccupant", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_PropertyOccupant")
-PID_4087_router.register(r"PID_4087_refAnalytes", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_refAnalytes")
-PID_4087_router.register(r"PID_4087_refLabLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_refLabLst")
-PID_4087_router.register(r"PID_4087_refMatrixLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_refMatrixLst")
-PID_4087_router.register(r"PID_4087_refNames", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_refNames")
-PID_4087_router.register(r"PID_4087_refPickLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_refPickLst")
-PID_4087_router.register(r"PID_4087_refSGenus", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_refSGenus")
-PID_4087_router.register(r"PID_4087_Samples", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_Samples")
-PID_4087_router.register(r"PID_4087_SamplesAir", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_SamplesAir")
-PID_4087_router.register(r"PID_4087_SamplesBiota", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_SamplesBiota")
-PID_4087_router.register(r"PID_4087_SamplesMeasurements", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_SamplesMeasurements")
-PID_4087_router.register(r"PID_4087_SamplesSoil", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_SamplesSoil")
-PID_4087_router.register(r"PID_4087_SamplesSoilGas", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_SamplesSoilGas")
-PID_4087_router.register(r"PID_4087_SamplesTags", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_SamplesTags")
-PID_4087_router.register(r"PID_4087_SamplesWater", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_SamplesWater")
-PID_4087_router.register(r"PID_4087_SamplesWipe", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_SamplesWipe")
-PID_4087_router.register(r"PID_4087_Site", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_Site")
-PID_4087_router.register(r"PID_4087_sysDataColumn", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_sysDataColumn")
-PID_4087_router.register(r"PID_4087_sysDataColumnLayout", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_sysDataColumnLayout")
-PID_4087_router.register(r"PID_4087_sysDataLabel", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_sysDataLabel")
-PID_4087_router.register(r"PID_4087_sysDataLabelLines", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_sysDataLabelLines")
-PID_4087_router.register(r"PID_4087_sysDataLabelLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_sysDataLabelLst")
-PID_4087_router.register(r"PID_4087_sysDataMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_sysDataMap")
-PID_4087_router.register(r"PID_4087_sysDataMapCol", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_sysDataMapCol")
-PID_4087_router.register(r"PID_4087_sysDataRpt", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_sysDataRpt")
-PID_4087_router.register(r"PID_4087_sysDataViews", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_sysDataViews")
-PID_4087_router.register(r"PID_4087_sysKMLMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_sysKMLMap")
-PID_4087_router.register(r"PID_4087_sysKMLMapClass", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_sysKMLMapClass")
-PID_4087_router.register(r"PID_4087_sysLookupLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_sysLookupLst")
-PID_4087_router.register(r"PID_4087_sysTableLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_sysTableLst")
-PID_4087_router.register(r"PID_4087_sysTaskGroups", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_sysTaskGroups")
-PID_4087_router.register(r"PID_4087_sysTaskLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_sysTaskLst")
-PID_4087_router.register(r"PID_4087_sysTasks", GenericViewSet, base_name="scribe_db.scribe_models.PID_4087_sysTasks")
-
-urlpatterns += [
-    url('PID_4087/', include(PID_4087_router.urls)),
-]
-
-
-PID_4091_router = DefaultRouter()
-
-PID_4091_router.register(r"PID_4091_ActionLevels", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_ActionLevels")
-PID_4091_router.register(r"PID_4091_COC", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_COC")
-PID_4091_router.register(r"PID_4091_EDDAirSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_EDDAirSampling")
-PID_4091_router.register(r"PID_4091_EDDBiotaSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_EDDBiotaSampling")
-PID_4091_router.register(r"PID_4091_EDDLabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_EDDLabAnalyses")
-PID_4091_router.register(r"PID_4091_EDDMonitoringData", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_EDDMonitoringData")
-PID_4091_router.register(r"PID_4091_EDDProperty", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_EDDProperty")
-PID_4091_router.register(r"PID_4091_EDDSoilGasSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_EDDSoilGasSampling")
-PID_4091_router.register(r"PID_4091_EDDSoilSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_EDDSoilSampling")
-PID_4091_router.register(r"PID_4091_EDDWaterSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_EDDWaterSampling")
-PID_4091_router.register(r"PID_4091_EDDWipeSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_EDDWipeSampling")
-PID_4091_router.register(r"PID_4091_Events", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_Events")
-PID_4091_router.register(r"PID_4091_Instruments", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_Instruments")
-PID_4091_router.register(r"PID_4091_LabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_LabAnalyses")
-PID_4091_router.register(r"PID_4091_LabResults", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_LabResults")
-PID_4091_router.register(r"PID_4091_Location", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_Location")
-PID_4091_router.register(r"PID_4091_Monitoring", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_Monitoring")
-PID_4091_router.register(r"PID_4091_PropertyInfo", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_PropertyInfo")
-PID_4091_router.register(r"PID_4091_PropertyOccupant", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_PropertyOccupant")
-PID_4091_router.register(r"PID_4091_refAnalytes", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_refAnalytes")
-PID_4091_router.register(r"PID_4091_refLabLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_refLabLst")
-PID_4091_router.register(r"PID_4091_refMatrixLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_refMatrixLst")
-PID_4091_router.register(r"PID_4091_refNames", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_refNames")
-PID_4091_router.register(r"PID_4091_refPickLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_refPickLst")
-PID_4091_router.register(r"PID_4091_refSGenus", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_refSGenus")
-PID_4091_router.register(r"PID_4091_Samples", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_Samples")
-PID_4091_router.register(r"PID_4091_SamplesAir", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_SamplesAir")
-PID_4091_router.register(r"PID_4091_SamplesBiota", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_SamplesBiota")
-PID_4091_router.register(r"PID_4091_SamplesMeasurements", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_SamplesMeasurements")
-PID_4091_router.register(r"PID_4091_SamplesSoil", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_SamplesSoil")
-PID_4091_router.register(r"PID_4091_SamplesSoilGas", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_SamplesSoilGas")
-PID_4091_router.register(r"PID_4091_SamplesTags", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_SamplesTags")
-PID_4091_router.register(r"PID_4091_SamplesWater", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_SamplesWater")
-PID_4091_router.register(r"PID_4091_SamplesWipe", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_SamplesWipe")
-PID_4091_router.register(r"PID_4091_Site", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_Site")
-PID_4091_router.register(r"PID_4091_sysDataColumn", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_sysDataColumn")
-PID_4091_router.register(r"PID_4091_sysDataColumnLayout", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_sysDataColumnLayout")
-PID_4091_router.register(r"PID_4091_sysDataLabel", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_sysDataLabel")
-PID_4091_router.register(r"PID_4091_sysDataLabelLines", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_sysDataLabelLines")
-PID_4091_router.register(r"PID_4091_sysDataLabelLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_sysDataLabelLst")
-PID_4091_router.register(r"PID_4091_sysDataMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_sysDataMap")
-PID_4091_router.register(r"PID_4091_sysDataMapCol", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_sysDataMapCol")
-PID_4091_router.register(r"PID_4091_sysDataRpt", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_sysDataRpt")
-PID_4091_router.register(r"PID_4091_sysDataViews", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_sysDataViews")
-PID_4091_router.register(r"PID_4091_sysKMLMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_sysKMLMap")
-PID_4091_router.register(r"PID_4091_sysKMLMapClass", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_sysKMLMapClass")
-PID_4091_router.register(r"PID_4091_sysLookupLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_sysLookupLst")
-PID_4091_router.register(r"PID_4091_sysTableLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_sysTableLst")
-PID_4091_router.register(r"PID_4091_sysTaskGroups", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_sysTaskGroups")
-PID_4091_router.register(r"PID_4091_sysTaskLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_sysTaskLst")
-PID_4091_router.register(r"PID_4091_sysTasks", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_sysTasks")
-
-urlpatterns += [
-    url('PID_4091/', include(PID_4091_router.urls)),
-]
-
-
-PID_4091_R9_router = DefaultRouter()
-
-PID_4091_R9_router.register(r"PID_4091_R9_refUnitConversion", GenericViewSet, base_name="scribe_db.scribe_models.PID_4091_R9_refUnitConversion")
-
-urlpatterns += [
-    url('PID_4091_R9/', include(PID_4091_R9_router.urls)),
-]
-
-
-PID_4105_router = DefaultRouter()
-
-PID_4105_router.register(r"PID_4105_ActionLevels", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_ActionLevels")
-PID_4105_router.register(r"PID_4105_BsaIL", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_BsaIL")
-PID_4105_router.register(r"PID_4105_BsaSites", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_BsaSites")
-PID_4105_router.register(r"PID_4105_COC", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_COC")
-PID_4105_router.register(r"PID_4105_EDDAirSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_EDDAirSampling")
-PID_4105_router.register(r"PID_4105_EDDBiotaSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_EDDBiotaSampling")
-PID_4105_router.register(r"PID_4105_EDDLabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_EDDLabAnalyses")
-PID_4105_router.register(r"PID_4105_EDDMonitoringData", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_EDDMonitoringData")
-PID_4105_router.register(r"PID_4105_EDDProperty", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_EDDProperty")
-PID_4105_router.register(r"PID_4105_EDDSoilGasSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_EDDSoilGasSampling")
-PID_4105_router.register(r"PID_4105_EDDSoilSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_EDDSoilSampling")
-PID_4105_router.register(r"PID_4105_EDDWaterSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_EDDWaterSampling")
-PID_4105_router.register(r"PID_4105_EDDWipeSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_EDDWipeSampling")
-PID_4105_router.register(r"PID_4105_Events", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_Events")
-PID_4105_router.register(r"PID_4105_Instruments", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_Instruments")
-PID_4105_router.register(r"PID_4105_LabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_LabAnalyses")
-PID_4105_router.register(r"PID_4105_LabResults", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_LabResults")
-PID_4105_router.register(r"PID_4105_Location", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_Location")
-PID_4105_router.register(r"PID_4105_Monitoring", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_Monitoring")
-PID_4105_router.register(r"PID_4105_PropertyInfo", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_PropertyInfo")
-PID_4105_router.register(r"PID_4105_PropertyOccupant", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_PropertyOccupant")
-PID_4105_router.register(r"PID_4105_refAnalytes", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_refAnalytes")
-PID_4105_router.register(r"PID_4105_refLabLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_refLabLst")
-PID_4105_router.register(r"PID_4105_refMatrixLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_refMatrixLst")
-PID_4105_router.register(r"PID_4105_refNames", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_refNames")
-PID_4105_router.register(r"PID_4105_refPickLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_refPickLst")
-PID_4105_router.register(r"PID_4105_refSGenus", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_refSGenus")
-PID_4105_router.register(r"PID_4105_Samples", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_Samples")
-PID_4105_router.register(r"PID_4105_SamplesAir", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_SamplesAir")
-PID_4105_router.register(r"PID_4105_SamplesBiota", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_SamplesBiota")
-PID_4105_router.register(r"PID_4105_SamplesMeasurements", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_SamplesMeasurements")
-PID_4105_router.register(r"PID_4105_SamplesSoil", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_SamplesSoil")
-PID_4105_router.register(r"PID_4105_SamplesSoilGas", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_SamplesSoilGas")
-PID_4105_router.register(r"PID_4105_SamplesTags", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_SamplesTags")
-PID_4105_router.register(r"PID_4105_SamplesWater", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_SamplesWater")
-PID_4105_router.register(r"PID_4105_SamplesWipe", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_SamplesWipe")
-PID_4105_router.register(r"PID_4105_Site", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_Site")
-PID_4105_router.register(r"PID_4105_sysDataColumn", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_sysDataColumn")
-PID_4105_router.register(r"PID_4105_sysDataColumnLayout", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_sysDataColumnLayout")
-PID_4105_router.register(r"PID_4105_sysDataLabel", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_sysDataLabel")
-PID_4105_router.register(r"PID_4105_sysDataLabelLines", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_sysDataLabelLines")
-PID_4105_router.register(r"PID_4105_sysDataLabelLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_sysDataLabelLst")
-PID_4105_router.register(r"PID_4105_sysDataMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_sysDataMap")
-PID_4105_router.register(r"PID_4105_sysDataMapCol", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_sysDataMapCol")
-PID_4105_router.register(r"PID_4105_sysDataRpt", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_sysDataRpt")
-PID_4105_router.register(r"PID_4105_sysDataViews", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_sysDataViews")
-PID_4105_router.register(r"PID_4105_sysKMLMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_sysKMLMap")
-PID_4105_router.register(r"PID_4105_sysKMLMapClass", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_sysKMLMapClass")
-PID_4105_router.register(r"PID_4105_sysLookupLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_sysLookupLst")
-PID_4105_router.register(r"PID_4105_sysTableLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_sysTableLst")
-PID_4105_router.register(r"PID_4105_sysTaskGroups", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_sysTaskGroups")
-PID_4105_router.register(r"PID_4105_sysTaskLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_sysTaskLst")
-PID_4105_router.register(r"PID_4105_sysTasks", GenericViewSet, base_name="scribe_db.scribe_models.PID_4105_sysTasks")
-
-urlpatterns += [
-    url('PID_4105/', include(PID_4105_router.urls)),
-]
-
-
-PID_4108_router = DefaultRouter()
-
-PID_4108_router.register(r"PID_4108_ActionLevels", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_ActionLevels")
-PID_4108_router.register(r"PID_4108_COC", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_COC")
-PID_4108_router.register(r"PID_4108_EDDAirSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_EDDAirSampling")
-PID_4108_router.register(r"PID_4108_EDDBiotaSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_EDDBiotaSampling")
-PID_4108_router.register(r"PID_4108_EDDLabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_EDDLabAnalyses")
-PID_4108_router.register(r"PID_4108_EDDMonitoringData", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_EDDMonitoringData")
-PID_4108_router.register(r"PID_4108_EDDProperty", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_EDDProperty")
-PID_4108_router.register(r"PID_4108_EDDSoilGasSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_EDDSoilGasSampling")
-PID_4108_router.register(r"PID_4108_EDDSoilSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_EDDSoilSampling")
-PID_4108_router.register(r"PID_4108_EDDWaterSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_EDDWaterSampling")
-PID_4108_router.register(r"PID_4108_EDDWipeSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_EDDWipeSampling")
-PID_4108_router.register(r"PID_4108_Events", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_Events")
-PID_4108_router.register(r"PID_4108_Instruments", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_Instruments")
-PID_4108_router.register(r"PID_4108_LabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_LabAnalyses")
-PID_4108_router.register(r"PID_4108_LabResults", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_LabResults")
-PID_4108_router.register(r"PID_4108_Monitoring", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_Monitoring")
-PID_4108_router.register(r"PID_4108_PropertyOccupant", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_PropertyOccupant")
-PID_4108_router.register(r"PID_4108_refAnalytes", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_refAnalytes")
-PID_4108_router.register(r"PID_4108_refLabLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_refLabLst")
-PID_4108_router.register(r"PID_4108_refMatrixLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_refMatrixLst")
-PID_4108_router.register(r"PID_4108_refNames", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_refNames")
-PID_4108_router.register(r"PID_4108_refPickLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_refPickLst")
-PID_4108_router.register(r"PID_4108_refSGenus", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_refSGenus")
-PID_4108_router.register(r"PID_4108_Samples", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_Samples")
-PID_4108_router.register(r"PID_4108_SamplesAir", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_SamplesAir")
-PID_4108_router.register(r"PID_4108_SamplesBiota", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_SamplesBiota")
-PID_4108_router.register(r"PID_4108_SamplesMeasurements", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_SamplesMeasurements")
-PID_4108_router.register(r"PID_4108_SamplesSoil", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_SamplesSoil")
-PID_4108_router.register(r"PID_4108_SamplesSoilGas", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_SamplesSoilGas")
-PID_4108_router.register(r"PID_4108_SamplesTags", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_SamplesTags")
-PID_4108_router.register(r"PID_4108_SamplesWater", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_SamplesWater")
-PID_4108_router.register(r"PID_4108_SamplesWipe", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_SamplesWipe")
-PID_4108_router.register(r"PID_4108_Site", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_Site")
-PID_4108_router.register(r"PID_4108_sysDataColumn", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_sysDataColumn")
-PID_4108_router.register(r"PID_4108_sysDataColumnLayout", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_sysDataColumnLayout")
-PID_4108_router.register(r"PID_4108_sysDataLabel", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_sysDataLabel")
-PID_4108_router.register(r"PID_4108_sysDataLabelLines", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_sysDataLabelLines")
-PID_4108_router.register(r"PID_4108_sysDataLabelLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_sysDataLabelLst")
-PID_4108_router.register(r"PID_4108_sysDataMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_sysDataMap")
-PID_4108_router.register(r"PID_4108_sysDataMapCol", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_sysDataMapCol")
-PID_4108_router.register(r"PID_4108_sysDataRpt", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_sysDataRpt")
-PID_4108_router.register(r"PID_4108_sysDataViews", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_sysDataViews")
-PID_4108_router.register(r"PID_4108_sysKMLMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_sysKMLMap")
-PID_4108_router.register(r"PID_4108_sysKMLMapClass", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_sysKMLMapClass")
-PID_4108_router.register(r"PID_4108_sysLookupLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_sysLookupLst")
-PID_4108_router.register(r"PID_4108_sysTableLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_sysTableLst")
-PID_4108_router.register(r"PID_4108_sysTaskGroups", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_sysTaskGroups")
-PID_4108_router.register(r"PID_4108_sysTaskLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_sysTaskLst")
-PID_4108_router.register(r"PID_4108_sysTasks", GenericViewSet, base_name="scribe_db.scribe_models.PID_4108_sysTasks")
-
-urlpatterns += [
-    url('PID_4108/', include(PID_4108_router.urls)),
-]
-
-
-PID_4111_router = DefaultRouter()
-
-PID_4111_router.register(r"PID_4111_ActionLevels", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_ActionLevels")
-PID_4111_router.register(r"PID_4111_COC", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_COC")
-PID_4111_router.register(r"PID_4111_EDDAirSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_EDDAirSampling")
-PID_4111_router.register(r"PID_4111_EDDBiotaSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_EDDBiotaSampling")
-PID_4111_router.register(r"PID_4111_EDDLabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_EDDLabAnalyses")
-PID_4111_router.register(r"PID_4111_EDDMonitoringData", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_EDDMonitoringData")
-PID_4111_router.register(r"PID_4111_EDDProperty", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_EDDProperty")
-PID_4111_router.register(r"PID_4111_EDDSoilGasSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_EDDSoilGasSampling")
-PID_4111_router.register(r"PID_4111_EDDSoilSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_EDDSoilSampling")
-PID_4111_router.register(r"PID_4111_EDDWaterSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_EDDWaterSampling")
-PID_4111_router.register(r"PID_4111_EDDWipeSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_EDDWipeSampling")
-PID_4111_router.register(r"PID_4111_Events", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_Events")
-PID_4111_router.register(r"PID_4111_Instruments", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_Instruments")
-PID_4111_router.register(r"PID_4111_LabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_LabAnalyses")
-PID_4111_router.register(r"PID_4111_LabResults", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_LabResults")
-PID_4111_router.register(r"PID_4111_Location", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_Location")
-PID_4111_router.register(r"PID_4111_Monitoring", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_Monitoring")
-PID_4111_router.register(r"PID_4111_PropertyInfo", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_PropertyInfo")
-PID_4111_router.register(r"PID_4111_PropertyOccupant", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_PropertyOccupant")
-PID_4111_router.register(r"PID_4111_refAnalytes", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_refAnalytes")
-PID_4111_router.register(r"PID_4111_refLabLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_refLabLst")
-PID_4111_router.register(r"PID_4111_refMatrixLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_refMatrixLst")
-PID_4111_router.register(r"PID_4111_refNames", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_refNames")
-PID_4111_router.register(r"PID_4111_refPickLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_refPickLst")
-PID_4111_router.register(r"PID_4111_refSGenus", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_refSGenus")
-PID_4111_router.register(r"PID_4111_Samples", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_Samples")
-PID_4111_router.register(r"PID_4111_SamplesAir", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_SamplesAir")
-PID_4111_router.register(r"PID_4111_SamplesBiota", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_SamplesBiota")
-PID_4111_router.register(r"PID_4111_SamplesMeasurements", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_SamplesMeasurements")
-PID_4111_router.register(r"PID_4111_SamplesSoil", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_SamplesSoil")
-PID_4111_router.register(r"PID_4111_SamplesSoilGas", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_SamplesSoilGas")
-PID_4111_router.register(r"PID_4111_SamplesTags", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_SamplesTags")
-PID_4111_router.register(r"PID_4111_SamplesWater", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_SamplesWater")
-PID_4111_router.register(r"PID_4111_SamplesWipe", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_SamplesWipe")
-PID_4111_router.register(r"PID_4111_Site", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_Site")
-PID_4111_router.register(r"PID_4111_sysDataColumn", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_sysDataColumn")
-PID_4111_router.register(r"PID_4111_sysDataColumnLayout", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_sysDataColumnLayout")
-PID_4111_router.register(r"PID_4111_sysDataLabel", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_sysDataLabel")
-PID_4111_router.register(r"PID_4111_sysDataLabelLines", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_sysDataLabelLines")
-PID_4111_router.register(r"PID_4111_sysDataLabelLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_sysDataLabelLst")
-PID_4111_router.register(r"PID_4111_sysDataMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_sysDataMap")
-PID_4111_router.register(r"PID_4111_sysDataMapCol", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_sysDataMapCol")
-PID_4111_router.register(r"PID_4111_sysDataRpt", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_sysDataRpt")
-PID_4111_router.register(r"PID_4111_sysDataViews", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_sysDataViews")
-PID_4111_router.register(r"PID_4111_sysKMLMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_sysKMLMap")
-PID_4111_router.register(r"PID_4111_sysKMLMapClass", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_sysKMLMapClass")
-PID_4111_router.register(r"PID_4111_sysLookupLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_sysLookupLst")
-PID_4111_router.register(r"PID_4111_sysTableLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_sysTableLst")
-PID_4111_router.register(r"PID_4111_sysTaskGroups", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_sysTaskGroups")
-PID_4111_router.register(r"PID_4111_sysTaskLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_sysTaskLst")
-PID_4111_router.register(r"PID_4111_sysTasks", GenericViewSet, base_name="scribe_db.scribe_models.PID_4111_sysTasks")
-
-urlpatterns += [
-    url('PID_4111/', include(PID_4111_router.urls)),
-]
-
-
-PID_4127_router = DefaultRouter()
-
-PID_4127_router.register(r"PID_4127_ActionLevels", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_ActionLevels")
-PID_4127_router.register(r"PID_4127_COC", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_COC")
-PID_4127_router.register(r"PID_4127_EDDAirSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_EDDAirSampling")
-PID_4127_router.register(r"PID_4127_EDDBiotaSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_EDDBiotaSampling")
-PID_4127_router.register(r"PID_4127_EDDLabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_EDDLabAnalyses")
-PID_4127_router.register(r"PID_4127_EDDMonitoringData", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_EDDMonitoringData")
-PID_4127_router.register(r"PID_4127_EDDProperty", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_EDDProperty")
-PID_4127_router.register(r"PID_4127_EDDSoilGasSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_EDDSoilGasSampling")
-PID_4127_router.register(r"PID_4127_EDDSoilSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_EDDSoilSampling")
-PID_4127_router.register(r"PID_4127_EDDWaterSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_EDDWaterSampling")
-PID_4127_router.register(r"PID_4127_EDDWipeSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_EDDWipeSampling")
-PID_4127_router.register(r"PID_4127_Events", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_Events")
-PID_4127_router.register(r"PID_4127_Instruments", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_Instruments")
-PID_4127_router.register(r"PID_4127_LabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_LabAnalyses")
-PID_4127_router.register(r"PID_4127_LabResults", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_LabResults")
-PID_4127_router.register(r"PID_4127_Location", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_Location")
-PID_4127_router.register(r"PID_4127_Monitoring", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_Monitoring")
-PID_4127_router.register(r"PID_4127_PropertyInfo", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_PropertyInfo")
-PID_4127_router.register(r"PID_4127_PropertyOccupant", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_PropertyOccupant")
-PID_4127_router.register(r"PID_4127_refAnalytes", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_refAnalytes")
-PID_4127_router.register(r"PID_4127_refLabLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_refLabLst")
-PID_4127_router.register(r"PID_4127_refMatrixLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_refMatrixLst")
-PID_4127_router.register(r"PID_4127_refNames", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_refNames")
-PID_4127_router.register(r"PID_4127_refPickLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_refPickLst")
-PID_4127_router.register(r"PID_4127_refSGenus", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_refSGenus")
-PID_4127_router.register(r"PID_4127_Samples", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_Samples")
-PID_4127_router.register(r"PID_4127_SamplesAir", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_SamplesAir")
-PID_4127_router.register(r"PID_4127_SamplesBiota", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_SamplesBiota")
-PID_4127_router.register(r"PID_4127_SamplesMeasurements", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_SamplesMeasurements")
-PID_4127_router.register(r"PID_4127_SamplesSoil", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_SamplesSoil")
-PID_4127_router.register(r"PID_4127_SamplesSoilGas", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_SamplesSoilGas")
-PID_4127_router.register(r"PID_4127_SamplesTags", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_SamplesTags")
-PID_4127_router.register(r"PID_4127_SamplesWater", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_SamplesWater")
-PID_4127_router.register(r"PID_4127_SamplesWipe", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_SamplesWipe")
-PID_4127_router.register(r"PID_4127_Site", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_Site")
-PID_4127_router.register(r"PID_4127_sysDataColumn", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_sysDataColumn")
-PID_4127_router.register(r"PID_4127_sysDataColumnLayout", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_sysDataColumnLayout")
-PID_4127_router.register(r"PID_4127_sysDataLabel", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_sysDataLabel")
-PID_4127_router.register(r"PID_4127_sysDataLabelLines", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_sysDataLabelLines")
-PID_4127_router.register(r"PID_4127_sysDataLabelLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_sysDataLabelLst")
-PID_4127_router.register(r"PID_4127_sysDataMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_sysDataMap")
-PID_4127_router.register(r"PID_4127_sysDataMapCol", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_sysDataMapCol")
-PID_4127_router.register(r"PID_4127_sysDataRpt", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_sysDataRpt")
-PID_4127_router.register(r"PID_4127_sysDataViews", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_sysDataViews")
-PID_4127_router.register(r"PID_4127_sysKMLMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_sysKMLMap")
-PID_4127_router.register(r"PID_4127_sysKMLMapClass", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_sysKMLMapClass")
-PID_4127_router.register(r"PID_4127_sysLookupLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_sysLookupLst")
-PID_4127_router.register(r"PID_4127_sysTableLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_sysTableLst")
-PID_4127_router.register(r"PID_4127_sysTaskGroups", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_sysTaskGroups")
-PID_4127_router.register(r"PID_4127_sysTaskLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_sysTaskLst")
-PID_4127_router.register(r"PID_4127_sysTasks", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_sysTasks")
-
-urlpatterns += [
-    url('PID_4127/', include(PID_4127_router.urls)),
-]
-
-
-PID_4127_R9_router = DefaultRouter()
-
-PID_4127_R9_router.register(r"PID_4127_R9_refUnitConversion", GenericViewSet, base_name="scribe_db.scribe_models.PID_4127_R9_refUnitConversion")
-
-urlpatterns += [
-    url('PID_4127_R9/', include(PID_4127_R9_router.urls)),
-]
-
-
-PID_4129_router = DefaultRouter()
-
-PID_4129_router.register(r"PID_4129_ActionLevels", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_ActionLevels")
-PID_4129_router.register(r"PID_4129_COC", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_COC")
-PID_4129_router.register(r"PID_4129_EDDAirSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_EDDAirSampling")
-PID_4129_router.register(r"PID_4129_EDDBiotaSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_EDDBiotaSampling")
-PID_4129_router.register(r"PID_4129_EDDLabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_EDDLabAnalyses")
-PID_4129_router.register(r"PID_4129_EDDMonitoringData", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_EDDMonitoringData")
-PID_4129_router.register(r"PID_4129_EDDProperty", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_EDDProperty")
-PID_4129_router.register(r"PID_4129_EDDSoilGasSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_EDDSoilGasSampling")
-PID_4129_router.register(r"PID_4129_EDDSoilSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_EDDSoilSampling")
-PID_4129_router.register(r"PID_4129_EDDWaterSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_EDDWaterSampling")
-PID_4129_router.register(r"PID_4129_EDDWipeSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_EDDWipeSampling")
-PID_4129_router.register(r"PID_4129_Events", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_Events")
-PID_4129_router.register(r"PID_4129_Instruments", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_Instruments")
-PID_4129_router.register(r"PID_4129_LabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_LabAnalyses")
-PID_4129_router.register(r"PID_4129_LabResults", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_LabResults")
-PID_4129_router.register(r"PID_4129_Location", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_Location")
-PID_4129_router.register(r"PID_4129_Monitoring", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_Monitoring")
-PID_4129_router.register(r"PID_4129_PropertyInfo", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_PropertyInfo")
-PID_4129_router.register(r"PID_4129_PropertyOccupant", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_PropertyOccupant")
-PID_4129_router.register(r"PID_4129_refAnalytes", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_refAnalytes")
-PID_4129_router.register(r"PID_4129_refLabLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_refLabLst")
-PID_4129_router.register(r"PID_4129_refMatrixLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_refMatrixLst")
-PID_4129_router.register(r"PID_4129_refNames", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_refNames")
-PID_4129_router.register(r"PID_4129_refPickLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_refPickLst")
-PID_4129_router.register(r"PID_4129_refSGenus", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_refSGenus")
-PID_4129_router.register(r"PID_4129_Samples", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_Samples")
-PID_4129_router.register(r"PID_4129_SamplesAir", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_SamplesAir")
-PID_4129_router.register(r"PID_4129_SamplesBiota", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_SamplesBiota")
-PID_4129_router.register(r"PID_4129_SamplesMeasurements", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_SamplesMeasurements")
-PID_4129_router.register(r"PID_4129_SamplesSoil", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_SamplesSoil")
-PID_4129_router.register(r"PID_4129_SamplesSoilGas", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_SamplesSoilGas")
-PID_4129_router.register(r"PID_4129_SamplesTags", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_SamplesTags")
-PID_4129_router.register(r"PID_4129_SamplesWater", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_SamplesWater")
-PID_4129_router.register(r"PID_4129_SamplesWipe", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_SamplesWipe")
-PID_4129_router.register(r"PID_4129_Site", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_Site")
-PID_4129_router.register(r"PID_4129_sysDataColumn", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_sysDataColumn")
-PID_4129_router.register(r"PID_4129_sysDataColumnLayout", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_sysDataColumnLayout")
-PID_4129_router.register(r"PID_4129_sysDataLabel", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_sysDataLabel")
-PID_4129_router.register(r"PID_4129_sysDataLabelLines", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_sysDataLabelLines")
-PID_4129_router.register(r"PID_4129_sysDataLabelLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_sysDataLabelLst")
-PID_4129_router.register(r"PID_4129_sysDataMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_sysDataMap")
-PID_4129_router.register(r"PID_4129_sysDataMapCol", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_sysDataMapCol")
-PID_4129_router.register(r"PID_4129_sysDataRpt", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_sysDataRpt")
-PID_4129_router.register(r"PID_4129_sysDataViews", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_sysDataViews")
-PID_4129_router.register(r"PID_4129_sysKMLMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_sysKMLMap")
-PID_4129_router.register(r"PID_4129_sysKMLMapClass", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_sysKMLMapClass")
-PID_4129_router.register(r"PID_4129_sysLookupLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_sysLookupLst")
-PID_4129_router.register(r"PID_4129_sysTableLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_sysTableLst")
-PID_4129_router.register(r"PID_4129_sysTaskGroups", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_sysTaskGroups")
-PID_4129_router.register(r"PID_4129_sysTaskLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_sysTaskLst")
-PID_4129_router.register(r"PID_4129_sysTasks", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_sysTasks")
-PID_4129_router.register(r"PID_4129_WST 25417 Validated", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_WST 25417 Validated")
-
-urlpatterns += [
-    url('PID_4129/', include(PID_4129_router.urls)),
-]
-
-
-PID_4129_R9_router = DefaultRouter()
-
-PID_4129_R9_router.register(r"PID_4129_R9_refUnitConversion", GenericViewSet, base_name="scribe_db.scribe_models.PID_4129_R9_refUnitConversion")
-
-urlpatterns += [
-    url('PID_4129_R9/', include(PID_4129_R9_router.urls)),
-]
-
-
-PID_4130_router = DefaultRouter()
-
-PID_4130_router.register(r"PID_4130_ActionLevels", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_ActionLevels")
-PID_4130_router.register(r"PID_4130_COC", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_COC")
-PID_4130_router.register(r"PID_4130_EDDAirSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_EDDAirSampling")
-PID_4130_router.register(r"PID_4130_EDDBiotaSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_EDDBiotaSampling")
-PID_4130_router.register(r"PID_4130_EDDLabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_EDDLabAnalyses")
-PID_4130_router.register(r"PID_4130_EDDMonitoringData", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_EDDMonitoringData")
-PID_4130_router.register(r"PID_4130_EDDProperty", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_EDDProperty")
-PID_4130_router.register(r"PID_4130_EDDSoilGasSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_EDDSoilGasSampling")
-PID_4130_router.register(r"PID_4130_EDDSoilSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_EDDSoilSampling")
-PID_4130_router.register(r"PID_4130_EDDWaterSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_EDDWaterSampling")
-PID_4130_router.register(r"PID_4130_EDDWipeSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_EDDWipeSampling")
-PID_4130_router.register(r"PID_4130_Events", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_Events")
-PID_4130_router.register(r"PID_4130_Instruments", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_Instruments")
-PID_4130_router.register(r"PID_4130_LabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_LabAnalyses")
-PID_4130_router.register(r"PID_4130_LabResults", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_LabResults")
-PID_4130_router.register(r"PID_4130_Location", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_Location")
-PID_4130_router.register(r"PID_4130_Monitoring", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_Monitoring")
-PID_4130_router.register(r"PID_4130_PropertyInfo", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_PropertyInfo")
-PID_4130_router.register(r"PID_4130_PropertyOccupant", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_PropertyOccupant")
-PID_4130_router.register(r"PID_4130_refAnalytes", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_refAnalytes")
-PID_4130_router.register(r"PID_4130_refLabLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_refLabLst")
-PID_4130_router.register(r"PID_4130_refMatrixLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_refMatrixLst")
-PID_4130_router.register(r"PID_4130_refNames", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_refNames")
-PID_4130_router.register(r"PID_4130_refPickLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_refPickLst")
-PID_4130_router.register(r"PID_4130_refSGenus", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_refSGenus")
-PID_4130_router.register(r"PID_4130_Samples", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_Samples")
-PID_4130_router.register(r"PID_4130_SamplesAir", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_SamplesAir")
-PID_4130_router.register(r"PID_4130_SamplesBiota", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_SamplesBiota")
-PID_4130_router.register(r"PID_4130_SamplesMeasurements", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_SamplesMeasurements")
-PID_4130_router.register(r"PID_4130_SamplesSoil", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_SamplesSoil")
-PID_4130_router.register(r"PID_4130_SamplesSoilGas", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_SamplesSoilGas")
-PID_4130_router.register(r"PID_4130_SamplesTags", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_SamplesTags")
-PID_4130_router.register(r"PID_4130_SamplesWater", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_SamplesWater")
-PID_4130_router.register(r"PID_4130_SamplesWipe", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_SamplesWipe")
-PID_4130_router.register(r"PID_4130_Site", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_Site")
-PID_4130_router.register(r"PID_4130_sysDataColumn", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_sysDataColumn")
-PID_4130_router.register(r"PID_4130_sysDataColumnLayout", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_sysDataColumnLayout")
-PID_4130_router.register(r"PID_4130_sysDataLabel", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_sysDataLabel")
-PID_4130_router.register(r"PID_4130_sysDataLabelLines", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_sysDataLabelLines")
-PID_4130_router.register(r"PID_4130_sysDataLabelLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_sysDataLabelLst")
-PID_4130_router.register(r"PID_4130_sysDataMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_sysDataMap")
-PID_4130_router.register(r"PID_4130_sysDataMapCol", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_sysDataMapCol")
-PID_4130_router.register(r"PID_4130_sysDataRpt", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_sysDataRpt")
-PID_4130_router.register(r"PID_4130_sysDataViews", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_sysDataViews")
-PID_4130_router.register(r"PID_4130_sysKMLMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_sysKMLMap")
-PID_4130_router.register(r"PID_4130_sysKMLMapClass", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_sysKMLMapClass")
-PID_4130_router.register(r"PID_4130_sysLookupLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_sysLookupLst")
-PID_4130_router.register(r"PID_4130_sysTableLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_sysTableLst")
-PID_4130_router.register(r"PID_4130_sysTaskGroups", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_sysTaskGroups")
-PID_4130_router.register(r"PID_4130_sysTaskLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_sysTaskLst")
-PID_4130_router.register(r"PID_4130_sysTasks", GenericViewSet, base_name="scribe_db.scribe_models.PID_4130_sysTasks")
-
-urlpatterns += [
-    url('PID_4130/', include(PID_4130_router.urls)),
-]
-
-
-PID_4154_router = DefaultRouter()
-
-PID_4154_router.register(r"PID_4154_ActionLevels", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_ActionLevels")
-PID_4154_router.register(r"PID_4154_COC", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_COC")
-PID_4154_router.register(r"PID_4154_EDDAirSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_EDDAirSampling")
-PID_4154_router.register(r"PID_4154_EDDBiotaSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_EDDBiotaSampling")
-PID_4154_router.register(r"PID_4154_EDDLabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_EDDLabAnalyses")
-PID_4154_router.register(r"PID_4154_EDDMonitoringData", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_EDDMonitoringData")
-PID_4154_router.register(r"PID_4154_EDDProperty", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_EDDProperty")
-PID_4154_router.register(r"PID_4154_EDDSoilGasSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_EDDSoilGasSampling")
-PID_4154_router.register(r"PID_4154_EDDSoilSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_EDDSoilSampling")
-PID_4154_router.register(r"PID_4154_EDDWaterSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_EDDWaterSampling")
-PID_4154_router.register(r"PID_4154_EDDWipeSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_EDDWipeSampling")
-PID_4154_router.register(r"PID_4154_Events", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_Events")
-PID_4154_router.register(r"PID_4154_Instruments", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_Instruments")
-PID_4154_router.register(r"PID_4154_LabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_LabAnalyses")
-PID_4154_router.register(r"PID_4154_LabResults", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_LabResults")
-PID_4154_router.register(r"PID_4154_Location", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_Location")
-PID_4154_router.register(r"PID_4154_Monitoring", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_Monitoring")
-PID_4154_router.register(r"PID_4154_PropertyInfo", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_PropertyInfo")
-PID_4154_router.register(r"PID_4154_PropertyOccupant", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_PropertyOccupant")
-PID_4154_router.register(r"PID_4154_refAnalytes", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_refAnalytes")
-PID_4154_router.register(r"PID_4154_refLabLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_refLabLst")
-PID_4154_router.register(r"PID_4154_refMatrixLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_refMatrixLst")
-PID_4154_router.register(r"PID_4154_refNames", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_refNames")
-PID_4154_router.register(r"PID_4154_refPickLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_refPickLst")
-PID_4154_router.register(r"PID_4154_refSGenus", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_refSGenus")
-PID_4154_router.register(r"PID_4154_Samples", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_Samples")
-PID_4154_router.register(r"PID_4154_SamplesAir", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_SamplesAir")
-PID_4154_router.register(r"PID_4154_SamplesBiota", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_SamplesBiota")
-PID_4154_router.register(r"PID_4154_SamplesMeasurements", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_SamplesMeasurements")
-PID_4154_router.register(r"PID_4154_SamplesSoil", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_SamplesSoil")
-PID_4154_router.register(r"PID_4154_SamplesSoilGas", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_SamplesSoilGas")
-PID_4154_router.register(r"PID_4154_SamplesTags", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_SamplesTags")
-PID_4154_router.register(r"PID_4154_SamplesWater", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_SamplesWater")
-PID_4154_router.register(r"PID_4154_SamplesWipe", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_SamplesWipe")
-PID_4154_router.register(r"PID_4154_SampleWind", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_SampleWind")
-PID_4154_router.register(r"PID_4154_Site", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_Site")
-PID_4154_router.register(r"PID_4154_sysDataColumn", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_sysDataColumn")
-PID_4154_router.register(r"PID_4154_sysDataColumnLayout", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_sysDataColumnLayout")
-PID_4154_router.register(r"PID_4154_sysDataLabel", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_sysDataLabel")
-PID_4154_router.register(r"PID_4154_sysDataLabelLines", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_sysDataLabelLines")
-PID_4154_router.register(r"PID_4154_sysDataLabelLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_sysDataLabelLst")
-PID_4154_router.register(r"PID_4154_sysDataMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_sysDataMap")
-PID_4154_router.register(r"PID_4154_sysDataMapCol", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_sysDataMapCol")
-PID_4154_router.register(r"PID_4154_sysDataRpt", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_sysDataRpt")
-PID_4154_router.register(r"PID_4154_sysDataViews", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_sysDataViews")
-PID_4154_router.register(r"PID_4154_sysKMLMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_sysKMLMap")
-PID_4154_router.register(r"PID_4154_sysKMLMapClass", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_sysKMLMapClass")
-PID_4154_router.register(r"PID_4154_sysLookupLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_sysLookupLst")
-PID_4154_router.register(r"PID_4154_sysTableLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_sysTableLst")
-PID_4154_router.register(r"PID_4154_sysTaskGroups", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_sysTaskGroups")
-PID_4154_router.register(r"PID_4154_sysTaskLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_sysTaskLst")
-PID_4154_router.register(r"PID_4154_sysTasks", GenericViewSet, base_name="scribe_db.scribe_models.PID_4154_sysTasks")
-
-urlpatterns += [
-    url('PID_4154/', include(PID_4154_router.urls)),
-]
-
-
-PID_4205_router = DefaultRouter()
-
-PID_4205_router.register(r"PID_4205_ActionLevels", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_ActionLevels")
-PID_4205_router.register(r"PID_4205_COC", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_COC")
-PID_4205_router.register(r"PID_4205_EDDAirSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_EDDAirSampling")
-PID_4205_router.register(r"PID_4205_EDDBiotaSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_EDDBiotaSampling")
-PID_4205_router.register(r"PID_4205_EDDLabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_EDDLabAnalyses")
-PID_4205_router.register(r"PID_4205_EDDMonitoringData", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_EDDMonitoringData")
-PID_4205_router.register(r"PID_4205_EDDProperty", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_EDDProperty")
-PID_4205_router.register(r"PID_4205_EDDSoilGasSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_EDDSoilGasSampling")
-PID_4205_router.register(r"PID_4205_EDDSoilSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_EDDSoilSampling")
-PID_4205_router.register(r"PID_4205_EDDWaterSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_EDDWaterSampling")
-PID_4205_router.register(r"PID_4205_EDDWipeSampling", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_EDDWipeSampling")
-PID_4205_router.register(r"PID_4205_Events", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_Events")
-PID_4205_router.register(r"PID_4205_Instruments", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_Instruments")
-PID_4205_router.register(r"PID_4205_LabAnalyses", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_LabAnalyses")
-PID_4205_router.register(r"PID_4205_LabResults", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_LabResults")
-PID_4205_router.register(r"PID_4205_Location", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_Location")
-PID_4205_router.register(r"PID_4205_Monitoring", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_Monitoring")
-PID_4205_router.register(r"PID_4205_PropertyInfo", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_PropertyInfo")
-PID_4205_router.register(r"PID_4205_PropertyOccupant", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_PropertyOccupant")
-PID_4205_router.register(r"PID_4205_refAnalytes", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_refAnalytes")
-PID_4205_router.register(r"PID_4205_refLabLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_refLabLst")
-PID_4205_router.register(r"PID_4205_refMatrixLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_refMatrixLst")
-PID_4205_router.register(r"PID_4205_refNames", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_refNames")
-PID_4205_router.register(r"PID_4205_refPickLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_refPickLst")
-PID_4205_router.register(r"PID_4205_refSGenus", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_refSGenus")
-PID_4205_router.register(r"PID_4205_Samples", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_Samples")
-PID_4205_router.register(r"PID_4205_SamplesAir", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_SamplesAir")
-PID_4205_router.register(r"PID_4205_SamplesBiota", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_SamplesBiota")
-PID_4205_router.register(r"PID_4205_SamplesMeasurements", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_SamplesMeasurements")
-PID_4205_router.register(r"PID_4205_SamplesSoil", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_SamplesSoil")
-PID_4205_router.register(r"PID_4205_SamplesSoilGas", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_SamplesSoilGas")
-PID_4205_router.register(r"PID_4205_SamplesTags", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_SamplesTags")
-PID_4205_router.register(r"PID_4205_SamplesWater", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_SamplesWater")
-PID_4205_router.register(r"PID_4205_SamplesWipe", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_SamplesWipe")
-PID_4205_router.register(r"PID_4205_Site", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_Site")
-PID_4205_router.register(r"PID_4205_sysDataColumn", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_sysDataColumn")
-PID_4205_router.register(r"PID_4205_sysDataColumnLayout", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_sysDataColumnLayout")
-PID_4205_router.register(r"PID_4205_sysDataLabel", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_sysDataLabel")
-PID_4205_router.register(r"PID_4205_sysDataLabelLines", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_sysDataLabelLines")
-PID_4205_router.register(r"PID_4205_sysDataLabelLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_sysDataLabelLst")
-PID_4205_router.register(r"PID_4205_sysDataMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_sysDataMap")
-PID_4205_router.register(r"PID_4205_sysDataMapCol", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_sysDataMapCol")
-PID_4205_router.register(r"PID_4205_sysDataRpt", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_sysDataRpt")
-PID_4205_router.register(r"PID_4205_sysDataViews", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_sysDataViews")
-PID_4205_router.register(r"PID_4205_sysKMLMap", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_sysKMLMap")
-PID_4205_router.register(r"PID_4205_sysKMLMapClass", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_sysKMLMapClass")
-PID_4205_router.register(r"PID_4205_sysLookupLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_sysLookupLst")
-PID_4205_router.register(r"PID_4205_sysTableLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_sysTableLst")
-PID_4205_router.register(r"PID_4205_sysTaskGroups", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_sysTaskGroups")
-PID_4205_router.register(r"PID_4205_sysTaskLst", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_sysTaskLst")
-PID_4205_router.register(r"PID_4205_sysTasks", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_sysTasks")
-
-urlpatterns += [
-    url('PID_4205/', include(PID_4205_router.urls)),
-]
-
-
-PID_4205_RECORD_router = DefaultRouter()
-
-PID_4205_RECORD_router.register(r"PID_4205_RECORD_LINEAGE", GenericViewSet, base_name="scribe_db.scribe_models.PID_4205_RECORD_LINEAGE")
-
-urlpatterns += [
-    url('PID_4205_RECORD/', include(PID_4205_RECORD_router.urls)),
 ]
 
