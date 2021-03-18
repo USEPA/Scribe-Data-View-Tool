@@ -118,7 +118,7 @@ DATABASES = {
     'scribe_db': {
         'ENGINE': 'sql_server.pyodbc',
         'HOST': os.environ.get('SCRIBE_DB_HOST', ''),
-        'NAME': 'Scribe_new',
+        'NAME': 'Scribe',
         'USER': os.environ.get('SCRIBE_DB_USER', ''),
         'PASSWORD': os.environ.get('SCRIBE_DB_PASSWORD', ''),
         'OPTIONS': {
