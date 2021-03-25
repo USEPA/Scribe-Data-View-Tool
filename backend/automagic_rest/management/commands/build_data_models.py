@@ -46,7 +46,8 @@ SQL_SERVER_COLUMN_FIELD_MAP = {
     "uuid": "UUIDField({}blank=True, null=True{})",
     "uniqueidentifier": "UUIDField({}blank=True, null=True{})",
     "varbinary": "BinaryField({}blank=True, null=True{})",
-    "binary": "BinaryField({}blank=True, null=True{})"
+    "binary": "BinaryField({}blank=True, null=True{})",
+    "image": "BinaryField({}blank=True, null=True{})"
 }
 
 # Created a reserved words list that can not be used for Django field
@@ -353,6 +354,7 @@ class Command(BaseCommand):
             if primary_key_has_been_set:
                 if row.column_name.replace(" ", "") == "pk":
                     column_name = "id"
+
                 field_map = SQL_SERVER_COLUMN_FIELD_MAP[row.data_type].format("", db_column)
             else:
                 # We'll make the first column the primary key, since once is required in the Django ORM

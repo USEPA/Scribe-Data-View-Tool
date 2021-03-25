@@ -42,7 +42,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
   userProjects: Project[] | any;
   projectsLoaded: boolean;
   selectedProjectIDs: string[] = [];
-  isMapPointsSelected = false;
   // sample point props
   projectSamplesColDefs: ColumnDefs[] = [];
   projectSamplesRowData: ProjectSample[] = [];
@@ -52,7 +51,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   projectLabResultsRowData: ProjectLabResult[] = [];
   // map / geo point props
   geoPointsArray = [];
-  selectedPoints: string[];
+  selectedPoints: string[] = [];
   missingGeoPointsCount = 0;
   // Map MDL symbolization props
   isReadyToSymbolizeMapPoints = false;
@@ -132,8 +131,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    // TODO: Remove when data analysis and map symbology is handled by the AGOL / GeoPlatform integration)
     // subscribe to changes to active Ag Grid filter
-    this.agGridActiveFiltersEvt.subscribe((agGridActiveFilters) => {
+    /*this.agGridActiveFiltersEvt.subscribe((agGridActiveFilters) => {
       this.checkReadyToSymbolizeMapPoints();
     });
     // subscribe to MDL value entered event
@@ -141,23 +141,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
       if (symbologyDefinitions && this.mapSymbolDefinitions !== symbologyDefinitions) {
         this.mapSymbolDefinitions = symbologyDefinitions;
       }
-    });
+    });*/
 
     // subscribe to selected map points events, and filter table rows to the subset of selected sample points
     this.scribeDataExplorerService.mapPointsSelectedChangedEvent.subscribe((selectedSamplePointsRowData) => {
       if (selectedSamplePointsRowData) {
         this.projectLabResultsRowData = this.mergeSelectedSamplesAndLabResults(selectedSamplePointsRowData, this.combinedLabResultRowData);
-        this.isMapPointsSelected = true;
       } else {
         this.projectLabResultsRowData = this.mergeAllSamplesAndLabResults(this.projectSamplesRowData, this.combinedLabResultRowData);
-        this.isMapPointsSelected = false;
-      }
-    });
-    this.scribeDataExplorerService.mapPointSelectedChangedEvent.subscribe((pointAttributes) => {
-      if (pointAttributes) {
-        this.isMapPointsSelected = true;
-      } else {
-        this.isMapPointsSelected = false;
       }
     });
   }
@@ -175,8 +166,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
         });
         const currentselectedProjectIDs = this.projects.value as Array<number>;
         if (!currentselectedProjectIDs || (currentselectedProjectIDs.sort().join(',') !== newSelectedProjectIDs.sort().join(','))) {
-          this.clearProjects();
-          this.setQueryParam('projects', newSelectedProjectIDs.join(','));
+          // this.clearProjects();
+          // this.setQueryParam('projects', newSelectedProjectIDs.join(','));
+          this.projects.setValue(newSelectedProjectIDs);
+          this.setProjects();
         }
       }
     });
@@ -259,7 +252,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
       });
 
       this.geoPointsArray = this.getLatLongRecords(filteredSamplePoints);
-      // set MDL min and max range
 
       // refresh missing map points number
       const totalMapPoints = this.getLatLongRecords(filters.filteredRowData);
@@ -310,13 +302,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   agGridRowSelected(val) {
-    const pointsWithGeo = this.geoPointsArray.filter(x => val.includes(x.Samp_No) && x.Latitude && x.Longitude);
-    if (pointsWithGeo.length > 0) {
-      this.selectedPoints = val;
-      this.isMapPointsSelected = true;
-    } else {
-      this.snackBar.open('Selection has no geospatial point', null, {duration: 1000});
-      this.isMapPointsSelected = false;
+    if (val && val.length > 0) {
+      const pointsWithGeo = this.geoPointsArray.filter(x => val.includes(x.Samp_No) && x.Latitude && x.Longitude);
+      if (pointsWithGeo.length > 0) {
+        this.selectedPoints = val;
+      } else {
+        this.snackBar.open('Selection has no geospatial point', null, {duration: 1000});
+      }
     }
   }
 
@@ -326,7 +318,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
   async getCombinedProjectData(projectIds) {
     let combinedSamplePointRowData = [];
     this.isLoadingData = true;
-    this.isMapPointsSelected = false;
     // combine all project sample point and lab results data
     const projectsSamplePoints = await Promise.all(projectIds.map(async (projectId) => {
       const rows = await this.scribeDataExplorerService.getProjectSamples(projectId);
@@ -363,12 +354,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.showTable = true;
     } else {
       this.showTable = false;
+      this.geoPointsArray = [];
+      this.snackBar.open('Selected project(s) have no Scribe data.', null, {duration: 3000});
     }
     this.isLoadingData = false;
   }
 
-  setProjects(event) {
-    event.stopPropagation();
+  setProjects(event?) {
+    if (event) {
+      event.stopPropagation();
+    }
+
+    this.clearQueryParams();
+
     if (this.projects.value) {
       const newselectedProjectIDs = this.projects.value.join(',');
       this.setQueryParam('projects', newselectedProjectIDs);
@@ -401,13 +399,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   async onTabChange(tabId) {
     this.selectedTab = tabId;
-    if (this.selectedProjectIDs) {
+    this.isLoadingData = true;
+    if (this.projects.value) {
       try {
         // clear filters and get tab data
         this.agGridActiveFilters = [];
         this.updateFilters.next([]);
         this.scribeDataExplorerService.clearMapSelectionSource.next(true);
-        this.getCombinedProjectData(this.selectedProjectIDs);
+        this.getCombinedProjectData(this.projects.value);
       } catch (err) {
         this.isLoadingData = false;
         this.showTable = false;
@@ -690,8 +689,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onClearMapSelection() {
-    this.scribeDataExplorerService.clearMapSelectionSource.next(true);
+  onClearSelection() {
+    this.selectedPoints = [];
   }
 
   /*
@@ -725,7 +724,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   clearQueryParams() {
     const queryParams = {};
-    Object.keys(this.route.snapshot.queryParams).filter(k => k === 'projects').forEach(key => {
+    Object.keys(this.route.snapshot.queryParams).forEach(key => {
       queryParams[key] = null;
     });
     this.router.navigate([], {queryParams});

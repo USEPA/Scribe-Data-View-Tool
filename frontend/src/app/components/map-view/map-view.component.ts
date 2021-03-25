@@ -46,6 +46,9 @@ import MapProperties = __esri.MapProperties;
 import LayerFromArcGISServerUrlParams = __esri.LayerFromArcGISServerUrlParams;
 import Handle = __esri.Handle;
 import {isEqual} from 'lodash';
+import SimpleMarkerSymbolProperties = __esri.SimpleMarkerSymbolProperties;
+import Histogram from '@arcgis/core/widgets/Histogram';
+import Color from '@arcgis/core/Color';
 
 // import {MapService} from '@services/map.service';
 
@@ -66,11 +69,12 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
 
   // The <div> where we will place the map
   @ViewChild('mapViewDiv', {static: true}) private mapViewEl: ElementRef;
+  private histogramDivEl: HTMLElement;
 
   mapViewLoaded = false;
   private _zoom = 10;
   private _center: Array<number> = [-122.449445, 37.762852]; // -122.449445, 37.762852
-  private _baseMap = 'gray-vector';
+  private _baseMap = 'dark-gray-vector';
   private _map: Map;
   private _view: SceneView;
   private _zoomToPointGraphic: Graphic;
@@ -128,13 +132,17 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   @Input() pointData: any[];
   private layer3d: FeatureLayer;
   private colorSlider: ColorSlider;
+  private histogramChart: Histogram;
   public hideColorSlider = true;
+  public showHistogram = false;
+  private expandWidget: Expand;
 
   constructor(public loginService: LoginService, public scribeDataExplorerService: ScribeDataExplorerService) {
     // this.mapService = new MapService(loginService.access_token);
   }
 
   initializeMap() {
+    esriConfig.assetsPath = './assets';
     esriConfig.request.trustedServers.push(environment.agol_trusted_server);
     esriConfig.request.proxyRules.push({
       urlPrefix: environment.agol_proxy_url_prefix,
@@ -159,7 +167,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     this._view = new SceneView({
       container: this.mapViewEl.nativeElement,
       map: this._map,
-      // center: this._center,
+      center: this._center,
       zoom: 4,
       popup: {
         autoOpenEnabled: false
@@ -178,6 +186,16 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       //   }
       // },
     });
+    this.histogramDivEl = document.createElement('div');
+    this.histogramDivEl.id = 'containerDiv';
+    this.histogramDivEl.className = 'esri-widget';
+    this.histogramDivEl.innerHTML = '<div class="horizontalLabels esri-widget">\n' +
+      '    <span style="float: left" id="minLabel"></span>\n' +
+      '    <span style="float: right" id="maxLabel"></span>\n' +
+      '  </div>\n' +
+      '</div>';
+
+    this._view.ui.add(this.histogramDivEl, 'bottom-right');
     // add ootb map widgets to view
     this._homeBtn = new Home({
       view: this._view
@@ -212,15 +230,15 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit() {
     this._zoomToPointGraphic = null;
-    document.getElementById('select-by-polygon').style.visibility = 'hidden';
+    // document.getElementById('select-by-polygon').style.visibility = 'hidden';
 
     // Initialize MapView and return an instance of MapView
     this.initializeMap().then(mapView => {
       // add initial geometries to the scene view
       if (this.pointData) {
+        this._map.layers.removeAll();
         const pointGraphicsArray = this.addPoints(this.pointData);
-        this.layer3d = this.add3dPoints(this.pointData);
-        this.setRenderer(this.layer3d);
+        this.add3dPoints(this.pointData);
         this._view.goTo(pointGraphicsArray, {animate: false});
       }
       // The map has been initialized
@@ -237,12 +255,15 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
           //   location: event.mapPoint,
           // });
           if (response.results.length > 0) {
-            this.selectedFeaturesChange.emit([response.results[0].graphic.attributes.Samp_No]);
-            // if (selectedGraphic.attributes && 'PROJECTID' in selectedGraphic.attributes) {
+            // this.selectedFeaturesChange.emit([response.results[0].graphic.attributes.Samp_No]);
+            if (response.results[0].graphic.attributes &&
+              response.results[0].graphic.attributes.hasOwnProperty('PROJECTID')) {
             //   // on project centroid point selected / clicked, go to that project
             //
-            //   this.scribeDataExplorerService.projectCentroidsSelectedSource.next([selectedGraphic.attributes]);
-            // } else {
+             this.selectedFeaturesChange.emit([response.results[0].graphic.attributes]);
+            } else {
+              this.selectedFeaturesChange.emit([response.results[0].graphic.attributes.Samp_No]);
+            }
             //   // Only return selected map point graphic from the click event results
             //   // selectedGraphic = response.results.filter((result) => {
             //   //   return result.graphic.layer === this.mapPointsFeatureLayer;
@@ -358,18 +379,18 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   // }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this._view) {
+    if (this._view && this._view.ready) {
 
       if (changes.pointData || (changes.analyte && changes.analyte.currentValue !== changes.analyte.previousValue)) {
         // ***IMPORTANT: Clear Map Graphics and Layers***
         this._view.graphics = null;
         this._view.map.layers = null;
         if (changes.pointData && changes.pointData.currentValue) {
+          this._map.layers.removeAll();
           const pointGraphicsArray = this.addPoints(changes.pointData.currentValue);
-          this.layer3d = this.add3dPoints(changes.pointData.currentValue);
+          this.add3dPoints(changes.pointData.currentValue);
           this._view.goTo(pointGraphicsArray, {animate: false});
         }
-        this.setRenderer(this.layer3d);
       }
       // if (changes.analyte && changes.analyte.currentValue !== changes.analyte.previousValue) {
       //   this.setRenderer(this.layer3d);
@@ -444,12 +465,10 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
         delete pt.LabResultsAvailable;
         delete pt.Numeric_Tags;
         delete pt.Region_Tag_Prefix;
-        const graphicSymbol = {
-          type: 'simple-marker',
+        const graphicSymbol = new SimpleMarkerSymbol({
           color: symbolColor,
-          opacity: symbolColor ? 1 : 0,
           size: 7,
-        };
+        });
         // @ts-ignore
         pointGraphic = new Graphic({
           geometry: point,
@@ -590,11 +609,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
         delete pt.Region_Tag_Prefix;
         meshPointGraphic = new Graphic({
           geometry: meshGeometry,
-          symbol: new MeshSymbol3D({
-            symbolLayers: [{
-              type: 'fill'
-            }]
-          }),
+          symbol: new MeshSymbol3D(),
           attributes: pt
         });
         pointGraphicsArray.push(meshPointGraphic);
@@ -609,6 +624,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       // });
       // this._view.map.add(graphicsLayer);
       // this._view.graphics.addMany(pointGraphicsArray);
+      // this._view.goTo(pointGraphicsArray);
 
       const newLayer = this.createFeatureLayerFromGraphics(
         pointGraphicsArray,
@@ -618,8 +634,8 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
         }
       );
       this._view.map.add(newLayer);
-      // this._view.goTo(pointGraphicsArray);
-      return newLayer;
+      this.layer3d = newLayer;
+      this.setRenderer(this.layer3d);
     }
   }
 
@@ -756,23 +772,21 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     this.pointSelectionSketchViewModel.on('create', (event) => {
       if (event.state === 'complete') {
         this.polygonSelectionGraphicsLayer.remove(event.graphic);
-        this.selectPointFeatures(event.graphic.geometry);
+        if (this.mapPointsFeatureLayer) {
+          this.selectPointFeatures(event.graphic.geometry, this.mapPointsFeatureLayer);
+        } else if (this.scribeProjectsFeatureLyr) {
+          this.selectPointFeatures(event.graphic.geometry, this.scribeProjectsFeatureLyr);
+        }
       }
     });
   }
 
-  selectPointFeatures(geometry) {
+  selectPointFeatures(geometry, queryFeatureLayer) {
     // create a query and set its geometry parameter to the polygon that was drawn on the view
     const query = {
       geometry,
       outFields: ['*'] // REQUIRED for querying the layer attributes
     };
-    const queryFeatureLayer = this.layer3d;
-    // if (this.mapPointsFeatureLayer) {
-    //   queryFeatureLayer = this.mapPointsFeatureLayer;
-    // } else if (this.scribeProjectsFeatureLyr) {
-    //   queryFeatureLayer = this.scribeProjectsFeatureLyr;
-    // }
     if (queryFeatureLayer) {
       // query mapPointsFeatureLayer. Geometry set for the query, so only intersecting geometries are returned
       queryFeatureLayer.queryFeatures(query).then((results) => {
@@ -791,15 +805,14 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
             }
             this.mapPointsFeatureLayerHighlight = layerView.highlight(graphics);
           });
+          // on Scribe Projects layer selection, emit selected project attributes
+          if (this.scribeProjectsFeatureLyr) {
+            const attributeData = graphics.map(feature => feature.attributes);
+            this.selectedFeaturesChange.emit(attributeData);
+            return;
+          }
           // get the attributes of map points
           this.selectedFeaturesChange.emit([...new Set(graphics.map((feature, i) => feature.attributes.Samp_No))]);
-          // if (this.mapPointsFeatureLayer) {
-          //   // on map points selected, filter them in corresponding table rows
-          //   this.scribeDataExplorerService.mapPointsSelectedSource.next(pointsAttributeData);
-          // } else if (this.scribeProjectsFeatureLyr) {
-          //   // on project centroid points selected, go to that project
-          //   this.scribeDataExplorerService.projectCentroidsSelectedSource.next(pointsAttributeData);
-          // }
         }
       }).catch((error) => {
         console.error('Error selecting map points: ' + error);
@@ -812,7 +825,18 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     // the layer must be specified along with a field name
     // or arcade expression. The view and other properties determine
     // the appropriate default color scheme.
+    if (this.histogramChart) {
+      this.histogramChart.destroy();
+      this.histogramDivEl.style.display = 'none';
+    }
+
     if (this.analyte) {
+      // recreate histogramDiv
+      const histogramDiv = document.createElement('div');
+      histogramDiv.id = 'histogramDiv';
+      document.getElementById('containerDiv').prepend(histogramDiv);
+
+      this.showHistogram = true;
       const colorParams = {
         layer,
         valueExpression: '$feature.Result',
@@ -839,7 +863,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
           layer.renderer = rendererResult.renderer;
 
           if (!this._map.layers.includes(layer)) {
-            this._map.add(layer);
+            this._map.layers.add(layer);
           }
 
           // generate a histogram for use in the slider. Input the layer
@@ -849,25 +873,63 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
             layer,
             valueExpression: colorParams.valueExpression,
             view: this._view,
-            numBins: 70
+            numBins: 50
           });
         })
         .then((histogramResult) => {
+          // render setting is current broken so removing slider for now and trying out histogram only
           // Construct a color slider from the result of both
           // smart mapping renderer and histogram methods
-          this.colorSlider = ColorSlider.fromRendererResult(
-            rendererResult,
-            histogramResult
-          );
-          this.colorSlider.container = document.createElement('div');
-          this.colorSlider.primaryHandleEnabled = true;
-          // Round labels to 1 decimal place
-          this.colorSlider.labelFormatFunction = (value, type) => {
-            return value.toFixed(3);
-          };
-          // styles the standard deviation lines to be shorter
-          // than the average line
-          this.colorSlider.histogramConfig.dataLineCreatedFunction = (
+          // this.colorSlider = ColorSlider.fromRendererResult(
+          //   rendererResult,
+          //   histogramResult
+          // );
+          // this.colorSlider.container = document.createElement('div');
+          // this.colorSlider.primaryHandleEnabled = true;
+          // // Round labels to 1 decimal place
+          // this.colorSlider.labelFormatFunction = (value, type) => {
+          //   return value.toFixed(3);
+          // };
+          // // styles the standard deviation lines to be shorter
+          // // than the average line
+          // this.colorSlider.histogramConfig.dataLineCreatedFunction = (
+          //   lineElement,
+          //   labelElement,
+          //   index
+          // ) => {
+          //   if (index != null) {
+          //     lineElement.setAttribute('x2', '66%');
+          //     const sign = index === 0 ? '-' : '+';
+          //     labelElement.innerHTML = sign + 'σ';
+          //   }
+          // };
+          // this.colorSlider.viewModel.precision = 3;
+          // this._view.ui.add(this.colorSlider, 'bottom-right');
+
+          // when the user slides the handle(s), update the renderer
+          // with the updated color visual variable object
+
+          // const changeEventHandler = () => {
+          //   const renderer = layer.renderer.clone();
+          //   const colorVariable = renderer.visualVariables[0].clone();
+          //   colorVariable.stops = this.colorSlider.stops;
+          //   renderer.visualVariables = [colorVariable];
+          //   this.layer3d.renderer = renderer;
+          // };
+          //
+          // // @ts-ignore
+          // this.colorSlider.on(['thumb-change', 'thumb-drag', 'min-change', 'max-change'],
+          //   changeEventHandler
+          // );
+          const histogramMinLabel = document.getElementById('minLabel');
+          const histogramMaxLabel = document.getElementById('maxLabel');
+          const histogramTitle = document.getElementById('title');
+          this.histogramChart = Histogram.fromHistogramResult(histogramResult);
+          // this.histogramChart.classes(['histogramContainer']);
+          // this.histogramChart.label = 'Test';
+          // histogramChart.classes(['histogramDiv']);
+          this.histogramChart.container = 'histogramDiv';
+          this.histogramChart.dataLineCreatedFunction = (
             lineElement,
             labelElement,
             index
@@ -878,40 +940,83 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
               labelElement.innerHTML = sign + 'σ';
             }
           };
-          this.colorSlider.viewModel.precision = 3;
-          this._view.ui.add(this.colorSlider, 'bottom-right');
-
-          // when the user slides the handle(s), update the renderer
-          // with the updated color visual variable object
-
-          const changeEventHandler = () => {
-            const renderer = layer.renderer.clone();
-            const colorVariable = renderer.visualVariables[0].clone();
-            const outlineVariable = renderer.visualVariables[1];
-            colorVariable.stops = this.colorSlider.stops;
-            renderer.visualVariables = [colorVariable, outlineVariable];
-            layer.renderer = renderer;
+          histogramMaxLabel.innerText = histogramResult.maxValue.toString();
+          histogramMinLabel.innerText = histogramResult.minValue.toString();
+          // histogramTitle.innerText = layer.renderer.visualVariables[0].legendOptions.title;
+          // Color the histogram to match the features in the map
+          this.histogramChart.barCreatedFunction = (index, element) => {
+            const bin = this.histogramChart.bins[index];
+            const midValue = (bin.maxValue - bin.minValue) / 2 + bin.minValue;
+            const color = this.getColorForValue(rendererResult.renderer.visualVariables[0].stops, midValue);
+            element.setAttribute('fill', color.toHex());
           };
+          // this.expandWidget = new Expand({
+          //   view: this._view,
+          //   content: this.histogramChart
+          // });
 
-          // @ts-ignore
-          this.colorSlider.on(['thumb-change', 'thumb-drag', 'min-change', 'max-change'],
-            changeEventHandler
-          );
+
+          this.histogramDivEl.style.display = 'block';
         })
         .catch((error) => {
           console.log('there was an error: ', error);
         });
     } else {
-      if (this.colorSlider) {
-        this.colorSlider.destroy();
-      }
+      // this.showHistogram = false;
+      // if (this.colorSlider) {
+      //   this.colorSlider.destroy();
+      // }
+
       const symbol = {
         type: 'mesh-3d',
         symbolLayers: [{type: 'fill'}]
       };
       // @ts-ignore
       this.layer3d.renderer = new SimpleRenderer({symbol});
+
     }
+  }
+
+  private getColorForValue(stops, value) {
+    let minStop = stops[0];
+    let maxStop = stops[stops.length - 1];
+
+    const minStopValue = minStop.value;
+    const maxStopValue = maxStop.value;
+
+    if (value < minStopValue) {
+      return minStop.color;
+    }
+
+    if (value > maxStopValue) {
+      return maxStop.color;
+    }
+
+    const exactMatches = stops.filter(stop => {
+      return stop.value === value;
+    });
+
+    if (exactMatches.length > 0) {
+      return exactMatches[0].color;
+    }
+
+    minStop = null;
+    maxStop = null;
+    stops.forEach((stop, i) => {
+      if (!minStop && !maxStop && stop.value >= value) {
+        minStop = stops[i - 1];
+        maxStop = stop;
+      }
+    });
+
+    const weightedPosition =
+      (value - minStop.value) / (maxStop.value - minStop.value);
+
+    return Color.blendColors(
+      minStop.color,
+      maxStop.color,
+      weightedPosition
+    );
   }
 
 }

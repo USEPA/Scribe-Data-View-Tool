@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
+from dotenv import load_dotenv
+load_dotenv()
 
 import os
 
@@ -110,7 +112,7 @@ DATABASES = {
         'USER': os.environ.get('SADIE_DB_USER', ''),
         'PASSWORD': os.environ.get('SADIE_DB_PASSWORD', ''),
         'OPTIONS': {
-            'driver': "ODBC Driver 17 for SQL Server"
+            'driver': "ODBC Driver 13 for SQL Server"
         }
     },
     'scribe_db': {
@@ -120,7 +122,7 @@ DATABASES = {
         'USER': os.environ.get('SCRIBE_DB_USER', ''),
         'PASSWORD': os.environ.get('SCRIBE_DB_PASSWORD', ''),
         'OPTIONS': {
-            'driver': "ODBC Driver 17 for SQL Server"
+            'driver': "ODBC Driver 13 for SQL Server"
         }
     },
 }

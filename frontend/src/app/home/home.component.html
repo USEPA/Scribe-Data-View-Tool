@@ -125,10 +125,10 @@
                 (click)="onExportCSVBtnClick()">
           Export CSV
         </button>
-        <button *ngIf="isMapPointsSelected" mat-raised-button color="primary"
-                style="transform: scale(0.8); margin-left: -20px;"
-                (click)="onClearMapSelection()">
-          Clear Map Selection
+        <button *ngIf="selectedPoints.length > 0" mat-raised-button color="primary"
+                style="transform: scale(0.8); margin-left: -15px;"
+                (click)="onClearSelection()">
+          Clear Selection
         </button>
       </span>
     </ng-template>
@@ -180,39 +180,41 @@
                 (click)="onExportCSVBtnClick()">
           Export CSV
         </button>
-        <button *ngIf="isMapPointsSelected" mat-raised-button color="primary"
-                style="transform: scale(0.8); margin-left: -20px;"
-                (click)="onClearMapSelection()">
-          Clear Map Selection
+        <button *ngIf="selectedPoints.length > 0" mat-raised-button color="primary"
+                style="transform: scale(0.8); margin-left: -15px;"
+                (click)="onClearSelection()">
+          Clear Selection
         </button>
       </span>
     </ng-template>
-    <ng-template matTabContent class="component-container-flex">
-      <app-ag-grid
-        *ngIf="showTable && !isLoadingData"
-        [isLoading]="isLoadingData"
-        [columnDefs]="projectSamplesColDefs"
-        [rowData]="projectSamplesRowData"
-        [selectedFeatures]="selectedPoints"
-        [customFilterProps]="agGridCustomFilters"
-        [updatingColDefs]="updateColDefs.asObservable()"
-        [settingFilters]="presetFilters.asObservable()"
-        [updatingFilters]="updateFilters.asObservable()"
-        [publishingToAGOL]="publishSamplePointLocationsToAGOL.asObservable()"
-        [exportingCSV]="exportSamplePointLocationCSV.asObservable()"
-        [style.width]="(geoPointsArray.length > 0) ? '1000px' : '100%'"
-        (gridReadyEvent)="setAgGridPresetFilters($event)"
-        (filtersChangedEvent)="agGridFiltersChanged($event)"
-        (rowSelectedEvent)="agGridRowSelected($event)"
-      ></app-ag-grid>
-      <app-map-view
-        *ngIf="geoPointsArray.length > 0"
-        [hidden]="isLoadingData"
-        [pointData]="geoPointsArray"
-        [(selectedFeatures)]="selectedPoints"
-        (mapFeaturesLoadedEvent)="mapGeoFeaturesLoaded($event)"
-        [analyte]="selectedAnalyte | async"
-      ></app-map-view>
+    <ng-template matTabContent>
+      <div class="component-container-flex">
+        <app-ag-grid
+          *ngIf="showTable && !isLoadingData"
+          [isLoading]="isLoadingData"
+          [columnDefs]="projectSamplesColDefs"
+          [rowData]="projectSamplesRowData"
+          [selectedFeatures]="selectedPoints"
+          [customFilterProps]="agGridCustomFilters"
+          [updatingColDefs]="updateColDefs.asObservable()"
+          [settingFilters]="presetFilters.asObservable()"
+          [updatingFilters]="updateFilters.asObservable()"
+          [publishingToAGOL]="publishSamplePointLocationsToAGOL.asObservable()"
+          [exportingCSV]="exportSamplePointLocationCSV.asObservable()"
+          [style.width]="(geoPointsArray.length > 0) ? '1000px' : '100%'"
+          (gridReadyEvent)="setAgGridPresetFilters($event)"
+          (filtersChangedEvent)="agGridFiltersChanged($event)"
+          (selectedFeaturesChange)="agGridRowSelected($event)"
+        ></app-ag-grid>
+        <app-map-view
+          *ngIf="geoPointsArray.length > 0"
+          [hidden]="isLoadingData"
+          [pointData]="geoPointsArray"
+          [(selectedFeatures)]="selectedPoints"
+          (mapFeaturesLoadedEvent)="mapGeoFeaturesLoaded($event)"
+          [analyte]="selectedAnalyte | async"
+        ></app-map-view>
+      </div>
     </ng-template>
   </mat-tab>
 </mat-tab-group>

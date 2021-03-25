@@ -20,15 +20,7 @@ export class ProjectsMapDialogComponent implements OnInit {
               public scribeDataExplorerService: ScribeDataExplorerService) { }
 
   ngOnInit() {
-    // subscribe to selected project centroid points
-    this.scribeDataExplorerService.projectCentroidsSelectedEvent.subscribe((projectCentroids) => {
-      if (projectCentroids) {
-        this.selectedProjectNames = projectCentroids.map((projectCentroid) => {
-          return projectCentroid.PROJECT_NAME;
-        }).join(', ');
-        this.selectedProjectCentroids = projectCentroids;
-      }
-    });
+
   }
 
   mapGeoFeaturesLoaded(val) {
@@ -43,7 +35,10 @@ export class ProjectsMapDialogComponent implements OnInit {
     this.dialogRef.close({done: false});
   }
 
-  selectProject(attributes) {
-    this.scribeDataExplorerService.projectCentroidsSelectedSource.next(attributes);
+  selectProject(selectedProjects) {
+    this.selectedProjectNames = selectedProjects.map((projectCentroid) => {
+      return projectCentroid.PROJECT_NAME;
+    }).join(', ');
+    this.selectedProjectCentroids = selectedProjects;
   }
 }

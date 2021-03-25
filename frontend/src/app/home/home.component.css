@@ -25,3 +25,7 @@ mat-spinner {
   #000 0px 0px 2px, #000 0px 0px 2px, #000 0px 0px 2px;
   -webkit-font-smoothing: antialiased;
 }
+
+::ng-deep .mat-select-panel {
+  max-height: 65vh !important;
+}

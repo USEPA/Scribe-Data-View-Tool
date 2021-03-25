@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, OnDestroy, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
-import {ClientSideRowModelModule, ColDef} from '@ag-grid-community/all-modules';
+import {ColDef, ClientSideRowModelModule, CsvExportModule} from '@ag-grid-community/all-modules';
 
 import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
 import {AgGridSelectFilterComponent} from '@components/ag-grid/ag-grid-select-filter.component';
@@ -13,10 +13,9 @@ import {AGOLService} from '../../projectInterfaceTypes';
   templateUrl: './ag-grid.component.html',
   styleUrls: ['./ag-grid.component.css']
 })
-export class AgGridComponent implements OnInit, OnDestroy, OnChanges {
+export class AgGridComponent implements OnInit, OnDestroy {
   @Output() gridReadyEvent = new EventEmitter<any>();
   @Output() filtersChangedEvent = new EventEmitter<{ activeFilters: any[], filteredRowData: any[] }>();
-  @Output() rowSelectedEvent = new EventEmitter<any[]>();
   public showGrid: boolean;
   private gridApi;
   private gridColumnApi;
@@ -25,11 +24,12 @@ export class AgGridComponent implements OnInit, OnDestroy, OnChanges {
   public customComponents: object;
   private _isLoading: boolean;
   private _columnDefs: any;
+  private _selectedFeatures: string[];
   private _activeFilters: ActiveFilter[];
   private updatingColDefsSubscription: Subscription;
   private settingFiltersSubscription: Subscription;
   private updatingFiltersSubscription: Subscription;
-  public modules = [ClientSideRowModelModule];
+  public modules = [ClientSideRowModelModule, CsvExportModule];
 
   // Inputs
   @Input() set isLoading(value: boolean) {
@@ -56,6 +56,37 @@ export class AgGridComponent implements OnInit, OnDestroy, OnChanges {
     return this._columnDefs;
   }
 
+  @Input('selectedFeatures')
+  set selectedFeatures(newValue: string[]) {
+    if (newValue && newValue.length > 0) {
+      if (this._selectedFeatures === undefined || !newValue.every(x => this._selectedFeatures.includes(x))) {
+        this._selectedFeatures = newValue;
+        // on map point selected / clicked, select corresponding table rows
+        if (this.gridApi) {
+          this.gridApi.deselectAll();
+          let rowIndex = 0;
+          this.gridApi.forEachNode((node) => {
+            const found = this._selectedFeatures.find(x => x === node.data.Samp_No);
+            if (found) {
+              node.setSelected(true, false, true);
+              rowIndex = node.rowIndex;
+              this.gridApi.ensureIndexVisible(rowIndex, 'middle');
+            }
+          });
+        }
+      }
+    } else {
+      if (this.gridApi && this._selectedFeatures && this._selectedFeatures.length > 0) {
+        this._selectedFeatures = newValue;
+        this.gridApi.deselectAll();
+      }
+    }
+  }
+
+  get selectedFeatures(): string[] {
+    return this._selectedFeatures;
+  }
+
   @Input() rowData: any[];
   @Input() customFilterProps: object;
   @Input() updatingColDefs: Observable<any>;
@@ -63,7 +94,6 @@ export class AgGridComponent implements OnInit, OnDestroy, OnChanges {
   @Input() updatingFilters: Observable<any>;
   @Input() publishingToAGOL: Observable<{ title: string, description: string }>;
   @Input() exportingCSV: Observable<string>;
-  @Input() selectedFeatures: string[];
   @Output() selectedFeaturesChange: EventEmitter<string[]> = new EventEmitter<string[]>();
 
   constructor(public scribeDataExplorerService: ScribeDataExplorerService) {
@@ -127,27 +157,7 @@ export class AgGridComponent implements OnInit, OnDestroy, OnChanges {
   ngOnDestroy() {
     this.updatingColDefsSubscription.unsubscribe();
     this.updatingFiltersSubscription.unsubscribe();
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.selectedFeatures !== undefined && changes.selectedFeatures.currentValue) {
-      if (changes.selectedFeatures.previousValue === undefined ||
-          !changes.selectedFeatures.currentValue.every(x => changes.selectedFeatures.previousValue.includes(x))) {
-        // on map point selected / clicked, select corresponding table rows
-        if (this.gridApi) {
-          this.gridApi.deselectAll();
-          let rowIndex = 0;
-          this.gridApi.forEachNode((node) => {
-            const found = changes.selectedFeatures.currentValue.find(x => x === node.data.Samp_No);
-            if (found) {
-              node.setSelected(true, false, true);
-              rowIndex = node.rowIndex;
-              this.gridApi.ensureIndexVisible(rowIndex, 'middle');
-            }
-          });
-        }
-      }
-    }
+    this.gridApi.destroy();
   }
 
   showLoading() {
