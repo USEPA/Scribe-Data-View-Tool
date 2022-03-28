@@ -18,7 +18,6 @@ import {environment} from '@environments/environment';
 import {CONFIG_SETTINGS} from '../../config_settings';
 import {LoginService} from '../../auth/login.service';
 import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
-import {MapSymbolizationProps} from '../../projectInterfaceTypes';
 import SceneView from '@arcgis/core/views/SceneView';
 import Graphic from '@arcgis/core/Graphic';
 import Point from '@arcgis/core/geometry/Point';
@@ -46,6 +45,12 @@ import MapProperties = __esri.MapProperties;
 import LayerFromArcGISServerUrlParams = __esri.LayerFromArcGISServerUrlParams;
 import Handle = __esri.Handle;
 import {isEqual} from 'lodash';
+import FillSymbol3DLayerProperties = __esri.FillSymbol3DLayerProperties;
+import Color from '@arcgis/core/Color';
+import ObjectSymbol3DLayer from '@arcgis/core/symbols/ObjectSymbol3DLayer';
+import PointSymbol3D from '@arcgis/core/symbols/PointSymbol3D';
+import SymbolProperties = __esri.SymbolProperties;
+import colorCreateContinuousRendererParams = __esri.colorCreateContinuousRendererParams;
 
 // import {MapService} from '@services/map.service';
 
@@ -70,7 +75,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   mapViewLoaded = false;
   private _zoom = 10;
   private _center: Array<number> = [-122.449445, 37.762852]; // -122.449445, 37.762852
-  private _baseMap = 'gray-vector';
+  private _baseMap = 'dark-gray-vector';
   private _map: Map;
   private _view: SceneView;
   private _zoomToPointGraphic: Graphic;
@@ -86,6 +91,32 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   mapPointsFeatureLayerHighlight;
   polygonSelectionGraphicsLayer: GraphicsLayer;
   pointSelectionSketchViewModel: SketchViewModel;
+
+  symbol = {
+    type: 'point-3d',
+    symbolLayers: [{
+      type: 'object',
+      resource: {primitive: 'cylinder'},
+      material: {color: 'white'}
+    }]
+  } as SymbolProperties;
+  visualVariables = [
+    {
+      type: 'size',
+      field: 'height',
+      axis: 'height',
+    },
+    {
+      type: 'size',
+      field: 'width',
+      axis: 'width',
+    },
+    {
+      type: 'size',
+      field: 'depth',
+      axis: 'depth',
+    }
+  ];
 
   private _selectedGeoPoint: any;
 
@@ -446,14 +477,13 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
         delete pt.Region_Tag_Prefix;
         const graphicSymbol = {
           type: 'simple-marker',
-          color: symbolColor,
-          opacity: symbolColor ? 1 : 0,
+          color: null,
           size: 7,
         };
         // @ts-ignore
         pointGraphic = new Graphic({
           geometry: point,
-          symbol: graphicSymbol,
+          symbol: graphicSymbol as SimpleMarkerSymbol,
           attributes: pt,
           // popupTemplate:
         });
@@ -476,8 +506,32 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
 
   createFeatureLayerFromGraphics(pointGraphicsArray: any, geometryType: 'polygon' | 'polyline' | 'point' | 'multipoint' | 'multipatch' | 'mesh' = 'point',
                                  elevationInfo = null, symbol = new SimpleMarkerSymbol({size: 7})): FeatureLayer {
+    // const _symbol = {
+    //   type: 'point-3d',
+    //   symbolLayers: [{
+    //     type: 'object',
+    //     resource: {primitive: 'cylinder'},
+    //     material: {color: 'white'}
+    //   }]
+    // } as SymbolProperties;
+    // const visualVariables = [{
+    //   type: 'size',
+    //   field: 'height',
+    //   axis: 'height',
+    // },
+    //   {
+    //     type: 'size',
+    //     field: 'width',
+    //     axis: 'width',
+    //   },
+    //   {
+    //     type: 'size',
+    //     field: 'depth',
+    //     axis: 'depth',
+    //   }];
     const renderer = new SimpleRenderer({  // overrides the layer's default renderer
-      symbol
+      symbol: this.symbol,
+      visualVariables: this.visualVariables
     });
     return new FeatureLayer({
       geometryType,
@@ -561,43 +615,66 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     const pointGraphicsArray = [];
 
     pointData.forEach((pt: any) => {
-      let pointGeometry = null;
-      let meshPointGraphic = null;
+      const pointGeometry = null;
+      const meshPointGraphic = null;
       if (pt.Latitude && pt.Longitude && pt.Samp_Depth_To) {
+        pt.height = (pt.Samp_Depth_To - pt.Samp_Depth) * 10 + 0.01;
+        pt.width = 10;
+        pt.depth = 10;
         // add point graphic
-        const pointProps = {
-          longitude: pt.Longitude,
-          latitude: pt.Latitude,
-          z: (pt.Samp_Depth_To * -1 * 10)
-        };
+        // const pointProps = {
+        //   longitude: pt.Longitude,
+        //   latitude: pt.Latitude,
+        //   z: (pt.Samp_Depth_To * -1 * 10)
+        // };
         // add 3d point with depth z coordinate
-        pointGeometry = new Point(pointProps);
+        // geometry = new Point(pointProps);
         // const symbolColor = null;
         /*if (pt.hasOwnProperty('Matrix') && pt.hasOwnProperty('MDL')) {
           symbolColor = this.getSamplePointColorByMDL(pt);
         }*/
-        const meshGeometry = Mesh.createCylinder(pointGeometry, {
-          size: {
-            width: 10,
-            depth: 10,
-            height: (pt.Samp_Depth_To - pt.Samp_Depth) * 10 + 0.1,
-          },
-          material: new MeshMaterial()
-        });
+        // const meshGeometry = Mesh.createCylinder(pointGeometry, {
+        //   size: {
+        //     width: 10,
+        //     depth: 10,
+        //     height: (pt.Samp_Depth_To - pt.Samp_Depth) * 10 + 0.1,
+        //   },
+        //   material: new MeshMaterial()
+        // });
+        const geometry = {
+          type: 'point',
+          longitude: pt.Longitude,
+          latitude: pt.Latitude,
+          z: (pt.Samp_Depth_To * -1 * 10)
+        } as Point;
+        // const symbol = {
+        //   type: 'point-3d',
+        //   symbolLayers: [{
+        //     type: 'object',
+        //     width: 10,
+        //     depth: 10,
+        //     height: (pt.Samp_Depth_To - pt.Samp_Depth) * 10 + 0.1,
+        //     material: {color: 'grey'}
+        //   }]
+        // } as SymbolProperties;
         // Create a graphic and add it to the view
         delete pt.LabResultsAvailable;
         delete pt.Numeric_Tags;
         delete pt.Region_Tag_Prefix;
-        meshPointGraphic = new Graphic({
-          geometry: meshGeometry,
-          symbol: new MeshSymbol3D({
-            symbolLayers: [{
-              type: 'fill'
-            }]
-          }),
+        const pointGraphic = new Graphic({
+          geometry,
           attributes: pt
         });
-        pointGraphicsArray.push(meshPointGraphic);
+        // meshPointGraphic = new Graphic({
+        //   geometry: meshGeometry,
+        //   symbol: new MeshSymbol3D({
+        //     symbolLayers: [{
+        //       type: 'fill'
+        //     } as FillSymbol3DLayerProperties]
+        //   }),
+        //   attributes: pt
+        // });
+        pointGraphicsArray.push(pointGraphic);
       }
     });
     if (pointGraphicsArray.length > 0) {
@@ -612,7 +689,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
 
       const newLayer = this.createFeatureLayerFromGraphics(
         pointGraphicsArray,
-        'mesh',
+        'point',
         {
           mode: 'relative-to-ground'
         }
@@ -812,14 +889,19 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     // the layer must be specified along with a field name
     // or arcade expression. The view and other properties determine
     // the appropriate default color scheme.
+    if (this.colorSlider) {
+        this.colorSlider.destroy();
+      }
+
     if (this.analyte) {
       const colorParams = {
         layer,
-        valueExpression: '$feature.Result',
+        field: 'Result',
         view: this._view,
         theme: 'above',
         // outlineOptimizationEnabled: true
-      };
+        symbolType: '3d-volumetric-uniform'
+      } as colorCreateContinuousRendererParams;
 
       // Generate a continuous color renderer based on the
       // statistics of the data in the provided layer
@@ -831,11 +913,12 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
 
       let rendererResult;
 
-      // @ts-ignore
       createContinuousRenderer(colorParams)
         .then(response => {
           // set the renderer to the layer and add it to the map
           rendererResult = response;
+          rendererResult.renderer.classBreakInfos[0].symbol = this.symbol;
+          rendererResult.renderer.visualVariables = rendererResult.renderer.visualVariables.concat(this.visualVariables);
           layer.renderer = rendererResult.renderer;
 
           if (!this._map.layers.includes(layer)) {
@@ -847,6 +930,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
 
           return histogram({
             layer,
+            field: 'Result',
             valueExpression: colorParams.valueExpression,
             view: this._view,
             numBins: 70
@@ -886,10 +970,20 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
 
           const changeEventHandler = () => {
             const renderer = layer.renderer.clone();
-            const colorVariable = renderer.visualVariables[0].clone();
-            const outlineVariable = renderer.visualVariables[1];
-            colorVariable.stops = this.colorSlider.stops;
-            renderer.visualVariables = [colorVariable, outlineVariable];
+            const visualVariables = [];
+            // just changing the stops for the color variable does not appear to work in sceneview
+            renderer.visualVariables.reverse().forEach(v => {
+              const variable = v.clone();
+              if (variable.type === 'color') {
+                variable.stops = this.colorSlider.stops;
+              }
+              visualVariables.push(variable);
+            });
+            // const colorVariableIndex = renderer.visualVariables.findIndex(v => v.type === 'color');
+            // const colorVariable = renderer.visualVariables[colorVariableIndex].clone();
+            // colorVariable.stops = this.colorSlider.stops;
+            // renderer.visualVariables[colorVariableIndex] = colorVariable;
+            renderer.visualVariables = visualVariables;
             layer.renderer = renderer;
           };
 
@@ -901,16 +995,6 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
         .catch((error) => {
           console.log('there was an error: ', error);
         });
-    } else {
-      if (this.colorSlider) {
-        this.colorSlider.destroy();
-      }
-      const symbol = {
-        type: 'mesh-3d',
-        symbolLayers: [{type: 'fill'}]
-      };
-      // @ts-ignore
-      this.layer3d.renderer = new SimpleRenderer({symbol});
     }
   }
 

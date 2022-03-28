@@ -13,9 +13,6 @@
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            "customWebpackConfig": {
-              "path": "./esri.conf.js"
-            },
             "outputPath": "dist/frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -74,9 +71,6 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "customWebpackConfig": {
-              "path": "./esri.conf.js"
-            },
             "browserTarget": "frontend:build"
           },
           "configurations": {
@@ -94,9 +88,6 @@
         "test": {
           "builder": "@angular-builders/custom-webpack:karma",
           "options": {
-            "customWebpackConfig": {
-              "path": "./esri.conf.js"
-            },
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
