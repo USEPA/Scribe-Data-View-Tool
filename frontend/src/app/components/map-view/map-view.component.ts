@@ -49,6 +49,7 @@ import {isEqual} from 'lodash';
 import SimpleMarkerSymbolProperties = __esri.SimpleMarkerSymbolProperties;
 import Histogram from '@arcgis/core/widgets/Histogram';
 import Color from '@arcgis/core/Color';
+import SymbolProperties = __esri.SymbolProperties;
 
 // import {MapService} from '@services/map.service';
 
@@ -90,6 +91,32 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   mapPointsFeatureLayerHighlight;
   polygonSelectionGraphicsLayer: GraphicsLayer;
   pointSelectionSketchViewModel: SketchViewModel;
+
+  symbol = {
+    type: 'point-3d',
+    symbolLayers: [{
+      type: 'object',
+      resource: {primitive: 'cylinder'},
+      material: {color: '#4e6dbd'}
+    }]
+  } as SymbolProperties;
+  visualVariables = [
+    {
+      type: 'size',
+      field: 'height',
+      axis: 'height',
+    },
+    {
+      type: 'size',
+      field: 'width',
+      axis: 'width',
+    },
+    {
+      type: 'size',
+      field: 'depth',
+      axis: 'depth',
+    }
+  ];
 
   private _selectedGeoPoint: any;
 
@@ -258,9 +285,9 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
             // this.selectedFeaturesChange.emit([response.results[0].graphic.attributes.Samp_No]);
             if (response.results[0].graphic.attributes &&
               response.results[0].graphic.attributes.hasOwnProperty('PROJECTID')) {
-            //   // on project centroid point selected / clicked, go to that project
-            //
-             this.selectedFeaturesChange.emit([response.results[0].graphic.attributes]);
+              //   // on project centroid point selected / clicked, go to that project
+              //
+              this.selectedFeaturesChange.emit([response.results[0].graphic.attributes]);
             } else {
               this.selectedFeaturesChange.emit([response.results[0].graphic.attributes.Samp_No]);
             }
@@ -386,6 +413,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
         this._view.graphics = null;
         this._view.map.layers = null;
         if (changes.pointData && changes.pointData.currentValue) {
+          console.log('removing layers');
           this._map.layers.removeAll();
           const pointGraphicsArray = this.addPoints(changes.pointData.currentValue);
           this.add3dPoints(changes.pointData.currentValue);
@@ -451,6 +479,10 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   addPoints(pointData: any[]) {
     let pointGraphic = null;
     const pointGraphicsArray = [];
+    const graphicSymbol = new SimpleMarkerSymbol({
+      color: '#4e6dbd',
+      size: 7,
+    });
     pointData.forEach((pt: any) => {
       if (pt.Latitude && pt.Longitude) {
         const point = new Point({
@@ -465,10 +497,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
         delete pt.LabResultsAvailable;
         delete pt.Numeric_Tags;
         delete pt.Region_Tag_Prefix;
-        const graphicSymbol = new SimpleMarkerSymbol({
-          color: symbolColor,
-          size: 7,
-        });
+
         // @ts-ignore
         pointGraphic = new Graphic({
           geometry: point,
@@ -480,9 +509,12 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       }
     });
     if (pointGraphicsArray.length > 0) {
-      this._view.graphics.addMany(pointGraphicsArray);
+      // this._view.graphics.addMany(pointGraphicsArray);
       // Create the feature layer from client-side graphics and add to map
       this.mapPointsFeatureLayer = this.createFeatureLayerFromGraphics(pointGraphicsArray);
+      this.mapPointsFeatureLayer.renderer = new SimpleRenderer({
+        symbol: graphicSymbol
+      });
       this._view.map.add(this.mapPointsFeatureLayer);
       this.mapPointsFeatureLayer.when((lyrLoaded) => {
         // get and set the map extent from the feature layer extent
@@ -495,9 +527,30 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
 
   createFeatureLayerFromGraphics(pointGraphicsArray: any, geometryType: 'polygon' | 'polyline' | 'point' | 'multipoint' | 'multipatch' | 'mesh' = 'point',
                                  elevationInfo = null, symbol = new SimpleMarkerSymbol({size: 7})): FeatureLayer {
-    const renderer = new SimpleRenderer({  // overrides the layer's default renderer
-      symbol
-    });
+    // const _symbol = {
+    //   type: 'point-3d',
+    //   symbolLayers: [{
+    //     type: 'object',
+    //     resource: {primitive: 'cylinder'},
+    //     material: {color: 'white'}
+    //   }]
+    // } as SymbolProperties;
+    // const visualVariables = [{
+    //   type: 'size',
+    //   field: 'height',
+    //   axis: 'height',
+    // },
+    //   {
+    //     type: 'size',
+    //     field: 'width',
+    //     axis: 'width',
+    //   },
+    //   {
+    //     type: 'size',
+    //     field: 'depth',
+    //     axis: 'depth',
+    //   }];
+
     return new FeatureLayer({
       geometryType,
       source: pointGraphicsArray,
@@ -505,7 +558,6 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       fields: this.setFeatureLayerFields(this.pointData),
       outFields: ['*'], // REQUIRED for querying the layer attributes
       // popupTemplate: this.setLayerPopupTemplate(this.pointData),
-      renderer,
       spatialReference: {
         wkid: 4326
       },
@@ -580,39 +632,66 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     const pointGraphicsArray = [];
 
     pointData.forEach((pt: any) => {
-      let pointGeometry = null;
-      let meshPointGraphic = null;
+      const pointGeometry = null;
+      const meshPointGraphic = null;
       if (pt.Latitude && pt.Longitude && pt.Samp_Depth_To) {
+        pt.height = (pt.Samp_Depth_To - pt.Samp_Depth) * 10 + 0.01;
+        pt.width = 10;
+        pt.depth = 10;
         // add point graphic
-        const pointProps = {
-          longitude: pt.Longitude,
-          latitude: pt.Latitude,
-          z: (pt.Samp_Depth_To * -1 * 10)
-        };
+        // const pointProps = {
+        //   longitude: pt.Longitude,
+        //   latitude: pt.Latitude,
+        //   z: (pt.Samp_Depth_To * -1 * 10)
+        // };
         // add 3d point with depth z coordinate
-        pointGeometry = new Point(pointProps);
+        // geometry = new Point(pointProps);
         // const symbolColor = null;
         /*if (pt.hasOwnProperty('Matrix') && pt.hasOwnProperty('MDL')) {
           symbolColor = this.getSamplePointColorByMDL(pt);
         }*/
-        const meshGeometry = Mesh.createCylinder(pointGeometry, {
-          size: {
-            width: 10,
-            depth: 10,
-            height: (pt.Samp_Depth_To - pt.Samp_Depth) * 10 + 0.1,
-          },
-          material: new MeshMaterial()
-        });
+        // const meshGeometry = Mesh.createCylinder(pointGeometry, {
+        //   size: {
+        //     width: 10,
+        //     depth: 10,
+        //     height: (pt.Samp_Depth_To - pt.Samp_Depth) * 10 + 0.1,
+        //   },
+        //   material: new MeshMaterial()
+        // });
+        const geometry = {
+          type: 'point',
+          longitude: pt.Longitude,
+          latitude: pt.Latitude,
+          z: (pt.Samp_Depth_To * -1 * 10)
+        } as Point;
+        // const symbol = {
+        //   type: 'point-3d',
+        //   symbolLayers: [{
+        //     type: 'object',
+        //     width: 10,
+        //     depth: 10,
+        //     height: (pt.Samp_Depth_To - pt.Samp_Depth) * 10 + 0.1,
+        //     material: {color: 'grey'}
+        //   }]
+        // } as SymbolProperties;
         // Create a graphic and add it to the view
         delete pt.LabResultsAvailable;
         delete pt.Numeric_Tags;
         delete pt.Region_Tag_Prefix;
-        meshPointGraphic = new Graphic({
-          geometry: meshGeometry,
-          symbol: new MeshSymbol3D(),
+        const pointGraphic = new Graphic({
+          geometry,
           attributes: pt
         });
-        pointGraphicsArray.push(meshPointGraphic);
+        // meshPointGraphic = new Graphic({
+        //   geometry: meshGeometry,
+        //   symbol: new MeshSymbol3D({
+        //     symbolLayers: [{
+        //       type: 'fill'
+        //     } as FillSymbol3DLayerProperties]
+        //   }),
+        //   attributes: pt
+        // });
+        pointGraphicsArray.push(pointGraphic);
       }
     });
     if (pointGraphicsArray.length > 0) {
@@ -628,14 +707,15 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
 
       const newLayer = this.createFeatureLayerFromGraphics(
         pointGraphicsArray,
-        'mesh',
+        'point',
         {
           mode: 'relative-to-ground'
         }
       );
+      newLayer.id = '3dpoints';
+      this.setRenderer(newLayer);
       this._view.map.add(newLayer);
       this.layer3d = newLayer;
-      this.setRenderer(this.layer3d);
     }
   }
 
@@ -858,13 +938,16 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       // @ts-ignore
       createContinuousRenderer(colorParams)
         .then(response => {
+          console.log('setting renderer')
           // set the renderer to the layer and add it to the map
           rendererResult = response;
+          rendererResult.renderer.classBreakInfos[0].symbol = this.symbol;
+          rendererResult.renderer.visualVariables = rendererResult.renderer.visualVariables.concat(this.visualVariables);
           layer.renderer = rendererResult.renderer;
 
-          if (!this._map.layers.includes(layer)) {
-            this._map.layers.add(layer);
-          }
+          // if (!this._map.layers.includes(layer)) {
+          //   this._map.layers.add(layer);
+          // }
 
           // generate a histogram for use in the slider. Input the layer
           // and field or arcade expression to generate it.
@@ -962,17 +1045,21 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
           console.log('there was an error: ', error);
         });
     } else {
+      layer.renderer = new SimpleRenderer({  // overrides the layer's default renderer
+        symbol: this.symbol,
+        visualVariables: this.visualVariables
+      });
       // this.showHistogram = false;
       // if (this.colorSlider) {
       //   this.colorSlider.destroy();
       // }
 
-      const symbol = {
-        type: 'mesh-3d',
-        symbolLayers: [{type: 'fill'}]
-      };
-      // @ts-ignore
-      this.layer3d.renderer = new SimpleRenderer({symbol});
+      // const symbol = {
+      //   type: 'mesh-3d',
+      //   symbolLayers: [{type: 'fill'}]
+      // };
+      // // @ts-ignore
+      // this.layer3d.renderer = new SimpleRenderer({symbol});
 
     }
   }
