@@ -77,7 +77,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   mapViewLoaded = false;
   private _zoom = 10;
   private _center: Array<number> = [-122.449445, 37.762852]; // -122.449445, 37.762852
-  private _baseMap = 'gray-vector';
+  private _baseMap = 'dark-gray-vector';
   private _map: Map;
   private _view: SceneView;
   private _zoomToPointGraphic: Graphic;
