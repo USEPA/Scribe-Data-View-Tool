@@ -50,6 +50,8 @@ import SimpleMarkerSymbolProperties = __esri.SimpleMarkerSymbolProperties;
 import Histogram from '@arcgis/core/widgets/Histogram';
 import Color from '@arcgis/core/Color';
 import SymbolProperties = __esri.SymbolProperties;
+import Ground from '@arcgis/core/Ground';
+import ElevationLayer from '@arcgis/core/layers/ElevationLayer';
 
 // import {MapService} from '@services/map.service';
 
@@ -75,7 +77,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   mapViewLoaded = false;
   private _zoom = 10;
   private _center: Array<number> = [-122.449445, 37.762852]; // -122.449445, 37.762852
-  private _baseMap = 'dark-gray-vector';
+  private _baseMap = 'gray-vector';
   private _map: Map;
   private _view: SceneView;
   private _zoomToPointGraphic: Graphic;
@@ -178,14 +180,18 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
 
     // Initialize the Esri Modules properties for this map component class
 
+    const worldElevation = new ElevationLayer({
+      url: '//elevation3d.arcgis.com/arcgis/rest/services/WorldElevation3D/Terrain3D/ImageServer'
+    });
     // Configure the BaseMap
     const mapProperties: MapProperties = {
       basemap: this._baseMap,
-      ground: {
+      ground: new Ground({
+        layers: [worldElevation],
         navigationConstraint: {
           type: 'none'
         }
-      }
+      })
     };
     this._map = new Map(mapProperties);
     // this.mapViewEl.nativeElement.id = this.mapDivId;
@@ -199,6 +205,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       popup: {
         autoOpenEnabled: false
       },
+      viewingMode: 'local',
       // local scene I think is preferable but causing too many issues at the moment
       // viewingMode: 'local',
       // camera: {
