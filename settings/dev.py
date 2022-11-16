@@ -174,7 +174,7 @@ SOCIAL_AUTH_ALLOWED_REDIRECT_HOSTS = os.environ.get('SOCIAL_AUTH_ALLOWED_REDIREC
 
 SOCIAL_AUTH_AGOL_KEY = os.environ.get('SOCIAL_AUTH_AGOL_KEY', '')
 SOCIAL_AUTH_AGOL_SECRET = os.environ.get('SOCIAL_AUTH_AGOL_SECRET', '')
-SOCIAL_AUTH_AGOL_DOMAIN = 'epa.maps.arcgis.com'
+SOCIAL_AUTH_AGOL_DOMAIN = os.environ.get('SOCIAL_AUTH_AGOL_DOMAIN', 'epa.maps.arcgis.com')
 
 SOCIAL_AUTH_PIPELINE = [  # Note: Sequence of functions matters here.
     'social_core.pipeline.social_auth.social_details',  # 0
