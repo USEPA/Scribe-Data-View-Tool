@@ -21,8 +21,8 @@ from django.views.generic import TemplateView
 from django.conf import settings
 from rest_framework import routers
 
-from backend.sadie.views import EsriProxy, ProjectTablesViewSet, current_user
-from backend.scribe_models.views import *
+from sadie.views import EsriProxy, ProjectTablesViewSet, current_user
+from scribe_models.views import *
 
 
 """Django REST Framework notes:
