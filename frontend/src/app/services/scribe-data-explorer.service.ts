@@ -47,7 +47,8 @@ export class ScribeDataExplorerService {
               public snackBar: MatSnackBar) {
     const username = this.loginService.currentUser.value.agol_username;
     this.scribeApiUrl = `${environment.api_url}/${environment.api_version_tag}`;
-    this.agolUserContentUrl = `https://epa.maps.arcgis.com/sharing/rest/content/users/${username}`;
+    // this.agolUserContentUrl = `https://epa.maps.arcgis.com/sharing/rest/content/users/${username}`;
+    this.agolUserContentUrl = `${environment.user_geo_platform_url}/sharing/rest/content/users/${username}`;
 
     esriConfig.request.trustedServers.push(environment.agol_trusted_server);
     esriConfig.request.proxyRules.push({
@@ -167,7 +168,7 @@ export class ScribeDataExplorerService {
     if (results) {
       for (const item of results.items) {
         if (item.tags.includes('Scribe Explorer')) {
-          agolServices.push({title: item.title, url: `${environment.geo_platform_url}/home/item.html?id=${item.id}`});
+          agolServices.push({title: item.title, url: `${environment.user_geo_platform_url}/home/item.html?id=${item.id}`});
         }
       }
     }

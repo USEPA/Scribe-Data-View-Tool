@@ -106,6 +106,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.userProjects = await this.scribeDataExplorerService.getUserProjects();
     await this.scribeDataExplorerService.getPublishedAGOLServices().then((items: AGOLService[]) => {
       this.scribeDataExplorerService.userAGOLServices.next(items);
+      this.scribeDataExplorerService.userAGOLServices.subscribe(x => {
+        x.forEach(i => {
+          console.log(`Title: ${i.title}`);
+          console.log(`url: ${i.url}`);
+        });
+        }
+      );
     });
 
     // Subscribing to query string parameters
