@@ -5,6 +5,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {BehaviorSubject, Observable} from 'rxjs';
 import esriConfig from '@arcgis/core/config';
 
+import {tap} from 'rxjs/operators';
+
 import {environment} from '@environments/environment';
 import {
   AGOLService,
@@ -16,6 +18,9 @@ import {
   ProjectSample
 } from '../projectInterfaceTypes';
 import {LoginService} from '../auth/login.service';
+import {User} from '../auth/login.service';
+import {createUrlResolverWithoutPackagePrefix} from '@angular/compiler';
+import {getLocaleCurrencyName} from '@angular/common';
 
 
 
@@ -40,15 +45,15 @@ export class ScribeDataExplorerService {
   public mapPointsSymbolizationChangedEvent: Observable<any> = this.mapPointsSymbolizationSource.asObservable();
   public mapSymbolFieldAliases = ['Matrix', 'Analyte', 'MDL'];
 
-  scribeApiUrl = null;
-  agolUserContentUrl = null;
+  public scribeApiUrl = null;
+  public agolUserContentUrl = null;
+  public agolUsername = null;
+  public agolToken = null;
 
-  constructor(private http: HttpClient, public router: Router, public loginService: LoginService,
-              public snackBar: MatSnackBar) {
-    const username = this.loginService.currentUser.value.agol_username;
+
+  constructor(private http: HttpClient, public router: Router, public snackBar: MatSnackBar) {
+    // const username = this.loginService.currentUser.value.agol_username;
     this.scribeApiUrl = `${environment.api_url}/${environment.api_version_tag}`;
-    // this.agolUserContentUrl = `https://epa.maps.arcgis.com/sharing/rest/content/users/${username}`;
-    this.agolUserContentUrl = `${environment.user_geo_platform_url}/sharing/rest/content/users/${username}`;
 
     esriConfig.request.trustedServers.push(environment.agol_trusted_server);
     esriConfig.request.proxyRules.push({
@@ -79,7 +84,7 @@ export class ScribeDataExplorerService {
       formData.append('tags', 'Scribe Explorer');
       // formData.append('multipart', 'true');
       // formData.append('filename', data.title);
-      formData.append('token', this.loginService.currentUser.value.agol_token);
+      formData.append('token', this.agolToken);
       formData.append('f', 'json');
       result = await this.http.post<any>(url, formData).toPromise().then((response) => {
         if ('error' in response) {
@@ -122,7 +127,7 @@ export class ScribeDataExplorerService {
         description: agolContentInfo.description
       });
       let url = `${this.agolUserContentUrl}/publish?itemId=${itemId}&fileType=geojson&publishParameters=${publishParams}`;
-      url = url + `&token=${this.loginService.currentUser.value.agol_token}&f=json`;
+      url = url + `&token=${this.agolToken}&f=json`;
       const result = await this.http.post<any>(url, {}).toPromise().then((response) => {
         // console.log(response);
         if ('error' in response) {
@@ -149,7 +154,7 @@ export class ScribeDataExplorerService {
         return error.message;
       });
       // delete added item
-      const deleteItemUrl = `${this.agolUserContentUrl}/deleteItems?items=${itemId}&token=${this.loginService.currentUser.value.agol_token}&f=json`;
+      const deleteItemUrl = `${this.agolUserContentUrl}/deleteItems?items=${itemId}&token=${this.agolToken}&f=json`;
       const deleteResult = await this.http.post<any>(deleteItemUrl, {}).toPromise().then((response) => {
         return response.results[0].success;
       });
@@ -160,7 +165,7 @@ export class ScribeDataExplorerService {
 
   async getPublishedAGOLServices() {
     const agolServices = [];
-    const url = `${this.agolUserContentUrl}?token=${this.loginService.currentUser.value.agol_token}&f=json`;
+    const url = `${this.agolUserContentUrl}?token=${this.agolToken}&f=json`;
     const results = await this.http.get<any>(url).toPromise()
       .catch((error) => {
         return false;

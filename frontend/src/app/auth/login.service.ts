@@ -17,7 +17,8 @@ export interface User {
 
 @Injectable()
 export class LoginService implements CanActivateChild, CanActivate {
-  currentUser: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  // currentUser: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  currentUser: ReplaySubject<User> = new ReplaySubject<User>(1);
   currentUsername: {displayName: ''};
   oauthUrl: string;
   groups: string[];

@@ -26,6 +26,9 @@ import {CONFIG_SETTINGS} from '../config_settings';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {map} from 'rxjs/operators';
 
+import {Injectable} from '@angular/core';
+import {environment} from "@environments/environment";
+
 
 @Component({
   selector: 'app-home',
@@ -33,6 +36,7 @@ import {map} from 'rxjs/operators';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements OnInit, AfterViewInit {
   tabs: any = {0: 'Lab Analyte Results', 1: 'Sample Point Locations'};
   selectedTab = 0;
@@ -102,18 +106,18 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   async ngOnInit() {
-    // get user's projects and published AGOL services
     this.userProjects = await this.scribeDataExplorerService.getUserProjects();
+    // console.log('agol url:' + this.scribeDataExplorerService.agolUserContentUrl);
     await this.scribeDataExplorerService.getPublishedAGOLServices().then((items: AGOLService[]) => {
-      this.scribeDataExplorerService.userAGOLServices.next(items);
-      this.scribeDataExplorerService.userAGOLServices.subscribe(x => {
-        x.forEach(i => {
-          console.log(`Title: ${i.title}`);
-          console.log(`url: ${i.url}`);
-        });
-        }
-      );
-    });
+        this.scribeDataExplorerService.userAGOLServices.next(items);
+        // this.scribeDataExplorerService.userAGOLServices.subscribe(x => {
+        //   x.forEach(i => {
+        //     console.log(`Title: ${i.title}`);
+        //     console.log(`url: ${i.url}`);
+        //   });
+        //   }
+        // );
+     });
 
     // Subscribing to query string parameters
     const queryParams = this.route.snapshot.queryParams;

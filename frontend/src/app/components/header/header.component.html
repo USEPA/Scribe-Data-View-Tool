@@ -12,6 +12,15 @@
       </span>
       <mat-menu #menu="matMenu">
         <span mat-menu-item>User: {{ currentUser.name }}</span>
+        <mat-form-field *ngIf="(scribeDataExplorerService.userAGOLServices | async)" style="width: 100%;">
+          <mat-label>Open your GeoPlatform service:</mat-label>
+          <mat-select [formControl]="projects">
+            <mat-option *ngFor="let item of scribeDataExplorerService.userAGOLServices.value">
+              <a matLine [href]="item.url" target="_blank">{{ item.title }}</a>&nbsp;
+              <mat-icon>open_in_new</mat-icon>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
         <button mat-menu-item (click)="logout()">Logout</button>
       </mat-menu>
     </div>
