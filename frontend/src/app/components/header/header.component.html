@@ -12,10 +12,12 @@
       </span>
       <mat-menu #menu="matMenu">
         <span mat-menu-item>User: {{ currentUser.name }}</span>
+        <!--        Menu item that triggers the geoplatforms links submenu items     -->
         <span mat-menu-item *ngIf="(scribeDataExplorerService.userAGOLServices | async)"
               [mat-menu-trigger-for]="geoplatforms">Geoplatforms</span>
         <button mat-menu-item (click)="logout()">Logout</button>
       </mat-menu>
+      <!--        Geoplatforms links submenu items     -->
       <mat-menu #geoplatforms="matMenu">
         <div *ngFor="let item of scribeDataExplorerService.userAGOLServices.value">
           <span mat-menu-item>
