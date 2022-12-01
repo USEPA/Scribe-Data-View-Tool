@@ -7,7 +7,7 @@ import {LoginService} from '../../auth/login.service';
 import {FormControl, Validators} from '@angular/forms';
 import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
 import {AGOLService, Project} from '../../projectInterfaceTypes';
-import {environment} from "@environments/environment";
+import {environment} from '@environments/environment';
 
 
 @Component({
@@ -17,6 +17,7 @@ import {environment} from "@environments/environment";
 })
 export class HeaderComponent implements OnInit {
   projects = new FormControl();
+  numbers: number[] = [];
 
   constructor(public loginService: LoginService, public scribeDataExplorerService: ScribeDataExplorerService,
               private router: Router) {
@@ -25,6 +26,7 @@ export class HeaderComponent implements OnInit {
       this.scribeDataExplorerService.agolUsername = user.agol_username;
       this.scribeDataExplorerService.agolToken = user.agol_token;
       this.scribeDataExplorerService.agolUserContentUrl = `${environment.user_geo_platform_url}/sharing/rest/content/users/${user.agol_username}`;
+      this.numbers = Array.from(Array(100).keys()).map(x => x + 1);
     });
 
   }

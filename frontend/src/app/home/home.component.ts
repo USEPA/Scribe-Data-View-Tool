@@ -38,7 +38,7 @@ import {environment} from "@environments/environment";
 })
 
 export class HomeComponent implements OnInit, AfterViewInit {
-  tabs: any = {0: 'Lab Analyte Results', 1: 'Sample Point Locations'};
+  tabs: any = {0: 'Lab Analyte Results', 1: 'Sample Point Locations', 2: 'Testing'};
   selectedTab = 0;
   isLoadingData = false;
   // project props
