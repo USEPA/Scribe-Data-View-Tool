@@ -41,7 +41,6 @@ def get_project_samples(request, project_id_p=0):
         response_data = cache.get(f'project_samples{project_id_p}')
         if response_data is not None:
             return Response(response_data)
-
         project_samples_sql = f"""
         SELECT * 
         FROM {project_id_p}_Samples samp

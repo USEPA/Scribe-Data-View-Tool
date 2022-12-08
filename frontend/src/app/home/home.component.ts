@@ -1,9 +1,14 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ElementRef, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormControl, Validators} from '@angular/forms';
 import {Subject, Subscription, Observable, BehaviorSubject} from 'rxjs';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {COMMA, ENTER, SPACE} from '@angular/cdk/keycodes';
+
+import {MatAutocomplete, MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
+import {MatChipInputEvent} from '@angular/material/chips';
+
+
 import {query} from '@angular/animations';
 import * as moment from 'moment';
 
@@ -24,10 +29,10 @@ import {ProjectsMapDialogComponent} from '@components/projects-map-dialog/projec
 import {FiltersInterfaceTypes, ActiveFilter} from '../filtersInterfaceTypes';
 import {CONFIG_SETTINGS} from '../config_settings';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {map} from 'rxjs/operators';
+import {map, startWith} from 'rxjs/operators';
 
 import {Injectable} from '@angular/core';
-import {environment} from "@environments/environment";
+import {environment} from '@environments/environment';
 
 
 @Component({
@@ -94,6 +99,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this._agGridActiveFilters = value;
     this.agGridActiveFiltersSubject.next(value);
   }
+
+  visible = true;
+  selectable = true;
+  removable = true;
+  projectCtrl = new FormControl('');
+  filteredProjects: Observable<Project[]>;
+  myProjects: Project[] = [{projectid: 1, project_name: 'test project1'}, {projectid: 2, project_name: 'test project2'}];
+  projectToAdd: Project;
+
+  @ViewChild('projectInput') projectInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   constructor(public app: AppComponent,
               public route: ActivatedRoute,
@@ -397,6 +413,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
       //   }
       // }
     }
+    this.myProjects.forEach(p => {
+      console.log(`Id: ${p.projectid}, Value: ${p.project_name}`);
+    });
   }
 
   clearProjects(event = null) {
@@ -744,6 +763,48 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   onResize(event) {
     this.colsSpan = (event.target.innerWidth > 1050) ? 1 : 2;
+  }
+
+  private _filter(value: string): Project[] {
+    const filterValue = value.toString().toLowerCase();
+
+    return this.userProjects.filter(project => project.project_name.toLowerCase().includes(value));
+  }
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+    // add project
+    if ((value || '').trim()) {
+      this.myProjects.push(this.projectToAdd);
+    }
+    // reset the input value
+    if (input) {
+      input.value = '';
+    }
+    this.projectCtrl.setValue(null);
+
+  }
+
+  remove(project: Project): void{
+    const index = this.myProjects.indexOf(project);
+    if (index >= 0) {
+      this.myProjects.splice(index, 1);
+    }
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.projectToAdd = {projectid: event.option.value, project_name: event.option.viewValue};
+    this.myProjects.push(this.projectToAdd);
+    this.projectInput.nativeElement.value = '';
+    this.projectCtrl.setValue(null);
+  }
+
+  setFilter() {
+    this.filteredProjects = this.projectCtrl.valueChanges.pipe(
+    startWith(null),
+    map((val: string | null) => (val ? this._filter(val) : this.userProjects.slice())),
+  );
   }
 
 }

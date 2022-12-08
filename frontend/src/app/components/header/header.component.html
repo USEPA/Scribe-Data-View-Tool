@@ -19,14 +19,12 @@
       </mat-menu>
       <!--        Geoplatforms links submenu items     -->
       <mat-menu #geoplatforms="matMenu">
-        <div *ngFor="let item of scribeDataExplorerService.userAGOLServices.value">
-          <span mat-menu-item>
+          <span mat-menu-item *ngFor="let item of scribeDataExplorerService.userAGOLServices.value">
             <a matLine [href]="item.url" target="_blank">{{ item.title | slice:0:30 }} {{item.title.length > 30 ? '...' : ''}}</a>
             <mat-icon>
               <a matLine [href]="item.url" target="_blank">open_in_new</a>
             </mat-icon>
           </span>
-        </div>
       </mat-menu>
     </div>
   </mat-toolbar-row>

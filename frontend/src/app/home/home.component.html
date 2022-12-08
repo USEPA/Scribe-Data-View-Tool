@@ -10,14 +10,39 @@
   <div class="component-container-row" style="margin-top: 10px;">
     <!-- Projects Selection -->
     <div class="component-container-col">
-      <div class="component-container-row tabs-btn">
+      <div class="component-container-row">
         <mat-form-field style="width: 50%;">
-          <mat-label>Select Project(s):</mat-label>
-          <mat-select [formControl]="projects" multiple>
-            <mat-option *ngFor="let project of userProjects" [value]="project.projectid">
+<!--          <mat-label>Select Project(s):</mat-label>-->
+<!--          <mat-select [formControl]="projects" multiple>-->
+<!--            <mat-option *ngFor="let project of userProjects" [value]="project.projectid">-->
+<!--              {{project.project_name}}-->
+<!--            </mat-option>-->
+<!--          </mat-select>-->
+          <mat-chip-list #chipList aria-label="Project selection">
+            <mat-chip
+              *ngFor="let project of myProjects"
+              [selectable]="selectable"
+              [removable]="removable"
+              (removed)="remove(project)">
+              {{project.project_name}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input
+              placeholder="New project..."
+              #projectInput
+              [formControl]="projectCtrl"
+              [matAutocomplete]="auto"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (matChipInputTokenEnd)="add($event)"
+              (click)="setFilter()"
+              (change)="setFilter()">
+          </mat-chip-list>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <mat-option *ngFor="let project of filteredProjects | async" [value]="project.projectid">
               {{project.project_name}}
             </mat-option>
-          </mat-select>
+          </mat-autocomplete>
         </mat-form-field>&nbsp;
         <span style="align-self: flex-end; margin-bottom: 20px;">
           <button mat-raised-button color="primary" (click)="setProjects($event)">
