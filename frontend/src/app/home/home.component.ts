@@ -29,7 +29,7 @@ import {ProjectsMapDialogComponent} from '@components/projects-map-dialog/projec
 import {FiltersInterfaceTypes, ActiveFilter} from '../filtersInterfaceTypes';
 import {CONFIG_SETTINGS} from '../config_settings';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {map, startWith} from 'rxjs/operators';
+import {count, map, startWith} from 'rxjs/operators';
 
 import {Injectable} from '@angular/core';
 import {environment} from '@environments/environment';
@@ -105,8 +105,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   removable = true;
   projectCtrl = new FormControl('');
   filteredProjects: Observable<Project[]>;
-  myProjects: Project[] = [{projectid: 1, project_name: 'test project1'}, {projectid: 2, project_name: 'test project2'}];
-  projectToAdd: Project;
+  projectsList: Project[] = [];
+  projectIdsList: number[] = [];
 
   @ViewChild('projectInput') projectInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -119,10 +119,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
               public snackBar: MatSnackBar,
               public router: Router) {
     this.projectsLoaded = false;
+
+
   }
 
   async ngOnInit() {
     this.userProjects = await this.scribeDataExplorerService.getUserProjects();
+    this.setFilter();
     // console.log('agol url:' + this.scribeDataExplorerService.agolUserContentUrl);
     await this.scribeDataExplorerService.getPublishedAGOLServices().then((items: AGOLService[]) => {
         this.scribeDataExplorerService.userAGOLServices.next(items);
@@ -190,6 +193,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   openProjectsMapDialog() {
+    // this.initProps();
     const dialogRef = this.dialog.open(ProjectsMapDialogComponent, {
       width: '800px',
       data: {}
@@ -200,7 +204,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         const newSelectedProjectIDs = projectCentroids.map((projectCentroid) => {
           return projectCentroid.PROJECTID;
         });
-        const currentselectedProjectIDs = this.projects.value as Array<number>;
+        const currentselectedProjectIDs = this.projectIdsList;
         if (!currentselectedProjectIDs || (currentselectedProjectIDs.sort().join(',') !== newSelectedProjectIDs.sort().join(','))) {
           this.clearProjects();
           this.setQueryParam('projects', newSelectedProjectIDs.join(','));
@@ -304,6 +308,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   initProps(): void {
     this.selectedProjectIDs = [];
+    this.projectsList = [];
+    this.projectIdsList = [];
     this.clearQueryParams();
     this.agGridActiveFilters = [];
     this.mapSymbolFields = [];
@@ -396,10 +402,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   setProjects(event) {
     event.stopPropagation();
-    if (this.projects.value) {
-      const newselectedProjectIDs = this.projects.value.join(',');
+    if (this.projectIdsList) {
+      const newselectedProjectIDs = this.projectIdsList.join(',');
       this.setQueryParam('projects', newselectedProjectIDs);
-      this.getCombinedProjectData(this.projects.value);
+      this.getCombinedProjectData(this.projectIdsList);
       // const currentselectedProjectIDs = this.route.snapshot.queryParams.projects;
       // if (!currentselectedProjectIDs) {
       //   this.setQueryParam('projects', newselectedProjectIDs);
@@ -413,8 +419,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
       //   }
       // }
     }
-    this.myProjects.forEach(p => {
+    this.projectsList.forEach(p => {
       console.log(`Id: ${p.projectid}, Value: ${p.project_name}`);
+    });
+    this.projectIdsList.forEach(id => {
+      console.log(`The id is: ${id}`);
     });
   }
 
@@ -426,7 +435,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     // disable the table and map components
     this.showTable = false;
     this.geoPointsArray = [];
-    this.projects.setValue(null);
   }
 
   async onTabChange(tabId) {
@@ -688,7 +696,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     let selectedProjects: Project[];
     this.scribeDataExplorerService.isPublishingToAGOL.next(true);
     selectedProjects = this.userProjects.filter((project: Project) => {
-      return this.projects.value.includes(project.projectid);
+      return this.projectIdsList.includes(project.projectid);
     });
     // set feature layer title: "[Project name] ([Number]) Scribe Project Feature Layer"
     const staticText = 'Scribe Project Feature Layer';
@@ -766,36 +774,27 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   private _filter(value: string): Project[] {
-    const filterValue = value.toString().toLowerCase();
-
-    return this.userProjects.filter(project => project.project_name.toLowerCase().includes(value));
+    const filterValue = value.toString().toLowerCase(); // use of toString cause value will be an observable
+    return this.userProjects.filter(project => project.project_name.toLowerCase().includes(filterValue));
   }
 
   add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-    // add project
-    if ((value || '').trim()) {
-      this.myProjects.push(this.projectToAdd);
-    }
-    // reset the input value
-    if (input) {
-      input.value = '';
-    }
-    this.projectCtrl.setValue(null);
-
+    event.input.value = '';
   }
 
+  // remove both the project and the project id from their respective list
   remove(project: Project): void{
-    const index = this.myProjects.indexOf(project);
+    const index = this.projectsList.indexOf(project);
     if (index >= 0) {
-      this.myProjects.splice(index, 1);
+      this.projectsList.splice(index, 1);
+      this.projectIdsList.splice(index, 1);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.projectToAdd = {projectid: event.option.value, project_name: event.option.viewValue};
-    this.myProjects.push(this.projectToAdd);
+    const projectToAdd = {projectid: event.option.value, project_name: event.option.viewValue};
+    this.addProject(projectToAdd);
+    this.addId(projectToAdd.projectid);
     this.projectInput.nativeElement.value = '';
     this.projectCtrl.setValue(null);
   }
@@ -803,8 +802,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
   setFilter() {
     this.filteredProjects = this.projectCtrl.valueChanges.pipe(
     startWith(null),
-    map((val: string | null) => (val ? this._filter(val) : this.userProjects.slice())),
-  );
+    map((val?: string) => (val ? this._filter(val) : this.userProjects.slice())),
+    );
   }
 
+  addId(id: number) {
+    if (!this.projectIdsList.includes(id)) {
+      this.projectIdsList.push(id);
+    }
+  }
+
+  addProject(project: Project) {
+    if (!this.projectIdsList.includes(project.projectid)) {
+      this.projectsList.push(project);
+    }
+  }
 }

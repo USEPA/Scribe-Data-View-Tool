@@ -20,7 +20,7 @@
 <!--          </mat-select>-->
           <mat-chip-list #chipList aria-label="Project selection">
             <mat-chip
-              *ngFor="let project of myProjects"
+              *ngFor="let project of projectsList"
               [selectable]="selectable"
               [removable]="removable"
               (removed)="remove(project)">
@@ -28,18 +28,17 @@
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
             <input
-              placeholder="New project..."
+              placeholder="Add projects..."
               #projectInput
               [formControl]="projectCtrl"
               [matAutocomplete]="auto"
               [matChipInputFor]="chipList"
               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
               (matChipInputTokenEnd)="add($event)"
-              (click)="setFilter()"
-              (change)="setFilter()">
+            (click)="setFilter()">
           </mat-chip-list>
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-            <mat-option *ngFor="let project of filteredProjects | async" [value]="project.projectid">
+            <mat-option *ngFor="let project of filteredProjects | async " [value]="project.projectid">
               {{project.project_name}}
             </mat-option>
           </mat-autocomplete>
@@ -51,7 +50,7 @@
           <button mat-raised-button color="primary" (click)="openProjectsMapDialog()">
             Select Project(s) on Map
           </button>&nbsp;
-          <button *ngIf="projects.value" mat-raised-button color="primary" (click)="clearProjects($event)">
+          <button *ngIf="projectIdsList" mat-raised-button color="primary" (click)="clearProjects($event)">
             Clear All
           </button>
         </span>
