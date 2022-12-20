@@ -13,7 +13,7 @@ from arcgis.gis import GIS
 import geojson
 import json
 
-from .models.scribe_base_models import Projects
+from .models.scribe_base_models import Projects, ProjectsExplorer
 
 
 class ProjectsSerializer(serializers.ModelSerializer):
@@ -109,3 +109,17 @@ def get_published_agol_services(request):
     except Exception as ex:
         print(ex)
         return Response(status=500)
+
+
+class ProjectsExplorerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProjectsExplorer
+        fields = "__all__"
+
+
+class ProjectsExplorerViewSet(viewsets.ModelViewSet):
+    db_name = "scribe_db"
+    permission_classes = [IsAuthenticated]
+    queryset = ProjectsExplorer.objects.using(db_name).order_by('project_name')
+    serializer_class = ProjectsExplorerSerializer
+

@@ -5,6 +5,17 @@ export interface Project {
   project_name: string;
 }
 
+export interface ProjectExplorer {
+  projectid: number;
+  project_name: string;
+  Site_No: string;
+  Site_State: string;
+  NPL_Status: string;
+  Description: string;
+  EPARegionNumber: string;
+  EPAContact: string;
+}
+
 export interface AGOLService {
   title: string;
   url: string;

@@ -32,6 +32,7 @@ ViewSets can also define additional API methods to be routed, using the @action 
 """
 router = routers.DefaultRouter()
 router.register(r'projects', ProjectsViewSet, basename='scribe_db.projects')
+router.register(r'projectsexplorer', ProjectsExplorerViewSet, basename='scribe_db.projectsexplorer')
 router.register(r'project_tables', ProjectTablesViewSet, basename='scribe_db.project_tables')
 
 

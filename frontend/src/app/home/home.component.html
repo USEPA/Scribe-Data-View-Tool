@@ -4,6 +4,8 @@
       Welcome to the Scribe Data Explorer! Search for and interact with projects from
       <a href="https://response.epa.gov/site/site_profile.aspx?site_id=ScribeGIS" target="_blank">USEPA ERT's Scribe database system</a>.
       <br>
+      Search projects by Id, Name, Site#, Site State, NPL Status, Description, Epa Region# or Epa Contact.
+      <br>
       Select projects from the drop-down or use the "Select Projects on Map" button to get started.
     </span>
   </span>
@@ -28,7 +30,7 @@
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
             <input
-              placeholder="Add projects..."
+              placeholder="Search projects..."
               #projectInput
               [formControl]="projectCtrl"
               [matAutocomplete]="auto"
@@ -39,7 +41,7 @@
           </mat-chip-list>
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
             <mat-option *ngFor="let project of filteredProjects | async " [value]="project.projectid">
-              {{project.project_name}}
+              {{project.project_name}} ({{project.Site_No}})
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>&nbsp;

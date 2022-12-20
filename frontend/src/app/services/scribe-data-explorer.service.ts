@@ -70,6 +70,14 @@ export class ScribeDataExplorerService {
     return results;
   }
 
+  async getUserExploredProjects() {
+    const results = await this.http.get<Project[]>(`${this.scribeApiUrl}/projectsexplorer/`).toPromise()
+      .catch((error) => {
+        return {} as ColumnsRows;
+      });
+    return results;
+  }
+
   async addItemToAGOL(agolContentInfo: AGOLContentInfo) {
     let result = false;
     const geoJson = await this.generateGeoJson(agolContentInfo);
