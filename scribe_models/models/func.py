@@ -1,31 +1,45 @@
 from scribe_models.models.scribe_base_models import *
-from scribe_models.models.dbo import *
 from django.utils.module_loading import import_string
+
+db_name = 'scribe_db'
 
 
 # populate the table using information from the project table and the corresponding
 # site table identified using the project id
-def populate_projects_explorer():
-    db_name = 'scribe_db'
+def populate_project_explorer():
     projects = Projects.objects.using(db_name).all()
-
     for p in projects:
-        SiteModel = import_string(f'scribe_models.models.dbo.PID_{p.projectid}_Site_model')
-        site = SiteModel.objects.using(db_name).first()  # There is only one record in the site table.
-        project_explorer = ProjectsExplorer()
-
-        project_explorer.projectid = p.projectid
-        project_explorer.project_name = p.project_name
-        project_explorer.Site_No = site.Site_No
-        project_explorer.Site_State = site.Site_State
-        project_explorer.NPL_Status = site.NPL_Status
-        project_explorer.Description = site.Description
-        project_explorer.EPARegionNumber = site.EPARegionNumber
-        project_explorer.EPAContact = site.EPAContact
-
-        project_explorer.save(using=db_name)
+        save_in_project_explorer(p)
 
 
+def delete_all_records():
+    ProjectsExplorer.objects.using(db_name).all().delete()
 
 
+def add_new_project_explorer():
+    project_ids = Projects.objects.using(db_name).all().values_list('projectid', flat=True)
+    project_explorer_ids = ProjectsExplorer.objects.using(db_name).all().values_list('projectid', flat=True)
+    if project_ids.count() > project_explorer_ids.count():
+        for i in project_ids:
+            if i not in project_explorer_ids:
+                project = Projects.objects.using(db_name).get(projectid=i)
+                save_in_project_explorer(project)
+    return project_ids.count() - project_explorer_ids.count()
 
+
+# helper function
+def save_in_project_explorer(project):
+    SiteModel = import_string(f'scribe_models.models.dbo.PID_{project.projectid}_Site_model')
+    site = SiteModel.objects.using(db_name).first()  # There is only one record in the site table.
+    project_explorer = ProjectsExplorer()
+
+    project_explorer.projectid = project.projectid
+    project_explorer.project_name = project.project_name
+    project_explorer.Site_No = site.Site_No
+    project_explorer.Site_State = site.Site_State
+    project_explorer.NPL_Status = site.NPL_Status
+    project_explorer.Description = site.Description
+    project_explorer.EPARegionNumber = site.EPARegionNumber
+    project_explorer.EPAContact = site.EPAContact
+
+    project_explorer.save(using=db_name)

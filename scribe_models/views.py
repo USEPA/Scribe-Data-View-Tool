@@ -1,6 +1,7 @@
 from django.db import connections
 from django.http import HttpResponseServerError
 from django.core.cache import cache
+from django_filters.rest_framework import DjangoFilterBackend
 from social_django.utils import load_strategy
 
 from rest_framework import serializers
@@ -8,6 +9,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import api_view, permission_classes, parser_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 from arcgis.gis import GIS
 import geojson
@@ -27,6 +29,10 @@ class ProjectsViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = Projects.objects.using(db_name).order_by('project_name')
     serializer_class = ProjectsSerializer
+    filter_backends = [SearchFilter, OrderingFilter, DjangoFilterBackend]
+    filterset_fields = ['project_name']
+    search_fields = ['project_name']
+
 
 
 @api_view(['GET'])
@@ -122,4 +128,6 @@ class ProjectsExplorerViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = ProjectsExplorer.objects.using(db_name).order_by('project_name')
     serializer_class = ProjectsExplorerSerializer
-
+    filter_backends = [SearchFilter, OrderingFilter, DjangoFilterBackend]
+    filterset_fields = ['project_name', 'Site_No', 'Site_State', 'NPL_Status', 'Description', 'EPARegionNumber', 'EPAContact']
+    search_fields = ['project_name', 'Site_No', 'Site_State', 'NPL_Status', 'Description', 'EPARegionNumber', 'EPAContact']

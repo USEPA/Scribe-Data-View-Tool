@@ -15,7 +15,7 @@ import {
   Project,
   ProjectCentroid,
   ProjectLabResult,
-  ProjectSample
+  ProjectSample, ProjectExplorer
 } from '../projectInterfaceTypes';
 import {LoginService} from '../auth/login.service';
 import {User} from '../auth/login.service';
@@ -71,11 +71,15 @@ export class ScribeDataExplorerService {
   }
 
   async getUserExploredProjects() {
-    const results = await this.http.get<Project[]>(`${this.scribeApiUrl}/projectsexplorer/`).toPromise()
+    const results = await this.http.get<ProjectExplorer[]>(`${this.scribeApiUrl}/projectsexplorer/`).toPromise()
       .catch((error) => {
         return {} as ColumnsRows;
       });
     return results;
+  }
+
+  getUserFilteredProjects(filterValue?: string): Observable<ProjectExplorer[]>{
+    return this.http.get<ProjectExplorer[]>(`${this.scribeApiUrl}/projectsexplorer/?search=${filterValue}`);
   }
 
   async addItemToAGOL(agolContentInfo: AGOLContentInfo) {
