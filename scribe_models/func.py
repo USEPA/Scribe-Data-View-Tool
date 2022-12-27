@@ -1,4 +1,5 @@
-from scribe_models.models.scribe_base_models import *
+from scribe_models.models.scribe_base_models import Projects
+from scribe_models.models.project_explorer_models import ProjectsExplorer
 from django.utils.module_loading import import_string
 
 db_name = 'scribe_db'

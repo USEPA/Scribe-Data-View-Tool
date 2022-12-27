@@ -4,7 +4,7 @@
       Welcome to the Scribe Data Explorer! Search for and interact with projects from
       <a href="https://response.epa.gov/site/site_profile.aspx?site_id=ScribeGIS" target="_blank">USEPA ERT's Scribe database system</a>.
       <br>
-      Search projects by Id, Name, Site#, Site State, NPL Status, Description, Epa Region# or Epa Contact.
+      Search projects Name, Site#, Site State, NPL Status, Description, Epa Region# or Epa Contact.
       <br>
       Select projects from the drop-down or use the "Select Projects on Map" button to get started.
     </span>
@@ -52,7 +52,7 @@
           <button mat-raised-button color="primary" (click)="openProjectsMapDialog()">
             Select Project(s) on Map
           </button>&nbsp;
-          <button *ngIf="projectIdsList" mat-raised-button color="primary" (click)="clearProjects($event)">
+          <button *ngIf="projectIdsList.length" mat-raised-button color="primary" (click)="clearProjects($event)">
             Clear All
           </button>
         </span>

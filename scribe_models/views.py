@@ -15,7 +15,8 @@ from arcgis.gis import GIS
 import geojson
 import json
 
-from .models.scribe_base_models import Projects, ProjectsExplorer
+from .models.scribe_base_models import Projects
+from .models.project_explorer_models import ProjectsExplorer
 
 
 class ProjectsSerializer(serializers.ModelSerializer):

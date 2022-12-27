@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from scribe_models.models.func import populate_project_explorer, delete_all_records, add_new_project_explorer
+from scribe_models.func import populate_project_explorer, delete_all_records, add_new_project_explorer
 
 
 class Command(BaseCommand):
