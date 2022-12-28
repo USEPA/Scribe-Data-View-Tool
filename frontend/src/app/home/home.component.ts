@@ -20,7 +20,7 @@ import {
   ColumnDefs,
   MapSymbolizationProps,
   MapSymbol,
-  ProjectCentroid, ColumnsRows, AGOLService
+  ProjectCentroid, ColumnsRows, AGOLService, ProjectExplorer
 } from '../projectInterfaceTypes';
 import {LoginService} from '../auth/login.service';
 import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
@@ -49,6 +49,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   // project props
   projects = new FormControl();
   userProjects: Project[] | any;
+  userExploredProjects: ProjectExplorer[] | any;
   projectsLoaded: boolean;
   selectedProjectIDs: string[] = [];
   isMapPointsSelected = false;
@@ -104,7 +105,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   selectable = true;
   removable = true;
   projectCtrl = new FormControl('');
-  filteredProjects: Observable<Project[]>;
+  filteredProjects: Observable<ProjectExplorer[]>;
   projectsList: Project[] = [];
   projectIdsList: number[] = [];
 
@@ -119,44 +120,36 @@ export class HomeComponent implements OnInit, AfterViewInit {
               public snackBar: MatSnackBar,
               public router: Router) {
     this.projectsLoaded = false;
-
-
   }
 
   async ngOnInit() {
     this.userProjects = await this.scribeDataExplorerService.getUserProjects();
+    // this.userExploredProjects = await this.scribeDataExplorerService.getUserExploredProjects();
     this.setFilter();
-    // console.log('agol url:' + this.scribeDataExplorerService.agolUserContentUrl);
     await this.scribeDataExplorerService.getPublishedAGOLServices().then((items: AGOLService[]) => {
         this.scribeDataExplorerService.userAGOLServices.next(items);
-        // this.scribeDataExplorerService.userAGOLServices.subscribe(x => {
-        //   x.forEach(i => {
-        //     console.log(`Title: ${i.title}`);
-        //     console.log(`url: ${i.url}`);
-        //   });
-        //   }
-        // );
      });
 
-    // Subscribing to query string parameters
-    const queryParams = this.route.snapshot.queryParams;
-    if (queryParams.projects) {
-      this.queryFilterParams = queryParams;
-      const newselectedProjectIDs = this.queryFilterParams.projects.split(',').map(item => item.trim());
-      // const notLoadedProjects = newselectedProjectIDs.filter(projectId => !this.selectedProjectIDs.includes(projectId));
-      // const removedProjects = this.selectedProjectIDs.filter(projectId => !newselectedProjectIDs.includes(projectId));
-      // clear active filters
-      this.agGridActiveFilters = [];
-      this.selectedProjectIDs = newselectedProjectIDs; // todo: in the future only load projects that have not been loaded already
-      this.getCombinedProjectData(this.selectedProjectIDs);
-      // tslint:disable-next-line:radix
-      this.projects.setValue(this.selectedProjectIDs.map(id => parseInt(id)));
-    }
-    /*const filters = [];
-    for (const key of Object.keys(queryParams).filter(k => k !== 'projects')) {
-      filters.push({name: key, value: queryParams[key]});
-    }*/
+    // // Subscribing to query string parameters
+    // const queryParams = this.route.snapshot.queryParams;
+    // if (queryParams.projects) {
+    //   this.queryFilterParams = queryParams;
+    //   const newselectedProjectIDs = this.queryFilterParams.projects.split(',').map(item => item.trim());
+    //   // const notLoadedProjects = newselectedProjectIDs.filter(projectId => !this.selectedProjectIDs.includes(projectId));
+    //   // const removedProjects = this.selectedProjectIDs.filter(projectId => !newselectedProjectIDs.includes(projectId));
+    //   // clear active filters
+    //   this.agGridActiveFilters = [];
+    //   this.selectedProjectIDs = newselectedProjectIDs; // todo: in the future only load projects that have not been loaded already
+    //   await this.getCombinedProjectData(this.selectedProjectIDs);
+    //   // tslint:disable-next-line:radix
+    //   // this.projects.setValue(this.selectedProjectIDs.map(id => parseInt(id)));
+    // }
+    // /*const filters = [];
+    // for (const key of Object.keys(queryParams).filter(k => k !== 'projects')) {
+    //   filters.push({name: key, value: queryParams[key]});
+    // }*/
 
+    this.agGridActiveFilters = [];
     this.colsSpan = (window.innerWidth > 1050) ? 1 : 2;
     this.selectedAnalyte = this.route.queryParams.pipe(map(params => params.Analyte));
   }
@@ -302,7 +295,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.missingGeoPointsCount = this.projectSamplesRowData.length;
     } else {
       // refresh data
-      this.getCombinedProjectData(this.selectedProjectIDs);
+      this.getCombinedProjectData(this.projectIdsList);
     }
   }
 
@@ -402,7 +395,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   setProjects(event) {
     event.stopPropagation();
-    if (this.projectIdsList) {
+    if (this.projectIdsList.length) {
       const newselectedProjectIDs = this.projectIdsList.join(',');
       this.setQueryParam('projects', newselectedProjectIDs);
       this.getCombinedProjectData(this.projectIdsList);
@@ -419,12 +412,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
       //   }
       // }
     }
-    this.projectsList.forEach(p => {
-      console.log(`Id: ${p.projectid}, Value: ${p.project_name}`);
-    });
-    this.projectIdsList.forEach(id => {
-      console.log(`The id is: ${id}`);
-    });
+    else {
+      this.clearProjects();
+    }
   }
 
   clearProjects(event = null) {
@@ -439,13 +429,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   async onTabChange(tabId) {
     this.selectedTab = tabId;
-    if (this.selectedProjectIDs) {
+    if (this.projectIdsList.length) {
       try {
         // clear filters and get tab data
         this.agGridActiveFilters = [];
         this.updateFilters.next([]);
         this.scribeDataExplorerService.clearMapSelectionSource.next(true);
-        this.getCombinedProjectData(this.selectedProjectIDs);
+        await this.getCombinedProjectData(this.projectIdsList);
       } catch (err) {
         this.isLoadingData = false;
         this.showTable = false;
@@ -719,7 +709,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   onExportCSVBtnClick() {
     // set ag grid title
     const selectedTab = this.tabs[this.selectedTab].replace(/ /g, '_');
-    const title = 'Projects_' + this.selectedProjectIDs.join('_') + '_' + selectedTab;
+    const title = 'Projects_' + this.projectIdsList.join('_') + '_' + selectedTab;
     if (this.selectedTab === 0) {
       this.exportLabResultsCSV.next(title);
     }
@@ -773,21 +763,45 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.colsSpan = (event.target.innerWidth > 1050) ? 1 : 2;
   }
 
-  private _filter(value: string): Project[] {
-    const filterValue = value.toString().toLowerCase(); // use of toString cause value will be an observable
-    return this.userProjects.filter(project => project.project_name.toLowerCase().includes(filterValue));
-  }
+  // perform the search by id, Name, Site#, Site State, NPL Status, Description, Epa Region# or Epa Contact
+  // private _filter(value: string): ProjectExplorer[] {
+  //   const filterValue = value.toString().toLowerCase(); // use of toString cause value will be an observable
+  //   return this.userExploredProjects.filter(project => {
+  //     return project.project_name?.toLowerCase().includes(filterValue) ||
+  //       project.projectid.toString().includes(filterValue) ||
+  //       project.Site_No?.toLowerCase().includes(filterValue) ||
+  //       project.Site_State?.toLowerCase().includes(filterValue) ||
+  //       project.NPL_Status?.toLowerCase().includes(filterValue) ||
+  //       project.Description?.toLowerCase().includes(filterValue) ||
+  //       project.EPARegionNumber?.toLowerCase().includes(filterValue) ||
+  //       project.EPAContact?.toLowerCase().includes(filterValue);
+  //   });
+  // }
 
   add(event: MatChipInputEvent): void {
-    event.input.value = '';
+    let projectInAutocomplete: ProjectExplorer;
+    this.filteredProjects.subscribe(projects => {
+      if (projects.length === 1) {
+        projectInAutocomplete = projects[0];
+        this.addProject(projectInAutocomplete);
+        this.addId(projectInAutocomplete.projectid);
+        event.input.value = '';
+      }
+    });
   }
 
   // remove both the project and the project id from their respective list
-  remove(project: Project): void{
+  async remove(project: Project){
     const index = this.projectsList.indexOf(project);
     if (index >= 0) {
       this.projectsList.splice(index, 1);
       this.projectIdsList.splice(index, 1);
+    }
+    if (this.projectIdsList.length > 0) {
+      await this.getCombinedProjectData(this.projectIdsList);
+    }
+    else {
+      this.clearProjects();
     }
   }
 
@@ -799,17 +813,23 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.projectCtrl.setValue(null);
   }
 
+  // setFilter() {
+  //   this.filteredProjects = this.projectCtrl.valueChanges.pipe(
+  //   map((val?: string) => (val ? this._filter(val) : this.userExploredProjects.slice())),
+  //   );
+  // }
+
   setFilter() {
-    this.filteredProjects = this.projectCtrl.valueChanges.pipe(
-    startWith(null),
-    map((val?: string) => (val ? this._filter(val) : this.userProjects.slice())),
-    );
+    this.projectCtrl.valueChanges.subscribe(val => {
+      this.filteredProjects =  this.scribeDataExplorerService.getUserFilteredProjects(val);
+    });
   }
 
-  addId(id: number) {
+  async addId(id: number) {
     if (!this.projectIdsList.includes(id)) {
       this.projectIdsList.push(id);
     }
+    await this.getCombinedProjectData(this.projectIdsList);
   }
 
   addProject(project: Project) {
