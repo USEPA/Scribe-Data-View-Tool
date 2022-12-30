@@ -157,3 +157,17 @@ export interface MapSymbol {
   color: string;
   label: string;
 }
+
+export interface Feature {
+  type: string;
+  geometry: {
+    type: string,
+    coordinates: any,
+  };
+  properties: any;
+}
+
+export interface FeatureCollection {
+  type: string;
+  features: Feature[];
+}

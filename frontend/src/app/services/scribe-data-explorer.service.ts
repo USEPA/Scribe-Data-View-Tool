@@ -15,7 +15,7 @@ import {
   Project,
   ProjectCentroid,
   ProjectLabResult,
-  ProjectSample, ProjectExplorer
+  ProjectSample, ProjectExplorer, FeatureCollection, Feature
 } from '../projectInterfaceTypes';
 import {LoginService} from '../auth/login.service';
 import {User} from '../auth/login.service';
@@ -118,17 +118,44 @@ export class ScribeDataExplorerService {
     }
     return result;
   }
+  // Generate the geojson from the backend
+  // async generateGeoJson(data) {
+  //   const fileResult = await this.http.post<any>(`${this.scribeApiUrl}/generate_geojson/`, data).toPromise().then((file) => {
+  //     return file;
+  //   }).catch((error) => {
+  //     this.snackBar.open(`Error publishing GeoPlatform service: Error creating GeoJson file.`, null, {
+  //       duration: 3000, panelClass: ['snackbar-error']
+  //     });
+  //     return false;
+  //   });
+  //   return fileResult;
+  // }
 
-  async generateGeoJson(data) {
-    const fileResult = await this.http.post<any>(`${this.scribeApiUrl}/generate_geojson/`, data).toPromise().then((file) => {
-      return file;
-    }).catch((error) => {
-      this.snackBar.open(`Error publishing GeoPlatform service: Error creating GeoJson file.`, null, {
-        duration: 3000, panelClass: ['snackbar-error']
-      });
-      return false;
+  // Generate the geojson from the frontend
+  generateGeoJson(data) {
+    const featureCollection: FeatureCollection = {
+      type: 'FeatureCollection',
+      features: []
+    };
+    data.rows.forEach(row => {
+      const feature: Feature = {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: []
+        },
+        properties: {}
+      };
+      feature.geometry.coordinates = [row.Longitude, row.Latitude];
+      feature.properties = row;
+      featureCollection.features.push(feature);
     });
-    return fileResult;
+    if (featureCollection.features.length) {
+      return JSON.stringify(featureCollection);
+    }
+    else {
+      return '';
+    }
   }
 
   async publishToAGOL(agolContentInfo: AGOLContentInfo) {
