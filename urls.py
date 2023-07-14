@@ -21,7 +21,7 @@ from django.views.generic import TemplateView
 from django.conf import settings
 from rest_framework import routers
 
-from sadie.views import EsriProxy, ProjectTablesViewSet, current_user
+from sadie.views import EsriProxy, ProjectTablesViewSet, current_user, ProjectsExplorerViewSet
 from scribe_models.views import *
 
 

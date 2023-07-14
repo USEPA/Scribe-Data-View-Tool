@@ -4,9 +4,11 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import View
 from django.utils.decorators import method_decorator
+from django_filters.rest_framework import DjangoFilterBackend
 
 from rest_framework import viewsets
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.viewsets import ViewSet
@@ -15,6 +17,9 @@ from rest_framework.response import Response
 from social_django.utils import load_strategy
 import requests
 import json
+
+from sadie.models import ProjectsExplorer
+from sadie.serializers import ProjectsExplorerSerializer
 
 
 @method_decorator(login_required, name='dispatch')
@@ -130,3 +135,13 @@ class ProjectTablesViewSet(ViewSet):
         else:
             return JsonResponse({'status': 'error', 'message': 'Invalid Request.'})
 
+
+
+
+class ProjectsExplorerViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    queryset = ProjectsExplorer.objects.order_by('project_name')
+    serializer_class = ProjectsExplorerSerializer
+    filter_backends = [SearchFilter, OrderingFilter, DjangoFilterBackend]
+    filterset_fields = ['project_name', 'Site_No', 'Site_State', 'NPL_Status', 'Description', 'EPARegionNumber', 'EPAContact']
+    search_fields = ['project_name', 'Site_No', 'Site_State', 'NPL_Status', 'Description', 'EPARegionNumber', 'EPAContact']

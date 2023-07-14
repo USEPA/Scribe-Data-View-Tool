@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'automagic_rest',
     'sadie',
     'scribe_models',
-    'oauth2_provider',
     'social_django',
     'django_filters',
 ]
@@ -105,7 +104,7 @@ WSGI_APPLICATION = 'settings.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'sql_server.pyodbc',
+        'ENGINE': 'mssql',
         'HOST': os.environ.get('SADIE_DB_HOST', ''),
         'NAME': 'Sadie',
         'USER': os.environ.get('SADIE_DB_USER', ''),
@@ -115,7 +114,7 @@ DATABASES = {
         }
     },
     'scribe_db': {
-        'ENGINE': 'sql_server.pyodbc',
+        'ENGINE': 'mssql',
         'HOST': os.environ.get('SCRIBE_DB_HOST', ''),
         'NAME': 'Scribe',
         'USER': os.environ.get('SCRIBE_DB_USER', ''),

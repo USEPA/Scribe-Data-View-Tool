@@ -10,7 +10,7 @@ urlpatterns = []
 {% for route_group_key, route_group_values in routes.items %}
 {{ route_group_key|replace_invalid_model_chars }}_router = {{ router }}()
 
-{% for route in route_group_values %}{{ route_group_key|replace_invalid_model_chars }}_router.register(r"{{ route }}", {{ view }}, base_name="{{ db_name }}.{{ root_python_path }}.{{ route }}")
+{% for route in route_group_values %}{{ route_group_key|replace_invalid_model_chars }}_router.register(r"{{ route }}", {{ view }}, basename="{{ db_name }}.{{ root_python_path }}.{{ route }}")
 {% endfor %}
 urlpatterns += [
     url('{{ route_group_key }}/', include({{ route_group_key|replace_invalid_model_chars }}_router.urls)),

@@ -8,15 +8,18 @@ from django.utils import timezone
 from rest_framework.authtoken.models import Token
 
 
-class SampleModel(models.Model):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    email = models.EmailField('Email Address', unique=True)
-    choice = models.CharField(
-        max_length=20,
-        choices=[('Django', 'Django'), ('React', 'react'), ('Both', 'Both')],
-        default='',
-    )
+# Model to use when filtering to explore the projects
+class ProjectsExplorer(models.Model):
+    projectid = models.IntegerField(db_column='Project_Id', primary_key=True)
+    project_name = models.CharField(db_column='Project_Name', max_length=255, blank=True, null=True)
+    Site_No = models.TextField(blank=True, null=True, db_column='Site_No')
+    Site_State = models.TextField(blank=True, null=True, db_column='Site_State')
+    NPL_Status = models.TextField(blank=True, null=True, db_column='NPL_Status')
+    Description = models.TextField(blank=True, null=True, db_column='Description')
+    EPARegionNumber = models.TextField(blank=True, null=True, db_column='EPARegionNumber')
+    EPAContact = models.TextField(blank=True, null=True, db_column='EPAContact')
 
     class Meta:
-        db_table = 'sample_model'
+        managed = True
+        db_table = 'PROJECTSEXPLORER'
+        ordering = ['projectid']

@@ -1,5 +1,5 @@
+from sadie.models import ProjectsExplorer
 from scribe_models.models.scribe_base_models import Projects
-from scribe_models.models.project_explorer_models import ProjectsExplorer
 from django.utils.module_loading import import_string
 
 db_name = 'scribe_db'
@@ -14,12 +14,12 @@ def populate_project_explorer():
 
 
 def delete_all_records():
-    ProjectsExplorer.objects.using(db_name).all().delete()
+    ProjectsExplorer.objects.all().delete()
 
 
 def add_new_project_explorer():
     project_ids = Projects.objects.using(db_name).all().values_list('projectid', flat=True)
-    project_explorer_ids = ProjectsExplorer.objects.using(db_name).all().values_list('projectid', flat=True)
+    project_explorer_ids = ProjectsExplorer.objects.all().values_list('projectid', flat=True)
     if project_ids.count() > project_explorer_ids.count():
         for i in project_ids:
             if i not in project_explorer_ids:
@@ -43,4 +43,4 @@ def save_in_project_explorer(project):
     project_explorer.EPARegionNumber = site.EPARegionNumber
     project_explorer.EPAContact = site.EPAContact
 
-    project_explorer.save(using=db_name)
+    project_explorer.save()
