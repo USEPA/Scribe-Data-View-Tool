@@ -17,11 +17,6 @@ import {
   ProjectLabResult,
   ProjectSample, ProjectExplorer, FeatureCollection, Feature
 } from '../projectInterfaceTypes';
-import {LoginService} from '../auth/login.service';
-import {User} from '../auth/login.service';
-import {createUrlResolverWithoutPackagePrefix} from '@angular/compiler';
-import {getLocaleCurrencyName} from '@angular/common';
-
 
 
 @Injectable({

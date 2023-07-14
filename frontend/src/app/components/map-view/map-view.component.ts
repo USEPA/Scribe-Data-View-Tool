@@ -268,7 +268,9 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
           //   location: event.mapPoint,
           // });
           if (response.results.length > 0) {
-            this.selectedFeaturesChange.emit([response.results[0].graphic.attributes.Samp_No]);
+            if (response.results[0].type === 'graphic') {
+              this.selectedFeaturesChange.emit([response.results[0].graphic.attributes.Samp_No]);
+            }
             // if (selectedGraphic.attributes && 'PROJECTID' in selectedGraphic.attributes) {
             //   // on project centroid point selected / clicked, go to that project
             //
