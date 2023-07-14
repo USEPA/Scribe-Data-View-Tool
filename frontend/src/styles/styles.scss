@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@use '~@angular/material' as mat;
 @import '~@angular/material/theming';
 @import url('//fonts.googleapis.com/icon?family=Material+Icons');
 // AG Grid style imports
@@ -7,9 +8,9 @@
 // Esri JS API css
 //@import url('https://js.arcgis.com/4.12/esri/css/main.css');
 
-@include mat-core();
+@include mat.core();
 
-$config: mat-typography-config();
+$config: mat.define-typography-config();
 
 html, body {
   height: 100%;
@@ -18,21 +19,21 @@ html, body {
 }
 body {
   // font-family: Roboto, "Helvetica Neue", sans-serif;
-  font-family: mat-font-family($config);
+  font-family: mat.font-family($config);
   font-weight: normal;
 }
 
 // Custom theme configurations
-$primary: mat-palette($mat-blue, 500);
-$accent:  mat-palette($mat-blue, 500, A200, A400);
-$error:    mat-palette($mat-red, 500);
-$warn:    mat-palette($mat-orange, 500);
-$theme: mat-light-theme($primary, $accent, $warn);
-@include angular-material-theme($theme);
+$primary: mat.define-palette(mat.$blue-palette, 500);
+$accent:  mat.define-palette(mat.$blue-palette, 500, A200, A400);
+$error:    mat.define-palette(mat.$red-palette, 500);
+$warn:    mat.define-palette(mat.$orange-palette, 500);
+$theme: mat.define-light-theme($primary, $accent, $warn);
+@include mat.all-component-themes($theme);
 
 // Custom colors
 $custom-colors: (
-  toolbar-background: mat-color($mat-blue, 700),
+  toolbar-background: mat.get-color-from-palette(mat.$blue-palette, 700),
 );
 
 // Material Angular extended classes
@@ -46,7 +47,7 @@ mat-tab-group, .mat-tab-body-wrapper {
   overflow-y: auto !important;
 }
 .mat-warn {
-  color: mat-color($warn);
+  color: mat.get-color-from-palette($warn);
 }
 .mat-toolbar {
   background: map-get($custom-colors, toolbar-background);
