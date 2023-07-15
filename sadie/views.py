@@ -18,6 +18,7 @@ from social_django.utils import load_strategy
 import requests
 import json
 
+from sadie.filters import ProjectsExplorerFilterset
 from sadie.models import ProjectsExplorer
 from sadie.serializers import ProjectsExplorerSerializer
 
@@ -140,8 +141,10 @@ class ProjectTablesViewSet(ViewSet):
 
 class ProjectsExplorerViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
-    queryset = ProjectsExplorer.objects.order_by('project_name')
+    queryset = ProjectsExplorer.objects.all()
+    ordering = ['project_name']
     serializer_class = ProjectsExplorerSerializer
     filter_backends = [SearchFilter, OrderingFilter, DjangoFilterBackend]
-    filterset_fields = ['project_name', 'Site_No', 'Site_State', 'NPL_Status', 'Description', 'EPARegionNumber', 'EPAContact']
-    search_fields = ['project_name', 'Site_No', 'Site_State', 'NPL_Status', 'Description', 'EPARegionNumber', 'EPAContact']
+    filterset_class = ProjectsExplorerFilterset
+    search_fields = ['project_name', 'Site_No', 'Site_State', 'NPL_Status', 'Description', 'EPARegionNumber',
+                     'EPAContact']

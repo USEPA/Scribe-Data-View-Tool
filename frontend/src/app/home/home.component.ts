@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   agGridActiveFiltersSubject: Subject<ActiveFilter[]> = new Subject<ActiveFilter[]>();
   agGridActiveFiltersEvt: Observable<ActiveFilter[]> = this.agGridActiveFiltersSubject.asObservable();
   updateColDefs: Subject<any> = new Subject<any>();
-  presetFilters: Subject<any> = new Subject<any>();
+  // presetFilters: Subject<any> = new Subject<any>();
   updateFilters: Subject<any> = new Subject<any>();
   publishLabResultsToAGOL = new BehaviorSubject<{ title: string, description: string }>(null);
   publishSamplePointLocationsToAGOL = new BehaviorSubject<{ title: string, description: string }>(null);
@@ -125,31 +125,41 @@ export class HomeComponent implements OnInit, AfterViewInit {
   async ngOnInit() {
     this.userProjects = await this.scribeDataExplorerService.getUserProjects();
     // this.userExploredProjects = await this.scribeDataExplorerService.getUserExploredProjects();
-    this.setFilter();
+    // this.setFilter();
     await this.scribeDataExplorerService.getPublishedAGOLServices().then((items: AGOLService[]) => {
-        this.scribeDataExplorerService.userAGOLServices.next(items);
-     });
+      this.scribeDataExplorerService.userAGOLServices.next(items);
+    });
+    // subscribe to autocomplete input
+    this.projectCtrl.valueChanges.subscribe(val => {
+      this.filteredProjects = this.scribeDataExplorerService.getUserFilteredProjects(val);
+    });
 
     // // Subscribing to query string parameters
-    // const queryParams = this.route.snapshot.queryParams;
-    // if (queryParams.projects) {
-    //   this.queryFilterParams = queryParams;
-    //   const newselectedProjectIDs = this.queryFilterParams.projects.split(',').map(item => item.trim());
-    //   // const notLoadedProjects = newselectedProjectIDs.filter(projectId => !this.selectedProjectIDs.includes(projectId));
-    //   // const removedProjects = this.selectedProjectIDs.filter(projectId => !newselectedProjectIDs.includes(projectId));
-    //   // clear active filters
-    //   this.agGridActiveFilters = [];
-    //   this.selectedProjectIDs = newselectedProjectIDs; // todo: in the future only load projects that have not been loaded already
-    //   await this.getCombinedProjectData(this.selectedProjectIDs);
-    //   // tslint:disable-next-line:radix
-    //   // this.projects.setValue(this.selectedProjectIDs.map(id => parseInt(id)));
-    // }
+    const queryParams = this.route.snapshot.queryParams;
+    if (queryParams.projects) {
+      this.queryFilterParams = queryParams;
+      const newselectedProjectIDs = this.queryFilterParams.projects.split(',').map(item => item.trim());
+      // const notLoadedProjects = newselectedProjectIDs.filter(projectId => !this.selectedProjectIDs.includes(projectId));
+      // const removedProjects = this.selectedProjectIDs.filter(projectId => !newselectedProjectIDs.includes(projectId));
+      // clear active filters
+      // this.agGridActiveFilters = [];
+      this.selectedProjectIDs = newselectedProjectIDs; // todo: in the future only load projects that have not been loaded already
+      this.scribeDataExplorerService.getProjects(this.selectedProjectIDs).subscribe(
+        projects => this.projectsList = projects
+      );
+      await this.getCombinedProjectData(this.selectedProjectIDs);
+      // tslint:disable-next-line:radix
+      // this.projects.setValue(this.selectedProjectIDs.map(id => parseInt(id)));
+    }
+    if (queryParams.Analyte) {
+      // this.agGridActiveFilters = [];
+    }
     // /*const filters = [];
     // for (const key of Object.keys(queryParams).filter(k => k !== 'projects')) {
     //   filters.push({name: key, value: queryParams[key]});
     // }*/
 
-    this.agGridActiveFilters = [];
+    // this.agGridActiveFilters = [];
     this.colsSpan = (window.innerWidth > 1050) ? 1 : 2;
     this.selectedAnalyte = this.route.queryParams.pipe(map(params => params.Analyte));
   }
@@ -411,8 +421,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       //     this.router.navigate([], {queryParams});
       //   }
       // }
-    }
-    else {
+    } else {
       this.clearProjects();
     }
   }
@@ -617,7 +626,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
           }
         });
       }
-      this.presetFilters.next(agGridPresetFilters);
+      this.updateFilters.next(agGridPresetFilters);
       this.queryFilterParams = undefined;
     }
   }
@@ -787,11 +796,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.addId(projectInAutocomplete.projectid);
         event.input.value = '';
       }
+
     });
   }
 
   // remove both the project and the project id from their respective list
-  async remove(project: Project){
+  async remove(project: Project) {
     const index = this.projectsList.indexOf(project);
     if (index >= 0) {
       this.projectsList.splice(index, 1);
@@ -799,8 +809,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
     if (this.projectIdsList.length > 0) {
       await this.getCombinedProjectData(this.projectIdsList);
-    }
-    else {
+    } else {
       this.clearProjects();
     }
   }
@@ -811,6 +820,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.addId(projectToAdd.projectid);
     this.projectInput.nativeElement.value = '';
     this.projectCtrl.setValue(null);
+    this.setQueryParam('projects', this.projectIdsList.join(','));
   }
 
   // setFilter() {
@@ -819,11 +829,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
   //   );
   // }
 
-  setFilter() {
-    this.projectCtrl.valueChanges.subscribe(val => {
-      this.filteredProjects =  this.scribeDataExplorerService.getUserFilteredProjects(val);
-    });
-  }
 
   async addId(id: number) {
     if (!this.projectIdsList.includes(id)) {

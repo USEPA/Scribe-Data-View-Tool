@@ -132,7 +132,7 @@ export class AgGridComponent implements OnInit, OnDestroy, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes.selectedFeatures !== undefined && changes.selectedFeatures.currentValue) {
       if (changes.selectedFeatures.previousValue === undefined ||
-          !changes.selectedFeatures.currentValue.every(x => changes.selectedFeatures.previousValue.includes(x))) {
+        !changes.selectedFeatures.currentValue.every(x => changes.selectedFeatures.previousValue.includes(x))) {
         // on map point selected / clicked, select corresponding table rows
         if (this.gridApi) {
           this.gridApi.deselectAll();
@@ -262,20 +262,18 @@ export class AgGridComponent implements OnInit, OnDestroy, OnChanges {
 
   updateActiveFilters(filters) {
     try {
-      if (filters.length > 0) {
+      if (Object.keys(filters).length > 0) {
         const activeFilters = this.gridApi.getFilterModel();
-        if (Object.keys(activeFilters).length > 0) {
-          // remove the deselected filters from the current filter model and reset the model
-          const currentFilterNames = filters.map((f: ActiveFilter) => {
-            return f.field;
-          });
-          for (const key of Object.keys(activeFilters)) {
-            if (!currentFilterNames.includes(key)) {
-              delete activeFilters[key];
-            }
+        // if (Object.keys(activeFilters).length > 0) {
+        // remove the deselected filters from the current filter model and reset the model
+        const currentFilterNames = Object.keys(filters);
+        for (const key of Object.keys(activeFilters)) {
+          if (!currentFilterNames.includes(key)) {
+            delete activeFilters[key];
           }
-          this.gridApi.setFilterModel(activeFilters);
         }
+        this.gridApi.setFilterModel({...activeFilters, ...filters});
+        // }
       } else {
         // clear all filters
         this.gridApi.setFilterModel(null);

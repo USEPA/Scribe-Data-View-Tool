@@ -11,7 +11,7 @@ import {
   ViewChild,
   AfterViewInit
 } from '@angular/core';
-import {ReplaySubject} from 'rxjs';
+import {ReplaySubject, Subject} from 'rxjs';
 
 
 import {environment} from '@environments/environment';
@@ -51,6 +51,8 @@ import ObjectSymbol3DLayer from '@arcgis/core/symbols/ObjectSymbol3DLayer';
 import PointSymbol3D from '@arcgis/core/symbols/PointSymbol3D';
 import SymbolProperties = __esri.SymbolProperties;
 import colorCreateContinuousRendererParams = __esri.colorCreateContinuousRendererParams;
+import {fromPromise} from "rxjs/internal-compatibility";
+import {switchMap, tap} from "rxjs/operators";
 
 // import {MapService} from '@services/map.service';
 
@@ -68,6 +70,26 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   @Output() selectedFeaturesChange: EventEmitter<any[]> = new EventEmitter<any[]>();
 
   @Input() analyte: string;
+  @Input() portalLayerServiceUrls: string[];
+  @Input() pointData: any[];
+
+  @Input()
+  set baseMap(baseMap: string) {
+    this._baseMap = baseMap;
+  }
+
+  get baseMap(): string {
+    return this._baseMap;
+  }
+
+  @Input()
+  set center(center: Array<number>) {
+    this._center = center;
+  }
+
+  get center(): Array<number> {
+    return this._center;
+  }
 
   // The <div> where we will place the map
   @ViewChild('mapViewDiv', {static: true}) private mapViewEl: ElementRef;
@@ -118,25 +140,8 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     }
   ];
 
-  private _selectedGeoPoint: any;
+  private _pointDataSubject: ReplaySubject<any[]> = new ReplaySubject<any[]>(1);
 
-  @Input()
-  set center(center: Array<number>) {
-    this._center = center;
-  }
-
-  get center(): Array<number> {
-    return this._center;
-  }
-
-  @Input()
-  set baseMap(baseMap: string) {
-    this._baseMap = baseMap;
-  }
-
-  get baseMap(): string {
-    return this._baseMap;
-  }
 
   // @Input()
   // set selectedGeoPoint(selectedGeoPoint: any) {
@@ -155,8 +160,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   //   return this._selectedGeoPoint;
   // }
 
-  @Input() portalLayerServiceUrls: string[];
-  @Input() pointData: any[];
+
   private layer3d: FeatureLayer;
   private colorSlider: ColorSlider;
   public hideColorSlider = true;
@@ -195,11 +199,10 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       popup: {
         autoOpenEnabled: false
       },
-      // local scene I think is preferable but causing too many issues at the moment
-      // viewingMode: 'local',
-      // camera: {
-      //   tilt: 0
-      // }
+      viewingMode: 'local',
+      camera: {
+        tilt: 0
+      }
       // popup: {
       //   dockEnabled: false,
       //   dockOptions: {
@@ -246,177 +249,59 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     document.getElementById('select-by-polygon').style.visibility = 'hidden';
 
     // Initialize MapView and return an instance of MapView
-    this.initializeMap().then(mapView => {
-      // add initial geometries to the scene view
-      if (this.pointData) {
-        const pointGraphicsArray = this.addPoints(this.pointData);
-        this.layer3d = this.add3dPoints(this.pointData);
+    fromPromise(this.initializeMap()).pipe(
+      tap(() => {
+        // The map has been initialized
+        this.mapViewLoaded = this._view.ready;
+        // load any portal layers from input prop
+        if (this.portalLayerServiceUrls) {
+          this.loadPortalLayers(this.portalLayerServiceUrls);
+        }
+
+        this.setupHitTest();
+        // create a new sketchviewmodel and set its properties
+        // set up the click event for the select by polygon button
+        this.setupPointSelectionSketchViewModel();
+      }),
+      switchMap(() => this._pointDataSubject),
+      tap(pointData => {
+        // ***IMPORTANT: Clear Map Graphics and Layers***
+        this._view.graphics.removeAll();
+        this._view.map.removeAll();
+        const pointGraphicsArray = this.addPoints(pointData);
+
+        this.layer3d = this.add3dPoints(pointData);
+        this.layer3d.queryFeatureCount({where: '1=1'}).then(r => console.log(r));
         this.setRenderer(this.layer3d);
         this._view.goTo(pointGraphicsArray, {animate: false});
-      }
-      // The map has been initialized
-      this.mapViewLoaded = this._view.ready;
-      // load any portal layers from input prop
-      if (this.portalLayerServiceUrls) {
-        this.loadPortalLayers(this.portalLayerServiceUrls);
-      }
+      })
+    ).subscribe();
 
-      // subscribe to map view events
-      this._view.on('click', (event) => {
-        this._view.hitTest(event).then((response) => {
-          // this._view.popup.open({
-          //   location: event.mapPoint,
-          // });
-          if (response.results.length > 0) {
-            if (response.results[0].type === 'graphic') {
-              this.selectedFeaturesChange.emit([response.results[0].graphic.attributes.Samp_No]);
-            }
-            // if (selectedGraphic.attributes && 'PROJECTID' in selectedGraphic.attributes) {
-            //   // on project centroid point selected / clicked, go to that project
-            //
-            //   this.scribeDataExplorerService.projectCentroidsSelectedSource.next([selectedGraphic.attributes]);
-            // } else {
-            //   // Only return selected map point graphic from the click event results
-            //   // selectedGraphic = response.results.filter((result) => {
-            //   //   return result.graphic.layer === this.mapPointsFeatureLayer;
-            //   // })[0].graphic;
-            //   // on map point selected / clicked, select corresponding table rows
-            //   this.scribeDataExplorerService.mapPointSelectedSource.next(selectedGraphic.attributes);
-            // }
-          }
-        });
-      });
-      // create a new sketchviewmodel and set its properties
-      // set up the click event for the select by polygon button
-      this.setupPointSelectionSketchViewModel();
-    });
+    // add initial geometries to the scene view
+    if (this.pointData) {
+      this._pointDataSubject.next(this.pointData);
+    }
+
   }
-
-  // ngAfterViewInit(): void {
-  //   // subscribe to clear map selection event to clear highlight and reset row data
-  //   this.scribeDataExplorerService.clearMapSelectionEvent.subscribe((clear) => {
-  //     if (clear) {
-  //       if (this.mapPointsFeatureLayerHighlight) {
-  //         this.mapPointsFeatureLayerHighlight.remove();
-  //       }
-  //       if (this._view) {
-  //         if (this._zoomToPointGraphic) {
-  //           this._view.graphics.remove(this._zoomToPointGraphic);
-  //         }
-  //         // this._view.popup.close();
-  //       }
-  //       this.scribeDataExplorerService.mapPointsSelectedSource.next(null);
-  //     }
-  //   });
-  //   // subscribe to MDL value entered event
-  //   // this.scribeDataExplorerService.mdlValueChangedEvent.subscribe((symbolizationProps: MapSymbolizationProps) => {
-  //   //   if (this._view) {
-  //   //     // symbolize feature layer based on latest MDL min, max, and threshold values
-  //   //     // let symbologyDefinitions = [];
-  //   //     if (symbolizationProps) {
-  //   //       // symbologyDefinitions = this.calculateThresholdSymbologyDefinitions(symbolizationProps);
-  //   //       // const lyrRenderer = {
-  //   //       //   type: 'simple',
-  //   //       //   symbol: {
-  //   //       //     type: 'simple-marker',
-  //   //       //     size: 7,
-  //   //       //   },
-  //   //       //   visualVariables: [{
-  //   //       //     type: 'color',
-  //   //       //     field: 'MDL',
-  //   //       //     stops: symbologyDefinitions
-  //   //       //   }]
-  //   //       // };
-  //   //
-  //   //
-  //   //       this._view.map.layers.forEach((lyr: any) => {
-  //   //         if (lyr.type === 'feature') {
-  //   //           const colorParams = {
-  //   //             layer: lyr,
-  //   //             view: this._view,
-  //   //             field: 'MDL',
-  //   //             theme: 'above-and-below',
-  //   //             // minValue: 1800,
-  //   //             // maxValue: 2020,
-  //   //           };
-  //   //           lyr.outFields = ['*']; // REQUIRED for querying the layer attributes
-  //   //           colorRendererCreator.createContinuousRenderer(colorParams)
-  //   //             .then(response => {
-  //   //               lyr.renderer = response.renderer;
-  //   //               const colorSlider = new ColorSlider({
-  //   //                 primaryHandleEnabled: true,
-  //   //                 container: 'slider',
-  //   //                 min: response.statistics.min,
-  //   //                 max: response.statistics.max,
-  //   //                 stops: response.visualVariable.stops,
-  //   //                 // labelFormatFunction(value) {
-  //   //                 //   return value.toFixed(0.0001);
-  //   //                 // },
-  //   //                 // precision: 0.0001
-  //   //               });
-  //   //               // Since data represents years, we don't
-  //   //               // want values to show decimal places
-  //   //               // colorSlider.viewModel.precision = 0.0001;
-  //   //               this._view.ui.add('containerDiv', 'bottom-left');
-  //   //             });
-  //   //         }
-  //   //       });
-  //   //     } else {
-  //   //       // reset renderer
-  //   //       const lyrRenderer = {
-  //   //         type: 'simple',
-  //   //         symbol: {
-  //   //           type: 'simple-marker',
-  //   //           size: 7,
-  //   //         }
-  //   //       };
-  //   //       this._view.map.layers.forEach((lyr: any) => {
-  //   //         lyr.outFields = ['*']; // REQUIRED for querying the layer attributes
-  //   //         lyr.renderer = lyrRenderer;
-  //   //       });
-  //   //     }
-  //   //     // this.scribeDataExplorerService.mapPointsSymbolizationSource.next(symbologyDefinitions);
-  //   //     /*const newGraphics = [];
-  //   //     this._view.graphics.forEach((graphic: any) => {
-  //   //       const newGraphic = graphic.clone();
-  //   //       if (graphic.attributes.hasOwnProperty('Matrix') && graphic.attributes.hasOwnProperty('MDL')) {
-  //   //         newGraphic.symbol.color = this.getSamplePointColorByMDL(graphic.attributes, symbolizationProps.threshold);
-  //   //       }
-  //   //       newGraphics.push(newGraphic);
-  //   //     });
-  //   //     this._view.graphics.removeAll();
-  //   //     this._view.graphics.addMany(newGraphics);*/
-  //   //   }
-  //   // });
-  // }
 
   ngOnChanges(changes: SimpleChanges) {
     if (this._view) {
 
       if (changes.pointData || (changes.analyte && changes.analyte.currentValue !== changes.analyte.previousValue)) {
-        // ***IMPORTANT: Clear Map Graphics and Layers***
-        this._view.graphics = null;
-        this._view.map.layers = null;
+
         if (changes.pointData && changes.pointData.currentValue) {
-          const pointGraphicsArray = this.addPoints(changes.pointData.currentValue);
-          this.layer3d = this.add3dPoints(changes.pointData.currentValue);
-          this._view.goTo(pointGraphicsArray, {animate: false});
+          this._pointDataSubject.next(changes.pointData.currentValue);
+          // const pointGraphicsArray = this.addPoints(changes.pointData.currentValue);
+          // this.layer3d = this.add3dPoints(changes.pointData.currentValue);
+          // this._view.goTo(pointGraphicsArray, {animate: false});
         }
-        this.setRenderer(this.layer3d);
+        // this.setRenderer(this.layer3d);
       }
       // if (changes.analyte && changes.analyte.currentValue !== changes.analyte.previousValue) {
       //   this.setRenderer(this.layer3d);
       // }
       if (changes.selectedFeatures && changes.selectedFeatures.currentValue !== changes.selectedFeatures.previousValue) {
-        if (this.mapPointsFeatureLayerHighlight) {
-          this.mapPointsFeatureLayerHighlight.remove();
-        }
-        if (this._zoomToPointGraphic) {
-          this._view.graphics.remove(this._zoomToPointGraphic);
-        }
-        if (changes.selectedFeatures.currentValue) {
-          this.zoomToPoint(changes.selectedFeatures.currentValue);
-        }
+        this.highlightSelectedFeature(changes.selectedFeatures.currentValue);
       }
 
     }
@@ -427,6 +312,46 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       // destroy the map view
       this._view.container = null;
     }
+  }
+
+  highlightSelectedFeature(selectedFeatures) {
+    if (this.mapPointsFeatureLayerHighlight) {
+      this.mapPointsFeatureLayerHighlight.remove();
+    }
+    if (this._zoomToPointGraphic) {
+      this._view.graphics.remove(this._zoomToPointGraphic);
+    }
+    if (selectedFeatures) {
+      this.zoomToPoint(selectedFeatures);
+    }
+  }
+
+  setupHitTest() {
+    // subscribe to map view events
+    this._view.on('click', (event) => {
+      this._view.hitTest(event).then((response) => {
+        // this._view.popup.open({
+        //   location: event.mapPoint,
+        // });
+        if (response.results.length > 0) {
+          if (response.results[0].type === 'graphic') {
+            this.selectedFeaturesChange.emit([response.results[0].graphic.attributes.Samp_No]);
+          }
+          // if (selectedGraphic.attributes && 'PROJECTID' in selectedGraphic.attributes) {
+          //   // on project centroid point selected / clicked, go to that project
+          //
+          //   this.scribeDataExplorerService.projectCentroidsSelectedSource.next([selectedGraphic.attributes]);
+          // } else {
+          //   // Only return selected map point graphic from the click event results
+          //   // selectedGraphic = response.results.filter((result) => {
+          //   //   return result.graphic.layer === this.mapPointsFeatureLayer;
+          //   // })[0].graphic;
+          //   // on map point selected / clicked, select corresponding table rows
+          //   this.scribeDataExplorerService.mapPointSelectedSource.next(selectedGraphic.attributes);
+          // }
+        }
+      });
+    });
   }
 
   async loadPortalLayers(portalLyrServiceUrls) {
@@ -494,13 +419,13 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     });
     if (pointGraphicsArray.length > 0) {
       this._view.graphics.addMany(pointGraphicsArray);
-      // Create the feature layer from client-side graphics and add to map
-      this.mapPointsFeatureLayer = this.createFeatureLayerFromGraphics(pointGraphicsArray);
-      this._view.map.add(this.mapPointsFeatureLayer);
-      this.mapPointsFeatureLayer.when((lyrLoaded) => {
+      // Create the feature layer from client-side graphics and add to map... why here at all?
+      // this.mapPointsFeatureLayer = this.createFeatureLayerFromGraphics(pointGraphicsArray);
+      // this._view.map.add(this.mapPointsFeatureLayer);
+      // this.mapPointsFeatureLayer.when((lyrLoaded) => {
         // get and set the map extent from the feature layer extent
-        this.setHomeExtentFromFl(lyrLoaded);
-      });
+        // this.setHomeExtentFromFl(lyrLoaded);
+      // });
     }
     this.mapFeaturesLoadedEvent.emit(pointGraphicsArray.length);
     return pointGraphicsArray;
@@ -892,8 +817,8 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     // or arcade expression. The view and other properties determine
     // the appropriate default color scheme.
     if (this.colorSlider) {
-        this.colorSlider.destroy();
-      }
+      this.colorSlider.destroy();
+    }
 
     if (this.analyte) {
       const colorParams = {

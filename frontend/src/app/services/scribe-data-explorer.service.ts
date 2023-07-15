@@ -5,7 +5,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {BehaviorSubject, Observable} from 'rxjs';
 import esriConfig from '@arcgis/core/config';
 
-import {tap} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 
 import {environment} from '@environments/environment';
 import {
@@ -73,7 +73,7 @@ export class ScribeDataExplorerService {
     return results;
   }
 
-  getUserFilteredProjects(filterValue?: string): Observable<ProjectExplorer[]>{
+  getUserFilteredProjects(filterValue?: string): Observable<ProjectExplorer[]> {
     return this.http.get<ProjectExplorer[]>(`${this.scribeApiUrl}/projectsexplorer/?search=${filterValue}`);
   }
 
@@ -83,7 +83,7 @@ export class ScribeDataExplorerService {
     if (geoJson) {
       const url = `${this.agolUserContentUrl}/addItem`;
       const formData = new FormData();
-      const geojsonFile = new Blob([geoJson], { type: 'application/geo+json' });
+      const geojsonFile = new Blob([geoJson], {type: 'application/geo+json'});
       formData.append('type', 'GeoJson');
       formData.append('title', agolContentInfo.title);
       formData.append('description', agolContentInfo.description);
@@ -113,6 +113,7 @@ export class ScribeDataExplorerService {
     }
     return result;
   }
+
   // Generate the geojson from the backend
   // async generateGeoJson(data) {
   //   const fileResult = await this.http.post<any>(`${this.scribeApiUrl}/generate_geojson/`, data).toPromise().then((file) => {
@@ -147,8 +148,7 @@ export class ScribeDataExplorerService {
     });
     if (featureCollection.features.length) {
       return JSON.stringify(featureCollection);
-    }
-    else {
+    } else {
       return '';
     }
   }
@@ -207,7 +207,10 @@ export class ScribeDataExplorerService {
     if (results) {
       for (const item of results.items) {
         if (item.tags.includes('Scribe Explorer')) {
-          agolServices.push({title: item.title, url: `${environment.user_geo_platform_url}/home/item.html?id=${item.id}`});
+          agolServices.push({
+            title: item.title,
+            url: `${environment.user_geo_platform_url}/home/item.html?id=${item.id}`
+          });
         }
       }
     }
@@ -230,5 +233,12 @@ export class ScribeDataExplorerService {
         return [];
       });
     return results;
+  }
+
+  getProjects(projectIds: string[]): Observable<ProjectExplorer[]> {
+    return this.http.get<ProjectExplorer[]>(
+      `${this.scribeApiUrl}/projectsexplorer/`,
+      {params: {projectids: projectIds.join(',')}}
+    );
   }
 }
