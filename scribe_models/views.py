@@ -11,7 +11,6 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.filters import SearchFilter, OrderingFilter
 
-from arcgis.gis import GIS
 import geojson
 import json
 
@@ -96,24 +95,24 @@ def generate_geojson(request):
         return Response(status=500)
 
 
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def get_published_agol_services(request):
-    try:
-        # open an AGOL connection
-        social_auth = request.user.social_auth.get(provider='agol')
-        agol_token = social_auth.get_access_token(load_strategy())
-        agol_conn = GIS(token=agol_token)
-        # get user's published services
-        items = []
-        agol_items = agol_conn.content.search(
-            query="owner:{owner} tags:{tags}".format(owner=social_auth.uid, tags='Scribe Explorer'),
-            item_type="Feature *")
-        for item in agol_items:
-            items.append({'title': item.title, 'url': item.homepage})
-        return Response(items)
-    except Exception as ex:
-        print(ex)
-        return Response(status=500)
+# @api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+# def get_published_agol_services(request):
+#     try:
+#         # open an AGOL connection
+#         social_auth = request.user.social_auth.get(provider='agol')
+#         agol_token = social_auth.get_access_token(load_strategy())
+#         agol_conn = GIS(token=agol_token)
+#         # get user's published services
+#         items = []
+#         agol_items = agol_conn.content.search(
+#             query="owner:{owner} tags:{tags}".format(owner=social_auth.uid, tags='Scribe Explorer'),
+#             item_type="Feature *")
+#         for item in agol_items:
+#             items.append({'title': item.title, 'url': item.homepage})
+#         return Response(items)
+#     except Exception as ex:
+#         print(ex)
+#         return Response(status=500)
 
 
