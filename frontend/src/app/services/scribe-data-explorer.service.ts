@@ -18,7 +18,6 @@ import {
   ProjectLabResult,
   ProjectSample, ProjectExplorer, FeatureCollection, Feature
 } from '../projectInterfaceTypes';
-import {SuccessPublishSnackComponent} from "@components/success-publish-snack/success-publish-snack.component";
 
 
 @Injectable({
