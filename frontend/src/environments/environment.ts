@@ -14,8 +14,7 @@ export const environment = {
   agol_trusted_server: 'http://localhost:8000',
   agol_proxy_url_prefix: 'utility.arcgis.com',
   agol_proxy_url: 'http://localhost:8000/api/proxy/',
-  geo_platform_url: 'https://epa.maps.arcgis.com',
-  user_geo_platform_url: 'https://innovate.maps.arcgis.com'
+  geo_platform_url: 'https://innovate.maps.arcgis.com'
 };
 
 /*

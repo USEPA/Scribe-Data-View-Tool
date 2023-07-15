@@ -187,7 +187,7 @@ export class ScribeDataExplorerService {
             panelClass: ['snackbar-success']
           });
           successSnack.onAction().subscribe(() => window.open(
-            `${environment.user_geo_platform_url}/home/item.html?id=${itemId}`,
+            `${environment.geo_platform_url}/home/item.html?id=${itemId}`,
             '_blank'
           ));
           setTimeout(() => this.getPublishedAGOLServices(), 10000);
@@ -211,7 +211,7 @@ export class ScribeDataExplorerService {
 
   getPublishedAGOLServices() {
     const agolServices = [];
-    const url = `${environment.user_geo_platform_url}/sharing/rest/search`;
+    const url = `${environment.geo_platform_url}/sharing/rest/search`;
     const params = {
       token: this.agolToken,
       f: 'json',
@@ -220,7 +220,7 @@ export class ScribeDataExplorerService {
     };
     return this.http.get<any>(url, {params}).pipe(
       map(r => r.results.map(i => {
-        i.itemUrl = `${environment.user_geo_platform_url}/home/item.html?id=${i.id}`;
+        i.itemUrl = `${environment.geo_platform_url}/home/item.html?id=${i.id}`;
         return i;
       })),
       tap(r => this.userAGOLServices.next(r)),

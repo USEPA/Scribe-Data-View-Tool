@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
     this.loginService.currentUser.subscribe(user => {
       this.scribeDataExplorerService.agolUsername = user.agol_username;
       this.scribeDataExplorerService.agolToken = user.agol_token;
-      this.scribeDataExplorerService.agolUserContentUrl = `${environment.user_geo_platform_url}/sharing/rest/content/users/${user.agol_username}`;
+      this.scribeDataExplorerService.agolUserContentUrl = `${environment.geo_platform_url}/sharing/rest/content/users/${user.agol_username}`;
       this.scribeDataExplorerService.getPublishedAGOLServices().subscribe();
     });
   }
