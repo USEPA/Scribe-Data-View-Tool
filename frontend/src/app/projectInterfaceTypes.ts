@@ -17,6 +17,7 @@ export interface ProjectExplorer {
 }
 
 export interface AGOLService {
+  itemUrl: any;
   title: string;
   url: string;
 }

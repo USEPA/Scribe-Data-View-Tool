@@ -21,16 +21,18 @@ export class HeaderComponent implements OnInit {
   constructor(public loginService: LoginService, public scribeDataExplorerService: ScribeDataExplorerService,
               private router: Router) {
     // The header component loads first and some properties of the scribeDataExplorerServices are set.
-    this.loginService.currentUser.subscribe(user => {
-      this.scribeDataExplorerService.agolUsername = user.agol_username;
-      this.scribeDataExplorerService.agolToken = user.agol_token;
-      this.scribeDataExplorerService.agolUserContentUrl = `${environment.user_geo_platform_url}/sharing/rest/content/users/${user.agol_username}`;
-    });
+
   }
 
   ngOnInit() {
     // The other properties and method calls of the scribeDataExplorerService are done in the ngOninit
     // of the header to give time to the async call to be performed.
+    this.loginService.currentUser.subscribe(user => {
+      this.scribeDataExplorerService.agolUsername = user.agol_username;
+      this.scribeDataExplorerService.agolToken = user.agol_token;
+      this.scribeDataExplorerService.agolUserContentUrl = `${environment.user_geo_platform_url}/sharing/rest/content/users/${user.agol_username}`;
+      this.scribeDataExplorerService.getPublishedAGOLServices().subscribe();
+    });
   }
 
   logout() {

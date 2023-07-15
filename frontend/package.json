@@ -15,6 +15,7 @@
     "@ag-grid-community/all-modules": "^27.3.0",
     "@ag-grid-community/angular": "^27.3.0",
     "@ag-grid-community/client-side-row-model": "^27.3.0",
+    "@ag-grid-community/csv-export": "^27.3.0",
     "@angular/animations": "~13.4.0",
     "@angular/cdk": "~13.3.9",
     "@angular/common": "~13.4.0",

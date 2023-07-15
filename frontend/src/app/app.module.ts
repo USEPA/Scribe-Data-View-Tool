@@ -18,6 +18,7 @@ import { AgGridSelectFilterComponent } from '@components/ag-grid/ag-grid-select-
 import { MapViewComponent } from '@components/map-view/map-view.component';
 import { VisibleColumnsDialogComponent } from '@components/visible-columns-dialog/visible-columns-dialog.component';
 import { ProjectsMapDialogComponent } from '@components/projects-map-dialog/projects-map-dialog.component';
+import { SuccessPublishSnackComponent } from './components/success-publish-snack/success-publish-snack.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { ProjectsMapDialogComponent } from '@components/projects-map-dialog/proj
     AgGridSelectFilterComponent,
     MapViewComponent,
     VisibleColumnsDialogComponent,
-    ProjectsMapDialogComponent
+    ProjectsMapDialogComponent,
+    SuccessPublishSnackComponent
   ],
   imports: [
     BrowserModule,

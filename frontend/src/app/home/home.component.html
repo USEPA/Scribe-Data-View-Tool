@@ -64,11 +64,11 @@
           </button>
         </span>
       </div>
-      <span class="component-container-row">
-        <div *ngIf="!(scribeDataExplorerService.userAGOLServices | async)" style="position: relative;">
-            <mat-spinner diameter="40"></mat-spinner>
-        </div>
-      </span>
+<!--      <span class="component-container-row">-->
+<!--        <div *ngIf="!(scribeDataExplorerService.userAGOLServices | async)" style="position: relative;">-->
+<!--            <mat-spinner diameter="40"></mat-spinner>-->
+<!--        </div>-->
+<!--      </span>-->
     </div>
     <div class="component-container-col" style="margin-left: 15px;">
       <!-- Selected Filters -->
@@ -83,7 +83,7 @@
                  [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
         </mat-chip-list>
       </mat-form-field>
-      <div *ngIf="!isLoadingData && (scribeDataExplorerService.userAGOLServices | async)"
+      <div *ngIf="!isLoadingData"
            class="component-container-row tabs-btn" style="margin-bottom: -35px; z-index: 1000;">
         <!-- Missing map points -->
         <span *ngIf="geoPointsArray.length === 0" class="mat-warn" style="margin-right: 10px;">

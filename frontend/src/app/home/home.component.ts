@@ -123,12 +123,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   async ngOnInit() {
-    this.userProjects = await this.scribeDataExplorerService.getUserProjects();
+    // this.userProjects = await this.scribeDataExplorerService.getUserProjects();
     // this.userExploredProjects = await this.scribeDataExplorerService.getUserExploredProjects();
     // this.setFilter();
-    await this.scribeDataExplorerService.getPublishedAGOLServices().then((items: AGOLService[]) => {
-      this.scribeDataExplorerService.userAGOLServices.next(items);
-    });
+    // await this.scribeDataExplorerService.getPublishedAGOLServices().then((items: AGOLService[]) => {
+    //   this.scribeDataExplorerService.userAGOLServices.next(items);
+    // });
     // subscribe to autocomplete input
     this.projectCtrl.valueChanges.subscribe(val => {
       this.filteredProjects = this.scribeDataExplorerService.getUserFilteredProjects(val);
@@ -692,11 +692,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   onPublishAGOLBtnClick() {
-    let selectedProjects: Project[];
+    // let selectedProjects: Project[];
     this.scribeDataExplorerService.isPublishingToAGOL.next(true);
-    selectedProjects = this.userProjects.filter((project: Project) => {
-      return this.projectIdsList.includes(project.projectid);
-    });
+    // selectedProjects = this.userProjects.filter((project: Project) => {
+    //   return this.projectIdsList.includes(project.projectid);
+    // });
+    const selectedProjects = this.projectsList;
     // set feature layer title: "[Project name] ([Number]) Scribe Project Feature Layer"
     const staticText = 'Scribe Project Feature Layer';
     const selectedTab = this.tabs[this.selectedTab].replace(/ /g, '_');
