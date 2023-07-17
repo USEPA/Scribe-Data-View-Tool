@@ -46,6 +46,7 @@ SQL_SERVER_COLUMN_FIELD_MAP = {
     "uuid": "UUIDField({}blank=True, null=True{})",
     "uniqueidentifier": "UUIDField({}blank=True, null=True{})",
     "varbinary": "BinaryField({}blank=True, null=True{})",
+    "image": "BinaryField({}blank=True, null=True{})",
     "binary": "BinaryField({}blank=True, null=True{})"
 }
 
