@@ -37,12 +37,12 @@ router.register(r'project_tables', ProjectTablesViewSet, basename='scribe_db.pro
 
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^{}admin/'.format(settings.URL_PREFIX), admin.site.urls),
     # Authentication api calls
-    url('^api/oauth2/', include('social_django.urls', namespace='social_django')),
-    url(r'^api/auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^api/current_user/', current_user),
-    url(r'^api/proxy/', EsriProxy.as_view()),
+    url('^{}api/oauth2/'.format(settings.URL_PREFIX), include('social_django.urls', namespace='social_django')),
+    url(r'^{}api/auth/'.format(settings.URL_PREFIX), include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^{}api/current_user/'.format(settings.URL_PREFIX), current_user),
+    url(r'^{}api/proxy/'.format(settings.URL_PREFIX), EsriProxy.as_view()),
     # url(r'^{}api/oauth2/'.format(settings.URL_PREFIX), include('rest_framework_social_oauth2.urls')),
 
     # Declare registered router ViewSet api calls
