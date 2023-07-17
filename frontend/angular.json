@@ -73,7 +73,7 @@
                   "with": "src/environments/environment.staging.ts"
                 }
               ],
-              "baseHref": "/apps/staging/scribeexplorer",
+              "baseHref": "/apps/staging/scribeexplorer/",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
