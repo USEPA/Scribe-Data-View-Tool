@@ -2,6 +2,8 @@ from sadie.models import ProjectsExplorer
 from scribe_models.models.scribe_base_models import Projects
 from django.utils.module_loading import import_string
 import logging
+from django.core.cache import cache
+from django.db import connections
 
 logger = logging.getLogger('django')
 
@@ -50,3 +52,31 @@ def save_in_project_explorer(project):
         project_explorer.save()
     except Exception as e:
         logger.error(f'Error on project {project.projectid}', e)
+
+
+def get_set_project_cache(project_id):
+    data = cache.get(f'project_samples{project_id}')
+    if data is None:
+        project_samples_sql = f"""
+        SELECT * 
+        FROM {project_id}_Samples samp
+        INNER JOIN {project_id}_Site s ON samp.Site_No = s.Site_No
+        INNER JOIN {project_id}_Location loc ON samp.Location = loc.Location
+        """
+
+        column_defs = []
+        row_data = []
+        with connections["scribe_db"].cursor() as cursor:
+            cursor.execute(project_samples_sql)
+            rows = cursor.fetchall()
+            cols = cursor.description
+            for idx, col in enumerate(cols):
+                column_defs.append({'headerName': col[0], 'field': col[0], 'sortable': True, 'filter': True})
+            for row in rows:
+                row_values = {}
+                for idx, col in enumerate(cols):
+                    row_values[col[0]] = row[idx]
+                row_data.append(row_values)
+            data = {'columnDefs': column_defs, 'rowData': row_data}
+            cache.set(f'project_samples{project_id}', data)
+    return data
