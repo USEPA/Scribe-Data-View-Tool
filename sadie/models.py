@@ -18,6 +18,7 @@ class ProjectsExplorer(models.Model):
     Description = models.TextField(blank=True, null=True, db_column='Description')
     EPARegionNumber = models.TextField(blank=True, null=True, db_column='EPARegionNumber')
     EPAContact = models.TextField(blank=True, null=True, db_column='EPAContact')
+    extent = models.JSONField(blank=True, null=True)
 
     class Meta:
         managed = True

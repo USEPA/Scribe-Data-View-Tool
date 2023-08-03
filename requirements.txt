@@ -10,3 +10,5 @@ python-dotenv
 wfastcgi==3.0.0
 pywinpty==0.5.1
 geojson
+pyjwt
+shapely

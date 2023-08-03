@@ -18,6 +18,7 @@ from social_django.utils import load_strategy
 import requests
 import json
 
+from sadie.auth import JWTAuth
 from sadie.filters import ProjectsExplorerFilterset
 from sadie.models import ProjectsExplorer
 from sadie.serializers import ProjectsExplorerSerializer
@@ -137,10 +138,9 @@ class ProjectTablesViewSet(ViewSet):
             return JsonResponse({'status': 'error', 'message': 'Invalid Request.'})
 
 
-
-
 class ProjectsExplorerViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
+    authentication_classes = viewsets.ModelViewSet.authentication_classes + [JWTAuth]
     queryset = ProjectsExplorer.objects.all()
     ordering = ['project_name']
     serializer_class = ProjectsExplorerSerializer

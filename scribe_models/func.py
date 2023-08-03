@@ -4,7 +4,8 @@ from django.utils.module_loading import import_string
 import logging
 from django.core.cache import cache
 from django.db import connections
-
+from shapely.wkt import loads
+from geojson import Feature, FeatureCollection
 logger = logging.getLogger('django')
 
 db_name = 'scribe_db'
@@ -36,6 +37,7 @@ def add_new_project_explorer():
 # helper function
 def save_in_project_explorer(project):
     SiteModel = import_string(f'scribe_models.models.dbo.PID_{project.projectid}_Site_model')
+
     try:
         site = SiteModel.objects.using(db_name).first()  # There is only one record in the site table.
         project_explorer = ProjectsExplorer()
@@ -48,6 +50,21 @@ def save_in_project_explorer(project):
         project_explorer.Description = site.Description
         project_explorer.EPARegionNumber = site.EPARegionNumber
         project_explorer.EPAContact = site.EPAContact
+
+        try:
+            LocationModel = import_string(f'scribe_models.models.dbo.PID_{project.projectid}_Location_model')
+            with connections["scribe_db"].cursor() as cursor:
+                cursor.execute(f"""select 
+    GEOGRAPHY::ConvexHullAggregate(GEOGRAPHY::STPointFromText('POINT(' + CAST(Longitude as VARCHAR(20)) + ' ' + CAST(Latitude as VARCHAR(20)) + ')', 4326)).STAsText()
+    FROM {LocationModel._meta.db_table}
+    where latitude is not null and longitude is not null""")
+                geometry = loads(cursor.fetchone()[0])
+                feature = Feature(geometry=geometry)
+                feature_collection = FeatureCollection([feature])
+                project_explorer.extent = feature_collection
+        except Exception as e:
+            print(e)
+            pass
 
         project_explorer.save()
     except Exception as e:

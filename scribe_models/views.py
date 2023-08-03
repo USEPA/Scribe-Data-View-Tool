@@ -1,5 +1,4 @@
 from django.http import HttpResponseServerError
-
 from django_filters.rest_framework import DjangoFilterBackend
 from social_django.utils import load_strategy
 

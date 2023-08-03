@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -213,3 +215,6 @@ CACHES = {
 }
 
 URL_PREFIX = os.environ.get('URL_PREFIX', '')
+
+import json
+INTAKE_TOKEN = json.loads(os.environ.get('INTAKE_TOKEN', '{}'))
