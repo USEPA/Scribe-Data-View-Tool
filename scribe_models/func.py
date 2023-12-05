@@ -36,9 +36,11 @@ def add_new_project_explorer():
 
 # helper function
 def save_in_project_explorer(project):
-    SiteModel = import_string(f'scribe_models.models.dbo.PID_{project.projectid}_Site_model')
+
 
     try:
+        SiteModel = import_string(f'scribe_models.models.dbo.PID_{project.projectid}_Site_model')
+
         site = SiteModel.objects.using(db_name).first()  # There is only one record in the site table.
         project_explorer = ProjectsExplorer()
 

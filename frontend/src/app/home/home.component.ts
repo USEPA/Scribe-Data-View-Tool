@@ -283,8 +283,18 @@ export class HomeComponent implements OnInit, AfterViewInit {
       //  determine how the sample points need to be symbolized
       const filteredSamplePoints = [];
       this.projectSamplesRowData.forEach((samplePoint) => {
+        filters.filteredRowData.filter(l => l.Samp_No === samplePoint.Samp_No).forEach(labResult => {
+          const i = filteredSamplePoints.findIndex(x => x.Samp_No === labResult.Samp_No);
+          if (i === -1) {
+            labResult.Result ? samplePoint.Result = labResult.Result : samplePoint.Result = 0;
+            filteredSamplePoints.push(samplePoint);
+          } else {
+            filteredSamplePoints[i].Result = filteredSamplePoints[i].Result < labResult.Result ? labResult.Result : filteredSamplePoints[i].Result;
+          }
+        });
+
         filters.filteredRowData.forEach((labResult) => {
-          if (labResult.Samp_No === samplePoint.Samp_No && !filteredSamplePoints.includes(samplePoint)) {
+          if (labResult.Samp_No === samplePoint.Samp_No) {
             // add MDL value to sample point attributes
             labResult.Result ? samplePoint.Result = labResult.Result : samplePoint.Result = 0;
             filteredSamplePoints.push(samplePoint);

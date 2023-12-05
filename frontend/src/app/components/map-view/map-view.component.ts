@@ -52,7 +52,9 @@ import PointSymbol3D from '@arcgis/core/symbols/PointSymbol3D';
 import SymbolProperties = __esri.SymbolProperties;
 import colorCreateContinuousRendererParams = __esri.colorCreateContinuousRendererParams;
 import {fromPromise} from "rxjs/internal-compatibility";
-import {switchMap, tap} from "rxjs/operators";
+import {map, switchMap, tap} from "rxjs/operators";
+import SimpleRendererProperties = __esri.SimpleRendererProperties;
+import VisualVariableProperties = __esri.VisualVariableProperties;
 
 // import {MapService} from '@services/map.service';
 
@@ -114,31 +116,42 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   polygonSelectionGraphicsLayer: GraphicsLayer;
   pointSelectionSketchViewModel: SketchViewModel;
 
-  symbol = {
-    type: 'point-3d',
-    symbolLayers: [{
-      type: 'object',
-      resource: {primitive: 'cylinder'},
-      material: {color: 'white'}
-    }]
-  } as SymbolProperties;
-  visualVariables = [
-    {
-      type: 'size',
-      field: 'height',
-      axis: 'height',
-    },
-    {
-      type: 'size',
-      field: 'width',
-      axis: 'width',
-    },
-    {
-      type: 'size',
-      field: 'depth',
-      axis: 'depth',
-    }
-  ];
+
+  base3DRRenderer = new SimpleRenderer({
+    symbol: {
+      type: 'point-3d',
+      symbolLayers: [{
+        type: 'object',
+        resource: {primitive: 'cylinder'},
+        material: {color: 'white'}
+      }]
+    } as SymbolProperties,
+    visualVariables: [
+      {
+        type: 'size',
+        field: 'height',
+        axis: 'height',
+      } as VisualVariableProperties,
+      {
+        type: 'size',
+        field: 'width',
+        axis: 'width',
+      },
+      {
+        type: 'size',
+        field: 'depth',
+        axis: 'depth',
+      }
+    ]
+  } as SimpleRendererProperties);
+
+  basePointRender = new SimpleRenderer({
+    symbol: {
+      type: 'simple-marker',
+      color: 'white',
+      size: '8px',  // pixels
+    } as SymbolProperties
+  });
 
   private _pointDataSubject: ReplaySubject<any[]> = new ReplaySubject<any[]>(1);
 
@@ -268,12 +281,17 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
         // ***IMPORTANT: Clear Map Graphics and Layers***
         this._view.graphics.removeAll();
         this._view.map.removeAll();
-        const pointGraphicsArray = this.addPoints(pointData);
-
+        const pointsLayer = this.addPoints(pointData) as FeatureLayer;
+        // this.setRenderer(pointGraphicsArray);
         this.layer3d = this.add3dPoints(pointData);
         this.layer3d.queryFeatureCount({where: '1=1'}).then(r => console.log(r));
-        this.setRenderer(this.layer3d);
-        this._view.goTo(pointGraphicsArray, {animate: false});
+        this.setRenderer([
+          {layer: this.layer3d, baseRenderer: this.base3DRRenderer},
+          {layer: pointsLayer, baseRenderer: this.basePointRender}
+        ]);
+        pointsLayer.queryExtent({where: '1=1'}).then(e => {
+          this._view.goTo(e.extent, {animate: false});
+        });
       })
     ).subscribe();
 
@@ -418,13 +436,14 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       }
     });
     if (pointGraphicsArray.length > 0) {
-      this._view.graphics.addMany(pointGraphicsArray);
+      // this._view.graphics.addMany(pointGraphicsArray);
       // Create the feature layer from client-side graphics and add to map... why here at all?
-      // this.mapPointsFeatureLayer = this.createFeatureLayerFromGraphics(pointGraphicsArray);
-      // this._view.map.add(this.mapPointsFeatureLayer);
+      const mapPointsFeatureLayer = this.createFeatureLayerFromGraphics(pointGraphicsArray, 'point', null, this.basePointRender);
+      this._view.map.add(mapPointsFeatureLayer);
+      return mapPointsFeatureLayer;
       // this.mapPointsFeatureLayer.when((lyrLoaded) => {
-        // get and set the map extent from the feature layer extent
-        // this.setHomeExtentFromFl(lyrLoaded);
+      // get and set the map extent from the feature layer extent
+      // this.setHomeExtentFromFl(lyrLoaded);
       // });
     }
     this.mapFeaturesLoadedEvent.emit(pointGraphicsArray.length);
@@ -432,7 +451,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   createFeatureLayerFromGraphics(pointGraphicsArray: any, geometryType: 'polygon' | 'polyline' | 'point' | 'multipoint' | 'multipatch' | 'mesh' = 'point',
-                                 elevationInfo = null, symbol = new SimpleMarkerSymbol({size: 7})): FeatureLayer {
+                                 elevationInfo = null, renderer: SimpleRenderer = new SimpleRenderer()): FeatureLayer {
     // const _symbol = {
     //   type: 'point-3d',
     //   symbolLayers: [{
@@ -456,10 +475,10 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     //     field: 'depth',
     //     axis: 'depth',
     //   }];
-    const renderer = new SimpleRenderer({  // overrides the layer's default renderer
-      symbol: this.symbol,
-      visualVariables: this.visualVariables
-    });
+    // const renderer = new SimpleRenderer({  // overrides the layer's default renderer
+    //   symbol,
+    //   visualVariables: this.visualVariables
+    // });
     return new FeatureLayer({
       geometryType,
       source: pointGraphicsArray,
@@ -619,7 +638,8 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
         'point',
         {
           mode: 'relative-to-ground'
-        }
+        },
+        this.base3DRRenderer
       );
       this._view.map.add(newLayer);
       // this._view.goTo(pointGraphicsArray);
@@ -811,7 +831,28 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  private setRenderer(layer) {
+  private changeEventHandler = (layers) => () => {
+    layers.forEach(layer => {
+      const renderer = layer.layer.renderer.clone();
+      const visualVariables = [];
+      // just changing the stops for the color variable does not appear to work in sceneview
+      renderer.visualVariables.reverse().forEach(v => {
+        const variable = v.clone();
+        if (variable.type === 'color') {
+          variable.stops = this.colorSlider.stops;
+        }
+        visualVariables.push(variable);
+      });
+      // const colorVariableIndex = renderer.visualVariables.findIndex(v => v.type === 'color');
+      // const colorVariable = renderer.visualVariables[colorVariableIndex].clone();
+      // colorVariable.stops = this.colorSlider.stops;
+      // renderer.visualVariables[colorVariableIndex] = colorVariable;
+      renderer.visualVariables = visualVariables;
+      layer.layer.set('renderer', renderer);
+    });
+  }
+
+  private setRenderer(layers: {layer: FeatureLayer, baseRenderer: SimpleRendererProperties}[]) {
     // configure parameters for the color renderer generator
     // the layer must be specified along with a field name
     // or arcade expression. The view and other properties determine
@@ -822,12 +863,12 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
 
     if (this.analyte) {
       const colorParams = {
-        layer,
+        layer: layers[1].layer,
         field: 'Result',
         view: this._view,
         theme: 'above',
         // outlineOptimizationEnabled: true
-        symbolType: '3d-volumetric-uniform'
+        // symbolType: '3d-volumetric-uniform'
       } as colorCreateContinuousRendererParams;
 
       // Generate a continuous color renderer based on the
@@ -839,24 +880,27 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       // the renderer and visual variable
 
       let rendererResult;
+      let renderer;
 
       createContinuousRenderer(colorParams)
         .then(response => {
-          // set the renderer to the layer and add it to the map
           rendererResult = response;
-          rendererResult.renderer.classBreakInfos[0].symbol = this.symbol;
-          rendererResult.renderer.visualVariables = rendererResult.renderer.visualVariables.concat(this.visualVariables);
-          layer.renderer = rendererResult.renderer;
-
-          if (!this._map.layers.includes(layer)) {
-            this._map.add(layer);
+          // set the renderer to the layer and add it to the map
+          layers.forEach(layer => {
+            renderer = response.renderer.clone();
+            renderer.classBreakInfos[0].symbol = layer.baseRenderer.symbol;
+            renderer.visualVariables = renderer.visualVariables.concat(layer.baseRenderer.visualVariables);
+            layer.layer.renderer = renderer;
+          });
+          if (!this._map.layers.includes(layers[0].layer)) {
+            this._map.add(layers[0].layer);
           }
 
           // generate a histogram for use in the slider. Input the layer
           // and field or arcade expression to generate it.
 
           return histogram({
-            layer,
+            layer: layers[1].layer,
             field: 'Result',
             valueExpression: colorParams.valueExpression,
             view: this._view,
@@ -895,28 +939,10 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
           // when the user slides the handle(s), update the renderer
           // with the updated color visual variable object
 
-          const changeEventHandler = () => {
-            const renderer = layer.renderer.clone();
-            const visualVariables = [];
-            // just changing the stops for the color variable does not appear to work in sceneview
-            renderer.visualVariables.reverse().forEach(v => {
-              const variable = v.clone();
-              if (variable.type === 'color') {
-                variable.stops = this.colorSlider.stops;
-              }
-              visualVariables.push(variable);
-            });
-            // const colorVariableIndex = renderer.visualVariables.findIndex(v => v.type === 'color');
-            // const colorVariable = renderer.visualVariables[colorVariableIndex].clone();
-            // colorVariable.stops = this.colorSlider.stops;
-            // renderer.visualVariables[colorVariableIndex] = colorVariable;
-            renderer.visualVariables = visualVariables;
-            layer.renderer = renderer;
-          };
 
           // @ts-ignore
           this.colorSlider.on(['thumb-change', 'thumb-drag', 'min-change', 'max-change'],
-            changeEventHandler
+            this.changeEventHandler(layers)
           );
         })
         .catch((error) => {
