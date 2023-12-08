@@ -155,7 +155,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
               if (i > -1) {
                 this.projectsList.splice(i, 1);
                 this.removeFromCombinedProjectData(r);
-                this.combinedProjectData();
+                if (added.length === 0) {
+                  // this only needs to run if nothing is being added at the same time
+                  this.combinedProjectData();
+                }
               }
             });
           }
@@ -237,11 +240,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
         const newSelectedProjectIDs = projectCentroids.map((projectCentroid) => {
           return projectCentroid.PROJECTID;
         });
-        const currentselectedProjectIDs = this.projectIdsList;
-        if (!currentselectedProjectIDs || (currentselectedProjectIDs.sort().join(',') !== newSelectedProjectIDs.sort().join(','))) {
-          this.clearProjects();
-          this.setQueryParam('projects', newSelectedProjectIDs.join(','));
-        }
+        // const currentselectedProjectIDs = this.projectIdsList;
+        // if (!currentselectedProjectIDs || (currentselectedProjectIDs.sort().join(',') !== newSelectedProjectIDs.sort().join(','))) {
+        //   this.clearProjects();
+        this.setQueryParam('projects', newSelectedProjectIDs.join(','));
+        // }
       }
     });
   }
