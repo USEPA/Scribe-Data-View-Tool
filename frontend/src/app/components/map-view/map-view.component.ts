@@ -51,10 +51,12 @@ import ObjectSymbol3DLayer from '@arcgis/core/symbols/ObjectSymbol3DLayer';
 import PointSymbol3D from '@arcgis/core/symbols/PointSymbol3D';
 import SymbolProperties = __esri.SymbolProperties;
 import colorCreateContinuousRendererParams = __esri.colorCreateContinuousRendererParams;
-import {fromPromise} from "rxjs/internal-compatibility";
-import {map, switchMap, tap} from "rxjs/operators";
+import {fromPromise} from 'rxjs/internal-compatibility';
+import {map, switchMap, tap} from 'rxjs/operators';
 import SimpleRendererProperties = __esri.SimpleRendererProperties;
 import VisualVariableProperties = __esri.VisualVariableProperties;
+import MapView from '@arcgis/core/views/MapView';
+import GraphicHit = __esri.GraphicHit;
 
 // import {MapService} from '@services/map.service';
 
@@ -74,6 +76,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   @Input() analyte: string;
   @Input() portalLayerServiceUrls: string[];
   @Input() pointData: any[];
+  @Input() mapViewType = 'sceneView';
 
   @Input()
   set baseMap(baseMap: string) {
@@ -101,7 +104,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
   private _center: Array<number> = [-122.449445, 37.762852]; // -122.449445, 37.762852
   private _baseMap = 'dark-gray-vector';
   private _map: Map;
-  private _view: SceneView;
+  private _view: SceneView | MapView;
   private _zoomToPointGraphic: Graphic;
   private _homeBtn: Home;
   private highlight: Handle;
@@ -204,27 +207,39 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     // this.mapViewEl.nativeElement.id = this.mapDivId;
 
     // create map scene view
-    this._view = new SceneView({
-      container: this.mapViewEl.nativeElement,
-      map: this._map,
-      // center: this._center,
-      zoom: 4,
-      popup: {
-        autoOpenEnabled: false
-      },
-      viewingMode: 'local',
-      camera: {
-        tilt: 0
-      }
-      // popup: {
-      //   dockEnabled: false,
-      //   dockOptions: {
-      //     position: 'bottom-center',
-      //     // Ignore the default sizes that trigger responsive docking
-      //     breakpoint: false
-      //   }
-      // },
-    });
+    if (this.mapViewType === 'sceneView') {
+      this._view = new SceneView({
+        container: this.mapViewEl.nativeElement,
+        map: this._map,
+        // center: this._center,
+        // zoom: 18,
+        popup: {
+          autoOpenEnabled: false
+        },
+        viewingMode: 'local',
+        camera: {
+          tilt: 0
+        }
+        // popup: {
+        //   dockEnabled: false,
+        //   dockOptions: {
+        //     position: 'bottom-center',
+        //     // Ignore the default sizes that trigger responsive docking
+        //     breakpoint: false
+        //   }
+        // },
+      });
+    } else if (this.mapViewType === 'mapView') {
+      this._view = new MapView({
+        container: this.mapViewEl.nativeElement,
+        map: this._map,
+        // center: this._center,
+        // zoom: 18,
+        popup: {
+          autoOpenEnabled: false
+        }
+      });
+    }
     // add ootb map widgets to view
     this._homeBtn = new Home({
       view: this._view
@@ -307,8 +322,8 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
 
       if (changes.pointData || (changes.analyte && changes.analyte.currentValue !== changes.analyte.previousValue)) {
 
-        if (changes.pointData && changes.pointData.currentValue) {
-          this._pointDataSubject.next(changes.pointData.currentValue);
+        if (this.pointData) {
+          this._pointDataSubject.next(this.pointData);
           // const pointGraphicsArray = this.addPoints(changes.pointData.currentValue);
           // this.layer3d = this.add3dPoints(changes.pointData.currentValue);
           // this._view.goTo(pointGraphicsArray, {animate: false});
@@ -351,15 +366,19 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
         // this._view.popup.open({
         //   location: event.mapPoint,
         // });
-        if (response.results.length > 0) {
-          if (response.results[0].type === 'graphic') {
-            this.selectedFeaturesChange.emit([response.results[0].graphic.attributes.Samp_No]);
+        const filteredResults = response.results.filter(x => x.type === 'graphic') as GraphicHit[];
+        if (filteredResults.length > 0) {
+          if (filteredResults[0].graphic.attributes.hasOwnProperty('Samp_No')) {
+            this.selectedFeaturesChange.emit([filteredResults[0].graphic.attributes.Samp_No]);
+          } else {
+            this.selectedFeaturesChange.emit(filteredResults.map((x => ({...x.graphic.attributes}))));
           }
           // if (selectedGraphic.attributes && 'PROJECTID' in selectedGraphic.attributes) {
           //   // on project centroid point selected / clicked, go to that project
           //
           //   this.scribeDataExplorerService.projectCentroidsSelectedSource.next([selectedGraphic.attributes]);
-          // } else {
+          // }
+          // else {
           //   // Only return selected map point graphic from the click event results
           //   // selectedGraphic = response.results.filter((result) => {
           //   //   return result.graphic.layer === this.mapPointsFeatureLayer;
@@ -372,11 +391,11 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
-  async loadPortalLayers(portalLyrServiceUrls) {
-    const portalLayers: Layer[] = await Promise.all(portalLyrServiceUrls.map(async (portalItemId) => {
+  loadPortalLayers(portalLyrServiceUrls) {
+    portalLyrServiceUrls.forEach((portalItemId) => {
       return Layer.fromArcGISServerUrl({
-        url: 'https://utility.arcgis.com/usrsvcs/servers/add9432d507146e7abf3351efa097b99/rest/services/R9GIS/R9ScribeData/MapServer'
-      } as unknown as LayerFromArcGISServerUrlParams).then((portalLyr) => {
+        url: portalItemId
+      }).then((portalLyr) => {
         portalLyr.load().then((loadedPortalLyr) => {
           // const portalLyrSubLayers = loadedPortalLyr.createServiceSublayers();
           // @ts-ignore
@@ -389,6 +408,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
               featureLayer.load().then((loadedFeatureLyr) => {
                 this.scribeProjectsFeatureLyr = loadedFeatureLyr;
                 this._view.map.add(this.scribeProjectsFeatureLyr);
+                loadedFeatureLyr.queryExtent({where: '1=1'}).then(e => this._view.goTo(e.extent));
               });
             });
           }
@@ -396,7 +416,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
       }).catch((error) => {
         console.log(error);
       });
-    }));
+    });
     // console.log(this._map.allLayers);
   }
 
@@ -779,7 +799,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
 
     this.pointSelectionSketchViewModel.on('create', (event) => {
       if (event.state === 'complete') {
-        this.polygonSelectionGraphicsLayer.remove(event.graphic);
+        // this.polygonSelectionGraphicsLayer.remove(event.graphic);
         this.selectPointFeatures(event.graphic.geometry);
       }
     });
@@ -852,7 +872,7 @@ export class MapViewComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
-  private setRenderer(layers: {layer: FeatureLayer, baseRenderer: SimpleRendererProperties}[]) {
+  private setRenderer(layers: { layer: FeatureLayer, baseRenderer: SimpleRendererProperties }[]) {
     // configure parameters for the color renderer generator
     // the layer must be specified along with a field name
     // or arcade expression. The view and other properties determine

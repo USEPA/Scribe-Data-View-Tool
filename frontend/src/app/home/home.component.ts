@@ -33,6 +33,7 @@ import {count, map, startWith} from 'rxjs/operators';
 
 import {Injectable} from '@angular/core';
 import {environment} from '@environments/environment';
+import {getMissingGeoPoints, mergeAllSamplesAndLabResults} from './home.functions';
 
 
 @Component({
@@ -51,7 +52,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   userProjects: Project[] | any;
   userExploredProjects: ProjectExplorer[] | any;
   projectsLoaded: boolean;
-  selectedProjectIDs: string[] = [];
+  // selectedProjectIDs: string[] = [];
   isMapPointsSelected = false;
   // sample point props
   projectSamplesColDefs: ColumnDefs[] = [];
@@ -106,8 +107,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   removable = true;
   projectCtrl = new FormControl('');
   filteredProjects: Observable<ProjectExplorer[]>;
-  projectsList: Project[] = [];
-  projectIdsList: number[] = [];
+  projectsList: ProjectExplorer[] = [];
+  projectIdsList: string[] = [];
 
   @ViewChild('projectInput') projectInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -122,7 +123,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.projectsLoaded = false;
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     // this.userProjects = await this.scribeDataExplorerService.getUserProjects();
     // this.userExploredProjects = await this.scribeDataExplorerService.getUserExploredProjects();
     // this.setFilter();
@@ -135,33 +136,60 @@ export class HomeComponent implements OnInit, AfterViewInit {
     });
 
     // // Subscribing to query string parameters
-    const queryParams = this.route.snapshot.queryParams;
-    if (queryParams.projects) {
-      this.queryFilterParams = queryParams;
-      const newselectedProjectIDs = this.queryFilterParams.projects.split(',').map(item => item.trim());
-      // const notLoadedProjects = newselectedProjectIDs.filter(projectId => !this.selectedProjectIDs.includes(projectId));
-      // const removedProjects = this.selectedProjectIDs.filter(projectId => !newselectedProjectIDs.includes(projectId));
-      // clear active filters
-      // this.agGridActiveFilters = [];
-      this.selectedProjectIDs = newselectedProjectIDs; // todo: in the future only load projects that have not been loaded already
-      this.scribeDataExplorerService.getProjects(this.selectedProjectIDs).subscribe(
-        projects => this.projectsList = projects
-      );
-      await this.getCombinedProjectData(this.selectedProjectIDs);
-      // tslint:disable-next-line:radix
-      // this.projects.setValue(this.selectedProjectIDs.map(id => parseInt(id)));
-    }
-    if (queryParams.Analyte) {
-      // this.agGridActiveFilters = [];
-    }
-    // /*const filters = [];
-    // for (const key of Object.keys(queryParams).filter(k => k !== 'projects')) {
-    //   filters.push({name: key, value: queryParams[key]});
-    // }*/
+    this.route.queryParams.subscribe(queryParams => {
+      if (queryParams.projects !== undefined) {
+        const {
+          added,
+          removed
+        } = this.diffProjectIds(queryParams.projects.split(',').filter(f => f !== '').map(i => i.trim()), this.projectIdsList);
+        this.projectIdsList = queryParams.projects.split(',').map(item => item.trim());
 
-    // this.agGridActiveFilters = [];
-    this.colsSpan = (window.innerWidth > 1050) ? 1 : 2;
-    this.selectedAnalyte = this.route.queryParams.pipe(map(params => params.Analyte));
+        if (this.projectIdsList.length === 0) {
+          this.clearProjects();
+        } else {
+          this.isLoadingData = true;
+          if (removed.length > 0) {
+            removed.forEach(r => {
+              const project = this.projectsList.find(p => `${p.projectid}` === r);
+              const i = this.projectsList.indexOf(project);
+              if (i > -1) {
+                this.projectsList.splice(i, 1);
+                this.removeFromCombinedProjectData(r);
+                this.combinedProjectData();
+              }
+            });
+          }
+          if (added.length > 0) {
+            this.queryFilterParams = queryParams;
+            this.scribeDataExplorerService.getProjects(added).subscribe(
+              projects => this.projectsList = [...this.projectsList, ...projects]
+            );
+            this.addToCombinedData(added).then(() => this.combinedProjectData());
+            // tslint:disable-next-line:radix
+            // this.projects.setValue(this.selectedProjectIDs.map(id => parseInt(id)));
+          }
+        }
+      }
+
+      if (queryParams.Analyte) {
+        // this.agGridActiveFilters = [];
+      }
+      // /*const filters = [];
+      // for (const key of Object.keys(queryParams).filter(k => k !== 'projects')) {
+      //   filters.push({name: key, value: queryParams[key]});
+      // }*/
+
+      // this.agGridActiveFilters = [];
+      this.colsSpan = (window.innerWidth > 1050) ? 1 : 2;
+    });
+
+    this.selectedAnalyte = this.route.queryParams.pipe(map(q => q.Analyte));
+  }
+
+  diffProjectIds(newSelection: string[], currentSelection: string[]) {
+    const added = newSelection.filter(x => !currentSelection.includes(x));
+    const removed = currentSelection.filter(x => !newSelection.includes(x));
+    return {added, removed};
   }
 
   ngAfterViewInit() {
@@ -182,8 +210,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.projectLabResultsRowData = this.mergeSelectedSamplesAndLabResults(selectedSamplePointsRowData, this.combinedLabResultRowData);
         this.isMapPointsSelected = true;
       } else {
-        this.projectLabResultsRowData = this.mergeAllSamplesAndLabResults(this.projectSamplesRowData, this.combinedLabResultRowData);
-        this.isMapPointsSelected = false;
+        this.mergeAllSamplesAndLabResultsWithWorker(this.projectSamplesRowData, this.combinedLabResultRowData).then(r => {
+          this.projectLabResultsRowData = r;
+          this.isMapPointsSelected = false;
+        });
       }
     });
     this.scribeDataExplorerService.mapPointSelectedChangedEvent.subscribe((pointAttributes) => {
@@ -277,7 +307,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       // }
     }
     // 2) Update the filtered map points
-    if (filters.filteredRowData && filters.filteredRowData.length > 0) {
+    if (filters.activeFilters.length > 0 && filters.filteredRowData && filters.filteredRowData.length > 0) {
       // IMPORTANT: pass in the resulting singular sample point records to the map
       // TODO: Add a summary calculation of the lab results to pass in along with these sample point records in order to
       //  determine how the sample points need to be symbolized
@@ -314,13 +344,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.geoPointsArray = [];
       this.missingGeoPointsCount = this.projectSamplesRowData.length;
     } else {
-      // refresh data
-      this.getCombinedProjectData(this.projectIdsList);
+      // refresh data... why????????
+      this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
+      this.getMissingGeoPointsWithWorker(this.projectSamplesRowData, this.combinedLabResultRowData).then(r => {
+        this.missingGeoPointsCount = r;
+      });
+
+      // this.addToCombinedProjectData(this.projectIdsList);
     }
   }
 
   initProps(): void {
-    this.selectedProjectIDs = [];
     this.projectsList = [];
     this.projectIdsList = [];
     this.clearQueryParams();
@@ -369,25 +403,38 @@ export class HomeComponent implements OnInit, AfterViewInit {
   mapGeoFeaturesLoaded(val) {
   }
 
-  async getCombinedProjectData(projectIds) {
-    let combinedSamplePointRowData = [];
-    this.isLoadingData = true;
-    this.isMapPointsSelected = false;
+  async addToCombinedData(projectIds) {
     // combine all project sample point and lab results data
     const projectsSamplePoints = await Promise.all(projectIds.map(async (projectId) => {
       const rows = await this.scribeDataExplorerService.getProjectSamples(projectId);
-      return rows;
+      // add projectid for use in removal later
+      return rows.map(r => {
+        r.projectid = projectId;
+        return r;
+      });
     }));
     // combine lab results
     const projectsLabResults = await Promise.all(projectIds.map(async (projectId) => {
       const rows = await this.scribeDataExplorerService.getProjectLabResults(projectId);
-      return rows;
+      // add projectid for use in removal later
+      return rows.map(r => {
+        r.projectid = projectId;
+        return r;
+      });
     }));
-    combinedSamplePointRowData = [].concat(...projectsSamplePoints);
-    this.combinedLabResultRowData = [].concat(...projectsLabResults);
-    if (combinedSamplePointRowData.length > 0) {
-      this.projectSamplesColDefs = this.setAgGridColumnProps(combinedSamplePointRowData);
-      this.projectSamplesRowData = combinedSamplePointRowData;
+    this.projectSamplesRowData = [...this.projectSamplesRowData, ...projectsSamplePoints.flat()];
+    this.combinedLabResultRowData = [...this.combinedLabResultRowData, ...projectsLabResults.flat()];
+  }
+
+  removeFromCombinedProjectData(projectId) {
+    this.combinedLabResultRowData = this.combinedLabResultRowData.filter(r => r.projectid !== projectId);
+    this.projectSamplesRowData = this.projectSamplesRowData.filter(r => r.projectid !== projectId);
+  }
+
+  combinedProjectData() {
+    this.isMapPointsSelected = false;
+    if (this.projectSamplesRowData.length > 0) {
+      this.projectSamplesColDefs = this.setAgGridColumnProps(this.projectSamplesRowData);
       // only pass in sample points for now
       this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
       this.missingGeoPointsCount = this.projectSamplesRowData.length - this.geoPointsArray.length;
@@ -401,8 +448,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
         });
         this.projectLabResultsColDefs = [...samplePointCols,
           ...this.setAgGridColumnProps(this.combinedLabResultRowData, addedSamplePointColIDs)];
-        this.projectLabResultsRowData = this.mergeAllSamplesAndLabResults(this.projectSamplesRowData, this.combinedLabResultRowData);
-        this.missingGeoPointsCount = this.getMissingGeoPoints(this.projectSamplesRowData, this.combinedLabResultRowData);
+        this.mergeAllSamplesAndLabResultsWithWorker(this.projectSamplesRowData, this.combinedLabResultRowData).then(r => {
+          this.projectLabResultsRowData = r;
+        });
+
+        this.getMissingGeoPointsWithWorker(this.projectSamplesRowData, this.combinedLabResultRowData).then(r => {
+          this.missingGeoPointsCount = r;
+        });
+
       }
       // set ag-grid select filter properties
       this.setAgGridSelectFilters();
@@ -413,28 +466,28 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.isLoadingData = false;
   }
 
-  setProjects(event) {
-    event.stopPropagation();
-    if (this.projectIdsList.length) {
-      const newselectedProjectIDs = this.projectIdsList.join(',');
-      this.setQueryParam('projects', newselectedProjectIDs);
-      this.getCombinedProjectData(this.projectIdsList);
-      // const currentselectedProjectIDs = this.route.snapshot.queryParams.projects;
-      // if (!currentselectedProjectIDs) {
-      //   this.setQueryParam('projects', newselectedProjectIDs);
-      // } else {
-      //   if (newselectedProjectIDs !== currentselectedProjectIDs) {
-      //     const queryParams = {};
-      //     Object.keys(this.route.snapshot.queryParams).filter(k => k === 'projects').forEach(key => {
-      //       queryParams[key] = newselectedProjectIDs;
-      //     });
-      //     this.router.navigate([], {queryParams});
-      //   }
-      // }
-    } else {
-      this.clearProjects();
-    }
-  }
+  // setProjects(event) {
+  //   event.stopPropagation();
+  //   if (this.projectIdsList.length) {
+  //     const newselectedProjectIDs = this.projectIdsList.join(',');
+  //     this.setQueryParam('projects', newselectedProjectIDs);
+  //     this.getCombinedProjectData(this.projectIdsList);
+  //     // const currentselectedProjectIDs = this.route.snapshot.queryParams.projects;
+  //     // if (!currentselectedProjectIDs) {
+  //     //   this.setQueryParam('projects', newselectedProjectIDs);
+  //     // } else {
+  //     //   if (newselectedProjectIDs !== currentselectedProjectIDs) {
+  //     //     const queryParams = {};
+  //     //     Object.keys(this.route.snapshot.queryParams).filter(k => k === 'projects').forEach(key => {
+  //     //       queryParams[key] = newselectedProjectIDs;
+  //     //     });
+  //     //     this.router.navigate([], {queryParams});
+  //     //   }
+  //     // }
+  //   } else {
+  //     this.clearProjects();
+  //   }
+  // }
 
   clearProjects(event = null) {
     if (event) {
@@ -454,7 +507,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.agGridActiveFilters = [];
         this.updateFilters.next([]);
         this.scribeDataExplorerService.clearMapSelectionSource.next(true);
-        await this.getCombinedProjectData(this.projectIdsList);
+        // todo: why does data need to be reload for tab change?
+        // await this.getCombinedProjectData(this.projectIdsList);
       } catch (err) {
         this.isLoadingData = false;
         this.showTable = false;
@@ -473,16 +527,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     return latLongRecords;
   }
 
-  mergeAllSamplesAndLabResults(samplePoints, labResults) {
-    const rowDataMerged = [];
-    labResults.forEach(result => {
-      rowDataMerged.push({
-        ...result, ...(samplePoints.find((point) =>
-          point.Samp_No === result.Samp_No))
-      });
-    });
-    return rowDataMerged;
-  }
 
   mergeSelectedSamplesAndLabResults(selectedSamplePoints, labResults) {
     const rowDataMerged = [];
@@ -499,22 +543,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     return rowDataMerged;
   }
 
-  getMissingGeoPoints(samplePoints, labResults) {
-    let missingGeoPointsCount = 0;
-    labResults.forEach(result => {
-      const found = samplePoints.find((point) => {
-        if (point.Samp_No === result.Samp_No) {
-          return point;
-        }
-      });
-      if (found) {
-        if (!found.Latitude || !found.Longitude) {
-          missingGeoPointsCount = missingGeoPointsCount + 1;
-        }
-      }
-    });
-    return missingGeoPointsCount;
-  }
 
   setAgGridSelectFilters() {
     this.agGridCustomFilters = {
@@ -799,39 +827,46 @@ export class HomeComponent implements OnInit, AfterViewInit {
   // }
 
   add(event: MatChipInputEvent): void {
-    let projectInAutocomplete: ProjectExplorer;
-    this.filteredProjects.subscribe(projects => {
-      if (projects.length === 1) {
-        projectInAutocomplete = projects[0];
-        this.addProject(projectInAutocomplete);
-        this.addId(projectInAutocomplete.projectid);
-        event.input.value = '';
-      }
-
-    });
+    const newProjectIds = [...this.projectIdsList, event.input.value];
+    this.setQueryParam('projects', newProjectIds.join(','));
+    event.input.value = '';
+    // let projectInAutocomplete: ProjectExplorer;
+    // this.filteredProjects.subscribe(projects => {
+    //   if (projects.length === 1) {
+    //     projectInAutocomplete = projects[0];
+    //     // this.addProject(projectInAutocomplete);
+    //     // this.addId(projectInAutocomplete.projectid);
+    //     event.input.value = '';
+    //   }
+    //
+    // });
   }
 
   // remove both the project and the project id from their respective list
-  async remove(project: Project) {
-    const index = this.projectsList.indexOf(project);
-    if (index >= 0) {
-      this.projectsList.splice(index, 1);
-      this.projectIdsList.splice(index, 1);
-    }
-    if (this.projectIdsList.length > 0) {
-      await this.getCombinedProjectData(this.projectIdsList);
-    } else {
-      this.clearProjects();
-    }
+  remove(project: ProjectExplorer) {
+    const newProjectIdList = this.projectIdsList.filter(x => x !== `${project.projectid}`);
+    this.setQueryParam('projects', newProjectIdList.join(','));
+    // const index = this.projectsList.indexOf(project);
+    // if (index >= 0) {
+    //   this.projectsList.splice(index, 1);
+    //   this.projectIdsList.splice(index, 1);
+    // }
+    // if (this.projectIdsList.length > 0) {
+    //   await this.getCombinedProjectData(this.projectIdsList);
+    // } else {
+    //   this.clearProjects();
+    // }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    const projectToAdd = {projectid: event.option.value, project_name: event.option.viewValue};
-    this.addProject(projectToAdd);
-    this.addId(projectToAdd.projectid);
+    // const projectToAdd = {projectid: event.option.value, project_name: event.option.viewValue} as ProjectExplorer;
+    // this.addProject(projectToAdd);
+    // this.addId(projectToAdd.projectid);
     this.projectInput.nativeElement.value = '';
-    this.projectCtrl.setValue(null);
-    this.setQueryParam('projects', this.projectIdsList.join(','));
+    // this.projectCtrl.setValue(null);
+    // this.projectIdsList.push(event.option.value);
+    const newIds = [...this.projectIdsList, event.option.value];
+    this.setQueryParam('projects', newIds.join(','));
   }
 
   // setFilter() {
@@ -841,16 +876,46 @@ export class HomeComponent implements OnInit, AfterViewInit {
   // }
 
 
-  async addId(id: number) {
-    if (!this.projectIdsList.includes(id)) {
-      this.projectIdsList.push(id);
-    }
-    await this.getCombinedProjectData(this.projectIdsList);
-  }
+  // async addId(id: string) {
+  //   if (!this.projectIdsList.includes(id)) {
+  //     this.projectIdsList.push(id);
+  //   }
+  //   await this.getCombinedProjectData(this.projectIdsList);
+  // }
 
-  addProject(project: Project) {
+  addProject(project: ProjectExplorer) {
     if (!this.projectIdsList.includes(project.projectid)) {
       this.projectsList.push(project);
     }
   }
+
+  mergeAllSamplesAndLabResultsWithWorker(samplePoints, labResults): Promise<any[]> {
+    return new Promise((resolve) => {
+      if (typeof Worker !== 'undefined') {
+        // Create a new
+        const worker = new Worker(new URL('./home.worker', import.meta.url));
+        worker.onmessage = (message) => resolve(message.data);
+        worker.postMessage({method: 'mergeAllSamplesAndLabResults', samplePoints, labResults});
+      } else {
+        const results = mergeAllSamplesAndLabResults(samplePoints, labResults);
+        resolve(results);
+      }
+    });
+  }
+
+  getMissingGeoPointsWithWorker(samplePoints, labResults): Promise<number> {
+    return new Promise((resolve) => {
+      if (typeof Worker !== 'undefined') {
+        // Create a new
+        const worker = new Worker(new URL('./home.worker', import.meta.url));
+        worker.onmessage = (message) => resolve(message.data);
+        worker.postMessage({method: 'getMissingGeoPoints', samplePoints, labResults});
+      } else {
+        const results = getMissingGeoPoints(samplePoints, labResults);
+        resolve(results);
+      }
+    });
+  }
+
+
 }

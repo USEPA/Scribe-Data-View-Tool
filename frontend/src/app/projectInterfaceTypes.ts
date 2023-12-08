@@ -1,12 +1,12 @@
 import DateTimeFormat = Intl.DateTimeFormat;
 
 export interface Project {
-  projectid: number;
+  projectid: string;
   project_name: string;
 }
 
 export interface ProjectExplorer {
-  projectid: number;
+  projectid: string;
   project_name: string;
   Site_No: string;
   Site_State: string;
@@ -144,6 +144,7 @@ export interface ProjectSample {
   Numeric_Tags: any;
   MDL: number;
   Result: number;
+  projectid: string;
 }
 
 export interface MapSymbolizationProps {
