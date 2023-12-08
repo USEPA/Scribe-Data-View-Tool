@@ -1,11 +1,23 @@
 import DateTimeFormat = Intl.DateTimeFormat;
 
 export interface Project {
-  projectid: number;
+  projectid: string;
   project_name: string;
 }
 
+export interface ProjectExplorer {
+  projectid: string;
+  project_name: string;
+  Site_No: string;
+  Site_State: string;
+  NPL_Status: string;
+  Description: string;
+  EPARegionNumber: string;
+  EPAContact: string;
+}
+
 export interface AGOLService {
+  itemUrl: any;
   title: string;
   url: string;
 }
@@ -132,6 +144,7 @@ export interface ProjectSample {
   Numeric_Tags: any;
   MDL: number;
   Result: number;
+  projectid: string;
 }
 
 export interface MapSymbolizationProps {
@@ -145,4 +158,18 @@ export interface MapSymbol {
   value: number;
   color: string;
   label: string;
+}
+
+export interface Feature {
+  type: string;
+  geometry: {
+    type: string,
+    coordinates: any,
+  };
+  properties: any;
+}
+
+export interface FeatureCollection {
+  type: string;
+  features: Feature[];
 }

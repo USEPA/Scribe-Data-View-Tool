@@ -25,3 +25,10 @@ mat-spinner {
   #000 0px 0px 2px, #000 0px 0px 2px, #000 0px 0px 2px;
   -webkit-font-smoothing: antialiased;
 }
+
+.tabs-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}

@@ -10,8 +10,9 @@
   </div>
   <div mat-dialog-content>
     <app-map-view
+      mapViewType="mapView"
       [portalLayerServiceUrls]="[
-        'https://utility.arcgis.com/usrsvcs/servers/add9432d507146e7abf3351efa097b99/rest/services/R9GIS/R9ScribeData/MapServer'
+        'https://utility.arcgis.com/usrsvcs/servers/94cdbffe266c42e480b657b4bb42576d/rest/services/EPA_CERCLA/R9Scribe/MapServer'
       ]"
       (mapFeaturesLoadedEvent)="mapGeoFeaturesLoaded($event)"
       (selectedFeaturesChange)="selectProject($event)"

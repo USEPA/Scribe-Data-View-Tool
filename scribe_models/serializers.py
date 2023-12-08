@@ -6047,48 +6047,6 @@ from .models.dbo import (
     PID_3553_EDDWaterSampling_model,
     PID_3553_EDDWipeSampling_model,
     PID_3553_Events_model,
-    PID_3553_Field_XRF_model,
-    PID_3553_GIS_Location_model,
-    PID_3553_Instruments_model,
-    PID_3553_LabAnalyses_model,
-    PID_3553_LabResults_model,
-    PID_3553_Location_model,
-    PID_3553_lu_Method_model,
-    PID_3553_Monitoring_model,
-    PID_3553_PropertyInfo_model,
-    PID_3553_PropertyOccupant_model,
-    PID_3553_refAnalytes_model,
-    PID_3553_refLabLst_model,
-    PID_3553_refMatrixLst_model,
-    PID_3553_refNames_model,
-    PID_3553_refPickLst_model,
-    PID_3553_refSGenus_model,
-    PID_3553_Samples_model,
-    PID_3553_SamplesAir_model,
-    PID_3553_SamplesBiota_model,
-    PID_3553_SamplesMeasurements_model,
-    PID_3553_SamplesSoil_model,
-    PID_3553_SamplesSoilGas_model,
-    PID_3553_SamplesTags_model,
-    PID_3553_SamplesWater_model,
-    PID_3553_SamplesWipe_model,
-    PID_3553_Site_model,
-    PID_3553_sysDataColumn_model,
-    PID_3553_sysDataColumnLayout_model,
-    PID_3553_sysDataLabel_model,
-    PID_3553_sysDataLabelLines_model,
-    PID_3553_sysDataLabelLst_model,
-    PID_3553_sysDataMap_model,
-    PID_3553_sysDataMapCol_model,
-    PID_3553_sysDataRpt_model,
-    PID_3553_sysDataViews_model,
-    PID_3553_sysKMLMap_model,
-    PID_3553_sysKMLMapClass_model,
-    PID_3553_sysLookupLst_model,
-    PID_3553_sysTableLst_model,
-    PID_3553_sysTaskGroups_model,
-    PID_3553_sysTaskLst_model,
-    PID_3553_sysTasks_model,
     PID_3562_ActionLevels_model,
     PID_3562_COC_model,
     PID_3562_EDDAirSampling_model,
@@ -7404,10 +7362,10 @@ from .models.dbo import (
     PID_3808_LabAnalyses_model,
     PID_3808_LabResults_model,
     PID_3808_Location_model,
+    PID_3808_MissingQualifier_model,
     PID_3808_Monitoring_model,
     PID_3808_PropertyInfo_model,
     PID_3808_PropertyOccupant_model,
-    PID_3808_R9_refUnitConversion_model,
     PID_3808_refAnalytes_model,
     PID_3808_refLabLst_model,
     PID_3808_refMatrixLst_model,
@@ -8435,13 +8393,10 @@ from .models.dbo import (
     PID_3874_EDDWaterSampling_model,
     PID_3874_EDDWipeSampling_model,
     PID_3874_Events_model,
-    PID_3874_Field_XRF_model,
-    PID_3874_GIS_Location_model,
     PID_3874_Instruments_model,
     PID_3874_LabAnalyses_model,
     PID_3874_LabResults_model,
     PID_3874_Location_model,
-    PID_3874_lu_Method_model,
     PID_3874_Monitoring_model,
     PID_3874_PropertyInfo_model,
     PID_3874_PropertyOccupant_model,
@@ -8630,6 +8585,3898 @@ from .models.dbo import (
     PID_3891_sysTaskGroups_model,
     PID_3891_sysTaskLst_model,
     PID_3891_sysTasks_model,
+    PID_3893_ActionLevels_model,
+    PID_3893_COC_model,
+    PID_3893_EDDAirSampling_model,
+    PID_3893_EDDBiotaSampling_model,
+    PID_3893_EDDLabAnalyses_model,
+    PID_3893_EDDMonitoringData_model,
+    PID_3893_EDDProperty_model,
+    PID_3893_EDDSoilGasSampling_model,
+    PID_3893_EDDSoilSampling_model,
+    PID_3893_EDDWaterSampling_model,
+    PID_3893_EDDWipeSampling_model,
+    PID_3893_Events_model,
+    PID_3893_Instruments_model,
+    PID_3893_LabAnalyses_model,
+    PID_3893_LabResults_model,
+    PID_3893_Location_model,
+    PID_3893_Monitoring_model,
+    PID_3893_PropertyInfo_model,
+    PID_3893_PropertyOccupant_model,
+    PID_3893_refAnalytes_model,
+    PID_3893_refLabLst_model,
+    PID_3893_refMatrixLst_model,
+    PID_3893_refNames_model,
+    PID_3893_refPickLst_model,
+    PID_3893_refSGenus_model,
+    PID_3893_Samples_model,
+    PID_3893_SamplesAir_model,
+    PID_3893_SamplesBiota_model,
+    PID_3893_SamplesMeasurements_model,
+    PID_3893_SamplesSoil_model,
+    PID_3893_SamplesSoilGas_model,
+    PID_3893_SamplesTags_model,
+    PID_3893_SamplesWater_model,
+    PID_3893_SamplesWipe_model,
+    PID_3893_Site_model,
+    PID_3893_sysDataColumn_model,
+    PID_3893_sysDataColumnLayout_model,
+    PID_3893_sysDataLabel_model,
+    PID_3893_sysDataLabelLines_model,
+    PID_3893_sysDataLabelLst_model,
+    PID_3893_sysDataMap_model,
+    PID_3893_sysDataMapCol_model,
+    PID_3893_sysDataRpt_model,
+    PID_3893_sysDataViews_model,
+    PID_3893_sysKMLMap_model,
+    PID_3893_sysKMLMapClass_model,
+    PID_3893_sysLookupLst_model,
+    PID_3893_sysTableLst_model,
+    PID_3893_sysTaskGroups_model,
+    PID_3893_sysTaskLst_model,
+    PID_3893_sysTasks_model,
+    PID_3894_ActionLevels_model,
+    PID_3894_COC_model,
+    PID_3894_EDDAirSampling_model,
+    PID_3894_EDDBiotaSampling_model,
+    PID_3894_EDDLabAnalyses_model,
+    PID_3894_EDDMonitoringData_model,
+    PID_3894_EDDProperty_model,
+    PID_3894_EDDSoilGasSampling_model,
+    PID_3894_EDDSoilSampling_model,
+    PID_3894_EDDWaterSampling_model,
+    PID_3894_EDDWipeSampling_model,
+    PID_3894_Events_model,
+    PID_3894_Instruments_model,
+    PID_3894_LabAnalyses_model,
+    PID_3894_LabResults_model,
+    PID_3894_Location_model,
+    PID_3894_Monitoring_model,
+    PID_3894_PropertyInfo_model,
+    PID_3894_PropertyOccupant_model,
+    PID_3894_refAnalytes_model,
+    PID_3894_refLabLst_model,
+    PID_3894_refMatrixLst_model,
+    PID_3894_refNames_model,
+    PID_3894_refPickLst_model,
+    PID_3894_refSGenus_model,
+    PID_3894_Samples_model,
+    PID_3894_SamplesAir_model,
+    PID_3894_SamplesBiota_model,
+    PID_3894_SamplesMeasurements_model,
+    PID_3894_SamplesSoil_model,
+    PID_3894_SamplesSoilGas_model,
+    PID_3894_SamplesTags_model,
+    PID_3894_SamplesWater_model,
+    PID_3894_SamplesWipe_model,
+    PID_3894_Site_model,
+    PID_3894_sysDataColumn_model,
+    PID_3894_sysDataColumnLayout_model,
+    PID_3894_sysDataLabel_model,
+    PID_3894_sysDataLabelLines_model,
+    PID_3894_sysDataLabelLst_model,
+    PID_3894_sysDataMap_model,
+    PID_3894_sysDataMapCol_model,
+    PID_3894_sysDataRpt_model,
+    PID_3894_sysDataViews_model,
+    PID_3894_sysKMLMap_model,
+    PID_3894_sysKMLMapClass_model,
+    PID_3894_sysLookupLst_model,
+    PID_3894_sysTableLst_model,
+    PID_3894_sysTaskGroups_model,
+    PID_3894_sysTaskLst_model,
+    PID_3894_sysTasks_model,
+    PID_3920_ActionLevels_model,
+    PID_3920_COC_model,
+    PID_3920_EDDAirSampling_model,
+    PID_3920_EDDBiotaSampling_model,
+    PID_3920_EDDLabAnalyses_model,
+    PID_3920_EDDMonitoringData_model,
+    PID_3920_EDDProperty_model,
+    PID_3920_EDDSoilGasSampling_model,
+    PID_3920_EDDSoilSampling_model,
+    PID_3920_EDDWaterSampling_model,
+    PID_3920_EDDWipeSampling_model,
+    PID_3920_Events_model,
+    PID_3920_Instruments_model,
+    PID_3920_LabAnalyses_model,
+    PID_3920_LabResults_model,
+    PID_3920_Location_model,
+    PID_3920_Monitoring_model,
+    PID_3920_PropertyOccupant_model,
+    PID_3920_refAnalytes_model,
+    PID_3920_refLabLst_model,
+    PID_3920_refMatrixLst_model,
+    PID_3920_refNames_model,
+    PID_3920_refPickLst_model,
+    PID_3920_refSGenus_model,
+    PID_3920_Samples_model,
+    PID_3920_SamplesAir_model,
+    PID_3920_SamplesBiota_model,
+    PID_3920_SamplesMeasurements_model,
+    PID_3920_SamplesSoil_model,
+    PID_3920_SamplesSoilGas_model,
+    PID_3920_SamplesTags_model,
+    PID_3920_SamplesWater_model,
+    PID_3920_SamplesWipe_model,
+    PID_3920_Site_model,
+    PID_3920_sysDataColumn_model,
+    PID_3920_sysDataColumnLayout_model,
+    PID_3920_sysDataLabel_model,
+    PID_3920_sysDataLabelLines_model,
+    PID_3920_sysDataLabelLst_model,
+    PID_3920_sysDataMap_model,
+    PID_3920_sysDataMapCol_model,
+    PID_3920_sysDataRpt_model,
+    PID_3920_sysDataViews_model,
+    PID_3920_sysKMLMap_model,
+    PID_3920_sysKMLMapClass_model,
+    PID_3920_sysLookupLst_model,
+    PID_3920_sysTableLst_model,
+    PID_3920_sysTaskGroups_model,
+    PID_3920_sysTaskLst_model,
+    PID_3920_sysTasks_model,
+    PID_3921_ActionLevels_model,
+    PID_3921_COC_model,
+    PID_3921_EDDAirSampling_model,
+    PID_3921_EDDBiotaSampling_model,
+    PID_3921_EDDLabAnalyses_model,
+    PID_3921_EDDMonitoringData_model,
+    PID_3921_EDDProperty_model,
+    PID_3921_EDDSoilGasSampling_model,
+    PID_3921_EDDSoilSampling_model,
+    PID_3921_EDDWaterSampling_model,
+    PID_3921_EDDWipeSampling_model,
+    PID_3921_Events_model,
+    PID_3921_Instruments_model,
+    PID_3921_LabAnalyses_model,
+    PID_3921_LabResults_model,
+    PID_3921_Location_model,
+    PID_3921_Monitoring_model,
+    PID_3921_PropertyInfo_model,
+    PID_3921_PropertyOccupant_model,
+    PID_3921_refAnalytes_model,
+    PID_3921_refLabLst_model,
+    PID_3921_refMatrixLst_model,
+    PID_3921_refNames_model,
+    PID_3921_refPickLst_model,
+    PID_3921_refSGenus_model,
+    PID_3921_Samples_model,
+    PID_3921_SamplesAir_model,
+    PID_3921_SamplesBiota_model,
+    PID_3921_SamplesMeasurements_model,
+    PID_3921_SamplesSoil_model,
+    PID_3921_SamplesSoilGas_model,
+    PID_3921_SamplesTags_model,
+    PID_3921_SamplesWater_model,
+    PID_3921_SamplesWipe_model,
+    PID_3921_Site_model,
+    PID_3921_sysDataColumn_model,
+    PID_3921_sysDataColumnLayout_model,
+    PID_3921_sysDataLabel_model,
+    PID_3921_sysDataLabelLines_model,
+    PID_3921_sysDataLabelLst_model,
+    PID_3921_sysDataMap_model,
+    PID_3921_sysDataMapCol_model,
+    PID_3921_sysDataRpt_model,
+    PID_3921_sysDataViews_model,
+    PID_3921_sysKMLMap_model,
+    PID_3921_sysKMLMapClass_model,
+    PID_3921_sysLookupLst_model,
+    PID_3921_sysTableLst_model,
+    PID_3921_sysTaskGroups_model,
+    PID_3921_sysTaskLst_model,
+    PID_3921_sysTasks_model,
+    PID_3925_ActionLevels_model,
+    PID_3925_COC_model,
+    PID_3925_EDDAirSampling_model,
+    PID_3925_EDDBiotaSampling_model,
+    PID_3925_EDDLabAnalyses_model,
+    PID_3925_EDDMonitoringData_model,
+    PID_3925_EDDProperty_model,
+    PID_3925_EDDSoilGasSampling_model,
+    PID_3925_EDDSoilSampling_model,
+    PID_3925_EDDWaterSampling_model,
+    PID_3925_EDDWipeSampling_model,
+    PID_3925_Events_model,
+    PID_3925_Instruments_model,
+    PID_3925_LabAnalyses_model,
+    PID_3925_LabResults_model,
+    PID_3925_Location_model,
+    PID_3925_Monitoring_model,
+    PID_3925_PropertyInfo_model,
+    PID_3925_PropertyOccupant_model,
+    PID_3925_refAnalytes_model,
+    PID_3925_refLabLst_model,
+    PID_3925_refMatrixLst_model,
+    PID_3925_refNames_model,
+    PID_3925_refPickLst_model,
+    PID_3925_refSGenus_model,
+    PID_3925_Samples_model,
+    PID_3925_SamplesAir_model,
+    PID_3925_SamplesBiota_model,
+    PID_3925_SamplesMeasurements_model,
+    PID_3925_SamplesSoil_model,
+    PID_3925_SamplesSoilGas_model,
+    PID_3925_SamplesTags_model,
+    PID_3925_SamplesWater_model,
+    PID_3925_SamplesWipe_model,
+    PID_3925_Site_model,
+    PID_3925_sysDataColumn_model,
+    PID_3925_sysDataColumnLayout_model,
+    PID_3925_sysDataLabel_model,
+    PID_3925_sysDataLabelLines_model,
+    PID_3925_sysDataLabelLst_model,
+    PID_3925_sysDataMap_model,
+    PID_3925_sysDataMapCol_model,
+    PID_3925_sysDataRpt_model,
+    PID_3925_sysDataViews_model,
+    PID_3925_sysKMLMap_model,
+    PID_3925_sysKMLMapClass_model,
+    PID_3925_sysLookupLst_model,
+    PID_3925_sysTableLst_model,
+    PID_3925_sysTaskGroups_model,
+    PID_3925_sysTaskLst_model,
+    PID_3925_sysTasks_model,
+    PID_3926_ActionLevels_model,
+    PID_3926_COC_model,
+    PID_3926_EDDAirSampling_model,
+    PID_3926_EDDBiotaSampling_model,
+    PID_3926_EDDLabAnalyses_model,
+    PID_3926_EDDMonitoringData_model,
+    PID_3926_EDDProperty_model,
+    PID_3926_EDDSoilGasSampling_model,
+    PID_3926_EDDSoilSampling_model,
+    PID_3926_EDDWaterSampling_model,
+    PID_3926_EDDWipeSampling_model,
+    PID_3926_Events_model,
+    PID_3926_Instruments_model,
+    PID_3926_LabAnalyses_model,
+    PID_3926_LabResults_model,
+    PID_3926_Location_model,
+    PID_3926_Monitoring_model,
+    PID_3926_PropertyInfo_model,
+    PID_3926_PropertyOccupant_model,
+    PID_3926_refAnalytes_model,
+    PID_3926_refLabLst_model,
+    PID_3926_refMatrixLst_model,
+    PID_3926_refNames_model,
+    PID_3926_refPickLst_model,
+    PID_3926_refSGenus_model,
+    PID_3926_Samples_model,
+    PID_3926_SamplesAir_model,
+    PID_3926_SamplesBiota_model,
+    PID_3926_SamplesMeasurements_model,
+    PID_3926_SamplesSoil_model,
+    PID_3926_SamplesSoilGas_model,
+    PID_3926_SamplesTags_model,
+    PID_3926_SamplesWater_model,
+    PID_3926_SamplesWipe_model,
+    PID_3926_Site_model,
+    PID_3926_sysDataColumn_model,
+    PID_3926_sysDataColumnLayout_model,
+    PID_3926_sysDataLabel_model,
+    PID_3926_sysDataLabelLines_model,
+    PID_3926_sysDataLabelLst_model,
+    PID_3926_sysDataMap_model,
+    PID_3926_sysDataMapCol_model,
+    PID_3926_sysDataRpt_model,
+    PID_3926_sysDataViews_model,
+    PID_3926_sysKMLMap_model,
+    PID_3926_sysKMLMapClass_model,
+    PID_3926_sysLookupLst_model,
+    PID_3926_sysTableLst_model,
+    PID_3926_sysTaskGroups_model,
+    PID_3926_sysTaskLst_model,
+    PID_3926_sysTasks_model,
+    PID_3927_ActionLevels_model,
+    PID_3927_COC_model,
+    PID_3927_EDDAirSampling_model,
+    PID_3927_EDDBiotaSampling_model,
+    PID_3927_EDDLabAnalyses_model,
+    PID_3927_EDDMonitoringData_model,
+    PID_3927_EDDProperty_model,
+    PID_3927_EDDSoilGasSampling_model,
+    PID_3927_EDDSoilSampling_model,
+    PID_3927_EDDWaterSampling_model,
+    PID_3927_EDDWipeSampling_model,
+    PID_3927_Events_model,
+    PID_3927_Instruments_model,
+    PID_3927_LabAnalyses_model,
+    PID_3927_LabResults_model,
+    PID_3927_Location_model,
+    PID_3927_Monitoring_model,
+    PID_3927_PropertyInfo_model,
+    PID_3927_PropertyOccupant_model,
+    PID_3927_refAnalytes_model,
+    PID_3927_refLabLst_model,
+    PID_3927_refMatrixLst_model,
+    PID_3927_refNames_model,
+    PID_3927_refPickLst_model,
+    PID_3927_refSGenus_model,
+    PID_3927_Samples_model,
+    PID_3927_SamplesAir_model,
+    PID_3927_SamplesBiota_model,
+    PID_3927_SamplesMeasurements_model,
+    PID_3927_SamplesSoil_model,
+    PID_3927_SamplesSoilGas_model,
+    PID_3927_SamplesTags_model,
+    PID_3927_SamplesWater_model,
+    PID_3927_SamplesWipe_model,
+    PID_3927_Site_model,
+    PID_3927_sysDataColumn_model,
+    PID_3927_sysDataColumnLayout_model,
+    PID_3927_sysDataLabel_model,
+    PID_3927_sysDataLabelLines_model,
+    PID_3927_sysDataLabelLst_model,
+    PID_3927_sysDataMap_model,
+    PID_3927_sysDataMapCol_model,
+    PID_3927_sysDataRpt_model,
+    PID_3927_sysDataViews_model,
+    PID_3927_sysKMLMap_model,
+    PID_3927_sysKMLMapClass_model,
+    PID_3927_sysLookupLst_model,
+    PID_3927_sysTableLst_model,
+    PID_3927_sysTaskGroups_model,
+    PID_3927_sysTaskLst_model,
+    PID_3927_sysTasks_model,
+    PID_3931_ActionLevels_model,
+    PID_3931_COC_model,
+    PID_3931_EDDAirSampling_model,
+    PID_3931_EDDBiotaSampling_model,
+    PID_3931_EDDLabAnalyses_model,
+    PID_3931_EDDMonitoringData_model,
+    PID_3931_EDDProperty_model,
+    PID_3931_EDDSoilGasSampling_model,
+    PID_3931_EDDSoilSampling_model,
+    PID_3931_EDDWaterSampling_model,
+    PID_3931_EDDWipeSampling_model,
+    PID_3931_Events_model,
+    PID_3931_Instruments_model,
+    PID_3931_LabAnalyses_model,
+    PID_3931_LabResults_model,
+    PID_3931_Location_model,
+    PID_3931_Monitoring_model,
+    PID_3931_PropertyInfo_model,
+    PID_3931_PropertyOccupant_model,
+    PID_3931_refAnalytes_model,
+    PID_3931_refLabLst_model,
+    PID_3931_refMatrixLst_model,
+    PID_3931_refNames_model,
+    PID_3931_refPickLst_model,
+    PID_3931_refSGenus_model,
+    PID_3931_Samples_model,
+    PID_3931_SamplesAir_model,
+    PID_3931_SamplesBiota_model,
+    PID_3931_SamplesMeasurements_model,
+    PID_3931_SamplesSoil_model,
+    PID_3931_SamplesSoilGas_model,
+    PID_3931_SamplesTags_model,
+    PID_3931_SamplesWater_model,
+    PID_3931_SamplesWipe_model,
+    PID_3931_Site_model,
+    PID_3931_sysDataColumn_model,
+    PID_3931_sysDataColumnLayout_model,
+    PID_3931_sysDataLabel_model,
+    PID_3931_sysDataLabelLines_model,
+    PID_3931_sysDataLabelLst_model,
+    PID_3931_sysDataMap_model,
+    PID_3931_sysDataMapCol_model,
+    PID_3931_sysDataRpt_model,
+    PID_3931_sysDataViews_model,
+    PID_3931_sysKMLMap_model,
+    PID_3931_sysKMLMapClass_model,
+    PID_3931_sysLookupLst_model,
+    PID_3931_sysTableLst_model,
+    PID_3931_sysTaskGroups_model,
+    PID_3931_sysTaskLst_model,
+    PID_3931_sysTasks_model,
+    PID_3932_ActionLevels_model,
+    PID_3932_COC_model,
+    PID_3932_EDDAirSampling_model,
+    PID_3932_EDDBiotaSampling_model,
+    PID_3932_EDDLabAnalyses_model,
+    PID_3932_EDDMonitoringData_model,
+    PID_3932_EDDProperty_model,
+    PID_3932_EDDSoilGasSampling_model,
+    PID_3932_EDDSoilSampling_model,
+    PID_3932_EDDWaterSampling_model,
+    PID_3932_EDDWipeSampling_model,
+    PID_3932_Events_model,
+    PID_3932_Instruments_model,
+    PID_3932_LabAnalyses_model,
+    PID_3932_LabResults_model,
+    PID_3932_Location_model,
+    PID_3932_Monitoring_model,
+    PID_3932_PropertyInfo_model,
+    PID_3932_PropertyOccupant_model,
+    PID_3932_refAnalytes_model,
+    PID_3932_refLabLst_model,
+    PID_3932_refMatrixLst_model,
+    PID_3932_refNames_model,
+    PID_3932_refPickLst_model,
+    PID_3932_refSGenus_model,
+    PID_3932_Samples_model,
+    PID_3932_SamplesAir_model,
+    PID_3932_SamplesBiota_model,
+    PID_3932_SamplesMeasurements_model,
+    PID_3932_SamplesSoil_model,
+    PID_3932_SamplesSoilGas_model,
+    PID_3932_SamplesTags_model,
+    PID_3932_SamplesWater_model,
+    PID_3932_SamplesWipe_model,
+    PID_3932_Site_model,
+    PID_3932_sysDataColumn_model,
+    PID_3932_sysDataColumnLayout_model,
+    PID_3932_sysDataLabel_model,
+    PID_3932_sysDataLabelLines_model,
+    PID_3932_sysDataLabelLst_model,
+    PID_3932_sysDataMap_model,
+    PID_3932_sysDataMapCol_model,
+    PID_3932_sysDataRpt_model,
+    PID_3932_sysDataViews_model,
+    PID_3932_sysKMLMap_model,
+    PID_3932_sysKMLMapClass_model,
+    PID_3932_sysLookupLst_model,
+    PID_3932_sysTableLst_model,
+    PID_3932_sysTaskGroups_model,
+    PID_3932_sysTaskLst_model,
+    PID_3932_sysTasks_model,
+    PID_3944_ActionLevels_model,
+    PID_3944_COC_model,
+    PID_3944_EDDAirSampling_model,
+    PID_3944_EDDBiotaSampling_model,
+    PID_3944_EDDLabAnalyses_model,
+    PID_3944_EDDMonitoringData_model,
+    PID_3944_EDDProperty_model,
+    PID_3944_EDDSoilGasSampling_model,
+    PID_3944_EDDSoilSampling_model,
+    PID_3944_EDDWaterSampling_model,
+    PID_3944_EDDWipeSampling_model,
+    PID_3944_Events_model,
+    PID_3944_Instruments_model,
+    PID_3944_LabAnalyses_model,
+    PID_3944_LabResults_model,
+    PID_3944_Location_model,
+    PID_3944_Monitoring_model,
+    PID_3944_PropertyInfo_model,
+    PID_3944_PropertyOccupant_model,
+    PID_3944_refAnalytes_model,
+    PID_3944_refLabLst_model,
+    PID_3944_refMatrixLst_model,
+    PID_3944_refNames_model,
+    PID_3944_refPickLst_model,
+    PID_3944_refSGenus_model,
+    PID_3944_Samples_model,
+    PID_3944_SamplesAir_model,
+    PID_3944_SamplesBiota_model,
+    PID_3944_SamplesMeasurements_model,
+    PID_3944_SamplesSoil_model,
+    PID_3944_SamplesSoilGas_model,
+    PID_3944_SamplesTags_model,
+    PID_3944_SamplesWater_model,
+    PID_3944_SamplesWipe_model,
+    PID_3944_Site_model,
+    PID_3944_sysDataColumn_model,
+    PID_3944_sysDataColumnLayout_model,
+    PID_3944_sysDataLabel_model,
+    PID_3944_sysDataLabelLines_model,
+    PID_3944_sysDataLabelLst_model,
+    PID_3944_sysDataMap_model,
+    PID_3944_sysDataMapCol_model,
+    PID_3944_sysDataRpt_model,
+    PID_3944_sysDataViews_model,
+    PID_3944_sysKMLMap_model,
+    PID_3944_sysKMLMapClass_model,
+    PID_3944_sysLookupLst_model,
+    PID_3944_sysTableLst_model,
+    PID_3944_sysTaskGroups_model,
+    PID_3944_sysTaskLst_model,
+    PID_3944_sysTasks_model,
+    PID_3945_ActionLevels_model,
+    PID_3945_COC_model,
+    PID_3945_EDDAirSampling_model,
+    PID_3945_EDDBiotaSampling_model,
+    PID_3945_EDDLabAnalyses_model,
+    PID_3945_EDDMonitoringData_model,
+    PID_3945_EDDProperty_model,
+    PID_3945_EDDSoilGasSampling_model,
+    PID_3945_EDDSoilSampling_model,
+    PID_3945_EDDWaterSampling_model,
+    PID_3945_EDDWipeSampling_model,
+    PID_3945_Events_model,
+    PID_3945_Instruments_model,
+    PID_3945_LabAnalyses_model,
+    PID_3945_LabResults_model,
+    PID_3945_Location_model,
+    PID_3945_Monitoring_model,
+    PID_3945_PropertyInfo_model,
+    PID_3945_PropertyOccupant_model,
+    PID_3945_refAnalytes_model,
+    PID_3945_refLabLst_model,
+    PID_3945_refMatrixLst_model,
+    PID_3945_refNames_model,
+    PID_3945_refPickLst_model,
+    PID_3945_refSGenus_model,
+    PID_3945_Samples_model,
+    PID_3945_SamplesAir_model,
+    PID_3945_SamplesBiota_model,
+    PID_3945_SamplesMeasurements_model,
+    PID_3945_SamplesSoil_model,
+    PID_3945_SamplesSoilGas_model,
+    PID_3945_SamplesTags_model,
+    PID_3945_SamplesWater_model,
+    PID_3945_SamplesWipe_model,
+    PID_3945_Site_model,
+    PID_3945_sysDataColumn_model,
+    PID_3945_sysDataColumnLayout_model,
+    PID_3945_sysDataLabel_model,
+    PID_3945_sysDataLabelLines_model,
+    PID_3945_sysDataLabelLst_model,
+    PID_3945_sysDataMap_model,
+    PID_3945_sysDataMapCol_model,
+    PID_3945_sysDataRpt_model,
+    PID_3945_sysDataViews_model,
+    PID_3945_sysKMLMap_model,
+    PID_3945_sysKMLMapClass_model,
+    PID_3945_sysLookupLst_model,
+    PID_3945_sysTableLst_model,
+    PID_3945_sysTaskGroups_model,
+    PID_3945_sysTaskLst_model,
+    PID_3945_sysTasks_model,
+    PID_3946_ActionLevels_model,
+    PID_3946_COC_model,
+    PID_3946_EDDAirSampling_model,
+    PID_3946_EDDBiotaSampling_model,
+    PID_3946_EDDLabAnalyses_model,
+    PID_3946_EDDMonitoringData_model,
+    PID_3946_EDDProperty_model,
+    PID_3946_EDDSoilGasSampling_model,
+    PID_3946_EDDSoilSampling_model,
+    PID_3946_EDDWaterSampling_model,
+    PID_3946_EDDWipeSampling_model,
+    PID_3946_Events_model,
+    PID_3946_Instruments_model,
+    PID_3946_LabAnalyses_model,
+    PID_3946_LabResults_model,
+    PID_3946_Location_model,
+    PID_3946_Monitoring_model,
+    PID_3946_PropertyInfo_model,
+    PID_3946_PropertyOccupant_model,
+    PID_3946_refAnalytes_model,
+    PID_3946_refLabLst_model,
+    PID_3946_refMatrixLst_model,
+    PID_3946_refNames_model,
+    PID_3946_refPickLst_model,
+    PID_3946_refSGenus_model,
+    PID_3946_Samples_model,
+    PID_3946_SamplesAir_model,
+    PID_3946_SamplesBiota_model,
+    PID_3946_SamplesMeasurements_model,
+    PID_3946_SamplesSoil_model,
+    PID_3946_SamplesSoilGas_model,
+    PID_3946_SamplesTags_model,
+    PID_3946_SamplesWater_model,
+    PID_3946_SamplesWipe_model,
+    PID_3946_Site_model,
+    PID_3946_sysDataColumn_model,
+    PID_3946_sysDataColumnLayout_model,
+    PID_3946_sysDataLabel_model,
+    PID_3946_sysDataLabelLines_model,
+    PID_3946_sysDataLabelLst_model,
+    PID_3946_sysDataMap_model,
+    PID_3946_sysDataMapCol_model,
+    PID_3946_sysDataRpt_model,
+    PID_3946_sysDataViews_model,
+    PID_3946_sysKMLMap_model,
+    PID_3946_sysKMLMapClass_model,
+    PID_3946_sysLookupLst_model,
+    PID_3946_sysTableLst_model,
+    PID_3946_sysTaskGroups_model,
+    PID_3946_sysTaskLst_model,
+    PID_3946_sysTasks_model,
+    PID_3984_ActionLevels_model,
+    PID_3984_COC_model,
+    PID_3984_EDDAirSampling_model,
+    PID_3984_EDDBiotaSampling_model,
+    PID_3984_EDDLabAnalyses_model,
+    PID_3984_EDDMonitoringData_model,
+    PID_3984_EDDProperty_model,
+    PID_3984_EDDSoilGasSampling_model,
+    PID_3984_EDDSoilSampling_model,
+    PID_3984_EDDWaterSampling_model,
+    PID_3984_EDDWipeSampling_model,
+    PID_3984_Events_model,
+    PID_3984_Instruments_model,
+    PID_3984_LabAnalyses_model,
+    PID_3984_LabResults_model,
+    PID_3984_Location_model,
+    PID_3984_Monitoring_model,
+    PID_3984_PropertyInfo_model,
+    PID_3984_PropertyOccupant_model,
+    PID_3984_refAnalytes_model,
+    PID_3984_refLabLst_model,
+    PID_3984_refMatrixLst_model,
+    PID_3984_refNames_model,
+    PID_3984_refPickLst_model,
+    PID_3984_refSGenus_model,
+    PID_3984_Samples_model,
+    PID_3984_SamplesAir_model,
+    PID_3984_SamplesBiota_model,
+    PID_3984_SamplesMeasurements_model,
+    PID_3984_SamplesSoil_model,
+    PID_3984_SamplesSoilGas_model,
+    PID_3984_SamplesTags_model,
+    PID_3984_SamplesWater_model,
+    PID_3984_SamplesWipe_model,
+    PID_3984_Site_model,
+    PID_3984_sysDataColumn_model,
+    PID_3984_sysDataColumnLayout_model,
+    PID_3984_sysDataLabel_model,
+    PID_3984_sysDataLabelLines_model,
+    PID_3984_sysDataLabelLst_model,
+    PID_3984_sysDataMap_model,
+    PID_3984_sysDataMapCol_model,
+    PID_3984_sysDataRpt_model,
+    PID_3984_sysDataViews_model,
+    PID_3984_sysKMLMap_model,
+    PID_3984_sysKMLMapClass_model,
+    PID_3984_sysLookupLst_model,
+    PID_3984_sysTableLst_model,
+    PID_3984_sysTaskGroups_model,
+    PID_3984_sysTaskLst_model,
+    PID_3984_sysTasks_model,
+    PID_4044_ActionLevels_model,
+    PID_4044_COC_model,
+    PID_4044_EDDAirSampling_model,
+    PID_4044_EDDBiotaSampling_model,
+    PID_4044_EDDLabAnalyses_model,
+    PID_4044_EDDMonitoringData_model,
+    PID_4044_EDDProperty_model,
+    PID_4044_EDDSoilGasSampling_model,
+    PID_4044_EDDSoilSampling_model,
+    PID_4044_EDDWaterSampling_model,
+    PID_4044_EDDWipeSampling_model,
+    PID_4044_Events_model,
+    PID_4044_Instruments_model,
+    PID_4044_LabAnalyses_model,
+    PID_4044_LabResults_model,
+    PID_4044_Location_model,
+    PID_4044_Monitoring_model,
+    PID_4044_PropertyInfo_model,
+    PID_4044_PropertyOccupant_model,
+    PID_4044_refAnalytes_model,
+    PID_4044_refLabLst_model,
+    PID_4044_refMatrixLst_model,
+    PID_4044_refNames_model,
+    PID_4044_refPickLst_model,
+    PID_4044_refSGenus_model,
+    PID_4044_Samples_model,
+    PID_4044_SamplesAir_model,
+    PID_4044_SamplesBiota_model,
+    PID_4044_SamplesMeasurements_model,
+    PID_4044_SamplesSoil_model,
+    PID_4044_SamplesSoilGas_model,
+    PID_4044_SamplesTags_model,
+    PID_4044_SamplesWater_model,
+    PID_4044_SamplesWipe_model,
+    PID_4044_Site_model,
+    PID_4044_sysDataColumn_model,
+    PID_4044_sysDataColumnLayout_model,
+    PID_4044_sysDataLabel_model,
+    PID_4044_sysDataLabelLines_model,
+    PID_4044_sysDataLabelLst_model,
+    PID_4044_sysDataMap_model,
+    PID_4044_sysDataMapCol_model,
+    PID_4044_sysDataRpt_model,
+    PID_4044_sysDataViews_model,
+    PID_4044_sysKMLMap_model,
+    PID_4044_sysKMLMapClass_model,
+    PID_4044_sysLookupLst_model,
+    PID_4044_sysTableLst_model,
+    PID_4044_sysTaskGroups_model,
+    PID_4044_sysTaskLst_model,
+    PID_4044_sysTasks_model,
+    PID_4046__Location_model,
+    PID_4046_Location_model,
+    PID_4046_Sample_model,
+    PID_4046_ActionLevels_model,
+    PID_4046_COC_model,
+    PID_4046_EDDAirSampling_model,
+    PID_4046_EDDBiotaSampling_model,
+    PID_4046_EDDLabAnalyses_model,
+    PID_4046_EDDMonitoringData_model,
+    PID_4046_EDDProperty_model,
+    PID_4046_EDDSoilGasSampling_model,
+    PID_4046_EDDSoilSampling_model,
+    PID_4046_EDDWaterSampling_model,
+    PID_4046_EDDWipeSampling_model,
+    PID_4046_Events_model,
+    PID_4046_Instruments_model,
+    PID_4046_LabAnalyses_model,
+    PID_4046_LabResults_model,
+    PID_4046_Location_model,
+    PID_4046_Monitoring_model,
+    PID_4046_PropertyInfo_model,
+    PID_4046_PropertyOccupant_model,
+    PID_4046_R9_refUnitConversion_model,
+    PID_4046_refAnalytes_model,
+    PID_4046_refLabLst_model,
+    PID_4046_refMatrixLst_model,
+    PID_4046_refNames_model,
+    PID_4046_refPickLst_model,
+    PID_4046_refSGenus_model,
+    PID_4046_Samples_model,
+    PID_4046_SamplesAir_model,
+    PID_4046_SamplesBiota_model,
+    PID_4046_SamplesMeasurements_model,
+    PID_4046_SamplesSoil_model,
+    PID_4046_SamplesSoilGas_model,
+    PID_4046_SamplesTags_model,
+    PID_4046_SamplesWater_model,
+    PID_4046_SamplesWipe_model,
+    PID_4046_Site_model,
+    PID_4046_sysDataColumn_model,
+    PID_4046_sysDataColumnLayout_model,
+    PID_4046_sysDataLabel_model,
+    PID_4046_sysDataLabelLines_model,
+    PID_4046_sysDataLabelLst_model,
+    PID_4046_sysDataMap_model,
+    PID_4046_sysDataMapCol_model,
+    PID_4046_sysDataRpt_model,
+    PID_4046_sysDataViews_model,
+    PID_4046_sysKMLMap_model,
+    PID_4046_sysKMLMapClass_model,
+    PID_4046_sysLookupLst_model,
+    PID_4046_sysTableLst_model,
+    PID_4046_sysTaskGroups_model,
+    PID_4046_sysTaskLst_model,
+    PID_4046_sysTasks_model,
+    PID_4048_320_57931_1Validatedtbj1kal2_model,
+    PID_4048_320_59178_1Validatedtbj1kal2_model,
+    PID_4048_440_250206_1Validated_model,
+    PID_4048_550_136699_1_22APR20_Validated_model,
+    PID_4048_550_136700_1_22APR20_Validated_model,
+    PID_4048_550_136790_1_22APR20_Validated_model,
+    PID_4048_550_136820_1_22APR20_Validated_model,
+    PID_4048_550_136831_1_22APR20_Validated_model,
+    PID_4048_550_136874_1_22APR20_Validated_model,
+    PID_4048_550_136943_1_22APR20_Validated_model,
+    PID_4048_550_137564_1_22APR20_Validated_model,
+    PID_4048_ActionLevels_model,
+    PID_4048_AirMonitoring_model,
+    PID_4048_COC_model,
+    PID_4048_EDDAirSampling_model,
+    PID_4048_EDDBiotaSampling_model,
+    PID_4048_EDDLabAnalyses_model,
+    PID_4048_EDDMonitoringData_model,
+    PID_4048_EDDProperty_model,
+    PID_4048_EDDSoilGasSampling_model,
+    PID_4048_EDDSoilSampling_model,
+    PID_4048_EDDWaterSampling_model,
+    PID_4048_EDDWipeSampling_model,
+    PID_4048_Events_model,
+    PID_4048_FactoryStreet_Cadmium_Chromium_Mercury_InSoil_model,
+    PID_4048_Instruments_model,
+    PID_4048_LabAnalyses_model,
+    PID_4048_LabResults_model,
+    PID_4048_Location_model,
+    PID_4048_Monitoring_model,
+    PID_4048_PropertyInfo_model,
+    PID_4048_PropertyOccupant_model,
+    PID_4048_R9_refUnitConversion_model,
+    PID_4048_refAnalytes_model,
+    PID_4048_refLabLst_model,
+    PID_4048_refMatrixLst_model,
+    PID_4048_refNames_model,
+    PID_4048_refPickLst_model,
+    PID_4048_refSGenus_model,
+    PID_4048_Samples_model,
+    PID_4048_SamplesAir_model,
+    PID_4048_SamplesBiota_model,
+    PID_4048_SamplesMeasurements_model,
+    PID_4048_SamplesSoil_model,
+    PID_4048_SamplesSoilGas_model,
+    PID_4048_SamplesTags_model,
+    PID_4048_SamplesWater_model,
+    PID_4048_SamplesWipe_model,
+    PID_4048_Site_model,
+    PID_4048_sysDataColumn_model,
+    PID_4048_sysDataColumnLayout_model,
+    PID_4048_sysDataLabel_model,
+    PID_4048_sysDataLabelLines_model,
+    PID_4048_sysDataLabelLst_model,
+    PID_4048_sysDataMap_model,
+    PID_4048_sysDataMapCol_model,
+    PID_4048_sysDataRpt_model,
+    PID_4048_sysDataViews_model,
+    PID_4048_sysKMLMap_model,
+    PID_4048_sysKMLMapClass_model,
+    PID_4048_sysLookupLst_model,
+    PID_4048_sysTableLst_model,
+    PID_4048_sysTaskGroups_model,
+    PID_4048_sysTaskLst_model,
+    PID_4048_sysTasks_model,
+    PID_4048_updatedstuff_model,
+    PID_4049_edf_T10000005772_20210216_model,
+    PID_4049_LaboratoryAnalyticalReportsE_model,
+    PID_4049_Newlocation_model,
+    PID_4049_WellDepthtoWater_model,
+    PID_4049_WellXYData_model,
+    PID_4049_ActionLevels_model,
+    PID_4049_ActionLevelsR6_model,
+    PID_4049_COC_model,
+    PID_4049_EDDAirSampling_model,
+    PID_4049_EDDBiotaSampling_model,
+    PID_4049_EDDLabAnalyses_model,
+    PID_4049_EDDMonitoringData_model,
+    PID_4049_EDDProperty_model,
+    PID_4049_EDDSoilGasSampling_model,
+    PID_4049_EDDSoilSampling_model,
+    PID_4049_EDDWaterSampling_model,
+    PID_4049_EDDWipeSampling_model,
+    PID_4049_Events_model,
+    PID_4049_Instruments_model,
+    PID_4049_LabAnalyses_model,
+    PID_4049_LabResults_model,
+    PID_4049_Location_model,
+    PID_4049_Monitoring_model,
+    PID_4049_PropertyInfo_model,
+    PID_4049_PropertyOccupant_model,
+    PID_4049_R9_refUnitConversion_model,
+    PID_4049_refAnalytes_model,
+    PID_4049_refLabLst_model,
+    PID_4049_refMatrixLst_model,
+    PID_4049_refNames_model,
+    PID_4049_refPickLst_model,
+    PID_4049_refSGenus_model,
+    PID_4049_Samples_model,
+    PID_4049_SamplesAir_model,
+    PID_4049_SamplesBiota_model,
+    PID_4049_SamplesMeasurements_model,
+    PID_4049_SamplesSoil_model,
+    PID_4049_SamplesSoilGas_model,
+    PID_4049_SamplesTags_model,
+    PID_4049_SamplesWater_model,
+    PID_4049_SamplesWipe_model,
+    PID_4049_Site_model,
+    PID_4049_sysDataColumn_model,
+    PID_4049_sysDataColumnLayout_model,
+    PID_4049_sysDataLabel_model,
+    PID_4049_sysDataLabelLines_model,
+    PID_4049_sysDataLabelLst_model,
+    PID_4049_sysDataMap_model,
+    PID_4049_sysDataMapCol_model,
+    PID_4049_sysDataRpt_model,
+    PID_4049_sysDataViews_model,
+    PID_4049_sysKMLMap_model,
+    PID_4049_sysKMLMapClass_model,
+    PID_4049_sysLookupLst_model,
+    PID_4049_sysTableLst_model,
+    PID_4049_sysTaskGroups_model,
+    PID_4049_sysTaskLst_model,
+    PID_4049_sysTasks_model,
+    PID_4061_ActionLevels_model,
+    PID_4061_COC_model,
+    PID_4061_EDDAirSampling_model,
+    PID_4061_EDDBiotaSampling_model,
+    PID_4061_EDDLabAnalyses_model,
+    PID_4061_EDDMonitoringData_model,
+    PID_4061_EDDProperty_model,
+    PID_4061_EDDSoilGasSampling_model,
+    PID_4061_EDDSoilSampling_model,
+    PID_4061_EDDWaterSampling_model,
+    PID_4061_EDDWipeSampling_model,
+    PID_4061_Events_model,
+    PID_4061_Instruments_model,
+    PID_4061_LabAnalyses_model,
+    PID_4061_LabResults_model,
+    PID_4061_Location_model,
+    PID_4061_Monitoring_model,
+    PID_4061_PropertyInfo_model,
+    PID_4061_PropertyOccupant_model,
+    PID_4061_refAnalytes_model,
+    PID_4061_refLabLst_model,
+    PID_4061_refMatrixLst_model,
+    PID_4061_refNames_model,
+    PID_4061_refPickLst_model,
+    PID_4061_refSGenus_model,
+    PID_4061_Samples_model,
+    PID_4061_SamplesAir_model,
+    PID_4061_SamplesBiota_model,
+    PID_4061_SamplesMeasurements_model,
+    PID_4061_SamplesSoil_model,
+    PID_4061_SamplesSoilGas_model,
+    PID_4061_SamplesTags_model,
+    PID_4061_SamplesWater_model,
+    PID_4061_SamplesWipe_model,
+    PID_4061_Site_model,
+    PID_4061_sysDataColumn_model,
+    PID_4061_sysDataColumnLayout_model,
+    PID_4061_sysDataLabel_model,
+    PID_4061_sysDataLabelLines_model,
+    PID_4061_sysDataLabelLst_model,
+    PID_4061_sysDataMap_model,
+    PID_4061_sysDataMapCol_model,
+    PID_4061_sysDataRpt_model,
+    PID_4061_sysDataViews_model,
+    PID_4061_sysKMLMap_model,
+    PID_4061_sysKMLMapClass_model,
+    PID_4061_sysLookupLst_model,
+    PID_4061_sysTableLst_model,
+    PID_4061_sysTaskGroups_model,
+    PID_4061_sysTaskLst_model,
+    PID_4061_sysTasks_model,
+    PID_4072_ActionLevels_model,
+    PID_4072_COC_model,
+    PID_4072_EDDAirSampling_model,
+    PID_4072_EDDBiotaSampling_model,
+    PID_4072_EDDLabAnalyses_model,
+    PID_4072_EDDMonitoringData_model,
+    PID_4072_EDDProperty_model,
+    PID_4072_EDDSoilGasSampling_model,
+    PID_4072_EDDSoilSampling_model,
+    PID_4072_EDDWaterSampling_model,
+    PID_4072_EDDWipeSampling_model,
+    PID_4072_Events_model,
+    PID_4072_Instruments_model,
+    PID_4072_LabAnalyses_model,
+    PID_4072_LabResults_model,
+    PID_4072_Location_model,
+    PID_4072_Monitoring_model,
+    PID_4072_PropertyOccupant_model,
+    PID_4072_refAnalytes_model,
+    PID_4072_refLabLst_model,
+    PID_4072_refMatrixLst_model,
+    PID_4072_refNames_model,
+    PID_4072_refPickLst_model,
+    PID_4072_refSGenus_model,
+    PID_4072_Samples_model,
+    PID_4072_SamplesAir_model,
+    PID_4072_SamplesBiota_model,
+    PID_4072_SamplesMeasurements_model,
+    PID_4072_SamplesSoil_model,
+    PID_4072_SamplesSoilGas_model,
+    PID_4072_SamplesTags_model,
+    PID_4072_SamplesWater_model,
+    PID_4072_SamplesWipe_model,
+    PID_4072_Site_model,
+    PID_4072_sysDataColumn_model,
+    PID_4072_sysDataColumnLayout_model,
+    PID_4072_sysDataLabel_model,
+    PID_4072_sysDataLabelLines_model,
+    PID_4072_sysDataLabelLst_model,
+    PID_4072_sysDataMap_model,
+    PID_4072_sysDataMapCol_model,
+    PID_4072_sysDataRpt_model,
+    PID_4072_sysDataViews_model,
+    PID_4072_sysKMLMap_model,
+    PID_4072_sysKMLMapClass_model,
+    PID_4072_sysLookupLst_model,
+    PID_4072_sysTableLst_model,
+    PID_4072_sysTaskGroups_model,
+    PID_4072_sysTaskLst_model,
+    PID_4072_sysTasks_model,
+    PID_4085_320_57931_1Validatedtbj1kal2_model,
+    PID_4085_320_59178_1Validatedtbj1kal2_model,
+    PID_4085_440_250206_1Validated_model,
+    PID_4085_550_136699_1_22APR20_Validated_model,
+    PID_4085_550_136700_1_22APR20_Validated_model,
+    PID_4085_550_136790_1_22APR20_Validated_model,
+    PID_4085_550_136820_1_22APR20_Validated_model,
+    PID_4085_550_136831_1_22APR20_Validated_model,
+    PID_4085_550_136874_1_22APR20_Validated_model,
+    PID_4085_550_136943_1_22APR20_Validated_model,
+    PID_4085_550_137564_1_22APR20_Validated_model,
+    PID_4085_ActionLevels_model,
+    PID_4085_AirMonitoring_model,
+    PID_4085_COC_model,
+    PID_4085_EDDAirSampling_model,
+    PID_4085_EDDBiotaSampling_model,
+    PID_4085_EDDLabAnalyses_model,
+    PID_4085_EDDMonitoringData_model,
+    PID_4085_EDDProperty_model,
+    PID_4085_EDDSoilGasSampling_model,
+    PID_4085_EDDSoilSampling_model,
+    PID_4085_EDDWaterSampling_model,
+    PID_4085_EDDWipeSampling_model,
+    PID_4085_Events_model,
+    PID_4085_FactoryStreet_Cadmium_Chromium_Mercury_InSoil_model,
+    PID_4085_Instruments_model,
+    PID_4085_LabAnalyses_model,
+    PID_4085_LabResults_model,
+    PID_4085_Location_model,
+    PID_4085_Monitoring_model,
+    PID_4085_PropertyInfo_model,
+    PID_4085_PropertyOccupant_model,
+    PID_4085_R9_refUnitConversion_model,
+    PID_4085_refAnalytes_model,
+    PID_4085_refLabLst_model,
+    PID_4085_refMatrixLst_model,
+    PID_4085_refNames_model,
+    PID_4085_refPickLst_model,
+    PID_4085_refSGenus_model,
+    PID_4085_Samples_model,
+    PID_4085_SamplesAir_model,
+    PID_4085_SamplesBiota_model,
+    PID_4085_SamplesMeasurements_model,
+    PID_4085_SamplesSoil_model,
+    PID_4085_SamplesSoilGas_model,
+    PID_4085_SamplesTags_model,
+    PID_4085_SamplesWater_model,
+    PID_4085_SamplesWipe_model,
+    PID_4085_Site_model,
+    PID_4085_sysDataColumn_model,
+    PID_4085_sysDataColumnLayout_model,
+    PID_4085_sysDataLabel_model,
+    PID_4085_sysDataLabelLines_model,
+    PID_4085_sysDataLabelLst_model,
+    PID_4085_sysDataMap_model,
+    PID_4085_sysDataMapCol_model,
+    PID_4085_sysDataRpt_model,
+    PID_4085_sysDataViews_model,
+    PID_4085_sysKMLMap_model,
+    PID_4085_sysKMLMapClass_model,
+    PID_4085_sysLookupLst_model,
+    PID_4085_sysTableLst_model,
+    PID_4085_sysTaskGroups_model,
+    PID_4085_sysTaskLst_model,
+    PID_4085_sysTasks_model,
+    PID_4087_ActionLevels_model,
+    PID_4087_COC_model,
+    PID_4087_EDDAirSampling_model,
+    PID_4087_EDDBiotaSampling_model,
+    PID_4087_EDDLabAnalyses_model,
+    PID_4087_EDDMonitoringData_model,
+    PID_4087_EDDProperty_model,
+    PID_4087_EDDSoilGasSampling_model,
+    PID_4087_EDDSoilSampling_model,
+    PID_4087_EDDWaterSampling_model,
+    PID_4087_EDDWipeSampling_model,
+    PID_4087_Events_model,
+    PID_4087_Instruments_model,
+    PID_4087_LabAnalyses_model,
+    PID_4087_LabResults_model,
+    PID_4087_Location_model,
+    PID_4087_Monitoring_model,
+    PID_4087_PropertyInfo_model,
+    PID_4087_PropertyOccupant_model,
+    PID_4087_refAnalytes_model,
+    PID_4087_refLabLst_model,
+    PID_4087_refMatrixLst_model,
+    PID_4087_refNames_model,
+    PID_4087_refPickLst_model,
+    PID_4087_refSGenus_model,
+    PID_4087_Samples_model,
+    PID_4087_SamplesAir_model,
+    PID_4087_SamplesBiota_model,
+    PID_4087_SamplesMeasurements_model,
+    PID_4087_SamplesSoil_model,
+    PID_4087_SamplesSoilGas_model,
+    PID_4087_SamplesTags_model,
+    PID_4087_SamplesWater_model,
+    PID_4087_SamplesWipe_model,
+    PID_4087_Site_model,
+    PID_4087_sysDataColumn_model,
+    PID_4087_sysDataColumnLayout_model,
+    PID_4087_sysDataLabel_model,
+    PID_4087_sysDataLabelLines_model,
+    PID_4087_sysDataLabelLst_model,
+    PID_4087_sysDataMap_model,
+    PID_4087_sysDataMapCol_model,
+    PID_4087_sysDataRpt_model,
+    PID_4087_sysDataViews_model,
+    PID_4087_sysKMLMap_model,
+    PID_4087_sysKMLMapClass_model,
+    PID_4087_sysLookupLst_model,
+    PID_4087_sysTableLst_model,
+    PID_4087_sysTaskGroups_model,
+    PID_4087_sysTaskLst_model,
+    PID_4087_sysTasks_model,
+    PID_4091_ActionLevels_model,
+    PID_4091_COC_model,
+    PID_4091_EDDAirSampling_model,
+    PID_4091_EDDBiotaSampling_model,
+    PID_4091_EDDLabAnalyses_model,
+    PID_4091_EDDMonitoringData_model,
+    PID_4091_EDDProperty_model,
+    PID_4091_EDDSoilGasSampling_model,
+    PID_4091_EDDSoilSampling_model,
+    PID_4091_EDDWaterSampling_model,
+    PID_4091_EDDWipeSampling_model,
+    PID_4091_Events_model,
+    PID_4091_Instruments_model,
+    PID_4091_LabAnalyses_model,
+    PID_4091_LabResults_model,
+    PID_4091_Location_model,
+    PID_4091_Monitoring_model,
+    PID_4091_PropertyInfo_model,
+    PID_4091_PropertyOccupant_model,
+    PID_4091_R9_refUnitConversion_model,
+    PID_4091_refAnalytes_model,
+    PID_4091_refLabLst_model,
+    PID_4091_refMatrixLst_model,
+    PID_4091_refNames_model,
+    PID_4091_refPickLst_model,
+    PID_4091_refSGenus_model,
+    PID_4091_Samples_model,
+    PID_4091_SamplesAir_model,
+    PID_4091_SamplesBiota_model,
+    PID_4091_SamplesMeasurements_model,
+    PID_4091_SamplesSoil_model,
+    PID_4091_SamplesSoilGas_model,
+    PID_4091_SamplesTags_model,
+    PID_4091_SamplesWater_model,
+    PID_4091_SamplesWipe_model,
+    PID_4091_Site_model,
+    PID_4091_sysDataColumn_model,
+    PID_4091_sysDataColumnLayout_model,
+    PID_4091_sysDataLabel_model,
+    PID_4091_sysDataLabelLines_model,
+    PID_4091_sysDataLabelLst_model,
+    PID_4091_sysDataMap_model,
+    PID_4091_sysDataMapCol_model,
+    PID_4091_sysDataRpt_model,
+    PID_4091_sysDataViews_model,
+    PID_4091_sysKMLMap_model,
+    PID_4091_sysKMLMapClass_model,
+    PID_4091_sysLookupLst_model,
+    PID_4091_sysTableLst_model,
+    PID_4091_sysTaskGroups_model,
+    PID_4091_sysTaskLst_model,
+    PID_4091_sysTasks_model,
+    PID_4105_ActionLevels_model,
+    PID_4105_BsaIL_model,
+    PID_4105_BsaSites_model,
+    PID_4105_COC_model,
+    PID_4105_EDDAirSampling_model,
+    PID_4105_EDDBiotaSampling_model,
+    PID_4105_EDDLabAnalyses_model,
+    PID_4105_EDDMonitoringData_model,
+    PID_4105_EDDProperty_model,
+    PID_4105_EDDSoilGasSampling_model,
+    PID_4105_EDDSoilSampling_model,
+    PID_4105_EDDWaterSampling_model,
+    PID_4105_EDDWipeSampling_model,
+    PID_4105_Events_model,
+    PID_4105_Instruments_model,
+    PID_4105_LabAnalyses_model,
+    PID_4105_LabResults_model,
+    PID_4105_Location_model,
+    PID_4105_Monitoring_model,
+    PID_4105_PropertyInfo_model,
+    PID_4105_PropertyOccupant_model,
+    PID_4105_refAnalytes_model,
+    PID_4105_refLabLst_model,
+    PID_4105_refMatrixLst_model,
+    PID_4105_refNames_model,
+    PID_4105_refPickLst_model,
+    PID_4105_refSGenus_model,
+    PID_4105_Samples_model,
+    PID_4105_SamplesAir_model,
+    PID_4105_SamplesBiota_model,
+    PID_4105_SamplesMeasurements_model,
+    PID_4105_SamplesSoil_model,
+    PID_4105_SamplesSoilGas_model,
+    PID_4105_SamplesTags_model,
+    PID_4105_SamplesWater_model,
+    PID_4105_SamplesWipe_model,
+    PID_4105_Site_model,
+    PID_4105_sysDataColumn_model,
+    PID_4105_sysDataColumnLayout_model,
+    PID_4105_sysDataLabel_model,
+    PID_4105_sysDataLabelLines_model,
+    PID_4105_sysDataLabelLst_model,
+    PID_4105_sysDataMap_model,
+    PID_4105_sysDataMapCol_model,
+    PID_4105_sysDataRpt_model,
+    PID_4105_sysDataViews_model,
+    PID_4105_sysKMLMap_model,
+    PID_4105_sysKMLMapClass_model,
+    PID_4105_sysLookupLst_model,
+    PID_4105_sysTableLst_model,
+    PID_4105_sysTaskGroups_model,
+    PID_4105_sysTaskLst_model,
+    PID_4105_sysTasks_model,
+    PID_4105_ver_ScribeTemplate_model,
+    PID_4105_vv_General_model,
+    PID_4105_vv_Geology_model,
+    PID_4105_vv_LabResults_model,
+    PID_4105_vv_Mine_model,
+    PID_4108_ActionLevels_model,
+    PID_4108_COC_model,
+    PID_4108_EDDAirSampling_model,
+    PID_4108_EDDBiotaSampling_model,
+    PID_4108_EDDLabAnalyses_model,
+    PID_4108_EDDMonitoringData_model,
+    PID_4108_EDDProperty_model,
+    PID_4108_EDDSoilGasSampling_model,
+    PID_4108_EDDSoilSampling_model,
+    PID_4108_EDDWaterSampling_model,
+    PID_4108_EDDWipeSampling_model,
+    PID_4108_Events_model,
+    PID_4108_Instruments_model,
+    PID_4108_LabAnalyses_model,
+    PID_4108_LabResults_model,
+    PID_4108_Monitoring_model,
+    PID_4108_PropertyOccupant_model,
+    PID_4108_refAnalytes_model,
+    PID_4108_refLabLst_model,
+    PID_4108_refMatrixLst_model,
+    PID_4108_refNames_model,
+    PID_4108_refPickLst_model,
+    PID_4108_refSGenus_model,
+    PID_4108_Samples_model,
+    PID_4108_SamplesAir_model,
+    PID_4108_SamplesBiota_model,
+    PID_4108_SamplesMeasurements_model,
+    PID_4108_SamplesSoil_model,
+    PID_4108_SamplesSoilGas_model,
+    PID_4108_SamplesTags_model,
+    PID_4108_SamplesWater_model,
+    PID_4108_SamplesWipe_model,
+    PID_4108_Site_model,
+    PID_4108_sysDataColumn_model,
+    PID_4108_sysDataColumnLayout_model,
+    PID_4108_sysDataLabel_model,
+    PID_4108_sysDataLabelLines_model,
+    PID_4108_sysDataLabelLst_model,
+    PID_4108_sysDataMap_model,
+    PID_4108_sysDataMapCol_model,
+    PID_4108_sysDataRpt_model,
+    PID_4108_sysDataViews_model,
+    PID_4108_sysKMLMap_model,
+    PID_4108_sysKMLMapClass_model,
+    PID_4108_sysLookupLst_model,
+    PID_4108_sysTableLst_model,
+    PID_4108_sysTaskGroups_model,
+    PID_4108_sysTaskLst_model,
+    PID_4108_sysTasks_model,
+    PID_4111_ActionLevels_model,
+    PID_4111_COC_model,
+    PID_4111_EDDAirSampling_model,
+    PID_4111_EDDBiotaSampling_model,
+    PID_4111_EDDLabAnalyses_model,
+    PID_4111_EDDMonitoringData_model,
+    PID_4111_EDDProperty_model,
+    PID_4111_EDDSoilGasSampling_model,
+    PID_4111_EDDSoilSampling_model,
+    PID_4111_EDDWaterSampling_model,
+    PID_4111_EDDWipeSampling_model,
+    PID_4111_Events_model,
+    PID_4111_Instruments_model,
+    PID_4111_LabAnalyses_model,
+    PID_4111_LabResults_model,
+    PID_4111_Location_model,
+    PID_4111_Monitoring_model,
+    PID_4111_PropertyInfo_model,
+    PID_4111_PropertyOccupant_model,
+    PID_4111_refAnalytes_model,
+    PID_4111_refLabLst_model,
+    PID_4111_refMatrixLst_model,
+    PID_4111_refNames_model,
+    PID_4111_refPickLst_model,
+    PID_4111_refSGenus_model,
+    PID_4111_Samples_model,
+    PID_4111_SamplesAir_model,
+    PID_4111_SamplesBiota_model,
+    PID_4111_SamplesMeasurements_model,
+    PID_4111_SamplesSoil_model,
+    PID_4111_SamplesSoilGas_model,
+    PID_4111_SamplesTags_model,
+    PID_4111_SamplesWater_model,
+    PID_4111_SamplesWipe_model,
+    PID_4111_Site_model,
+    PID_4111_sysDataColumn_model,
+    PID_4111_sysDataColumnLayout_model,
+    PID_4111_sysDataLabel_model,
+    PID_4111_sysDataLabelLines_model,
+    PID_4111_sysDataLabelLst_model,
+    PID_4111_sysDataMap_model,
+    PID_4111_sysDataMapCol_model,
+    PID_4111_sysDataRpt_model,
+    PID_4111_sysDataViews_model,
+    PID_4111_sysKMLMap_model,
+    PID_4111_sysKMLMapClass_model,
+    PID_4111_sysLookupLst_model,
+    PID_4111_sysTableLst_model,
+    PID_4111_sysTaskGroups_model,
+    PID_4111_sysTaskLst_model,
+    PID_4111_sysTasks_model,
+    PID_4127_ActionLevels_model,
+    PID_4127_COC_model,
+    PID_4127_EDDAirSampling_model,
+    PID_4127_EDDBiotaSampling_model,
+    PID_4127_EDDLabAnalyses_model,
+    PID_4127_EDDMonitoringData_model,
+    PID_4127_EDDProperty_model,
+    PID_4127_EDDSoilGasSampling_model,
+    PID_4127_EDDSoilSampling_model,
+    PID_4127_EDDWaterSampling_model,
+    PID_4127_EDDWipeSampling_model,
+    PID_4127_Events_model,
+    PID_4127_Instruments_model,
+    PID_4127_LabAnalyses_model,
+    PID_4127_LabResults_model,
+    PID_4127_Location_model,
+    PID_4127_Monitoring_model,
+    PID_4127_PropertyInfo_model,
+    PID_4127_PropertyOccupant_model,
+    PID_4127_R9_refUnitConversion_model,
+    PID_4127_refAnalytes_model,
+    PID_4127_refLabLst_model,
+    PID_4127_refMatrixLst_model,
+    PID_4127_refNames_model,
+    PID_4127_refPickLst_model,
+    PID_4127_refSGenus_model,
+    PID_4127_Samples_model,
+    PID_4127_SamplesAir_model,
+    PID_4127_SamplesBiota_model,
+    PID_4127_SamplesMeasurements_model,
+    PID_4127_SamplesSoil_model,
+    PID_4127_SamplesSoilGas_model,
+    PID_4127_SamplesTags_model,
+    PID_4127_SamplesWater_model,
+    PID_4127_SamplesWipe_model,
+    PID_4127_Site_model,
+    PID_4127_sysDataColumn_model,
+    PID_4127_sysDataColumnLayout_model,
+    PID_4127_sysDataLabel_model,
+    PID_4127_sysDataLabelLines_model,
+    PID_4127_sysDataLabelLst_model,
+    PID_4127_sysDataMap_model,
+    PID_4127_sysDataMapCol_model,
+    PID_4127_sysDataRpt_model,
+    PID_4127_sysDataViews_model,
+    PID_4127_sysKMLMap_model,
+    PID_4127_sysKMLMapClass_model,
+    PID_4127_sysLookupLst_model,
+    PID_4127_sysTableLst_model,
+    PID_4127_sysTaskGroups_model,
+    PID_4127_sysTaskLst_model,
+    PID_4127_sysTasks_model,
+    PID_4129_ActionLevels_model,
+    PID_4129_COC_model,
+    PID_4129_EDDAirSampling_model,
+    PID_4129_EDDBiotaSampling_model,
+    PID_4129_EDDLabAnalyses_model,
+    PID_4129_EDDMonitoringData_model,
+    PID_4129_EDDProperty_model,
+    PID_4129_EDDSoilGasSampling_model,
+    PID_4129_EDDSoilSampling_model,
+    PID_4129_EDDWaterSampling_model,
+    PID_4129_EDDWipeSampling_model,
+    PID_4129_Events_model,
+    PID_4129_Instruments_model,
+    PID_4129_LabAnalyses_model,
+    PID_4129_LabResults_model,
+    PID_4129_Location_model,
+    PID_4129_Monitoring_model,
+    PID_4129_PropertyInfo_model,
+    PID_4129_PropertyOccupant_model,
+    PID_4129_R9_refUnitConversion_model,
+    PID_4129_refAnalytes_model,
+    PID_4129_refLabLst_model,
+    PID_4129_refMatrixLst_model,
+    PID_4129_refNames_model,
+    PID_4129_refPickLst_model,
+    PID_4129_refSGenus_model,
+    PID_4129_Samples_model,
+    PID_4129_SamplesAir_model,
+    PID_4129_SamplesBiota_model,
+    PID_4129_SamplesMeasurements_model,
+    PID_4129_SamplesSoil_model,
+    PID_4129_SamplesSoilGas_model,
+    PID_4129_SamplesTags_model,
+    PID_4129_SamplesWater_model,
+    PID_4129_SamplesWipe_model,
+    PID_4129_Site_model,
+    PID_4129_sysDataColumn_model,
+    PID_4129_sysDataColumnLayout_model,
+    PID_4129_sysDataLabel_model,
+    PID_4129_sysDataLabelLines_model,
+    PID_4129_sysDataLabelLst_model,
+    PID_4129_sysDataMap_model,
+    PID_4129_sysDataMapCol_model,
+    PID_4129_sysDataRpt_model,
+    PID_4129_sysDataViews_model,
+    PID_4129_sysKMLMap_model,
+    PID_4129_sysKMLMapClass_model,
+    PID_4129_sysLookupLst_model,
+    PID_4129_sysTableLst_model,
+    PID_4129_sysTaskGroups_model,
+    PID_4129_sysTaskLst_model,
+    PID_4129_sysTasks_model,
+    PID_4129_WST25417Validated_model,
+    PID_4130_ActionLevels_model,
+    PID_4130_COC_model,
+    PID_4130_EDDAirSampling_model,
+    PID_4130_EDDBiotaSampling_model,
+    PID_4130_EDDLabAnalyses_model,
+    PID_4130_EDDMonitoringData_model,
+    PID_4130_EDDProperty_model,
+    PID_4130_EDDSoilGasSampling_model,
+    PID_4130_EDDSoilSampling_model,
+    PID_4130_EDDWaterSampling_model,
+    PID_4130_EDDWipeSampling_model,
+    PID_4130_Events_model,
+    PID_4130_Instruments_model,
+    PID_4130_LabAnalyses_model,
+    PID_4130_LabResults_model,
+    PID_4130_Location_model,
+    PID_4130_Monitoring_model,
+    PID_4130_PropertyInfo_model,
+    PID_4130_PropertyOccupant_model,
+    PID_4130_refAnalytes_model,
+    PID_4130_refLabLst_model,
+    PID_4130_refMatrixLst_model,
+    PID_4130_refNames_model,
+    PID_4130_refPickLst_model,
+    PID_4130_refSGenus_model,
+    PID_4130_Samples_model,
+    PID_4130_SamplesAir_model,
+    PID_4130_SamplesBiota_model,
+    PID_4130_SamplesMeasurements_model,
+    PID_4130_SamplesSoil_model,
+    PID_4130_SamplesSoilGas_model,
+    PID_4130_SamplesTags_model,
+    PID_4130_SamplesWater_model,
+    PID_4130_SamplesWipe_model,
+    PID_4130_Site_model,
+    PID_4130_sysDataColumn_model,
+    PID_4130_sysDataColumnLayout_model,
+    PID_4130_sysDataLabel_model,
+    PID_4130_sysDataLabelLines_model,
+    PID_4130_sysDataLabelLst_model,
+    PID_4130_sysDataMap_model,
+    PID_4130_sysDataMapCol_model,
+    PID_4130_sysDataRpt_model,
+    PID_4130_sysDataViews_model,
+    PID_4130_sysKMLMap_model,
+    PID_4130_sysKMLMapClass_model,
+    PID_4130_sysLookupLst_model,
+    PID_4130_sysTableLst_model,
+    PID_4130_sysTaskGroups_model,
+    PID_4130_sysTaskLst_model,
+    PID_4130_sysTasks_model,
+    PID_4154_ActionLevels_model,
+    PID_4154_COC_model,
+    PID_4154_EDDAirSampling_model,
+    PID_4154_EDDBiotaSampling_model,
+    PID_4154_EDDLabAnalyses_model,
+    PID_4154_EDDMonitoringData_model,
+    PID_4154_EDDProperty_model,
+    PID_4154_EDDSoilGasSampling_model,
+    PID_4154_EDDSoilSampling_model,
+    PID_4154_EDDWaterSampling_model,
+    PID_4154_EDDWipeSampling_model,
+    PID_4154_Events_model,
+    PID_4154_Instruments_model,
+    PID_4154_LabAnalyses_model,
+    PID_4154_LabResults_model,
+    PID_4154_Location_model,
+    PID_4154_Monitoring_model,
+    PID_4154_PropertyInfo_model,
+    PID_4154_PropertyOccupant_model,
+    PID_4154_refAnalytes_model,
+    PID_4154_refLabLst_model,
+    PID_4154_refMatrixLst_model,
+    PID_4154_refNames_model,
+    PID_4154_refPickLst_model,
+    PID_4154_refSGenus_model,
+    PID_4154_Samples_model,
+    PID_4154_SamplesAir_model,
+    PID_4154_SamplesBiota_model,
+    PID_4154_SamplesMeasurements_model,
+    PID_4154_SamplesSoil_model,
+    PID_4154_SamplesSoilGas_model,
+    PID_4154_SamplesTags_model,
+    PID_4154_SamplesWater_model,
+    PID_4154_SamplesWipe_model,
+    PID_4154_SampleWind_model,
+    PID_4154_Site_model,
+    PID_4154_sysDataColumn_model,
+    PID_4154_sysDataColumnLayout_model,
+    PID_4154_sysDataLabel_model,
+    PID_4154_sysDataLabelLines_model,
+    PID_4154_sysDataLabelLst_model,
+    PID_4154_sysDataMap_model,
+    PID_4154_sysDataMapCol_model,
+    PID_4154_sysDataRpt_model,
+    PID_4154_sysDataViews_model,
+    PID_4154_sysKMLMap_model,
+    PID_4154_sysKMLMapClass_model,
+    PID_4154_sysLookupLst_model,
+    PID_4154_sysTableLst_model,
+    PID_4154_sysTaskGroups_model,
+    PID_4154_sysTaskLst_model,
+    PID_4154_sysTasks_model,
+    PID_4205_ActionLevels_model,
+    PID_4205_COC_model,
+    PID_4205_EDDAirSampling_model,
+    PID_4205_EDDBiotaSampling_model,
+    PID_4205_EDDLabAnalyses_model,
+    PID_4205_EDDMonitoringData_model,
+    PID_4205_EDDProperty_model,
+    PID_4205_EDDSoilGasSampling_model,
+    PID_4205_EDDSoilSampling_model,
+    PID_4205_EDDWaterSampling_model,
+    PID_4205_EDDWipeSampling_model,
+    PID_4205_Events_model,
+    PID_4205_Instruments_model,
+    PID_4205_LabAnalyses_model,
+    PID_4205_LabResults_model,
+    PID_4205_Location_model,
+    PID_4205_Monitoring_model,
+    PID_4205_PropertyInfo_model,
+    PID_4205_PropertyOccupant_model,
+    PID_4205_RECORD_LINEAGE_model,
+    PID_4205_refAnalytes_model,
+    PID_4205_refLabLst_model,
+    PID_4205_refMatrixLst_model,
+    PID_4205_refNames_model,
+    PID_4205_refPickLst_model,
+    PID_4205_refSGenus_model,
+    PID_4205_Samples_model,
+    PID_4205_SamplesAir_model,
+    PID_4205_SamplesBiota_model,
+    PID_4205_SamplesMeasurements_model,
+    PID_4205_SamplesSoil_model,
+    PID_4205_SamplesSoilGas_model,
+    PID_4205_SamplesTags_model,
+    PID_4205_SamplesWater_model,
+    PID_4205_SamplesWipe_model,
+    PID_4205_Site_model,
+    PID_4205_sysDataColumn_model,
+    PID_4205_sysDataColumnLayout_model,
+    PID_4205_sysDataLabel_model,
+    PID_4205_sysDataLabelLines_model,
+    PID_4205_sysDataLabelLst_model,
+    PID_4205_sysDataMap_model,
+    PID_4205_sysDataMapCol_model,
+    PID_4205_sysDataRpt_model,
+    PID_4205_sysDataViews_model,
+    PID_4205_sysKMLMap_model,
+    PID_4205_sysKMLMapClass_model,
+    PID_4205_sysLookupLst_model,
+    PID_4205_sysTableLst_model,
+    PID_4205_sysTaskGroups_model,
+    PID_4205_sysTaskLst_model,
+    PID_4205_sysTasks_model,
+    PID_4229_ActionLevels_model,
+    PID_4229_COC_model,
+    PID_4229_EDDAirSampling_model,
+    PID_4229_EDDBiotaSampling_model,
+    PID_4229_EDDLabAnalyses_model,
+    PID_4229_EDDMonitoringData_model,
+    PID_4229_EDDProperty_model,
+    PID_4229_EDDSoilGasSampling_model,
+    PID_4229_EDDSoilSampling_model,
+    PID_4229_EDDWaterSampling_model,
+    PID_4229_EDDWipeSampling_model,
+    PID_4229_Events_model,
+    PID_4229_Instruments_model,
+    PID_4229_LabAnalyses_model,
+    PID_4229_LabResults_model,
+    PID_4229_Location_model,
+    PID_4229_Monitoring_model,
+    PID_4229_PropertyInfo_model,
+    PID_4229_PropertyOccupant_model,
+    PID_4229_refAnalytes_model,
+    PID_4229_refLabLst_model,
+    PID_4229_refMatrixLst_model,
+    PID_4229_refNames_model,
+    PID_4229_refPickLst_model,
+    PID_4229_refSGenus_model,
+    PID_4229_Samples_model,
+    PID_4229_SamplesAir_model,
+    PID_4229_SamplesBiota_model,
+    PID_4229_SamplesMeasurements_model,
+    PID_4229_SamplesSoil_model,
+    PID_4229_SamplesSoilGas_model,
+    PID_4229_SamplesTags_model,
+    PID_4229_SamplesWater_model,
+    PID_4229_SamplesWipe_model,
+    PID_4229_Site_model,
+    PID_4229_sysDataColumn_model,
+    PID_4229_sysDataColumnLayout_model,
+    PID_4229_sysDataLabel_model,
+    PID_4229_sysDataLabelLines_model,
+    PID_4229_sysDataLabelLst_model,
+    PID_4229_sysDataMap_model,
+    PID_4229_sysDataMapCol_model,
+    PID_4229_sysDataRpt_model,
+    PID_4229_sysDataViews_model,
+    PID_4229_sysKMLMap_model,
+    PID_4229_sysKMLMapClass_model,
+    PID_4229_sysLookupLst_model,
+    PID_4229_sysTableLst_model,
+    PID_4229_sysTaskGroups_model,
+    PID_4229_sysTaskLst_model,
+    PID_4229_sysTasks_model,
+    PID_4233_ActionLevels_model,
+    PID_4233_COC_model,
+    PID_4233_EDDAirSampling_model,
+    PID_4233_EDDBiotaSampling_model,
+    PID_4233_EDDLabAnalyses_model,
+    PID_4233_EDDMonitoringData_model,
+    PID_4233_EDDProperty_model,
+    PID_4233_EDDSoilGasSampling_model,
+    PID_4233_EDDSoilSampling_model,
+    PID_4233_EDDWaterSampling_model,
+    PID_4233_EDDWipeSampling_model,
+    PID_4233_Events_model,
+    PID_4233_Instruments_model,
+    PID_4233_LabAnalyses_model,
+    PID_4233_LabResults_model,
+    PID_4233_Location_model,
+    PID_4233_Monitoring_model,
+    PID_4233_PropertyInfo_model,
+    PID_4233_PropertyOccupant_model,
+    PID_4233_refAnalytes_model,
+    PID_4233_refLabLst_model,
+    PID_4233_refMatrixLst_model,
+    PID_4233_refNames_model,
+    PID_4233_refPickLst_model,
+    PID_4233_refSGenus_model,
+    PID_4233_Samples_model,
+    PID_4233_SamplesAir_model,
+    PID_4233_SamplesBiota_model,
+    PID_4233_SamplesMeasurements_model,
+    PID_4233_SamplesSoil_model,
+    PID_4233_SamplesSoilGas_model,
+    PID_4233_SamplesTags_model,
+    PID_4233_SamplesWater_model,
+    PID_4233_SamplesWipe_model,
+    PID_4233_Site_model,
+    PID_4233_sysDataColumn_model,
+    PID_4233_sysDataColumnLayout_model,
+    PID_4233_sysDataLabel_model,
+    PID_4233_sysDataLabelLines_model,
+    PID_4233_sysDataLabelLst_model,
+    PID_4233_sysDataMap_model,
+    PID_4233_sysDataMapCol_model,
+    PID_4233_sysDataRpt_model,
+    PID_4233_sysDataViews_model,
+    PID_4233_sysKMLMap_model,
+    PID_4233_sysKMLMapClass_model,
+    PID_4233_sysLookupLst_model,
+    PID_4233_sysTableLst_model,
+    PID_4233_sysTaskGroups_model,
+    PID_4233_sysTaskLst_model,
+    PID_4233_sysTasks_model,
+    PID_4234_ActionLevels_model,
+    PID_4234_COC_model,
+    PID_4234_EDDAirSampling_model,
+    PID_4234_EDDBiotaSampling_model,
+    PID_4234_EDDLabAnalyses_model,
+    PID_4234_EDDMonitoringData_model,
+    PID_4234_EDDProperty_model,
+    PID_4234_EDDSoilGasSampling_model,
+    PID_4234_EDDSoilSampling_model,
+    PID_4234_EDDWaterSampling_model,
+    PID_4234_EDDWipeSampling_model,
+    PID_4234_Events_model,
+    PID_4234_Instruments_model,
+    PID_4234_LabAnalyses_model,
+    PID_4234_LabResults_model,
+    PID_4234_Location_model,
+    PID_4234_Monitoring_model,
+    PID_4234_PropertyInfo_model,
+    PID_4234_PropertyOccupant_model,
+    PID_4234_refAnalytes_model,
+    PID_4234_refLabLst_model,
+    PID_4234_refMatrixLst_model,
+    PID_4234_refNames_model,
+    PID_4234_refPickLst_model,
+    PID_4234_refSGenus_model,
+    PID_4234_Samples_model,
+    PID_4234_SamplesAir_model,
+    PID_4234_SamplesBiota_model,
+    PID_4234_SamplesMeasurements_model,
+    PID_4234_SamplesSoil_model,
+    PID_4234_SamplesSoilGas_model,
+    PID_4234_SamplesTags_model,
+    PID_4234_SamplesWater_model,
+    PID_4234_SamplesWipe_model,
+    PID_4234_Site_model,
+    PID_4234_sysDataColumn_model,
+    PID_4234_sysDataColumnLayout_model,
+    PID_4234_sysDataLabel_model,
+    PID_4234_sysDataLabelLines_model,
+    PID_4234_sysDataLabelLst_model,
+    PID_4234_sysDataMap_model,
+    PID_4234_sysDataMapCol_model,
+    PID_4234_sysDataRpt_model,
+    PID_4234_sysDataViews_model,
+    PID_4234_sysKMLMap_model,
+    PID_4234_sysKMLMapClass_model,
+    PID_4234_sysLookupLst_model,
+    PID_4234_sysTableLst_model,
+    PID_4234_sysTaskGroups_model,
+    PID_4234_sysTaskLst_model,
+    PID_4234_sysTasks_model,
+    PID_4255_ActionLevels_model,
+    PID_4255_COC_model,
+    PID_4255_EDDAirSampling_model,
+    PID_4255_EDDBiotaSampling_model,
+    PID_4255_EDDLabAnalyses_model,
+    PID_4255_EDDMonitoringData_model,
+    PID_4255_EDDProperty_model,
+    PID_4255_EDDSoilGasSampling_model,
+    PID_4255_EDDSoilSampling_model,
+    PID_4255_EDDWaterSampling_model,
+    PID_4255_EDDWipeSampling_model,
+    PID_4255_Events_model,
+    PID_4255_Instruments_model,
+    PID_4255_LabAnalyses_model,
+    PID_4255_LabResults_model,
+    PID_4255_Location_model,
+    PID_4255_Monitoring_model,
+    PID_4255_PropertyInfo_model,
+    PID_4255_PropertyOccupant_model,
+    PID_4255_refAnalytes_model,
+    PID_4255_refLabLst_model,
+    PID_4255_refMatrixLst_model,
+    PID_4255_refNames_model,
+    PID_4255_refPickLst_model,
+    PID_4255_refSGenus_model,
+    PID_4255_Samples_model,
+    PID_4255_SamplesAir_model,
+    PID_4255_SamplesBiota_model,
+    PID_4255_SamplesMeasurements_model,
+    PID_4255_SamplesSoil_model,
+    PID_4255_SamplesSoilGas_model,
+    PID_4255_SamplesTags_model,
+    PID_4255_SamplesWater_model,
+    PID_4255_SamplesWipe_model,
+    PID_4255_Site_model,
+    PID_4255_sysDataColumn_model,
+    PID_4255_sysDataColumnLayout_model,
+    PID_4255_sysDataLabel_model,
+    PID_4255_sysDataLabelLines_model,
+    PID_4255_sysDataLabelLst_model,
+    PID_4255_sysDataMap_model,
+    PID_4255_sysDataMapCol_model,
+    PID_4255_sysDataRpt_model,
+    PID_4255_sysDataViews_model,
+    PID_4255_sysKMLMap_model,
+    PID_4255_sysKMLMapClass_model,
+    PID_4255_sysLookupLst_model,
+    PID_4255_sysTableLst_model,
+    PID_4255_sysTaskGroups_model,
+    PID_4255_sysTaskLst_model,
+    PID_4255_sysTasks_model,
+    PID_4269_ActionLevels_model,
+    PID_4269_COC_model,
+    PID_4269_EDDAirSampling_model,
+    PID_4269_EDDBiotaSampling_model,
+    PID_4269_EDDLabAnalyses_model,
+    PID_4269_EDDMonitoringData_model,
+    PID_4269_EDDProperty_model,
+    PID_4269_EDDSoilGasSampling_model,
+    PID_4269_EDDSoilSampling_model,
+    PID_4269_EDDWaterSampling_model,
+    PID_4269_EDDWipeSampling_model,
+    PID_4269_Events_model,
+    PID_4269_Instruments_model,
+    PID_4269_LabAnalyses_model,
+    PID_4269_LabResults_model,
+    PID_4269_Location_model,
+    PID_4269_Monitoring_model,
+    PID_4269_PropertyInfo_model,
+    PID_4269_PropertyOccupant_model,
+    PID_4269_refAnalytes_model,
+    PID_4269_refLabLst_model,
+    PID_4269_refMatrixLst_model,
+    PID_4269_refNames_model,
+    PID_4269_refPickLst_model,
+    PID_4269_refSGenus_model,
+    PID_4269_Samples_model,
+    PID_4269_SamplesAir_model,
+    PID_4269_SamplesBiota_model,
+    PID_4269_SamplesMeasurements_model,
+    PID_4269_SamplesSoil_model,
+    PID_4269_SamplesSoilGas_model,
+    PID_4269_SamplesTags_model,
+    PID_4269_SamplesWater_model,
+    PID_4269_SamplesWipe_model,
+    PID_4269_Site_model,
+    PID_4269_sysDataColumn_model,
+    PID_4269_sysDataColumnLayout_model,
+    PID_4269_sysDataLabel_model,
+    PID_4269_sysDataLabelLines_model,
+    PID_4269_sysDataLabelLst_model,
+    PID_4269_sysDataMap_model,
+    PID_4269_sysDataMapCol_model,
+    PID_4269_sysDataRpt_model,
+    PID_4269_sysDataViews_model,
+    PID_4269_sysKMLMap_model,
+    PID_4269_sysKMLMapClass_model,
+    PID_4269_sysLookupLst_model,
+    PID_4269_sysTableLst_model,
+    PID_4269_sysTaskGroups_model,
+    PID_4269_sysTaskLst_model,
+    PID_4269_sysTasks_model,
+    PID_4295_ActionLevels_model,
+    PID_4295_COC_model,
+    PID_4295_EDDAirSampling_model,
+    PID_4295_EDDBiotaSampling_model,
+    PID_4295_EDDLabAnalyses_model,
+    PID_4295_EDDMonitoringData_model,
+    PID_4295_EDDProperty_model,
+    PID_4295_EDDSoilGasSampling_model,
+    PID_4295_EDDSoilSampling_model,
+    PID_4295_EDDWaterSampling_model,
+    PID_4295_EDDWipeSampling_model,
+    PID_4295_Events_model,
+    PID_4295_Instruments_model,
+    PID_4295_LabAnalyses_model,
+    PID_4295_LabResults_model,
+    PID_4295_Location_model,
+    PID_4295_Monitoring_model,
+    PID_4295_PropertyInfo_model,
+    PID_4295_PropertyOccupant_model,
+    PID_4295_refAnalytes_model,
+    PID_4295_refLabLst_model,
+    PID_4295_refMatrixLst_model,
+    PID_4295_refNames_model,
+    PID_4295_refPickLst_model,
+    PID_4295_refSGenus_model,
+    PID_4295_Samples_model,
+    PID_4295_SamplesAir_model,
+    PID_4295_SamplesBiota_model,
+    PID_4295_SamplesMeasurements_model,
+    PID_4295_SamplesSoil_model,
+    PID_4295_SamplesSoilGas_model,
+    PID_4295_SamplesTags_model,
+    PID_4295_SamplesWater_model,
+    PID_4295_SamplesWipe_model,
+    PID_4295_Site_model,
+    PID_4295_sysDataColumn_model,
+    PID_4295_sysDataColumnLayout_model,
+    PID_4295_sysDataLabel_model,
+    PID_4295_sysDataLabelLines_model,
+    PID_4295_sysDataLabelLst_model,
+    PID_4295_sysDataMap_model,
+    PID_4295_sysDataMapCol_model,
+    PID_4295_sysDataRpt_model,
+    PID_4295_sysDataViews_model,
+    PID_4295_sysKMLMap_model,
+    PID_4295_sysKMLMapClass_model,
+    PID_4295_sysLookupLst_model,
+    PID_4295_sysTableLst_model,
+    PID_4295_sysTaskGroups_model,
+    PID_4295_sysTaskLst_model,
+    PID_4295_sysTasks_model,
+    PID_4296_ActionLevels_model,
+    PID_4296_COC_model,
+    PID_4296_EDDAirSampling_model,
+    PID_4296_EDDBiotaSampling_model,
+    PID_4296_EDDLabAnalyses_model,
+    PID_4296_EDDMonitoringData_model,
+    PID_4296_EDDProperty_model,
+    PID_4296_EDDSoilGasSampling_model,
+    PID_4296_EDDSoilSampling_model,
+    PID_4296_EDDWaterSampling_model,
+    PID_4296_EDDWipeSampling_model,
+    PID_4296_Events_model,
+    PID_4296_Instruments_model,
+    PID_4296_LabAnalyses_model,
+    PID_4296_LabResults_model,
+    PID_4296_Location_model,
+    PID_4296_Monitoring_model,
+    PID_4296_PropertyInfo_model,
+    PID_4296_PropertyOccupant_model,
+    PID_4296_refAnalytes_model,
+    PID_4296_refLabLst_model,
+    PID_4296_refMatrixLst_model,
+    PID_4296_refNames_model,
+    PID_4296_refPickLst_model,
+    PID_4296_refSGenus_model,
+    PID_4296_Samples_model,
+    PID_4296_SamplesAir_model,
+    PID_4296_SamplesBiota_model,
+    PID_4296_SamplesMeasurements_model,
+    PID_4296_SamplesSoil_model,
+    PID_4296_SamplesSoilGas_model,
+    PID_4296_SamplesTags_model,
+    PID_4296_SamplesWater_model,
+    PID_4296_SamplesWipe_model,
+    PID_4296_Site_model,
+    PID_4296_sysDataColumn_model,
+    PID_4296_sysDataColumnLayout_model,
+    PID_4296_sysDataLabel_model,
+    PID_4296_sysDataLabelLines_model,
+    PID_4296_sysDataLabelLst_model,
+    PID_4296_sysDataMap_model,
+    PID_4296_sysDataMapCol_model,
+    PID_4296_sysDataRpt_model,
+    PID_4296_sysDataViews_model,
+    PID_4296_sysKMLMap_model,
+    PID_4296_sysKMLMapClass_model,
+    PID_4296_sysLookupLst_model,
+    PID_4296_sysTableLst_model,
+    PID_4296_sysTaskGroups_model,
+    PID_4296_sysTaskLst_model,
+    PID_4296_sysTasks_model,
+    PID_4298_ActionLevels_model,
+    PID_4298_COC_model,
+    PID_4298_EDDAirSampling_model,
+    PID_4298_EDDBiotaSampling_model,
+    PID_4298_EDDLabAnalyses_model,
+    PID_4298_EDDMonitoringData_model,
+    PID_4298_EDDProperty_model,
+    PID_4298_EDDSoilGasSampling_model,
+    PID_4298_EDDSoilSampling_model,
+    PID_4298_EDDWaterSampling_model,
+    PID_4298_EDDWipeSampling_model,
+    PID_4298_Events_model,
+    PID_4298_Instruments_model,
+    PID_4298_LabAnalyses_model,
+    PID_4298_LabResults_model,
+    PID_4298_Location_model,
+    PID_4298_Monitoring_model,
+    PID_4298_PropertyInfo_model,
+    PID_4298_PropertyOccupant_model,
+    PID_4298_refAnalytes_model,
+    PID_4298_refLabLst_model,
+    PID_4298_refMatrixLst_model,
+    PID_4298_refNames_model,
+    PID_4298_refPickLst_model,
+    PID_4298_refSGenus_model,
+    PID_4298_Samples_model,
+    PID_4298_SamplesAir_model,
+    PID_4298_SamplesBiota_model,
+    PID_4298_SamplesMeasurements_model,
+    PID_4298_SamplesSoil_model,
+    PID_4298_SamplesSoilGas_model,
+    PID_4298_SamplesTags_model,
+    PID_4298_SamplesWater_model,
+    PID_4298_SamplesWipe_model,
+    PID_4298_Site_model,
+    PID_4298_sysDataColumn_model,
+    PID_4298_sysDataColumnLayout_model,
+    PID_4298_sysDataLabel_model,
+    PID_4298_sysDataLabelLines_model,
+    PID_4298_sysDataLabelLst_model,
+    PID_4298_sysDataMap_model,
+    PID_4298_sysDataMapCol_model,
+    PID_4298_sysDataRpt_model,
+    PID_4298_sysDataViews_model,
+    PID_4298_sysKMLMap_model,
+    PID_4298_sysKMLMapClass_model,
+    PID_4298_sysLookupLst_model,
+    PID_4298_sysTableLst_model,
+    PID_4298_sysTaskGroups_model,
+    PID_4298_sysTaskLst_model,
+    PID_4298_sysTasks_model,
+    PID_4312_ActionLevels_model,
+    PID_4312_COC_model,
+    PID_4312_EDDAirSampling_model,
+    PID_4312_EDDBiotaSampling_model,
+    PID_4312_EDDLabAnalyses_model,
+    PID_4312_EDDMonitoringData_model,
+    PID_4312_EDDProperty_model,
+    PID_4312_EDDSoilGasSampling_model,
+    PID_4312_EDDSoilSampling_model,
+    PID_4312_EDDWaterSampling_model,
+    PID_4312_EDDWipeSampling_model,
+    PID_4312_Events_model,
+    PID_4312_Instruments_model,
+    PID_4312_LabAnalyses_model,
+    PID_4312_LabResults_model,
+    PID_4312_Location_model,
+    PID_4312_Monitoring_model,
+    PID_4312_PropertyInfo_model,
+    PID_4312_PropertyOccupant_model,
+    PID_4312_refAnalytes_model,
+    PID_4312_refLabLst_model,
+    PID_4312_refMatrixLst_model,
+    PID_4312_refNames_model,
+    PID_4312_refPickLst_model,
+    PID_4312_refSGenus_model,
+    PID_4312_Samples_model,
+    PID_4312_SamplesAir_model,
+    PID_4312_SamplesBiota_model,
+    PID_4312_SamplesMeasurements_model,
+    PID_4312_SamplesSoil_model,
+    PID_4312_SamplesSoilGas_model,
+    PID_4312_SamplesTags_model,
+    PID_4312_SamplesWater_model,
+    PID_4312_SamplesWipe_model,
+    PID_4312_Site_model,
+    PID_4312_sysDataColumn_model,
+    PID_4312_sysDataColumnLayout_model,
+    PID_4312_sysDataLabel_model,
+    PID_4312_sysDataLabelLines_model,
+    PID_4312_sysDataLabelLst_model,
+    PID_4312_sysDataMap_model,
+    PID_4312_sysDataMapCol_model,
+    PID_4312_sysDataRpt_model,
+    PID_4312_sysDataViews_model,
+    PID_4312_sysKMLMap_model,
+    PID_4312_sysKMLMapClass_model,
+    PID_4312_sysLookupLst_model,
+    PID_4312_sysTableLst_model,
+    PID_4312_sysTaskGroups_model,
+    PID_4312_sysTaskLst_model,
+    PID_4312_sysTasks_model,
+    PID_4433_ActionLevels_model,
+    PID_4433_COC_model,
+    PID_4433_EDDAirSampling_model,
+    PID_4433_EDDBiotaSampling_model,
+    PID_4433_EDDLabAnalyses_model,
+    PID_4433_EDDMonitoringData_model,
+    PID_4433_EDDProperty_model,
+    PID_4433_EDDSoilGasSampling_model,
+    PID_4433_EDDSoilSampling_model,
+    PID_4433_EDDWaterSampling_model,
+    PID_4433_EDDWipeSampling_model,
+    PID_4433_Events_model,
+    PID_4433_Instruments_model,
+    PID_4433_LabAnalyses_model,
+    PID_4433_LabResults_model,
+    PID_4433_Location_model,
+    PID_4433_Monitoring_model,
+    PID_4433_PropertyInfo_model,
+    PID_4433_PropertyOccupant_model,
+    PID_4433_R9_refUnitConversion_model,
+    PID_4433_refAnalytes_model,
+    PID_4433_refLabLst_model,
+    PID_4433_refMatrixLst_model,
+    PID_4433_refNames_model,
+    PID_4433_refPickLst_model,
+    PID_4433_refSGenus_model,
+    PID_4433_Samples_model,
+    PID_4433_SamplesAir_model,
+    PID_4433_SamplesBiota_model,
+    PID_4433_SamplesMeasurements_model,
+    PID_4433_SamplesSoil_model,
+    PID_4433_SamplesSoilGas_model,
+    PID_4433_SamplesTags_model,
+    PID_4433_SamplesWater_model,
+    PID_4433_SamplesWipe_model,
+    PID_4433_Site_model,
+    PID_4433_sysDataColumn_model,
+    PID_4433_sysDataColumnLayout_model,
+    PID_4433_sysDataLabel_model,
+    PID_4433_sysDataLabelLines_model,
+    PID_4433_sysDataLabelLst_model,
+    PID_4433_sysDataMap_model,
+    PID_4433_sysDataMapCol_model,
+    PID_4433_sysDataRpt_model,
+    PID_4433_sysDataViews_model,
+    PID_4433_sysKMLMap_model,
+    PID_4433_sysKMLMapClass_model,
+    PID_4433_sysLookupLst_model,
+    PID_4433_sysTableLst_model,
+    PID_4433_sysTaskGroups_model,
+    PID_4433_sysTaskLst_model,
+    PID_4433_sysTasks_model,
+    PID_4433_WST26410_model,
+    PID_4433_WST26411_26412_model,
+    PID_4453_ActionLevels_model,
+    PID_4453_COC_model,
+    PID_4453_EDDAirSampling_model,
+    PID_4453_EDDBiotaSampling_model,
+    PID_4453_EDDLabAnalyses_model,
+    PID_4453_EDDMonitoringData_model,
+    PID_4453_EDDProperty_model,
+    PID_4453_EDDSoilGasSampling_model,
+    PID_4453_EDDSoilSampling_model,
+    PID_4453_EDDWaterSampling_model,
+    PID_4453_EDDWipeSampling_model,
+    PID_4453_Events_model,
+    PID_4453_Instruments_model,
+    PID_4453_LabAnalyses_model,
+    PID_4453_LabResults_model,
+    PID_4453_Location_model,
+    PID_4453_Monitoring_model,
+    PID_4453_PropertyInfo_model,
+    PID_4453_PropertyOccupant_model,
+    PID_4453_R9_refUnitConversion_model,
+    PID_4453_refAnalytes_model,
+    PID_4453_refLabLst_model,
+    PID_4453_refMatrixLst_model,
+    PID_4453_refNames_model,
+    PID_4453_refPickLst_model,
+    PID_4453_refSGenus_model,
+    PID_4453_Samples_model,
+    PID_4453_SamplesAir_model,
+    PID_4453_SamplesBiota_model,
+    PID_4453_SamplesMeasurements_model,
+    PID_4453_SamplesSoil_model,
+    PID_4453_SamplesSoilGas_model,
+    PID_4453_SamplesTags_model,
+    PID_4453_SamplesWater_model,
+    PID_4453_SamplesWipe_model,
+    PID_4453_Site_model,
+    PID_4453_sysDataColumn_model,
+    PID_4453_sysDataColumnLayout_model,
+    PID_4453_sysDataLabel_model,
+    PID_4453_sysDataLabelLines_model,
+    PID_4453_sysDataLabelLst_model,
+    PID_4453_sysDataMap_model,
+    PID_4453_sysDataMapCol_model,
+    PID_4453_sysDataRpt_model,
+    PID_4453_sysDataViews_model,
+    PID_4453_sysKMLMap_model,
+    PID_4453_sysKMLMapClass_model,
+    PID_4453_sysLookupLst_model,
+    PID_4453_sysTableLst_model,
+    PID_4453_sysTaskGroups_model,
+    PID_4453_sysTaskLst_model,
+    PID_4453_sysTasks_model,
+    PID_4454_ActionLevels_model,
+    PID_4454_COC_model,
+    PID_4454_EDDAirSampling_model,
+    PID_4454_EDDBiotaSampling_model,
+    PID_4454_EDDLabAnalyses_model,
+    PID_4454_EDDMonitoringData_model,
+    PID_4454_EDDProperty_model,
+    PID_4454_EDDSoilGasSampling_model,
+    PID_4454_EDDSoilSampling_model,
+    PID_4454_EDDWaterSampling_model,
+    PID_4454_EDDWipeSampling_model,
+    PID_4454_Events_model,
+    PID_4454_Instruments_model,
+    PID_4454_LabAnalyses_model,
+    PID_4454_LabResults_model,
+    PID_4454_Location_model,
+    PID_4454_Monitoring_model,
+    PID_4454_PropertyInfo_model,
+    PID_4454_PropertyOccupant_model,
+    PID_4454_R9_refUnitConversion_model,
+    PID_4454_refAnalytes_model,
+    PID_4454_refLabLst_model,
+    PID_4454_refMatrixLst_model,
+    PID_4454_refNames_model,
+    PID_4454_refPickLst_model,
+    PID_4454_refSGenus_model,
+    PID_4454_Samples_model,
+    PID_4454_SamplesAir_model,
+    PID_4454_SamplesBiota_model,
+    PID_4454_SamplesMeasurements_model,
+    PID_4454_SamplesSoil_model,
+    PID_4454_SamplesSoilGas_model,
+    PID_4454_SamplesTags_model,
+    PID_4454_SamplesWater_model,
+    PID_4454_SamplesWipe_model,
+    PID_4454_Site_model,
+    PID_4454_sysDataColumn_model,
+    PID_4454_sysDataColumnLayout_model,
+    PID_4454_sysDataLabel_model,
+    PID_4454_sysDataLabelLines_model,
+    PID_4454_sysDataLabelLst_model,
+    PID_4454_sysDataMap_model,
+    PID_4454_sysDataMapCol_model,
+    PID_4454_sysDataRpt_model,
+    PID_4454_sysDataViews_model,
+    PID_4454_sysKMLMap_model,
+    PID_4454_sysKMLMapClass_model,
+    PID_4454_sysLookupLst_model,
+    PID_4454_sysTableLst_model,
+    PID_4454_sysTaskGroups_model,
+    PID_4454_sysTaskLst_model,
+    PID_4454_sysTasks_model,
+    PID_4461_ActionLevels_model,
+    PID_4461_COC_model,
+    PID_4461_EDDAirSampling_model,
+    PID_4461_EDDBiotaSampling_model,
+    PID_4461_EDDLabAnalyses_model,
+    PID_4461_EDDMonitoringData_model,
+    PID_4461_EDDProperty_model,
+    PID_4461_EDDSoilGasSampling_model,
+    PID_4461_EDDSoilSampling_model,
+    PID_4461_EDDWaterSampling_model,
+    PID_4461_EDDWipeSampling_model,
+    PID_4461_Events_model,
+    PID_4461_Instruments_model,
+    PID_4461_LabAnalyses_model,
+    PID_4461_LabResults_model,
+    PID_4461_LabResults_Historic_model,
+    PID_4461_LabResults_Historic_Not_Corrected_model,
+    PID_4461_Location_model,
+    PID_4461_Monitoring_model,
+    PID_4461_PropertyInfo_model,
+    PID_4461_PropertyOccupant_model,
+    PID_4461_refAnalytes_model,
+    PID_4461_refLabLst_model,
+    PID_4461_refMatrixLst_model,
+    PID_4461_refNames_model,
+    PID_4461_refPickLst_model,
+    PID_4461_refSGenus_model,
+    PID_4461_Samples_model,
+    PID_4461_SamplesAir_model,
+    PID_4461_SamplesBiota_model,
+    PID_4461_SamplesMeasurements_model,
+    PID_4461_SamplesSoil_model,
+    PID_4461_SamplesSoilGas_model,
+    PID_4461_SamplesTags_model,
+    PID_4461_SamplesWater_model,
+    PID_4461_SamplesWipe_model,
+    PID_4461_Site_model,
+    PID_4461_sysDataColumn_model,
+    PID_4461_sysDataColumnLayout_model,
+    PID_4461_sysDataLabel_model,
+    PID_4461_sysDataLabelLines_model,
+    PID_4461_sysDataLabelLst_model,
+    PID_4461_sysDataMap_model,
+    PID_4461_sysDataMapCol_model,
+    PID_4461_sysDataRpt_model,
+    PID_4461_sysDataViews_model,
+    PID_4461_sysKMLMap_model,
+    PID_4461_sysKMLMapClass_model,
+    PID_4461_sysLookupLst_model,
+    PID_4461_sysTableLst_model,
+    PID_4461_sysTaskGroups_model,
+    PID_4461_sysTaskLst_model,
+    PID_4461_sysTasks_model,
+    PID_4461_ver_ScribeTemplate_model,
+    PID_4461_vv_General_model,
+    PID_4461_vv_Geology_model,
+    PID_4461_vv_LabResults_model,
+    PID_4461_vv_Mine_model,
+    PID_4462_ActionLevels_model,
+    PID_4462_COC_model,
+    PID_4462_EDDAirSampling_model,
+    PID_4462_EDDBiotaSampling_model,
+    PID_4462_EDDLabAnalyses_model,
+    PID_4462_EDDMonitoringData_model,
+    PID_4462_EDDProperty_model,
+    PID_4462_EDDSoilGasSampling_model,
+    PID_4462_EDDSoilSampling_model,
+    PID_4462_EDDWaterSampling_model,
+    PID_4462_EDDWipeSampling_model,
+    PID_4462_Events_model,
+    PID_4462_Field_XRF_model,
+    PID_4462_Instruments_model,
+    PID_4462_LabAnalyses_model,
+    PID_4462_LabResults_model,
+    PID_4462_Location_model,
+    PID_4462_Monitoring_model,
+    PID_4462_PropertyInfo_model,
+    PID_4462_PropertyOccupant_model,
+    PID_4462_refAnalytes_model,
+    PID_4462_refLabLst_model,
+    PID_4462_refMatrixLst_model,
+    PID_4462_refNames_model,
+    PID_4462_refPickLst_model,
+    PID_4462_refSGenus_model,
+    PID_4462_Samples_model,
+    PID_4462_SamplesAir_model,
+    PID_4462_SamplesBiota_model,
+    PID_4462_SamplesMeasurements_model,
+    PID_4462_SamplesSoil_model,
+    PID_4462_SamplesSoilGas_model,
+    PID_4462_SamplesTags_model,
+    PID_4462_SamplesWater_model,
+    PID_4462_SamplesWipe_model,
+    PID_4462_Site_model,
+    PID_4462_sysDataColumn_model,
+    PID_4462_sysDataColumnLayout_model,
+    PID_4462_sysDataLabel_model,
+    PID_4462_sysDataLabelLines_model,
+    PID_4462_sysDataLabelLst_model,
+    PID_4462_sysDataMap_model,
+    PID_4462_sysDataMapCol_model,
+    PID_4462_sysDataRpt_model,
+    PID_4462_sysDataViews_model,
+    PID_4462_sysKMLMap_model,
+    PID_4462_sysKMLMapClass_model,
+    PID_4462_sysLookupLst_model,
+    PID_4462_sysTableLst_model,
+    PID_4462_sysTaskGroups_model,
+    PID_4462_sysTaskLst_model,
+    PID_4462_sysTasks_model,
+    PID_4462_ver_ScribeTemplate_model,
+    PID_4462_vv_General_model,
+    PID_4462_vv_Geology_model,
+    PID_4462_vv_LabResults_model,
+    PID_4462_vv_Mine_model,
+    PID_4489_ActionLevels_model,
+    PID_4489_COC_model,
+    PID_4489_EDDAirSampling_model,
+    PID_4489_EDDBiotaSampling_model,
+    PID_4489_EDDLabAnalyses_model,
+    PID_4489_EDDMonitoringData_model,
+    PID_4489_EDDProperty_model,
+    PID_4489_EDDSoilGasSampling_model,
+    PID_4489_EDDSoilSampling_model,
+    PID_4489_EDDWaterSampling_model,
+    PID_4489_EDDWipeSampling_model,
+    PID_4489_Events_model,
+    PID_4489_Instruments_model,
+    PID_4489_LabAnalyses_model,
+    PID_4489_LabResults_model,
+    PID_4489_Location_model,
+    PID_4489_Monitoring_model,
+    PID_4489_PropertyInfo_model,
+    PID_4489_PropertyOccupant_model,
+    PID_4489_refAnalytes_model,
+    PID_4489_refLabLst_model,
+    PID_4489_refMatrixLst_model,
+    PID_4489_refNames_model,
+    PID_4489_refPickLst_model,
+    PID_4489_refSGenus_model,
+    PID_4489_Samples_model,
+    PID_4489_SamplesAir_model,
+    PID_4489_SamplesBiota_model,
+    PID_4489_SamplesMeasurements_model,
+    PID_4489_SamplesSoil_model,
+    PID_4489_SamplesSoilGas_model,
+    PID_4489_SamplesTags_model,
+    PID_4489_SamplesWater_model,
+    PID_4489_SamplesWipe_model,
+    PID_4489_Site_model,
+    PID_4489_sysDataColumn_model,
+    PID_4489_sysDataColumnLayout_model,
+    PID_4489_sysDataLabel_model,
+    PID_4489_sysDataLabelLines_model,
+    PID_4489_sysDataLabelLst_model,
+    PID_4489_sysDataMap_model,
+    PID_4489_sysDataMapCol_model,
+    PID_4489_sysDataRpt_model,
+    PID_4489_sysDataViews_model,
+    PID_4489_sysKMLMap_model,
+    PID_4489_sysKMLMapClass_model,
+    PID_4489_sysLookupLst_model,
+    PID_4489_sysTableLst_model,
+    PID_4489_sysTaskGroups_model,
+    PID_4489_sysTaskLst_model,
+    PID_4489_sysTasks_model,
+    PID_4493_ActionLevels_model,
+    PID_4493_COC_model,
+    PID_4493_EDDAirSampling_model,
+    PID_4493_EDDBiotaSampling_model,
+    PID_4493_EDDLabAnalyses_model,
+    PID_4493_EDDMonitoringData_model,
+    PID_4493_EDDProperty_model,
+    PID_4493_EDDSoilGasSampling_model,
+    PID_4493_EDDSoilSampling_model,
+    PID_4493_EDDWaterSampling_model,
+    PID_4493_EDDWipeSampling_model,
+    PID_4493_Events_model,
+    PID_4493_Instruments_model,
+    PID_4493_LabAnalyses_model,
+    PID_4493_LabResults_model,
+    PID_4493_Location_model,
+    PID_4493_Monitoring_model,
+    PID_4493_PropertyInfo_model,
+    PID_4493_PropertyOccupant_model,
+    PID_4493_R9_refUnitConversion_model,
+    PID_4493_refAnalytes_model,
+    PID_4493_refLabLst_model,
+    PID_4493_refMatrixLst_model,
+    PID_4493_refNames_model,
+    PID_4493_refPickLst_model,
+    PID_4493_refSGenus_model,
+    PID_4493_Samples_model,
+    PID_4493_SamplesAir_model,
+    PID_4493_SamplesBiota_model,
+    PID_4493_SamplesMeasurements_model,
+    PID_4493_SamplesSoil_model,
+    PID_4493_SamplesSoilGas_model,
+    PID_4493_SamplesTags_model,
+    PID_4493_SamplesWater_model,
+    PID_4493_SamplesWipe_model,
+    PID_4493_Site_model,
+    PID_4493_sysDataColumn_model,
+    PID_4493_sysDataColumnLayout_model,
+    PID_4493_sysDataLabel_model,
+    PID_4493_sysDataLabelLines_model,
+    PID_4493_sysDataLabelLst_model,
+    PID_4493_sysDataMap_model,
+    PID_4493_sysDataMapCol_model,
+    PID_4493_sysDataRpt_model,
+    PID_4493_sysDataViews_model,
+    PID_4493_sysKMLMap_model,
+    PID_4493_sysKMLMapClass_model,
+    PID_4493_sysLookupLst_model,
+    PID_4493_sysTableLst_model,
+    PID_4493_sysTaskGroups_model,
+    PID_4493_sysTaskLst_model,
+    PID_4493_sysTasks_model,
+    PID_4494_ActionLevels_model,
+    PID_4494_COC_model,
+    PID_4494_EDDAirSampling_model,
+    PID_4494_EDDBiotaSampling_model,
+    PID_4494_EDDLabAnalyses_model,
+    PID_4494_EDDMonitoringData_model,
+    PID_4494_EDDProperty_model,
+    PID_4494_EDDSoilGasSampling_model,
+    PID_4494_EDDSoilSampling_model,
+    PID_4494_EDDWaterSampling_model,
+    PID_4494_EDDWipeSampling_model,
+    PID_4494_Events_model,
+    PID_4494_Instruments_model,
+    PID_4494_LabAnalyses_model,
+    PID_4494_LabResults_model,
+    PID_4494_Location_model,
+    PID_4494_Monitoring_model,
+    PID_4494_PropertyInfo_model,
+    PID_4494_PropertyOccupant_model,
+    PID_4494_refAnalytes_model,
+    PID_4494_refLabLst_model,
+    PID_4494_refMatrixLst_model,
+    PID_4494_refNames_model,
+    PID_4494_refPickLst_model,
+    PID_4494_refSGenus_model,
+    PID_4494_Samples_model,
+    PID_4494_SamplesAir_model,
+    PID_4494_SamplesBiota_model,
+    PID_4494_SamplesMeasurements_model,
+    PID_4494_SamplesSoil_model,
+    PID_4494_SamplesSoilGas_model,
+    PID_4494_SamplesTags_model,
+    PID_4494_SamplesWater_model,
+    PID_4494_SamplesWipe_model,
+    PID_4494_Site_model,
+    PID_4494_sysDataColumn_model,
+    PID_4494_sysDataColumnLayout_model,
+    PID_4494_sysDataLabel_model,
+    PID_4494_sysDataLabelLines_model,
+    PID_4494_sysDataLabelLst_model,
+    PID_4494_sysDataMap_model,
+    PID_4494_sysDataMapCol_model,
+    PID_4494_sysDataRpt_model,
+    PID_4494_sysDataViews_model,
+    PID_4494_sysKMLMap_model,
+    PID_4494_sysKMLMapClass_model,
+    PID_4494_sysLookupLst_model,
+    PID_4494_sysTableLst_model,
+    PID_4494_sysTaskGroups_model,
+    PID_4494_sysTaskLst_model,
+    PID_4494_sysTasks_model,
+    PID_4494_TestPingTable_model,
+    PID_4500_Sawmill_EDD_model,
+    PID_4500_Sawmill_Locations_model,
+    PID_4500_Sawmill_Samples_model,
+    PID_4500_ActionLevels_model,
+    PID_4500_COC_model,
+    PID_4500_EDDAirSampling_model,
+    PID_4500_EDDBiotaSampling_model,
+    PID_4500_EDDLabAnalyses_model,
+    PID_4500_EDDMonitoringData_model,
+    PID_4500_EDDProperty_model,
+    PID_4500_EDDSoilGasSampling_model,
+    PID_4500_EDDSoilSampling_model,
+    PID_4500_EDDWaterSampling_model,
+    PID_4500_EDDWipeSampling_model,
+    PID_4500_Events_model,
+    PID_4500_Instruments_model,
+    PID_4500_LabAnalyses_model,
+    PID_4500_LabResults_model,
+    PID_4500_Location_model,
+    PID_4500_Monitoring_model,
+    PID_4500_PropertyInfo_model,
+    PID_4500_PropertyOccupant_model,
+    PID_4500_R9_refUnitConversion_model,
+    PID_4500_refAnalytes_model,
+    PID_4500_refLabLst_model,
+    PID_4500_refMatrixLst_model,
+    PID_4500_refNames_model,
+    PID_4500_refPickLst_model,
+    PID_4500_refSGenus_model,
+    PID_4500_Samples_model,
+    PID_4500_SamplesAir_model,
+    PID_4500_SamplesBiota_model,
+    PID_4500_SamplesMeasurements_model,
+    PID_4500_SamplesSoil_model,
+    PID_4500_SamplesSoilGas_model,
+    PID_4500_SamplesTags_model,
+    PID_4500_SamplesWater_model,
+    PID_4500_SamplesWipe_model,
+    PID_4500_Site_model,
+    PID_4500_sysDataColumn_model,
+    PID_4500_sysDataColumnLayout_model,
+    PID_4500_sysDataLabel_model,
+    PID_4500_sysDataLabelLines_model,
+    PID_4500_sysDataLabelLst_model,
+    PID_4500_sysDataMap_model,
+    PID_4500_sysDataMapCol_model,
+    PID_4500_sysDataRpt_model,
+    PID_4500_sysDataViews_model,
+    PID_4500_sysKMLMap_model,
+    PID_4500_sysKMLMapClass_model,
+    PID_4500_sysLookupLst_model,
+    PID_4500_sysTableLst_model,
+    PID_4500_sysTaskGroups_model,
+    PID_4500_sysTaskLst_model,
+    PID_4500_sysTasks_model,
+    PID_4510_ActionLevels_model,
+    PID_4510_COC_model,
+    PID_4510_EDDAirSampling_model,
+    PID_4510_EDDBiotaSampling_model,
+    PID_4510_EDDLabAnalyses_model,
+    PID_4510_EDDMonitoringData_model,
+    PID_4510_EDDProperty_model,
+    PID_4510_EDDSoilGasSampling_model,
+    PID_4510_EDDSoilSampling_model,
+    PID_4510_EDDWaterSampling_model,
+    PID_4510_EDDWipeSampling_model,
+    PID_4510_Events_model,
+    PID_4510_Instruments_model,
+    PID_4510_LabAnalyses_model,
+    PID_4510_LabResults_model,
+    PID_4510_Location_model,
+    PID_4510_Monitoring_model,
+    PID_4510_PropertyInfo_model,
+    PID_4510_PropertyOccupant_model,
+    PID_4510_R9_refUnitConversion_model,
+    PID_4510_refAnalytes_model,
+    PID_4510_refLabLst_model,
+    PID_4510_refMatrixLst_model,
+    PID_4510_refNames_model,
+    PID_4510_refPickLst_model,
+    PID_4510_refSGenus_model,
+    PID_4510_Samples_model,
+    PID_4510_SamplesAir_model,
+    PID_4510_SamplesBiota_model,
+    PID_4510_SamplesMeasurements_model,
+    PID_4510_SamplesSoil_model,
+    PID_4510_SamplesSoilGas_model,
+    PID_4510_SamplesTags_model,
+    PID_4510_SamplesWater_model,
+    PID_4510_SamplesWipe_model,
+    PID_4510_Site_model,
+    PID_4510_sysDataColumn_model,
+    PID_4510_sysDataColumnLayout_model,
+    PID_4510_sysDataLabel_model,
+    PID_4510_sysDataLabelLines_model,
+    PID_4510_sysDataLabelLst_model,
+    PID_4510_sysDataMap_model,
+    PID_4510_sysDataMapCol_model,
+    PID_4510_sysDataRpt_model,
+    PID_4510_sysDataViews_model,
+    PID_4510_sysKMLMap_model,
+    PID_4510_sysKMLMapClass_model,
+    PID_4510_sysLookupLst_model,
+    PID_4510_sysTableLst_model,
+    PID_4510_sysTaskGroups_model,
+    PID_4510_sysTaskLst_model,
+    PID_4510_sysTasks_model,
+    PID_4514_ActionLevels_model,
+    PID_4514_COC_model,
+    PID_4514_EDDAirSampling_model,
+    PID_4514_EDDBiotaSampling_model,
+    PID_4514_EDDLabAnalyses_model,
+    PID_4514_EDDMonitoringData_model,
+    PID_4514_EDDProperty_model,
+    PID_4514_EDDSoilGasSampling_model,
+    PID_4514_EDDSoilSampling_model,
+    PID_4514_EDDWaterSampling_model,
+    PID_4514_EDDWipeSampling_model,
+    PID_4514_Events_model,
+    PID_4514_Instruments_model,
+    PID_4514_LabAnalyses_model,
+    PID_4514_LabResults_model,
+    PID_4514_Location_model,
+    PID_4514_Monitoring_model,
+    PID_4514_PropertyInfo_model,
+    PID_4514_PropertyOccupant_model,
+    PID_4514_refAnalytes_model,
+    PID_4514_refLabLst_model,
+    PID_4514_refMatrixLst_model,
+    PID_4514_refNames_model,
+    PID_4514_refPickLst_model,
+    PID_4514_refSGenus_model,
+    PID_4514_Samples_model,
+    PID_4514_SamplesAir_model,
+    PID_4514_SamplesBiota_model,
+    PID_4514_SamplesMeasurements_model,
+    PID_4514_SamplesSoil_model,
+    PID_4514_SamplesSoilGas_model,
+    PID_4514_SamplesTags_model,
+    PID_4514_SamplesWater_model,
+    PID_4514_SamplesWipe_model,
+    PID_4514_Site_model,
+    PID_4514_sysDataColumn_model,
+    PID_4514_sysDataColumnLayout_model,
+    PID_4514_sysDataLabel_model,
+    PID_4514_sysDataLabelLines_model,
+    PID_4514_sysDataLabelLst_model,
+    PID_4514_sysDataMap_model,
+    PID_4514_sysDataMapCol_model,
+    PID_4514_sysDataRpt_model,
+    PID_4514_sysDataViews_model,
+    PID_4514_sysKMLMap_model,
+    PID_4514_sysKMLMapClass_model,
+    PID_4514_sysLookupLst_model,
+    PID_4514_sysTableLst_model,
+    PID_4514_sysTaskGroups_model,
+    PID_4514_sysTaskLst_model,
+    PID_4514_sysTasks_model,
+    PID_4515_ActionLevels_model,
+    PID_4515_COC_model,
+    PID_4515_EDDAirSampling_model,
+    PID_4515_EDDBiotaSampling_model,
+    PID_4515_EDDLabAnalyses_model,
+    PID_4515_EDDMonitoringData_model,
+    PID_4515_EDDProperty_model,
+    PID_4515_EDDSoilGasSampling_model,
+    PID_4515_EDDSoilSampling_model,
+    PID_4515_EDDWaterSampling_model,
+    PID_4515_EDDWipeSampling_model,
+    PID_4515_Events_model,
+    PID_4515_Instruments_model,
+    PID_4515_LabAnalyses_model,
+    PID_4515_LabResults_model,
+    PID_4515_Location_model,
+    PID_4515_Monitoring_model,
+    PID_4515_PropertyInfo_model,
+    PID_4515_PropertyOccupant_model,
+    PID_4515_refAnalytes_model,
+    PID_4515_refLabLst_model,
+    PID_4515_refMatrixLst_model,
+    PID_4515_refNames_model,
+    PID_4515_refPickLst_model,
+    PID_4515_refSGenus_model,
+    PID_4515_Samples_model,
+    PID_4515_SamplesAir_model,
+    PID_4515_SamplesBiota_model,
+    PID_4515_SamplesMeasurements_model,
+    PID_4515_SamplesSoil_model,
+    PID_4515_SamplesSoilGas_model,
+    PID_4515_SamplesTags_model,
+    PID_4515_SamplesWater_model,
+    PID_4515_SamplesWipe_model,
+    PID_4515_Site_model,
+    PID_4515_sysDataColumn_model,
+    PID_4515_sysDataColumnLayout_model,
+    PID_4515_sysDataLabel_model,
+    PID_4515_sysDataLabelLines_model,
+    PID_4515_sysDataLabelLst_model,
+    PID_4515_sysDataMap_model,
+    PID_4515_sysDataMapCol_model,
+    PID_4515_sysDataRpt_model,
+    PID_4515_sysDataViews_model,
+    PID_4515_sysKMLMap_model,
+    PID_4515_sysKMLMapClass_model,
+    PID_4515_sysLookupLst_model,
+    PID_4515_sysTableLst_model,
+    PID_4515_sysTaskGroups_model,
+    PID_4515_sysTaskLst_model,
+    PID_4515_sysTasks_model,
+    PID_4516_ActionLevels_model,
+    PID_4516_COC_model,
+    PID_4516_EDDAirSampling_model,
+    PID_4516_EDDBiotaSampling_model,
+    PID_4516_EDDLabAnalyses_model,
+    PID_4516_EDDMonitoringData_model,
+    PID_4516_EDDProperty_model,
+    PID_4516_EDDSoilGasSampling_model,
+    PID_4516_EDDSoilSampling_model,
+    PID_4516_EDDWaterSampling_model,
+    PID_4516_EDDWipeSampling_model,
+    PID_4516_Events_model,
+    PID_4516_Instruments_model,
+    PID_4516_LabAnalyses_model,
+    PID_4516_LabResults_model,
+    PID_4516_Location_model,
+    PID_4516_Monitoring_model,
+    PID_4516_PropertyInfo_model,
+    PID_4516_PropertyOccupant_model,
+    PID_4516_refAnalytes_model,
+    PID_4516_refLabLst_model,
+    PID_4516_refMatrixLst_model,
+    PID_4516_refNames_model,
+    PID_4516_refPickLst_model,
+    PID_4516_refSGenus_model,
+    PID_4516_Samples_model,
+    PID_4516_SamplesAir_model,
+    PID_4516_SamplesBiota_model,
+    PID_4516_SamplesMeasurements_model,
+    PID_4516_SamplesSoil_model,
+    PID_4516_SamplesSoilGas_model,
+    PID_4516_SamplesTags_model,
+    PID_4516_SamplesWater_model,
+    PID_4516_SamplesWipe_model,
+    PID_4516_Site_model,
+    PID_4516_sysDataColumn_model,
+    PID_4516_sysDataColumnLayout_model,
+    PID_4516_sysDataLabel_model,
+    PID_4516_sysDataLabelLines_model,
+    PID_4516_sysDataLabelLst_model,
+    PID_4516_sysDataMap_model,
+    PID_4516_sysDataMapCol_model,
+    PID_4516_sysDataRpt_model,
+    PID_4516_sysDataViews_model,
+    PID_4516_sysKMLMap_model,
+    PID_4516_sysKMLMapClass_model,
+    PID_4516_sysLookupLst_model,
+    PID_4516_sysTableLst_model,
+    PID_4516_sysTaskGroups_model,
+    PID_4516_sysTaskLst_model,
+    PID_4516_sysTasks_model,
+    PID_4518_ActionLevels_model,
+    PID_4518_COC_model,
+    PID_4518_EDDAirSampling_model,
+    PID_4518_EDDBiotaSampling_model,
+    PID_4518_EDDLabAnalyses_model,
+    PID_4518_EDDMonitoringData_model,
+    PID_4518_EDDProperty_model,
+    PID_4518_EDDSoilGasSampling_model,
+    PID_4518_EDDSoilSampling_model,
+    PID_4518_EDDWaterSampling_model,
+    PID_4518_EDDWipeSampling_model,
+    PID_4518_Events_model,
+    PID_4518_Instruments_model,
+    PID_4518_LabAnalyses_model,
+    PID_4518_LabResults_model,
+    PID_4518_Location_model,
+    PID_4518_Monitoring_model,
+    PID_4518_PropertyInfo_model,
+    PID_4518_PropertyOccupant_model,
+    PID_4518_R9_refUnitConversion_model,
+    PID_4518_refAnalytes_model,
+    PID_4518_refLabLst_model,
+    PID_4518_refMatrixLst_model,
+    PID_4518_refNames_model,
+    PID_4518_refPickLst_model,
+    PID_4518_refSGenus_model,
+    PID_4518_Samples_model,
+    PID_4518_SamplesAir_model,
+    PID_4518_SamplesBiota_model,
+    PID_4518_SamplesMeasurements_model,
+    PID_4518_SamplesSoil_model,
+    PID_4518_SamplesSoilGas_model,
+    PID_4518_SamplesTags_model,
+    PID_4518_SamplesWater_model,
+    PID_4518_SamplesWipe_model,
+    PID_4518_Site_model,
+    PID_4518_sysDataColumn_model,
+    PID_4518_sysDataColumnLayout_model,
+    PID_4518_sysDataLabel_model,
+    PID_4518_sysDataLabelLines_model,
+    PID_4518_sysDataLabelLst_model,
+    PID_4518_sysDataMap_model,
+    PID_4518_sysDataMapCol_model,
+    PID_4518_sysDataRpt_model,
+    PID_4518_sysDataViews_model,
+    PID_4518_sysKMLMap_model,
+    PID_4518_sysKMLMapClass_model,
+    PID_4518_sysLookupLst_model,
+    PID_4518_sysTableLst_model,
+    PID_4518_sysTaskGroups_model,
+    PID_4518_sysTaskLst_model,
+    PID_4518_sysTasks_model,
+    PID_4528_ActionLevels_model,
+    PID_4528_BsaIL_model,
+    PID_4528_BsaSites_model,
+    PID_4528_COC_model,
+    PID_4528_EDDAirSampling_model,
+    PID_4528_EDDBiotaSampling_model,
+    PID_4528_EDDLabAnalyses_model,
+    PID_4528_EDDMonitoringData_model,
+    PID_4528_EDDProperty_model,
+    PID_4528_EDDSoilGasSampling_model,
+    PID_4528_EDDSoilSampling_model,
+    PID_4528_EDDWaterSampling_model,
+    PID_4528_EDDWipeSampling_model,
+    PID_4528_Events_model,
+    PID_4528_Instruments_model,
+    PID_4528_LabAnalyses_model,
+    PID_4528_LabResults_model,
+    PID_4528_Location_model,
+    PID_4528_Monitoring_model,
+    PID_4528_PropertyInfo_model,
+    PID_4528_PropertyOccupant_model,
+    PID_4528_refAnalytes_model,
+    PID_4528_refLabLst_model,
+    PID_4528_refMatrixLst_model,
+    PID_4528_refNames_model,
+    PID_4528_refPickLst_model,
+    PID_4528_refSGenus_model,
+    PID_4528_Samples_model,
+    PID_4528_SamplesAir_model,
+    PID_4528_SamplesBiota_model,
+    PID_4528_SamplesMeasurements_model,
+    PID_4528_SamplesSoil_model,
+    PID_4528_SamplesSoilGas_model,
+    PID_4528_SamplesTags_model,
+    PID_4528_SamplesWater_model,
+    PID_4528_SamplesWipe_model,
+    PID_4528_Site_model,
+    PID_4528_sysDataColumn_model,
+    PID_4528_sysDataColumnLayout_model,
+    PID_4528_sysDataLabel_model,
+    PID_4528_sysDataLabelLines_model,
+    PID_4528_sysDataLabelLst_model,
+    PID_4528_sysDataMap_model,
+    PID_4528_sysDataMapCol_model,
+    PID_4528_sysDataRpt_model,
+    PID_4528_sysDataViews_model,
+    PID_4528_sysKMLMap_model,
+    PID_4528_sysKMLMapClass_model,
+    PID_4528_sysLookupLst_model,
+    PID_4528_sysTableLst_model,
+    PID_4528_sysTaskGroups_model,
+    PID_4528_sysTaskLst_model,
+    PID_4528_sysTasks_model,
+    PID_4528_ver_ScribeTemplate_model,
+    PID_4528_vv_General_model,
+    PID_4528_vv_Geology_model,
+    PID_4528_vv_LabResults_model,
+    PID_4528_vv_Mine_model,
+    PID_4553_ActionLevels_model,
+    PID_4553_COC_model,
+    PID_4553_EDDAirSampling_model,
+    PID_4553_EDDBiotaSampling_model,
+    PID_4553_EDDLabAnalyses_model,
+    PID_4553_EDDMonitoringData_model,
+    PID_4553_EDDProperty_model,
+    PID_4553_EDDSoilGasSampling_model,
+    PID_4553_EDDSoilSampling_model,
+    PID_4553_EDDWaterSampling_model,
+    PID_4553_EDDWipeSampling_model,
+    PID_4553_Events_model,
+    PID_4553_Instruments_model,
+    PID_4553_LabAnalyses_model,
+    PID_4553_LabResults_model,
+    PID_4553_Location_model,
+    PID_4553_Location_old_model,
+    PID_4553_Monitoring_model,
+    PID_4553_PropertyInfo_model,
+    PID_4553_PropertyOccupant_model,
+    PID_4553_RECORD_LINEAGE_model,
+    PID_4553_refAnalytes_model,
+    PID_4553_refLabLst_model,
+    PID_4553_refMatrixLst_model,
+    PID_4553_refNames_model,
+    PID_4553_refPickLst_model,
+    PID_4553_refSGenus_model,
+    PID_4553_Samples_model,
+    PID_4553_SamplesAir_model,
+    PID_4553_SamplesBiota_model,
+    PID_4553_SamplesMeasurements_model,
+    PID_4553_SamplesSoil_model,
+    PID_4553_SamplesSoilGas_model,
+    PID_4553_SamplesTags_model,
+    PID_4553_SamplesWater_model,
+    PID_4553_SamplesWipe_model,
+    PID_4553_Site_model,
+    PID_4553_sysDataColumn_model,
+    PID_4553_sysDataColumnLayout_model,
+    PID_4553_sysDataLabel_model,
+    PID_4553_sysDataLabelLines_model,
+    PID_4553_sysDataLabelLst_model,
+    PID_4553_sysDataMap_model,
+    PID_4553_sysDataMapCol_model,
+    PID_4553_sysDataRpt_model,
+    PID_4553_sysDataViews_model,
+    PID_4553_sysKMLMap_model,
+    PID_4553_sysKMLMapClass_model,
+    PID_4553_sysLookupLst_model,
+    PID_4553_sysTableLst_model,
+    PID_4553_sysTaskGroups_model,
+    PID_4553_sysTaskLst_model,
+    PID_4553_sysTasks_model,
+    PID_4556_ActionLevels_model,
+    PID_4556_COC_model,
+    PID_4556_EDDAirSampling_model,
+    PID_4556_EDDBiotaSampling_model,
+    PID_4556_EDDLabAnalyses_model,
+    PID_4556_EDDMonitoringData_model,
+    PID_4556_EDDProperty_model,
+    PID_4556_EDDSoilGasSampling_model,
+    PID_4556_EDDSoilSampling_model,
+    PID_4556_EDDWaterSampling_model,
+    PID_4556_EDDWipeSampling_model,
+    PID_4556_Events_model,
+    PID_4556_Instruments_model,
+    PID_4556_LabAnalyses_model,
+    PID_4556_LabResults_model,
+    PID_4556_Location_model,
+    PID_4556_Monitoring_model,
+    PID_4556_PropertyInfo_model,
+    PID_4556_PropertyOccupant_model,
+    PID_4556_RECORD_LINEAGE_model,
+    PID_4556_refAnalytes_model,
+    PID_4556_refLabLst_model,
+    PID_4556_refMatrixLst_model,
+    PID_4556_refNames_model,
+    PID_4556_refPickLst_model,
+    PID_4556_refSGenus_model,
+    PID_4556_Samples_model,
+    PID_4556_SamplesAir_model,
+    PID_4556_SamplesBiota_model,
+    PID_4556_SamplesMeasurements_model,
+    PID_4556_SamplesSoil_model,
+    PID_4556_SamplesSoilGas_model,
+    PID_4556_SamplesTags_model,
+    PID_4556_SamplesWater_model,
+    PID_4556_SamplesWipe_model,
+    PID_4556_Site_model,
+    PID_4556_sysDataColumn_model,
+    PID_4556_sysDataColumnLayout_model,
+    PID_4556_sysDataLabel_model,
+    PID_4556_sysDataLabelLines_model,
+    PID_4556_sysDataLabelLst_model,
+    PID_4556_sysDataMap_model,
+    PID_4556_sysDataMapCol_model,
+    PID_4556_sysDataRpt_model,
+    PID_4556_sysDataViews_model,
+    PID_4556_sysKMLMap_model,
+    PID_4556_sysKMLMapClass_model,
+    PID_4556_sysLookupLst_model,
+    PID_4556_sysTableLst_model,
+    PID_4556_sysTaskGroups_model,
+    PID_4556_sysTaskLst_model,
+    PID_4556_sysTasks_model,
+    PID_4563_ActionLevels_model,
+    PID_4563_COC_model,
+    PID_4563_EDDAirSampling_model,
+    PID_4563_EDDBiotaSampling_model,
+    PID_4563_EDDLabAnalyses_model,
+    PID_4563_EDDMonitoringData_model,
+    PID_4563_EDDProperty_model,
+    PID_4563_EDDSoilGasSampling_model,
+    PID_4563_EDDSoilSampling_model,
+    PID_4563_EDDWaterSampling_model,
+    PID_4563_EDDWipeSampling_model,
+    PID_4563_Events_model,
+    PID_4563_Instruments_model,
+    PID_4563_LabAnalyses_model,
+    PID_4563_LabResults_model,
+    PID_4563_Location_model,
+    PID_4563_Monitoring_model,
+    PID_4563_PropertyInfo_model,
+    PID_4563_PropertyOccupant_model,
+    PID_4563_refAnalytes_model,
+    PID_4563_refLabLst_model,
+    PID_4563_refMatrixLst_model,
+    PID_4563_refNames_model,
+    PID_4563_refPickLst_model,
+    PID_4563_refSGenus_model,
+    PID_4563_Samples_model,
+    PID_4563_SamplesAir_model,
+    PID_4563_SamplesBiota_model,
+    PID_4563_SamplesMeasurements_model,
+    PID_4563_SamplesSoil_model,
+    PID_4563_SamplesSoilGas_model,
+    PID_4563_SamplesTags_model,
+    PID_4563_SamplesWater_model,
+    PID_4563_SamplesWipe_model,
+    PID_4563_Site_model,
+    PID_4563_sysDataColumn_model,
+    PID_4563_sysDataColumnLayout_model,
+    PID_4563_sysDataLabel_model,
+    PID_4563_sysDataLabelLines_model,
+    PID_4563_sysDataLabelLst_model,
+    PID_4563_sysDataMap_model,
+    PID_4563_sysDataMapCol_model,
+    PID_4563_sysDataRpt_model,
+    PID_4563_sysDataViews_model,
+    PID_4563_sysKMLMap_model,
+    PID_4563_sysKMLMapClass_model,
+    PID_4563_sysLookupLst_model,
+    PID_4563_sysTableLst_model,
+    PID_4563_sysTaskGroups_model,
+    PID_4563_sysTaskLst_model,
+    PID_4563_sysTasks_model,
+    PID_4563_ver_ScribeTemplate_model,
+    PID_4563_vv_General_model,
+    PID_4563_vv_Geology_model,
+    PID_4563_vv_LabResults_model,
+    PID_4563_vv_Mine_model,
+    PID_4564_ActionLevels_model,
+    PID_4564_COC_model,
+    PID_4564_EDDAirSampling_model,
+    PID_4564_EDDBiotaSampling_model,
+    PID_4564_EDDLabAnalyses_model,
+    PID_4564_EDDMonitoringData_model,
+    PID_4564_EDDProperty_model,
+    PID_4564_EDDSoilGasSampling_model,
+    PID_4564_EDDSoilSampling_model,
+    PID_4564_EDDWaterSampling_model,
+    PID_4564_EDDWipeSampling_model,
+    PID_4564_Events_model,
+    PID_4564_Field_XRF_model,
+    PID_4564_Instruments_model,
+    PID_4564_LabAnalyses_model,
+    PID_4564_LabResults_model,
+    PID_4564_Location_model,
+    PID_4564_Monitoring_model,
+    PID_4564_PropertyInfo_model,
+    PID_4564_PropertyOccupant_model,
+    PID_4564_refAnalytes_model,
+    PID_4564_refLabLst_model,
+    PID_4564_refMatrixLst_model,
+    PID_4564_refNames_model,
+    PID_4564_refPickLst_model,
+    PID_4564_refSGenus_model,
+    PID_4564_Samples_model,
+    PID_4564_SamplesAir_model,
+    PID_4564_SamplesBiota_model,
+    PID_4564_SamplesMeasurements_model,
+    PID_4564_SamplesSoil_model,
+    PID_4564_SamplesSoilGas_model,
+    PID_4564_SamplesTags_model,
+    PID_4564_SamplesWater_model,
+    PID_4564_SamplesWipe_model,
+    PID_4564_Site_model,
+    PID_4564_sysDataColumn_model,
+    PID_4564_sysDataColumnLayout_model,
+    PID_4564_sysDataLabel_model,
+    PID_4564_sysDataLabelLines_model,
+    PID_4564_sysDataLabelLst_model,
+    PID_4564_sysDataMap_model,
+    PID_4564_sysDataMapCol_model,
+    PID_4564_sysDataRpt_model,
+    PID_4564_sysDataViews_model,
+    PID_4564_sysKMLMap_model,
+    PID_4564_sysKMLMapClass_model,
+    PID_4564_sysLookupLst_model,
+    PID_4564_sysTableLst_model,
+    PID_4564_sysTaskGroups_model,
+    PID_4564_sysTaskLst_model,
+    PID_4564_sysTasks_model,
+    PID_4564_ver_ScribeTemplate_model,
+    PID_4564_vv_General_model,
+    PID_4564_vv_Geology_model,
+    PID_4564_vv_LabResults_model,
+    PID_4564_vv_Mine_model,
+    PID_4567_ActionLevels_model,
+    PID_4567_COC_model,
+    PID_4567_EDDAirSampling_model,
+    PID_4567_EDDBiotaSampling_model,
+    PID_4567_EDDLabAnalyses_model,
+    PID_4567_EDDMonitoringData_model,
+    PID_4567_EDDProperty_model,
+    PID_4567_EDDSoilGasSampling_model,
+    PID_4567_EDDSoilSampling_model,
+    PID_4567_EDDWaterSampling_model,
+    PID_4567_EDDWipeSampling_model,
+    PID_4567_Events_model,
+    PID_4567_Instruments_model,
+    PID_4567_LabAnalyses_model,
+    PID_4567_LabResults_model,
+    PID_4567_Location_model,
+    PID_4567_Monitoring_model,
+    PID_4567_PropertyInfo_model,
+    PID_4567_PropertyOccupant_model,
+    PID_4567_refAnalytes_model,
+    PID_4567_refLabLst_model,
+    PID_4567_refMatrixLst_model,
+    PID_4567_refNames_model,
+    PID_4567_refPickLst_model,
+    PID_4567_refSGenus_model,
+    PID_4567_Samples_model,
+    PID_4567_SamplesAir_model,
+    PID_4567_SamplesBiota_model,
+    PID_4567_SamplesMeasurements_model,
+    PID_4567_SamplesSoil_model,
+    PID_4567_SamplesSoilGas_model,
+    PID_4567_SamplesTags_model,
+    PID_4567_SamplesWater_model,
+    PID_4567_SamplesWipe_model,
+    PID_4567_Site_model,
+    PID_4567_sysDataColumn_model,
+    PID_4567_sysDataColumnLayout_model,
+    PID_4567_sysDataLabel_model,
+    PID_4567_sysDataLabelLines_model,
+    PID_4567_sysDataLabelLst_model,
+    PID_4567_sysDataMap_model,
+    PID_4567_sysDataMapCol_model,
+    PID_4567_sysDataRpt_model,
+    PID_4567_sysDataViews_model,
+    PID_4567_sysKMLMap_model,
+    PID_4567_sysKMLMapClass_model,
+    PID_4567_sysLookupLst_model,
+    PID_4567_sysTableLst_model,
+    PID_4567_sysTaskGroups_model,
+    PID_4567_sysTaskLst_model,
+    PID_4567_sysTasks_model,
+    PID_4567_ver_ScribeTemplate_model,
+    PID_4567_vv_General_model,
+    PID_4567_vv_Geology_model,
+    PID_4567_vv_LabResults_model,
+    PID_4567_vv_Mine_model,
+    PID_4578_ActionLevels_model,
+    PID_4578_COC_model,
+    PID_4578_DustTrak_model,
+    PID_4578_EDDAirSampling_model,
+    PID_4578_EDDBiotaSampling_model,
+    PID_4578_EDDLabAnalyses_model,
+    PID_4578_EDDMonitoringData_model,
+    PID_4578_EDDProperty_model,
+    PID_4578_EDDSoilGasSampling_model,
+    PID_4578_EDDSoilSampling_model,
+    PID_4578_EDDWaterSampling_model,
+    PID_4578_EDDWipeSampling_model,
+    PID_4578_Events_model,
+    PID_4578_Instruments_model,
+    PID_4578_LabAnalyses_model,
+    PID_4578_LabResults_model,
+    PID_4578_Location_model,
+    PID_4578_Monitoring_model,
+    PID_4578_PropertyInfo_model,
+    PID_4578_PropertyOccupant_model,
+    PID_4578_refAnalytes_model,
+    PID_4578_refLabLst_model,
+    PID_4578_refMatrixLst_model,
+    PID_4578_refNames_model,
+    PID_4578_refPickLst_model,
+    PID_4578_refSGenus_model,
+    PID_4578_Samples_model,
+    PID_4578_SamplesAir_model,
+    PID_4578_SamplesBiota_model,
+    PID_4578_SamplesMeasurements_model,
+    PID_4578_SamplesSoil_model,
+    PID_4578_SamplesSoilGas_model,
+    PID_4578_SamplesTags_model,
+    PID_4578_SamplesWater_model,
+    PID_4578_SamplesWipe_model,
+    PID_4578_Site_model,
+    PID_4578_sysDataColumn_model,
+    PID_4578_sysDataColumnLayout_model,
+    PID_4578_sysDataLabel_model,
+    PID_4578_sysDataLabelLines_model,
+    PID_4578_sysDataLabelLst_model,
+    PID_4578_sysDataMap_model,
+    PID_4578_sysDataMapCol_model,
+    PID_4578_sysDataRpt_model,
+    PID_4578_sysDataViews_model,
+    PID_4578_sysKMLMap_model,
+    PID_4578_sysKMLMapClass_model,
+    PID_4578_sysLookupLst_model,
+    PID_4578_sysTableLst_model,
+    PID_4578_sysTaskGroups_model,
+    PID_4578_sysTaskLst_model,
+    PID_4578_sysTasks_model,
+    PID_4578_ver_ScribeTemplate_model,
+    PID_4578_vv_General_model,
+    PID_4578_vv_Geology_model,
+    PID_4578_vv_LabResults_model,
+    PID_4578_vv_Mine_model,
+    PID_4579_ActionLevels_model,
+    PID_4579_COC_model,
+    PID_4579_EDDAirSampling_model,
+    PID_4579_EDDBiotaSampling_model,
+    PID_4579_EDDLabAnalyses_model,
+    PID_4579_EDDMonitoringData_model,
+    PID_4579_EDDProperty_model,
+    PID_4579_EDDSoilGasSampling_model,
+    PID_4579_EDDSoilSampling_model,
+    PID_4579_EDDWaterSampling_model,
+    PID_4579_EDDWipeSampling_model,
+    PID_4579_Events_model,
+    PID_4579_Instruments_model,
+    PID_4579_LabAnalyses_model,
+    PID_4579_LabResults_model,
+    PID_4579_Location_model,
+    PID_4579_Monitoring_model,
+    PID_4579_PropertyInfo_model,
+    PID_4579_PropertyOccupant_model,
+    PID_4579_refAnalytes_model,
+    PID_4579_refLabLst_model,
+    PID_4579_refMatrixLst_model,
+    PID_4579_refNames_model,
+    PID_4579_refPickLst_model,
+    PID_4579_refSGenus_model,
+    PID_4579_Samples_model,
+    PID_4579_SamplesAir_model,
+    PID_4579_SamplesBiota_model,
+    PID_4579_SamplesMeasurements_model,
+    PID_4579_SamplesSoil_model,
+    PID_4579_SamplesSoilGas_model,
+    PID_4579_SamplesTags_model,
+    PID_4579_SamplesWater_model,
+    PID_4579_SamplesWipe_model,
+    PID_4579_Site_model,
+    PID_4579_sysDataColumn_model,
+    PID_4579_sysDataColumnLayout_model,
+    PID_4579_sysDataLabel_model,
+    PID_4579_sysDataLabelLines_model,
+    PID_4579_sysDataLabelLst_model,
+    PID_4579_sysDataMap_model,
+    PID_4579_sysDataMapCol_model,
+    PID_4579_sysDataRpt_model,
+    PID_4579_sysDataViews_model,
+    PID_4579_sysKMLMap_model,
+    PID_4579_sysKMLMapClass_model,
+    PID_4579_sysLookupLst_model,
+    PID_4579_sysTableLst_model,
+    PID_4579_sysTaskGroups_model,
+    PID_4579_sysTaskLst_model,
+    PID_4579_sysTasks_model,
+    PID_4579_ver_ScribeTemplate_model,
+    PID_4579_vv_General_model,
+    PID_4579_vv_Geology_model,
+    PID_4579_vv_LabResults_model,
+    PID_4579_vv_Mine_model,
+    PID_4580_ActionLevels_model,
+    PID_4580_COC_model,
+    PID_4580_EDDAirSampling_model,
+    PID_4580_EDDBiotaSampling_model,
+    PID_4580_EDDLabAnalyses_model,
+    PID_4580_EDDMonitoringData_model,
+    PID_4580_EDDProperty_model,
+    PID_4580_EDDSoilGasSampling_model,
+    PID_4580_EDDSoilSampling_model,
+    PID_4580_EDDWaterSampling_model,
+    PID_4580_EDDWipeSampling_model,
+    PID_4580_Events_model,
+    PID_4580_Instruments_model,
+    PID_4580_LabAnalyses_model,
+    PID_4580_LabResults_model,
+    PID_4580_Location_model,
+    PID_4580_Monitoring_model,
+    PID_4580_PropertyInfo_model,
+    PID_4580_PropertyOccupant_model,
+    PID_4580_refAnalytes_model,
+    PID_4580_refLabLst_model,
+    PID_4580_refMatrixLst_model,
+    PID_4580_refNames_model,
+    PID_4580_refPickLst_model,
+    PID_4580_refSGenus_model,
+    PID_4580_Samples_model,
+    PID_4580_SamplesAir_model,
+    PID_4580_SamplesBiota_model,
+    PID_4580_SamplesMeasurements_model,
+    PID_4580_SamplesSoil_model,
+    PID_4580_SamplesSoilGas_model,
+    PID_4580_SamplesTags_model,
+    PID_4580_SamplesWater_model,
+    PID_4580_SamplesWipe_model,
+    PID_4580_Site_model,
+    PID_4580_sysDataColumn_model,
+    PID_4580_sysDataColumnLayout_model,
+    PID_4580_sysDataLabel_model,
+    PID_4580_sysDataLabelLines_model,
+    PID_4580_sysDataLabelLst_model,
+    PID_4580_sysDataMap_model,
+    PID_4580_sysDataMapCol_model,
+    PID_4580_sysDataRpt_model,
+    PID_4580_sysDataViews_model,
+    PID_4580_sysKMLMap_model,
+    PID_4580_sysKMLMapClass_model,
+    PID_4580_sysLookupLst_model,
+    PID_4580_sysTableLst_model,
+    PID_4580_sysTaskGroups_model,
+    PID_4580_sysTaskLst_model,
+    PID_4580_sysTasks_model,
+    PID_4581_ActionLevels_model,
+    PID_4581_COC_model,
+    PID_4581_EDDAirSampling_model,
+    PID_4581_EDDBiotaSampling_model,
+    PID_4581_EDDLabAnalyses_model,
+    PID_4581_EDDMonitoringData_model,
+    PID_4581_EDDProperty_model,
+    PID_4581_EDDSoilGasSampling_model,
+    PID_4581_EDDSoilSampling_model,
+    PID_4581_EDDWaterSampling_model,
+    PID_4581_EDDWipeSampling_model,
+    PID_4581_Events_model,
+    PID_4581_Instruments_model,
+    PID_4581_LabAnalyses_model,
+    PID_4581_LabResults_model,
+    PID_4581_Location_model,
+    PID_4581_Monitoring_model,
+    PID_4581_PropertyInfo_model,
+    PID_4581_PropertyOccupant_model,
+    PID_4581_refAnalytes_model,
+    PID_4581_refLabLst_model,
+    PID_4581_refMatrixLst_model,
+    PID_4581_refNames_model,
+    PID_4581_refPickLst_model,
+    PID_4581_refSGenus_model,
+    PID_4581_Samples_model,
+    PID_4581_SamplesAir_model,
+    PID_4581_SamplesBiota_model,
+    PID_4581_SamplesMeasurements_model,
+    PID_4581_SamplesSoil_model,
+    PID_4581_SamplesSoilGas_model,
+    PID_4581_SamplesTags_model,
+    PID_4581_SamplesWater_model,
+    PID_4581_SamplesWipe_model,
+    PID_4581_Site_model,
+    PID_4581_sysDataColumn_model,
+    PID_4581_sysDataColumnLayout_model,
+    PID_4581_sysDataLabel_model,
+    PID_4581_sysDataLabelLines_model,
+    PID_4581_sysDataLabelLst_model,
+    PID_4581_sysDataMap_model,
+    PID_4581_sysDataMapCol_model,
+    PID_4581_sysDataRpt_model,
+    PID_4581_sysDataViews_model,
+    PID_4581_sysKMLMap_model,
+    PID_4581_sysKMLMapClass_model,
+    PID_4581_sysLookupLst_model,
+    PID_4581_sysTableLst_model,
+    PID_4581_sysTaskGroups_model,
+    PID_4581_sysTaskLst_model,
+    PID_4581_sysTasks_model,
+    PID_4585_ActionLevels_model,
+    PID_4585_COC_model,
+    PID_4585_EDDAirSampling_model,
+    PID_4585_EDDBiotaSampling_model,
+    PID_4585_EDDLabAnalyses_model,
+    PID_4585_EDDMonitoringData_model,
+    PID_4585_EDDProperty_model,
+    PID_4585_EDDSoilGasSampling_model,
+    PID_4585_EDDSoilSampling_model,
+    PID_4585_EDDWaterSampling_model,
+    PID_4585_EDDWipeSampling_model,
+    PID_4585_Events_model,
+    PID_4585_Instruments_model,
+    PID_4585_LabAnalyses_model,
+    PID_4585_LabResults_model,
+    PID_4585_Location_model,
+    PID_4585_Monitoring_model,
+    PID_4585_PropertyInfo_model,
+    PID_4585_PropertyOccupant_model,
+    PID_4585_refAnalytes_model,
+    PID_4585_refLabLst_model,
+    PID_4585_refMatrixLst_model,
+    PID_4585_refNames_model,
+    PID_4585_refPickLst_model,
+    PID_4585_refSGenus_model,
+    PID_4585_Samples_model,
+    PID_4585_SamplesAir_model,
+    PID_4585_SamplesBiota_model,
+    PID_4585_SamplesMeasurements_model,
+    PID_4585_SamplesSoil_model,
+    PID_4585_SamplesSoilGas_model,
+    PID_4585_SamplesTags_model,
+    PID_4585_SamplesWater_model,
+    PID_4585_SamplesWipe_model,
+    PID_4585_Site_model,
+    PID_4585_sysDataColumn_model,
+    PID_4585_sysDataColumnLayout_model,
+    PID_4585_sysDataLabel_model,
+    PID_4585_sysDataLabelLines_model,
+    PID_4585_sysDataLabelLst_model,
+    PID_4585_sysDataMap_model,
+    PID_4585_sysDataMapCol_model,
+    PID_4585_sysDataRpt_model,
+    PID_4585_sysDataViews_model,
+    PID_4585_sysKMLMap_model,
+    PID_4585_sysKMLMapClass_model,
+    PID_4585_sysLookupLst_model,
+    PID_4585_sysTableLst_model,
+    PID_4585_sysTaskGroups_model,
+    PID_4585_sysTaskLst_model,
+    PID_4585_sysTasks_model,
+    PID_4590_ActionLevels_model,
+    PID_4590_COC_model,
+    PID_4590_EDDAirSampling_model,
+    PID_4590_EDDBiotaSampling_model,
+    PID_4590_EDDLabAnalyses_model,
+    PID_4590_EDDMonitoringData_model,
+    PID_4590_EDDProperty_model,
+    PID_4590_EDDSoilGasSampling_model,
+    PID_4590_EDDSoilSampling_model,
+    PID_4590_EDDWaterSampling_model,
+    PID_4590_EDDWipeSampling_model,
+    PID_4590_Events_model,
+    PID_4590_Instruments_model,
+    PID_4590_LabAnalyses_model,
+    PID_4590_LabResults_model,
+    PID_4590_Location_model,
+    PID_4590_Monitoring_model,
+    PID_4590_PropertyInfo_model,
+    PID_4590_PropertyOccupant_model,
+    PID_4590_refAnalytes_model,
+    PID_4590_refLabLst_model,
+    PID_4590_refMatrixLst_model,
+    PID_4590_refNames_model,
+    PID_4590_refPickLst_model,
+    PID_4590_refSGenus_model,
+    PID_4590_Samples_model,
+    PID_4590_SamplesAir_model,
+    PID_4590_SamplesBiota_model,
+    PID_4590_SamplesMeasurements_model,
+    PID_4590_SamplesSoil_model,
+    PID_4590_SamplesSoilGas_model,
+    PID_4590_SamplesTags_model,
+    PID_4590_SamplesWater_model,
+    PID_4590_SamplesWipe_model,
+    PID_4590_Site_model,
+    PID_4590_sysDataColumn_model,
+    PID_4590_sysDataColumnLayout_model,
+    PID_4590_sysDataLabel_model,
+    PID_4590_sysDataLabelLines_model,
+    PID_4590_sysDataLabelLst_model,
+    PID_4590_sysDataMap_model,
+    PID_4590_sysDataMapCol_model,
+    PID_4590_sysDataRpt_model,
+    PID_4590_sysDataViews_model,
+    PID_4590_sysKMLMap_model,
+    PID_4590_sysKMLMapClass_model,
+    PID_4590_sysLookupLst_model,
+    PID_4590_sysTableLst_model,
+    PID_4590_sysTaskGroups_model,
+    PID_4590_sysTaskLst_model,
+    PID_4590_sysTasks_model,
+    PID_4596_ActionLevels_model,
+    PID_4596_COC_model,
+    PID_4596_EDDAirSampling_model,
+    PID_4596_EDDBiotaSampling_model,
+    PID_4596_EDDLabAnalyses_model,
+    PID_4596_EDDMonitoringData_model,
+    PID_4596_EDDProperty_model,
+    PID_4596_EDDSoilGasSampling_model,
+    PID_4596_EDDSoilSampling_model,
+    PID_4596_EDDWaterSampling_model,
+    PID_4596_EDDWipeSampling_model,
+    PID_4596_Events_model,
+    PID_4596_Instruments_model,
+    PID_4596_LabAnalyses_model,
+    PID_4596_LabResults_model,
+    PID_4596_Location_model,
+    PID_4596_Monitoring_model,
+    PID_4596_PropertyInfo_model,
+    PID_4596_PropertyOccupant_model,
+    PID_4596_RECORD_LINEAGE_model,
+    PID_4596_refAnalytes_model,
+    PID_4596_refLabLst_model,
+    PID_4596_refMatrixLst_model,
+    PID_4596_refNames_model,
+    PID_4596_refPickLst_model,
+    PID_4596_refSGenus_model,
+    PID_4596_Samples_model,
+    PID_4596_SamplesAir_model,
+    PID_4596_SamplesBiota_model,
+    PID_4596_SamplesMeasurements_model,
+    PID_4596_SamplesSoil_model,
+    PID_4596_SamplesSoilGas_model,
+    PID_4596_SamplesTags_model,
+    PID_4596_SamplesWater_model,
+    PID_4596_SamplesWipe_model,
+    PID_4596_Site_model,
+    PID_4596_sysDataColumn_model,
+    PID_4596_sysDataColumnLayout_model,
+    PID_4596_sysDataLabel_model,
+    PID_4596_sysDataLabelLines_model,
+    PID_4596_sysDataLabelLst_model,
+    PID_4596_sysDataMap_model,
+    PID_4596_sysDataMapCol_model,
+    PID_4596_sysDataRpt_model,
+    PID_4596_sysDataViews_model,
+    PID_4596_sysKMLMap_model,
+    PID_4596_sysKMLMapClass_model,
+    PID_4596_sysLookupLst_model,
+    PID_4596_sysTableLst_model,
+    PID_4596_sysTaskGroups_model,
+    PID_4596_sysTaskLst_model,
+    PID_4596_sysTasks_model,
+    PID_4604_ActionLevels_model,
+    PID_4604_COC_model,
+    PID_4604_EDDAirSampling_model,
+    PID_4604_EDDBiotaSampling_model,
+    PID_4604_EDDLabAnalyses_model,
+    PID_4604_EDDMonitoringData_model,
+    PID_4604_EDDProperty_model,
+    PID_4604_EDDSoilGasSampling_model,
+    PID_4604_EDDSoilSampling_model,
+    PID_4604_EDDWaterSampling_model,
+    PID_4604_EDDWipeSampling_model,
+    PID_4604_Events_model,
+    PID_4604_Instruments_model,
+    PID_4604_LabAnalyses_model,
+    PID_4604_LabResults_model,
+    PID_4604_Location_model,
+    PID_4604_Monitoring_model,
+    PID_4604_PropertyInfo_model,
+    PID_4604_PropertyOccupant_model,
+    PID_4604_refAnalytes_model,
+    PID_4604_refLabLst_model,
+    PID_4604_refMatrixLst_model,
+    PID_4604_refNames_model,
+    PID_4604_refPickLst_model,
+    PID_4604_refSGenus_model,
+    PID_4604_Samples_model,
+    PID_4604_SamplesAir_model,
+    PID_4604_SamplesBiota_model,
+    PID_4604_SamplesMeasurements_model,
+    PID_4604_SamplesSoil_model,
+    PID_4604_SamplesSoilGas_model,
+    PID_4604_SamplesTags_model,
+    PID_4604_SamplesWater_model,
+    PID_4604_SamplesWipe_model,
+    PID_4604_Site_model,
+    PID_4604_sysDataColumn_model,
+    PID_4604_sysDataColumnLayout_model,
+    PID_4604_sysDataLabel_model,
+    PID_4604_sysDataLabelLines_model,
+    PID_4604_sysDataLabelLst_model,
+    PID_4604_sysDataMap_model,
+    PID_4604_sysDataMapCol_model,
+    PID_4604_sysDataRpt_model,
+    PID_4604_sysDataViews_model,
+    PID_4604_sysKMLMap_model,
+    PID_4604_sysKMLMapClass_model,
+    PID_4604_sysLookupLst_model,
+    PID_4604_sysTableLst_model,
+    PID_4604_sysTaskGroups_model,
+    PID_4604_sysTaskLst_model,
+    PID_4604_sysTasks_model,
+    PID_4605_ActionLevels_model,
+    PID_4605_COC_model,
+    PID_4605_EDDAirSampling_model,
+    PID_4605_EDDBiotaSampling_model,
+    PID_4605_EDDLabAnalyses_model,
+    PID_4605_EDDMonitoringData_model,
+    PID_4605_EDDProperty_model,
+    PID_4605_EDDSoilGasSampling_model,
+    PID_4605_EDDSoilSampling_model,
+    PID_4605_EDDWaterSampling_model,
+    PID_4605_EDDWipeSampling_model,
+    PID_4605_Events_model,
+    PID_4605_Instruments_model,
+    PID_4605_LabAnalyses_model,
+    PID_4605_LabResults_model,
+    PID_4605_Location_model,
+    PID_4605_Monitoring_model,
+    PID_4605_PropertyInfo_model,
+    PID_4605_PropertyOccupant_model,
+    PID_4605_refAnalytes_model,
+    PID_4605_refLabLst_model,
+    PID_4605_refMatrixLst_model,
+    PID_4605_refNames_model,
+    PID_4605_refPickLst_model,
+    PID_4605_refSGenus_model,
+    PID_4605_Samples_model,
+    PID_4605_SamplesAir_model,
+    PID_4605_SamplesBiota_model,
+    PID_4605_SamplesMeasurements_model,
+    PID_4605_SamplesSoil_model,
+    PID_4605_SamplesSoilGas_model,
+    PID_4605_SamplesTags_model,
+    PID_4605_SamplesWater_model,
+    PID_4605_SamplesWipe_model,
+    PID_4605_Site_model,
+    PID_4605_sysDataColumn_model,
+    PID_4605_sysDataColumnLayout_model,
+    PID_4605_sysDataLabel_model,
+    PID_4605_sysDataLabelLines_model,
+    PID_4605_sysDataLabelLst_model,
+    PID_4605_sysDataMap_model,
+    PID_4605_sysDataMapCol_model,
+    PID_4605_sysDataRpt_model,
+    PID_4605_sysDataViews_model,
+    PID_4605_sysKMLMap_model,
+    PID_4605_sysKMLMapClass_model,
+    PID_4605_sysLookupLst_model,
+    PID_4605_sysTableLst_model,
+    PID_4605_sysTaskGroups_model,
+    PID_4605_sysTaskLst_model,
+    PID_4605_sysTasks_model,
+    PID_4612_ActionLevels_model,
+    PID_4612_COC_model,
+    PID_4612_EDDAirSampling_model,
+    PID_4612_EDDBiotaSampling_model,
+    PID_4612_EDDLabAnalyses_model,
+    PID_4612_EDDMonitoringData_model,
+    PID_4612_EDDProperty_model,
+    PID_4612_EDDSoilGasSampling_model,
+    PID_4612_EDDSoilSampling_model,
+    PID_4612_EDDWaterSampling_model,
+    PID_4612_EDDWipeSampling_model,
+    PID_4612_Events_model,
+    PID_4612_Instruments_model,
+    PID_4612_LabAnalyses_model,
+    PID_4612_LabResults_model,
+    PID_4612_Location_model,
+    PID_4612_Monitoring_model,
+    PID_4612_PropertyInfo_model,
+    PID_4612_PropertyOccupant_model,
+    PID_4612_refAnalytes_model,
+    PID_4612_refLabLst_model,
+    PID_4612_refMatrixLst_model,
+    PID_4612_refNames_model,
+    PID_4612_refPickLst_model,
+    PID_4612_refSGenus_model,
+    PID_4612_Samples_model,
+    PID_4612_SamplesAir_model,
+    PID_4612_SamplesBiota_model,
+    PID_4612_SamplesMeasurements_model,
+    PID_4612_SamplesSoil_model,
+    PID_4612_SamplesSoilGas_model,
+    PID_4612_SamplesTags_model,
+    PID_4612_SamplesWater_model,
+    PID_4612_SamplesWipe_model,
+    PID_4612_Site_model,
+    PID_4612_sysDataColumn_model,
+    PID_4612_sysDataColumnLayout_model,
+    PID_4612_sysDataLabel_model,
+    PID_4612_sysDataLabelLines_model,
+    PID_4612_sysDataLabelLst_model,
+    PID_4612_sysDataMap_model,
+    PID_4612_sysDataMapCol_model,
+    PID_4612_sysDataRpt_model,
+    PID_4612_sysDataViews_model,
+    PID_4612_sysKMLMap_model,
+    PID_4612_sysKMLMapClass_model,
+    PID_4612_sysLookupLst_model,
+    PID_4612_sysTableLst_model,
+    PID_4612_sysTaskGroups_model,
+    PID_4612_sysTaskLst_model,
+    PID_4612_sysTasks_model,
+    PID_4619_ActionLevels_model,
+    PID_4619_COC_model,
+    PID_4619_EDDAirSampling_model,
+    PID_4619_EDDBiotaSampling_model,
+    PID_4619_EDDLabAnalyses_model,
+    PID_4619_EDDMonitoringData_model,
+    PID_4619_EDDProperty_model,
+    PID_4619_EDDSoilGasSampling_model,
+    PID_4619_EDDSoilSampling_model,
+    PID_4619_EDDWaterSampling_model,
+    PID_4619_EDDWipeSampling_model,
+    PID_4619_Events_model,
+    PID_4619_Instruments_model,
+    PID_4619_LabAnalyses_model,
+    PID_4619_LabResults_model,
+    PID_4619_Location_model,
+    PID_4619_Monitoring_model,
+    PID_4619_PropertyInfo_model,
+    PID_4619_PropertyOccupant_model,
+    PID_4619_refAnalytes_model,
+    PID_4619_refLabLst_model,
+    PID_4619_refMatrixLst_model,
+    PID_4619_refNames_model,
+    PID_4619_refPickLst_model,
+    PID_4619_refSGenus_model,
+    PID_4619_Samples_model,
+    PID_4619_SamplesAir_model,
+    PID_4619_SamplesBiota_model,
+    PID_4619_SamplesMeasurements_model,
+    PID_4619_SamplesSoil_model,
+    PID_4619_SamplesSoilGas_model,
+    PID_4619_SamplesTags_model,
+    PID_4619_SamplesWater_model,
+    PID_4619_SamplesWipe_model,
+    PID_4619_Site_model,
+    PID_4619_sysDataColumn_model,
+    PID_4619_sysDataColumnLayout_model,
+    PID_4619_sysDataLabel_model,
+    PID_4619_sysDataLabelLines_model,
+    PID_4619_sysDataLabelLst_model,
+    PID_4619_sysDataMap_model,
+    PID_4619_sysDataMapCol_model,
+    PID_4619_sysDataRpt_model,
+    PID_4619_sysDataViews_model,
+    PID_4619_sysKMLMap_model,
+    PID_4619_sysKMLMapClass_model,
+    PID_4619_sysLookupLst_model,
+    PID_4619_sysTableLst_model,
+    PID_4619_sysTaskGroups_model,
+    PID_4619_sysTaskLst_model,
+    PID_4619_sysTasks_model,
+    PID_4620_ActionLevels_model,
+    PID_4620_COC_model,
+    PID_4620_EDDAirSampling_model,
+    PID_4620_EDDBiotaSampling_model,
+    PID_4620_EDDLabAnalyses_model,
+    PID_4620_EDDMonitoringData_model,
+    PID_4620_EDDProperty_model,
+    PID_4620_EDDSoilGasSampling_model,
+    PID_4620_EDDSoilSampling_model,
+    PID_4620_EDDWaterSampling_model,
+    PID_4620_EDDWipeSampling_model,
+    PID_4620_Events_model,
+    PID_4620_Instruments_model,
+    PID_4620_LabAnalyses_model,
+    PID_4620_LabResults_model,
+    PID_4620_Location_model,
+    PID_4620_Monitoring_model,
+    PID_4620_PropertyInfo_model,
+    PID_4620_PropertyOccupant_model,
+    PID_4620_refAnalytes_model,
+    PID_4620_refLabLst_model,
+    PID_4620_refMatrixLst_model,
+    PID_4620_refNames_model,
+    PID_4620_refPickLst_model,
+    PID_4620_refSGenus_model,
+    PID_4620_Samples_model,
+    PID_4620_SamplesAir_model,
+    PID_4620_SamplesBiota_model,
+    PID_4620_SamplesMeasurements_model,
+    PID_4620_SamplesSoil_model,
+    PID_4620_SamplesSoilGas_model,
+    PID_4620_SamplesTags_model,
+    PID_4620_SamplesWater_model,
+    PID_4620_SamplesWipe_model,
+    PID_4620_Site_model,
+    PID_4620_sysDataColumn_model,
+    PID_4620_sysDataColumnLayout_model,
+    PID_4620_sysDataLabel_model,
+    PID_4620_sysDataLabelLines_model,
+    PID_4620_sysDataLabelLst_model,
+    PID_4620_sysDataMap_model,
+    PID_4620_sysDataMapCol_model,
+    PID_4620_sysDataRpt_model,
+    PID_4620_sysDataViews_model,
+    PID_4620_sysKMLMap_model,
+    PID_4620_sysKMLMapClass_model,
+    PID_4620_sysLookupLst_model,
+    PID_4620_sysTableLst_model,
+    PID_4620_sysTaskGroups_model,
+    PID_4620_sysTaskLst_model,
+    PID_4620_sysTasks_model,
+    PID_4621_ActionLevels_model,
+    PID_4621_COC_model,
+    PID_4621_EDDAirSampling_model,
+    PID_4621_EDDBiotaSampling_model,
+    PID_4621_EDDLabAnalyses_model,
+    PID_4621_EDDMonitoringData_model,
+    PID_4621_EDDProperty_model,
+    PID_4621_EDDSoilGasSampling_model,
+    PID_4621_EDDSoilSampling_model,
+    PID_4621_EDDWaterSampling_model,
+    PID_4621_EDDWipeSampling_model,
+    PID_4621_Events_model,
+    PID_4621_Instruments_model,
+    PID_4621_LabAnalyses_model,
+    PID_4621_LabResults_model,
+    PID_4621_Location_model,
+    PID_4621_Monitoring_model,
+    PID_4621_PropertyInfo_model,
+    PID_4621_PropertyOccupant_model,
+    PID_4621_refAnalytes_model,
+    PID_4621_refLabLst_model,
+    PID_4621_refMatrixLst_model,
+    PID_4621_refNames_model,
+    PID_4621_refPickLst_model,
+    PID_4621_refSGenus_model,
+    PID_4621_Samples_model,
+    PID_4621_SamplesAir_model,
+    PID_4621_SamplesBiota_model,
+    PID_4621_SamplesMeasurements_model,
+    PID_4621_SamplesSoil_model,
+    PID_4621_SamplesSoilGas_model,
+    PID_4621_SamplesTags_model,
+    PID_4621_SamplesWater_model,
+    PID_4621_SamplesWipe_model,
+    PID_4621_Site_model,
+    PID_4621_sysDataColumn_model,
+    PID_4621_sysDataColumnLayout_model,
+    PID_4621_sysDataLabel_model,
+    PID_4621_sysDataLabelLines_model,
+    PID_4621_sysDataLabelLst_model,
+    PID_4621_sysDataMap_model,
+    PID_4621_sysDataMapCol_model,
+    PID_4621_sysDataRpt_model,
+    PID_4621_sysDataViews_model,
+    PID_4621_sysKMLMap_model,
+    PID_4621_sysKMLMapClass_model,
+    PID_4621_sysLookupLst_model,
+    PID_4621_sysTableLst_model,
+    PID_4621_sysTaskGroups_model,
+    PID_4621_sysTaskLst_model,
+    PID_4621_sysTasks_model,
+    PID_4626_ActionLevels_model,
+    PID_4626_COC_model,
+    PID_4626_EDDAirSampling_model,
+    PID_4626_EDDBiotaSampling_model,
+    PID_4626_EDDLabAnalyses_model,
+    PID_4626_EDDMonitoringData_model,
+    PID_4626_EDDProperty_model,
+    PID_4626_EDDSoilGasSampling_model,
+    PID_4626_EDDSoilSampling_model,
+    PID_4626_EDDWaterSampling_model,
+    PID_4626_EDDWipeSampling_model,
+    PID_4626_Events_model,
+    PID_4626_Instruments_model,
+    PID_4626_LabAnalyses_model,
+    PID_4626_LabResults_model,
+    PID_4626_Location_model,
+    PID_4626_Monitoring_model,
+    PID_4626_PropertyInfo_model,
+    PID_4626_PropertyOccupant_model,
+    PID_4626_refAnalytes_model,
+    PID_4626_refLabLst_model,
+    PID_4626_refMatrixLst_model,
+    PID_4626_refNames_model,
+    PID_4626_refPickLst_model,
+    PID_4626_refSGenus_model,
+    PID_4626_Samples_model,
+    PID_4626_SamplesAir_model,
+    PID_4626_SamplesBiota_model,
+    PID_4626_SamplesMeasurements_model,
+    PID_4626_SamplesSoil_model,
+    PID_4626_SamplesSoilGas_model,
+    PID_4626_SamplesTags_model,
+    PID_4626_SamplesWater_model,
+    PID_4626_SamplesWipe_model,
+    PID_4626_Site_model,
+    PID_4626_sysDataColumn_model,
+    PID_4626_sysDataColumnLayout_model,
+    PID_4626_sysDataLabel_model,
+    PID_4626_sysDataLabelLines_model,
+    PID_4626_sysDataLabelLst_model,
+    PID_4626_sysDataMap_model,
+    PID_4626_sysDataMapCol_model,
+    PID_4626_sysDataRpt_model,
+    PID_4626_sysDataViews_model,
+    PID_4626_sysKMLMap_model,
+    PID_4626_sysKMLMapClass_model,
+    PID_4626_sysLookupLst_model,
+    PID_4626_sysTableLst_model,
+    PID_4626_sysTaskGroups_model,
+    PID_4626_sysTaskLst_model,
+    PID_4626_sysTasks_model,
+    PID_4626_ver_ScribeTemplate_model,
+    PID_4626_vv_General_model,
+    PID_4626_vv_Geology_model,
+    PID_4626_vv_LabResults_model,
+    PID_4626_vv_Mine_model,
+    PID_4628_ActionLevels_model,
+    PID_4628_COC_model,
+    PID_4628_EDDAirSampling_model,
+    PID_4628_EDDBiotaSampling_model,
+    PID_4628_EDDLabAnalyses_model,
+    PID_4628_EDDMonitoringData_model,
+    PID_4628_EDDProperty_model,
+    PID_4628_EDDSoilGasSampling_model,
+    PID_4628_EDDSoilSampling_model,
+    PID_4628_EDDWaterSampling_model,
+    PID_4628_EDDWipeSampling_model,
+    PID_4628_Events_model,
+    PID_4628_Instruments_model,
+    PID_4628_LabAnalyses_model,
+    PID_4628_LabResults_model,
+    PID_4628_Location_model,
+    PID_4628_Monitoring_model,
+    PID_4628_PropertyInfo_model,
+    PID_4628_PropertyOccupant_model,
+    PID_4628_refAnalytes_model,
+    PID_4628_refLabLst_model,
+    PID_4628_refMatrixLst_model,
+    PID_4628_refNames_model,
+    PID_4628_refPickLst_model,
+    PID_4628_refSGenus_model,
+    PID_4628_Samples_model,
+    PID_4628_SamplesAir_model,
+    PID_4628_SamplesBiota_model,
+    PID_4628_SamplesMeasurements_model,
+    PID_4628_SamplesSoil_model,
+    PID_4628_SamplesSoilGas_model,
+    PID_4628_SamplesTags_model,
+    PID_4628_SamplesWater_model,
+    PID_4628_SamplesWipe_model,
+    PID_4628_Site_model,
+    PID_4628_sysDataColumn_model,
+    PID_4628_sysDataColumnLayout_model,
+    PID_4628_sysDataLabel_model,
+    PID_4628_sysDataLabelLines_model,
+    PID_4628_sysDataLabelLst_model,
+    PID_4628_sysDataMap_model,
+    PID_4628_sysDataMapCol_model,
+    PID_4628_sysDataRpt_model,
+    PID_4628_sysDataViews_model,
+    PID_4628_sysKMLMap_model,
+    PID_4628_sysKMLMapClass_model,
+    PID_4628_sysLookupLst_model,
+    PID_4628_sysTableLst_model,
+    PID_4628_sysTaskGroups_model,
+    PID_4628_sysTaskLst_model,
+    PID_4628_sysTasks_model,
 )
 
 
@@ -44909,258 +48756,6 @@ class dbo_PID_3553_Events_serializer():
         fields = "__all__"
 
 
-class dbo_PID_3553_Field_XRF_serializer():
-    class Meta:
-        model = PID_3553_Field_XRF_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_GIS_Location_serializer():
-    class Meta:
-        model = PID_3553_GIS_Location_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_Instruments_serializer():
-    class Meta:
-        model = PID_3553_Instruments_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_LabAnalyses_serializer():
-    class Meta:
-        model = PID_3553_LabAnalyses_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_LabResults_serializer():
-    class Meta:
-        model = PID_3553_LabResults_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_Location_serializer():
-    class Meta:
-        model = PID_3553_Location_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_lu_Method_serializer():
-    class Meta:
-        model = PID_3553_lu_Method_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_Monitoring_serializer():
-    class Meta:
-        model = PID_3553_Monitoring_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_PropertyInfo_serializer():
-    class Meta:
-        model = PID_3553_PropertyInfo_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_PropertyOccupant_serializer():
-    class Meta:
-        model = PID_3553_PropertyOccupant_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_refAnalytes_serializer():
-    class Meta:
-        model = PID_3553_refAnalytes_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_refLabLst_serializer():
-    class Meta:
-        model = PID_3553_refLabLst_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_refMatrixLst_serializer():
-    class Meta:
-        model = PID_3553_refMatrixLst_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_refNames_serializer():
-    class Meta:
-        model = PID_3553_refNames_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_refPickLst_serializer():
-    class Meta:
-        model = PID_3553_refPickLst_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_refSGenus_serializer():
-    class Meta:
-        model = PID_3553_refSGenus_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_Samples_serializer():
-    class Meta:
-        model = PID_3553_Samples_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_SamplesAir_serializer():
-    class Meta:
-        model = PID_3553_SamplesAir_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_SamplesBiota_serializer():
-    class Meta:
-        model = PID_3553_SamplesBiota_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_SamplesMeasurements_serializer():
-    class Meta:
-        model = PID_3553_SamplesMeasurements_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_SamplesSoil_serializer():
-    class Meta:
-        model = PID_3553_SamplesSoil_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_SamplesSoilGas_serializer():
-    class Meta:
-        model = PID_3553_SamplesSoilGas_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_SamplesTags_serializer():
-    class Meta:
-        model = PID_3553_SamplesTags_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_SamplesWater_serializer():
-    class Meta:
-        model = PID_3553_SamplesWater_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_SamplesWipe_serializer():
-    class Meta:
-        model = PID_3553_SamplesWipe_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_Site_serializer():
-    class Meta:
-        model = PID_3553_Site_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_sysDataColumn_serializer():
-    class Meta:
-        model = PID_3553_sysDataColumn_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_sysDataColumnLayout_serializer():
-    class Meta:
-        model = PID_3553_sysDataColumnLayout_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_sysDataLabel_serializer():
-    class Meta:
-        model = PID_3553_sysDataLabel_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_sysDataLabelLines_serializer():
-    class Meta:
-        model = PID_3553_sysDataLabelLines_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_sysDataLabelLst_serializer():
-    class Meta:
-        model = PID_3553_sysDataLabelLst_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_sysDataMap_serializer():
-    class Meta:
-        model = PID_3553_sysDataMap_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_sysDataMapCol_serializer():
-    class Meta:
-        model = PID_3553_sysDataMapCol_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_sysDataRpt_serializer():
-    class Meta:
-        model = PID_3553_sysDataRpt_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_sysDataViews_serializer():
-    class Meta:
-        model = PID_3553_sysDataViews_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_sysKMLMap_serializer():
-    class Meta:
-        model = PID_3553_sysKMLMap_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_sysKMLMapClass_serializer():
-    class Meta:
-        model = PID_3553_sysKMLMapClass_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_sysLookupLst_serializer():
-    class Meta:
-        model = PID_3553_sysLookupLst_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_sysTableLst_serializer():
-    class Meta:
-        model = PID_3553_sysTableLst_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_sysTaskGroups_serializer():
-    class Meta:
-        model = PID_3553_sysTaskGroups_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_sysTaskLst_serializer():
-    class Meta:
-        model = PID_3553_sysTaskLst_model
-        fields = "__all__"
-
-
-class dbo_PID_3553_sysTasks_serializer():
-    class Meta:
-        model = PID_3553_sysTasks_model
-        fields = "__all__"
-
-
 class dbo_PID_3562_ActionLevels_serializer():
     class Meta:
         model = PID_3562_ActionLevels_model
@@ -53051,6 +56646,12 @@ class dbo_PID_3808_Location_serializer():
         fields = "__all__"
 
 
+class dbo_PID_3808_MissingQualifier_serializer():
+    class Meta:
+        model = PID_3808_MissingQualifier_model
+        fields = "__all__"
+
+
 class dbo_PID_3808_Monitoring_serializer():
     class Meta:
         model = PID_3808_Monitoring_model
@@ -53066,12 +56667,6 @@ class dbo_PID_3808_PropertyInfo_serializer():
 class dbo_PID_3808_PropertyOccupant_serializer():
     class Meta:
         model = PID_3808_PropertyOccupant_model
-        fields = "__all__"
-
-
-class dbo_PID_3808_R9_refUnitConversion_serializer():
-    class Meta:
-        model = PID_3808_R9_refUnitConversion_model
         fields = "__all__"
 
 
@@ -59237,18 +62832,6 @@ class dbo_PID_3874_Events_serializer():
         fields = "__all__"
 
 
-class dbo_PID_3874_Field_XRF_serializer():
-    class Meta:
-        model = PID_3874_Field_XRF_model
-        fields = "__all__"
-
-
-class dbo_PID_3874_GIS_Location_serializer():
-    class Meta:
-        model = PID_3874_GIS_Location_model
-        fields = "__all__"
-
-
 class dbo_PID_3874_Instruments_serializer():
     class Meta:
         model = PID_3874_Instruments_model
@@ -59270,12 +62853,6 @@ class dbo_PID_3874_LabResults_serializer():
 class dbo_PID_3874_Location_serializer():
     class Meta:
         model = PID_3874_Location_model
-        fields = "__all__"
-
-
-class dbo_PID_3874_lu_Method_serializer():
-    class Meta:
-        model = PID_3874_lu_Method_model
         fields = "__all__"
 
 
@@ -60404,4 +63981,23356 @@ class dbo_PID_3891_sysTaskLst_serializer():
 class dbo_PID_3891_sysTasks_serializer():
     class Meta:
         model = PID_3891_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_ActionLevels_serializer():
+    class Meta:
+        model = PID_3893_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_COC_serializer():
+    class Meta:
+        model = PID_3893_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_3893_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_3893_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_3893_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_3893_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_EDDProperty_serializer():
+    class Meta:
+        model = PID_3893_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_3893_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_3893_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_3893_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_3893_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_Events_serializer():
+    class Meta:
+        model = PID_3893_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_Instruments_serializer():
+    class Meta:
+        model = PID_3893_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_LabAnalyses_serializer():
+    class Meta:
+        model = PID_3893_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_LabResults_serializer():
+    class Meta:
+        model = PID_3893_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_Location_serializer():
+    class Meta:
+        model = PID_3893_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_Monitoring_serializer():
+    class Meta:
+        model = PID_3893_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_PropertyInfo_serializer():
+    class Meta:
+        model = PID_3893_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_3893_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_refAnalytes_serializer():
+    class Meta:
+        model = PID_3893_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_refLabLst_serializer():
+    class Meta:
+        model = PID_3893_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_refMatrixLst_serializer():
+    class Meta:
+        model = PID_3893_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_refNames_serializer():
+    class Meta:
+        model = PID_3893_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_refPickLst_serializer():
+    class Meta:
+        model = PID_3893_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_refSGenus_serializer():
+    class Meta:
+        model = PID_3893_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_Samples_serializer():
+    class Meta:
+        model = PID_3893_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_SamplesAir_serializer():
+    class Meta:
+        model = PID_3893_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_SamplesBiota_serializer():
+    class Meta:
+        model = PID_3893_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_3893_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_SamplesSoil_serializer():
+    class Meta:
+        model = PID_3893_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_3893_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_SamplesTags_serializer():
+    class Meta:
+        model = PID_3893_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_SamplesWater_serializer():
+    class Meta:
+        model = PID_3893_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_SamplesWipe_serializer():
+    class Meta:
+        model = PID_3893_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_Site_serializer():
+    class Meta:
+        model = PID_3893_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_sysDataColumn_serializer():
+    class Meta:
+        model = PID_3893_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_3893_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_sysDataLabel_serializer():
+    class Meta:
+        model = PID_3893_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_3893_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_3893_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_sysDataMap_serializer():
+    class Meta:
+        model = PID_3893_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_3893_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_sysDataRpt_serializer():
+    class Meta:
+        model = PID_3893_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_sysDataViews_serializer():
+    class Meta:
+        model = PID_3893_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_sysKMLMap_serializer():
+    class Meta:
+        model = PID_3893_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_3893_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_sysLookupLst_serializer():
+    class Meta:
+        model = PID_3893_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_sysTableLst_serializer():
+    class Meta:
+        model = PID_3893_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_3893_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_sysTaskLst_serializer():
+    class Meta:
+        model = PID_3893_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3893_sysTasks_serializer():
+    class Meta:
+        model = PID_3893_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_ActionLevels_serializer():
+    class Meta:
+        model = PID_3894_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_COC_serializer():
+    class Meta:
+        model = PID_3894_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_3894_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_3894_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_3894_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_3894_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_EDDProperty_serializer():
+    class Meta:
+        model = PID_3894_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_3894_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_3894_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_3894_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_3894_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_Events_serializer():
+    class Meta:
+        model = PID_3894_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_Instruments_serializer():
+    class Meta:
+        model = PID_3894_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_LabAnalyses_serializer():
+    class Meta:
+        model = PID_3894_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_LabResults_serializer():
+    class Meta:
+        model = PID_3894_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_Location_serializer():
+    class Meta:
+        model = PID_3894_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_Monitoring_serializer():
+    class Meta:
+        model = PID_3894_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_PropertyInfo_serializer():
+    class Meta:
+        model = PID_3894_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_3894_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_refAnalytes_serializer():
+    class Meta:
+        model = PID_3894_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_refLabLst_serializer():
+    class Meta:
+        model = PID_3894_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_refMatrixLst_serializer():
+    class Meta:
+        model = PID_3894_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_refNames_serializer():
+    class Meta:
+        model = PID_3894_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_refPickLst_serializer():
+    class Meta:
+        model = PID_3894_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_refSGenus_serializer():
+    class Meta:
+        model = PID_3894_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_Samples_serializer():
+    class Meta:
+        model = PID_3894_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_SamplesAir_serializer():
+    class Meta:
+        model = PID_3894_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_SamplesBiota_serializer():
+    class Meta:
+        model = PID_3894_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_3894_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_SamplesSoil_serializer():
+    class Meta:
+        model = PID_3894_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_3894_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_SamplesTags_serializer():
+    class Meta:
+        model = PID_3894_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_SamplesWater_serializer():
+    class Meta:
+        model = PID_3894_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_SamplesWipe_serializer():
+    class Meta:
+        model = PID_3894_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_Site_serializer():
+    class Meta:
+        model = PID_3894_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_sysDataColumn_serializer():
+    class Meta:
+        model = PID_3894_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_3894_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_sysDataLabel_serializer():
+    class Meta:
+        model = PID_3894_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_3894_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_3894_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_sysDataMap_serializer():
+    class Meta:
+        model = PID_3894_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_3894_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_sysDataRpt_serializer():
+    class Meta:
+        model = PID_3894_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_sysDataViews_serializer():
+    class Meta:
+        model = PID_3894_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_sysKMLMap_serializer():
+    class Meta:
+        model = PID_3894_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_3894_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_sysLookupLst_serializer():
+    class Meta:
+        model = PID_3894_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_sysTableLst_serializer():
+    class Meta:
+        model = PID_3894_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_3894_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_sysTaskLst_serializer():
+    class Meta:
+        model = PID_3894_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3894_sysTasks_serializer():
+    class Meta:
+        model = PID_3894_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_ActionLevels_serializer():
+    class Meta:
+        model = PID_3920_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_COC_serializer():
+    class Meta:
+        model = PID_3920_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_3920_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_3920_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_3920_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_3920_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_EDDProperty_serializer():
+    class Meta:
+        model = PID_3920_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_3920_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_3920_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_3920_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_3920_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_Events_serializer():
+    class Meta:
+        model = PID_3920_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_Instruments_serializer():
+    class Meta:
+        model = PID_3920_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_LabAnalyses_serializer():
+    class Meta:
+        model = PID_3920_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_LabResults_serializer():
+    class Meta:
+        model = PID_3920_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_Location_serializer():
+    class Meta:
+        model = PID_3920_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_Monitoring_serializer():
+    class Meta:
+        model = PID_3920_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_3920_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_refAnalytes_serializer():
+    class Meta:
+        model = PID_3920_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_refLabLst_serializer():
+    class Meta:
+        model = PID_3920_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_refMatrixLst_serializer():
+    class Meta:
+        model = PID_3920_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_refNames_serializer():
+    class Meta:
+        model = PID_3920_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_refPickLst_serializer():
+    class Meta:
+        model = PID_3920_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_refSGenus_serializer():
+    class Meta:
+        model = PID_3920_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_Samples_serializer():
+    class Meta:
+        model = PID_3920_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_SamplesAir_serializer():
+    class Meta:
+        model = PID_3920_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_SamplesBiota_serializer():
+    class Meta:
+        model = PID_3920_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_3920_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_SamplesSoil_serializer():
+    class Meta:
+        model = PID_3920_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_3920_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_SamplesTags_serializer():
+    class Meta:
+        model = PID_3920_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_SamplesWater_serializer():
+    class Meta:
+        model = PID_3920_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_SamplesWipe_serializer():
+    class Meta:
+        model = PID_3920_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_Site_serializer():
+    class Meta:
+        model = PID_3920_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_sysDataColumn_serializer():
+    class Meta:
+        model = PID_3920_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_3920_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_sysDataLabel_serializer():
+    class Meta:
+        model = PID_3920_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_3920_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_3920_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_sysDataMap_serializer():
+    class Meta:
+        model = PID_3920_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_3920_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_sysDataRpt_serializer():
+    class Meta:
+        model = PID_3920_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_sysDataViews_serializer():
+    class Meta:
+        model = PID_3920_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_sysKMLMap_serializer():
+    class Meta:
+        model = PID_3920_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_3920_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_sysLookupLst_serializer():
+    class Meta:
+        model = PID_3920_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_sysTableLst_serializer():
+    class Meta:
+        model = PID_3920_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_3920_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_sysTaskLst_serializer():
+    class Meta:
+        model = PID_3920_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3920_sysTasks_serializer():
+    class Meta:
+        model = PID_3920_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_ActionLevels_serializer():
+    class Meta:
+        model = PID_3921_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_COC_serializer():
+    class Meta:
+        model = PID_3921_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_3921_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_3921_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_3921_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_3921_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_EDDProperty_serializer():
+    class Meta:
+        model = PID_3921_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_3921_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_3921_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_3921_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_3921_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_Events_serializer():
+    class Meta:
+        model = PID_3921_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_Instruments_serializer():
+    class Meta:
+        model = PID_3921_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_LabAnalyses_serializer():
+    class Meta:
+        model = PID_3921_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_LabResults_serializer():
+    class Meta:
+        model = PID_3921_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_Location_serializer():
+    class Meta:
+        model = PID_3921_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_Monitoring_serializer():
+    class Meta:
+        model = PID_3921_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_PropertyInfo_serializer():
+    class Meta:
+        model = PID_3921_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_3921_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_refAnalytes_serializer():
+    class Meta:
+        model = PID_3921_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_refLabLst_serializer():
+    class Meta:
+        model = PID_3921_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_refMatrixLst_serializer():
+    class Meta:
+        model = PID_3921_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_refNames_serializer():
+    class Meta:
+        model = PID_3921_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_refPickLst_serializer():
+    class Meta:
+        model = PID_3921_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_refSGenus_serializer():
+    class Meta:
+        model = PID_3921_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_Samples_serializer():
+    class Meta:
+        model = PID_3921_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_SamplesAir_serializer():
+    class Meta:
+        model = PID_3921_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_SamplesBiota_serializer():
+    class Meta:
+        model = PID_3921_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_3921_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_SamplesSoil_serializer():
+    class Meta:
+        model = PID_3921_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_3921_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_SamplesTags_serializer():
+    class Meta:
+        model = PID_3921_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_SamplesWater_serializer():
+    class Meta:
+        model = PID_3921_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_SamplesWipe_serializer():
+    class Meta:
+        model = PID_3921_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_Site_serializer():
+    class Meta:
+        model = PID_3921_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_sysDataColumn_serializer():
+    class Meta:
+        model = PID_3921_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_3921_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_sysDataLabel_serializer():
+    class Meta:
+        model = PID_3921_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_3921_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_3921_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_sysDataMap_serializer():
+    class Meta:
+        model = PID_3921_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_3921_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_sysDataRpt_serializer():
+    class Meta:
+        model = PID_3921_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_sysDataViews_serializer():
+    class Meta:
+        model = PID_3921_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_sysKMLMap_serializer():
+    class Meta:
+        model = PID_3921_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_3921_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_sysLookupLst_serializer():
+    class Meta:
+        model = PID_3921_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_sysTableLst_serializer():
+    class Meta:
+        model = PID_3921_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_3921_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_sysTaskLst_serializer():
+    class Meta:
+        model = PID_3921_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3921_sysTasks_serializer():
+    class Meta:
+        model = PID_3921_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_ActionLevels_serializer():
+    class Meta:
+        model = PID_3925_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_COC_serializer():
+    class Meta:
+        model = PID_3925_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_3925_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_3925_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_3925_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_3925_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_EDDProperty_serializer():
+    class Meta:
+        model = PID_3925_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_3925_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_3925_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_3925_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_3925_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_Events_serializer():
+    class Meta:
+        model = PID_3925_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_Instruments_serializer():
+    class Meta:
+        model = PID_3925_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_LabAnalyses_serializer():
+    class Meta:
+        model = PID_3925_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_LabResults_serializer():
+    class Meta:
+        model = PID_3925_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_Location_serializer():
+    class Meta:
+        model = PID_3925_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_Monitoring_serializer():
+    class Meta:
+        model = PID_3925_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_PropertyInfo_serializer():
+    class Meta:
+        model = PID_3925_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_3925_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_refAnalytes_serializer():
+    class Meta:
+        model = PID_3925_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_refLabLst_serializer():
+    class Meta:
+        model = PID_3925_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_refMatrixLst_serializer():
+    class Meta:
+        model = PID_3925_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_refNames_serializer():
+    class Meta:
+        model = PID_3925_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_refPickLst_serializer():
+    class Meta:
+        model = PID_3925_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_refSGenus_serializer():
+    class Meta:
+        model = PID_3925_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_Samples_serializer():
+    class Meta:
+        model = PID_3925_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_SamplesAir_serializer():
+    class Meta:
+        model = PID_3925_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_SamplesBiota_serializer():
+    class Meta:
+        model = PID_3925_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_3925_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_SamplesSoil_serializer():
+    class Meta:
+        model = PID_3925_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_3925_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_SamplesTags_serializer():
+    class Meta:
+        model = PID_3925_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_SamplesWater_serializer():
+    class Meta:
+        model = PID_3925_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_SamplesWipe_serializer():
+    class Meta:
+        model = PID_3925_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_Site_serializer():
+    class Meta:
+        model = PID_3925_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_sysDataColumn_serializer():
+    class Meta:
+        model = PID_3925_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_3925_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_sysDataLabel_serializer():
+    class Meta:
+        model = PID_3925_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_3925_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_3925_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_sysDataMap_serializer():
+    class Meta:
+        model = PID_3925_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_3925_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_sysDataRpt_serializer():
+    class Meta:
+        model = PID_3925_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_sysDataViews_serializer():
+    class Meta:
+        model = PID_3925_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_sysKMLMap_serializer():
+    class Meta:
+        model = PID_3925_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_3925_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_sysLookupLst_serializer():
+    class Meta:
+        model = PID_3925_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_sysTableLst_serializer():
+    class Meta:
+        model = PID_3925_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_3925_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_sysTaskLst_serializer():
+    class Meta:
+        model = PID_3925_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3925_sysTasks_serializer():
+    class Meta:
+        model = PID_3925_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_ActionLevels_serializer():
+    class Meta:
+        model = PID_3926_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_COC_serializer():
+    class Meta:
+        model = PID_3926_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_3926_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_3926_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_3926_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_3926_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_EDDProperty_serializer():
+    class Meta:
+        model = PID_3926_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_3926_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_3926_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_3926_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_3926_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_Events_serializer():
+    class Meta:
+        model = PID_3926_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_Instruments_serializer():
+    class Meta:
+        model = PID_3926_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_LabAnalyses_serializer():
+    class Meta:
+        model = PID_3926_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_LabResults_serializer():
+    class Meta:
+        model = PID_3926_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_Location_serializer():
+    class Meta:
+        model = PID_3926_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_Monitoring_serializer():
+    class Meta:
+        model = PID_3926_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_PropertyInfo_serializer():
+    class Meta:
+        model = PID_3926_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_3926_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_refAnalytes_serializer():
+    class Meta:
+        model = PID_3926_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_refLabLst_serializer():
+    class Meta:
+        model = PID_3926_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_refMatrixLst_serializer():
+    class Meta:
+        model = PID_3926_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_refNames_serializer():
+    class Meta:
+        model = PID_3926_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_refPickLst_serializer():
+    class Meta:
+        model = PID_3926_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_refSGenus_serializer():
+    class Meta:
+        model = PID_3926_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_Samples_serializer():
+    class Meta:
+        model = PID_3926_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_SamplesAir_serializer():
+    class Meta:
+        model = PID_3926_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_SamplesBiota_serializer():
+    class Meta:
+        model = PID_3926_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_3926_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_SamplesSoil_serializer():
+    class Meta:
+        model = PID_3926_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_3926_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_SamplesTags_serializer():
+    class Meta:
+        model = PID_3926_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_SamplesWater_serializer():
+    class Meta:
+        model = PID_3926_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_SamplesWipe_serializer():
+    class Meta:
+        model = PID_3926_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_Site_serializer():
+    class Meta:
+        model = PID_3926_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_sysDataColumn_serializer():
+    class Meta:
+        model = PID_3926_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_3926_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_sysDataLabel_serializer():
+    class Meta:
+        model = PID_3926_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_3926_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_3926_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_sysDataMap_serializer():
+    class Meta:
+        model = PID_3926_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_3926_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_sysDataRpt_serializer():
+    class Meta:
+        model = PID_3926_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_sysDataViews_serializer():
+    class Meta:
+        model = PID_3926_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_sysKMLMap_serializer():
+    class Meta:
+        model = PID_3926_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_3926_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_sysLookupLst_serializer():
+    class Meta:
+        model = PID_3926_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_sysTableLst_serializer():
+    class Meta:
+        model = PID_3926_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_3926_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_sysTaskLst_serializer():
+    class Meta:
+        model = PID_3926_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3926_sysTasks_serializer():
+    class Meta:
+        model = PID_3926_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_ActionLevels_serializer():
+    class Meta:
+        model = PID_3927_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_COC_serializer():
+    class Meta:
+        model = PID_3927_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_3927_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_3927_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_3927_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_3927_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_EDDProperty_serializer():
+    class Meta:
+        model = PID_3927_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_3927_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_3927_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_3927_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_3927_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_Events_serializer():
+    class Meta:
+        model = PID_3927_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_Instruments_serializer():
+    class Meta:
+        model = PID_3927_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_LabAnalyses_serializer():
+    class Meta:
+        model = PID_3927_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_LabResults_serializer():
+    class Meta:
+        model = PID_3927_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_Location_serializer():
+    class Meta:
+        model = PID_3927_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_Monitoring_serializer():
+    class Meta:
+        model = PID_3927_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_PropertyInfo_serializer():
+    class Meta:
+        model = PID_3927_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_3927_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_refAnalytes_serializer():
+    class Meta:
+        model = PID_3927_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_refLabLst_serializer():
+    class Meta:
+        model = PID_3927_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_refMatrixLst_serializer():
+    class Meta:
+        model = PID_3927_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_refNames_serializer():
+    class Meta:
+        model = PID_3927_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_refPickLst_serializer():
+    class Meta:
+        model = PID_3927_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_refSGenus_serializer():
+    class Meta:
+        model = PID_3927_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_Samples_serializer():
+    class Meta:
+        model = PID_3927_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_SamplesAir_serializer():
+    class Meta:
+        model = PID_3927_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_SamplesBiota_serializer():
+    class Meta:
+        model = PID_3927_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_3927_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_SamplesSoil_serializer():
+    class Meta:
+        model = PID_3927_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_3927_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_SamplesTags_serializer():
+    class Meta:
+        model = PID_3927_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_SamplesWater_serializer():
+    class Meta:
+        model = PID_3927_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_SamplesWipe_serializer():
+    class Meta:
+        model = PID_3927_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_Site_serializer():
+    class Meta:
+        model = PID_3927_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_sysDataColumn_serializer():
+    class Meta:
+        model = PID_3927_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_3927_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_sysDataLabel_serializer():
+    class Meta:
+        model = PID_3927_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_3927_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_3927_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_sysDataMap_serializer():
+    class Meta:
+        model = PID_3927_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_3927_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_sysDataRpt_serializer():
+    class Meta:
+        model = PID_3927_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_sysDataViews_serializer():
+    class Meta:
+        model = PID_3927_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_sysKMLMap_serializer():
+    class Meta:
+        model = PID_3927_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_3927_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_sysLookupLst_serializer():
+    class Meta:
+        model = PID_3927_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_sysTableLst_serializer():
+    class Meta:
+        model = PID_3927_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_3927_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_sysTaskLst_serializer():
+    class Meta:
+        model = PID_3927_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3927_sysTasks_serializer():
+    class Meta:
+        model = PID_3927_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_ActionLevels_serializer():
+    class Meta:
+        model = PID_3931_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_COC_serializer():
+    class Meta:
+        model = PID_3931_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_3931_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_3931_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_3931_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_3931_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_EDDProperty_serializer():
+    class Meta:
+        model = PID_3931_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_3931_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_3931_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_3931_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_3931_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_Events_serializer():
+    class Meta:
+        model = PID_3931_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_Instruments_serializer():
+    class Meta:
+        model = PID_3931_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_LabAnalyses_serializer():
+    class Meta:
+        model = PID_3931_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_LabResults_serializer():
+    class Meta:
+        model = PID_3931_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_Location_serializer():
+    class Meta:
+        model = PID_3931_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_Monitoring_serializer():
+    class Meta:
+        model = PID_3931_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_PropertyInfo_serializer():
+    class Meta:
+        model = PID_3931_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_3931_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_refAnalytes_serializer():
+    class Meta:
+        model = PID_3931_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_refLabLst_serializer():
+    class Meta:
+        model = PID_3931_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_refMatrixLst_serializer():
+    class Meta:
+        model = PID_3931_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_refNames_serializer():
+    class Meta:
+        model = PID_3931_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_refPickLst_serializer():
+    class Meta:
+        model = PID_3931_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_refSGenus_serializer():
+    class Meta:
+        model = PID_3931_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_Samples_serializer():
+    class Meta:
+        model = PID_3931_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_SamplesAir_serializer():
+    class Meta:
+        model = PID_3931_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_SamplesBiota_serializer():
+    class Meta:
+        model = PID_3931_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_3931_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_SamplesSoil_serializer():
+    class Meta:
+        model = PID_3931_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_3931_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_SamplesTags_serializer():
+    class Meta:
+        model = PID_3931_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_SamplesWater_serializer():
+    class Meta:
+        model = PID_3931_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_SamplesWipe_serializer():
+    class Meta:
+        model = PID_3931_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_Site_serializer():
+    class Meta:
+        model = PID_3931_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_sysDataColumn_serializer():
+    class Meta:
+        model = PID_3931_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_3931_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_sysDataLabel_serializer():
+    class Meta:
+        model = PID_3931_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_3931_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_3931_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_sysDataMap_serializer():
+    class Meta:
+        model = PID_3931_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_3931_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_sysDataRpt_serializer():
+    class Meta:
+        model = PID_3931_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_sysDataViews_serializer():
+    class Meta:
+        model = PID_3931_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_sysKMLMap_serializer():
+    class Meta:
+        model = PID_3931_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_3931_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_sysLookupLst_serializer():
+    class Meta:
+        model = PID_3931_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_sysTableLst_serializer():
+    class Meta:
+        model = PID_3931_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_3931_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_sysTaskLst_serializer():
+    class Meta:
+        model = PID_3931_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3931_sysTasks_serializer():
+    class Meta:
+        model = PID_3931_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_ActionLevels_serializer():
+    class Meta:
+        model = PID_3932_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_COC_serializer():
+    class Meta:
+        model = PID_3932_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_3932_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_3932_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_3932_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_3932_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_EDDProperty_serializer():
+    class Meta:
+        model = PID_3932_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_3932_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_3932_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_3932_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_3932_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_Events_serializer():
+    class Meta:
+        model = PID_3932_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_Instruments_serializer():
+    class Meta:
+        model = PID_3932_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_LabAnalyses_serializer():
+    class Meta:
+        model = PID_3932_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_LabResults_serializer():
+    class Meta:
+        model = PID_3932_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_Location_serializer():
+    class Meta:
+        model = PID_3932_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_Monitoring_serializer():
+    class Meta:
+        model = PID_3932_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_PropertyInfo_serializer():
+    class Meta:
+        model = PID_3932_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_3932_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_refAnalytes_serializer():
+    class Meta:
+        model = PID_3932_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_refLabLst_serializer():
+    class Meta:
+        model = PID_3932_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_refMatrixLst_serializer():
+    class Meta:
+        model = PID_3932_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_refNames_serializer():
+    class Meta:
+        model = PID_3932_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_refPickLst_serializer():
+    class Meta:
+        model = PID_3932_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_refSGenus_serializer():
+    class Meta:
+        model = PID_3932_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_Samples_serializer():
+    class Meta:
+        model = PID_3932_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_SamplesAir_serializer():
+    class Meta:
+        model = PID_3932_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_SamplesBiota_serializer():
+    class Meta:
+        model = PID_3932_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_3932_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_SamplesSoil_serializer():
+    class Meta:
+        model = PID_3932_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_3932_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_SamplesTags_serializer():
+    class Meta:
+        model = PID_3932_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_SamplesWater_serializer():
+    class Meta:
+        model = PID_3932_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_SamplesWipe_serializer():
+    class Meta:
+        model = PID_3932_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_Site_serializer():
+    class Meta:
+        model = PID_3932_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_sysDataColumn_serializer():
+    class Meta:
+        model = PID_3932_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_3932_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_sysDataLabel_serializer():
+    class Meta:
+        model = PID_3932_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_3932_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_3932_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_sysDataMap_serializer():
+    class Meta:
+        model = PID_3932_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_3932_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_sysDataRpt_serializer():
+    class Meta:
+        model = PID_3932_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_sysDataViews_serializer():
+    class Meta:
+        model = PID_3932_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_sysKMLMap_serializer():
+    class Meta:
+        model = PID_3932_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_3932_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_sysLookupLst_serializer():
+    class Meta:
+        model = PID_3932_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_sysTableLst_serializer():
+    class Meta:
+        model = PID_3932_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_3932_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_sysTaskLst_serializer():
+    class Meta:
+        model = PID_3932_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3932_sysTasks_serializer():
+    class Meta:
+        model = PID_3932_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_ActionLevels_serializer():
+    class Meta:
+        model = PID_3944_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_COC_serializer():
+    class Meta:
+        model = PID_3944_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_3944_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_3944_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_3944_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_3944_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_EDDProperty_serializer():
+    class Meta:
+        model = PID_3944_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_3944_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_3944_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_3944_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_3944_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_Events_serializer():
+    class Meta:
+        model = PID_3944_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_Instruments_serializer():
+    class Meta:
+        model = PID_3944_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_LabAnalyses_serializer():
+    class Meta:
+        model = PID_3944_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_LabResults_serializer():
+    class Meta:
+        model = PID_3944_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_Location_serializer():
+    class Meta:
+        model = PID_3944_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_Monitoring_serializer():
+    class Meta:
+        model = PID_3944_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_PropertyInfo_serializer():
+    class Meta:
+        model = PID_3944_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_3944_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_refAnalytes_serializer():
+    class Meta:
+        model = PID_3944_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_refLabLst_serializer():
+    class Meta:
+        model = PID_3944_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_refMatrixLst_serializer():
+    class Meta:
+        model = PID_3944_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_refNames_serializer():
+    class Meta:
+        model = PID_3944_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_refPickLst_serializer():
+    class Meta:
+        model = PID_3944_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_refSGenus_serializer():
+    class Meta:
+        model = PID_3944_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_Samples_serializer():
+    class Meta:
+        model = PID_3944_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_SamplesAir_serializer():
+    class Meta:
+        model = PID_3944_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_SamplesBiota_serializer():
+    class Meta:
+        model = PID_3944_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_3944_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_SamplesSoil_serializer():
+    class Meta:
+        model = PID_3944_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_3944_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_SamplesTags_serializer():
+    class Meta:
+        model = PID_3944_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_SamplesWater_serializer():
+    class Meta:
+        model = PID_3944_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_SamplesWipe_serializer():
+    class Meta:
+        model = PID_3944_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_Site_serializer():
+    class Meta:
+        model = PID_3944_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_sysDataColumn_serializer():
+    class Meta:
+        model = PID_3944_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_3944_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_sysDataLabel_serializer():
+    class Meta:
+        model = PID_3944_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_3944_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_3944_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_sysDataMap_serializer():
+    class Meta:
+        model = PID_3944_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_3944_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_sysDataRpt_serializer():
+    class Meta:
+        model = PID_3944_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_sysDataViews_serializer():
+    class Meta:
+        model = PID_3944_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_sysKMLMap_serializer():
+    class Meta:
+        model = PID_3944_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_3944_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_sysLookupLst_serializer():
+    class Meta:
+        model = PID_3944_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_sysTableLst_serializer():
+    class Meta:
+        model = PID_3944_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_3944_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_sysTaskLst_serializer():
+    class Meta:
+        model = PID_3944_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3944_sysTasks_serializer():
+    class Meta:
+        model = PID_3944_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_ActionLevels_serializer():
+    class Meta:
+        model = PID_3945_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_COC_serializer():
+    class Meta:
+        model = PID_3945_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_3945_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_3945_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_3945_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_3945_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_EDDProperty_serializer():
+    class Meta:
+        model = PID_3945_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_3945_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_3945_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_3945_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_3945_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_Events_serializer():
+    class Meta:
+        model = PID_3945_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_Instruments_serializer():
+    class Meta:
+        model = PID_3945_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_LabAnalyses_serializer():
+    class Meta:
+        model = PID_3945_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_LabResults_serializer():
+    class Meta:
+        model = PID_3945_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_Location_serializer():
+    class Meta:
+        model = PID_3945_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_Monitoring_serializer():
+    class Meta:
+        model = PID_3945_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_PropertyInfo_serializer():
+    class Meta:
+        model = PID_3945_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_3945_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_refAnalytes_serializer():
+    class Meta:
+        model = PID_3945_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_refLabLst_serializer():
+    class Meta:
+        model = PID_3945_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_refMatrixLst_serializer():
+    class Meta:
+        model = PID_3945_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_refNames_serializer():
+    class Meta:
+        model = PID_3945_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_refPickLst_serializer():
+    class Meta:
+        model = PID_3945_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_refSGenus_serializer():
+    class Meta:
+        model = PID_3945_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_Samples_serializer():
+    class Meta:
+        model = PID_3945_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_SamplesAir_serializer():
+    class Meta:
+        model = PID_3945_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_SamplesBiota_serializer():
+    class Meta:
+        model = PID_3945_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_3945_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_SamplesSoil_serializer():
+    class Meta:
+        model = PID_3945_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_3945_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_SamplesTags_serializer():
+    class Meta:
+        model = PID_3945_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_SamplesWater_serializer():
+    class Meta:
+        model = PID_3945_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_SamplesWipe_serializer():
+    class Meta:
+        model = PID_3945_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_Site_serializer():
+    class Meta:
+        model = PID_3945_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_sysDataColumn_serializer():
+    class Meta:
+        model = PID_3945_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_3945_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_sysDataLabel_serializer():
+    class Meta:
+        model = PID_3945_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_3945_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_3945_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_sysDataMap_serializer():
+    class Meta:
+        model = PID_3945_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_3945_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_sysDataRpt_serializer():
+    class Meta:
+        model = PID_3945_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_sysDataViews_serializer():
+    class Meta:
+        model = PID_3945_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_sysKMLMap_serializer():
+    class Meta:
+        model = PID_3945_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_3945_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_sysLookupLst_serializer():
+    class Meta:
+        model = PID_3945_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_sysTableLst_serializer():
+    class Meta:
+        model = PID_3945_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_3945_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_sysTaskLst_serializer():
+    class Meta:
+        model = PID_3945_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3945_sysTasks_serializer():
+    class Meta:
+        model = PID_3945_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_ActionLevels_serializer():
+    class Meta:
+        model = PID_3946_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_COC_serializer():
+    class Meta:
+        model = PID_3946_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_3946_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_3946_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_3946_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_3946_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_EDDProperty_serializer():
+    class Meta:
+        model = PID_3946_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_3946_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_3946_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_3946_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_3946_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_Events_serializer():
+    class Meta:
+        model = PID_3946_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_Instruments_serializer():
+    class Meta:
+        model = PID_3946_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_LabAnalyses_serializer():
+    class Meta:
+        model = PID_3946_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_LabResults_serializer():
+    class Meta:
+        model = PID_3946_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_Location_serializer():
+    class Meta:
+        model = PID_3946_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_Monitoring_serializer():
+    class Meta:
+        model = PID_3946_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_PropertyInfo_serializer():
+    class Meta:
+        model = PID_3946_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_3946_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_refAnalytes_serializer():
+    class Meta:
+        model = PID_3946_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_refLabLst_serializer():
+    class Meta:
+        model = PID_3946_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_refMatrixLst_serializer():
+    class Meta:
+        model = PID_3946_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_refNames_serializer():
+    class Meta:
+        model = PID_3946_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_refPickLst_serializer():
+    class Meta:
+        model = PID_3946_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_refSGenus_serializer():
+    class Meta:
+        model = PID_3946_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_Samples_serializer():
+    class Meta:
+        model = PID_3946_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_SamplesAir_serializer():
+    class Meta:
+        model = PID_3946_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_SamplesBiota_serializer():
+    class Meta:
+        model = PID_3946_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_3946_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_SamplesSoil_serializer():
+    class Meta:
+        model = PID_3946_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_3946_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_SamplesTags_serializer():
+    class Meta:
+        model = PID_3946_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_SamplesWater_serializer():
+    class Meta:
+        model = PID_3946_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_SamplesWipe_serializer():
+    class Meta:
+        model = PID_3946_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_Site_serializer():
+    class Meta:
+        model = PID_3946_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_sysDataColumn_serializer():
+    class Meta:
+        model = PID_3946_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_3946_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_sysDataLabel_serializer():
+    class Meta:
+        model = PID_3946_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_3946_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_3946_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_sysDataMap_serializer():
+    class Meta:
+        model = PID_3946_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_3946_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_sysDataRpt_serializer():
+    class Meta:
+        model = PID_3946_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_sysDataViews_serializer():
+    class Meta:
+        model = PID_3946_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_sysKMLMap_serializer():
+    class Meta:
+        model = PID_3946_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_3946_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_sysLookupLst_serializer():
+    class Meta:
+        model = PID_3946_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_sysTableLst_serializer():
+    class Meta:
+        model = PID_3946_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_3946_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_sysTaskLst_serializer():
+    class Meta:
+        model = PID_3946_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3946_sysTasks_serializer():
+    class Meta:
+        model = PID_3946_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_ActionLevels_serializer():
+    class Meta:
+        model = PID_3984_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_COC_serializer():
+    class Meta:
+        model = PID_3984_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_3984_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_3984_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_3984_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_3984_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_EDDProperty_serializer():
+    class Meta:
+        model = PID_3984_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_3984_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_3984_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_3984_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_3984_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_Events_serializer():
+    class Meta:
+        model = PID_3984_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_Instruments_serializer():
+    class Meta:
+        model = PID_3984_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_LabAnalyses_serializer():
+    class Meta:
+        model = PID_3984_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_LabResults_serializer():
+    class Meta:
+        model = PID_3984_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_Location_serializer():
+    class Meta:
+        model = PID_3984_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_Monitoring_serializer():
+    class Meta:
+        model = PID_3984_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_PropertyInfo_serializer():
+    class Meta:
+        model = PID_3984_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_3984_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_refAnalytes_serializer():
+    class Meta:
+        model = PID_3984_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_refLabLst_serializer():
+    class Meta:
+        model = PID_3984_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_refMatrixLst_serializer():
+    class Meta:
+        model = PID_3984_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_refNames_serializer():
+    class Meta:
+        model = PID_3984_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_refPickLst_serializer():
+    class Meta:
+        model = PID_3984_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_refSGenus_serializer():
+    class Meta:
+        model = PID_3984_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_Samples_serializer():
+    class Meta:
+        model = PID_3984_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_SamplesAir_serializer():
+    class Meta:
+        model = PID_3984_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_SamplesBiota_serializer():
+    class Meta:
+        model = PID_3984_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_3984_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_SamplesSoil_serializer():
+    class Meta:
+        model = PID_3984_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_3984_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_SamplesTags_serializer():
+    class Meta:
+        model = PID_3984_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_SamplesWater_serializer():
+    class Meta:
+        model = PID_3984_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_SamplesWipe_serializer():
+    class Meta:
+        model = PID_3984_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_Site_serializer():
+    class Meta:
+        model = PID_3984_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_sysDataColumn_serializer():
+    class Meta:
+        model = PID_3984_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_3984_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_sysDataLabel_serializer():
+    class Meta:
+        model = PID_3984_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_3984_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_3984_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_sysDataMap_serializer():
+    class Meta:
+        model = PID_3984_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_3984_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_sysDataRpt_serializer():
+    class Meta:
+        model = PID_3984_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_sysDataViews_serializer():
+    class Meta:
+        model = PID_3984_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_sysKMLMap_serializer():
+    class Meta:
+        model = PID_3984_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_3984_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_sysLookupLst_serializer():
+    class Meta:
+        model = PID_3984_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_sysTableLst_serializer():
+    class Meta:
+        model = PID_3984_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_3984_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_sysTaskLst_serializer():
+    class Meta:
+        model = PID_3984_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_3984_sysTasks_serializer():
+    class Meta:
+        model = PID_3984_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_ActionLevels_serializer():
+    class Meta:
+        model = PID_4044_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_COC_serializer():
+    class Meta:
+        model = PID_4044_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4044_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4044_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4044_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4044_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_EDDProperty_serializer():
+    class Meta:
+        model = PID_4044_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4044_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4044_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4044_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4044_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_Events_serializer():
+    class Meta:
+        model = PID_4044_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_Instruments_serializer():
+    class Meta:
+        model = PID_4044_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4044_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_LabResults_serializer():
+    class Meta:
+        model = PID_4044_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_Location_serializer():
+    class Meta:
+        model = PID_4044_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_Monitoring_serializer():
+    class Meta:
+        model = PID_4044_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4044_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4044_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_refAnalytes_serializer():
+    class Meta:
+        model = PID_4044_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_refLabLst_serializer():
+    class Meta:
+        model = PID_4044_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4044_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_refNames_serializer():
+    class Meta:
+        model = PID_4044_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_refPickLst_serializer():
+    class Meta:
+        model = PID_4044_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_refSGenus_serializer():
+    class Meta:
+        model = PID_4044_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_Samples_serializer():
+    class Meta:
+        model = PID_4044_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_SamplesAir_serializer():
+    class Meta:
+        model = PID_4044_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4044_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4044_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4044_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4044_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_SamplesTags_serializer():
+    class Meta:
+        model = PID_4044_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_SamplesWater_serializer():
+    class Meta:
+        model = PID_4044_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4044_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_Site_serializer():
+    class Meta:
+        model = PID_4044_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4044_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4044_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4044_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4044_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4044_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_sysDataMap_serializer():
+    class Meta:
+        model = PID_4044_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4044_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4044_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_sysDataViews_serializer():
+    class Meta:
+        model = PID_4044_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4044_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4044_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4044_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_sysTableLst_serializer():
+    class Meta:
+        model = PID_4044_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4044_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4044_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4044_sysTasks_serializer():
+    class Meta:
+        model = PID_4044_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4046__Location_serializer():
+    class Meta:
+        model = PID_4046__Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_Location_serializer():
+    class Meta:
+        model = PID_4046_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_Sample_serializer():
+    class Meta:
+        model = PID_4046_Sample_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_ActionLevels_serializer():
+    class Meta:
+        model = PID_4046_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_COC_serializer():
+    class Meta:
+        model = PID_4046_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4046_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4046_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4046_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4046_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_EDDProperty_serializer():
+    class Meta:
+        model = PID_4046_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4046_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4046_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4046_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4046_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_Events_serializer():
+    class Meta:
+        model = PID_4046_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_Instruments_serializer():
+    class Meta:
+        model = PID_4046_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4046_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_LabResults_serializer():
+    class Meta:
+        model = PID_4046_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_Location_serializer():
+    class Meta:
+        model = PID_4046_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_Monitoring_serializer():
+    class Meta:
+        model = PID_4046_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4046_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4046_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_R9_refUnitConversion_serializer():
+    class Meta:
+        model = PID_4046_R9_refUnitConversion_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_refAnalytes_serializer():
+    class Meta:
+        model = PID_4046_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_refLabLst_serializer():
+    class Meta:
+        model = PID_4046_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4046_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_refNames_serializer():
+    class Meta:
+        model = PID_4046_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_refPickLst_serializer():
+    class Meta:
+        model = PID_4046_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_refSGenus_serializer():
+    class Meta:
+        model = PID_4046_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_Samples_serializer():
+    class Meta:
+        model = PID_4046_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_SamplesAir_serializer():
+    class Meta:
+        model = PID_4046_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4046_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4046_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4046_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4046_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_SamplesTags_serializer():
+    class Meta:
+        model = PID_4046_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_SamplesWater_serializer():
+    class Meta:
+        model = PID_4046_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4046_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_Site_serializer():
+    class Meta:
+        model = PID_4046_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4046_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4046_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4046_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4046_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4046_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_sysDataMap_serializer():
+    class Meta:
+        model = PID_4046_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4046_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4046_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_sysDataViews_serializer():
+    class Meta:
+        model = PID_4046_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4046_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4046_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4046_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_sysTableLst_serializer():
+    class Meta:
+        model = PID_4046_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4046_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4046_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4046_sysTasks_serializer():
+    class Meta:
+        model = PID_4046_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_320_57931_1Validatedtbj1kal2_serializer():
+    class Meta:
+        model = PID_4048_320_57931_1Validatedtbj1kal2_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_320_59178_1Validatedtbj1kal2_serializer():
+    class Meta:
+        model = PID_4048_320_59178_1Validatedtbj1kal2_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_440_250206_1Validated_serializer():
+    class Meta:
+        model = PID_4048_440_250206_1Validated_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_550_136699_1_22APR20_Validated_serializer():
+    class Meta:
+        model = PID_4048_550_136699_1_22APR20_Validated_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_550_136700_1_22APR20_Validated_serializer():
+    class Meta:
+        model = PID_4048_550_136700_1_22APR20_Validated_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_550_136790_1_22APR20_Validated_serializer():
+    class Meta:
+        model = PID_4048_550_136790_1_22APR20_Validated_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_550_136820_1_22APR20_Validated_serializer():
+    class Meta:
+        model = PID_4048_550_136820_1_22APR20_Validated_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_550_136831_1_22APR20_Validated_serializer():
+    class Meta:
+        model = PID_4048_550_136831_1_22APR20_Validated_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_550_136874_1_22APR20_Validated_serializer():
+    class Meta:
+        model = PID_4048_550_136874_1_22APR20_Validated_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_550_136943_1_22APR20_Validated_serializer():
+    class Meta:
+        model = PID_4048_550_136943_1_22APR20_Validated_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_550_137564_1_22APR20_Validated_serializer():
+    class Meta:
+        model = PID_4048_550_137564_1_22APR20_Validated_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_ActionLevels_serializer():
+    class Meta:
+        model = PID_4048_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_AirMonitoring_serializer():
+    class Meta:
+        model = PID_4048_AirMonitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_COC_serializer():
+    class Meta:
+        model = PID_4048_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4048_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4048_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4048_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4048_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_EDDProperty_serializer():
+    class Meta:
+        model = PID_4048_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4048_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4048_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4048_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4048_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_Events_serializer():
+    class Meta:
+        model = PID_4048_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_FactoryStreet_Cadmium_Chromium_Mercury_InSoil_serializer():
+    class Meta:
+        model = PID_4048_FactoryStreet_Cadmium_Chromium_Mercury_InSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_Instruments_serializer():
+    class Meta:
+        model = PID_4048_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4048_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_LabResults_serializer():
+    class Meta:
+        model = PID_4048_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_Location_serializer():
+    class Meta:
+        model = PID_4048_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_Monitoring_serializer():
+    class Meta:
+        model = PID_4048_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4048_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4048_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_R9_refUnitConversion_serializer():
+    class Meta:
+        model = PID_4048_R9_refUnitConversion_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_refAnalytes_serializer():
+    class Meta:
+        model = PID_4048_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_refLabLst_serializer():
+    class Meta:
+        model = PID_4048_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4048_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_refNames_serializer():
+    class Meta:
+        model = PID_4048_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_refPickLst_serializer():
+    class Meta:
+        model = PID_4048_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_refSGenus_serializer():
+    class Meta:
+        model = PID_4048_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_Samples_serializer():
+    class Meta:
+        model = PID_4048_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_SamplesAir_serializer():
+    class Meta:
+        model = PID_4048_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4048_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4048_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4048_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4048_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_SamplesTags_serializer():
+    class Meta:
+        model = PID_4048_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_SamplesWater_serializer():
+    class Meta:
+        model = PID_4048_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4048_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_Site_serializer():
+    class Meta:
+        model = PID_4048_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4048_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4048_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4048_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4048_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4048_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_sysDataMap_serializer():
+    class Meta:
+        model = PID_4048_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4048_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4048_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_sysDataViews_serializer():
+    class Meta:
+        model = PID_4048_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4048_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4048_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4048_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_sysTableLst_serializer():
+    class Meta:
+        model = PID_4048_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4048_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4048_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_sysTasks_serializer():
+    class Meta:
+        model = PID_4048_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4048_updatedstuff_serializer():
+    class Meta:
+        model = PID_4048_updatedstuff_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_edf_T10000005772_20210216_serializer():
+    class Meta:
+        model = PID_4049_edf_T10000005772_20210216_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_LaboratoryAnalyticalReportsE_serializer():
+    class Meta:
+        model = PID_4049_LaboratoryAnalyticalReportsE_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_Newlocation_serializer():
+    class Meta:
+        model = PID_4049_Newlocation_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_WellDepthtoWater_serializer():
+    class Meta:
+        model = PID_4049_WellDepthtoWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_WellXYData_serializer():
+    class Meta:
+        model = PID_4049_WellXYData_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_ActionLevels_serializer():
+    class Meta:
+        model = PID_4049_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_ActionLevelsR6_serializer():
+    class Meta:
+        model = PID_4049_ActionLevelsR6_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_COC_serializer():
+    class Meta:
+        model = PID_4049_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4049_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4049_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4049_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4049_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_EDDProperty_serializer():
+    class Meta:
+        model = PID_4049_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4049_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4049_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4049_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4049_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_Events_serializer():
+    class Meta:
+        model = PID_4049_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_Instruments_serializer():
+    class Meta:
+        model = PID_4049_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4049_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_LabResults_serializer():
+    class Meta:
+        model = PID_4049_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_Location_serializer():
+    class Meta:
+        model = PID_4049_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_Monitoring_serializer():
+    class Meta:
+        model = PID_4049_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4049_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4049_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_R9_refUnitConversion_serializer():
+    class Meta:
+        model = PID_4049_R9_refUnitConversion_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_refAnalytes_serializer():
+    class Meta:
+        model = PID_4049_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_refLabLst_serializer():
+    class Meta:
+        model = PID_4049_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4049_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_refNames_serializer():
+    class Meta:
+        model = PID_4049_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_refPickLst_serializer():
+    class Meta:
+        model = PID_4049_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_refSGenus_serializer():
+    class Meta:
+        model = PID_4049_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_Samples_serializer():
+    class Meta:
+        model = PID_4049_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_SamplesAir_serializer():
+    class Meta:
+        model = PID_4049_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4049_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4049_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4049_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4049_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_SamplesTags_serializer():
+    class Meta:
+        model = PID_4049_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_SamplesWater_serializer():
+    class Meta:
+        model = PID_4049_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4049_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_Site_serializer():
+    class Meta:
+        model = PID_4049_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4049_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4049_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4049_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4049_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4049_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_sysDataMap_serializer():
+    class Meta:
+        model = PID_4049_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4049_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4049_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_sysDataViews_serializer():
+    class Meta:
+        model = PID_4049_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4049_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4049_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4049_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_sysTableLst_serializer():
+    class Meta:
+        model = PID_4049_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4049_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4049_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4049_sysTasks_serializer():
+    class Meta:
+        model = PID_4049_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_ActionLevels_serializer():
+    class Meta:
+        model = PID_4061_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_COC_serializer():
+    class Meta:
+        model = PID_4061_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4061_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4061_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4061_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4061_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_EDDProperty_serializer():
+    class Meta:
+        model = PID_4061_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4061_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4061_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4061_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4061_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_Events_serializer():
+    class Meta:
+        model = PID_4061_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_Instruments_serializer():
+    class Meta:
+        model = PID_4061_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4061_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_LabResults_serializer():
+    class Meta:
+        model = PID_4061_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_Location_serializer():
+    class Meta:
+        model = PID_4061_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_Monitoring_serializer():
+    class Meta:
+        model = PID_4061_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4061_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4061_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_refAnalytes_serializer():
+    class Meta:
+        model = PID_4061_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_refLabLst_serializer():
+    class Meta:
+        model = PID_4061_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4061_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_refNames_serializer():
+    class Meta:
+        model = PID_4061_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_refPickLst_serializer():
+    class Meta:
+        model = PID_4061_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_refSGenus_serializer():
+    class Meta:
+        model = PID_4061_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_Samples_serializer():
+    class Meta:
+        model = PID_4061_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_SamplesAir_serializer():
+    class Meta:
+        model = PID_4061_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4061_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4061_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4061_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4061_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_SamplesTags_serializer():
+    class Meta:
+        model = PID_4061_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_SamplesWater_serializer():
+    class Meta:
+        model = PID_4061_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4061_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_Site_serializer():
+    class Meta:
+        model = PID_4061_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4061_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4061_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4061_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4061_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4061_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_sysDataMap_serializer():
+    class Meta:
+        model = PID_4061_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4061_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4061_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_sysDataViews_serializer():
+    class Meta:
+        model = PID_4061_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4061_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4061_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4061_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_sysTableLst_serializer():
+    class Meta:
+        model = PID_4061_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4061_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4061_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4061_sysTasks_serializer():
+    class Meta:
+        model = PID_4061_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_ActionLevels_serializer():
+    class Meta:
+        model = PID_4072_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_COC_serializer():
+    class Meta:
+        model = PID_4072_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4072_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4072_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4072_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4072_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_EDDProperty_serializer():
+    class Meta:
+        model = PID_4072_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4072_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4072_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4072_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4072_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_Events_serializer():
+    class Meta:
+        model = PID_4072_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_Instruments_serializer():
+    class Meta:
+        model = PID_4072_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4072_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_LabResults_serializer():
+    class Meta:
+        model = PID_4072_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_Location_serializer():
+    class Meta:
+        model = PID_4072_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_Monitoring_serializer():
+    class Meta:
+        model = PID_4072_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4072_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_refAnalytes_serializer():
+    class Meta:
+        model = PID_4072_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_refLabLst_serializer():
+    class Meta:
+        model = PID_4072_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4072_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_refNames_serializer():
+    class Meta:
+        model = PID_4072_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_refPickLst_serializer():
+    class Meta:
+        model = PID_4072_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_refSGenus_serializer():
+    class Meta:
+        model = PID_4072_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_Samples_serializer():
+    class Meta:
+        model = PID_4072_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_SamplesAir_serializer():
+    class Meta:
+        model = PID_4072_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4072_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4072_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4072_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4072_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_SamplesTags_serializer():
+    class Meta:
+        model = PID_4072_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_SamplesWater_serializer():
+    class Meta:
+        model = PID_4072_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4072_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_Site_serializer():
+    class Meta:
+        model = PID_4072_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4072_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4072_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4072_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4072_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4072_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_sysDataMap_serializer():
+    class Meta:
+        model = PID_4072_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4072_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4072_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_sysDataViews_serializer():
+    class Meta:
+        model = PID_4072_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4072_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4072_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4072_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_sysTableLst_serializer():
+    class Meta:
+        model = PID_4072_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4072_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4072_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4072_sysTasks_serializer():
+    class Meta:
+        model = PID_4072_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_320_57931_1Validatedtbj1kal2_serializer():
+    class Meta:
+        model = PID_4085_320_57931_1Validatedtbj1kal2_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_320_59178_1Validatedtbj1kal2_serializer():
+    class Meta:
+        model = PID_4085_320_59178_1Validatedtbj1kal2_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_440_250206_1Validated_serializer():
+    class Meta:
+        model = PID_4085_440_250206_1Validated_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_550_136699_1_22APR20_Validated_serializer():
+    class Meta:
+        model = PID_4085_550_136699_1_22APR20_Validated_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_550_136700_1_22APR20_Validated_serializer():
+    class Meta:
+        model = PID_4085_550_136700_1_22APR20_Validated_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_550_136790_1_22APR20_Validated_serializer():
+    class Meta:
+        model = PID_4085_550_136790_1_22APR20_Validated_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_550_136820_1_22APR20_Validated_serializer():
+    class Meta:
+        model = PID_4085_550_136820_1_22APR20_Validated_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_550_136831_1_22APR20_Validated_serializer():
+    class Meta:
+        model = PID_4085_550_136831_1_22APR20_Validated_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_550_136874_1_22APR20_Validated_serializer():
+    class Meta:
+        model = PID_4085_550_136874_1_22APR20_Validated_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_550_136943_1_22APR20_Validated_serializer():
+    class Meta:
+        model = PID_4085_550_136943_1_22APR20_Validated_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_550_137564_1_22APR20_Validated_serializer():
+    class Meta:
+        model = PID_4085_550_137564_1_22APR20_Validated_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_ActionLevels_serializer():
+    class Meta:
+        model = PID_4085_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_AirMonitoring_serializer():
+    class Meta:
+        model = PID_4085_AirMonitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_COC_serializer():
+    class Meta:
+        model = PID_4085_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4085_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4085_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4085_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4085_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_EDDProperty_serializer():
+    class Meta:
+        model = PID_4085_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4085_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4085_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4085_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4085_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_Events_serializer():
+    class Meta:
+        model = PID_4085_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_FactoryStreet_Cadmium_Chromium_Mercury_InSoil_serializer():
+    class Meta:
+        model = PID_4085_FactoryStreet_Cadmium_Chromium_Mercury_InSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_Instruments_serializer():
+    class Meta:
+        model = PID_4085_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4085_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_LabResults_serializer():
+    class Meta:
+        model = PID_4085_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_Location_serializer():
+    class Meta:
+        model = PID_4085_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_Monitoring_serializer():
+    class Meta:
+        model = PID_4085_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4085_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4085_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_R9_refUnitConversion_serializer():
+    class Meta:
+        model = PID_4085_R9_refUnitConversion_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_refAnalytes_serializer():
+    class Meta:
+        model = PID_4085_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_refLabLst_serializer():
+    class Meta:
+        model = PID_4085_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4085_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_refNames_serializer():
+    class Meta:
+        model = PID_4085_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_refPickLst_serializer():
+    class Meta:
+        model = PID_4085_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_refSGenus_serializer():
+    class Meta:
+        model = PID_4085_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_Samples_serializer():
+    class Meta:
+        model = PID_4085_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_SamplesAir_serializer():
+    class Meta:
+        model = PID_4085_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4085_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4085_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4085_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4085_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_SamplesTags_serializer():
+    class Meta:
+        model = PID_4085_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_SamplesWater_serializer():
+    class Meta:
+        model = PID_4085_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4085_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_Site_serializer():
+    class Meta:
+        model = PID_4085_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4085_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4085_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4085_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4085_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4085_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_sysDataMap_serializer():
+    class Meta:
+        model = PID_4085_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4085_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4085_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_sysDataViews_serializer():
+    class Meta:
+        model = PID_4085_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4085_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4085_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4085_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_sysTableLst_serializer():
+    class Meta:
+        model = PID_4085_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4085_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4085_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4085_sysTasks_serializer():
+    class Meta:
+        model = PID_4085_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_ActionLevels_serializer():
+    class Meta:
+        model = PID_4087_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_COC_serializer():
+    class Meta:
+        model = PID_4087_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4087_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4087_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4087_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4087_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_EDDProperty_serializer():
+    class Meta:
+        model = PID_4087_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4087_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4087_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4087_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4087_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_Events_serializer():
+    class Meta:
+        model = PID_4087_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_Instruments_serializer():
+    class Meta:
+        model = PID_4087_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4087_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_LabResults_serializer():
+    class Meta:
+        model = PID_4087_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_Location_serializer():
+    class Meta:
+        model = PID_4087_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_Monitoring_serializer():
+    class Meta:
+        model = PID_4087_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4087_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4087_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_refAnalytes_serializer():
+    class Meta:
+        model = PID_4087_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_refLabLst_serializer():
+    class Meta:
+        model = PID_4087_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4087_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_refNames_serializer():
+    class Meta:
+        model = PID_4087_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_refPickLst_serializer():
+    class Meta:
+        model = PID_4087_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_refSGenus_serializer():
+    class Meta:
+        model = PID_4087_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_Samples_serializer():
+    class Meta:
+        model = PID_4087_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_SamplesAir_serializer():
+    class Meta:
+        model = PID_4087_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4087_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4087_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4087_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4087_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_SamplesTags_serializer():
+    class Meta:
+        model = PID_4087_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_SamplesWater_serializer():
+    class Meta:
+        model = PID_4087_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4087_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_Site_serializer():
+    class Meta:
+        model = PID_4087_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4087_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4087_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4087_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4087_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4087_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_sysDataMap_serializer():
+    class Meta:
+        model = PID_4087_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4087_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4087_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_sysDataViews_serializer():
+    class Meta:
+        model = PID_4087_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4087_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4087_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4087_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_sysTableLst_serializer():
+    class Meta:
+        model = PID_4087_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4087_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4087_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4087_sysTasks_serializer():
+    class Meta:
+        model = PID_4087_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_ActionLevels_serializer():
+    class Meta:
+        model = PID_4091_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_COC_serializer():
+    class Meta:
+        model = PID_4091_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4091_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4091_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4091_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4091_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_EDDProperty_serializer():
+    class Meta:
+        model = PID_4091_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4091_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4091_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4091_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4091_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_Events_serializer():
+    class Meta:
+        model = PID_4091_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_Instruments_serializer():
+    class Meta:
+        model = PID_4091_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4091_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_LabResults_serializer():
+    class Meta:
+        model = PID_4091_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_Location_serializer():
+    class Meta:
+        model = PID_4091_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_Monitoring_serializer():
+    class Meta:
+        model = PID_4091_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4091_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4091_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_R9_refUnitConversion_serializer():
+    class Meta:
+        model = PID_4091_R9_refUnitConversion_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_refAnalytes_serializer():
+    class Meta:
+        model = PID_4091_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_refLabLst_serializer():
+    class Meta:
+        model = PID_4091_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4091_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_refNames_serializer():
+    class Meta:
+        model = PID_4091_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_refPickLst_serializer():
+    class Meta:
+        model = PID_4091_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_refSGenus_serializer():
+    class Meta:
+        model = PID_4091_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_Samples_serializer():
+    class Meta:
+        model = PID_4091_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_SamplesAir_serializer():
+    class Meta:
+        model = PID_4091_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4091_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4091_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4091_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4091_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_SamplesTags_serializer():
+    class Meta:
+        model = PID_4091_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_SamplesWater_serializer():
+    class Meta:
+        model = PID_4091_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4091_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_Site_serializer():
+    class Meta:
+        model = PID_4091_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4091_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4091_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4091_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4091_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4091_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_sysDataMap_serializer():
+    class Meta:
+        model = PID_4091_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4091_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4091_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_sysDataViews_serializer():
+    class Meta:
+        model = PID_4091_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4091_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4091_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4091_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_sysTableLst_serializer():
+    class Meta:
+        model = PID_4091_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4091_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4091_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4091_sysTasks_serializer():
+    class Meta:
+        model = PID_4091_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_ActionLevels_serializer():
+    class Meta:
+        model = PID_4105_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_BsaIL_serializer():
+    class Meta:
+        model = PID_4105_BsaIL_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_BsaSites_serializer():
+    class Meta:
+        model = PID_4105_BsaSites_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_COC_serializer():
+    class Meta:
+        model = PID_4105_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4105_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4105_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4105_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4105_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_EDDProperty_serializer():
+    class Meta:
+        model = PID_4105_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4105_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4105_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4105_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4105_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_Events_serializer():
+    class Meta:
+        model = PID_4105_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_Instruments_serializer():
+    class Meta:
+        model = PID_4105_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4105_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_LabResults_serializer():
+    class Meta:
+        model = PID_4105_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_Location_serializer():
+    class Meta:
+        model = PID_4105_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_Monitoring_serializer():
+    class Meta:
+        model = PID_4105_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4105_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4105_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_refAnalytes_serializer():
+    class Meta:
+        model = PID_4105_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_refLabLst_serializer():
+    class Meta:
+        model = PID_4105_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4105_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_refNames_serializer():
+    class Meta:
+        model = PID_4105_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_refPickLst_serializer():
+    class Meta:
+        model = PID_4105_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_refSGenus_serializer():
+    class Meta:
+        model = PID_4105_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_Samples_serializer():
+    class Meta:
+        model = PID_4105_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_SamplesAir_serializer():
+    class Meta:
+        model = PID_4105_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4105_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4105_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4105_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4105_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_SamplesTags_serializer():
+    class Meta:
+        model = PID_4105_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_SamplesWater_serializer():
+    class Meta:
+        model = PID_4105_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4105_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_Site_serializer():
+    class Meta:
+        model = PID_4105_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4105_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4105_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4105_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4105_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4105_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_sysDataMap_serializer():
+    class Meta:
+        model = PID_4105_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4105_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4105_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_sysDataViews_serializer():
+    class Meta:
+        model = PID_4105_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4105_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4105_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4105_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_sysTableLst_serializer():
+    class Meta:
+        model = PID_4105_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4105_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4105_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_sysTasks_serializer():
+    class Meta:
+        model = PID_4105_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_ver_ScribeTemplate_serializer():
+    class Meta:
+        model = PID_4105_ver_ScribeTemplate_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_vv_General_serializer():
+    class Meta:
+        model = PID_4105_vv_General_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_vv_Geology_serializer():
+    class Meta:
+        model = PID_4105_vv_Geology_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_vv_LabResults_serializer():
+    class Meta:
+        model = PID_4105_vv_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4105_vv_Mine_serializer():
+    class Meta:
+        model = PID_4105_vv_Mine_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_ActionLevels_serializer():
+    class Meta:
+        model = PID_4108_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_COC_serializer():
+    class Meta:
+        model = PID_4108_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4108_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4108_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4108_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4108_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_EDDProperty_serializer():
+    class Meta:
+        model = PID_4108_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4108_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4108_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4108_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4108_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_Events_serializer():
+    class Meta:
+        model = PID_4108_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_Instruments_serializer():
+    class Meta:
+        model = PID_4108_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4108_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_LabResults_serializer():
+    class Meta:
+        model = PID_4108_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_Monitoring_serializer():
+    class Meta:
+        model = PID_4108_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4108_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_refAnalytes_serializer():
+    class Meta:
+        model = PID_4108_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_refLabLst_serializer():
+    class Meta:
+        model = PID_4108_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4108_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_refNames_serializer():
+    class Meta:
+        model = PID_4108_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_refPickLst_serializer():
+    class Meta:
+        model = PID_4108_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_refSGenus_serializer():
+    class Meta:
+        model = PID_4108_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_Samples_serializer():
+    class Meta:
+        model = PID_4108_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_SamplesAir_serializer():
+    class Meta:
+        model = PID_4108_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4108_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4108_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4108_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4108_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_SamplesTags_serializer():
+    class Meta:
+        model = PID_4108_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_SamplesWater_serializer():
+    class Meta:
+        model = PID_4108_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4108_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_Site_serializer():
+    class Meta:
+        model = PID_4108_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4108_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4108_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4108_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4108_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4108_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_sysDataMap_serializer():
+    class Meta:
+        model = PID_4108_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4108_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4108_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_sysDataViews_serializer():
+    class Meta:
+        model = PID_4108_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4108_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4108_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4108_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_sysTableLst_serializer():
+    class Meta:
+        model = PID_4108_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4108_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4108_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4108_sysTasks_serializer():
+    class Meta:
+        model = PID_4108_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_ActionLevels_serializer():
+    class Meta:
+        model = PID_4111_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_COC_serializer():
+    class Meta:
+        model = PID_4111_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4111_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4111_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4111_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4111_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_EDDProperty_serializer():
+    class Meta:
+        model = PID_4111_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4111_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4111_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4111_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4111_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_Events_serializer():
+    class Meta:
+        model = PID_4111_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_Instruments_serializer():
+    class Meta:
+        model = PID_4111_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4111_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_LabResults_serializer():
+    class Meta:
+        model = PID_4111_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_Location_serializer():
+    class Meta:
+        model = PID_4111_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_Monitoring_serializer():
+    class Meta:
+        model = PID_4111_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4111_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4111_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_refAnalytes_serializer():
+    class Meta:
+        model = PID_4111_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_refLabLst_serializer():
+    class Meta:
+        model = PID_4111_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4111_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_refNames_serializer():
+    class Meta:
+        model = PID_4111_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_refPickLst_serializer():
+    class Meta:
+        model = PID_4111_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_refSGenus_serializer():
+    class Meta:
+        model = PID_4111_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_Samples_serializer():
+    class Meta:
+        model = PID_4111_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_SamplesAir_serializer():
+    class Meta:
+        model = PID_4111_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4111_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4111_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4111_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4111_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_SamplesTags_serializer():
+    class Meta:
+        model = PID_4111_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_SamplesWater_serializer():
+    class Meta:
+        model = PID_4111_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4111_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_Site_serializer():
+    class Meta:
+        model = PID_4111_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4111_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4111_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4111_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4111_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4111_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_sysDataMap_serializer():
+    class Meta:
+        model = PID_4111_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4111_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4111_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_sysDataViews_serializer():
+    class Meta:
+        model = PID_4111_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4111_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4111_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4111_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_sysTableLst_serializer():
+    class Meta:
+        model = PID_4111_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4111_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4111_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4111_sysTasks_serializer():
+    class Meta:
+        model = PID_4111_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_ActionLevels_serializer():
+    class Meta:
+        model = PID_4127_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_COC_serializer():
+    class Meta:
+        model = PID_4127_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4127_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4127_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4127_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4127_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_EDDProperty_serializer():
+    class Meta:
+        model = PID_4127_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4127_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4127_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4127_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4127_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_Events_serializer():
+    class Meta:
+        model = PID_4127_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_Instruments_serializer():
+    class Meta:
+        model = PID_4127_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4127_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_LabResults_serializer():
+    class Meta:
+        model = PID_4127_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_Location_serializer():
+    class Meta:
+        model = PID_4127_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_Monitoring_serializer():
+    class Meta:
+        model = PID_4127_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4127_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4127_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_R9_refUnitConversion_serializer():
+    class Meta:
+        model = PID_4127_R9_refUnitConversion_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_refAnalytes_serializer():
+    class Meta:
+        model = PID_4127_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_refLabLst_serializer():
+    class Meta:
+        model = PID_4127_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4127_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_refNames_serializer():
+    class Meta:
+        model = PID_4127_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_refPickLst_serializer():
+    class Meta:
+        model = PID_4127_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_refSGenus_serializer():
+    class Meta:
+        model = PID_4127_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_Samples_serializer():
+    class Meta:
+        model = PID_4127_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_SamplesAir_serializer():
+    class Meta:
+        model = PID_4127_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4127_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4127_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4127_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4127_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_SamplesTags_serializer():
+    class Meta:
+        model = PID_4127_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_SamplesWater_serializer():
+    class Meta:
+        model = PID_4127_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4127_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_Site_serializer():
+    class Meta:
+        model = PID_4127_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4127_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4127_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4127_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4127_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4127_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_sysDataMap_serializer():
+    class Meta:
+        model = PID_4127_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4127_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4127_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_sysDataViews_serializer():
+    class Meta:
+        model = PID_4127_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4127_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4127_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4127_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_sysTableLst_serializer():
+    class Meta:
+        model = PID_4127_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4127_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4127_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4127_sysTasks_serializer():
+    class Meta:
+        model = PID_4127_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_ActionLevels_serializer():
+    class Meta:
+        model = PID_4129_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_COC_serializer():
+    class Meta:
+        model = PID_4129_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4129_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4129_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4129_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4129_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_EDDProperty_serializer():
+    class Meta:
+        model = PID_4129_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4129_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4129_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4129_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4129_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_Events_serializer():
+    class Meta:
+        model = PID_4129_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_Instruments_serializer():
+    class Meta:
+        model = PID_4129_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4129_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_LabResults_serializer():
+    class Meta:
+        model = PID_4129_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_Location_serializer():
+    class Meta:
+        model = PID_4129_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_Monitoring_serializer():
+    class Meta:
+        model = PID_4129_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4129_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4129_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_R9_refUnitConversion_serializer():
+    class Meta:
+        model = PID_4129_R9_refUnitConversion_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_refAnalytes_serializer():
+    class Meta:
+        model = PID_4129_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_refLabLst_serializer():
+    class Meta:
+        model = PID_4129_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4129_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_refNames_serializer():
+    class Meta:
+        model = PID_4129_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_refPickLst_serializer():
+    class Meta:
+        model = PID_4129_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_refSGenus_serializer():
+    class Meta:
+        model = PID_4129_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_Samples_serializer():
+    class Meta:
+        model = PID_4129_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_SamplesAir_serializer():
+    class Meta:
+        model = PID_4129_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4129_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4129_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4129_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4129_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_SamplesTags_serializer():
+    class Meta:
+        model = PID_4129_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_SamplesWater_serializer():
+    class Meta:
+        model = PID_4129_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4129_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_Site_serializer():
+    class Meta:
+        model = PID_4129_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4129_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4129_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4129_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4129_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4129_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_sysDataMap_serializer():
+    class Meta:
+        model = PID_4129_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4129_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4129_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_sysDataViews_serializer():
+    class Meta:
+        model = PID_4129_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4129_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4129_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4129_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_sysTableLst_serializer():
+    class Meta:
+        model = PID_4129_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4129_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4129_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_sysTasks_serializer():
+    class Meta:
+        model = PID_4129_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4129_WST25417Validated_serializer():
+    class Meta:
+        model = PID_4129_WST25417Validated_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_ActionLevels_serializer():
+    class Meta:
+        model = PID_4130_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_COC_serializer():
+    class Meta:
+        model = PID_4130_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4130_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4130_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4130_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4130_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_EDDProperty_serializer():
+    class Meta:
+        model = PID_4130_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4130_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4130_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4130_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4130_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_Events_serializer():
+    class Meta:
+        model = PID_4130_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_Instruments_serializer():
+    class Meta:
+        model = PID_4130_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4130_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_LabResults_serializer():
+    class Meta:
+        model = PID_4130_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_Location_serializer():
+    class Meta:
+        model = PID_4130_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_Monitoring_serializer():
+    class Meta:
+        model = PID_4130_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4130_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4130_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_refAnalytes_serializer():
+    class Meta:
+        model = PID_4130_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_refLabLst_serializer():
+    class Meta:
+        model = PID_4130_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4130_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_refNames_serializer():
+    class Meta:
+        model = PID_4130_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_refPickLst_serializer():
+    class Meta:
+        model = PID_4130_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_refSGenus_serializer():
+    class Meta:
+        model = PID_4130_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_Samples_serializer():
+    class Meta:
+        model = PID_4130_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_SamplesAir_serializer():
+    class Meta:
+        model = PID_4130_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4130_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4130_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4130_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4130_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_SamplesTags_serializer():
+    class Meta:
+        model = PID_4130_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_SamplesWater_serializer():
+    class Meta:
+        model = PID_4130_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4130_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_Site_serializer():
+    class Meta:
+        model = PID_4130_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4130_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4130_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4130_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4130_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4130_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_sysDataMap_serializer():
+    class Meta:
+        model = PID_4130_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4130_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4130_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_sysDataViews_serializer():
+    class Meta:
+        model = PID_4130_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4130_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4130_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4130_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_sysTableLst_serializer():
+    class Meta:
+        model = PID_4130_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4130_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4130_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4130_sysTasks_serializer():
+    class Meta:
+        model = PID_4130_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_ActionLevels_serializer():
+    class Meta:
+        model = PID_4154_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_COC_serializer():
+    class Meta:
+        model = PID_4154_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4154_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4154_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4154_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4154_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_EDDProperty_serializer():
+    class Meta:
+        model = PID_4154_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4154_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4154_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4154_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4154_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_Events_serializer():
+    class Meta:
+        model = PID_4154_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_Instruments_serializer():
+    class Meta:
+        model = PID_4154_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4154_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_LabResults_serializer():
+    class Meta:
+        model = PID_4154_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_Location_serializer():
+    class Meta:
+        model = PID_4154_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_Monitoring_serializer():
+    class Meta:
+        model = PID_4154_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4154_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4154_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_refAnalytes_serializer():
+    class Meta:
+        model = PID_4154_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_refLabLst_serializer():
+    class Meta:
+        model = PID_4154_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4154_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_refNames_serializer():
+    class Meta:
+        model = PID_4154_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_refPickLst_serializer():
+    class Meta:
+        model = PID_4154_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_refSGenus_serializer():
+    class Meta:
+        model = PID_4154_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_Samples_serializer():
+    class Meta:
+        model = PID_4154_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_SamplesAir_serializer():
+    class Meta:
+        model = PID_4154_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4154_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4154_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4154_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4154_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_SamplesTags_serializer():
+    class Meta:
+        model = PID_4154_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_SamplesWater_serializer():
+    class Meta:
+        model = PID_4154_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4154_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_SampleWind_serializer():
+    class Meta:
+        model = PID_4154_SampleWind_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_Site_serializer():
+    class Meta:
+        model = PID_4154_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4154_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4154_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4154_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4154_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4154_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_sysDataMap_serializer():
+    class Meta:
+        model = PID_4154_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4154_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4154_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_sysDataViews_serializer():
+    class Meta:
+        model = PID_4154_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4154_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4154_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4154_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_sysTableLst_serializer():
+    class Meta:
+        model = PID_4154_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4154_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4154_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4154_sysTasks_serializer():
+    class Meta:
+        model = PID_4154_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_ActionLevels_serializer():
+    class Meta:
+        model = PID_4205_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_COC_serializer():
+    class Meta:
+        model = PID_4205_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4205_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4205_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4205_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4205_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_EDDProperty_serializer():
+    class Meta:
+        model = PID_4205_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4205_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4205_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4205_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4205_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_Events_serializer():
+    class Meta:
+        model = PID_4205_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_Instruments_serializer():
+    class Meta:
+        model = PID_4205_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4205_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_LabResults_serializer():
+    class Meta:
+        model = PID_4205_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_Location_serializer():
+    class Meta:
+        model = PID_4205_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_Monitoring_serializer():
+    class Meta:
+        model = PID_4205_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4205_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4205_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_RECORD_LINEAGE_serializer():
+    class Meta:
+        model = PID_4205_RECORD_LINEAGE_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_refAnalytes_serializer():
+    class Meta:
+        model = PID_4205_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_refLabLst_serializer():
+    class Meta:
+        model = PID_4205_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4205_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_refNames_serializer():
+    class Meta:
+        model = PID_4205_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_refPickLst_serializer():
+    class Meta:
+        model = PID_4205_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_refSGenus_serializer():
+    class Meta:
+        model = PID_4205_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_Samples_serializer():
+    class Meta:
+        model = PID_4205_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_SamplesAir_serializer():
+    class Meta:
+        model = PID_4205_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4205_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4205_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4205_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4205_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_SamplesTags_serializer():
+    class Meta:
+        model = PID_4205_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_SamplesWater_serializer():
+    class Meta:
+        model = PID_4205_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4205_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_Site_serializer():
+    class Meta:
+        model = PID_4205_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4205_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4205_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4205_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4205_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4205_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_sysDataMap_serializer():
+    class Meta:
+        model = PID_4205_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4205_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4205_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_sysDataViews_serializer():
+    class Meta:
+        model = PID_4205_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4205_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4205_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4205_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_sysTableLst_serializer():
+    class Meta:
+        model = PID_4205_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4205_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4205_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4205_sysTasks_serializer():
+    class Meta:
+        model = PID_4205_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_ActionLevels_serializer():
+    class Meta:
+        model = PID_4229_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_COC_serializer():
+    class Meta:
+        model = PID_4229_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4229_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4229_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4229_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4229_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_EDDProperty_serializer():
+    class Meta:
+        model = PID_4229_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4229_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4229_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4229_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4229_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_Events_serializer():
+    class Meta:
+        model = PID_4229_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_Instruments_serializer():
+    class Meta:
+        model = PID_4229_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4229_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_LabResults_serializer():
+    class Meta:
+        model = PID_4229_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_Location_serializer():
+    class Meta:
+        model = PID_4229_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_Monitoring_serializer():
+    class Meta:
+        model = PID_4229_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4229_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4229_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_refAnalytes_serializer():
+    class Meta:
+        model = PID_4229_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_refLabLst_serializer():
+    class Meta:
+        model = PID_4229_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4229_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_refNames_serializer():
+    class Meta:
+        model = PID_4229_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_refPickLst_serializer():
+    class Meta:
+        model = PID_4229_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_refSGenus_serializer():
+    class Meta:
+        model = PID_4229_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_Samples_serializer():
+    class Meta:
+        model = PID_4229_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_SamplesAir_serializer():
+    class Meta:
+        model = PID_4229_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4229_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4229_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4229_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4229_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_SamplesTags_serializer():
+    class Meta:
+        model = PID_4229_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_SamplesWater_serializer():
+    class Meta:
+        model = PID_4229_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4229_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_Site_serializer():
+    class Meta:
+        model = PID_4229_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4229_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4229_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4229_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4229_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4229_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_sysDataMap_serializer():
+    class Meta:
+        model = PID_4229_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4229_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4229_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_sysDataViews_serializer():
+    class Meta:
+        model = PID_4229_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4229_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4229_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4229_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_sysTableLst_serializer():
+    class Meta:
+        model = PID_4229_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4229_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4229_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4229_sysTasks_serializer():
+    class Meta:
+        model = PID_4229_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_ActionLevels_serializer():
+    class Meta:
+        model = PID_4233_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_COC_serializer():
+    class Meta:
+        model = PID_4233_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4233_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4233_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4233_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4233_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_EDDProperty_serializer():
+    class Meta:
+        model = PID_4233_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4233_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4233_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4233_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4233_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_Events_serializer():
+    class Meta:
+        model = PID_4233_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_Instruments_serializer():
+    class Meta:
+        model = PID_4233_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4233_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_LabResults_serializer():
+    class Meta:
+        model = PID_4233_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_Location_serializer():
+    class Meta:
+        model = PID_4233_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_Monitoring_serializer():
+    class Meta:
+        model = PID_4233_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4233_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4233_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_refAnalytes_serializer():
+    class Meta:
+        model = PID_4233_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_refLabLst_serializer():
+    class Meta:
+        model = PID_4233_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4233_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_refNames_serializer():
+    class Meta:
+        model = PID_4233_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_refPickLst_serializer():
+    class Meta:
+        model = PID_4233_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_refSGenus_serializer():
+    class Meta:
+        model = PID_4233_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_Samples_serializer():
+    class Meta:
+        model = PID_4233_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_SamplesAir_serializer():
+    class Meta:
+        model = PID_4233_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4233_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4233_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4233_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4233_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_SamplesTags_serializer():
+    class Meta:
+        model = PID_4233_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_SamplesWater_serializer():
+    class Meta:
+        model = PID_4233_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4233_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_Site_serializer():
+    class Meta:
+        model = PID_4233_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4233_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4233_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4233_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4233_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4233_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_sysDataMap_serializer():
+    class Meta:
+        model = PID_4233_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4233_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4233_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_sysDataViews_serializer():
+    class Meta:
+        model = PID_4233_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4233_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4233_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4233_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_sysTableLst_serializer():
+    class Meta:
+        model = PID_4233_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4233_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4233_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4233_sysTasks_serializer():
+    class Meta:
+        model = PID_4233_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_ActionLevels_serializer():
+    class Meta:
+        model = PID_4234_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_COC_serializer():
+    class Meta:
+        model = PID_4234_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4234_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4234_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4234_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4234_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_EDDProperty_serializer():
+    class Meta:
+        model = PID_4234_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4234_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4234_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4234_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4234_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_Events_serializer():
+    class Meta:
+        model = PID_4234_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_Instruments_serializer():
+    class Meta:
+        model = PID_4234_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4234_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_LabResults_serializer():
+    class Meta:
+        model = PID_4234_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_Location_serializer():
+    class Meta:
+        model = PID_4234_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_Monitoring_serializer():
+    class Meta:
+        model = PID_4234_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4234_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4234_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_refAnalytes_serializer():
+    class Meta:
+        model = PID_4234_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_refLabLst_serializer():
+    class Meta:
+        model = PID_4234_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4234_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_refNames_serializer():
+    class Meta:
+        model = PID_4234_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_refPickLst_serializer():
+    class Meta:
+        model = PID_4234_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_refSGenus_serializer():
+    class Meta:
+        model = PID_4234_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_Samples_serializer():
+    class Meta:
+        model = PID_4234_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_SamplesAir_serializer():
+    class Meta:
+        model = PID_4234_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4234_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4234_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4234_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4234_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_SamplesTags_serializer():
+    class Meta:
+        model = PID_4234_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_SamplesWater_serializer():
+    class Meta:
+        model = PID_4234_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4234_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_Site_serializer():
+    class Meta:
+        model = PID_4234_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4234_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4234_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4234_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4234_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4234_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_sysDataMap_serializer():
+    class Meta:
+        model = PID_4234_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4234_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4234_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_sysDataViews_serializer():
+    class Meta:
+        model = PID_4234_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4234_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4234_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4234_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_sysTableLst_serializer():
+    class Meta:
+        model = PID_4234_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4234_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4234_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4234_sysTasks_serializer():
+    class Meta:
+        model = PID_4234_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_ActionLevels_serializer():
+    class Meta:
+        model = PID_4255_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_COC_serializer():
+    class Meta:
+        model = PID_4255_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4255_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4255_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4255_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4255_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_EDDProperty_serializer():
+    class Meta:
+        model = PID_4255_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4255_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4255_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4255_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4255_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_Events_serializer():
+    class Meta:
+        model = PID_4255_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_Instruments_serializer():
+    class Meta:
+        model = PID_4255_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4255_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_LabResults_serializer():
+    class Meta:
+        model = PID_4255_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_Location_serializer():
+    class Meta:
+        model = PID_4255_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_Monitoring_serializer():
+    class Meta:
+        model = PID_4255_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4255_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4255_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_refAnalytes_serializer():
+    class Meta:
+        model = PID_4255_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_refLabLst_serializer():
+    class Meta:
+        model = PID_4255_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4255_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_refNames_serializer():
+    class Meta:
+        model = PID_4255_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_refPickLst_serializer():
+    class Meta:
+        model = PID_4255_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_refSGenus_serializer():
+    class Meta:
+        model = PID_4255_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_Samples_serializer():
+    class Meta:
+        model = PID_4255_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_SamplesAir_serializer():
+    class Meta:
+        model = PID_4255_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4255_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4255_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4255_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4255_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_SamplesTags_serializer():
+    class Meta:
+        model = PID_4255_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_SamplesWater_serializer():
+    class Meta:
+        model = PID_4255_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4255_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_Site_serializer():
+    class Meta:
+        model = PID_4255_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4255_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4255_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4255_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4255_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4255_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_sysDataMap_serializer():
+    class Meta:
+        model = PID_4255_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4255_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4255_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_sysDataViews_serializer():
+    class Meta:
+        model = PID_4255_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4255_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4255_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4255_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_sysTableLst_serializer():
+    class Meta:
+        model = PID_4255_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4255_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4255_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4255_sysTasks_serializer():
+    class Meta:
+        model = PID_4255_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_ActionLevels_serializer():
+    class Meta:
+        model = PID_4269_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_COC_serializer():
+    class Meta:
+        model = PID_4269_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4269_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4269_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4269_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4269_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_EDDProperty_serializer():
+    class Meta:
+        model = PID_4269_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4269_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4269_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4269_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4269_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_Events_serializer():
+    class Meta:
+        model = PID_4269_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_Instruments_serializer():
+    class Meta:
+        model = PID_4269_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4269_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_LabResults_serializer():
+    class Meta:
+        model = PID_4269_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_Location_serializer():
+    class Meta:
+        model = PID_4269_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_Monitoring_serializer():
+    class Meta:
+        model = PID_4269_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4269_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4269_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_refAnalytes_serializer():
+    class Meta:
+        model = PID_4269_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_refLabLst_serializer():
+    class Meta:
+        model = PID_4269_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4269_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_refNames_serializer():
+    class Meta:
+        model = PID_4269_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_refPickLst_serializer():
+    class Meta:
+        model = PID_4269_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_refSGenus_serializer():
+    class Meta:
+        model = PID_4269_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_Samples_serializer():
+    class Meta:
+        model = PID_4269_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_SamplesAir_serializer():
+    class Meta:
+        model = PID_4269_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4269_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4269_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4269_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4269_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_SamplesTags_serializer():
+    class Meta:
+        model = PID_4269_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_SamplesWater_serializer():
+    class Meta:
+        model = PID_4269_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4269_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_Site_serializer():
+    class Meta:
+        model = PID_4269_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4269_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4269_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4269_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4269_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4269_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_sysDataMap_serializer():
+    class Meta:
+        model = PID_4269_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4269_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4269_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_sysDataViews_serializer():
+    class Meta:
+        model = PID_4269_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4269_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4269_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4269_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_sysTableLst_serializer():
+    class Meta:
+        model = PID_4269_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4269_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4269_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4269_sysTasks_serializer():
+    class Meta:
+        model = PID_4269_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_ActionLevels_serializer():
+    class Meta:
+        model = PID_4295_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_COC_serializer():
+    class Meta:
+        model = PID_4295_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4295_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4295_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4295_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4295_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_EDDProperty_serializer():
+    class Meta:
+        model = PID_4295_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4295_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4295_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4295_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4295_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_Events_serializer():
+    class Meta:
+        model = PID_4295_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_Instruments_serializer():
+    class Meta:
+        model = PID_4295_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4295_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_LabResults_serializer():
+    class Meta:
+        model = PID_4295_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_Location_serializer():
+    class Meta:
+        model = PID_4295_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_Monitoring_serializer():
+    class Meta:
+        model = PID_4295_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4295_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4295_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_refAnalytes_serializer():
+    class Meta:
+        model = PID_4295_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_refLabLst_serializer():
+    class Meta:
+        model = PID_4295_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4295_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_refNames_serializer():
+    class Meta:
+        model = PID_4295_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_refPickLst_serializer():
+    class Meta:
+        model = PID_4295_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_refSGenus_serializer():
+    class Meta:
+        model = PID_4295_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_Samples_serializer():
+    class Meta:
+        model = PID_4295_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_SamplesAir_serializer():
+    class Meta:
+        model = PID_4295_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4295_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4295_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4295_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4295_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_SamplesTags_serializer():
+    class Meta:
+        model = PID_4295_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_SamplesWater_serializer():
+    class Meta:
+        model = PID_4295_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4295_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_Site_serializer():
+    class Meta:
+        model = PID_4295_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4295_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4295_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4295_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4295_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4295_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_sysDataMap_serializer():
+    class Meta:
+        model = PID_4295_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4295_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4295_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_sysDataViews_serializer():
+    class Meta:
+        model = PID_4295_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4295_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4295_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4295_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_sysTableLst_serializer():
+    class Meta:
+        model = PID_4295_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4295_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4295_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4295_sysTasks_serializer():
+    class Meta:
+        model = PID_4295_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_ActionLevels_serializer():
+    class Meta:
+        model = PID_4296_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_COC_serializer():
+    class Meta:
+        model = PID_4296_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4296_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4296_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4296_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4296_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_EDDProperty_serializer():
+    class Meta:
+        model = PID_4296_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4296_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4296_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4296_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4296_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_Events_serializer():
+    class Meta:
+        model = PID_4296_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_Instruments_serializer():
+    class Meta:
+        model = PID_4296_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4296_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_LabResults_serializer():
+    class Meta:
+        model = PID_4296_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_Location_serializer():
+    class Meta:
+        model = PID_4296_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_Monitoring_serializer():
+    class Meta:
+        model = PID_4296_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4296_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4296_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_refAnalytes_serializer():
+    class Meta:
+        model = PID_4296_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_refLabLst_serializer():
+    class Meta:
+        model = PID_4296_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4296_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_refNames_serializer():
+    class Meta:
+        model = PID_4296_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_refPickLst_serializer():
+    class Meta:
+        model = PID_4296_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_refSGenus_serializer():
+    class Meta:
+        model = PID_4296_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_Samples_serializer():
+    class Meta:
+        model = PID_4296_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_SamplesAir_serializer():
+    class Meta:
+        model = PID_4296_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4296_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4296_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4296_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4296_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_SamplesTags_serializer():
+    class Meta:
+        model = PID_4296_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_SamplesWater_serializer():
+    class Meta:
+        model = PID_4296_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4296_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_Site_serializer():
+    class Meta:
+        model = PID_4296_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4296_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4296_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4296_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4296_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4296_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_sysDataMap_serializer():
+    class Meta:
+        model = PID_4296_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4296_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4296_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_sysDataViews_serializer():
+    class Meta:
+        model = PID_4296_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4296_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4296_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4296_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_sysTableLst_serializer():
+    class Meta:
+        model = PID_4296_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4296_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4296_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4296_sysTasks_serializer():
+    class Meta:
+        model = PID_4296_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_ActionLevels_serializer():
+    class Meta:
+        model = PID_4298_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_COC_serializer():
+    class Meta:
+        model = PID_4298_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4298_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4298_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4298_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4298_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_EDDProperty_serializer():
+    class Meta:
+        model = PID_4298_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4298_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4298_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4298_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4298_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_Events_serializer():
+    class Meta:
+        model = PID_4298_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_Instruments_serializer():
+    class Meta:
+        model = PID_4298_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4298_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_LabResults_serializer():
+    class Meta:
+        model = PID_4298_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_Location_serializer():
+    class Meta:
+        model = PID_4298_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_Monitoring_serializer():
+    class Meta:
+        model = PID_4298_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4298_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4298_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_refAnalytes_serializer():
+    class Meta:
+        model = PID_4298_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_refLabLst_serializer():
+    class Meta:
+        model = PID_4298_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4298_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_refNames_serializer():
+    class Meta:
+        model = PID_4298_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_refPickLst_serializer():
+    class Meta:
+        model = PID_4298_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_refSGenus_serializer():
+    class Meta:
+        model = PID_4298_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_Samples_serializer():
+    class Meta:
+        model = PID_4298_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_SamplesAir_serializer():
+    class Meta:
+        model = PID_4298_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4298_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4298_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4298_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4298_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_SamplesTags_serializer():
+    class Meta:
+        model = PID_4298_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_SamplesWater_serializer():
+    class Meta:
+        model = PID_4298_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4298_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_Site_serializer():
+    class Meta:
+        model = PID_4298_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4298_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4298_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4298_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4298_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4298_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_sysDataMap_serializer():
+    class Meta:
+        model = PID_4298_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4298_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4298_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_sysDataViews_serializer():
+    class Meta:
+        model = PID_4298_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4298_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4298_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4298_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_sysTableLst_serializer():
+    class Meta:
+        model = PID_4298_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4298_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4298_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4298_sysTasks_serializer():
+    class Meta:
+        model = PID_4298_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_ActionLevels_serializer():
+    class Meta:
+        model = PID_4312_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_COC_serializer():
+    class Meta:
+        model = PID_4312_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4312_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4312_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4312_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4312_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_EDDProperty_serializer():
+    class Meta:
+        model = PID_4312_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4312_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4312_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4312_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4312_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_Events_serializer():
+    class Meta:
+        model = PID_4312_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_Instruments_serializer():
+    class Meta:
+        model = PID_4312_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4312_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_LabResults_serializer():
+    class Meta:
+        model = PID_4312_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_Location_serializer():
+    class Meta:
+        model = PID_4312_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_Monitoring_serializer():
+    class Meta:
+        model = PID_4312_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4312_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4312_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_refAnalytes_serializer():
+    class Meta:
+        model = PID_4312_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_refLabLst_serializer():
+    class Meta:
+        model = PID_4312_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4312_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_refNames_serializer():
+    class Meta:
+        model = PID_4312_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_refPickLst_serializer():
+    class Meta:
+        model = PID_4312_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_refSGenus_serializer():
+    class Meta:
+        model = PID_4312_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_Samples_serializer():
+    class Meta:
+        model = PID_4312_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_SamplesAir_serializer():
+    class Meta:
+        model = PID_4312_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4312_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4312_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4312_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4312_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_SamplesTags_serializer():
+    class Meta:
+        model = PID_4312_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_SamplesWater_serializer():
+    class Meta:
+        model = PID_4312_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4312_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_Site_serializer():
+    class Meta:
+        model = PID_4312_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4312_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4312_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4312_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4312_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4312_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_sysDataMap_serializer():
+    class Meta:
+        model = PID_4312_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4312_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4312_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_sysDataViews_serializer():
+    class Meta:
+        model = PID_4312_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4312_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4312_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4312_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_sysTableLst_serializer():
+    class Meta:
+        model = PID_4312_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4312_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4312_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4312_sysTasks_serializer():
+    class Meta:
+        model = PID_4312_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_ActionLevels_serializer():
+    class Meta:
+        model = PID_4433_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_COC_serializer():
+    class Meta:
+        model = PID_4433_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4433_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4433_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4433_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4433_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_EDDProperty_serializer():
+    class Meta:
+        model = PID_4433_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4433_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4433_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4433_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4433_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_Events_serializer():
+    class Meta:
+        model = PID_4433_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_Instruments_serializer():
+    class Meta:
+        model = PID_4433_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4433_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_LabResults_serializer():
+    class Meta:
+        model = PID_4433_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_Location_serializer():
+    class Meta:
+        model = PID_4433_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_Monitoring_serializer():
+    class Meta:
+        model = PID_4433_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4433_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4433_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_R9_refUnitConversion_serializer():
+    class Meta:
+        model = PID_4433_R9_refUnitConversion_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_refAnalytes_serializer():
+    class Meta:
+        model = PID_4433_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_refLabLst_serializer():
+    class Meta:
+        model = PID_4433_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4433_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_refNames_serializer():
+    class Meta:
+        model = PID_4433_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_refPickLst_serializer():
+    class Meta:
+        model = PID_4433_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_refSGenus_serializer():
+    class Meta:
+        model = PID_4433_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_Samples_serializer():
+    class Meta:
+        model = PID_4433_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_SamplesAir_serializer():
+    class Meta:
+        model = PID_4433_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4433_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4433_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4433_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4433_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_SamplesTags_serializer():
+    class Meta:
+        model = PID_4433_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_SamplesWater_serializer():
+    class Meta:
+        model = PID_4433_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4433_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_Site_serializer():
+    class Meta:
+        model = PID_4433_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4433_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4433_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4433_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4433_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4433_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_sysDataMap_serializer():
+    class Meta:
+        model = PID_4433_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4433_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4433_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_sysDataViews_serializer():
+    class Meta:
+        model = PID_4433_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4433_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4433_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4433_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_sysTableLst_serializer():
+    class Meta:
+        model = PID_4433_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4433_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4433_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_sysTasks_serializer():
+    class Meta:
+        model = PID_4433_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_WST26410_serializer():
+    class Meta:
+        model = PID_4433_WST26410_model
+        fields = "__all__"
+
+
+class dbo_PID_4433_WST26411_26412_serializer():
+    class Meta:
+        model = PID_4433_WST26411_26412_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_ActionLevels_serializer():
+    class Meta:
+        model = PID_4453_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_COC_serializer():
+    class Meta:
+        model = PID_4453_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4453_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4453_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4453_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4453_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_EDDProperty_serializer():
+    class Meta:
+        model = PID_4453_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4453_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4453_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4453_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4453_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_Events_serializer():
+    class Meta:
+        model = PID_4453_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_Instruments_serializer():
+    class Meta:
+        model = PID_4453_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4453_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_LabResults_serializer():
+    class Meta:
+        model = PID_4453_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_Location_serializer():
+    class Meta:
+        model = PID_4453_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_Monitoring_serializer():
+    class Meta:
+        model = PID_4453_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4453_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4453_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_R9_refUnitConversion_serializer():
+    class Meta:
+        model = PID_4453_R9_refUnitConversion_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_refAnalytes_serializer():
+    class Meta:
+        model = PID_4453_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_refLabLst_serializer():
+    class Meta:
+        model = PID_4453_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4453_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_refNames_serializer():
+    class Meta:
+        model = PID_4453_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_refPickLst_serializer():
+    class Meta:
+        model = PID_4453_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_refSGenus_serializer():
+    class Meta:
+        model = PID_4453_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_Samples_serializer():
+    class Meta:
+        model = PID_4453_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_SamplesAir_serializer():
+    class Meta:
+        model = PID_4453_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4453_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4453_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4453_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4453_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_SamplesTags_serializer():
+    class Meta:
+        model = PID_4453_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_SamplesWater_serializer():
+    class Meta:
+        model = PID_4453_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4453_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_Site_serializer():
+    class Meta:
+        model = PID_4453_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4453_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4453_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4453_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4453_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4453_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_sysDataMap_serializer():
+    class Meta:
+        model = PID_4453_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4453_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4453_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_sysDataViews_serializer():
+    class Meta:
+        model = PID_4453_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4453_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4453_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4453_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_sysTableLst_serializer():
+    class Meta:
+        model = PID_4453_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4453_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4453_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4453_sysTasks_serializer():
+    class Meta:
+        model = PID_4453_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_ActionLevels_serializer():
+    class Meta:
+        model = PID_4454_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_COC_serializer():
+    class Meta:
+        model = PID_4454_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4454_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4454_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4454_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4454_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_EDDProperty_serializer():
+    class Meta:
+        model = PID_4454_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4454_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4454_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4454_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4454_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_Events_serializer():
+    class Meta:
+        model = PID_4454_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_Instruments_serializer():
+    class Meta:
+        model = PID_4454_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4454_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_LabResults_serializer():
+    class Meta:
+        model = PID_4454_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_Location_serializer():
+    class Meta:
+        model = PID_4454_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_Monitoring_serializer():
+    class Meta:
+        model = PID_4454_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4454_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4454_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_R9_refUnitConversion_serializer():
+    class Meta:
+        model = PID_4454_R9_refUnitConversion_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_refAnalytes_serializer():
+    class Meta:
+        model = PID_4454_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_refLabLst_serializer():
+    class Meta:
+        model = PID_4454_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4454_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_refNames_serializer():
+    class Meta:
+        model = PID_4454_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_refPickLst_serializer():
+    class Meta:
+        model = PID_4454_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_refSGenus_serializer():
+    class Meta:
+        model = PID_4454_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_Samples_serializer():
+    class Meta:
+        model = PID_4454_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_SamplesAir_serializer():
+    class Meta:
+        model = PID_4454_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4454_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4454_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4454_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4454_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_SamplesTags_serializer():
+    class Meta:
+        model = PID_4454_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_SamplesWater_serializer():
+    class Meta:
+        model = PID_4454_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4454_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_Site_serializer():
+    class Meta:
+        model = PID_4454_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4454_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4454_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4454_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4454_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4454_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_sysDataMap_serializer():
+    class Meta:
+        model = PID_4454_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4454_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4454_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_sysDataViews_serializer():
+    class Meta:
+        model = PID_4454_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4454_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4454_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4454_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_sysTableLst_serializer():
+    class Meta:
+        model = PID_4454_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4454_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4454_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4454_sysTasks_serializer():
+    class Meta:
+        model = PID_4454_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_ActionLevels_serializer():
+    class Meta:
+        model = PID_4461_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_COC_serializer():
+    class Meta:
+        model = PID_4461_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4461_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4461_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4461_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4461_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_EDDProperty_serializer():
+    class Meta:
+        model = PID_4461_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4461_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4461_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4461_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4461_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_Events_serializer():
+    class Meta:
+        model = PID_4461_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_Instruments_serializer():
+    class Meta:
+        model = PID_4461_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4461_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_LabResults_serializer():
+    class Meta:
+        model = PID_4461_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_LabResults_Historic_serializer():
+    class Meta:
+        model = PID_4461_LabResults_Historic_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_LabResults_Historic_Not_Corrected_serializer():
+    class Meta:
+        model = PID_4461_LabResults_Historic_Not_Corrected_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_Location_serializer():
+    class Meta:
+        model = PID_4461_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_Monitoring_serializer():
+    class Meta:
+        model = PID_4461_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4461_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4461_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_refAnalytes_serializer():
+    class Meta:
+        model = PID_4461_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_refLabLst_serializer():
+    class Meta:
+        model = PID_4461_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4461_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_refNames_serializer():
+    class Meta:
+        model = PID_4461_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_refPickLst_serializer():
+    class Meta:
+        model = PID_4461_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_refSGenus_serializer():
+    class Meta:
+        model = PID_4461_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_Samples_serializer():
+    class Meta:
+        model = PID_4461_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_SamplesAir_serializer():
+    class Meta:
+        model = PID_4461_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4461_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4461_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4461_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4461_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_SamplesTags_serializer():
+    class Meta:
+        model = PID_4461_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_SamplesWater_serializer():
+    class Meta:
+        model = PID_4461_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4461_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_Site_serializer():
+    class Meta:
+        model = PID_4461_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4461_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4461_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4461_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4461_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4461_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_sysDataMap_serializer():
+    class Meta:
+        model = PID_4461_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4461_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4461_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_sysDataViews_serializer():
+    class Meta:
+        model = PID_4461_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4461_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4461_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4461_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_sysTableLst_serializer():
+    class Meta:
+        model = PID_4461_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4461_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4461_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_sysTasks_serializer():
+    class Meta:
+        model = PID_4461_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_ver_ScribeTemplate_serializer():
+    class Meta:
+        model = PID_4461_ver_ScribeTemplate_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_vv_General_serializer():
+    class Meta:
+        model = PID_4461_vv_General_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_vv_Geology_serializer():
+    class Meta:
+        model = PID_4461_vv_Geology_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_vv_LabResults_serializer():
+    class Meta:
+        model = PID_4461_vv_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4461_vv_Mine_serializer():
+    class Meta:
+        model = PID_4461_vv_Mine_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_ActionLevels_serializer():
+    class Meta:
+        model = PID_4462_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_COC_serializer():
+    class Meta:
+        model = PID_4462_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4462_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4462_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4462_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4462_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_EDDProperty_serializer():
+    class Meta:
+        model = PID_4462_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4462_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4462_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4462_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4462_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_Events_serializer():
+    class Meta:
+        model = PID_4462_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_Field_XRF_serializer():
+    class Meta:
+        model = PID_4462_Field_XRF_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_Instruments_serializer():
+    class Meta:
+        model = PID_4462_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4462_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_LabResults_serializer():
+    class Meta:
+        model = PID_4462_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_Location_serializer():
+    class Meta:
+        model = PID_4462_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_Monitoring_serializer():
+    class Meta:
+        model = PID_4462_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4462_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4462_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_refAnalytes_serializer():
+    class Meta:
+        model = PID_4462_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_refLabLst_serializer():
+    class Meta:
+        model = PID_4462_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4462_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_refNames_serializer():
+    class Meta:
+        model = PID_4462_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_refPickLst_serializer():
+    class Meta:
+        model = PID_4462_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_refSGenus_serializer():
+    class Meta:
+        model = PID_4462_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_Samples_serializer():
+    class Meta:
+        model = PID_4462_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_SamplesAir_serializer():
+    class Meta:
+        model = PID_4462_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4462_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4462_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4462_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4462_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_SamplesTags_serializer():
+    class Meta:
+        model = PID_4462_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_SamplesWater_serializer():
+    class Meta:
+        model = PID_4462_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4462_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_Site_serializer():
+    class Meta:
+        model = PID_4462_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4462_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4462_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4462_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4462_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4462_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_sysDataMap_serializer():
+    class Meta:
+        model = PID_4462_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4462_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4462_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_sysDataViews_serializer():
+    class Meta:
+        model = PID_4462_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4462_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4462_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4462_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_sysTableLst_serializer():
+    class Meta:
+        model = PID_4462_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4462_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4462_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_sysTasks_serializer():
+    class Meta:
+        model = PID_4462_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_ver_ScribeTemplate_serializer():
+    class Meta:
+        model = PID_4462_ver_ScribeTemplate_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_vv_General_serializer():
+    class Meta:
+        model = PID_4462_vv_General_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_vv_Geology_serializer():
+    class Meta:
+        model = PID_4462_vv_Geology_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_vv_LabResults_serializer():
+    class Meta:
+        model = PID_4462_vv_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4462_vv_Mine_serializer():
+    class Meta:
+        model = PID_4462_vv_Mine_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_ActionLevels_serializer():
+    class Meta:
+        model = PID_4489_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_COC_serializer():
+    class Meta:
+        model = PID_4489_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4489_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4489_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4489_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4489_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_EDDProperty_serializer():
+    class Meta:
+        model = PID_4489_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4489_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4489_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4489_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4489_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_Events_serializer():
+    class Meta:
+        model = PID_4489_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_Instruments_serializer():
+    class Meta:
+        model = PID_4489_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4489_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_LabResults_serializer():
+    class Meta:
+        model = PID_4489_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_Location_serializer():
+    class Meta:
+        model = PID_4489_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_Monitoring_serializer():
+    class Meta:
+        model = PID_4489_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4489_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4489_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_refAnalytes_serializer():
+    class Meta:
+        model = PID_4489_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_refLabLst_serializer():
+    class Meta:
+        model = PID_4489_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4489_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_refNames_serializer():
+    class Meta:
+        model = PID_4489_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_refPickLst_serializer():
+    class Meta:
+        model = PID_4489_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_refSGenus_serializer():
+    class Meta:
+        model = PID_4489_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_Samples_serializer():
+    class Meta:
+        model = PID_4489_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_SamplesAir_serializer():
+    class Meta:
+        model = PID_4489_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4489_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4489_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4489_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4489_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_SamplesTags_serializer():
+    class Meta:
+        model = PID_4489_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_SamplesWater_serializer():
+    class Meta:
+        model = PID_4489_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4489_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_Site_serializer():
+    class Meta:
+        model = PID_4489_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4489_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4489_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4489_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4489_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4489_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_sysDataMap_serializer():
+    class Meta:
+        model = PID_4489_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4489_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4489_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_sysDataViews_serializer():
+    class Meta:
+        model = PID_4489_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4489_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4489_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4489_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_sysTableLst_serializer():
+    class Meta:
+        model = PID_4489_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4489_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4489_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4489_sysTasks_serializer():
+    class Meta:
+        model = PID_4489_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_ActionLevels_serializer():
+    class Meta:
+        model = PID_4493_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_COC_serializer():
+    class Meta:
+        model = PID_4493_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4493_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4493_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4493_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4493_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_EDDProperty_serializer():
+    class Meta:
+        model = PID_4493_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4493_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4493_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4493_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4493_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_Events_serializer():
+    class Meta:
+        model = PID_4493_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_Instruments_serializer():
+    class Meta:
+        model = PID_4493_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4493_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_LabResults_serializer():
+    class Meta:
+        model = PID_4493_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_Location_serializer():
+    class Meta:
+        model = PID_4493_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_Monitoring_serializer():
+    class Meta:
+        model = PID_4493_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4493_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4493_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_R9_refUnitConversion_serializer():
+    class Meta:
+        model = PID_4493_R9_refUnitConversion_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_refAnalytes_serializer():
+    class Meta:
+        model = PID_4493_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_refLabLst_serializer():
+    class Meta:
+        model = PID_4493_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4493_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_refNames_serializer():
+    class Meta:
+        model = PID_4493_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_refPickLst_serializer():
+    class Meta:
+        model = PID_4493_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_refSGenus_serializer():
+    class Meta:
+        model = PID_4493_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_Samples_serializer():
+    class Meta:
+        model = PID_4493_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_SamplesAir_serializer():
+    class Meta:
+        model = PID_4493_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4493_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4493_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4493_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4493_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_SamplesTags_serializer():
+    class Meta:
+        model = PID_4493_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_SamplesWater_serializer():
+    class Meta:
+        model = PID_4493_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4493_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_Site_serializer():
+    class Meta:
+        model = PID_4493_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4493_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4493_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4493_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4493_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4493_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_sysDataMap_serializer():
+    class Meta:
+        model = PID_4493_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4493_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4493_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_sysDataViews_serializer():
+    class Meta:
+        model = PID_4493_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4493_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4493_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4493_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_sysTableLst_serializer():
+    class Meta:
+        model = PID_4493_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4493_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4493_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4493_sysTasks_serializer():
+    class Meta:
+        model = PID_4493_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_ActionLevels_serializer():
+    class Meta:
+        model = PID_4494_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_COC_serializer():
+    class Meta:
+        model = PID_4494_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4494_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4494_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4494_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4494_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_EDDProperty_serializer():
+    class Meta:
+        model = PID_4494_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4494_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4494_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4494_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4494_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_Events_serializer():
+    class Meta:
+        model = PID_4494_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_Instruments_serializer():
+    class Meta:
+        model = PID_4494_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4494_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_LabResults_serializer():
+    class Meta:
+        model = PID_4494_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_Location_serializer():
+    class Meta:
+        model = PID_4494_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_Monitoring_serializer():
+    class Meta:
+        model = PID_4494_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4494_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4494_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_refAnalytes_serializer():
+    class Meta:
+        model = PID_4494_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_refLabLst_serializer():
+    class Meta:
+        model = PID_4494_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4494_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_refNames_serializer():
+    class Meta:
+        model = PID_4494_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_refPickLst_serializer():
+    class Meta:
+        model = PID_4494_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_refSGenus_serializer():
+    class Meta:
+        model = PID_4494_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_Samples_serializer():
+    class Meta:
+        model = PID_4494_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_SamplesAir_serializer():
+    class Meta:
+        model = PID_4494_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4494_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4494_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4494_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4494_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_SamplesTags_serializer():
+    class Meta:
+        model = PID_4494_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_SamplesWater_serializer():
+    class Meta:
+        model = PID_4494_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4494_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_Site_serializer():
+    class Meta:
+        model = PID_4494_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4494_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4494_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4494_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4494_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4494_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_sysDataMap_serializer():
+    class Meta:
+        model = PID_4494_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4494_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4494_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_sysDataViews_serializer():
+    class Meta:
+        model = PID_4494_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4494_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4494_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4494_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_sysTableLst_serializer():
+    class Meta:
+        model = PID_4494_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4494_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4494_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_sysTasks_serializer():
+    class Meta:
+        model = PID_4494_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4494_TestPingTable_serializer():
+    class Meta:
+        model = PID_4494_TestPingTable_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_Sawmill_EDD_serializer():
+    class Meta:
+        model = PID_4500_Sawmill_EDD_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_Sawmill_Locations_serializer():
+    class Meta:
+        model = PID_4500_Sawmill_Locations_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_Sawmill_Samples_serializer():
+    class Meta:
+        model = PID_4500_Sawmill_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_ActionLevels_serializer():
+    class Meta:
+        model = PID_4500_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_COC_serializer():
+    class Meta:
+        model = PID_4500_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4500_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4500_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4500_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4500_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_EDDProperty_serializer():
+    class Meta:
+        model = PID_4500_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4500_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4500_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4500_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4500_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_Events_serializer():
+    class Meta:
+        model = PID_4500_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_Instruments_serializer():
+    class Meta:
+        model = PID_4500_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4500_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_LabResults_serializer():
+    class Meta:
+        model = PID_4500_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_Location_serializer():
+    class Meta:
+        model = PID_4500_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_Monitoring_serializer():
+    class Meta:
+        model = PID_4500_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4500_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4500_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_R9_refUnitConversion_serializer():
+    class Meta:
+        model = PID_4500_R9_refUnitConversion_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_refAnalytes_serializer():
+    class Meta:
+        model = PID_4500_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_refLabLst_serializer():
+    class Meta:
+        model = PID_4500_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4500_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_refNames_serializer():
+    class Meta:
+        model = PID_4500_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_refPickLst_serializer():
+    class Meta:
+        model = PID_4500_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_refSGenus_serializer():
+    class Meta:
+        model = PID_4500_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_Samples_serializer():
+    class Meta:
+        model = PID_4500_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_SamplesAir_serializer():
+    class Meta:
+        model = PID_4500_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4500_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4500_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4500_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4500_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_SamplesTags_serializer():
+    class Meta:
+        model = PID_4500_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_SamplesWater_serializer():
+    class Meta:
+        model = PID_4500_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4500_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_Site_serializer():
+    class Meta:
+        model = PID_4500_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4500_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4500_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4500_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4500_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4500_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_sysDataMap_serializer():
+    class Meta:
+        model = PID_4500_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4500_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4500_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_sysDataViews_serializer():
+    class Meta:
+        model = PID_4500_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4500_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4500_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4500_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_sysTableLst_serializer():
+    class Meta:
+        model = PID_4500_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4500_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4500_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4500_sysTasks_serializer():
+    class Meta:
+        model = PID_4500_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_ActionLevels_serializer():
+    class Meta:
+        model = PID_4510_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_COC_serializer():
+    class Meta:
+        model = PID_4510_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4510_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4510_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4510_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4510_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_EDDProperty_serializer():
+    class Meta:
+        model = PID_4510_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4510_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4510_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4510_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4510_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_Events_serializer():
+    class Meta:
+        model = PID_4510_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_Instruments_serializer():
+    class Meta:
+        model = PID_4510_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4510_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_LabResults_serializer():
+    class Meta:
+        model = PID_4510_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_Location_serializer():
+    class Meta:
+        model = PID_4510_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_Monitoring_serializer():
+    class Meta:
+        model = PID_4510_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4510_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4510_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_R9_refUnitConversion_serializer():
+    class Meta:
+        model = PID_4510_R9_refUnitConversion_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_refAnalytes_serializer():
+    class Meta:
+        model = PID_4510_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_refLabLst_serializer():
+    class Meta:
+        model = PID_4510_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4510_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_refNames_serializer():
+    class Meta:
+        model = PID_4510_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_refPickLst_serializer():
+    class Meta:
+        model = PID_4510_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_refSGenus_serializer():
+    class Meta:
+        model = PID_4510_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_Samples_serializer():
+    class Meta:
+        model = PID_4510_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_SamplesAir_serializer():
+    class Meta:
+        model = PID_4510_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4510_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4510_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4510_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4510_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_SamplesTags_serializer():
+    class Meta:
+        model = PID_4510_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_SamplesWater_serializer():
+    class Meta:
+        model = PID_4510_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4510_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_Site_serializer():
+    class Meta:
+        model = PID_4510_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4510_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4510_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4510_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4510_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4510_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_sysDataMap_serializer():
+    class Meta:
+        model = PID_4510_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4510_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4510_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_sysDataViews_serializer():
+    class Meta:
+        model = PID_4510_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4510_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4510_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4510_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_sysTableLst_serializer():
+    class Meta:
+        model = PID_4510_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4510_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4510_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4510_sysTasks_serializer():
+    class Meta:
+        model = PID_4510_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_ActionLevels_serializer():
+    class Meta:
+        model = PID_4514_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_COC_serializer():
+    class Meta:
+        model = PID_4514_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4514_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4514_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4514_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4514_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_EDDProperty_serializer():
+    class Meta:
+        model = PID_4514_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4514_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4514_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4514_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4514_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_Events_serializer():
+    class Meta:
+        model = PID_4514_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_Instruments_serializer():
+    class Meta:
+        model = PID_4514_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4514_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_LabResults_serializer():
+    class Meta:
+        model = PID_4514_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_Location_serializer():
+    class Meta:
+        model = PID_4514_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_Monitoring_serializer():
+    class Meta:
+        model = PID_4514_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4514_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4514_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_refAnalytes_serializer():
+    class Meta:
+        model = PID_4514_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_refLabLst_serializer():
+    class Meta:
+        model = PID_4514_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4514_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_refNames_serializer():
+    class Meta:
+        model = PID_4514_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_refPickLst_serializer():
+    class Meta:
+        model = PID_4514_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_refSGenus_serializer():
+    class Meta:
+        model = PID_4514_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_Samples_serializer():
+    class Meta:
+        model = PID_4514_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_SamplesAir_serializer():
+    class Meta:
+        model = PID_4514_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4514_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4514_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4514_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4514_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_SamplesTags_serializer():
+    class Meta:
+        model = PID_4514_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_SamplesWater_serializer():
+    class Meta:
+        model = PID_4514_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4514_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_Site_serializer():
+    class Meta:
+        model = PID_4514_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4514_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4514_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4514_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4514_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4514_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_sysDataMap_serializer():
+    class Meta:
+        model = PID_4514_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4514_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4514_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_sysDataViews_serializer():
+    class Meta:
+        model = PID_4514_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4514_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4514_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4514_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_sysTableLst_serializer():
+    class Meta:
+        model = PID_4514_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4514_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4514_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4514_sysTasks_serializer():
+    class Meta:
+        model = PID_4514_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_ActionLevels_serializer():
+    class Meta:
+        model = PID_4515_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_COC_serializer():
+    class Meta:
+        model = PID_4515_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4515_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4515_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4515_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4515_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_EDDProperty_serializer():
+    class Meta:
+        model = PID_4515_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4515_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4515_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4515_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4515_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_Events_serializer():
+    class Meta:
+        model = PID_4515_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_Instruments_serializer():
+    class Meta:
+        model = PID_4515_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4515_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_LabResults_serializer():
+    class Meta:
+        model = PID_4515_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_Location_serializer():
+    class Meta:
+        model = PID_4515_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_Monitoring_serializer():
+    class Meta:
+        model = PID_4515_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4515_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4515_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_refAnalytes_serializer():
+    class Meta:
+        model = PID_4515_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_refLabLst_serializer():
+    class Meta:
+        model = PID_4515_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4515_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_refNames_serializer():
+    class Meta:
+        model = PID_4515_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_refPickLst_serializer():
+    class Meta:
+        model = PID_4515_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_refSGenus_serializer():
+    class Meta:
+        model = PID_4515_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_Samples_serializer():
+    class Meta:
+        model = PID_4515_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_SamplesAir_serializer():
+    class Meta:
+        model = PID_4515_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4515_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4515_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4515_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4515_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_SamplesTags_serializer():
+    class Meta:
+        model = PID_4515_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_SamplesWater_serializer():
+    class Meta:
+        model = PID_4515_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4515_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_Site_serializer():
+    class Meta:
+        model = PID_4515_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4515_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4515_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4515_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4515_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4515_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_sysDataMap_serializer():
+    class Meta:
+        model = PID_4515_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4515_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4515_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_sysDataViews_serializer():
+    class Meta:
+        model = PID_4515_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4515_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4515_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4515_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_sysTableLst_serializer():
+    class Meta:
+        model = PID_4515_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4515_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4515_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4515_sysTasks_serializer():
+    class Meta:
+        model = PID_4515_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_ActionLevels_serializer():
+    class Meta:
+        model = PID_4516_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_COC_serializer():
+    class Meta:
+        model = PID_4516_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4516_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4516_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4516_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4516_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_EDDProperty_serializer():
+    class Meta:
+        model = PID_4516_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4516_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4516_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4516_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4516_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_Events_serializer():
+    class Meta:
+        model = PID_4516_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_Instruments_serializer():
+    class Meta:
+        model = PID_4516_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4516_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_LabResults_serializer():
+    class Meta:
+        model = PID_4516_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_Location_serializer():
+    class Meta:
+        model = PID_4516_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_Monitoring_serializer():
+    class Meta:
+        model = PID_4516_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4516_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4516_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_refAnalytes_serializer():
+    class Meta:
+        model = PID_4516_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_refLabLst_serializer():
+    class Meta:
+        model = PID_4516_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4516_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_refNames_serializer():
+    class Meta:
+        model = PID_4516_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_refPickLst_serializer():
+    class Meta:
+        model = PID_4516_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_refSGenus_serializer():
+    class Meta:
+        model = PID_4516_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_Samples_serializer():
+    class Meta:
+        model = PID_4516_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_SamplesAir_serializer():
+    class Meta:
+        model = PID_4516_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4516_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4516_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4516_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4516_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_SamplesTags_serializer():
+    class Meta:
+        model = PID_4516_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_SamplesWater_serializer():
+    class Meta:
+        model = PID_4516_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4516_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_Site_serializer():
+    class Meta:
+        model = PID_4516_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4516_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4516_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4516_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4516_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4516_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_sysDataMap_serializer():
+    class Meta:
+        model = PID_4516_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4516_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4516_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_sysDataViews_serializer():
+    class Meta:
+        model = PID_4516_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4516_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4516_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4516_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_sysTableLst_serializer():
+    class Meta:
+        model = PID_4516_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4516_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4516_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4516_sysTasks_serializer():
+    class Meta:
+        model = PID_4516_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_ActionLevels_serializer():
+    class Meta:
+        model = PID_4518_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_COC_serializer():
+    class Meta:
+        model = PID_4518_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4518_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4518_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4518_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4518_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_EDDProperty_serializer():
+    class Meta:
+        model = PID_4518_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4518_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4518_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4518_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4518_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_Events_serializer():
+    class Meta:
+        model = PID_4518_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_Instruments_serializer():
+    class Meta:
+        model = PID_4518_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4518_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_LabResults_serializer():
+    class Meta:
+        model = PID_4518_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_Location_serializer():
+    class Meta:
+        model = PID_4518_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_Monitoring_serializer():
+    class Meta:
+        model = PID_4518_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4518_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4518_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_R9_refUnitConversion_serializer():
+    class Meta:
+        model = PID_4518_R9_refUnitConversion_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_refAnalytes_serializer():
+    class Meta:
+        model = PID_4518_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_refLabLst_serializer():
+    class Meta:
+        model = PID_4518_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4518_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_refNames_serializer():
+    class Meta:
+        model = PID_4518_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_refPickLst_serializer():
+    class Meta:
+        model = PID_4518_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_refSGenus_serializer():
+    class Meta:
+        model = PID_4518_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_Samples_serializer():
+    class Meta:
+        model = PID_4518_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_SamplesAir_serializer():
+    class Meta:
+        model = PID_4518_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4518_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4518_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4518_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4518_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_SamplesTags_serializer():
+    class Meta:
+        model = PID_4518_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_SamplesWater_serializer():
+    class Meta:
+        model = PID_4518_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4518_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_Site_serializer():
+    class Meta:
+        model = PID_4518_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4518_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4518_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4518_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4518_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4518_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_sysDataMap_serializer():
+    class Meta:
+        model = PID_4518_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4518_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4518_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_sysDataViews_serializer():
+    class Meta:
+        model = PID_4518_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4518_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4518_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4518_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_sysTableLst_serializer():
+    class Meta:
+        model = PID_4518_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4518_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4518_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4518_sysTasks_serializer():
+    class Meta:
+        model = PID_4518_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_ActionLevels_serializer():
+    class Meta:
+        model = PID_4528_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_BsaIL_serializer():
+    class Meta:
+        model = PID_4528_BsaIL_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_BsaSites_serializer():
+    class Meta:
+        model = PID_4528_BsaSites_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_COC_serializer():
+    class Meta:
+        model = PID_4528_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4528_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4528_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4528_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4528_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_EDDProperty_serializer():
+    class Meta:
+        model = PID_4528_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4528_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4528_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4528_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4528_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_Events_serializer():
+    class Meta:
+        model = PID_4528_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_Instruments_serializer():
+    class Meta:
+        model = PID_4528_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4528_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_LabResults_serializer():
+    class Meta:
+        model = PID_4528_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_Location_serializer():
+    class Meta:
+        model = PID_4528_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_Monitoring_serializer():
+    class Meta:
+        model = PID_4528_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4528_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4528_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_refAnalytes_serializer():
+    class Meta:
+        model = PID_4528_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_refLabLst_serializer():
+    class Meta:
+        model = PID_4528_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4528_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_refNames_serializer():
+    class Meta:
+        model = PID_4528_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_refPickLst_serializer():
+    class Meta:
+        model = PID_4528_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_refSGenus_serializer():
+    class Meta:
+        model = PID_4528_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_Samples_serializer():
+    class Meta:
+        model = PID_4528_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_SamplesAir_serializer():
+    class Meta:
+        model = PID_4528_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4528_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4528_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4528_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4528_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_SamplesTags_serializer():
+    class Meta:
+        model = PID_4528_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_SamplesWater_serializer():
+    class Meta:
+        model = PID_4528_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4528_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_Site_serializer():
+    class Meta:
+        model = PID_4528_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4528_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4528_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4528_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4528_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4528_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_sysDataMap_serializer():
+    class Meta:
+        model = PID_4528_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4528_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4528_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_sysDataViews_serializer():
+    class Meta:
+        model = PID_4528_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4528_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4528_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4528_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_sysTableLst_serializer():
+    class Meta:
+        model = PID_4528_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4528_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4528_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_sysTasks_serializer():
+    class Meta:
+        model = PID_4528_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_ver_ScribeTemplate_serializer():
+    class Meta:
+        model = PID_4528_ver_ScribeTemplate_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_vv_General_serializer():
+    class Meta:
+        model = PID_4528_vv_General_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_vv_Geology_serializer():
+    class Meta:
+        model = PID_4528_vv_Geology_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_vv_LabResults_serializer():
+    class Meta:
+        model = PID_4528_vv_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4528_vv_Mine_serializer():
+    class Meta:
+        model = PID_4528_vv_Mine_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_ActionLevels_serializer():
+    class Meta:
+        model = PID_4553_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_COC_serializer():
+    class Meta:
+        model = PID_4553_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4553_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4553_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4553_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4553_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_EDDProperty_serializer():
+    class Meta:
+        model = PID_4553_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4553_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4553_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4553_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4553_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_Events_serializer():
+    class Meta:
+        model = PID_4553_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_Instruments_serializer():
+    class Meta:
+        model = PID_4553_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4553_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_LabResults_serializer():
+    class Meta:
+        model = PID_4553_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_Location_serializer():
+    class Meta:
+        model = PID_4553_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_Location_old_serializer():
+    class Meta:
+        model = PID_4553_Location_old_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_Monitoring_serializer():
+    class Meta:
+        model = PID_4553_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4553_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4553_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_RECORD_LINEAGE_serializer():
+    class Meta:
+        model = PID_4553_RECORD_LINEAGE_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_refAnalytes_serializer():
+    class Meta:
+        model = PID_4553_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_refLabLst_serializer():
+    class Meta:
+        model = PID_4553_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4553_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_refNames_serializer():
+    class Meta:
+        model = PID_4553_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_refPickLst_serializer():
+    class Meta:
+        model = PID_4553_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_refSGenus_serializer():
+    class Meta:
+        model = PID_4553_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_Samples_serializer():
+    class Meta:
+        model = PID_4553_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_SamplesAir_serializer():
+    class Meta:
+        model = PID_4553_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4553_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4553_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4553_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4553_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_SamplesTags_serializer():
+    class Meta:
+        model = PID_4553_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_SamplesWater_serializer():
+    class Meta:
+        model = PID_4553_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4553_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_Site_serializer():
+    class Meta:
+        model = PID_4553_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4553_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4553_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4553_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4553_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4553_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_sysDataMap_serializer():
+    class Meta:
+        model = PID_4553_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4553_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4553_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_sysDataViews_serializer():
+    class Meta:
+        model = PID_4553_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4553_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4553_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4553_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_sysTableLst_serializer():
+    class Meta:
+        model = PID_4553_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4553_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4553_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4553_sysTasks_serializer():
+    class Meta:
+        model = PID_4553_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_ActionLevels_serializer():
+    class Meta:
+        model = PID_4556_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_COC_serializer():
+    class Meta:
+        model = PID_4556_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4556_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4556_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4556_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4556_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_EDDProperty_serializer():
+    class Meta:
+        model = PID_4556_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4556_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4556_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4556_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4556_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_Events_serializer():
+    class Meta:
+        model = PID_4556_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_Instruments_serializer():
+    class Meta:
+        model = PID_4556_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4556_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_LabResults_serializer():
+    class Meta:
+        model = PID_4556_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_Location_serializer():
+    class Meta:
+        model = PID_4556_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_Monitoring_serializer():
+    class Meta:
+        model = PID_4556_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4556_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4556_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_RECORD_LINEAGE_serializer():
+    class Meta:
+        model = PID_4556_RECORD_LINEAGE_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_refAnalytes_serializer():
+    class Meta:
+        model = PID_4556_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_refLabLst_serializer():
+    class Meta:
+        model = PID_4556_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4556_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_refNames_serializer():
+    class Meta:
+        model = PID_4556_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_refPickLst_serializer():
+    class Meta:
+        model = PID_4556_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_refSGenus_serializer():
+    class Meta:
+        model = PID_4556_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_Samples_serializer():
+    class Meta:
+        model = PID_4556_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_SamplesAir_serializer():
+    class Meta:
+        model = PID_4556_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4556_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4556_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4556_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4556_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_SamplesTags_serializer():
+    class Meta:
+        model = PID_4556_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_SamplesWater_serializer():
+    class Meta:
+        model = PID_4556_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4556_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_Site_serializer():
+    class Meta:
+        model = PID_4556_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4556_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4556_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4556_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4556_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4556_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_sysDataMap_serializer():
+    class Meta:
+        model = PID_4556_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4556_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4556_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_sysDataViews_serializer():
+    class Meta:
+        model = PID_4556_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4556_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4556_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4556_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_sysTableLst_serializer():
+    class Meta:
+        model = PID_4556_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4556_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4556_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4556_sysTasks_serializer():
+    class Meta:
+        model = PID_4556_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_ActionLevels_serializer():
+    class Meta:
+        model = PID_4563_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_COC_serializer():
+    class Meta:
+        model = PID_4563_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4563_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4563_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4563_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4563_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_EDDProperty_serializer():
+    class Meta:
+        model = PID_4563_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4563_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4563_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4563_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4563_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_Events_serializer():
+    class Meta:
+        model = PID_4563_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_Instruments_serializer():
+    class Meta:
+        model = PID_4563_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4563_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_LabResults_serializer():
+    class Meta:
+        model = PID_4563_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_Location_serializer():
+    class Meta:
+        model = PID_4563_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_Monitoring_serializer():
+    class Meta:
+        model = PID_4563_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4563_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4563_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_refAnalytes_serializer():
+    class Meta:
+        model = PID_4563_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_refLabLst_serializer():
+    class Meta:
+        model = PID_4563_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4563_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_refNames_serializer():
+    class Meta:
+        model = PID_4563_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_refPickLst_serializer():
+    class Meta:
+        model = PID_4563_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_refSGenus_serializer():
+    class Meta:
+        model = PID_4563_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_Samples_serializer():
+    class Meta:
+        model = PID_4563_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_SamplesAir_serializer():
+    class Meta:
+        model = PID_4563_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4563_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4563_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4563_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4563_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_SamplesTags_serializer():
+    class Meta:
+        model = PID_4563_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_SamplesWater_serializer():
+    class Meta:
+        model = PID_4563_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4563_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_Site_serializer():
+    class Meta:
+        model = PID_4563_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4563_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4563_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4563_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4563_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4563_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_sysDataMap_serializer():
+    class Meta:
+        model = PID_4563_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4563_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4563_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_sysDataViews_serializer():
+    class Meta:
+        model = PID_4563_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4563_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4563_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4563_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_sysTableLst_serializer():
+    class Meta:
+        model = PID_4563_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4563_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4563_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_sysTasks_serializer():
+    class Meta:
+        model = PID_4563_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_ver_ScribeTemplate_serializer():
+    class Meta:
+        model = PID_4563_ver_ScribeTemplate_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_vv_General_serializer():
+    class Meta:
+        model = PID_4563_vv_General_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_vv_Geology_serializer():
+    class Meta:
+        model = PID_4563_vv_Geology_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_vv_LabResults_serializer():
+    class Meta:
+        model = PID_4563_vv_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4563_vv_Mine_serializer():
+    class Meta:
+        model = PID_4563_vv_Mine_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_ActionLevels_serializer():
+    class Meta:
+        model = PID_4564_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_COC_serializer():
+    class Meta:
+        model = PID_4564_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4564_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4564_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4564_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4564_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_EDDProperty_serializer():
+    class Meta:
+        model = PID_4564_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4564_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4564_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4564_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4564_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_Events_serializer():
+    class Meta:
+        model = PID_4564_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_Field_XRF_serializer():
+    class Meta:
+        model = PID_4564_Field_XRF_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_Instruments_serializer():
+    class Meta:
+        model = PID_4564_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4564_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_LabResults_serializer():
+    class Meta:
+        model = PID_4564_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_Location_serializer():
+    class Meta:
+        model = PID_4564_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_Monitoring_serializer():
+    class Meta:
+        model = PID_4564_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4564_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4564_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_refAnalytes_serializer():
+    class Meta:
+        model = PID_4564_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_refLabLst_serializer():
+    class Meta:
+        model = PID_4564_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4564_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_refNames_serializer():
+    class Meta:
+        model = PID_4564_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_refPickLst_serializer():
+    class Meta:
+        model = PID_4564_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_refSGenus_serializer():
+    class Meta:
+        model = PID_4564_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_Samples_serializer():
+    class Meta:
+        model = PID_4564_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_SamplesAir_serializer():
+    class Meta:
+        model = PID_4564_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4564_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4564_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4564_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4564_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_SamplesTags_serializer():
+    class Meta:
+        model = PID_4564_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_SamplesWater_serializer():
+    class Meta:
+        model = PID_4564_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4564_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_Site_serializer():
+    class Meta:
+        model = PID_4564_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4564_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4564_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4564_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4564_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4564_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_sysDataMap_serializer():
+    class Meta:
+        model = PID_4564_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4564_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4564_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_sysDataViews_serializer():
+    class Meta:
+        model = PID_4564_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4564_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4564_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4564_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_sysTableLst_serializer():
+    class Meta:
+        model = PID_4564_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4564_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4564_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_sysTasks_serializer():
+    class Meta:
+        model = PID_4564_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_ver_ScribeTemplate_serializer():
+    class Meta:
+        model = PID_4564_ver_ScribeTemplate_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_vv_General_serializer():
+    class Meta:
+        model = PID_4564_vv_General_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_vv_Geology_serializer():
+    class Meta:
+        model = PID_4564_vv_Geology_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_vv_LabResults_serializer():
+    class Meta:
+        model = PID_4564_vv_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4564_vv_Mine_serializer():
+    class Meta:
+        model = PID_4564_vv_Mine_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_ActionLevels_serializer():
+    class Meta:
+        model = PID_4567_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_COC_serializer():
+    class Meta:
+        model = PID_4567_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4567_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4567_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4567_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4567_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_EDDProperty_serializer():
+    class Meta:
+        model = PID_4567_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4567_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4567_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4567_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4567_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_Events_serializer():
+    class Meta:
+        model = PID_4567_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_Instruments_serializer():
+    class Meta:
+        model = PID_4567_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4567_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_LabResults_serializer():
+    class Meta:
+        model = PID_4567_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_Location_serializer():
+    class Meta:
+        model = PID_4567_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_Monitoring_serializer():
+    class Meta:
+        model = PID_4567_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4567_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4567_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_refAnalytes_serializer():
+    class Meta:
+        model = PID_4567_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_refLabLst_serializer():
+    class Meta:
+        model = PID_4567_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4567_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_refNames_serializer():
+    class Meta:
+        model = PID_4567_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_refPickLst_serializer():
+    class Meta:
+        model = PID_4567_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_refSGenus_serializer():
+    class Meta:
+        model = PID_4567_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_Samples_serializer():
+    class Meta:
+        model = PID_4567_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_SamplesAir_serializer():
+    class Meta:
+        model = PID_4567_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4567_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4567_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4567_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4567_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_SamplesTags_serializer():
+    class Meta:
+        model = PID_4567_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_SamplesWater_serializer():
+    class Meta:
+        model = PID_4567_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4567_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_Site_serializer():
+    class Meta:
+        model = PID_4567_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4567_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4567_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4567_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4567_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4567_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_sysDataMap_serializer():
+    class Meta:
+        model = PID_4567_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4567_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4567_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_sysDataViews_serializer():
+    class Meta:
+        model = PID_4567_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4567_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4567_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4567_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_sysTableLst_serializer():
+    class Meta:
+        model = PID_4567_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4567_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4567_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_sysTasks_serializer():
+    class Meta:
+        model = PID_4567_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_ver_ScribeTemplate_serializer():
+    class Meta:
+        model = PID_4567_ver_ScribeTemplate_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_vv_General_serializer():
+    class Meta:
+        model = PID_4567_vv_General_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_vv_Geology_serializer():
+    class Meta:
+        model = PID_4567_vv_Geology_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_vv_LabResults_serializer():
+    class Meta:
+        model = PID_4567_vv_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4567_vv_Mine_serializer():
+    class Meta:
+        model = PID_4567_vv_Mine_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_ActionLevels_serializer():
+    class Meta:
+        model = PID_4578_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_COC_serializer():
+    class Meta:
+        model = PID_4578_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_DustTrak_serializer():
+    class Meta:
+        model = PID_4578_DustTrak_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4578_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4578_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4578_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4578_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_EDDProperty_serializer():
+    class Meta:
+        model = PID_4578_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4578_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4578_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4578_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4578_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_Events_serializer():
+    class Meta:
+        model = PID_4578_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_Instruments_serializer():
+    class Meta:
+        model = PID_4578_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4578_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_LabResults_serializer():
+    class Meta:
+        model = PID_4578_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_Location_serializer():
+    class Meta:
+        model = PID_4578_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_Monitoring_serializer():
+    class Meta:
+        model = PID_4578_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4578_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4578_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_refAnalytes_serializer():
+    class Meta:
+        model = PID_4578_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_refLabLst_serializer():
+    class Meta:
+        model = PID_4578_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4578_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_refNames_serializer():
+    class Meta:
+        model = PID_4578_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_refPickLst_serializer():
+    class Meta:
+        model = PID_4578_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_refSGenus_serializer():
+    class Meta:
+        model = PID_4578_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_Samples_serializer():
+    class Meta:
+        model = PID_4578_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_SamplesAir_serializer():
+    class Meta:
+        model = PID_4578_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4578_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4578_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4578_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4578_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_SamplesTags_serializer():
+    class Meta:
+        model = PID_4578_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_SamplesWater_serializer():
+    class Meta:
+        model = PID_4578_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4578_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_Site_serializer():
+    class Meta:
+        model = PID_4578_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4578_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4578_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4578_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4578_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4578_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_sysDataMap_serializer():
+    class Meta:
+        model = PID_4578_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4578_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4578_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_sysDataViews_serializer():
+    class Meta:
+        model = PID_4578_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4578_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4578_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4578_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_sysTableLst_serializer():
+    class Meta:
+        model = PID_4578_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4578_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4578_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_sysTasks_serializer():
+    class Meta:
+        model = PID_4578_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_ver_ScribeTemplate_serializer():
+    class Meta:
+        model = PID_4578_ver_ScribeTemplate_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_vv_General_serializer():
+    class Meta:
+        model = PID_4578_vv_General_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_vv_Geology_serializer():
+    class Meta:
+        model = PID_4578_vv_Geology_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_vv_LabResults_serializer():
+    class Meta:
+        model = PID_4578_vv_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4578_vv_Mine_serializer():
+    class Meta:
+        model = PID_4578_vv_Mine_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_ActionLevels_serializer():
+    class Meta:
+        model = PID_4579_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_COC_serializer():
+    class Meta:
+        model = PID_4579_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4579_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4579_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4579_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4579_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_EDDProperty_serializer():
+    class Meta:
+        model = PID_4579_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4579_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4579_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4579_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4579_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_Events_serializer():
+    class Meta:
+        model = PID_4579_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_Instruments_serializer():
+    class Meta:
+        model = PID_4579_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4579_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_LabResults_serializer():
+    class Meta:
+        model = PID_4579_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_Location_serializer():
+    class Meta:
+        model = PID_4579_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_Monitoring_serializer():
+    class Meta:
+        model = PID_4579_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4579_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4579_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_refAnalytes_serializer():
+    class Meta:
+        model = PID_4579_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_refLabLst_serializer():
+    class Meta:
+        model = PID_4579_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4579_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_refNames_serializer():
+    class Meta:
+        model = PID_4579_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_refPickLst_serializer():
+    class Meta:
+        model = PID_4579_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_refSGenus_serializer():
+    class Meta:
+        model = PID_4579_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_Samples_serializer():
+    class Meta:
+        model = PID_4579_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_SamplesAir_serializer():
+    class Meta:
+        model = PID_4579_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4579_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4579_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4579_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4579_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_SamplesTags_serializer():
+    class Meta:
+        model = PID_4579_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_SamplesWater_serializer():
+    class Meta:
+        model = PID_4579_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4579_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_Site_serializer():
+    class Meta:
+        model = PID_4579_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4579_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4579_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4579_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4579_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4579_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_sysDataMap_serializer():
+    class Meta:
+        model = PID_4579_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4579_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4579_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_sysDataViews_serializer():
+    class Meta:
+        model = PID_4579_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4579_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4579_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4579_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_sysTableLst_serializer():
+    class Meta:
+        model = PID_4579_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4579_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4579_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_sysTasks_serializer():
+    class Meta:
+        model = PID_4579_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_ver_ScribeTemplate_serializer():
+    class Meta:
+        model = PID_4579_ver_ScribeTemplate_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_vv_General_serializer():
+    class Meta:
+        model = PID_4579_vv_General_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_vv_Geology_serializer():
+    class Meta:
+        model = PID_4579_vv_Geology_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_vv_LabResults_serializer():
+    class Meta:
+        model = PID_4579_vv_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4579_vv_Mine_serializer():
+    class Meta:
+        model = PID_4579_vv_Mine_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_ActionLevels_serializer():
+    class Meta:
+        model = PID_4580_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_COC_serializer():
+    class Meta:
+        model = PID_4580_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4580_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4580_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4580_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4580_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_EDDProperty_serializer():
+    class Meta:
+        model = PID_4580_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4580_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4580_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4580_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4580_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_Events_serializer():
+    class Meta:
+        model = PID_4580_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_Instruments_serializer():
+    class Meta:
+        model = PID_4580_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4580_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_LabResults_serializer():
+    class Meta:
+        model = PID_4580_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_Location_serializer():
+    class Meta:
+        model = PID_4580_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_Monitoring_serializer():
+    class Meta:
+        model = PID_4580_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4580_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4580_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_refAnalytes_serializer():
+    class Meta:
+        model = PID_4580_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_refLabLst_serializer():
+    class Meta:
+        model = PID_4580_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4580_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_refNames_serializer():
+    class Meta:
+        model = PID_4580_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_refPickLst_serializer():
+    class Meta:
+        model = PID_4580_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_refSGenus_serializer():
+    class Meta:
+        model = PID_4580_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_Samples_serializer():
+    class Meta:
+        model = PID_4580_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_SamplesAir_serializer():
+    class Meta:
+        model = PID_4580_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4580_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4580_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4580_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4580_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_SamplesTags_serializer():
+    class Meta:
+        model = PID_4580_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_SamplesWater_serializer():
+    class Meta:
+        model = PID_4580_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4580_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_Site_serializer():
+    class Meta:
+        model = PID_4580_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4580_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4580_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4580_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4580_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4580_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_sysDataMap_serializer():
+    class Meta:
+        model = PID_4580_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4580_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4580_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_sysDataViews_serializer():
+    class Meta:
+        model = PID_4580_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4580_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4580_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4580_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_sysTableLst_serializer():
+    class Meta:
+        model = PID_4580_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4580_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4580_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4580_sysTasks_serializer():
+    class Meta:
+        model = PID_4580_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_ActionLevels_serializer():
+    class Meta:
+        model = PID_4581_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_COC_serializer():
+    class Meta:
+        model = PID_4581_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4581_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4581_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4581_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4581_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_EDDProperty_serializer():
+    class Meta:
+        model = PID_4581_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4581_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4581_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4581_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4581_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_Events_serializer():
+    class Meta:
+        model = PID_4581_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_Instruments_serializer():
+    class Meta:
+        model = PID_4581_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4581_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_LabResults_serializer():
+    class Meta:
+        model = PID_4581_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_Location_serializer():
+    class Meta:
+        model = PID_4581_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_Monitoring_serializer():
+    class Meta:
+        model = PID_4581_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4581_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4581_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_refAnalytes_serializer():
+    class Meta:
+        model = PID_4581_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_refLabLst_serializer():
+    class Meta:
+        model = PID_4581_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4581_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_refNames_serializer():
+    class Meta:
+        model = PID_4581_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_refPickLst_serializer():
+    class Meta:
+        model = PID_4581_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_refSGenus_serializer():
+    class Meta:
+        model = PID_4581_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_Samples_serializer():
+    class Meta:
+        model = PID_4581_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_SamplesAir_serializer():
+    class Meta:
+        model = PID_4581_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4581_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4581_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4581_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4581_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_SamplesTags_serializer():
+    class Meta:
+        model = PID_4581_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_SamplesWater_serializer():
+    class Meta:
+        model = PID_4581_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4581_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_Site_serializer():
+    class Meta:
+        model = PID_4581_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4581_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4581_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4581_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4581_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4581_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_sysDataMap_serializer():
+    class Meta:
+        model = PID_4581_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4581_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4581_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_sysDataViews_serializer():
+    class Meta:
+        model = PID_4581_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4581_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4581_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4581_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_sysTableLst_serializer():
+    class Meta:
+        model = PID_4581_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4581_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4581_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4581_sysTasks_serializer():
+    class Meta:
+        model = PID_4581_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_ActionLevels_serializer():
+    class Meta:
+        model = PID_4585_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_COC_serializer():
+    class Meta:
+        model = PID_4585_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4585_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4585_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4585_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4585_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_EDDProperty_serializer():
+    class Meta:
+        model = PID_4585_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4585_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4585_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4585_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4585_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_Events_serializer():
+    class Meta:
+        model = PID_4585_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_Instruments_serializer():
+    class Meta:
+        model = PID_4585_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4585_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_LabResults_serializer():
+    class Meta:
+        model = PID_4585_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_Location_serializer():
+    class Meta:
+        model = PID_4585_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_Monitoring_serializer():
+    class Meta:
+        model = PID_4585_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4585_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4585_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_refAnalytes_serializer():
+    class Meta:
+        model = PID_4585_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_refLabLst_serializer():
+    class Meta:
+        model = PID_4585_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4585_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_refNames_serializer():
+    class Meta:
+        model = PID_4585_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_refPickLst_serializer():
+    class Meta:
+        model = PID_4585_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_refSGenus_serializer():
+    class Meta:
+        model = PID_4585_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_Samples_serializer():
+    class Meta:
+        model = PID_4585_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_SamplesAir_serializer():
+    class Meta:
+        model = PID_4585_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4585_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4585_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4585_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4585_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_SamplesTags_serializer():
+    class Meta:
+        model = PID_4585_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_SamplesWater_serializer():
+    class Meta:
+        model = PID_4585_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4585_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_Site_serializer():
+    class Meta:
+        model = PID_4585_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4585_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4585_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4585_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4585_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4585_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_sysDataMap_serializer():
+    class Meta:
+        model = PID_4585_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4585_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4585_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_sysDataViews_serializer():
+    class Meta:
+        model = PID_4585_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4585_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4585_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4585_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_sysTableLst_serializer():
+    class Meta:
+        model = PID_4585_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4585_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4585_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4585_sysTasks_serializer():
+    class Meta:
+        model = PID_4585_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_ActionLevels_serializer():
+    class Meta:
+        model = PID_4590_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_COC_serializer():
+    class Meta:
+        model = PID_4590_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4590_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4590_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4590_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4590_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_EDDProperty_serializer():
+    class Meta:
+        model = PID_4590_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4590_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4590_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4590_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4590_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_Events_serializer():
+    class Meta:
+        model = PID_4590_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_Instruments_serializer():
+    class Meta:
+        model = PID_4590_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4590_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_LabResults_serializer():
+    class Meta:
+        model = PID_4590_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_Location_serializer():
+    class Meta:
+        model = PID_4590_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_Monitoring_serializer():
+    class Meta:
+        model = PID_4590_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4590_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4590_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_refAnalytes_serializer():
+    class Meta:
+        model = PID_4590_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_refLabLst_serializer():
+    class Meta:
+        model = PID_4590_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4590_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_refNames_serializer():
+    class Meta:
+        model = PID_4590_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_refPickLst_serializer():
+    class Meta:
+        model = PID_4590_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_refSGenus_serializer():
+    class Meta:
+        model = PID_4590_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_Samples_serializer():
+    class Meta:
+        model = PID_4590_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_SamplesAir_serializer():
+    class Meta:
+        model = PID_4590_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4590_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4590_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4590_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4590_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_SamplesTags_serializer():
+    class Meta:
+        model = PID_4590_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_SamplesWater_serializer():
+    class Meta:
+        model = PID_4590_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4590_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_Site_serializer():
+    class Meta:
+        model = PID_4590_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4590_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4590_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4590_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4590_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4590_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_sysDataMap_serializer():
+    class Meta:
+        model = PID_4590_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4590_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4590_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_sysDataViews_serializer():
+    class Meta:
+        model = PID_4590_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4590_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4590_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4590_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_sysTableLst_serializer():
+    class Meta:
+        model = PID_4590_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4590_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4590_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4590_sysTasks_serializer():
+    class Meta:
+        model = PID_4590_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_ActionLevels_serializer():
+    class Meta:
+        model = PID_4596_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_COC_serializer():
+    class Meta:
+        model = PID_4596_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4596_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4596_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4596_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4596_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_EDDProperty_serializer():
+    class Meta:
+        model = PID_4596_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4596_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4596_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4596_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4596_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_Events_serializer():
+    class Meta:
+        model = PID_4596_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_Instruments_serializer():
+    class Meta:
+        model = PID_4596_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4596_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_LabResults_serializer():
+    class Meta:
+        model = PID_4596_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_Location_serializer():
+    class Meta:
+        model = PID_4596_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_Monitoring_serializer():
+    class Meta:
+        model = PID_4596_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4596_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4596_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_RECORD_LINEAGE_serializer():
+    class Meta:
+        model = PID_4596_RECORD_LINEAGE_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_refAnalytes_serializer():
+    class Meta:
+        model = PID_4596_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_refLabLst_serializer():
+    class Meta:
+        model = PID_4596_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4596_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_refNames_serializer():
+    class Meta:
+        model = PID_4596_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_refPickLst_serializer():
+    class Meta:
+        model = PID_4596_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_refSGenus_serializer():
+    class Meta:
+        model = PID_4596_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_Samples_serializer():
+    class Meta:
+        model = PID_4596_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_SamplesAir_serializer():
+    class Meta:
+        model = PID_4596_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4596_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4596_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4596_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4596_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_SamplesTags_serializer():
+    class Meta:
+        model = PID_4596_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_SamplesWater_serializer():
+    class Meta:
+        model = PID_4596_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4596_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_Site_serializer():
+    class Meta:
+        model = PID_4596_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4596_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4596_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4596_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4596_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4596_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_sysDataMap_serializer():
+    class Meta:
+        model = PID_4596_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4596_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4596_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_sysDataViews_serializer():
+    class Meta:
+        model = PID_4596_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4596_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4596_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4596_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_sysTableLst_serializer():
+    class Meta:
+        model = PID_4596_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4596_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4596_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4596_sysTasks_serializer():
+    class Meta:
+        model = PID_4596_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_ActionLevels_serializer():
+    class Meta:
+        model = PID_4604_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_COC_serializer():
+    class Meta:
+        model = PID_4604_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4604_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4604_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4604_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4604_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_EDDProperty_serializer():
+    class Meta:
+        model = PID_4604_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4604_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4604_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4604_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4604_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_Events_serializer():
+    class Meta:
+        model = PID_4604_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_Instruments_serializer():
+    class Meta:
+        model = PID_4604_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4604_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_LabResults_serializer():
+    class Meta:
+        model = PID_4604_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_Location_serializer():
+    class Meta:
+        model = PID_4604_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_Monitoring_serializer():
+    class Meta:
+        model = PID_4604_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4604_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4604_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_refAnalytes_serializer():
+    class Meta:
+        model = PID_4604_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_refLabLst_serializer():
+    class Meta:
+        model = PID_4604_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4604_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_refNames_serializer():
+    class Meta:
+        model = PID_4604_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_refPickLst_serializer():
+    class Meta:
+        model = PID_4604_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_refSGenus_serializer():
+    class Meta:
+        model = PID_4604_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_Samples_serializer():
+    class Meta:
+        model = PID_4604_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_SamplesAir_serializer():
+    class Meta:
+        model = PID_4604_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4604_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4604_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4604_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4604_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_SamplesTags_serializer():
+    class Meta:
+        model = PID_4604_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_SamplesWater_serializer():
+    class Meta:
+        model = PID_4604_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4604_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_Site_serializer():
+    class Meta:
+        model = PID_4604_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4604_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4604_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4604_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4604_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4604_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_sysDataMap_serializer():
+    class Meta:
+        model = PID_4604_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4604_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4604_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_sysDataViews_serializer():
+    class Meta:
+        model = PID_4604_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4604_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4604_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4604_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_sysTableLst_serializer():
+    class Meta:
+        model = PID_4604_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4604_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4604_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4604_sysTasks_serializer():
+    class Meta:
+        model = PID_4604_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_ActionLevels_serializer():
+    class Meta:
+        model = PID_4605_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_COC_serializer():
+    class Meta:
+        model = PID_4605_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4605_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4605_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4605_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4605_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_EDDProperty_serializer():
+    class Meta:
+        model = PID_4605_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4605_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4605_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4605_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4605_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_Events_serializer():
+    class Meta:
+        model = PID_4605_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_Instruments_serializer():
+    class Meta:
+        model = PID_4605_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4605_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_LabResults_serializer():
+    class Meta:
+        model = PID_4605_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_Location_serializer():
+    class Meta:
+        model = PID_4605_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_Monitoring_serializer():
+    class Meta:
+        model = PID_4605_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4605_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4605_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_refAnalytes_serializer():
+    class Meta:
+        model = PID_4605_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_refLabLst_serializer():
+    class Meta:
+        model = PID_4605_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4605_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_refNames_serializer():
+    class Meta:
+        model = PID_4605_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_refPickLst_serializer():
+    class Meta:
+        model = PID_4605_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_refSGenus_serializer():
+    class Meta:
+        model = PID_4605_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_Samples_serializer():
+    class Meta:
+        model = PID_4605_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_SamplesAir_serializer():
+    class Meta:
+        model = PID_4605_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4605_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4605_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4605_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4605_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_SamplesTags_serializer():
+    class Meta:
+        model = PID_4605_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_SamplesWater_serializer():
+    class Meta:
+        model = PID_4605_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4605_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_Site_serializer():
+    class Meta:
+        model = PID_4605_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4605_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4605_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4605_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4605_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4605_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_sysDataMap_serializer():
+    class Meta:
+        model = PID_4605_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4605_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4605_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_sysDataViews_serializer():
+    class Meta:
+        model = PID_4605_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4605_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4605_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4605_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_sysTableLst_serializer():
+    class Meta:
+        model = PID_4605_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4605_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4605_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4605_sysTasks_serializer():
+    class Meta:
+        model = PID_4605_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_ActionLevels_serializer():
+    class Meta:
+        model = PID_4612_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_COC_serializer():
+    class Meta:
+        model = PID_4612_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4612_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4612_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4612_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4612_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_EDDProperty_serializer():
+    class Meta:
+        model = PID_4612_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4612_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4612_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4612_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4612_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_Events_serializer():
+    class Meta:
+        model = PID_4612_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_Instruments_serializer():
+    class Meta:
+        model = PID_4612_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4612_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_LabResults_serializer():
+    class Meta:
+        model = PID_4612_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_Location_serializer():
+    class Meta:
+        model = PID_4612_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_Monitoring_serializer():
+    class Meta:
+        model = PID_4612_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4612_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4612_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_refAnalytes_serializer():
+    class Meta:
+        model = PID_4612_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_refLabLst_serializer():
+    class Meta:
+        model = PID_4612_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4612_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_refNames_serializer():
+    class Meta:
+        model = PID_4612_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_refPickLst_serializer():
+    class Meta:
+        model = PID_4612_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_refSGenus_serializer():
+    class Meta:
+        model = PID_4612_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_Samples_serializer():
+    class Meta:
+        model = PID_4612_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_SamplesAir_serializer():
+    class Meta:
+        model = PID_4612_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4612_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4612_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4612_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4612_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_SamplesTags_serializer():
+    class Meta:
+        model = PID_4612_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_SamplesWater_serializer():
+    class Meta:
+        model = PID_4612_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4612_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_Site_serializer():
+    class Meta:
+        model = PID_4612_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4612_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4612_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4612_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4612_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4612_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_sysDataMap_serializer():
+    class Meta:
+        model = PID_4612_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4612_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4612_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_sysDataViews_serializer():
+    class Meta:
+        model = PID_4612_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4612_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4612_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4612_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_sysTableLst_serializer():
+    class Meta:
+        model = PID_4612_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4612_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4612_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4612_sysTasks_serializer():
+    class Meta:
+        model = PID_4612_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_ActionLevels_serializer():
+    class Meta:
+        model = PID_4619_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_COC_serializer():
+    class Meta:
+        model = PID_4619_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4619_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4619_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4619_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4619_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_EDDProperty_serializer():
+    class Meta:
+        model = PID_4619_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4619_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4619_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4619_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4619_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_Events_serializer():
+    class Meta:
+        model = PID_4619_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_Instruments_serializer():
+    class Meta:
+        model = PID_4619_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4619_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_LabResults_serializer():
+    class Meta:
+        model = PID_4619_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_Location_serializer():
+    class Meta:
+        model = PID_4619_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_Monitoring_serializer():
+    class Meta:
+        model = PID_4619_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4619_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4619_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_refAnalytes_serializer():
+    class Meta:
+        model = PID_4619_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_refLabLst_serializer():
+    class Meta:
+        model = PID_4619_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4619_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_refNames_serializer():
+    class Meta:
+        model = PID_4619_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_refPickLst_serializer():
+    class Meta:
+        model = PID_4619_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_refSGenus_serializer():
+    class Meta:
+        model = PID_4619_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_Samples_serializer():
+    class Meta:
+        model = PID_4619_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_SamplesAir_serializer():
+    class Meta:
+        model = PID_4619_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4619_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4619_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4619_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4619_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_SamplesTags_serializer():
+    class Meta:
+        model = PID_4619_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_SamplesWater_serializer():
+    class Meta:
+        model = PID_4619_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4619_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_Site_serializer():
+    class Meta:
+        model = PID_4619_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4619_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4619_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4619_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4619_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4619_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_sysDataMap_serializer():
+    class Meta:
+        model = PID_4619_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4619_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4619_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_sysDataViews_serializer():
+    class Meta:
+        model = PID_4619_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4619_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4619_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4619_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_sysTableLst_serializer():
+    class Meta:
+        model = PID_4619_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4619_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4619_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4619_sysTasks_serializer():
+    class Meta:
+        model = PID_4619_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_ActionLevels_serializer():
+    class Meta:
+        model = PID_4620_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_COC_serializer():
+    class Meta:
+        model = PID_4620_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4620_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4620_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4620_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4620_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_EDDProperty_serializer():
+    class Meta:
+        model = PID_4620_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4620_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4620_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4620_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4620_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_Events_serializer():
+    class Meta:
+        model = PID_4620_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_Instruments_serializer():
+    class Meta:
+        model = PID_4620_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4620_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_LabResults_serializer():
+    class Meta:
+        model = PID_4620_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_Location_serializer():
+    class Meta:
+        model = PID_4620_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_Monitoring_serializer():
+    class Meta:
+        model = PID_4620_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4620_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4620_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_refAnalytes_serializer():
+    class Meta:
+        model = PID_4620_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_refLabLst_serializer():
+    class Meta:
+        model = PID_4620_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4620_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_refNames_serializer():
+    class Meta:
+        model = PID_4620_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_refPickLst_serializer():
+    class Meta:
+        model = PID_4620_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_refSGenus_serializer():
+    class Meta:
+        model = PID_4620_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_Samples_serializer():
+    class Meta:
+        model = PID_4620_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_SamplesAir_serializer():
+    class Meta:
+        model = PID_4620_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4620_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4620_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4620_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4620_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_SamplesTags_serializer():
+    class Meta:
+        model = PID_4620_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_SamplesWater_serializer():
+    class Meta:
+        model = PID_4620_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4620_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_Site_serializer():
+    class Meta:
+        model = PID_4620_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4620_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4620_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4620_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4620_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4620_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_sysDataMap_serializer():
+    class Meta:
+        model = PID_4620_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4620_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4620_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_sysDataViews_serializer():
+    class Meta:
+        model = PID_4620_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4620_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4620_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4620_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_sysTableLst_serializer():
+    class Meta:
+        model = PID_4620_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4620_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4620_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4620_sysTasks_serializer():
+    class Meta:
+        model = PID_4620_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_ActionLevels_serializer():
+    class Meta:
+        model = PID_4621_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_COC_serializer():
+    class Meta:
+        model = PID_4621_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4621_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4621_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4621_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4621_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_EDDProperty_serializer():
+    class Meta:
+        model = PID_4621_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4621_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4621_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4621_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4621_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_Events_serializer():
+    class Meta:
+        model = PID_4621_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_Instruments_serializer():
+    class Meta:
+        model = PID_4621_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4621_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_LabResults_serializer():
+    class Meta:
+        model = PID_4621_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_Location_serializer():
+    class Meta:
+        model = PID_4621_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_Monitoring_serializer():
+    class Meta:
+        model = PID_4621_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4621_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4621_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_refAnalytes_serializer():
+    class Meta:
+        model = PID_4621_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_refLabLst_serializer():
+    class Meta:
+        model = PID_4621_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4621_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_refNames_serializer():
+    class Meta:
+        model = PID_4621_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_refPickLst_serializer():
+    class Meta:
+        model = PID_4621_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_refSGenus_serializer():
+    class Meta:
+        model = PID_4621_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_Samples_serializer():
+    class Meta:
+        model = PID_4621_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_SamplesAir_serializer():
+    class Meta:
+        model = PID_4621_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4621_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4621_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4621_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4621_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_SamplesTags_serializer():
+    class Meta:
+        model = PID_4621_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_SamplesWater_serializer():
+    class Meta:
+        model = PID_4621_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4621_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_Site_serializer():
+    class Meta:
+        model = PID_4621_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4621_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4621_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4621_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4621_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4621_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_sysDataMap_serializer():
+    class Meta:
+        model = PID_4621_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4621_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4621_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_sysDataViews_serializer():
+    class Meta:
+        model = PID_4621_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4621_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4621_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4621_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_sysTableLst_serializer():
+    class Meta:
+        model = PID_4621_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4621_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4621_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4621_sysTasks_serializer():
+    class Meta:
+        model = PID_4621_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_ActionLevels_serializer():
+    class Meta:
+        model = PID_4626_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_COC_serializer():
+    class Meta:
+        model = PID_4626_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4626_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4626_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4626_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4626_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_EDDProperty_serializer():
+    class Meta:
+        model = PID_4626_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4626_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4626_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4626_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4626_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_Events_serializer():
+    class Meta:
+        model = PID_4626_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_Instruments_serializer():
+    class Meta:
+        model = PID_4626_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4626_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_LabResults_serializer():
+    class Meta:
+        model = PID_4626_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_Location_serializer():
+    class Meta:
+        model = PID_4626_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_Monitoring_serializer():
+    class Meta:
+        model = PID_4626_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4626_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4626_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_refAnalytes_serializer():
+    class Meta:
+        model = PID_4626_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_refLabLst_serializer():
+    class Meta:
+        model = PID_4626_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4626_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_refNames_serializer():
+    class Meta:
+        model = PID_4626_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_refPickLst_serializer():
+    class Meta:
+        model = PID_4626_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_refSGenus_serializer():
+    class Meta:
+        model = PID_4626_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_Samples_serializer():
+    class Meta:
+        model = PID_4626_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_SamplesAir_serializer():
+    class Meta:
+        model = PID_4626_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4626_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4626_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4626_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4626_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_SamplesTags_serializer():
+    class Meta:
+        model = PID_4626_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_SamplesWater_serializer():
+    class Meta:
+        model = PID_4626_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4626_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_Site_serializer():
+    class Meta:
+        model = PID_4626_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4626_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4626_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4626_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4626_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4626_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_sysDataMap_serializer():
+    class Meta:
+        model = PID_4626_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4626_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4626_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_sysDataViews_serializer():
+    class Meta:
+        model = PID_4626_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4626_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4626_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4626_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_sysTableLst_serializer():
+    class Meta:
+        model = PID_4626_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4626_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4626_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_sysTasks_serializer():
+    class Meta:
+        model = PID_4626_sysTasks_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_ver_ScribeTemplate_serializer():
+    class Meta:
+        model = PID_4626_ver_ScribeTemplate_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_vv_General_serializer():
+    class Meta:
+        model = PID_4626_vv_General_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_vv_Geology_serializer():
+    class Meta:
+        model = PID_4626_vv_Geology_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_vv_LabResults_serializer():
+    class Meta:
+        model = PID_4626_vv_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4626_vv_Mine_serializer():
+    class Meta:
+        model = PID_4626_vv_Mine_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_ActionLevels_serializer():
+    class Meta:
+        model = PID_4628_ActionLevels_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_COC_serializer():
+    class Meta:
+        model = PID_4628_COC_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_EDDAirSampling_serializer():
+    class Meta:
+        model = PID_4628_EDDAirSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_EDDBiotaSampling_serializer():
+    class Meta:
+        model = PID_4628_EDDBiotaSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_EDDLabAnalyses_serializer():
+    class Meta:
+        model = PID_4628_EDDLabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_EDDMonitoringData_serializer():
+    class Meta:
+        model = PID_4628_EDDMonitoringData_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_EDDProperty_serializer():
+    class Meta:
+        model = PID_4628_EDDProperty_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_EDDSoilGasSampling_serializer():
+    class Meta:
+        model = PID_4628_EDDSoilGasSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_EDDSoilSampling_serializer():
+    class Meta:
+        model = PID_4628_EDDSoilSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_EDDWaterSampling_serializer():
+    class Meta:
+        model = PID_4628_EDDWaterSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_EDDWipeSampling_serializer():
+    class Meta:
+        model = PID_4628_EDDWipeSampling_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_Events_serializer():
+    class Meta:
+        model = PID_4628_Events_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_Instruments_serializer():
+    class Meta:
+        model = PID_4628_Instruments_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_LabAnalyses_serializer():
+    class Meta:
+        model = PID_4628_LabAnalyses_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_LabResults_serializer():
+    class Meta:
+        model = PID_4628_LabResults_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_Location_serializer():
+    class Meta:
+        model = PID_4628_Location_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_Monitoring_serializer():
+    class Meta:
+        model = PID_4628_Monitoring_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_PropertyInfo_serializer():
+    class Meta:
+        model = PID_4628_PropertyInfo_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_PropertyOccupant_serializer():
+    class Meta:
+        model = PID_4628_PropertyOccupant_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_refAnalytes_serializer():
+    class Meta:
+        model = PID_4628_refAnalytes_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_refLabLst_serializer():
+    class Meta:
+        model = PID_4628_refLabLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_refMatrixLst_serializer():
+    class Meta:
+        model = PID_4628_refMatrixLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_refNames_serializer():
+    class Meta:
+        model = PID_4628_refNames_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_refPickLst_serializer():
+    class Meta:
+        model = PID_4628_refPickLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_refSGenus_serializer():
+    class Meta:
+        model = PID_4628_refSGenus_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_Samples_serializer():
+    class Meta:
+        model = PID_4628_Samples_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_SamplesAir_serializer():
+    class Meta:
+        model = PID_4628_SamplesAir_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_SamplesBiota_serializer():
+    class Meta:
+        model = PID_4628_SamplesBiota_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_SamplesMeasurements_serializer():
+    class Meta:
+        model = PID_4628_SamplesMeasurements_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_SamplesSoil_serializer():
+    class Meta:
+        model = PID_4628_SamplesSoil_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_SamplesSoilGas_serializer():
+    class Meta:
+        model = PID_4628_SamplesSoilGas_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_SamplesTags_serializer():
+    class Meta:
+        model = PID_4628_SamplesTags_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_SamplesWater_serializer():
+    class Meta:
+        model = PID_4628_SamplesWater_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_SamplesWipe_serializer():
+    class Meta:
+        model = PID_4628_SamplesWipe_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_Site_serializer():
+    class Meta:
+        model = PID_4628_Site_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_sysDataColumn_serializer():
+    class Meta:
+        model = PID_4628_sysDataColumn_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_sysDataColumnLayout_serializer():
+    class Meta:
+        model = PID_4628_sysDataColumnLayout_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_sysDataLabel_serializer():
+    class Meta:
+        model = PID_4628_sysDataLabel_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_sysDataLabelLines_serializer():
+    class Meta:
+        model = PID_4628_sysDataLabelLines_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_sysDataLabelLst_serializer():
+    class Meta:
+        model = PID_4628_sysDataLabelLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_sysDataMap_serializer():
+    class Meta:
+        model = PID_4628_sysDataMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_sysDataMapCol_serializer():
+    class Meta:
+        model = PID_4628_sysDataMapCol_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_sysDataRpt_serializer():
+    class Meta:
+        model = PID_4628_sysDataRpt_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_sysDataViews_serializer():
+    class Meta:
+        model = PID_4628_sysDataViews_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_sysKMLMap_serializer():
+    class Meta:
+        model = PID_4628_sysKMLMap_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_sysKMLMapClass_serializer():
+    class Meta:
+        model = PID_4628_sysKMLMapClass_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_sysLookupLst_serializer():
+    class Meta:
+        model = PID_4628_sysLookupLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_sysTableLst_serializer():
+    class Meta:
+        model = PID_4628_sysTableLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_sysTaskGroups_serializer():
+    class Meta:
+        model = PID_4628_sysTaskGroups_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_sysTaskLst_serializer():
+    class Meta:
+        model = PID_4628_sysTaskLst_model
+        fields = "__all__"
+
+
+class dbo_PID_4628_sysTasks_serializer():
+    class Meta:
+        model = PID_4628_sysTasks_model
         fields = "__all__"

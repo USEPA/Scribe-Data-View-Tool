@@ -1,12 +1,9 @@
 from rest_framework import serializers
-from .models import SampleModel
+
+from sadie.models import ProjectsExplorer
 
 
-class SampleSerializer(serializers.ModelSerializer):
-    """
-    A Serializer for sample request REST API methods
-    """
+class ProjectsExplorerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = SampleModel
-        fields = ('first_name', 'last_name', 'email', 'choice')
-
+        model = ProjectsExplorer
+        fields = "__all__"

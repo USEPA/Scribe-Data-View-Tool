@@ -14,19 +14,29 @@ from django.db import models
 
 class Projects(models.Model):
     projectid = models.IntegerField(db_column='PROJECTID', primary_key=True)  # Field name made lowercase.
-    current_version = models.IntegerField(db_column='CURRENT_VERSION', blank=True, null=True)  # Field name made lowercase.
+    current_version = models.IntegerField(db_column='CURRENT_VERSION', blank=True,
+                                          null=True)  # Field name made lowercase.
     last_update = models.DateTimeField(db_column='LAST_UPDATE', blank=True, null=True)  # Field name made lowercase.
-    project_name = models.CharField(db_column='PROJECT_NAME', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    project_name = models.CharField(db_column='PROJECT_NAME', max_length=255, blank=True,
+                                    null=True)  # Field name made lowercase.
     update_to_version = models.IntegerField(db_column='UPDATE_TO_VERSION')  # Field name made lowercase.
-    full_name = models.CharField(db_column='FULL_NAME', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    organization = models.CharField(db_column='ORGANIZATION', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    publisher_role = models.CharField(db_column='PUBLISHER_ROLE', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    phone_number = models.CharField(db_column='PHONE_NUMBER', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    full_name = models.CharField(db_column='FULL_NAME', max_length=100, blank=True,
+                                 null=True)  # Field name made lowercase.
+    organization = models.CharField(db_column='ORGANIZATION', max_length=100, blank=True,
+                                    null=True)  # Field name made lowercase.
+    publisher_role = models.CharField(db_column='PUBLISHER_ROLE', max_length=100, blank=True,
+                                      null=True)  # Field name made lowercase.
+    phone_number = models.CharField(db_column='PHONE_NUMBER', max_length=50, blank=True,
+                                    null=True)  # Field name made lowercase.
     email = models.CharField(db_column='EMAIL', max_length=250, blank=True, null=True)  # Field name made lowercase.
-    client_username = models.CharField(db_column='CLIENT_USERNAME', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    client_computername = models.CharField(db_column='CLIENT_COMPUTERNAME', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    client_username = models.CharField(db_column='CLIENT_USERNAME', max_length=100, blank=True,
+                                       null=True)  # Field name made lowercase.
+    client_computername = models.CharField(db_column='CLIENT_COMPUTERNAME', max_length=100, blank=True,
+                                           null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
         app_label = 'scribe_models'
         db_table = 'PROJECTS'
+
+

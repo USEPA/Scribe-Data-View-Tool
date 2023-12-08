@@ -4,18 +4,16 @@
 
 export const environment = {
   production: false,
-  oauth_url: 'http://localhost:8000/api/oauth2',
-  oauth_client_id: 'ZtlpDht9ywRCA4Iq',
+  oauth_url: 'http://localhost:8001/api/oauth2',
   login_redirect: 'http://localhost:4200',
-  local_client_id: 'ttDS2qFfDXJSxCjETxKHcWeFCjmiycrGPUrKRr8T',
-  api_url: 'http://localhost:8000/api',
+  api_url: 'http://localhost:8001/api',
   api_version_tag: 'v1',
   default_baseloadedMap: '972c131daf9d4e83b30a98630c8f8b2b',
-  agol_trusted_server: 'http://localhost:8000',
+  agol_trusted_server: 'http://localhost:8001',
   agol_proxy_url_prefix: 'utility.arcgis.com',
-  agol_proxy_url: 'http://localhost:8000/api/proxy/',
+  agol_proxy_url: 'http://localhost:8001/api/proxy/',
   geo_platform_url: 'https://epa.maps.arcgis.com',
-  user_geo_platform_url: 'https://innovate.maps.arcgis.com'
+  scribe_map_service: 'https://utility.arcgis.com/usrsvcs/servers/94cdbffe266c42e480b657b4bb42576d/rest/services/EPA_CERCLA/R9Scribe/MapServer'
 };
 
 /*
@@ -25,4 +23,4 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.

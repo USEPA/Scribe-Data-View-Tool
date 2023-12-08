@@ -2,10 +2,11 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import esriConfig from '@arcgis/core/config';
+import { v4 as uuidv4 } from 'uuid';
 
-import {tap} from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
 
 import {environment} from '@environments/environment';
 import {
@@ -15,13 +16,8 @@ import {
   Project,
   ProjectCentroid,
   ProjectLabResult,
-  ProjectSample
+  ProjectSample, ProjectExplorer, FeatureCollection, Feature
 } from '../projectInterfaceTypes';
-import {LoginService} from '../auth/login.service';
-import {User} from '../auth/login.service';
-import {createUrlResolverWithoutPackagePrefix} from '@angular/compiler';
-import {getLocaleCurrencyName} from '@angular/common';
-
 
 
 @Injectable({
@@ -70,17 +66,29 @@ export class ScribeDataExplorerService {
     return results;
   }
 
-  async addItemToAGOL(agolContentInfo: AGOLContentInfo) {
+  async getUserExploredProjects() {
+    const results = await this.http.get<ProjectExplorer[]>(`${this.scribeApiUrl}/projectsexplorer/`).toPromise()
+      .catch((error) => {
+        return {} as ColumnsRows;
+      });
+    return results;
+  }
+
+  getUserFilteredProjects(filterValue?: string): Observable<ProjectExplorer[]> {
+    return this.http.get<ProjectExplorer[]>(`${this.scribeApiUrl}/projectsexplorer/?search=${filterValue}`);
+  }
+
+  async addItemToAGOL(agolContentInfo: AGOLContentInfo): Promise<boolean | string> {
     let result = false;
     const geoJson = await this.generateGeoJson(agolContentInfo);
     if (geoJson) {
       const url = `${this.agolUserContentUrl}/addItem`;
       const formData = new FormData();
-      const geojsonFile = new Blob([geoJson], { type: 'application/geo+json' });
+      const geojsonFile = new Blob([geoJson], {type: 'application/geo+json'});
       formData.append('type', 'GeoJson');
       formData.append('title', agolContentInfo.title);
       formData.append('description', agolContentInfo.description);
-      formData.append('file', geojsonFile, agolContentInfo.title);
+      formData.append('file', geojsonFile, uuidv4());
       formData.append('tags', 'Scribe Explorer');
       // formData.append('multipart', 'true');
       // formData.append('filename', data.title);
@@ -107,28 +115,60 @@ export class ScribeDataExplorerService {
     return result;
   }
 
-  async generateGeoJson(data) {
-    const fileResult = await this.http.post<any>(`${this.scribeApiUrl}/generate_geojson/`, data).toPromise().then((file) => {
-      return file;
-    }).catch((error) => {
-      this.snackBar.open(`Error publishing GeoPlatform service: Error creating GeoJson file.`, null, {
-        duration: 3000, panelClass: ['snackbar-error']
-      });
-      return false;
+  // Generate the geojson from the backend
+  // async generateGeoJson(data) {
+  //   const fileResult = await this.http.post<any>(`${this.scribeApiUrl}/generate_geojson/`, data).toPromise().then((file) => {
+  //     return file;
+  //   }).catch((error) => {
+  //     this.snackBar.open(`Error publishing GeoPlatform service: Error creating GeoJson file.`, null, {
+  //       duration: 3000, panelClass: ['snackbar-error']
+  //     });
+  //     return false;
+  //   });
+  //   return fileResult;
+  // }
+
+  // Generate the geojson from the frontend
+  generateGeoJson(data) {
+    const featureCollection: FeatureCollection = {
+      type: 'FeatureCollection',
+      features: []
+    };
+    data.rows.forEach(row => {
+      const feature: Feature = {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: []
+        },
+        properties: {}
+      };
+      feature.geometry.coordinates = [row.Longitude, row.Latitude];
+      feature.properties = row;
+      featureCollection.features.push(feature);
     });
-    return fileResult;
+    if (featureCollection.features.length) {
+      return JSON.stringify(featureCollection);
+    } else {
+      return '';
+    }
   }
 
   async publishToAGOL(agolContentInfo: AGOLContentInfo) {
     const itemId = await this.addItemToAGOL(agolContentInfo);
     if (itemId) {
-      const publishParams = JSON.stringify({
-        name: agolContentInfo.title + '_' + String(itemId),
+      const publishParameters = JSON.stringify({
+        name: itemId as string,
         description: agolContentInfo.description
       });
-      let url = `${this.agolUserContentUrl}/publish?itemId=${itemId}&fileType=geojson&publishParameters=${publishParams}`;
-      url = url + `&token=${this.agolToken}&f=json`;
-      const result = await this.http.post<any>(url, {}).toPromise().then((response) => {
+      const url = `${this.agolUserContentUrl}/publish`;
+      const formData = new FormData();
+      formData.append('itemId', itemId as string);
+      formData.append('fileType', 'geojson');
+      formData.append('publishParameters', publishParameters);
+      formData.append('token', this.agolToken);
+      formData.append('f', 'json');
+      const result = await this.http.post<any>(url, formData).toPromise().then((response) => {
         // console.log(response);
         if ('error' in response) {
           this.snackBar.open(`Error publishing GeoPlatform service: ${response.error.message}`, null, {
@@ -142,9 +182,15 @@ export class ScribeDataExplorerService {
             });
             return false;
           }
-          this.snackBar.open(`AGOL Service published.`, null, {
-            duration: 3000, panelClass: ['snackbar-success']
+          const successSnack = this.snackBar.open('Successfully Publish', 'Click to open', {
+            duration: null,
+            panelClass: ['snackbar-success']
           });
+          successSnack.onAction().subscribe(() => window.open(
+            `${environment.geo_platform_url}/home/item.html?id=${itemId}`,
+            '_blank'
+          ));
+          setTimeout(() => this.getPublishedAGOLServices(), 10000);
           return true;
         }
       }).catch((error) => {
@@ -154,30 +200,46 @@ export class ScribeDataExplorerService {
         return error.message;
       });
       // delete added item
-      const deleteItemUrl = `${this.agolUserContentUrl}/deleteItems?items=${itemId}&token=${this.agolToken}&f=json`;
-      const deleteResult = await this.http.post<any>(deleteItemUrl, {}).toPromise().then((response) => {
-        return response.results[0].success;
-      });
+      // const deleteItemUrl = `${this.agolUserContentUrl}/deleteItems?items=${itemId}&token=${this.agolToken}&f=json`;
+      // const deleteResult = await this.http.post<any>(deleteItemUrl, {}).toPromise().then((response) => {
+      //   return response.results[0].success;
+      // });
 
       return result;
     }
   }
 
-  async getPublishedAGOLServices() {
+  getPublishedAGOLServices() {
     const agolServices = [];
-    const url = `${this.agolUserContentUrl}?token=${this.agolToken}&f=json`;
-    const results = await this.http.get<any>(url).toPromise()
-      .catch((error) => {
-        return false;
-      });
-    if (results) {
-      for (const item of results.items) {
-        if (item.tags.includes('Scribe Explorer')) {
-          agolServices.push({title: item.title, url: `${environment.user_geo_platform_url}/home/item.html?id=${item.id}`});
-        }
-      }
-    }
-    return agolServices;
+    const url = `${environment.geo_platform_url}/sharing/rest/search`;
+    const params = {
+      token: this.agolToken,
+      f: 'json',
+      filter: '(tags:("scribe explorer") and type:("Feature Service"))',
+      q: `(owner: "${this.agolUsername}")`
+    };
+    return this.http.get<any>(url, {params}).pipe(
+      map(r => r.results.map(i => {
+        i.itemUrl = `${environment.geo_platform_url}/home/item.html?id=${i.id}`;
+        return i;
+      })),
+      tap(r => this.userAGOLServices.next(r)),
+      catchError(e => of(e))
+    );
+      // .catch((error) => {
+      //   return false;
+      // });
+    // if (results) {
+    //   for (const item of results.items) {
+    //     // if (item.tags.includes('Scribe Explorer')) {
+    //       agolServices.push({
+    //         title: item.title,
+    //         url: `${environment.user_geo_platform_url}/home/item.html?id=${item.id}`
+    //       });
+    //     // }
+    //   }
+    // }
+    // return agolServices;
   }
 
   async getProjectSamples(projectId: string) {
@@ -198,4 +260,10 @@ export class ScribeDataExplorerService {
     return results;
   }
 
+  getProjects(projectIds: string[]): Observable<ProjectExplorer[]> {
+    return this.http.get<ProjectExplorer[]>(
+      `${this.scribeApiUrl}/projectsexplorer/`,
+      {params: {projectids: projectIds.join(',')}}
+    );
+  }
 }

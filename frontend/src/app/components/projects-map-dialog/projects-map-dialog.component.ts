@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {VisibleColumnsDialogComponent} from '@components/visible-columns-dialog/visible-columns-dialog.component';
 import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
 import {ProjectCentroid} from '../../projectInterfaceTypes';
+import {filter} from 'rxjs/operators';
 
 
 @Component({
@@ -17,17 +18,19 @@ export class ProjectsMapDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<VisibleColumnsDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              public scribeDataExplorerService: ScribeDataExplorerService) { }
+              public scribeDataExplorerService: ScribeDataExplorerService) {
+  }
 
   ngOnInit() {
     // subscribe to selected project centroid points
-    this.scribeDataExplorerService.projectCentroidsSelectedEvent.subscribe((projectCentroids) => {
-      if (projectCentroids) {
-        this.selectedProjectNames = projectCentroids.map((projectCentroid) => {
-          return projectCentroid.PROJECT_NAME;
-        }).join(', ');
-        this.selectedProjectCentroids = projectCentroids;
-      }
+    this.scribeDataExplorerService.projectCentroidsSelectedEvent.pipe(
+      filter(x => x !== null)
+    ).subscribe((projectCentroids) => {
+      projectCentroids = projectCentroids.filter(x => x?.PROJECT_NAME !== undefined);
+      this.selectedProjectNames = projectCentroids.map((projectCentroid) => {
+        return projectCentroid.PROJECT_NAME;
+      }).join(', ');
+      this.selectedProjectCentroids = projectCentroids;
     });
   }
 

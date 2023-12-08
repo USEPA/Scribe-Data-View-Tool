@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -45,8 +47,8 @@ INSTALLED_APPS = [
     'automagic_rest',
     'sadie',
     'scribe_models',
-    'oauth2_provider',
     'social_django',
+    'django_filters',
 ]
 
 '''
@@ -104,7 +106,7 @@ WSGI_APPLICATION = 'settings.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'sql_server.pyodbc',
+        'ENGINE': 'mssql',
         'HOST': os.environ.get('SADIE_DB_HOST', ''),
         'NAME': 'Sadie',
         'USER': os.environ.get('SADIE_DB_USER', ''),
@@ -114,7 +116,7 @@ DATABASES = {
         }
     },
     'scribe_db': {
-        'ENGINE': 'sql_server.pyodbc',
+        'ENGINE': 'mssql',
         'HOST': os.environ.get('SCRIBE_DB_HOST', ''),
         'NAME': 'Scribe',
         'USER': os.environ.get('SCRIBE_DB_USER', ''),
@@ -203,6 +205,7 @@ MIGRATION_MODULES = {
 OAUTH2_PROVIDER_ACCESS_TOKEN_MODEL = 'oauth2_provider.AccessToken'
 OAUTH2_PROVIDER_APPLICATION_MODEL = 'oauth2_provider.Application'
 OAUTH2_PROVIDER_REFRESH_TOKEN_MODEL = 'oauth2_provider.RefreshToken'
+OAUTH2_PROVIDER_ID_TOKEN_MODEL = 'oauth2_provider.IDToken'
 
 CACHES = {
     'default': {
@@ -212,3 +215,6 @@ CACHES = {
 }
 
 URL_PREFIX = os.environ.get('URL_PREFIX', '')
+
+import json
+INTAKE_TOKEN = json.loads(os.environ.get('INTAKE_TOKEN', '{}'))

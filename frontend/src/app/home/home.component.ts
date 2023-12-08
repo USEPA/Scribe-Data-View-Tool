@@ -1,9 +1,14 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ElementRef, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormControl, Validators} from '@angular/forms';
 import {Subject, Subscription, Observable, BehaviorSubject} from 'rxjs';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {COMMA, ENTER, SPACE} from '@angular/cdk/keycodes';
+
+import {MatAutocomplete, MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
+import {MatChipInputEvent} from '@angular/material/chips';
+
+
 import {query} from '@angular/animations';
 import * as moment from 'moment';
 
@@ -15,7 +20,7 @@ import {
   ColumnDefs,
   MapSymbolizationProps,
   MapSymbol,
-  ProjectCentroid, ColumnsRows, AGOLService
+  ProjectCentroid, ColumnsRows, AGOLService, ProjectExplorer
 } from '../projectInterfaceTypes';
 import {LoginService} from '../auth/login.service';
 import {ScribeDataExplorerService} from '@services/scribe-data-explorer.service';
@@ -24,10 +29,11 @@ import {ProjectsMapDialogComponent} from '@components/projects-map-dialog/projec
 import {FiltersInterfaceTypes, ActiveFilter} from '../filtersInterfaceTypes';
 import {CONFIG_SETTINGS} from '../config_settings';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {map} from 'rxjs/operators';
+import {count, map, startWith} from 'rxjs/operators';
 
 import {Injectable} from '@angular/core';
-import {environment} from "@environments/environment";
+import {environment} from '@environments/environment';
+import {getMissingGeoPoints, mergeAllSamplesAndLabResults} from './home.functions';
 
 
 @Component({
@@ -44,8 +50,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   // project props
   projects = new FormControl();
   userProjects: Project[] | any;
+  userExploredProjects: ProjectExplorer[] | any;
   projectsLoaded: boolean;
-  selectedProjectIDs: string[] = [];
+  // selectedProjectIDs: string[] = [];
   isMapPointsSelected = false;
   // sample point props
   projectSamplesColDefs: ColumnDefs[] = [];
@@ -77,7 +84,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   agGridActiveFiltersSubject: Subject<ActiveFilter[]> = new Subject<ActiveFilter[]>();
   agGridActiveFiltersEvt: Observable<ActiveFilter[]> = this.agGridActiveFiltersSubject.asObservable();
   updateColDefs: Subject<any> = new Subject<any>();
-  presetFilters: Subject<any> = new Subject<any>();
+  // presetFilters: Subject<any> = new Subject<any>();
   updateFilters: Subject<any> = new Subject<any>();
   publishLabResultsToAGOL = new BehaviorSubject<{ title: string, description: string }>(null);
   publishSamplePointLocationsToAGOL = new BehaviorSubject<{ title: string, description: string }>(null);
@@ -95,6 +102,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.agGridActiveFiltersSubject.next(value);
   }
 
+  visible = true;
+  selectable = true;
+  removable = true;
+  projectCtrl = new FormControl('');
+  filteredProjects: Observable<ProjectExplorer[]>;
+  projectsList: ProjectExplorer[] = [];
+  projectIdsList: string[] = [];
+
+  @ViewChild('projectInput') projectInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete: MatAutocomplete;
+
   constructor(public app: AppComponent,
               public route: ActivatedRoute,
               public loginService: LoginService,
@@ -105,41 +123,76 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.projectsLoaded = false;
   }
 
-  async ngOnInit() {
-    this.userProjects = await this.scribeDataExplorerService.getUserProjects();
-    // console.log('agol url:' + this.scribeDataExplorerService.agolUserContentUrl);
-    await this.scribeDataExplorerService.getPublishedAGOLServices().then((items: AGOLService[]) => {
-        this.scribeDataExplorerService.userAGOLServices.next(items);
-        // this.scribeDataExplorerService.userAGOLServices.subscribe(x => {
-        //   x.forEach(i => {
-        //     console.log(`Title: ${i.title}`);
-        //     console.log(`url: ${i.url}`);
-        //   });
-        //   }
-        // );
-     });
+  ngOnInit() {
+    // this.userProjects = await this.scribeDataExplorerService.getUserProjects();
+    // this.userExploredProjects = await this.scribeDataExplorerService.getUserExploredProjects();
+    // this.setFilter();
+    // await this.scribeDataExplorerService.getPublishedAGOLServices().then((items: AGOLService[]) => {
+    //   this.scribeDataExplorerService.userAGOLServices.next(items);
+    // });
+    // subscribe to autocomplete input
+    this.projectCtrl.valueChanges.subscribe(val => {
+      this.filteredProjects = this.scribeDataExplorerService.getUserFilteredProjects(val);
+    });
 
-    // Subscribing to query string parameters
-    const queryParams = this.route.snapshot.queryParams;
-    if (queryParams.projects) {
-      this.queryFilterParams = queryParams;
-      const newselectedProjectIDs = this.queryFilterParams.projects.split(',').map(item => item.trim());
-      // const notLoadedProjects = newselectedProjectIDs.filter(projectId => !this.selectedProjectIDs.includes(projectId));
-      // const removedProjects = this.selectedProjectIDs.filter(projectId => !newselectedProjectIDs.includes(projectId));
-      // clear active filters
-      this.agGridActiveFilters = [];
-      this.selectedProjectIDs = newselectedProjectIDs; // todo: in the future only load projects that have not been loaded already
-      this.getCombinedProjectData(this.selectedProjectIDs);
-      // tslint:disable-next-line:radix
-      this.projects.setValue(this.selectedProjectIDs.map(id => parseInt(id)));
-    }
-    /*const filters = [];
-    for (const key of Object.keys(queryParams).filter(k => k !== 'projects')) {
-      filters.push({name: key, value: queryParams[key]});
-    }*/
+    // // Subscribing to query string parameters
+    this.route.queryParams.subscribe(queryParams => {
+      if (queryParams.projects !== undefined) {
+        const {
+          added,
+          removed
+        } = this.diffProjectIds(queryParams.projects.split(',').filter(f => f !== '').map(i => i.trim()), this.projectIdsList);
+        this.projectIdsList = queryParams.projects.split(',').map(item => item.trim());
 
-    this.colsSpan = (window.innerWidth > 1050) ? 1 : 2;
-    this.selectedAnalyte = this.route.queryParams.pipe(map(params => params.Analyte));
+        if (this.projectIdsList.length === 0) {
+          this.clearProjects();
+        } else {
+          this.isLoadingData = true;
+          if (removed.length > 0) {
+            removed.forEach(r => {
+              const project = this.projectsList.find(p => `${p.projectid}` === r);
+              const i = this.projectsList.indexOf(project);
+              if (i > -1) {
+                this.projectsList.splice(i, 1);
+                this.removeFromCombinedProjectData(r);
+                if (added.length === 0) {
+                  // this only needs to run if nothing is being added at the same time
+                  this.combinedProjectData();
+                }
+              }
+            });
+          }
+          if (added.length > 0) {
+            this.queryFilterParams = queryParams;
+            this.scribeDataExplorerService.getProjects(added).subscribe(
+              projects => this.projectsList = [...this.projectsList, ...projects]
+            );
+            this.addToCombinedData(added).then(() => this.combinedProjectData());
+            // tslint:disable-next-line:radix
+            // this.projects.setValue(this.selectedProjectIDs.map(id => parseInt(id)));
+          }
+        }
+      }
+
+      if (queryParams.Analyte) {
+        // this.agGridActiveFilters = [];
+      }
+      // /*const filters = [];
+      // for (const key of Object.keys(queryParams).filter(k => k !== 'projects')) {
+      //   filters.push({name: key, value: queryParams[key]});
+      // }*/
+
+      // this.agGridActiveFilters = [];
+      this.colsSpan = (window.innerWidth > 1050) ? 1 : 2;
+    });
+
+    this.selectedAnalyte = this.route.queryParams.pipe(map(q => q.Analyte));
+  }
+
+  diffProjectIds(newSelection: string[], currentSelection: string[]) {
+    const added = newSelection.filter(x => !currentSelection.includes(x));
+    const removed = currentSelection.filter(x => !newSelection.includes(x));
+    return {added, removed};
   }
 
   ngAfterViewInit() {
@@ -160,8 +213,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.projectLabResultsRowData = this.mergeSelectedSamplesAndLabResults(selectedSamplePointsRowData, this.combinedLabResultRowData);
         this.isMapPointsSelected = true;
       } else {
-        this.projectLabResultsRowData = this.mergeAllSamplesAndLabResults(this.projectSamplesRowData, this.combinedLabResultRowData);
-        this.isMapPointsSelected = false;
+        this.mergeAllSamplesAndLabResultsWithWorker(this.projectSamplesRowData, this.combinedLabResultRowData).then(r => {
+          this.projectLabResultsRowData = r;
+          this.isMapPointsSelected = false;
+        });
       }
     });
     this.scribeDataExplorerService.mapPointSelectedChangedEvent.subscribe((pointAttributes) => {
@@ -174,6 +229,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   openProjectsMapDialog() {
+    // this.initProps();
     const dialogRef = this.dialog.open(ProjectsMapDialogComponent, {
       width: '800px',
       data: {}
@@ -184,11 +240,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
         const newSelectedProjectIDs = projectCentroids.map((projectCentroid) => {
           return projectCentroid.PROJECTID;
         });
-        const currentselectedProjectIDs = this.projects.value as Array<number>;
-        if (!currentselectedProjectIDs || (currentselectedProjectIDs.sort().join(',') !== newSelectedProjectIDs.sort().join(','))) {
-          this.clearProjects();
-          this.setQueryParam('projects', newSelectedProjectIDs.join(','));
-        }
+        // const currentselectedProjectIDs = this.projectIdsList;
+        // if (!currentselectedProjectIDs || (currentselectedProjectIDs.sort().join(',') !== newSelectedProjectIDs.sort().join(','))) {
+        //   this.clearProjects();
+        this.setQueryParam('projects', newSelectedProjectIDs.join(','));
+        // }
       }
     });
   }
@@ -254,14 +310,24 @@ export class HomeComponent implements OnInit, AfterViewInit {
       // }
     }
     // 2) Update the filtered map points
-    if (filters.filteredRowData && filters.filteredRowData.length > 0) {
+    if (filters.activeFilters.length > 0 && filters.filteredRowData && filters.filteredRowData.length > 0) {
       // IMPORTANT: pass in the resulting singular sample point records to the map
       // TODO: Add a summary calculation of the lab results to pass in along with these sample point records in order to
       //  determine how the sample points need to be symbolized
       const filteredSamplePoints = [];
       this.projectSamplesRowData.forEach((samplePoint) => {
+        filters.filteredRowData.filter(l => l.Samp_No === samplePoint.Samp_No).forEach(labResult => {
+          const i = filteredSamplePoints.findIndex(x => x.Samp_No === labResult.Samp_No);
+          if (i === -1) {
+            labResult.Result ? samplePoint.Result = labResult.Result : samplePoint.Result = 0;
+            filteredSamplePoints.push(samplePoint);
+          } else {
+            filteredSamplePoints[i].Result = filteredSamplePoints[i].Result < labResult.Result ? labResult.Result : filteredSamplePoints[i].Result;
+          }
+        });
+
         filters.filteredRowData.forEach((labResult) => {
-          if (labResult.Samp_No === samplePoint.Samp_No && !filteredSamplePoints.includes(samplePoint)) {
+          if (labResult.Samp_No === samplePoint.Samp_No) {
             // add MDL value to sample point attributes
             labResult.Result ? samplePoint.Result = labResult.Result : samplePoint.Result = 0;
             filteredSamplePoints.push(samplePoint);
@@ -281,13 +347,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.geoPointsArray = [];
       this.missingGeoPointsCount = this.projectSamplesRowData.length;
     } else {
-      // refresh data
-      this.getCombinedProjectData(this.selectedProjectIDs);
+      // refresh data... why????????
+      this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
+      this.getMissingGeoPointsWithWorker(this.projectSamplesRowData, this.combinedLabResultRowData).then(r => {
+        this.missingGeoPointsCount = r;
+      });
+
+      // this.addToCombinedProjectData(this.projectIdsList);
     }
   }
 
   initProps(): void {
-    this.selectedProjectIDs = [];
+    this.projectsList = [];
+    this.projectIdsList = [];
     this.clearQueryParams();
     this.agGridActiveFilters = [];
     this.mapSymbolFields = [];
@@ -334,25 +406,38 @@ export class HomeComponent implements OnInit, AfterViewInit {
   mapGeoFeaturesLoaded(val) {
   }
 
-  async getCombinedProjectData(projectIds) {
-    let combinedSamplePointRowData = [];
-    this.isLoadingData = true;
-    this.isMapPointsSelected = false;
+  async addToCombinedData(projectIds) {
     // combine all project sample point and lab results data
     const projectsSamplePoints = await Promise.all(projectIds.map(async (projectId) => {
       const rows = await this.scribeDataExplorerService.getProjectSamples(projectId);
-      return rows;
+      // add projectid for use in removal later
+      return rows.map(r => {
+        r.projectid = projectId;
+        return r;
+      });
     }));
     // combine lab results
     const projectsLabResults = await Promise.all(projectIds.map(async (projectId) => {
       const rows = await this.scribeDataExplorerService.getProjectLabResults(projectId);
-      return rows;
+      // add projectid for use in removal later
+      return rows.map(r => {
+        r.projectid = projectId;
+        return r;
+      });
     }));
-    combinedSamplePointRowData = [].concat(...projectsSamplePoints);
-    this.combinedLabResultRowData = [].concat(...projectsLabResults);
-    if (combinedSamplePointRowData.length > 0) {
-      this.projectSamplesColDefs = this.setAgGridColumnProps(combinedSamplePointRowData);
-      this.projectSamplesRowData = combinedSamplePointRowData;
+    this.projectSamplesRowData = [...this.projectSamplesRowData, ...projectsSamplePoints.flat()];
+    this.combinedLabResultRowData = [...this.combinedLabResultRowData, ...projectsLabResults.flat()];
+  }
+
+  removeFromCombinedProjectData(projectId) {
+    this.combinedLabResultRowData = this.combinedLabResultRowData.filter(r => r.projectid !== projectId);
+    this.projectSamplesRowData = this.projectSamplesRowData.filter(r => r.projectid !== projectId);
+  }
+
+  combinedProjectData() {
+    this.isMapPointsSelected = false;
+    if (this.projectSamplesRowData.length > 0) {
+      this.projectSamplesColDefs = this.setAgGridColumnProps(this.projectSamplesRowData);
       // only pass in sample points for now
       this.geoPointsArray = this.getLatLongRecords(this.projectSamplesRowData);
       this.missingGeoPointsCount = this.projectSamplesRowData.length - this.geoPointsArray.length;
@@ -366,8 +451,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
         });
         this.projectLabResultsColDefs = [...samplePointCols,
           ...this.setAgGridColumnProps(this.combinedLabResultRowData, addedSamplePointColIDs)];
-        this.projectLabResultsRowData = this.mergeAllSamplesAndLabResults(this.projectSamplesRowData, this.combinedLabResultRowData);
-        this.missingGeoPointsCount = this.getMissingGeoPoints(this.projectSamplesRowData, this.combinedLabResultRowData);
+        this.mergeAllSamplesAndLabResultsWithWorker(this.projectSamplesRowData, this.combinedLabResultRowData).then(r => {
+          this.projectLabResultsRowData = r;
+        });
+
+        this.getMissingGeoPointsWithWorker(this.projectSamplesRowData, this.combinedLabResultRowData).then(r => {
+          this.missingGeoPointsCount = r;
+        });
+
       }
       // set ag-grid select filter properties
       this.setAgGridSelectFilters();
@@ -378,26 +469,28 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.isLoadingData = false;
   }
 
-  setProjects(event) {
-    event.stopPropagation();
-    if (this.projects.value) {
-      const newselectedProjectIDs = this.projects.value.join(',');
-      this.setQueryParam('projects', newselectedProjectIDs);
-      this.getCombinedProjectData(this.projects.value);
-      // const currentselectedProjectIDs = this.route.snapshot.queryParams.projects;
-      // if (!currentselectedProjectIDs) {
-      //   this.setQueryParam('projects', newselectedProjectIDs);
-      // } else {
-      //   if (newselectedProjectIDs !== currentselectedProjectIDs) {
-      //     const queryParams = {};
-      //     Object.keys(this.route.snapshot.queryParams).filter(k => k === 'projects').forEach(key => {
-      //       queryParams[key] = newselectedProjectIDs;
-      //     });
-      //     this.router.navigate([], {queryParams});
-      //   }
-      // }
-    }
-  }
+  // setProjects(event) {
+  //   event.stopPropagation();
+  //   if (this.projectIdsList.length) {
+  //     const newselectedProjectIDs = this.projectIdsList.join(',');
+  //     this.setQueryParam('projects', newselectedProjectIDs);
+  //     this.getCombinedProjectData(this.projectIdsList);
+  //     // const currentselectedProjectIDs = this.route.snapshot.queryParams.projects;
+  //     // if (!currentselectedProjectIDs) {
+  //     //   this.setQueryParam('projects', newselectedProjectIDs);
+  //     // } else {
+  //     //   if (newselectedProjectIDs !== currentselectedProjectIDs) {
+  //     //     const queryParams = {};
+  //     //     Object.keys(this.route.snapshot.queryParams).filter(k => k === 'projects').forEach(key => {
+  //     //       queryParams[key] = newselectedProjectIDs;
+  //     //     });
+  //     //     this.router.navigate([], {queryParams});
+  //     //   }
+  //     // }
+  //   } else {
+  //     this.clearProjects();
+  //   }
+  // }
 
   clearProjects(event = null) {
     if (event) {
@@ -407,18 +500,18 @@ export class HomeComponent implements OnInit, AfterViewInit {
     // disable the table and map components
     this.showTable = false;
     this.geoPointsArray = [];
-    this.projects.setValue(null);
   }
 
   async onTabChange(tabId) {
     this.selectedTab = tabId;
-    if (this.selectedProjectIDs) {
+    if (this.projectIdsList.length) {
       try {
         // clear filters and get tab data
         this.agGridActiveFilters = [];
         this.updateFilters.next([]);
         this.scribeDataExplorerService.clearMapSelectionSource.next(true);
-        this.getCombinedProjectData(this.selectedProjectIDs);
+        // todo: why does data need to be reload for tab change?
+        // await this.getCombinedProjectData(this.projectIdsList);
       } catch (err) {
         this.isLoadingData = false;
         this.showTable = false;
@@ -437,16 +530,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     return latLongRecords;
   }
 
-  mergeAllSamplesAndLabResults(samplePoints, labResults) {
-    const rowDataMerged = [];
-    labResults.forEach(result => {
-      rowDataMerged.push({
-        ...result, ...(samplePoints.find((point) =>
-          point.Samp_No === result.Samp_No))
-      });
-    });
-    return rowDataMerged;
-  }
 
   mergeSelectedSamplesAndLabResults(selectedSamplePoints, labResults) {
     const rowDataMerged = [];
@@ -463,22 +546,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     return rowDataMerged;
   }
 
-  getMissingGeoPoints(samplePoints, labResults) {
-    let missingGeoPointsCount = 0;
-    labResults.forEach(result => {
-      const found = samplePoints.find((point) => {
-        if (point.Samp_No === result.Samp_No) {
-          return point;
-        }
-      });
-      if (found) {
-        if (!found.Latitude || !found.Longitude) {
-          missingGeoPointsCount = missingGeoPointsCount + 1;
-        }
-      }
-    });
-    return missingGeoPointsCount;
-  }
 
   setAgGridSelectFilters() {
     this.agGridCustomFilters = {
@@ -600,7 +667,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
           }
         });
       }
-      this.presetFilters.next(agGridPresetFilters);
+      this.updateFilters.next(agGridPresetFilters);
       this.queryFilterParams = undefined;
     }
   }
@@ -666,11 +733,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   onPublishAGOLBtnClick() {
-    let selectedProjects: Project[];
+    // let selectedProjects: Project[];
     this.scribeDataExplorerService.isPublishingToAGOL.next(true);
-    selectedProjects = this.userProjects.filter((project: Project) => {
-      return this.projects.value.includes(project.projectid);
-    });
+    // selectedProjects = this.userProjects.filter((project: Project) => {
+    //   return this.projectIdsList.includes(project.projectid);
+    // });
+    const selectedProjects = this.projectsList;
     // set feature layer title: "[Project name] ([Number]) Scribe Project Feature Layer"
     const staticText = 'Scribe Project Feature Layer';
     const selectedTab = this.tabs[this.selectedTab].replace(/ /g, '_');
@@ -692,7 +760,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   onExportCSVBtnClick() {
     // set ag grid title
     const selectedTab = this.tabs[this.selectedTab].replace(/ /g, '_');
-    const title = 'Projects_' + this.selectedProjectIDs.join('_') + '_' + selectedTab;
+    const title = 'Projects_' + this.projectIdsList.join('_') + '_' + selectedTab;
     if (this.selectedTab === 0) {
       this.exportLabResultsCSV.next(title);
     }
@@ -745,5 +813,112 @@ export class HomeComponent implements OnInit, AfterViewInit {
   onResize(event) {
     this.colsSpan = (event.target.innerWidth > 1050) ? 1 : 2;
   }
+
+  // perform the search by id, Name, Site#, Site State, NPL Status, Description, Epa Region# or Epa Contact
+  // private _filter(value: string): ProjectExplorer[] {
+  //   const filterValue = value.toString().toLowerCase(); // use of toString cause value will be an observable
+  //   return this.userExploredProjects.filter(project => {
+  //     return project.project_name?.toLowerCase().includes(filterValue) ||
+  //       project.projectid.toString().includes(filterValue) ||
+  //       project.Site_No?.toLowerCase().includes(filterValue) ||
+  //       project.Site_State?.toLowerCase().includes(filterValue) ||
+  //       project.NPL_Status?.toLowerCase().includes(filterValue) ||
+  //       project.Description?.toLowerCase().includes(filterValue) ||
+  //       project.EPARegionNumber?.toLowerCase().includes(filterValue) ||
+  //       project.EPAContact?.toLowerCase().includes(filterValue);
+  //   });
+  // }
+
+  add(event: MatChipInputEvent): void {
+    const newProjectIds = [...this.projectIdsList, event.input.value];
+    this.setQueryParam('projects', newProjectIds.join(','));
+    event.input.value = '';
+    // let projectInAutocomplete: ProjectExplorer;
+    // this.filteredProjects.subscribe(projects => {
+    //   if (projects.length === 1) {
+    //     projectInAutocomplete = projects[0];
+    //     // this.addProject(projectInAutocomplete);
+    //     // this.addId(projectInAutocomplete.projectid);
+    //     event.input.value = '';
+    //   }
+    //
+    // });
+  }
+
+  // remove both the project and the project id from their respective list
+  remove(project: ProjectExplorer) {
+    const newProjectIdList = this.projectIdsList.filter(x => x !== `${project.projectid}`);
+    this.setQueryParam('projects', newProjectIdList.join(','));
+    // const index = this.projectsList.indexOf(project);
+    // if (index >= 0) {
+    //   this.projectsList.splice(index, 1);
+    //   this.projectIdsList.splice(index, 1);
+    // }
+    // if (this.projectIdsList.length > 0) {
+    //   await this.getCombinedProjectData(this.projectIdsList);
+    // } else {
+    //   this.clearProjects();
+    // }
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    // const projectToAdd = {projectid: event.option.value, project_name: event.option.viewValue} as ProjectExplorer;
+    // this.addProject(projectToAdd);
+    // this.addId(projectToAdd.projectid);
+    this.projectInput.nativeElement.value = '';
+    // this.projectCtrl.setValue(null);
+    // this.projectIdsList.push(event.option.value);
+    const newIds = [...this.projectIdsList, event.option.value];
+    this.setQueryParam('projects', newIds.join(','));
+  }
+
+  // setFilter() {
+  //   this.filteredProjects = this.projectCtrl.valueChanges.pipe(
+  //   map((val?: string) => (val ? this._filter(val) : this.userExploredProjects.slice())),
+  //   );
+  // }
+
+
+  // async addId(id: string) {
+  //   if (!this.projectIdsList.includes(id)) {
+  //     this.projectIdsList.push(id);
+  //   }
+  //   await this.getCombinedProjectData(this.projectIdsList);
+  // }
+
+  addProject(project: ProjectExplorer) {
+    if (!this.projectIdsList.includes(project.projectid)) {
+      this.projectsList.push(project);
+    }
+  }
+
+  mergeAllSamplesAndLabResultsWithWorker(samplePoints, labResults): Promise<any[]> {
+    return new Promise((resolve) => {
+      if (typeof Worker !== 'undefined') {
+        // Create a new
+        const worker = new Worker(new URL('./home.worker', import.meta.url));
+        worker.onmessage = (message) => resolve(message.data);
+        worker.postMessage({method: 'mergeAllSamplesAndLabResults', samplePoints, labResults});
+      } else {
+        const results = mergeAllSamplesAndLabResults(samplePoints, labResults);
+        resolve(results);
+      }
+    });
+  }
+
+  getMissingGeoPointsWithWorker(samplePoints, labResults): Promise<number> {
+    return new Promise((resolve) => {
+      if (typeof Worker !== 'undefined') {
+        // Create a new
+        const worker = new Worker(new URL('./home.worker', import.meta.url));
+        worker.onmessage = (message) => resolve(message.data);
+        worker.postMessage({method: 'getMissingGeoPoints', samplePoints, labResults});
+      } else {
+        const results = getMissingGeoPoints(samplePoints, labResults);
+        resolve(results);
+      }
+    });
+  }
+
 
 }

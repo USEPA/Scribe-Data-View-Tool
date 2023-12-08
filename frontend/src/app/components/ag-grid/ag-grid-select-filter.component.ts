@@ -1,5 +1,11 @@
 import {Component, ViewChild, ViewContainerRef} from '@angular/core';
-import {IDoesFilterPassParams, IFilterParams, RowNode} from '@ag-grid-community/all-modules';
+import {
+  IDoesFilterPassParams,
+  IFilterParams,
+  RowNode,
+  ValueGetterFunc,
+  ValueGetterParams
+} from '@ag-grid-community/all-modules';
 import {IFilterAngularComp} from '@ag-grid-community/angular';
 
 interface ExtendedFilterParams extends IFilterParams {
@@ -13,7 +19,7 @@ interface ExtendedFilterParams extends IFilterParams {
 })
 export class AgGridSelectFilterComponent implements IFilterAngularComp {
   private params: ExtendedFilterParams;
-  private valueGetter: (rowNode: RowNode) => any;
+  private valueGetter: ValueGetterFunc;
   public selectFilterValues: string[];
   public selectedFilterVal = '';
 
@@ -32,13 +38,13 @@ export class AgGridSelectFilterComponent implements IFilterAngularComp {
     return this.selectedFilterVal !== null && this.selectedFilterVal !== undefined && this.selectedFilterVal !== '';
   }
 
-  doesFilterPass(params: IDoesFilterPassParams): boolean {
+  doesFilterPass(params: ValueGetterParams): boolean {
     return this.selectedFilterVal.toLowerCase()
       .split(' ')
       .every((filterWord) => {
-        const filterVal = this.valueGetter(params.node);
+        const filterVal = this.valueGetter(params);
         if (filterVal) {
-          return this.valueGetter(params.node).toString().toLowerCase().indexOf(filterWord) >= 0;
+          return this.valueGetter(params).toString().toLowerCase().indexOf(filterWord) >= 0;
         } else {
           return false;
         }
