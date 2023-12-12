@@ -142,13 +142,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
           added,
           removed
         } = this.diffProjectIds(queryParams.projects.split(',').filter(f => f !== '').map(i => i.trim()), this.projectIdsList);
-        this.projectIdsList = queryParams.projects.split(',').map(item => item.trim());
+        this.projectIdsList = queryParams.projects.split(',').filter(i => i).map(item => item.trim());
 
         if (this.projectIdsList.length === 0) {
           this.clearProjects();
         } else {
-          this.isLoadingData = true;
+
           if (removed.length > 0) {
+            this.isLoadingData = true;
             removed.forEach(r => {
               const project = this.projectsList.find(p => `${p.projectid}` === r);
               const i = this.projectsList.indexOf(project);
@@ -163,6 +164,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
             });
           }
           if (added.length > 0) {
+            this.isLoadingData = true;
             this.queryFilterParams = queryParams;
             this.scribeDataExplorerService.getProjects(added).subscribe(
               projects => this.projectsList = [...this.projectsList, ...projects]
@@ -451,22 +453,26 @@ export class HomeComponent implements OnInit, AfterViewInit {
         });
         this.projectLabResultsColDefs = [...samplePointCols,
           ...this.setAgGridColumnProps(this.combinedLabResultRowData, addedSamplePointColIDs)];
-        this.mergeAllSamplesAndLabResultsWithWorker(this.projectSamplesRowData, this.combinedLabResultRowData).then(r => {
-          this.projectLabResultsRowData = r;
-        });
-
-        this.getMissingGeoPointsWithWorker(this.projectSamplesRowData, this.combinedLabResultRowData).then(r => {
-          this.missingGeoPointsCount = r;
+        Promise.all([
+          this.mergeAllSamplesAndLabResultsWithWorker(this.projectSamplesRowData, this.combinedLabResultRowData),
+          this.getMissingGeoPointsWithWorker(this.projectSamplesRowData, this.combinedLabResultRowData)
+        ]).then(r => {
+          this.projectLabResultsRowData = r[0];
+          this.missingGeoPointsCount = r[1];
+          this.setAgGridSelectFilters();
+          this.isLoadingData = false;
+          this.showTable = true;
         });
 
       }
       // set ag-grid select filter properties
-      this.setAgGridSelectFilters();
-      this.showTable = true;
+
+
     } else {
       this.showTable = false;
+      this.isLoadingData = false;
     }
-    this.isLoadingData = false;
+
   }
 
   // setProjects(event) {
