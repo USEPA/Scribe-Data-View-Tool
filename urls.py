@@ -37,7 +37,7 @@ router.register(r'project_tables', ProjectTablesViewSet, basename='scribe_db.pro
 
 
 urlpatterns = [
-    url(r'^{}admin/'.format(settings.URL_PREFIX), admin.site.urls),
+    url(r'^{}api/admin/'.format(settings.URL_PREFIX), admin.site.urls),
     # Authentication api calls
     url('^{}api/oauth2/'.format(settings.URL_PREFIX), include('social_django.urls', namespace='social_django')),
     url(r'^{}api/auth/'.format(settings.URL_PREFIX), include('rest_framework.urls', namespace='rest_framework')),
