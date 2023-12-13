@@ -5,9 +5,9 @@
     <a href="https://response.epa.gov/site/site_profile.aspx?site_id=ScribeGIS" target="_blank">USEPA ERT's Scribe
       database system</a>.
 
-    Search projects Name, Site#, Site State, NPL Status, Description, Epa Region# or Epa Contact.
-
-    Select projects from the drop-down or use the "Select Projects on Map" button to get started.
+    Search projects Name, Site Number, Site State, NPL Status, Description, Region, or Contact.
+    <br/>
+      Select projects from the drop-down or use the "Select Projects on Map" button to get started.
   </span>
   </div>
   <div class="component-container-row">
@@ -32,7 +32,7 @@
               [selectable]="selectable"
               [removable]="removable"
               (removed)="remove(project)">
-              {{project.project_name}}
+              {{ project.project_name }}
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
             <input
@@ -47,7 +47,7 @@
           </mat-chip-list>
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
             <mat-option *ngFor="let project of filteredProjects | async " [value]="project.projectid">
-              {{project.project_name}} ({{project.Site_No}})
+              {{ project.project_name }} ({{ project.Site_No }})
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>&nbsp;
@@ -64,11 +64,11 @@
           </button>
         </span>
       </div>
-<!--      <span class="component-container-row">-->
-<!--        <div *ngIf="!(scribeDataExplorerService.userAGOLServices | async)" style="position: relative;">-->
-<!--            <mat-spinner diameter="40"></mat-spinner>-->
-<!--        </div>-->
-<!--      </span>-->
+      <!--      <span class="component-container-row">-->
+      <!--        <div *ngIf="!(scribeDataExplorerService.userAGOLServices | async)" style="position: relative;">-->
+      <!--            <mat-spinner diameter="40"></mat-spinner>-->
+      <!--        </div>-->
+      <!--      </span>-->
     </div>
     <div class="component-container-col" style="margin-left: 15px;">
       <!-- Selected Filters -->
@@ -76,7 +76,7 @@
         <mat-chip-list #chipList>
           <mat-chip *ngFor="let filter of agGridActiveFilters" selectable removable
                     (removed)="removeActiveFilter(filter)">
-            {{filter.alias}} {{filter.operand}} {{filter.value}}
+            {{ filter.alias }} {{ filter.operand }} {{ filter.value }}
             <mat-icon matChipRemove>cancel</mat-icon>
           </mat-chip>
           <input matChipInputAddOnBlur placeholder=" Active Filters:"
@@ -91,9 +91,9 @@
       </span>
         <span *ngIf="geoPointsArray.length > 0 && missingGeoPointsCount > 0" class="mat-warn"
               style="margin-right: 10px;">
-        Number of records without coordinates: {{missingGeoPointsCount}}
+        Number of records without coordinates: {{ missingGeoPointsCount }}
       </span>
-        <div *ngIf="showTable" >
+        <div *ngIf="showTable">
           <button mat-raised-button color="primary" style="margin-right: 10px;"
                   (click)="openVisibleColumnsDialog()">
             Visible Columns
@@ -154,7 +154,7 @@
 <mat-tab-group (selectedIndexChange)="onTabChange($event)" animationDuration="10ms">
   <mat-tab>
     <ng-template mat-tab-label>
-      {{tabs[0]}}
+      {{ tabs[0] }}
     </ng-template>
     <ng-template matTabContent>
       <div class="component-container-flex">
@@ -188,7 +188,7 @@
   </mat-tab>
   <mat-tab>
     <ng-template mat-tab-label>
-      {{tabs[1]}}
+      {{ tabs[1] }}
     </ng-template>
     <ng-template matTabContent>
       <div class="component-container-flex">

@@ -104,10 +104,11 @@ export class AgGridComponent implements OnInit, OnDestroy, OnChanges {
     // subscribe to data exporting events
     this.publishingToAGOL.subscribe((featureLayerInfo) => {
       if (featureLayerInfo) {
-        this.publishToAGOL(featureLayerInfo).then(async () => {
-          // update user's published AGOL services list
-          this.scribeDataExplorerService.getPublishedAGOLServices().subscribe();
-        });
+        this.publishToAGOL(featureLayerInfo);
+        // update user's published AGOL services list
+        // check if this is already happening
+        // this.scribeDataExplorerService.getPublishedAGOLServices().subscribe();
+        // });
       }
     });
     this.exportingCSV.subscribe((title) => {
@@ -300,15 +301,16 @@ export class AgGridComponent implements OnInit, OnDestroy, OnChanges {
     });
   }
 
-  async publishToAGOL(featureLayerInfo) {
+  publishToAGOL(featureLayerInfo) {
     const rowData = [];
     this.gridApi.forEachNodeAfterFilter((row) => {
       rowData.push(row.data);
     });
     if (rowData.length > 0) {
       featureLayerInfo.rows = rowData;
-      await this.scribeDataExplorerService.publishToAGOL(featureLayerInfo);
-      this.scribeDataExplorerService.isPublishingToAGOL.next(false);
+      this.scribeDataExplorerService.publishToAGOL(featureLayerInfo).subscribe(() => {
+        this.scribeDataExplorerService.isPublishingToAGOL.next(false);
+      });
     }
   }
 
